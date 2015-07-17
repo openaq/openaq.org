@@ -1,0 +1,89 @@
+.header {
+    margin-bottom: 2em;
+}
+
+.title {
+    font-size: 2.5em;
+    font-weight: 200;
+    /*margin-bottom: 0.1em;*/
+}
+
+.subheader {
+    color: gray;
+    font-size: 2em;
+    font-weight: 100;
+}
+
+.content {
+    margin-bottom: 2em;
+}
+
+.content div p {
+    font-weight: 200;
+}
+
+.mailchimp-header {
+    font-weight: 200;
+    font-size: 1em;
+    color: gray;
+}
+
+.mc-minimal {
+    position: relative;
+    width: 40%;
+    margin: 0.5em auto 0 auto;
+}
+
+.mc-field-group {
+    width: 93%;
+    position: absolute;
+    left: 0;
+}
+
+#mce-EMAIL {
+    border-radius: 10rem !important;
+}
+
+#mce-EMAIL:focus {
+    box-shadow: none;
+    background: #eee;
+}
+
+#mc-embedded-subscribe {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#mce-responses {
+    padding-top: 40px;
+}
+
+button, .button {
+    border-radius: 10rem !important;
+    font-size: 0.6rem;
+    letter-spacing: 0.1rem;
+    padding: 0 0.8rem !important;
+    text-transform: uppercase;
+    width: 7rem;
+    line-height: 3.8;
+}
+
+
+@media only screen and (max-width:50em) {
+    .mc-field-group {
+        width: 100%;
+        position: static;
+        left: 0;
+    }
+
+    #mc-embedded-subscribe {
+        position: static;
+        right: 0;
+        top: 0;
+    }
+
+    #mce-responses {
+        padding-top: 0px;
+    }
+}
