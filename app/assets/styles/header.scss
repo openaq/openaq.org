@@ -1,0 +1,54 @@
+header {
+  @include span-columns(10);
+  @include shift(1);
+
+  height: $header-height;
+  position: absolute;
+  top: 0;
+  padding: 10px 10px;
+
+  a {
+    text-decoration: none;
+  }
+
+  &.light {
+    a {
+      color: white;
+    }
+  }
+
+  &.dark {
+    a {
+      color: black;
+    }
+  }
+
+  .site-logo {
+    @include span-columns(1 of 12);
+
+    float: left;
+
+    img {
+      position: relative;
+      height: 44px;
+      @include transform(translateY(-25%));
+    }
+  }
+
+  &.no-logo {
+    .site-logo {
+      opacity: 0;
+    }
+  }
+
+  nav {
+    @include span-columns(11 of 12);
+
+    font-size: modular-scale(0);
+
+    li {
+      float: right;
+      margin: 0 5px;
+    }
+  }
+}

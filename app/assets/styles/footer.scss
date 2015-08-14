@@ -1,0 +1,11 @@
+footer {
+  @include span-columns(12);
+
+  text-align: center;
+  margin: 2em 0;
+
+  .heart {
+    color: $base-color;
+    font-size: modular-scale(1);
+  }
+}

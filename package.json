@@ -1,0 +1,75 @@
+{
+  "name": "openaq.github.io",
+  "version": "0.1.0",
+  "description": "Website for OpenAQ project.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developmentseed/openaq.github.io.git"
+  },
+  "author": {
+    "name": "Development Seed",
+    "url": "https://developmentseed.org"
+  },
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/developmentseed/openaq.github.io/issues"
+  },
+  "homepage": "https://openaq.org",
+  "scripts": {
+    "serve": "gulp serve",
+    "build": "gulp",
+    "lint": "semistandard app/assets/scripts/**/*.js",
+    "test": "echo NO TESTS YET"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer-core": "^5.2.0",
+    "browser-sync": "^2.7.6",
+    "browserify": "^10.2.3",
+    "del": "^1.2.0",
+    "envify": "^3.4.0",
+    "gulp": "^3.9.0",
+    "gulp-cache": "^0.2.9",
+    "gulp-csso": "^1.0.0",
+    "gulp-exit": "0.0.2",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-jshint": "^1.11.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-minify-html": "^1.0.3",
+    "gulp-plumber": "^1.0.1",
+    "gulp-postcss": "^5.1.8",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^4.0.0",
+    "gulp-rev-replace": "^0.4.1",
+    "gulp-sass": "^2.0.1",
+    "gulp-size": "^1.2.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-useref": "^1.2.0",
+    "gulp-util": "^3.0.5",
+    "jshint-stylish": "^2.0.0",
+    "node-bourbon": "^4.2.3",
+    "node-neat": "^1.7.2",
+    "node-notifier": "^4.2.1",
+    "opn": "^1.0.2",
+    "reactify": "^1.1.1",
+    "semistandard": "^5.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.1"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "nets": "^3.1.0",
+    "react": "^0.13.3",
+    "react-intl": "^1.2.0",
+    "react-router": "^0.13.3",
+    "reflux": "^0.2.12"
+  }
+}

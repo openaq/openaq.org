@@ -1,0 +1,34 @@
+language: node_js
+node_js:
+- '0.12'
+env:
+  global:
+  - GH_REF=github.com/openaq/openaq.github.io.git
+  - PRODUCTION_BRANCH=publish
+  - STAGING_BRANCH=develop
+  - secure: igU037NoTH7bpLfvPxJuP3HKSmiUJOUe8o8b0bnvG4J3ncxLerdYM9I2bqpxl4qfepoWM+GMpekP57Nmkqmnc0OvukiJjPzRa5PENedcnp2Wm6En2fAX4Ww2qp5NMSmphNA3fL/lg26R3jEu4dIWPWiHwFFUPq1d6S3zbINBXz4oy0zccEujpXsR+dMq0wtBltU+8pGZg8/z5rdnvCLr9YogbGHJOcUoo9byPnHw7aUjrHvDbps/pjSxMD55ZNSapVSxuwfHHNui+8pWvEGEXx7jiVySVZyNXB37Gx3WvTLg4XK+A3SbRPFScWBlYY8AF1Nt0FrL3qcydCIfZuQCltctU5JMtg5XZ4th36SVwjsUHran7Qpsm5N+Isr0OJ7rkeRnOKI6KHsFqe43kZ+90BAUbz9L66iiUeqyl7ImFdJ3x1rXPezc0cyKwESpUU4RjIWmQWIkck1fDd0EuKtjCx3Gog71WymItSZnHy5RB7thpASjLD53hxKHabD7xguEavgY1n4YQh9KMWkuly8Km9sfIay+QgAuIkxORN/FbWuqCJ+9TUdrUc4eSKxawE3G1IwBPh32b8V037C/63juVrydYjtKhUnFoCiNN11qcfPQHTM8m6OcMRPDJl0CM+Y6z5YML8jYHBMfACYP/Z4Lkp95xheOo4UUI/w0x6nSVPc=
+cache:
+  directories:
+  - node_modules
+before_install:
+- chmod +x ./.build_scripts/deploy.sh
+- chmod +x ./.build_scripts/lint.sh
+before_script:
+- "./.build_scripts/lint.sh"
+- npm test
+script:
+- npm run build
+after_success:
+- "./.build_scripts/deploy.sh"
+deploy:
+  provider: s3
+  access_key_id: AKIAIKYL5T4NQHTDJ5MQ
+  secret_access_key:
+    secure: aVfLcveJAkRSfXtEVUg182ZEwmsZBuMh5OR43HykWbc+hkI4a6JQ0VHXCX7uWOHY5LNkV2I0CvJDYktjhDI9D4+BOp75Kvc83EMgq1nSh7wLWI+SYPnmueodI0RWJh0BWTc0GFzH4L5c73pULOTIy1TkFLkk6rwJE08YpCZw1cwpngFjCEP+DeXhHTK7AHBdGg3mCly599U4JDXtIjsWbk8Nn8tg7rlv9I0O6zfQ5JbV09Fx6B4Ylul8g2Ohs9y3l5QLNWVNWft4JWGvEosCp/rjqipzF7l9cySljwnjeN8LLWCtpPC12Gca2PTjuKlNS1DFUZtq4pBH9tkUgM/zbyPkF2oukcZsw2t8QkLW9EPzYve0xResV0TsHpvXYCcFFd1GMEEdh9xatUYYIrZJ3a6jqz55cmOIWlW5g0UO4j7z9YWUFun7x6Y/897RyIYOVNMtEPZqEWYoXHwapUwAMT+rPaUla7Ng/AEd7OatT+oUHOJXL4Ox2JMZF8vIHKkzi9CVitAw6SYFmZ1mXrTFUnjmTe3yMWWU+WZK/EqFctLJa+X9MTg5DY3Ep+yPiNv412QN4R25dDsRryuQ/Fn/CWCWizoBdIciGZYiQn1dWiDg0WnvAa/rZroxknLRP3gxoCg5Ww1htyirT1jqksJB0Eodva3Wcr5y/ICdnhQuqrc=
+  bucket: openaq.org-staging
+  acl: public_read
+  local-dir: dist
+  skip-cleanup: true
+  on:
+    repo: openaq/openaq.github.io
+    branch: ${STAGING_BRANCH}

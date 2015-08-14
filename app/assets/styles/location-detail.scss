@@ -1,0 +1,67 @@
+.detail-country-item {
+  @include span-columns(12);
+  font-size: modular-scale(1);
+  font-weight: $base-font-bold;
+  margin-bottom: 1em;
+}
+
+.detail-city-item {
+  @include span-columns(12);
+  margin-bottom: 1em;
+  font-size: modular-scale(0);
+  font-weight: $base-font-regular;
+
+  >.title {
+    text-align: center;
+    margin-bottom: 0.5em;
+  }
+}
+
+.location-detail {
+  @include span-columns(4);
+  @include omega;
+  font-size: modular-scale(-1);
+  font-weight: $base-font-light;
+  border-radius: $global-radius;
+  margin-bottom: 0.5em;
+  margin-left: 0.4em;
+  // height: 150px;
+  border: 1px solid lightgray;
+
+  .inner {
+    padding: 0.6em;
+  }
+
+  &:nth-of-type(3n+2) {
+    margin-left: 0;
+  }
+
+  .title {
+    color: $base-color;
+    font-weight: $base-font-regular;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: lightgray;
+    width: 100%;
+    margin-top: 0.6em;
+  }
+
+  .extra span:first-of-type {
+    font-weight: $base-font-regular;
+  }
+
+  .links {
+    text-align: center;
+    padding: 0.2em 0;
+
+    a {
+      margin: 0 1.5em;
+      text-decoration: none;
+      color: $tertiary-color;
+      font-size: modular-scale(1);
+    }
+  }
+
+}
