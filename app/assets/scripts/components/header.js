@@ -9,6 +9,10 @@ var Header = React.createClass({
 
   mixins: [IntlMixin],
 
+  propTypes: {
+    style: React.PropTypes.string
+  },
+
   render () {
     return (
       <header id='site-header' role='banner' className={this.props.style}>

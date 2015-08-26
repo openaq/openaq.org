@@ -4,6 +4,11 @@ var Header = require('./header');
 
 var Home = React.createClass({
 
+  propTypes: {
+    messages: React.PropTypes.object.isRequired,
+    locales: React.PropTypes.array.isRequired
+  },
+
   render () {
     return (
       <div>

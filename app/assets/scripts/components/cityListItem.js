@@ -5,7 +5,8 @@ var DetailItem = require('./locationDetailItem');
 var CityListItem = React.createClass({
 
   propTypes: {
-    city: React.PropTypes.object
+    city: React.PropTypes.object,
+    countryName: React.PropTypes.string
   },
 
   render () {
@@ -13,7 +14,7 @@ var CityListItem = React.createClass({
       <div className='detail-city-item'>
         <div className='title'>{this.props.countryName} - {this.props.city.city}</div>
         {this.props.city.locations.map(function (l) {
-          return <DetailItem location={l} key={l.location} />
+          return <DetailItem location={l} key={l.location} />;
         })}
       </div>
     );

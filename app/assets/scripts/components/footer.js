@@ -1,7 +1,6 @@
 var React = require('react');
 var ReactIntl = require('react-intl');
 var Reflux = require('reflux');
-var nets = require('nets');
 
 var siteStore = require('../stores/sites');
 var actions = require('../actions/actions');

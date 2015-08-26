@@ -12,6 +12,11 @@ var Sites = React.createClass({
     Reflux.listenTo(actions.latestSitesLoaded, 'onLatestSitesLoaded')
   ],
 
+  propTypes: {
+    messages: React.PropTypes.object.isRequired,
+    locales: React.PropTypes.array.isRequired
+  },
+
   getInitialState: function () {
     return {
       countries: siteStore.storage.countries
@@ -36,7 +41,7 @@ var Sites = React.createClass({
           </div>
           <div className='detail'>
             {this.state.countries.map(function (c) {
-              return <CountryListItem country={c} key={c.country} />
+              return <CountryListItem country={c} key={c.country} />;
             })}
           </div>
         </div>
