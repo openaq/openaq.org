@@ -5,6 +5,7 @@ var CountryListItem = require('./countryListItem');
 var siteStore = require('../stores/sites');
 var actions = require('../actions/actions');
 var Header = require('./header');
+var Menu = require('./sourcesMenu');
 
 var Sites = React.createClass({
 
@@ -40,6 +41,7 @@ var Sites = React.createClass({
           <p>Do mollit non et enim aute eiusmod id in aute est ullamco proident do dolor ea est anim esse non dolore irure enim cupidatat qui occaecat occaecat amet voluptate reprehenderit sed do consequat adipisicing deserunt magna enim quis amet non dolore sint ut fugiat reprehenderit proident magna anim quis ex aliquip ad dolor deserunt sit ut adipisicing id culpa Excepteur dolore sed occaecat minim enim est commodo enim sed officia tempor Excepteur dolor reprehenderit non tempor enim laborum quis.</p>
           </div>
           <div className='detail'>
+            <Menu countries={this.state.countries} />
             {this.state.countries.map(function (c) {
               return <CountryListItem country={c} key={c.country} />;
             })}

@@ -14,9 +14,10 @@ var Header = React.createClass({
   },
 
   render () {
+    var logo = (this.props.style.indexOf('light') === -1) ? '/assets/graphics/layout/wind.png' : '/assets/graphics/layout/wind_white.png';
     return (
       <header id='site-header' role='banner' className={this.props.style}>
-        <div className='site-logo'><a href='#/' title='OpenAQ'><img src='/assets/graphics/layout/wind.png' /></a></div>
+        <div className='site-logo'><a href='#/' title='OpenAQ'><img src={logo} /></a></div>
         <nav id='site-prime-nav' role='navigation'>
           <ul className='global-menu'>
             <li><a href='https://github.com/openaq/openaq-api'><FormattedMessage message={this.getIntlMessage('header.code')} /></a></li>

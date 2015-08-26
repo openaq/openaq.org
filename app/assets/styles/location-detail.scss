@@ -65,3 +65,34 @@
   }
 
 }
+
+.sources-menu {
+  @include span-columns(12);
+  text-align: center;
+  font-size: modular-scale(1);
+  color: $base-color;
+  margin: 2em 0;
+
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    display: inline;
+    cursor: pointer;
+
+    &+li:before {
+      margin: 0 2em;
+      content: '•';
+      color: $tertiary-color;
+    }
+  }
+
+  .divider {
+    @include span-columns(12);
+
+    height: 1px;
+    background-color: $tertiary-color;
+    margin: 1em 0;
+  }
+}

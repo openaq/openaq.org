@@ -1,54 +1,57 @@
 header {
-  @include span-columns(10);
-  @include shift(1);
-
+  @include span-columns(12);
   height: $header-height;
   position: absolute;
   top: 0;
-  padding: 10px 10px;
+  margin: 20px 0;
+  padding: 0 90px;
 
   a {
     text-decoration: none;
+    font-weight: $base-font-bold;
   }
 
   &.light {
     a {
       color: white;
     }
+
+    :hover {
+      color: lighten($tertiary-color, $lighten-percentage);
+    }
   }
 
   &.dark {
     a {
-      color: black;
+      color: $base-color;
+    }
+
+    :hover {
+      color: lighten($base-color, $lighten-percentage);
     }
   }
 
   .site-logo {
-    @include span-columns(1 of 12);
-
     float: left;
 
     img {
       position: relative;
-      height: 44px;
-      @include transform(translateY(-25%));
-    }
-  }
-
-  &.no-logo {
-    .site-logo {
-      opacity: 0;
+      height: 40px;
     }
   }
 
   nav {
-    @include span-columns(11 of 12);
-
     font-size: modular-scale(0);
-
+    @include transform(translateY(10px));
     li {
       float: right;
-      margin: 0 5px;
+      margin: 0 15px;
+
+      .active {
+        padding: 0.5em;
+        border-radius: $global-radius;
+        background-color: rgba($tertiary-color, 0.1);
+      }
     }
   }
 }

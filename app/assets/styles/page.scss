@@ -63,9 +63,7 @@
         }
 
         &:hover {
-          opacity: 0.64;
-          background: rgba($tertiary-color, 0.2);
-          outline: none;
+          background: lighten($tertiary-color, $lighten-percentage);
         }
       }
     }
