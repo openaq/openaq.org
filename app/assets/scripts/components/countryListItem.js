@@ -13,7 +13,7 @@ var CountryListItem = React.createClass({
     return (
       <div className='detail-country-item' id={this.props.country.country}>
         {_.map(this.props.country.cities, function (c) {
-          return <CityListItem city={c} countryName={this.props.country.country} key={c.city} />;
+          return <CityListItem city={c} countryName={this.props.country.prettyCountry} key={c.city} />;
         }, this)}
       </div>
     );

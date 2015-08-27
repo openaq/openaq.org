@@ -4,7 +4,9 @@ var Reflux = require('reflux');
 
 var Actions = Reflux.createActions({
 
-  'latestSitesLoaded': {}
+  'latestSourcesLoaded': {},
+  'latestLocationsLoaded': {},
+  'metadataLoaded': {}
 
 });
 

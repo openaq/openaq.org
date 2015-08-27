@@ -2,7 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 
 var CountryListItem = require('./countryListItem');
-var siteStore = require('../stores/sites');
+var metadataStore = require('../stores/metadata');
 var actions = require('../actions/actions');
 var Header = require('./header');
 var Menu = require('./sourcesMenu');
@@ -10,7 +10,7 @@ var Menu = require('./sourcesMenu');
 var Sites = React.createClass({
 
   mixins: [
-    Reflux.listenTo(actions.latestSitesLoaded, 'onLatestSitesLoaded')
+    Reflux.listenTo(actions.metadataLoaded, 'onMetadataLoaded')
   ],
 
   propTypes: {
@@ -20,13 +20,13 @@ var Sites = React.createClass({
 
   getInitialState: function () {
     return {
-      countries: siteStore.storage.countries
+      countries: metadataStore.storage.countries
     };
   },
 
-  onLatestSitesLoaded: function () {
+  onMetadataLoaded: function () {
     this.setState({
-      countries: siteStore.storage.countries
+      countries: metadataStore.storage.countries
     });
   },
 
