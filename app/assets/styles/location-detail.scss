@@ -23,13 +23,14 @@
   font-size: modular-scale(-1);
   font-weight: $base-font-light;
   border-radius: $global-radius;
-  margin-bottom: 0.5em;
-  margin-left: 0.4em;
+  margin-bottom: 0.7em;
+  margin-left: 0.8em;
   // height: 150px;
   border: 1px solid lightgray;
 
   .inner {
-    padding: 0.6em;
+    padding: 1em;
+    line-height: 1.5em;
   }
 
   &:nth-of-type(3n+2) {
