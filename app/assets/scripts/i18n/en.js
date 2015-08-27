@@ -8,7 +8,10 @@ var i18n = {
           about: 'About',
           methodology: 'Methodology'
         },
-        footer: '{number, plural, =0 {Made} =1 {# measurement captured} other {# measurements captured}} with {heart} by {link}.'
+        footer: '{number, plural, =0 {Made} =1 {# measurement captured} other {# measurements captured}} with {heart} by {link}.',
+        sources: {
+          addData: 'Suggest a Source'
+        }
     }
 };
 

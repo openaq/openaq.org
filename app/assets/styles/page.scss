@@ -8,6 +8,12 @@
     line-height: 1.6em;
   }
 
+  .cta-wrapper {
+    @include span-columns(12);
+
+    text-align: center;
+  }
+
   .detail {
     @include span-columns(10);
     @include shift(1);
@@ -42,29 +48,6 @@
         margin-top: 0.25em;
         margin-bottom: 1.5em;
         font-weight: 400;
-      }
-
-      .bttn-cta {
-        display: inline-block;
-        border-radius: $global-radius;
-        min-width: 10rem;
-        padding: 0.25rem 1rem;
-        border: 2px solid;
-        text-decoration: none;
-
-        &.light {
-          color: #fff;
-          border-color: #fff;
-          background: rgba(#fff, 0.08);
-        }
-
-        &.large {
-          padding: 0.5rem 1.5rem;
-        }
-
-        &:hover {
-          background: lighten($tertiary-color, $lighten-percentage);
-        }
       }
     }
   }
