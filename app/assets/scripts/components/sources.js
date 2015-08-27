@@ -1,6 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var ReactIntl = require('react-intl');
+var MdastComponent = require('mdast-react-component');
 
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
@@ -41,8 +42,7 @@ var Sites = React.createClass({
         <Header locales={this.props.locales} messages={this.props.messages} style='dark' />
         <div className='sites page'>
           <div className='intro'>
-            <p>Lorem ipsum Dolor voluptate Excepteur adipisicing minim dolor adipisicing incididunt incididunt tempor et mollit aliquip Duis nostrud officia dolor occaecat culpa sed magna reprehenderit eiusmod laborum veniam sint fugiat ullamco sed sint dolore adipisicing aute magna fugiat aute magna sed incididunt dolor ut adipisicing tempor ex in aliqua proident eu ea sed et deserunt consequat aliqua mollit eiusmod mollit voluptate nulla est exercitation Excepteur exercitation consectetur sed nostrud ea velit adipisicing irure fugiat deserunt reprehenderit laborum sunt laborum ullamco reprehenderit ad minim pariatur cupidatat quis minim officia qui ut reprehenderit cillum labore esse ex nisi Excepteur cupidatat culpa id commodo dolor consequat elit eiusmod fugiat nisi dolore eiusmod exercitation.</p>
-            <p>&nbsp;</p>
+            <MdastComponent>{this.getIntlMessage('sources.intro')}</MdastComponent>
           </div>
           <p className='cta-wrapper'><a href='#' title='Suggest a new source' className='bttn-cta dark large'><FormattedMessage message={this.getIntlMessage('sources.addData')} /></a></p>
           <div className='detail'>

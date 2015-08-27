@@ -1,3 +1,6 @@
+var fs = require('fs');
+
+// String to modify
 var i18n = {
     locales: ['en-US'],
     messages: {
@@ -14,5 +17,10 @@ var i18n = {
         }
     }
 };
+
+/**
+ * Probably best not to edit below here
+ */
+i18n.messages.sources.intro = fs.readFileSync(__dirname + '/sourcesIntro.md', 'utf8');
 
 module.exports = i18n;
