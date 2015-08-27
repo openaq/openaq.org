@@ -2,7 +2,7 @@ var React = require('react');
 var ReactIntl = require('react-intl');
 var Reflux = require('reflux');
 
-var siteStore = require('../stores/sites');
+var locationsStore = require('../stores/locations');
 var actions = require('../actions/actions');
 
 var IntlMixin = ReactIntl.IntlMixin;
@@ -12,7 +12,7 @@ var Footer = React.createClass({
 
   mixins: [
     IntlMixin,
-    Reflux.listenTo(actions.latestSitesLoaded, 'onLatestSitesLoaded')
+    Reflux.listenTo(actions.latestLocationsLoaded, 'onLatestLocationsLoaded')
   ],
 
   getInitialState: function () {
@@ -21,9 +21,9 @@ var Footer = React.createClass({
     };
   },
 
-  onLatestSitesLoaded: function () {
+  onLatestLocationsLoaded: function () {
     this.setState({
-      numMeasurements: siteStore.storage.totalNumber
+      numMeasurements: locationsStore.storage.totalNumber
     });
   },
 

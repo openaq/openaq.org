@@ -22,7 +22,7 @@ var DetailItem = React.createClass({
     return (
       <div className='location-detail'>
         <div className='inner'>
-          <div className='title'>{l.location}</div>
+          <div className='title'><a href={l.sourceURL} title='See source site' target='_blank'>{l.location}</a></div>
           <div className='extra'><span>Count</span>: <FormattedNumber value={l.count} /> measurements</div>
           <div className='extra'><span>Updated</span>: <FormattedRelative value={l.lastUpdated} /></div>
           <div className='extra'><span>Available</span>: {l.parameters.join(', ')}</div>

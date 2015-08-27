@@ -23,7 +23,7 @@ var Menu = React.createClass({
         <div className='divider'></div>
         <ul>
           {_.map(this.props.countries, function (c) {
-            return <li onClick={this.handleClick} data-country={c.country} key={c.country}>{c.country}</li>;
+            return <li onClick={this.handleClick} data-country={c.country} key={c.country}>{c.prettyCountry}</li>;
           }, this)}
         </ul>
         <div className='divider'></div>
