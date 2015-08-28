@@ -1,4 +1,5 @@
 var React = require('react');
+var Link = require('react-router').Link;
 
 var Header = require('./header');
 
@@ -39,9 +40,9 @@ var Home = React.createClass({
                 </div>
               </section>
               <section className='feat-block'>
-                <h2>Join the Project</h2>
+                <h2>Get Involved</h2>
                 <div className='prose'>
-                  <p>Lorem ipsum Nulla ut culpa dolore voluptate elit ea Ut minim in velit consequat ut esse labore aliquip occaecat aliqua ex officia Ut non cupidatat reprehenderit non laboris occaecat quis ad.</p>
+                  <p>First and foremost, we are trying to build a community around Air Quality. There are many ways to get involved. You can chat with us on <a href='#'>Slack</a>, contribute code on <a href='https://github.com/openaq' target='_blank'>GitHub</a>, suggest new <Link to='sources'>data sources</Link> or just <a href='http://eepurl.com/bi1Uhn' target='_blank'>join the mailing list</a>.</p>
                 </div>
               </section>
             </div>

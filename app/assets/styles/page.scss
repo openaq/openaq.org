@@ -75,6 +75,10 @@
       margin-bottom: .75em;
     }
 
+    a {
+      color: $base-color;
+    }
+
     @include media($tablet) {
       @include span-columns(8);
       @include omega;
