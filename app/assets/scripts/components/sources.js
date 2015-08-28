@@ -44,7 +44,7 @@ var Sites = React.createClass({
           <div className='intro'>
             <MdastComponent>{this.getIntlMessage('sources.intro')}</MdastComponent>
           </div>
-          <p className='cta-wrapper'><a href='#' title='Suggest a new source' className='bttn-cta dark large'><FormattedMessage message={this.getIntlMessage('sources.addData')} /></a></p>
+          <p className='cta-wrapper'><a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' target='_blank' title='Suggest a new source' className='bttn-cta dark large'><FormattedMessage message={this.getIntlMessage('sources.addData')} /></a></p>
           <div className='detail'>
             <Menu countries={this.state.countries} />
             {this.state.countries.map(function (c) {
