@@ -34,7 +34,7 @@
     @include span-columns(12);
 
     min-height: 28em;
-    @include background(linear-gradient(rgba($primary-color, 0.48), rgba($primary-color, 0.64), rgba($primary-color, 0.80)), url("../graphics/layout/hero.jpg") center top no-repeat);
+    @include background(linear-gradient(rgba($primary-color, 0.08), rgba($primary-color, 0.14), rgba($primary-color, 0.20)), url("../graphics/layout/hero.jpg") center top no-repeat);
     color: white;
     margin-bottom: 3em;
 
