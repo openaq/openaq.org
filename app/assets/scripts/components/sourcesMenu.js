@@ -17,7 +17,7 @@ var Menu = React.createClass({
     document.getElementById(country).scrollIntoView({behavior: 'smooth'});
   },
 
-  render () {
+  render: function () {
     return (
       <div className='sources-menu'>
         <div className='divider'></div>

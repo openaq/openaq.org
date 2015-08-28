@@ -9,7 +9,7 @@ var CountryListItem = React.createClass({
     country: React.PropTypes.object
   },
 
-  render () {
+  render: function () {
     return (
       <div className='detail-country-item' id={this.props.country.country}>
         {_.map(this.props.country.cities, function (c) {

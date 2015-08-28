@@ -17,7 +17,7 @@ var DetailItem = React.createClass({
     return 'https://api.openaq.org/v1/measurements?format=csv&location=' + l.location;
   },
 
-  render () {
+  render: function () {
     var l = this.props.location;
     return (
       <div className='location-detail'>

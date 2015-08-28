@@ -13,7 +13,7 @@ var Header = React.createClass({
     style: React.PropTypes.string
   },
 
-  render () {
+  render: function () {
     var logo = (this.props.style.indexOf('light') === -1) ? '/assets/graphics/layout/wind.png' : '/assets/graphics/layout/wind_white.png';
     return (
       <header id='site-header' role='banner' className={this.props.style}>

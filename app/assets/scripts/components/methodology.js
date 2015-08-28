@@ -9,7 +9,7 @@ var Methodology = React.createClass({
     locales: React.PropTypes.array.isRequired
   },
 
-  render () {
+  render: function () {
     return (
       <div>
         <Header locales={this.props.locales} messages={this.props.messages} style='dark' />

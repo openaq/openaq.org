@@ -39,9 +39,9 @@
     margin-bottom: 3em;
 
     // For centering title
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(center);
 
     .inner {
       text-align: center;

@@ -2,7 +2,7 @@ var React = require('react');
 
 var NotFound = React.createClass({
 
-  render () {
+  render: function () {
     return (
       <div>NotFound Page</div>
     );

@@ -9,7 +9,7 @@ var CityListItem = React.createClass({
     countryName: React.PropTypes.string
   },
 
-  render () {
+  render: function () {
     return (
       <div className='detail-city-item'>
         <div className='title'>{this.props.countryName} - {this.props.city.city}</div>

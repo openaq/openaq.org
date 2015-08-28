@@ -36,7 +36,7 @@ var Sites = React.createClass({
     });
   },
 
-  render () {
+  render: function () {
     return (
       <div>
         <Header locales={this.props.locales} messages={this.props.messages} style='dark' />

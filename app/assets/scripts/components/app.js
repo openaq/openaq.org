@@ -13,7 +13,7 @@ var App = React.createClass({
     messages: React.PropTypes.object.isRequired
   },
 
-  render () {
+  render: function () {
     return (
       <div>
         <main id='site-body' role='main'>

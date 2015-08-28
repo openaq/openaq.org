@@ -27,7 +27,7 @@ var Footer = React.createClass({
     });
   },
 
-  render () {
+  render: function () {
     return (
       <footer id='site-footer'>
         <div className='inner'>
