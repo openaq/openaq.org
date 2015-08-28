@@ -22,7 +22,7 @@ var Home = require('./components/home');
 // declare our routes and their hierarchy
 var routes = (
   <Route handler={App} path='/'>
-    <DefaultRoute handler={Home} />
+    <DefaultRoute name ='default' handler={Home} />
     <Route path='about' name='about' handler={About}/>
     <Route path='methodology' name='methodology' handler={Methodology}/>
     <Route path='sources' name='sources' handler={Sources}/>

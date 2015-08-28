@@ -9,7 +9,8 @@ var i18n = {
           api: 'API',
           sources: 'Sources',
           about: 'About',
-          methodology: 'Methodology'
+          methodology: 'Methodology',
+          home: 'Home'
         },
         footer: '{number, plural, =0 {Made} =1 {# measurement captured} other {# measurements captured}} with {heart} by {link}.',
         sources: {

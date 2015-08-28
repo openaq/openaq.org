@@ -29,7 +29,7 @@
 
   .inner {
     padding: 1em;
-    line-height: 1.5em;
+    line-height: $base-line-height;
   }
 
   &:nth-of-type(3n+2) {
@@ -85,7 +85,7 @@
       display: none;
     }
 
-    a {
+    .links {
       display: none;
     }
   }

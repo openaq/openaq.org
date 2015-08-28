@@ -43,14 +43,34 @@ header {
   nav {
     font-size: modular-scale(0);
     @include transform(translateY(10px));
+
+    float: right;
     li {
-      float: right;
+      display: inline;
       margin: 0 15px;
 
       .active {
         padding: 0.5em;
         border-radius: $global-radius;
         background-color: lighten($tertiary-color, 50%);
+      }
+    }
+  }
+
+  @include media($mobile) {
+    @include span-columns(4);
+
+    nav {
+      text-align: center;
+      float: none;
+    }
+
+    .site-logo {
+      float: none;
+      text-align: center;
+
+      img {
+        height: 30px;
       }
     }
   }

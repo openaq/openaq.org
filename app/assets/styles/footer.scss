@@ -8,4 +8,8 @@ footer {
     color: $tertiary-color;
     font-size: modular-scale(1);
   }
+
+  @include media($mobile) {
+    padding: 0 2em;
+  }
 }
