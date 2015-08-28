@@ -64,5 +64,12 @@
       font-size: modular-scale(1);
       margin-bottom: .75em;
     }
+
+    @include media($tablet) {
+      @include span-columns(8);
+      @include omega;
+
+      margin: 1.5em 0;
+    }
   }
 }

@@ -21,3 +21,8 @@ $global-radius: 0.25rem;
 $global-rounded: 60rem;
 
 $lighten-percentage: 20%;
+
+// Breakpoints
+$mobile: new-breakpoint(max-width 500px 4);
+$tablet: new-breakpoint(max-width 900px 8);
+$large: new-breakpoint(max-width 1130px 12);
