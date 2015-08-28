@@ -40,7 +40,7 @@ var Home = React.createClass({
                 </div>
               </section>
               <section className='feat-block'>
-                <h2>Get Involved</h2>
+                <h2>Join us!</h2>
                 <div className='prose'>
                   <p>Our highest priority is building a community around open real-time air quality data, and we’d love you to join us.  Chat with us on <a href='https://openaq-slackin.herokuapp.com/' target='_blank'>Slack</a>, contribute code on <a href='https://github.com/openaq' target='_blank'>GitHub</a>, suggest new <Link to='sources'>data sources</Link> or just <a href='http://eepurl.com/bi1Uhn' target='_blank'>join the mailing list</a>.</p>
                 </div>
