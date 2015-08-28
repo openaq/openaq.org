@@ -36,7 +36,7 @@ var Home = React.createClass({
               <section className='feat-block'>
                 <h2>Why OpenAQ?</h2>
                 <div className='prose'>
-                  <p>Globally, thousands of stations publish real-time air quality info that just disappears after it’s displayed. We are aggregating, standardizing and sharing this info so that the public - from researchers to media - can do awesome things with it. </p>
+                  <p>Globally, thousands of stations publish real-time air quality info that just disappears after it’s displayed. We are aggregating, standardizing and sharing this info so that the public - from researchers to the media - can do awesome things with it. </p>
                 </div>
               </section>
               <section className='feat-block'>
