@@ -30,19 +30,19 @@ var Home = React.createClass({
               <section className='feat-block'>
                 <h2>What is OpenAQ?</h2>
                 <div className='prose'>
-                  <p>Lorem ipsum In ullamco voluptate in Excepteur aliquip sit irure culpa velit mollit ullamco esse enim aute dolor non tempor exercitation est laboris labore sed sint commodo aute velit minim veniam sint occaecat dolore ad ex.</p>
+                  <p>We are a community of scientists, software developers, and lovers of open environmental data. Together, we are building an open, real-time database that provides programmatic and historical access to air quality data.</p>
                 </div>
               </section>
               <section className='feat-block'>
                 <h2>Why OpenAQ?</h2>
                 <div className='prose'>
-                  <p>Lorem ipsum Adipisicing est consectetur ea proident dolore sint eiusmod dolor anim ad nostrud tempor occaecat nostrud quis ut dolore sit tempor consectetur eiusmod laborum ut eu nostrud non reprehenderit ad id quis in officia aliqua.</p>
+                  <p>Globally, thousands of stations publish real-time air quality info that just disappears after it’s displayed. We are aggregating, standardizing and sharing this info so that the public - from researchers to media - can do awesome things with it. </p>
                 </div>
               </section>
               <section className='feat-block'>
                 <h2>Get Involved</h2>
                 <div className='prose'>
-                  <p>First and foremost, we are trying to build a community around Air Quality. There are many ways to get involved. You can chat with us on <a href='https://openaq-slackin.herokuapp.com/' target='_blank'>Slack</a>, contribute code on <a href='https://github.com/openaq' target='_blank'>GitHub</a>, suggest new <Link to='sources'>data sources</Link> or just <a href='http://eepurl.com/bi1Uhn' target='_blank'>join the mailing list</a>.</p>
+                  <p>Our highest priority is building a community around open real-time air quality data, and we’d love you to join us.  Chat with us on <a href='https://openaq-slackin.herokuapp.com/' target='_blank'>Slack</a>, contribute code on <a href='https://github.com/openaq' target='_blank'>GitHub</a>, suggest new <Link to='sources'>data sources</Link> or just <a href='http://eepurl.com/bi1Uhn' target='_blank'>join the mailing list</a>.</p>
                 </div>
               </section>
             </div>
