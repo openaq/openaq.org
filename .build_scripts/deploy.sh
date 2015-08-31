@@ -4,7 +4,8 @@ set -e # halt script on error
 # If this is the production branch, push it up to gh-pages
 if [ $TRAVIS_PULL_REQUEST = "false" ] && [ $TRAVIS_BRANCH = ${PRODUCTION_BRANCH} ]; then
   echo "Get ready, we're pushing to gh-pages!"
-  cp CNAME dist/
+  cp CNAME dist
+  cp -r f dist
   cd dist
   git init
   git config user.name "Travis-CI"
