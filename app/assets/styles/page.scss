@@ -39,6 +39,7 @@
 
     min-height: 28em;
     @include background(linear-gradient(rgba($primary-color, 0.08), rgba($primary-color, 0.14), rgba($primary-color, 0.20)), url("../graphics/layout/hero.jpg") center top no-repeat);
+    background-size: cover;
     color: white;
     margin-bottom: 3em;
 
