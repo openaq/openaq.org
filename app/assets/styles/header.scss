@@ -57,8 +57,8 @@ header {
     }
   }
 
-  @include media($mobile) {
-    @include span-columns(4);
+  @include media($tablet) {
+    @include span-columns(8);
 
     nav {
       text-align: center;

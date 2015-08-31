@@ -20,6 +20,7 @@ var Header = React.createClass({
         <div className='site-logo'><a href='#/' title='OpenAQ'><img src={logo} /></a></div>
         <nav id='site-prime-nav' role='navigation'>
           <ul className='global-menu'>
+            <li><Link to='about'><FormattedMessage message={this.getIntlMessage('header.about')} /></Link></li>
             <li><Link to='sources'><FormattedMessage message={this.getIntlMessage('header.sources')} /></Link></li>
             <li><a href='https://docs.openaq.org'><FormattedMessage message={this.getIntlMessage('header.api')} /></a></li>
             <li><a href='https://github.com/openaq/openaq-api'><FormattedMessage message={this.getIntlMessage('header.code')} /></a></li>
