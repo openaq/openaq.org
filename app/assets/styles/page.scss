@@ -1,4 +1,4 @@
-.sites {
+.page {
   .intro {
     @include span-columns(8);
     @include shift(2);
@@ -15,6 +15,9 @@
       margin: 1em 0;
     }
   }
+}
+
+.sites {
 
   .cta-wrapper {
     @include span-columns(12);
