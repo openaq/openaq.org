@@ -5,18 +5,12 @@ var MdastComponent = require('mdast-react-component');
 var Header = require('./header');
 
 var IntlMixin = ReactIntl.IntlMixin;
-var FormattedMessage = ReactIntl.FormattedMessage;
 
 var About = React.createClass({
 
   mixins: [
-    IntlMixin,
+    IntlMixin
   ],
-
-  propTypes: {
-    messages: React.PropTypes.object.isRequired,
-    locales: React.PropTypes.array.isRequired
-  },
 
   propTypes: {
     messages: React.PropTypes.object.isRequired,
