@@ -36,7 +36,8 @@ var Footer = React.createClass({
               message={this.getIntlMessage('footer')}
               number={this.state.numMeasurements}
               heart={<span className='heart'>♥</span>}
-              link={<a href='http://developmentseed.com/' title='Visit Development Seed website'>Development Seed</a>} />
+              link={<a href='http://developmentseed.com/' title='Visit Development Seed website'>Development Seed</a>}
+              email={<a href='mailto:info@openaq.org?subject=Mail from website' title='Email OpenAQ'>OpenAQ</a>} />
           </p>
         </div>
       </footer>

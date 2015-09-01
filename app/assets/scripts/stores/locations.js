@@ -28,6 +28,9 @@ var LocationsStore = Reflux.createStore({
         case 'IN':
           c.prettyCountry = 'India';
           break;
+        case 'MN':
+          c.prettyCountry = 'Mongolia';
+          break;
       }
 
       return c;

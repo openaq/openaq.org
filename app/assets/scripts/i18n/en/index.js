@@ -12,7 +12,7 @@ var i18n = {
           methodology: 'Methodology',
           home: 'Home'
         },
-        footer: '{number, plural, =0 {Made} =1 {# measurement captured} other {# measurements captured}} with {heart} by {link}.',
+        footer: '{number, plural, =0 {Made} =1 {# measurement captured} other {# measurements captured}} with {heart} by {link} and the {email} team.',
         sources: {
           addData: 'Suggest a Source'
         },
