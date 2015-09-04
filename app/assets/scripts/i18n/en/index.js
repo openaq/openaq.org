@@ -14,7 +14,10 @@ var i18n = {
         },
         footer: '{number, plural, =0 {Made} =1 {# measurement captured} other {# measurements captured}} with {heart} by {link} and the {email} team.',
         sources: {
-          addData: 'Suggest a Source'
+          addData: 'Suggest a Source',
+          card: {
+            measurements: '{number, plural, =1 {# measurement} other {# measurements}}'
+          }
         },
         about: {}
     }

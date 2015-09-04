@@ -3,11 +3,11 @@ var ReactIntl = require('react-intl');
 
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedRelative = ReactIntl.FormattedRelative;
-var FormattedNumber = ReactIntl.FormattedNumber;
+var FormattedMessage = ReactIntl.FormattedMessage;
 
 var DetailItem = React.createClass({
 
-  mixinx: [IntlMixin],
+  mixins: [IntlMixin],
 
   propTypes: {
     location: React.PropTypes.object
@@ -23,7 +23,7 @@ var DetailItem = React.createClass({
       <div className='location-detail'>
         <div className='inner'>
           <div className='title'><a href={l.sourceURL} title='See source site' target='_blank'>{l.location}</a></div>
-          <div className='extra'><span>Count</span>: <FormattedNumber value={l.count} /> measurements</div>
+          <div className='extra'><span>Count</span>: <FormattedMessage message={this.getIntlMessage('sources.card.measurements')} number={l.count} /></div>
           <div className='extra'><span>Last Updated</span>: <FormattedRelative value={l.lastUpdated} /></div>
           <div className='extra'><span>Collecting Since</span>: <FormattedRelative value={l.firstUpdated} /></div>
           <div className='extra'><span>Values</span>: {l.parameters.join(', ')}</div>
