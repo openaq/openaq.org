@@ -1,5 +1,4 @@
 var React = require('react');
-var Link = require('react-router').Link;
 var ReactIntl = require('react-intl');
 var MdastComponent = require('mdast-react-component');
 
