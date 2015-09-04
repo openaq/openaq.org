@@ -1,9 +1,14 @@
 var React = require('react');
-var Link = require('react-router').Link;
+var ReactIntl = require('react-intl');
+var MdastComponent = require('mdast-react-component');
 
+var IntlMixin = ReactIntl.IntlMixin;
+var FormattedMessage = ReactIntl.FormattedMessage;
 var Header = require('./header');
 
 var Home = React.createClass({
+
+  mixins: [IntlMixin],
 
   propTypes: {
     messages: React.PropTypes.object.isRequired,
@@ -18,9 +23,9 @@ var Home = React.createClass({
           {/* banner */}
           <div className='banner'>
             <div className='inner'>
-              <h1 className='site-title'>OpenAQ</h1>
-              <p className='site-description'>Building the first open, real-time air quality data hub for the world.</p>
-              <p className='cta-wrapper'><a href='#/sources' title='See the available sources' className='bttn-cta light large'>Access & Contribute Data</a></p>
+              <h1 className='site-title'><FormattedMessage message={this.getIntlMessage('home.siteName')} /></h1>
+              <p className='site-description'><FormattedMessage message={this.getIntlMessage('home.tagline')} /></p>
+              <p className='cta-wrapper'><a href='#/sources' title='See the available sources' className='bttn-cta light large'><FormattedMessage message={this.getIntlMessage('home.cta')} /></a></p>
             </div>
           </div>
           {/* banner */}
@@ -28,21 +33,21 @@ var Home = React.createClass({
           <div className='content-blocks'>
             <div className='inner'>
               <section className='feat-block'>
-                <h2>What is OpenAQ?</h2>
+                <h2><FormattedMessage message={this.getIntlMessage('home.what.title')} /></h2>
                 <div className='prose'>
-                  <p>We are a community of scientists, software developers, and lovers of open environmental data. Together, we are building an open, real-time database that provides programmatic and historical access to air quality data.</p>
+                  <MdastComponent>{this.getIntlMessage('home.what.content')}</MdastComponent>
                 </div>
               </section>
               <section className='feat-block'>
-                <h2>Why OpenAQ?</h2>
+                <h2><FormattedMessage message={this.getIntlMessage('home.why.title')} /></h2>
                 <div className='prose'>
-                  <p>Globally, thousands of stations publish real-time air quality info that just disappears after it’s displayed. We are aggregating, standardizing and sharing this info so that the public - from researchers to the media - can do awesome things with it. </p>
+                  <MdastComponent>{this.getIntlMessage('home.why.content')}</MdastComponent>
                 </div>
               </section>
               <section className='feat-block'>
-                <h2>Join us!</h2>
+                <h2><FormattedMessage message={this.getIntlMessage('home.join.title')} /></h2>
                 <div className='prose'>
-                  <p>Our highest priority is building a community around open real-time air quality data, and we’d love you to join us.  Chat with us on <a href='https://openaq-slackin.herokuapp.com/' target='_blank'>Slack</a>, contribute code on <a href='https://github.com/openaq' target='_blank'>GitHub</a>, suggest new <Link to='sources'>data sources</Link> or just <a href='http://eepurl.com/bi1Uhn' target='_blank'>join the mailing list</a>.</p>
+                  <MdastComponent>{this.getIntlMessage('home.join.content')}</MdastComponent>
                 </div>
               </section>
             </div>
