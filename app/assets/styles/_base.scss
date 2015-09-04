@@ -31,6 +31,12 @@ a {
   color: $base-color;
 }
 
+em {
+  color: $tertiary-color;
+  font-style: normal;
+  font-weight: normal;
+}
+
 .bttn-cta {
   display: inline-block;
   border-radius: $global-radius;

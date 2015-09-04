@@ -19,7 +19,21 @@ var i18n = {
             measurements: '{number, plural, =1 {# measurement} other {# measurements}}'
           }
         },
-        about: {}
+        about: {},
+        home: {
+          siteName: 'OpenAQ',
+          tagline: 'Building the first open, real-time air quality data hub for the world.',
+          cta: 'Access & Contribute Data',
+          what: {
+            title: 'What is OpenAQ?'
+          },
+          why: {
+            title: 'Why OpenAQ?'
+          },
+          join: {
+            title: 'Join Us!'
+          }
+        }
     }
 };
 
@@ -28,5 +42,8 @@ var i18n = {
  */
 i18n.messages.sources.intro = fs.readFileSync(__dirname + '/sources/intro.md', 'utf8');
 i18n.messages.about.intro = fs.readFileSync(__dirname + '/about/intro.md', 'utf8');
+i18n.messages.home.what.content = fs.readFileSync(__dirname + '/home/what.md', 'utf8');
+i18n.messages.home.why.content = fs.readFileSync(__dirname + '/home/why.md', 'utf8');
+i18n.messages.home.join.content = fs.readFileSync(__dirname + '/home/join.md', 'utf8');
 
 module.exports = i18n;
