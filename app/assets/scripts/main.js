@@ -3,6 +3,9 @@
 var React = require('react');
 var Router = require('react-router');
 
+// Config variables
+var config = require('./config');
+
 // Language, hard code for now, do better detection later?
 var i18n = require('./i18n/en');
 
@@ -18,6 +21,11 @@ var Methodology = require('./components/methodology');
 var Sources = require('./components/sources');
 var NotFound = require('./components/notFound');
 var Home = require('./components/home');
+
+console.log.apply(console, config.consoleMessage);
+if (config.environment !== 'production') {
+  console.log('--' + config.environment.toUpperCase() + '--');
+}
 
 // declare our routes and their hierarchy
 var routes = (
