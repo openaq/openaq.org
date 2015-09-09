@@ -70,6 +70,10 @@
         margin-top: 0.25em;
         margin-bottom: 1.5em;
         font-weight: 400;
+
+        @include media($tablet) {
+          padding: 0 10px;
+        }
       }
     }
   }
