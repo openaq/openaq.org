@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 var nets = require('nets');
 var _ = require('lodash');
 
+var utils = require('../utils');
 var actions = require('../actions/actions');
 
 var LocationsStore = Reflux.createStore({
@@ -18,20 +19,7 @@ var LocationsStore = Reflux.createStore({
 
   prettifyCountries: function () {
     this.storage.countries = _.map(this.storage.countries, function (c) {
-      switch (c.country) {
-        case 'CN':
-          c.prettyCountry = 'China';
-          break;
-        case 'UK':
-          c.prettyCountry = 'United Kingdom';
-          break;
-        case 'IN':
-          c.prettyCountry = 'India';
-          break;
-        case 'MN':
-          c.prettyCountry = 'Mongolia';
-          break;
-      }
+      c.prettyCountry = utils.getPrettyCountry(c.country);
 
       return c;
     });
