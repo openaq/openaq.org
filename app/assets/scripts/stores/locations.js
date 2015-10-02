@@ -10,7 +10,8 @@ var actions = require('../actions/actions');
 var LocationsStore = Reflux.createStore({
 
   storage: {
-    totalNumber: 0
+    totalNumber: 0,
+    countries: []
   },
 
   init: function () {
@@ -80,6 +81,9 @@ var LocationsStore = Reflux.createStore({
 
       // Make the country names nicer
       self.prettifyCountries();
+
+      // And sort by nice country name
+      self.storage.countries = _.sortBy(self.storage.countries, 'prettyCountry');
 
       // Done, send out action
       actions.latestLocationsLoaded();
