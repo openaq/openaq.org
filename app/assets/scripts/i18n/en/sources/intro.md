@@ -7,6 +7,6 @@ In this first iteration of the platform:
 
 The "Resolution" parameter below indicates the time frequency at which the data are archived from a given site, and this corresponds, to the best of our knoweldge, with the frequency at which the data are measured on a given site. 
 
-*Note: We cannot verify the accuracy of the data.*
+*Note: We cannot verify the accuracy of the data and unless otherwise noted, as these data are collected in real-time, they should be considered preliminary by their sources.*
 
 Notice errors, have comments or questions? Click the button below to leave feedback.
