@@ -103,14 +103,10 @@
   }
 
   li {
-    display: inline;
+    display: inline-block;
     cursor: pointer;
+    margin: 5px 30px;
 
-    &+li:before {
-      margin: 0 2em;
-      content: '•';
-      color: $tertiary-color;
-    }
   }
 
   .divider {
