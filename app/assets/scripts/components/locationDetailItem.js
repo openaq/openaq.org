@@ -27,7 +27,6 @@ var DetailItem = React.createClass({
           <div className='extra'><span>Last Updated</span>: <FormattedRelative value={l.lastUpdated} /></div>
           <div className='extra'><span>Collecting Since</span>: <FormattedRelative value={l.firstUpdated} /></div>
           <div className='extra'><span>Values</span>: {l.parameters.join(', ')}</div>
-          <div className='extra'><span>Resolution</span>: {l.resolution}</div>
         </div>
         <div className='divider'></div>
         <div className='links'>
