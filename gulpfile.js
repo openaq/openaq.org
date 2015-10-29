@@ -85,11 +85,11 @@ gulp.task('build', ['vendorScripts', 'javascript'], function () {
 gulp.task('javascript', function () {
   // set the correct environment, which controls what happens in config.js
   if (!process.env.DS_ENV) {
-    if (!process.env.TRAVIS_BRANCH
-    || process.env.TRAVIS_BRANCH !== process.env.DEPLOY_BRANCH) {
-      process.env.DS_ENV = 'production';
-    } else {
+    if (!process.env.TRAVIS_BRANCH ||
+      process.env.TRAVIS_BRANCH !== process.env.PRODUCTION_BRANCH) {
       process.env.DS_ENV = 'staging';
+    } else {
+      process.env.DS_ENV = 'production';
     }
   }
 
