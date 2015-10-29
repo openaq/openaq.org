@@ -3,3 +3,4 @@ node_modules
 .tmp
 dist
 npm-debug.log
+app/assets/scripts/config/local.js
