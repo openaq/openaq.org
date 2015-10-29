@@ -5,5 +5,6 @@
  * running on a branch other than the DEPLOY_BRANCH.
  */
 module.exports = {
-  environment: 'local'
+  environment: 'local',
+  apiURL: 'http://localhost:3004/v1/'
 };

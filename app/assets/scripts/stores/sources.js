@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 var nets = require('nets');
 
+var config = require('../config');
 var actions = require('../actions/actions');
 
 var SourcesStore = Reflux.createStore({
@@ -18,7 +19,7 @@ var SourcesStore = Reflux.createStore({
   getSources: function () {
     var self = this;
 
-    nets({ url: 'https://api.openaq.org/v1/sources' }, function (err, res, body) {
+    nets({ url: config.apiURL + 'sources' }, function (err, res, body) {
       if (err) {
         return console.error(err);
       }

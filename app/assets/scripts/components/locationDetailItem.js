@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactIntl = require('react-intl');
 
+var config = require('../config');
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedRelative = ReactIntl.FormattedRelative;
 var FormattedMessage = ReactIntl.FormattedMessage;
@@ -14,7 +16,7 @@ var DetailItem = React.createClass({
   },
 
   getCSVURL: function (l) {
-    return 'https://api.openaq.org/v1/measurements?format=csv&location=' + l.location;
+    return config.apiURL + 'measurements?format=csv&location=' + l.location;
   },
 
   render: function () {
