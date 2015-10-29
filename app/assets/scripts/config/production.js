@@ -4,6 +4,6 @@ var logo = require('./logo');
  */
 module.exports = {
   environment: 'production',
+  apiURL: 'https://api.openaq.org/v1/',
   consoleMessage: logo
 };
-
