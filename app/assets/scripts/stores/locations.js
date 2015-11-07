@@ -106,17 +106,17 @@ var groupResults = function (locations) {
   var grouped = {};
   _.forEach(locations, function (d) {
     var location = {
-      location: d._id.location,
+      location: d.location,
       count: d.count,
       firstUpdated: d.firstUpdated,
       lastUpdated: d.lastUpdated,
       parameters: d.parameters,
       sourceName: d.sourceName
     };
-    var country = grouped[d._id.country];
+    var country = grouped[d.country];
     if (country) {
       // Country exists already
-      var city = country.cities[d._id.city];
+      var city = country.cities[d.city];
       if (city) {
         // City exists already, add location and update parent values
         city.locations.push(location);
@@ -130,8 +130,8 @@ var groupResults = function (locations) {
         country.parameters = _.union(country.parameters, location.parameters);
       } else {
         // City doesn't exist yet
-        country.cities[d._id.city] = {
-          city: d._id.city,
+        country.cities[d.city] = {
+          city: d.city,
           locations: [location],
           count: location.count,
           firstUpdated: location.firstUpdated,
@@ -143,16 +143,16 @@ var groupResults = function (locations) {
       }
     } else {
       // Neither Country nor City exist yet
-      grouped[d._id.country] = {
-        country: d._id.country,
+      grouped[d.country] = {
+        country: d.country,
         cities: {},
         count: location.count,
         firstUpdated: location.firstUpdated,
         lastUpdated: location.lastUpdated,
         parameters: location.parameters
       };
-      grouped[d._id.country].cities[d._id.city] = {
-        city: d._id.city,
+      grouped[d.country].cities[d.city] = {
+        city: d.city,
         locations: [location],
         count: location.count,
         firstUpdated: location.firstUpdated,
