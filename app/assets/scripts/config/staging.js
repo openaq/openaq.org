@@ -4,8 +4,8 @@
 
 // set staging-specific options here.
 module.exports = {
-  environment: 'staging'
-
+  environment: 'staging',
+  apiURL: 'https://api.openaq.org/v1/'
 };
 
 // copy over any production settings that weren't specifically set above
