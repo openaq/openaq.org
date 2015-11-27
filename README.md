@@ -64,7 +64,7 @@ The script build, which uses `browserify`, outputs two js files: `bundle.js` and
    install --save ...`.
 
 ## Travis for testing and deployment
-The .travis.yml file enables the usage of [Travis](http://travis.org) as a test and deployment system. In this particular case, Travis will be looking for any changes to the repo and when a change is made to the `master` branch, Travis will build the project and deploy it to the `gh-pages` branch.
+The .travis.yml file enables the usage of [Travis](http://travis.org) as a test and deployment system. In this particular case, Travis will be looking for any changes to the repo and when a change is made to the `master` branch, Travis will build the project and deploy it to the `gh-pages` branch. Staging is deployed to http://openaq.org-staging.s3-website-us-east-1.amazonaws.com/#/ while production is deployed to https://openaq.org via gh-pages.
 
 ## semistandard for linting
 We're using [semistandard](https://github.com/Flet/semistandard) for linting. 
