@@ -42,65 +42,15 @@
 }
 
 .home {
-  .banner {
-    @include span-columns(12);
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
 
-    min-height: 28em;
-    @include background(linear-gradient(rgba($primary-color, 0.08), rgba($primary-color, 0.14), rgba($primary-color, 0.20)), url("../graphics/layout/hero.jpg") center top no-repeat);
-    background-size: cover;
-    color: white;
-    margin-bottom: 3em;
-
-    // For centering title
-    @include display(flex);
-    @include flex-direction(column);
-    @include justify-content(center);
-
-    .inner {
-      text-align: center;
-
-      .site-title {
-        font-size: modular-scale(4);
-        line-height: 1.25em;
-      }
-
-      .site-description {
-        font-size: modular-scale(1);
-        line-height: 1.75em;
-        margin-top: 0.25em;
-        margin-bottom: 1.5em;
-        font-weight: 400;
-
-        @include media($tablet) {
-          padding: 0 10px;
-        }
-      }
-    }
-  }
-  .content-blocks {
-    margin: 0 4em;
-  }
-
-  .feat-block {
-    @include span-columns(4);
-
-    text-align: center;
-    line-height: $base-line-height;
-
-    h2 {
-      font-size: modular-scale(1);
-      margin-bottom: .75em;
-    }
-
-    a {
-      color: $base-color;
-    }
-
-    @include media($tablet) {
-      @include span-columns(8);
-      @include omega;
-
-      margin: 1.5em 0;
+    .mapboxgl-popup {
+      transform: translate(50%, 150px) !important;
     }
   }
 }

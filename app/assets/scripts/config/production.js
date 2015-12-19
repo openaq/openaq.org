@@ -5,5 +5,6 @@ var logo = require('./logo');
 module.exports = {
   environment: 'production',
   apiURL: 'https://api.openaq.org/v1/',
+  mapboxToken: 'pk.eyJ1IjoidW1waHJleTEwMTIiLCJhIjoiQ1MzNldBYyJ9.fM0A16yfZbqCIH0--_X7Eg',
   consoleMessage: logo
 };
