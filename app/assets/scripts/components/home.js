@@ -10,60 +10,19 @@ import actions from '../actions/actions';
 let IntlMixin = ReactIntl.IntlMixin;
 import Header from './header';
 import config from '../config';
-import Popup from './mapPopup';
+import Sidebar from './mapSidebar';
 let map;
 
-// These are the visual breaks for the 6 severity groupings.
-let breaks = {
-  'pm25': {
-    massValues: [0, 20, 100, 200, 400, 600],
-    numberValues: [0, 20, 100, 200, 400, 600],
-    colors: ['#0CE700', '#FFFF00', '#FF6800', '#FF0000', '#87003B', '#6B0019']
-  },
-  'pm10': {
-    massValues: [0, 20, 100, 200, 400, 600],
-    numberValues: [0, 20, 100, 200, 400, 600],
-    colors: ['#0CE700', '#FFFF00', '#FF6800', '#FF0000', '#87003B', '#6B0019']
-  },
-  'co': {
-    massValues: [0, 20, 100, 200, 400, 600],
-    numberValues: [0, 20, 100, 200, 400, 600],
-    colors: ['#0CE700', '#FFFF00', '#FF6800', '#FF0000', '#87003B', '#6B0019']
-  },
-  'so2': {
-    massValues: [0, 20, 100, 200, 400, 600],
-    numberValues: [0, 20, 100, 200, 400, 600],
-    colors: ['#0CE700', '#FFFF00', '#FF6800', '#FF0000', '#87003B', '#6B0019']
-  },
-  'no2': {
-    massValues: [0, 20, 100, 200, 400, 600],
-    numberValues: [0, 20, 100, 200, 400, 600],
-    colors: ['#0CE700', '#FFFF00', '#FF6800', '#FF0000', '#87003B', '#6B0019']
-  },
-  'o3': {
-    massValues: [0, 20, 100, 200, 400, 600],
-    numberValues: [0, 20, 100, 200, 400, 600],
-    colors: ['#0CE700', '#FFFF00', '#FF6800', '#FF0000', '#87003B', '#6B0019']
-  },
-  'bc': {
-    massValues: [0, 20, 100, 200, 400, 600],
-    numberValues: [0, 20, 100, 200, 400, 600],
-    colors: ['#0CE700', '#FFFF00', '#FF6800', '#FF0000', '#87003B', '#6B0019']
-  }
-};
-let defaultCircleOpacity = 0.4;
-let defaultCircleRadius = 2;
-let zoomedInCircleOpacity = 0.8;
-let zoomedInCircleRadius = 6;
-let zoomChange = 5; // Zoom level at which we make circles larger
-let millisecondsToOld = 6 * 60 * 60 * 1000; // 6 hours
+// Map styling
+import { breaks, millisecondsToOld, mapCenter } from './mapConfig';
 
 let Home = React.createClass({
 
   mixins: [
     IntlMixin,
     Reflux.listenTo(actions.latestValuesLoaded, '_onLatestValuesLoaded'),
-    Reflux.listenTo(actions.closeMapPopup, '_onPopupClosed')
+    Reflux.listenTo(actions.closeMapSidebar, '_onSidebarClosed'),
+    Reflux.listenTo(actions.mapParameterChanged, '_handleParamSwitch')
   ],
 
   propTypes: {
@@ -74,12 +33,9 @@ let Home = React.createClass({
   getInitialState: function () {
     return {
       selectedParameter: 'pm25',
-      mapZoom: 1,
-      mapCenter: [-77.04, 38.907],
-      circleRadius: defaultCircleRadius,
-      circleOpactiy: defaultCircleOpacity,
-      displayPopup: false,
-      selectedFeatures: [{properties: {}}]
+      displaySidebar: false,
+      selectedFeatures: [],
+      selectedPoint: {x: 0, y: 0}
     };
   },
 
@@ -106,6 +62,7 @@ let Home = React.createClass({
       'type': 'FeatureCollection',
       'features': []
     };
+    console.info(`Generating GeoJSON for ${this.state.selectedParameter}`);
     _.forEach(latestStore.storage.hasGeo[this.state.selectedParameter], function (l) {
       // Make sure we have lat/lon
       if (l.coordinates) {
@@ -133,28 +90,49 @@ let Home = React.createClass({
     map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/light-v8',
-      center: this.state.mapCenter,
-      zoom: this.state.mapZoom
+      center: [0, 0],
+      zoom: 1.5
     });
     // disable map rotation
     map.dragRotate.disable();
 
     map.on('style.load', function () {
-      _this._updateData();
+      // Add initial data
+      let markers = _this._generateGeoJSON();
+      map.addSource('markers', {
+        'type': 'geojson',
+        'data': markers
+      });
+
+      // Add filtered layers
+      let bs = breaks[_this.state.selectedParameter];
+      let filters = _this._generateFilters();
+      for (let i = 0; i < filters.length; i++) {
+        map.addLayer({
+            'id': `markers-${bs.massValues[i]}`,
+            'interactive': true,
+            'type': 'circle',
+            'source': 'markers',
+            'paint': {
+                'circle-color': bs.colors[i],
+                'circle-opacity': {
+                  'stops': [[0, 1], [5, 0.8], [7, 0.6], [11, 0.4]]
+                },
+                'circle-radius': {
+                  'stops': [[0, 2], [5, 4], [7, 6]]
+                }
+            },
+            filter: filters[i]
+        });
+      }
     });
 
-    // When a click event occurs near a marker icon, open a popup at the location of
-    // the feature, with description HTML from its properties.
+    // Open sidebar when we have items to show.
     map.on('click', function (e) {
-      map.featuresAt(e.point, {radius: 10, includeGeometry: true}, function (err, features) {
-        if (err || !features.length) {
-          return;
-        }
-
-        _this.setState({
-          selectedFeatures: features,
-          displayPopup: true
-        });
+      _this.setState({
+        selectedPoint: e.point
+      }, function () {
+        _this._getFeatures();
       });
     });
 
@@ -165,68 +143,31 @@ let Home = React.createClass({
         map.getCanvas().style.cursor = (!err && features.length) ? 'pointer' : '';
       });
     });
+  },
 
-    // We want to redraw circles at different zooms, handle that here
-    map.on('moveend', function (e) {
-      // Change circle size at a certain zoom level
-      let circleRadius = defaultCircleRadius;
-      let circleOpacity = defaultCircleOpacity;
-      if (map.getZoom() >= zoomChange) {
-        circleRadius = zoomedInCircleRadius;
-        circleOpacity = zoomedInCircleOpacity;
+  /*
+  * Get the features for parameter and update the sidebar
+  */
+  _getFeatures: function () {
+    let _this = this;
+    map.featuresAt(this.state.selectedPoint, {radius: 10}, function (err, features) {
+      if (err) {
+        return console.error(err);
       }
-      // Check here to see if we're changing radius, hence if we need to redraw
-      let dataUpdateRequired = _this.state.circleRadius !== circleRadius;
+
       _this.setState({
-        circleRadius: circleRadius,
-        circleOpacity: circleOpacity
-      }, function () {
-        if (dataUpdateRequired) {
-          _this._updateData();
-        }
+        selectedFeatures: features,
+        displaySidebar: true
       });
     });
   },
 
-  /**
-   * Generate HTML for popup given selected features
-   * @param {array} features Array of selected features
-   * @return {string} HTML to display
+  /*
+   * Generate the filters we want to use for the data, dependent on data
+   * @return {array} An array of filter arrays
    */
-  _generatePopupHTML: function (features) {
-    let div = function (feature) {
-      return `<div>
-                  Location: ${feature.properties.location}<br/>
-                  Time: ${feature.properties.lastUpdated}<br/>
-                  Value: ${feature.properties.value} ${feature.properties.unit}
-              </div>
-              <hr/>`;
-    };
-
-    let html = '';
-    _.forEach(features, function (f) {
-      html += div(f);
-    });
-
-    return html;
-  },
-
-  /**
-   * Updating the data based on current state, will remove present layers and
-   * sources and add new ones.
-   */
-  _updateData: function () {
-    let markers = this._generateGeoJSON();
-    // Try removing old data source before adding new one
-    try {
-      map.removeSource('markers');
-    } catch (e) {}
-    map.addSource('markers', {
-        'type': 'geojson',
-        'data': markers
-    });
-
-    // Add filtered layers
+  _generateFilters: function () {
+    let arr = [];
     let bs = breaks[this.state.selectedParameter];
     for (let p = 0; p < bs.massValues.length; p++) {
       let filters;
@@ -242,22 +183,31 @@ let Home = React.createClass({
           [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld]
         ];
       }
-      // Try and move previous layer before adding new one
-      try {
-        map.removeLayer(`markers-${bs.massValues[p]}`);
-      } catch (e) {}
-      map.addLayer({
-          'id': `markers-${bs.massValues[p]}`,
-          'interactive': true,
-          'type': 'circle',
-          'source': 'markers',
-          'paint': {
-              'circle-color': bs.colors[p],
-              'circle-opacity': this.state.circleOpacity,
-              'circle-radius': this.state.circleRadius
-          },
-          filter: filters
-      });
+
+      arr.push(filters);
+    }
+
+    return arr;
+  },
+
+  /**
+   * Updating the data based on current state, will remove present layers and
+   * sources and add new ones.
+   * @todo move some of this logic to another function so we can do
+   * source.setData and layer.setFilter instead of removing and adding
+   * @todo use https://www.mapbox.com/mapbox-gl-style-spec/#types-function for
+   * zoom-level circle-radius
+   */
+  _updateData: function () {
+    let markers = this._generateGeoJSON();
+    // Update data source
+    map.getSource('markers').setData(markers);
+
+    // Add filtered layers
+    let bs = breaks[this.state.selectedParameter];
+    let filters = this._generateFilters();
+    for (let i = 0; i < filters.length; i++) {
+      map.setFilter(`markers-${bs.massValues[i]}`, filters[i]);
     }
   },
 
@@ -268,22 +218,35 @@ let Home = React.createClass({
     this._mapInit();
   },
 
-  _onPopupClosed: function () {
+  _onSidebarClosed: function () {
     this.setState({
-      displayPopup: false
+      displaySidebar: !this.state.displaySidebar
     });
   },
 
   /**
-   * Handler for switching of the selected paramter, updates state and data
+   * Handler for switching of the selected parameter, updates state and data
    * @param {object} e associated event
    */
-  _handleParamSwitch: function (e) {
-    // Set new selected paramter and then update data
+  _handleParamSwitch: function (data) {
+    let _this = this;
+    // Set new selected parameter and then update data
+
+    // This gets a bit weird since we need to wait for all the map data
+    // to be loaded before grabbing new features.
+    var getFeaturesIfLoaded = function () {
+      if (!map.loaded()) {
+        setTimeout(function () { getFeaturesIfLoaded(); }, 50);
+      } else {
+        _this._getFeatures();
+      }
+    };
+
     this.setState({
-      selectedParameter: e.target.value
+      selectedParameter: data.parameter
     }, function () {
       this._updateData();
+      getFeaturesIfLoaded();
     });
   },
 
@@ -291,23 +254,18 @@ let Home = React.createClass({
    * Main render function, draws everything
    */
   render: function () {
-    // Include the popup or not
-    var popup;
-    if (this.state.displayPopup) {
-      popup = <Popup locales={this.props.locales} messages={this.props.messages} features={this.state.selectedFeatures} parameter={this.state.selectedParameter} />;
-    }
     return (
       <div>
         <Header locales={this.props.locales} messages={this.props.messages} style='no-logo' />
         <div className='home page'>
           <div id='map'></div>
-          {popup}
-          <input type='radio' name='paramSwitcher' value='pm25' onChange={this._handleParamSwitch} checked={this.state.selectedParameter === 'pm25'} />PM2.5
-          <input type='radio' name='paramSwitcher' value='pm10' onChange={this._handleParamSwitch} checked={this.state.selectedParameter === 'pm10'} />PM10
-          <input type='radio' name='paramSwitcher' value='o3' onChange={this._handleParamSwitch} checked={this.state.selectedParameter === 'o3'} />Ozone
-          <input type='radio' name='paramSwitcher' value='so2' onChange={this._handleParamSwitch} checked={this.state.selectedParameter === 'so2'} />SO2
-          <input type='radio' name='paramSwitcher' value='no2' onChange={this._handleParamSwitch} checked={this.state.selectedParameter === 'no2'} />NO2
-          <input type='radio' name='paramSwitcher' value='co' onChange={this._handleParamSwitch} checked={this.state.selectedParameter === 'co'} />CO
+          <Sidebar
+            locales={this.props.locales}
+            messages={this.props.messages}
+            features={this.state.selectedFeatures}
+            parameter={this.state.selectedParameter}
+            displaySidebar={this.state.displaySidebar}
+          />
         </div>
       </div>
     );

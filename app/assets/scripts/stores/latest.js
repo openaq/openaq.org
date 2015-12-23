@@ -53,32 +53,32 @@ var LatestStore = Reflux.createStore({
           // Add milliseconds since updated so we can filter on it
           l.lastUpdatedMilliseconds = self._getMillisecondOffset(m.lastUpdated);
           if (m.parameter === 'pm25') {
-            l = _.assign(l, m);
-            l = _.omit(l, ['measurements', 'parameter']);
+            l = _.assign({}, l, m);
+            l = _.omit(l, ['measurements']);
             pm25.push(l);
           } else if (m.parameter === 'pm10') {
-            l = _.assign(l, m);
-            l = _.omit(l, ['measurements', 'parameter']);
+            l = _.assign({}, l, m);
+            l = _.omit(l, ['measurements']);
             pm10.push(l);
           } else if (m.parameter === 'co') {
-            l = _.assign(l, m);
-            l = _.omit(l, ['measurements', 'parameter']);
+            l = _.assign({}, l, m);
+            l = _.omit(l, ['measurements']);
             co.push(l);
           } else if (m.parameter === 'no2') {
-            l = _.assign(l, m);
-            l = _.omit(l, ['measurements', 'parameter']);
+            l = _.assign({}, l, m);
+            l = _.omit(l, ['measurements']);
             no2.push(l);
           } else if (m.parameter === 'so2') {
-            l = _.assign(l, m);
-            l = _.omit(l, ['measurements', 'parameter']);
+            l = _.assign({}, l, m);
+            l = _.omit(l, ['measurements']);
             so2.push(l);
           } else if (m.parameter === 'o3') {
-            l = _.assign(l, m);
-            l = _.omit(l, ['measurements', 'parameter']);
+            l = _.assign({}, l, m);
+            l = _.omit(l, ['measurements']);
             o3.push(l);
           } else if (m.parameter === 'bc') {
-            l = _.assign(l, m);
-            l = _.omit(l, ['measurements', 'parameter']);
+            l = _.assign({}, l, m);
+            l = _.omit(l, ['measurements']);
             bc.push(l);
           }
 

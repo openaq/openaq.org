@@ -1,0 +1,117 @@
+$sidebar-width: 400px;
+$tab-width: 80px;
+$results-pane-top: 180px;
+
+.map-sidebar {
+  position: absolute;
+  background: white;
+  width: $sidebar-width;
+  bottom: $header-height + 120px;
+  top: $header-height + 40px;
+  box-shadow: 5px 5px 12px $brdr-rgba;
+
+  &.hidden {
+    transform: translate(-$sidebar-width, 0);
+    transition: transform 1s ease-out;
+  }
+
+  &.shown {
+    transform: translate(0, 0);
+    transition: transform 1s ease-out;
+  }
+
+  .results-pane {
+    position: absolute;
+    top: $results-pane-top;
+    background-color: white;
+    position: absolute;
+    width: $sidebar-width;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0.2em 1.6em;
+  }
+
+  .selector {
+    position: absolute;
+    top: 0px;
+    height: 50px;
+    width: 100%;
+    margin: 1.6em 1.6em 0.2em 1.6em;
+
+    .title {
+      font-weight: $base-font-regular;
+      margin: 0.4em 0;
+    }
+
+    label {
+    display: inline-block;
+    width: 50%;
+    }
+
+    input {
+      margin-right: 0.4em;
+    }
+  }
+
+  .divider {
+    height: 1px;
+    background-color: darkgray;
+    width: 100%;
+    margin: 1.6em 0;
+  }
+
+  .header-divider {
+    @extend .divider;
+    position: absolute;
+    width: .6 * $sidebar-width;
+    left: .2 * $sidebar-width;
+    top: $results-pane-top - 50px;
+  }
+
+  .map-sidebar-cell {
+
+    .title {
+      color: $base-color;
+      font-weight: $base-font-regular;
+    }
+
+    a {
+      text-decoration: none;
+      color: $tertiary-color;
+    }
+
+  }
+
+  .sidebar-tab {
+    position: relative;
+    height: 60px;
+    width: $tab-width;
+    left: $sidebar-width;
+    background-color: white;
+    text-align: center;
+    font-weight: $base-font-bold;
+    color: $tertiary-color;
+    font-size: modular-scale(1);
+    box-shadow: 5px 5px 12px $brdr-rgba;
+    padding-top: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: lighten($tertiary-color, 20%);
+    }
+  }
+
+  .no-results {
+    position: absolute;
+    top: 200px;
+    z-index: 1;
+
+    &.hidden {
+      display: none;
+    }
+
+    margin: 1.6em;
+  }
+}

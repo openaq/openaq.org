@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 
 // Config variables
@@ -39,5 +40,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler locales={i18n.locales} messages={i18n.messages} />, document.getElementById('site-canvas'));
+  ReactDOM.render(<Handler locales={i18n.locales} messages={i18n.messages} />, document.getElementById('site-canvas'));
 });
