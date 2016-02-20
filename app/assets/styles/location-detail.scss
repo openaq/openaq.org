@@ -107,6 +107,9 @@
     cursor: pointer;
     margin: 5px 30px;
 
+    &.selected {
+      font-weight: $base-font-bold;
+    }
   }
 
   .divider {
