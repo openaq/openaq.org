@@ -69,6 +69,7 @@
     "watchify": "^3.2.1"
   },
   "dependencies": {
+    "async": "^1.5.2",
     "classnames": "^2.2.3",
     "lodash": "^3.10.1",
     "mdast-react-component": "^1.0.1",
