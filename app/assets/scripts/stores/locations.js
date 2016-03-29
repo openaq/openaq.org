@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 var nets = require('nets');
 var _ = require('lodash');
+var async = require('async');
 
 var utils = require('../utils');
 var actions = require('../actions/actions');
@@ -51,18 +52,7 @@ var LocationsStore = Reflux.createStore({
   getSites: function () {
     var self = this;
 
-    nets({ url: config.apiURL + 'locations' }, function (err, res, body) {
-      if (err) {
-        return console.error(err);
-      }
-
-      var data;
-      try {
-        data = JSON.parse(body);
-      } catch (e) {
-        return console.error(e);
-      }
-
+    var handleResults = function (data) {
       // Roll up the locations into countries
       var countries = groupResults(data.results);
 
@@ -91,6 +81,62 @@ var LocationsStore = Reflux.createStore({
 
       // Done, send out action
       actions.latestLocationsLoaded();
+    };
+
+    var createGetFunction = function (limit, page) {
+      return function (done) {
+        return nets({ url: config.apiURL + 'locations?limit=' + limit + '&page=' + page }, function (err, res, body) {
+          if (err) {
+            return done(err);
+          }
+
+          var data;
+          try {
+            data = JSON.parse(body);
+          } catch (e) {
+            return done(e);
+          }
+
+          return done(null, data.results);
+        });
+      };
+    };
+
+    nets({ url: config.apiURL + 'locations?limit=0' }, function (err, res, body) {
+      if (err) {
+        return console.error(err);
+      }
+
+      var data;
+      try {
+        data = JSON.parse(body);
+      } catch (e) {
+        return console.error(e);
+      }
+
+      // Run extra fetch tasks to get all pages of data
+      var tasks = [];
+      var limit = 1000;
+      for (var i = 1; i <= Math.ceil(data.meta.found / limit); i++) {
+        var f = createGetFunction(limit, i);
+        tasks.push(f);
+      }
+
+      async.parallel(tasks, function (err, results) {
+        if (err) {
+          return console.error(err);
+        }
+
+        // Join all results
+        results.forEach(function (r) {
+          data.results = data.results.concat(r);
+        });
+
+        console.log(data);
+
+        // Handle the joined results
+        handleResults(data);
+      });
     });
   }
 

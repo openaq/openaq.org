@@ -10,10 +10,9 @@ cache:
   - node_modules
 before_install:
 - chmod +x ./.build_scripts/lint.sh
-before_script:
-- "./.build_scripts/lint.sh"
-- npm test
 script:
+- npm test
+- ./.build_scripts/lint.sh
 - npm run build
 deploy:
   - provider: s3
