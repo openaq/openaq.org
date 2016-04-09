@@ -81,7 +81,8 @@
     "watchify": "^3.2.1"
   },
   "dependencies": {
-    "classnames": "^2.2.1",
+    "async": "^1.5.2",
+    "classnames": "^2.2.3",
     "lodash": "^3.10.1",
     "mapbox-gl": "^0.12.1",
     "moment": "^2.10.6",
@@ -91,5 +92,10 @@
     "react-intl": "^1.2.0",
     "react-router": "^0.13.3",
     "reflux": "^0.2.12"
+  },
+  "semistandard": {
+    "ignore": [
+      "logo.js"
+    ]
   }
 }

@@ -11,7 +11,7 @@ var i18n = {
           about: 'About',
           methodology: 'Methodology',
           home: 'Home',
-          news: 'Updates'
+          news: 'News'
         },
         footer: '{number, plural, =0 {Made} =1 {# measurement captured} other {# measurements captured}} with {heart} by {link} and the {email} team.',
         sources: {
