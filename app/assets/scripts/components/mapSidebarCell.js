@@ -27,7 +27,7 @@ let Cell = React.createClass({
           <div className='title'>{f.location}</div>
           <div className='extra'><FormattedRelative value={f.lastUpdated} /></div>
           <div className='extra'><FormattedNumber value={f.value} /> {f.unit}</div>
-          <div className='extra'>Source: <a href="#">source</a></div>
+          <div className='extra'>Source: <a href='#'>source</a></div>
         </div>
         <div className='divider'></div>
       </div>

@@ -12,4 +12,10 @@ footer {
   @include media($mobile) {
     padding: 0 2em;
   }
+
+  &.bottom {
+    position: absolute;
+    bottom: 0px;
+    z-index: -1;
+  }
 }

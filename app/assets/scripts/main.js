@@ -22,6 +22,7 @@ var Methodology = require('./components/methodology');
 var Sources = require('./components/sources');
 var NotFound = require('./components/notFound');
 var Home = require('./components/home');
+var Map = require('./components/map');
 
 console.log.apply(console, config.consoleMessage);
 if (config.environment !== 'production') {
@@ -32,6 +33,7 @@ if (config.environment !== 'production') {
 var routes = (
   <Route handler={App} path='/'>
     <DefaultRoute name ='default' handler={Home} />
+    <Route path='map' name ='map' handler={Map} />
     <Route path='about' name='about' handler={About}/>
     <Route path='methodology' name='methodology' handler={Methodology}/>
     <Route path='sources' name='sources' handler={Sources}/>

@@ -1,14 +1,15 @@
 'use strict';
 
-var Reflux = require('reflux');
-var nets = require('nets');
-var _ = require('lodash');
-var moment = require('moment');
+import Reflux from 'reflux';
+import nets from 'nets';
+import { parallel } from 'async';
+import moment from 'moment';
+import { omit } from 'lodash';
 
-var actions = require('../actions/actions');
-var config = require('../config');
+import actions from '../actions/actions';
+import config from '../config';
 
-var LatestStore = Reflux.createStore({
+const LatestStore = Reflux.createStore({
 
   storage: {
     hasGeo: {}
@@ -28,18 +29,7 @@ var LatestStore = Reflux.createStore({
   getLatest: function () {
     var self = this;
 
-    nets({ url: config.apiURL + 'latest?has_geo' }, function (err, res, body) {
-      if (err) {
-        return console.error(err);
-      }
-
-      var data;
-      try {
-        data = JSON.parse(body);
-      } catch (e) {
-        return console.error(e);
-      }
-
+    let handleResults = function (data) {
       // Move data into paramter specific arrays
       var pm25 = [];
       var pm10 = [];
@@ -48,37 +38,37 @@ var LatestStore = Reflux.createStore({
       var so2 = [];
       var no2 = [];
       var bc = [];
-      _.forEach(data.results, function (l) {
-        _.forEach(l.measurements, function (m) {
+      data.results.forEach((l) => {
+        l.measurements.forEach((m) => {
           // Add milliseconds since updated so we can filter on it
           l.lastUpdatedMilliseconds = self._getMillisecondOffset(m.lastUpdated);
           if (m.parameter === 'pm25') {
-            l = _.assign({}, l, m);
-            l = _.omit(l, ['measurements']);
+            l = Object.assign({}, l, m);
+            l = omit(l, ['measurements']);
             pm25.push(l);
           } else if (m.parameter === 'pm10') {
-            l = _.assign({}, l, m);
-            l = _.omit(l, ['measurements']);
+            l = Object.assign({}, l, m);
+            l = omit(l, ['measurements']);
             pm10.push(l);
           } else if (m.parameter === 'co') {
-            l = _.assign({}, l, m);
-            l = _.omit(l, ['measurements']);
+            l = Object.assign({}, l, m);
+            l = omit(l, ['measurements']);
             co.push(l);
           } else if (m.parameter === 'no2') {
-            l = _.assign({}, l, m);
-            l = _.omit(l, ['measurements']);
+            l = Object.assign({}, l, m);
+            l = omit(l, ['measurements']);
             no2.push(l);
           } else if (m.parameter === 'so2') {
-            l = _.assign({}, l, m);
-            l = _.omit(l, ['measurements']);
+            l = Object.assign({}, l, m);
+            l = omit(l, ['measurements']);
             so2.push(l);
           } else if (m.parameter === 'o3') {
-            l = _.assign({}, l, m);
-            l = _.omit(l, ['measurements']);
+            l = Object.assign({}, l, m);
+            l = omit(l, ['measurements']);
             o3.push(l);
           } else if (m.parameter === 'bc') {
-            l = _.assign({}, l, m);
-            l = _.omit(l, ['measurements']);
+            l = Object.assign({}, l, m);
+            l = omit(l, ['measurements']);
             bc.push(l);
           }
 
@@ -96,9 +86,65 @@ var LatestStore = Reflux.createStore({
 
       // Done, send out action
       actions.latestValuesLoaded();
+    };
+
+    let createGetFunction = function (limit, page) {
+      return function (done) {
+        return nets({ url: config.apiURL + 'latest?has_geo&limit=' + limit + '&page=' + page }, function (err, res, body) {
+          if (err) {
+            return done(err);
+          }
+
+          var data;
+          try {
+            data = JSON.parse(body);
+          } catch (e) {
+            return done(e);
+          }
+
+          return done(null, data.results);
+        });
+      };
+    };
+
+    nets({ url: config.apiURL + 'latest?has_geo&limit=0' }, function (err, res, body) {
+      if (err) {
+        return console.error(err);
+      }
+
+      var data;
+      try {
+        data = JSON.parse(body);
+      } catch (e) {
+        return console.error(e);
+      }
+
+      // Run extra fetch tasks to get all pages of data
+      var tasks = [];
+      var limit = 1000;
+      for (var i = 1; i <= Math.ceil(data.meta.found / limit); i++) {
+        var f = createGetFunction(limit, i);
+        tasks.push(f);
+      }
+
+      parallel(tasks, function (err, results) {
+        if (err) {
+          return console.error(err);
+        }
+
+        // Join all results
+        results.forEach(function (r) {
+          data.results = data.results.concat(r);
+        });
+
+        console.log(data);
+
+        // Handle the joined results
+        handleResults(data);
+      });
     });
   }
 
 });
 
-module.exports = LatestStore;
+export { LatestStore as default };

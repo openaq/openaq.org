@@ -12,12 +12,12 @@ $results-pane-top: 180px;
 
   &.hidden {
     transform: translate(-$sidebar-width, 0);
-    transition: transform 1s ease-out;
+    transition: transform $map-sidebar-transition ease-out;
   }
 
   &.shown {
     transform: translate(0, 0);
-    transition: transform 1s ease-out;
+    transition: transform $map-sidebar-transition ease-out;
   }
 
   .results-pane {
