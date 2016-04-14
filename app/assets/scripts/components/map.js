@@ -2,20 +2,22 @@ import React from 'react';
 import ReactIntl from 'react-intl';
 import Reflux from 'reflux';
 import mapboxgl from 'mapbox-gl';
-import _ from 'lodash';
 
 import latestStore from '../stores/latest';
 import actions from '../actions/actions';
+import { generateColorScale } from '../utils';
 
 let IntlMixin = ReactIntl.IntlMixin;
 import Header from './header';
 import Footer from './footer';
 import config from '../config';
 import Sidebar from './mapSidebar';
+import MapLegend from './mapLegend';
 let map;
+let relevantLayers = [];
 
-// Map styling
-import { breaks, millisecondsToOld } from './mapConfig';
+// Map config
+import { millisecondsToOld, colorScale as colors, parameterMax } from './mapConfig';
 
 let Map = React.createClass({
 
@@ -64,7 +66,7 @@ let Map = React.createClass({
       'features': []
     };
     console.info(`Generating GeoJSON for ${this.state.selectedParameter}`);
-    _.forEach(latestStore.storage.hasGeo[this.state.selectedParameter], function (l) {
+    latestStore.storage.hasGeo[this.state.selectedParameter].forEach((l) => {
       // Make sure we have lat/lon
       if (l.coordinates) {
         let o = {
@@ -106,16 +108,17 @@ let Map = React.createClass({
       });
 
       // Add filtered layers
-      let bs = breaks[_this.state.selectedParameter];
       let filters = _this._generateFilters();
       for (let i = 0; i < filters.length; i++) {
+        const layerID = `markers-${i}`;
+        relevantLayers.push(layerID);
         map.addLayer({
-          'id': `markers-${bs.massValues[i]}`,
+          'id': layerID,
           'interactive': true,
           'type': 'circle',
           'source': 'markers',
           'paint': {
-            'circle-color': bs.colors[i],
+            'circle-color': colors[i],
             'circle-opacity': {
               'stops': [[0, 0.8], [7, 0.6], [11, 0.4]]
             },
@@ -143,9 +146,8 @@ let Map = React.createClass({
     // Use the same approach as above to indicate that the symbols are clickable
     // by changing the cursor style to 'pointer'.
     map.on('mousemove', function (e) {
-      map.featuresAt(e.point, {radius: 10}, function (err, features) {
-        map.getCanvas().style.cursor = (!err && features.length) ? 'pointer' : '';
-      });
+      const features = map.queryRenderedFeatures(e.point, {layers: relevantLayers});
+      map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
     });
   },
 
@@ -153,16 +155,10 @@ let Map = React.createClass({
   * Get the features for parameter and update the sidebar
   */
   _getFeatures: function () {
-    let _this = this;
-    map.featuresAt(this.state.selectedPoint, {radius: 10}, function (err, features) {
-      if (err) {
-        return console.error(err);
-      }
-
-      _this.setState({
-        selectedFeatures: features,
-        displaySidebar: true
-      });
+    const features = map.queryRenderedFeatures(this.state.selectedPoint, {layers: relevantLayers});
+    this.setState({
+      selectedFeatures: features,
+      displaySidebar: true
     });
   },
 
@@ -171,19 +167,20 @@ let Map = React.createClass({
    * @return {array} An array of filter arrays
    */
   _generateFilters: function () {
+    const colorScale = generateColorScale(latestStore.storage.hasGeo[this.state.selectedParameter], parameterMax[this.state.selectedParameter]);
     let arr = [];
-    let bs = breaks[this.state.selectedParameter];
-    for (let p = 0; p < bs.massValues.length; p++) {
+    for (let p = 0; p < colors.length; p++) {
       let filters;
-      if (p < bs.massValues.length - 1) {
+      const b = colorScale.invertExtent(colors[p]);
+      if (p < colors.length - 1) {
         filters = [ 'all',
-          [ '>=', 'value', bs.massValues[p] ],
-          [ '<', 'value', bs.massValues[p + 1] ],
+          [ '>=', 'value', b[0] ],
+          [ '<', 'value', b[1] ],
           [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
         ];
       } else {
         filters = [ 'all',
-          [ '>=', 'value', bs.massValues[p] ],
+          [ '>=', 'value', b[0] ],
           [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
         ];
       }
@@ -208,10 +205,9 @@ let Map = React.createClass({
     map.getSource('markers').setData(markers);
 
     // Add filtered layers
-    let bs = breaks[this.state.selectedParameter];
     let filters = this._generateFilters();
     for (let i = 0; i < filters.length; i++) {
-      map.setFilter(`markers-${bs.massValues[i]}`, filters[i]);
+      map.setFilter(`markers-${i}`, filters[i]);
     }
   },
 
@@ -270,6 +266,7 @@ let Map = React.createClass({
             parameter={this.state.selectedParameter}
             displaySidebar={this.state.displaySidebar}
           />
+          <MapLegend />
         </div>
         <Footer locales={this.props.locales} messages={this.props.messages} style='bottom' />
       </div>

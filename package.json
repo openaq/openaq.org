@@ -87,8 +87,9 @@
   "dependencies": {
     "async": "^1.5.2",
     "classnames": "^2.2.3",
+    "d3": "^3.5.16",
     "lodash": "^3.10.1",
-    "mapbox-gl": "^0.12.1",
+    "mapbox-gl": "^0.17.0",
     "moment": "^2.10.6",
     "nets": "^3.1.0",
     "react": "^0.14.8",
@@ -98,10 +99,5 @@
     "reflux": "^0.2.12",
     "remark": "^4.2.0",
     "remark-react": "^2.0.0"
-  },
-  "semistandard": {
-    "ignore": [
-      "logo.js"
-    ]
   }
 }

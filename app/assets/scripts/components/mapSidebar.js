@@ -2,9 +2,9 @@ import React from 'react';
 import ReactIntl from 'react-intl';
 import {getPrettyParameterName} from '../utils';
 import classNames from 'classnames';
-var actions = require('../actions/actions');
+import actions from '../actions/actions';
 
-let {IntlMixin} = ReactIntl;
+let { IntlMixin } = ReactIntl;
 
 import Cell from './mapSidebarCell';
 
