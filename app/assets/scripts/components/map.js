@@ -38,7 +38,7 @@ let Map = React.createClass({
       selectedParameter: 'pm25',
       displaySidebar: false,
       selectedFeatures: [],
-      selectedPoint: {x: 0, y: 0}
+      selectedPoint: null
     };
   },
 
@@ -155,6 +155,9 @@ let Map = React.createClass({
   * Get the features for parameter and update the sidebar
   */
   _getFeatures: function () {
+    if (!this.state.selectedPoint) {
+      return;
+    }
     const features = map.queryRenderedFeatures(this.state.selectedPoint, {layers: relevantLayers});
     this.setState({
       selectedFeatures: features,
