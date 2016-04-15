@@ -1,5 +1,4 @@
 var fs = require('fs');
-import { join } from 'path';
 
 // String to modify
 var i18n = {
