@@ -40,24 +40,25 @@ const LatestStore = Reflux.createStore({
       var bc = [];
       data.results.forEach((l) => {
         l.measurements.forEach((m) => {
+          let loc = Object.assign({}, l, m);
           // Add milliseconds since updated so we can filter on it
-          l.lastUpdatedMilliseconds = self._getMillisecondOffset(m.lastUpdated);
-          l = Object.assign({}, l, m);
-          l = omit(l, ['measurements']);
+          loc.lastUpdatedMilliseconds = self._getMillisecondOffset(m.lastUpdated);
+          // Omit unneeded props to save on buffer size
+          loc = omit(loc, ['measurements', 'city', 'country', 'parameter']);
           if (m.parameter === 'pm25') {
-            pm25.push(l);
+            pm25.push(loc);
           } else if (m.parameter === 'pm10') {
-            pm10.push(l);
+            pm10.push(loc);
           } else if (m.parameter === 'co') {
-            co.push(l);
+            co.push(loc);
           } else if (m.parameter === 'no2') {
-            no2.push(l);
+            no2.push(loc);
           } else if (m.parameter === 'so2') {
-            so2.push(l);
+            so2.push(loc);
           } else if (m.parameter === 'o3') {
-            o3.push(l);
+            o3.push(loc);
           } else if (m.parameter === 'bc') {
-            bc.push(l);
+            bc.push(loc);
           }
         });
       });

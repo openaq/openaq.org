@@ -6,11 +6,22 @@ export const millisecondsToOld = 24 * 60 * 60 * 1000;
 
 // The max value to clamp to per parameter
 export const parameterMax = {
-  'pm25': 200,
-  'pm10': 200,
-  'co': 200,
-  'no2': 200,
-  'so2': 200,
-  'o3': 200,
-  'bc': 200
+  'pm25': 150,
+  'pm10': 350,
+  'co': 15.4,
+  'no2': 0.65,
+  'so2': 0.3,
+  'o3': 0.2,
+  'bc': 3
+};
+
+// The unit to show per parameter
+export const parameterUnit = {
+  'pm25': 'µg/m³',
+  'pm10': 'µg/m³',
+  'co': 'ppm',
+  'no2': 'ppm',
+  'so2': 'ppm',
+  'o3': 'ppm',
+  'bc': 'µg/m³'
 };

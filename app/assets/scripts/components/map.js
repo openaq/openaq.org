@@ -17,7 +17,7 @@ let map;
 let relevantLayers = [];
 
 // Map config
-import { millisecondsToOld, colorScale as colors, parameterMax } from './mapConfig';
+import { millisecondsToOld, colorScale as colors, parameterMax, parameterUnit } from './mapConfig';
 
 let Map = React.createClass({
 
@@ -132,6 +132,27 @@ let Map = React.createClass({
           filter: filters[i]
         });
       }
+
+      // And a special layer just for unused data
+      map.addLayer({
+        'id': 'unused-data',
+        'interactive': false,
+        'type': 'circle',
+        'source': 'markers',
+        'paint': {
+          'circle-color': '#B3B3B3',
+          'circle-opacity': {
+            'stops': [[0, 0.8], [7, 0.6], [11, 0.4]]
+          },
+          'circle-radius': {
+            'stops': [[0, 2], [5, 5], [7, 8]]
+          },
+          'circle-blur': {
+            'stops': [[0, 0.8], [5, 0.5], [7, 0]]
+          }
+        },
+        filter: _this._generateUnusedFilter()
+      });
     });
 
     // Open sidebar when we have items to show.
@@ -166,11 +187,32 @@ let Map = React.createClass({
   },
 
   /*
+   * Generate the filter for unused data
+   * Filters out old items, items with wrong unit or values < 0
+   * @return {array} A filter array
+   */
+  _generateUnusedFilter: function () {
+    // Depending on parameter, chose a desired unit to display
+    const unit = parameterUnit[this.state.selectedParameter];
+
+    return [ 'any',
+      [ '>', 'lastUpdatedMilliseconds', millisecondsToOld ],
+      [ '!=', 'unit', unit ],
+      [ '<', 'value', 0 ]
+    ];
+  },
+
+  /*
    * Generate the filters we want to use for the data, dependent on data
    * @return {array} An array of filter arrays
    */
   _generateFilters: function () {
+    // Generate color scale for colors and extents
     const colorScale = generateColorScale(latestStore.storage.hasGeo[this.state.selectedParameter], parameterMax[this.state.selectedParameter]);
+
+    // Depending on parameter, chose a desired unit to display
+    const unit = parameterUnit[this.state.selectedParameter];
+
     let arr = [];
     for (let p = 0; p < colors.length; p++) {
       let filters;
@@ -179,12 +221,16 @@ let Map = React.createClass({
         filters = [ 'all',
           [ '>=', 'value', b[0] ],
           [ '<', 'value', b[1] ],
-          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
+          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ],
+          [ '==', 'unit', unit ],
+          [ '>=', 'value', 0 ]
         ];
       } else {
         filters = [ 'all',
           [ '>=', 'value', b[0] ],
-          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
+          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ],
+          [ '==', 'unit', unit ],
+          [ '>=', 'value', 0 ]
         ];
       }
 
@@ -212,6 +258,7 @@ let Map = React.createClass({
     for (let i = 0; i < filters.length; i++) {
       map.setFilter(`markers-${i}`, filters[i]);
     }
+    map.setFilter('unused-data', this._generateUnusedFilter());
   },
 
   /**

@@ -50,7 +50,8 @@ const MapLegend = createClass({
         <ul>
           {colorScale.range().map((s, i) => {
             // Add a plus sign to indicate higher values for last item
-            let text = colorScale.invertExtent(s)[0].toFixed();
+            let text = colorScale.invertExtent(s)[0];
+            text = (text < 1 && text !== 0) ? text.toFixed(2) : text.toFixed();
             text = (i === colorScale.range().length - 1) ? text += '+' : text;
             return <li key={i} className='legend-item' style={{borderTopColor: s}}>{text}</li>;
           })}
