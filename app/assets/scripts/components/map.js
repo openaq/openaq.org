@@ -65,7 +65,6 @@ let Map = React.createClass({
       'type': 'FeatureCollection',
       'features': []
     };
-    console.info(`Generating GeoJSON for ${this.state.selectedParameter}`);
     latestStore.storage.hasGeo[this.state.selectedParameter].forEach((l) => {
       // Make sure we have lat/lon
       if (l.coordinates) {
@@ -288,7 +287,7 @@ let Map = React.createClass({
       if (!map.loaded()) {
         setTimeout(function () { getFeaturesIfLoaded(); }, 50);
       } else {
-        _this._getFeatures();
+        setTimeout(function () { _this._getFeatures(); }, 100);
       }
     };
 
