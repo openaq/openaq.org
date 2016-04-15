@@ -37,6 +37,25 @@
   .Dropdown-control {
     border-bottom: 1px dashed #999;
     font-weight: $base-font-regular;
+    cursor: pointer;
+
+    color: $base-color;
+  }
+
+  .Dropdown-menu {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 0px 20px $brdr-rgba;
+    border-radius: 5px;
+    padding: 0 5px;
+    min-width: 145px;
+  }
+
+  .Dropdown-option {
+    cursor: pointer;
+    &:hover {
+      font-weight: $base-font-regular;
+    }
   }
 }
 
