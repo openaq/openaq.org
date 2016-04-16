@@ -1,10 +1,11 @@
 var React = require('react');
 var ReactIntl = require('react-intl');
-var MdastComponent = require('mdast-react-component');
+var MdastComponent = require('./mdast-react-component');
 
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var Header = require('./header');
+var Footer = require('./footer');
 
 var Home = React.createClass({
 
@@ -54,6 +55,7 @@ var Home = React.createClass({
           </div>
           {/* content-block */}
         </div>
+        <Footer locales={this.props.locales} messages={this.props.messages} />
       </div>
     );
   }

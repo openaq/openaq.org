@@ -1,6 +1,7 @@
 footer {
   @include span-columns(12);
 
+  z-index: $z-footer;
   text-align: center;
   margin: 2em 0;
 
@@ -11,5 +12,10 @@ footer {
 
   @include media($mobile) {
     padding: 0 2em;
+  }
+
+  &.bottom {
+    position: absolute;
+    bottom: 0px;
   }
 }

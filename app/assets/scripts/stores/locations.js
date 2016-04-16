@@ -132,8 +132,6 @@ var LocationsStore = Reflux.createStore({
           data.results = data.results.concat(r);
         });
 
-        console.log(data);
-
         // Handle the joined results
         handleResults(data);
       });

@@ -18,10 +18,10 @@ var configurations = require('./config/*.js', {mode: 'hash'});
 var config = configurations[process.env.DS_ENV];
 var local = configurations.local || {};
 
-for (var p in config) {
+for (let p in config) {
   module.exports[p] = config[p];
 }
 
-for (var p in local) {
+for (let p in local) {
   module.exports[p] = local[p];
 }
