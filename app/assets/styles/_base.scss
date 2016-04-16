@@ -68,3 +68,7 @@ em {
 .hidden {
   display: none;
 }
+
+sub {
+  z-index: $z-map;
+}

@@ -3,6 +3,8 @@ var ReactIntl = require('react-intl');
 
 var config = require('../config');
 
+import { getCSVURL } from '../utils';
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedRelative = ReactIntl.FormattedRelative;
 var FormattedMessage = ReactIntl.FormattedMessage;
@@ -32,7 +34,7 @@ var DetailItem = React.createClass({
         </div>
         <div className='divider'></div>
         <div className='links'>
-          <a href={this.getCSVURL(l)} title='Download CSV of all data'><span className='collecticon collecticon-download'></span></a>
+          <a href={getCSVURL(l.location)} title='Download CSV of all data'><span className='collecticon collecticon-download'></span></a>
         </div>
       </div>
     );

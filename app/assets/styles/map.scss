@@ -11,7 +11,7 @@
 }
 
 .legend-outer {
-  width: 400px;
+  width: 450px;
   padding: 1em;
   position: absolute;
   bottom: 70px;
@@ -74,6 +74,10 @@
     width: 9%;
     border-top-width: 15px;
     border-top-style: solid;
+  }
+
+  .legend-item {
+    font-size: modular-scale(-1);
   }
 }
 

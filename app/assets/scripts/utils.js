@@ -5,6 +5,7 @@ import { scale, max as d3Max } from 'd3';
 
 import countries from './country-list';
 import { colorScale as colors } from './components/mapConfig';
+import config from './config';
 
 /**
  * Get a nicer country name for a 2 letter abbreviation
@@ -63,4 +64,13 @@ export function generateColorScale (data, parameterMax) {
                       .range(colors);
 
   return colorScale;
+}
+
+/**
+ * Generate CSV download link for a location
+ * @param {string} location The location name
+ * @return {string} url for download
+ */
+export function getCSVURL (location) {
+  return config.apiURL + 'measurements?format=csv&location=' + location;
 }

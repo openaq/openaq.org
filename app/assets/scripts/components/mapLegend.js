@@ -45,7 +45,7 @@ const MapLegend = createClass({
 
     return (
       <div className='legend-outer'>
-        <div className='legend-title'>Showing values for <Dropdown options={options} onChange={this._handleParamSwitch} value={defaultOption} /> in {parameterUnit[this.props.parameter]}.</div>
+        <div className='legend-title'>Showing values for <Dropdown options={options} onChange={this._handleParamSwitch} value={defaultOption} /></div>
         <div className='map-legend'>
           <ul>
             {colorScale.range().map((s, i) => {
@@ -53,11 +53,12 @@ const MapLegend = createClass({
               let text = colorScale.invertExtent(s)[0];
               text = (text < 1 && text !== 0) ? text.toFixed(2) : text.toFixed();
               text = (i === colorScale.range().length - 1) ? text += '+' : text;
+              text = (i === 0) ? text += ` ${parameterUnit[this.props.parameter]}` : text;
               return <li key={i} className='legend-item' style={{borderTopColor: s}}>{text}</li>;
             })}
           </ul>
         </div>
-        <div className='legend-info'>Only values for the last 24 hours are displayed, older values are greyed out.</div>
+        <div className='legend-info'>Recent PM2.5, PM10, Ozone, NO<sub>2</sub>, SO<sub>2</sub>, and CO data from official sources. Values older than 24hrs are displayed in gray.</div>
       </div>
     );
   }
