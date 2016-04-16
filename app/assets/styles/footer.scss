@@ -1,6 +1,7 @@
 footer {
   @include span-columns(12);
 
+  z-index: $z-footer;
   text-align: center;
   margin: 2em 0;
 
@@ -16,6 +17,5 @@ footer {
   &.bottom {
     position: absolute;
     bottom: 0px;
-    z-index: $z-footer;
   }
 }

@@ -123,7 +123,7 @@ let Map = React.createClass({
               'stops': [[0, 0.8], [7, 0.6], [11, 0.4]]
             },
             'circle-radius': {
-              'stops': [[0, 2], [5, 5], [7, 8]]
+              'stops': [[0, 4], [5, 5], [7, 8]]
             },
             'circle-blur': {
               'stops': [[0, 0.8], [5, 0.5], [7, 0]]

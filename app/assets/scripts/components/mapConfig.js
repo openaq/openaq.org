@@ -6,12 +6,12 @@ export const millisecondsToOld = 24 * 60 * 60 * 1000;
 
 // The max value to clamp to per parameter
 export const parameterMax = {
-  'pm25': 150,
-  'pm10': 350,
+  'pm25': 110,
+  'pm10': 275,
   'co': 15.4,
   'no2': 0.65,
-  'so2': 0.3,
-  'o3': 0.2,
+  'so2': 0.22,
+  'o3': 0.165,
   'bc': 3
 };
 

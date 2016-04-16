@@ -58,10 +58,9 @@ const MapLegend = createClass({
       {value: 'pm25', label: getPrettyParameterName('pm25')},
       {value: 'pm10', label: getPrettyParameterName('pm10')},
       {value: 'o3', label: getPrettyParameterName('o3')},
-      {value: 'co', label: getPrettyParameterName('co')},
-      {value: 'so2', label: getPrettyParameterName('so2')},
       {value: 'no2', label: getPrettyParameterName('no2')},
-      {value: 'bc', label: getPrettyParameterName('bc')}
+      {value: 'so2', label: getPrettyParameterName('so2')},
+      {value: 'co', label: getPrettyParameterName('co')}
     ];
     const defaultOption = {label: getPrettyParameterName(this.state.selectedParameter)};
 
