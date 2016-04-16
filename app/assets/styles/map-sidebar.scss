@@ -7,7 +7,7 @@ $sidebar-width: 200px;
   bottom: 40px;
   top: $header-height + 40px;
   box-shadow: 5px 5px 12px $brdr-rgba;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
   z-index: $z-results;
 
   @include media($mobile) {

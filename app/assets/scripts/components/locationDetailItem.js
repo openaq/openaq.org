@@ -34,7 +34,8 @@ var DetailItem = React.createClass({
         </div>
         <div className='divider'></div>
         <div className='links'>
-          <a href={getCSVURL(l.location)} title='Download CSV of all data'><span className='collecticon collecticon-download'></span></a>
+          <a href={getCSVURL(l.location)} title='Download CSV of recent data for location'><span className='collecticon collecticon-download'></span></a>
+          <a href={l.sourceURL} target='_blank' title='Go to source data for location'><span className='collecticon collecticon-expand-top-right'></span></a>
         </div>
       </div>
     );

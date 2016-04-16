@@ -45,7 +45,7 @@ const MapLegend = createClass({
 
     return (
       <div className='legend-outer'>
-        <div className='legend-title'>Showing values for <Dropdown options={options} onChange={this._handleParamSwitch} value={defaultOption} /></div>
+        <div className='legend-title'>Showing values for: <Dropdown options={options} onChange={this._handleParamSwitch} value={defaultOption} /></div>
         <div className='map-legend'>
           <ul>
             {colorScale.range().map((s, i) => {
