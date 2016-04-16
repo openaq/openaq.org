@@ -4,4 +4,4 @@ Read more about [our mission](https://medium.com/@openaq/the-mission-of-openaq-c
 
 Shoot us an email at [info@openaq.org](mailto:info@openaq.org) or follow us at [@Open_AQ](https://twitter.com/open_aq) to find out more, give us feedback or  tell us about any awesome open air quality work you're up to!
 
-This platform is possibly because of air quality agencies around the world, which do the hard task of generating and publicly sharing these data.
+This platform is possible because of air quality agencies around the world, which do the hard task of generating and publicly sharing these data.
