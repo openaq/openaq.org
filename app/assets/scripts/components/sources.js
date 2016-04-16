@@ -1,7 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var ReactIntl = require('react-intl');
-var MdastComponent = require('mdast-react-component');
+var MdastComponent = require('./mdast-react-component');
 
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
@@ -10,6 +10,7 @@ var CountryListItem = require('./countryListItem');
 var metadataStore = require('../stores/metadata');
 var actions = require('../actions/actions');
 var Header = require('./header');
+var Footer = require('./footer');
 var Menu = require('./sourcesMenu');
 
 var Sites = React.createClass({
@@ -75,6 +76,7 @@ var Sites = React.createClass({
             })}
           </div>
         </div>
+        <Footer locales={this.props.locales} messages={this.props.messages} />
       </div>
     );
   }

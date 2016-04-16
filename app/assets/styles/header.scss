@@ -5,6 +5,7 @@ header {
   top: 0;
   margin: 20px 0;
   padding: 0 90px;
+  z-index: $z-header;
 
   a {
     text-decoration: none;

@@ -1,8 +1,9 @@
 var React = require('react');
 var ReactIntl = require('react-intl');
-var MdastComponent = require('mdast-react-component');
+var MdastComponent = require('./mdast-react-component');
 
 var Header = require('./header');
+var Footer = require('./footer');
 
 var IntlMixin = ReactIntl.IntlMixin;
 
@@ -26,6 +27,7 @@ var About = React.createClass({
             <MdastComponent>{this.getIntlMessage('about.intro')}</MdastComponent>
           </div>
         </div>
+        <Footer locales={this.props.locales} messages={this.props.messages} />
       </div>
     );
   }

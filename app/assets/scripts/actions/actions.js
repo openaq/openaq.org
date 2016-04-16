@@ -6,7 +6,9 @@ var Actions = Reflux.createActions({
 
   'latestSourcesLoaded': {},
   'latestLocationsLoaded': {},
-  'metadataLoaded': {}
+  'metadataLoaded': {},
+  'latestValuesLoaded': {},
+  'mapParameterChanged': {}
 
 });
 

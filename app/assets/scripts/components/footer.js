@@ -15,9 +15,13 @@ var Footer = React.createClass({
     Reflux.listenTo(actions.latestLocationsLoaded, 'onLatestLocationsLoaded')
   ],
 
+  propTypes: {
+    style: React.PropTypes.string
+  },
+
   getInitialState: function () {
     return {
-      numMeasurements: 0
+      numMeasurements: locationsStore.storage.totalNumber || 0
     };
   },
 
@@ -29,7 +33,7 @@ var Footer = React.createClass({
 
   render: function () {
     return (
-      <footer id='site-footer'>
+      <footer id='site-footer' className={this.props.style}>
         <div className='inner'>
           <p>
             <FormattedMessage
