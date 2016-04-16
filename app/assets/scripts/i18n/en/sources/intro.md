@@ -1,6 +1,6 @@
 In this first iteration of the platform:
 
-- We are aggregate data from official, stationary government monitors and not smaller-scale or mobile monitoring. It is our intent to attribute all data in our platform to their originating sources. Please contact us if you notice otherwise.
+- We aggregate data from official, stationary government monitors and not smaller-scale or mobile monitoring. It is our intent to attribute all data in our platform to their originating sources. Please contact us if you notice otherwise.
 - We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC).
 
 *Note: We cannot verify the accuracy of the data and unless otherwise noted, as these data are collected in real-time. Please see originating site for more information for a particular source.*
