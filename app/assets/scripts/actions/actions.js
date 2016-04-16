@@ -8,7 +8,6 @@ var Actions = Reflux.createActions({
   'latestLocationsLoaded': {},
   'metadataLoaded': {},
   'latestValuesLoaded': {},
-  'closeMapSidebar': {},
   'mapParameterChanged': {}
 
 });

@@ -25,7 +25,6 @@ let Map = React.createClass({
   mixins: [
     IntlMixin,
     Reflux.listenTo(actions.latestValuesLoaded, '_onLatestValuesLoaded'),
-    Reflux.listenTo(actions.closeMapSidebar, '_onSidebarClosed'),
     Reflux.listenTo(actions.mapParameterChanged, '_handleParamSwitch')
   ],
 
@@ -37,7 +36,6 @@ let Map = React.createClass({
   getInitialState: function () {
     return {
       selectedParameter: 'pm25',
-      displaySidebar: false,
       selectedFeatures: [],
       selectedPoint: null
     };
@@ -181,8 +179,7 @@ let Map = React.createClass({
     }
     const features = map.queryRenderedFeatures(this.state.selectedPoint, {layers: relevantLayers});
     this.setState({
-      selectedFeatures: features,
-      displaySidebar: true
+      selectedFeatures: features
     });
   },
 
@@ -268,20 +265,12 @@ let Map = React.createClass({
     this._mapInit();
   },
 
-  _onSidebarClosed: function () {
-    this.setState({
-      displaySidebar: !this.state.displaySidebar
-    });
-  },
-
   /**
    * Handler for switching of the selected parameter, updates state and data
    * @param {object} e associated event
    */
   _handleParamSwitch: function (data) {
     let _this = this;
-    // Set new selected parameter and then update data
-
     // This gets a bit weird since we need to wait for all the map data
     // to be loaded before grabbing new features.
     var getFeaturesIfLoaded = function () {
@@ -315,8 +304,6 @@ let Map = React.createClass({
             locales={this.props.locales}
             messages={this.props.messages}
             features={this.state.selectedFeatures}
-            parameter={this.state.selectedParameter}
-            displaySidebar={this.state.displaySidebar}
           />
           <MapLegend />
           <div className={noMapClass}>

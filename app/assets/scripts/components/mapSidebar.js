@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactIntl from 'react-intl';
 import classNames from 'classnames';
-import actions from '../actions/actions';
 
 let { IntlMixin } = ReactIntl;
 
@@ -13,25 +12,36 @@ let Sidebar = React.createClass({
     IntlMixin
   ],
 
+  getInitialState: function () {
+    return {
+      displayed: false
+    };
+  },
+
   propTypes: {
     messages: React.PropTypes.object.isRequired,
     locales: React.PropTypes.array.isRequired,
-    features: React.PropTypes.array.isRequired,
-    parameter: React.PropTypes.string.isRequired,
-    displaySidebar: React.PropTypes.bool.isRequired
+    features: React.PropTypes.array.isRequired
+  },
+
+  componentWillReceiveProps: function (nextProps) {
+    this.setState({
+      displayed: this.state.displayed || nextProps.features.length >= 1
+    });
   },
 
   _closeSidebar: function (e) {
     e.preventDefault();
-    // Send out action
-    actions.closeMapSidebar();
+    this.setState({
+      displayed: false
+    });
   },
 
   /**
    * Main render function, draws everything
    */
   render: function () {
-    let sidebarClass = classNames('map-sidebar', this.props.displaySidebar ? 'open' : 'closed');
+    let sidebarClass = classNames('map-sidebar', this.state.displayed ? 'open' : 'closed');
     let noResultsClass = classNames('no-results', this.props.features.length === 0 ? 'shown' : 'hidden');
 
     return (
