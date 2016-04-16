@@ -18,7 +18,7 @@ let map;
 let relevantLayers = [];
 
 // Map config
-import { millisecondsToOld, colorScale as colors, parameterMax, parameterUnit } from './mapConfig';
+import { millisecondsToOld, colorScale as colors, parameterMax, parameterConversion } from './mapConfig';
 
 let Map = React.createClass({
 
@@ -65,18 +65,20 @@ let Map = React.createClass({
       'features': []
     };
     latestStore.storage.hasGeo[this.state.selectedParameter].forEach((l) => {
-      // Make sure we have lat/lon
-      if (l.coordinates) {
-        let o = {
-          'type': 'Feature',
-          'properties': l,
-          'geometry': {
-            'type': 'Point',
-            'coordinates': [l.coordinates.longitude, l.coordinates.latitude]
-          }
-        };
-        geojson.features.push(o);
+      // Handle conversion from ug/m3 to ppm for certain parameters here
+      l.convertedValue = l.value;
+      if (['co', 'so2', 'no2', 'o3'].indexOf(l.parameter) !== -1) {
+        l.convertedValue = parameterConversion[l.parameter] * l.value;
       }
+      let o = {
+        'type': 'Feature',
+        'properties': l,
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [l.coordinates.longitude, l.coordinates.latitude]
+        }
+      };
+      geojson.features.push(o);
     });
 
     return geojson;
@@ -185,17 +187,13 @@ let Map = React.createClass({
 
   /*
    * Generate the filter for unused data
-   * Filters out old items, items with wrong unit or values < 0
+   * Filters out old items or values < 0
    * @return {array} A filter array
    */
   _generateUnusedFilter: function () {
-    // Depending on parameter, chose a desired unit to display
-    const unit = parameterUnit[this.state.selectedParameter];
-
     return [ 'any',
       [ '>', 'lastUpdatedMilliseconds', millisecondsToOld ],
-      [ '!=', 'unit', unit ],
-      [ '<', 'value', 0 ]
+      [ '<', 'convertedValue', 0 ]
     ];
   },
 
@@ -207,27 +205,20 @@ let Map = React.createClass({
     // Generate color scale for colors and extents
     const colorScale = generateColorScale(latestStore.storage.hasGeo[this.state.selectedParameter], parameterMax[this.state.selectedParameter]);
 
-    // Depending on parameter, chose a desired unit to display
-    const unit = parameterUnit[this.state.selectedParameter];
-
     let arr = [];
     for (let p = 0; p < colors.length; p++) {
       let filters;
       const b = colorScale.invertExtent(colors[p]);
       if (p < colors.length - 1) {
         filters = [ 'all',
-          [ '>=', 'value', b[0] ],
-          [ '<', 'value', b[1] ],
-          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ],
-          [ '==', 'unit', unit ],
-          [ '>=', 'value', 0 ]
+          [ '>=', 'convertedValue', b[0] ],
+          [ '<', 'convertedValue', b[1] ],
+          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
         ];
       } else {
         filters = [ 'all',
-          [ '>=', 'value', b[0] ],
-          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ],
-          [ '==', 'unit', unit ],
-          [ '>=', 'value', 0 ]
+          [ '>=', 'convertedValue', b[0] ],
+          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
         ];
       }
 
@@ -238,12 +229,7 @@ let Map = React.createClass({
   },
 
   /**
-   * Updating the data based on current state, will remove present layers and
-   * sources and add new ones.
-   * @todo move some of this logic to another function so we can do
-   * source.setData and layer.setFilter instead of removing and adding
-   * @todo use https://www.mapbox.com/mapbox-gl-style-spec/#types-function for
-   * zoom-level circle-radius
+   * Updating the data based on current state.
    */
   _updateData: function () {
     let markers = this._generateGeoJSON();

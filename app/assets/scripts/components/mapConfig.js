@@ -25,3 +25,11 @@ export const parameterUnit = {
   'o3': 'ppm',
   'bc': 'µg/m³'
 };
+
+// Conversion factor from ug/m3 to ppm
+export const parameterConversion = {
+  'co': 0.000904379,
+  'no2': 0.000550492,
+  'so2': 0.000395666,
+  'o3': 0.000527554
+};

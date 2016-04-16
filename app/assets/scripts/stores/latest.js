@@ -44,7 +44,7 @@ const LatestStore = Reflux.createStore({
           // Add milliseconds since updated so we can filter on it
           loc.lastUpdatedMilliseconds = self._getMillisecondOffset(m.lastUpdated);
           // Omit unneeded props to save on buffer size
-          loc = omit(loc, ['measurements', 'city', 'country', 'parameter']);
+          loc = omit(loc, ['measurements', 'city', 'country']);
           if (m.parameter === 'pm25') {
             pm25.push(loc);
           } else if (m.parameter === 'pm10') {

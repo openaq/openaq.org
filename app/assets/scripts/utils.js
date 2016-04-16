@@ -50,7 +50,7 @@ export function generateColorScale (data, parameterMax) {
     return;
   }
   let max = d3Max(data, (d) => {
-    return d.value;
+    return d.convertedValue;
   });
 
   // Clamp to max value for the parameter
