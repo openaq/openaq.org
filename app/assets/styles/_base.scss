@@ -64,3 +64,7 @@ em {
     background: lighten($tertiary-color, $lighten-percentage);
   }
 }
+
+.hidden {
+  display: none;
+}

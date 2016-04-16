@@ -16,6 +16,6 @@ footer {
   &.bottom {
     position: absolute;
     bottom: 0px;
-    z-index: -1;
+    z-index: $z-footer;
   }
 }

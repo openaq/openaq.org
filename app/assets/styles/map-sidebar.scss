@@ -1,5 +1,4 @@
 $sidebar-width: 200px;
-$results-pane-top: 30px;
 
 .map-sidebar {
   position: absolute;
@@ -9,6 +8,7 @@ $results-pane-top: 30px;
   top: $header-height + 40px;
   box-shadow: 5px 5px 12px $brdr-rgba;
   border-top-right-radius: 5px;
+  z-index: $z-results;
 
   #close-button {
     color: $secondary-color;
@@ -17,24 +17,26 @@ $results-pane-top: 30px;
     top: 10px;
   }
 
-  &.hidden {
+  &.closed {
     transform: translate(-$sidebar-width, 0);
     transition: transform $map-sidebar-transition ease-out;
+    // visibility: visible;
   }
 
-  &.shown {
+  &.open {
     transform: translate(0, 0);
     transition: transform $map-sidebar-transition ease-out;
+    // visibility: hidden;
   }
 
   .results-pane {
     position: absolute;
-    top: $results-pane-top;
+    top: 40px;
     background-color: white;
     position: absolute;
     width: $sidebar-width;
     overflow-y: auto;
-    height: 100%;
+    height: calc(100% - 40px);
     padding: 0.2em 1.6em;
     border-bottom-right-radius: 5px;
   }
@@ -63,11 +65,7 @@ $results-pane-top: 30px;
   .no-results {
     position: absolute;
     top: 200px;
-    z-index: 1;
-
-    &.hidden {
-      display: none;
-    }
+    z-index: $z-results + 1;
 
     margin: 1.6em;
   }

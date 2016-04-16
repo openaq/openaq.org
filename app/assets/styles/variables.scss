@@ -28,7 +28,15 @@ $tablet: new-breakpoint(max-width 900px 8);
 $large: new-breakpoint(max-width 1130px 12);
 
 // We use this rgba for shadowing
-$brdr-rgba: rgba($secondary-color, 0.3);
+$brdr-rgba: rgba($primary-color, 0.3);
 
 // Animations
 $map-sidebar-transition: 0.5s;
+
+// z-index
+$z-map: -1;
+$z-footer: 3;
+$z-header: 3;
+$z-legend: 1;
+$z-no-map: 2;
+$z-results: 4;

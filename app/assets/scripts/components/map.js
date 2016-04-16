@@ -2,6 +2,7 @@ import React from 'react';
 import ReactIntl from 'react-intl';
 import Reflux from 'reflux';
 import mapboxgl from 'mapbox-gl';
+import classnames from 'classnames';
 
 import latestStore from '../stores/latest';
 import actions from '../actions/actions';
@@ -303,10 +304,12 @@ let Map = React.createClass({
    * Main render function, draws everything
    */
   render: function () {
+    // Class for no map case
+    let noMapClass = classnames('no-map', {'hidden': mapboxgl.supported({failIfMajorPerformanceCaveat: true})});
     return (
       <div>
         <Header locales={this.props.locales} messages={this.props.messages} style='no-logo' />
-        <div className='home page'>
+        <div className='map page'>
           <div id='map'></div>
           <Sidebar
             locales={this.props.locales}
@@ -316,6 +319,12 @@ let Map = React.createClass({
             displaySidebar={this.state.displaySidebar}
           />
           <MapLegend />
+          <div className={noMapClass}>
+            <p>
+              Unfortunately, the map is not available due to your current computer configuration.
+              Trying with a more modern browser may resolve the situation.
+            </p>
+          </div>
         </div>
         <Footer locales={this.props.locales} messages={this.props.messages} style='bottom' />
       </div>

@@ -31,7 +31,7 @@ let Sidebar = React.createClass({
    * Main render function, draws everything
    */
   render: function () {
-    let sidebarClass = classNames('map-sidebar', this.props.displaySidebar ? 'shown' : 'hidden');
+    let sidebarClass = classNames('map-sidebar', this.props.displaySidebar ? 'open' : 'closed');
     let noResultsClass = classNames('no-results', this.props.features.length === 0 ? 'shown' : 'hidden');
 
     return (
