@@ -9,6 +9,7 @@ Data aggregated into our system are accessible by an open API, which allows the 
 
 Additionally, the latest csv files of air quality data from our platform, sorted by location and attributed to their originating sources, are shared below.
 
-Notice errors, have comments or questions? Shoot us an email at info@openaq.org.
-
 Thank-you to the air quality agencies around the world measuring and publicly sharing these data. 
+
+Notice errors, have comments or questions? Know of a source we could add? Shoot us an email at info@openaq.org or click the button below.
+
