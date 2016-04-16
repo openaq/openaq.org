@@ -10,6 +10,10 @@ $sidebar-width: 200px;
   border-top-right-radius: 5px;
   z-index: $z-results;
 
+  @include media($mobile) {
+    display: none;
+  }
+
   #close-button {
     color: $secondary-color;
     position: absolute;

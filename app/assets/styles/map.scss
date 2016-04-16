@@ -21,6 +21,13 @@
   box-shadow: 5px 5px 12px $brdr-rgba;
   border-radius: 5px;
 
+  @include media($mobile) {
+    width: 80%;
+    margin: 0 10%;
+    right: 0;
+    bottom: 100px;
+  }
+
   .legend-info {
     font-size: modular-scale(-1);
     margin-top: 0.5em;
