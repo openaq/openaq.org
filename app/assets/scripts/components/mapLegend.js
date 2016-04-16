@@ -1,13 +1,11 @@
 'use strict';
 
 var React = require('react');
-import Reflux from 'reflux';
 import { createClass } from 'react';
 import Dropdown from 'react-dropdown';
 
-import latestStore from '../stores/latest';
 import { generateColorScale, getPrettyParameterName } from '../utils';
-import { latestValuesLoaded, mapParameterChanged } from '../actions/actions';
+import { mapParameterChanged } from '../actions/actions';
 import { parameterMax, parameterUnit } from '../components/mapConfig';
 
 /**
