@@ -37,7 +37,8 @@ let Map = React.createClass({
     return {
       selectedParameter: 'pm25',
       selectedFeatures: [],
-      selectedPoint: null
+      selectedPoint: null,
+      geojson: {}
     };
   },
 
@@ -102,6 +103,9 @@ let Map = React.createClass({
     map.on('style.load', function () {
       // Add initial data
       let markers = _this._generateGeoJSON();
+      _this.setState({
+        geojson: markers
+      });
       map.addSource('markers', {
         'type': 'geojson',
         'data': markers
@@ -232,16 +236,19 @@ let Map = React.createClass({
    * Updating the data based on current state.
    */
   _updateData: function () {
-    let markers = this._generateGeoJSON();
-    // Update data source
-    map.getSource('markers').setData(markers);
+    this.setState({
+      geojson: this._generateGeoJSON()
+    }, () => {
+      // Update data source
+      map.getSource('markers').setData(this.state.geojson);
 
-    // Add filtered layers
-    let filters = this._generateFilters();
-    for (let i = 0; i < filters.length; i++) {
-      map.setFilter(`markers-${i}`, filters[i]);
-    }
-    map.setFilter('unused-data', this._generateUnusedFilter());
+      // Add filtered layers
+      let filters = this._generateFilters();
+      for (let i = 0; i < filters.length; i++) {
+        map.setFilter(`markers-${i}`, filters[i]);
+      }
+      map.setFilter('unused-data', this._generateUnusedFilter());
+    });
   },
 
   /**
@@ -263,7 +270,8 @@ let Map = React.createClass({
       if (!map.loaded()) {
         setTimeout(function () { getFeaturesIfLoaded(); }, 50);
       } else {
-        setTimeout(function () { _this._getFeatures(); }, 100);
+        // A timeout to wait for map to finish rendering before getting features
+        setTimeout(function () { _this._getFeatures(); }, 150);
       }
     };
 
@@ -291,7 +299,7 @@ let Map = React.createClass({
             messages={this.props.messages}
             features={this.state.selectedFeatures}
           />
-          <MapLegend />
+          <MapLegend data={this.state.geojson} parameter={this.state.selectedParameter} />
           <div className={noMapClass}>
             <p>
               Unfortunately, the map is not available due to your current computer configuration.

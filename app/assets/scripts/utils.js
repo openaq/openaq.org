@@ -46,11 +46,12 @@ export function getPrettyParameterName (param) {
 * @return {function} d3 scale function
 */
 export function generateColorScale (data, parameterMax) {
-  if (!data) {
+  if (!data || !Array.isArray(data)) {
     return;
   }
+
   let max = d3Max(data, (d) => {
-    return d.convertedValue;
+    return (d.convertedValue !== undefined) ? d.convertedValue : d.properties.convertedValue;
   });
 
   // Clamp to max value for the parameter

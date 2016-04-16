@@ -14,31 +14,10 @@ import { parameterMax, parameterUnit } from '../components/mapConfig';
  * Small legend component for map
  */
 const MapLegend = createClass({
-  mixins: [
-    Reflux.listenTo(latestValuesLoaded, '_handleData'),
-    Reflux.listenTo(mapParameterChanged, '_handleData')
-  ],
-
-  getInitialState: function () {
-    return {
-      data: [],
-      selectedParameter: 'pm25'
-    };
+  propTypes: {
+    parameter: React.PropTypes.string.isRequired,
+    data: React.PropTypes.object.isRequired
   },
-
-  _handleData: function (data) {
-    if (data && data.parameter) {
-      this.setState({
-        selectedParameter: data.parameter,
-        data: latestStore.storage.hasGeo[this.state.selectedParameter]
-      });
-    } else {
-      this.setState({
-        data: latestStore.storage.hasGeo[this.state.selectedParameter]
-      });
-    }
-  },
-
   /**
    * Handler for switching of the selected paramter, updates state and data
    * @param {object} e associated event
@@ -48,9 +27,9 @@ const MapLegend = createClass({
   },
 
   render: function () {
-    const colorScale = generateColorScale(this.state.data, parameterMax[this.state.selectedParameter]);
+    const colorScale = generateColorScale(this.props.data.features, parameterMax[this.props.parameter]);
     // Do nothing if we don't have a color scale
-    if (!colorScale(0)) {
+    if (!colorScale || !colorScale(0)) {
       return (<div></div>);
     }
 
@@ -62,11 +41,11 @@ const MapLegend = createClass({
       {value: 'so2', label: getPrettyParameterName('so2')},
       {value: 'co', label: getPrettyParameterName('co')}
     ];
-    const defaultOption = {label: getPrettyParameterName(this.state.selectedParameter)};
+    const defaultOption = {label: getPrettyParameterName(this.props.parameter)};
 
     return (
       <div className='legend-outer'>
-        <div className='legend-title'>Showing values for <Dropdown options={options} onChange={this._handleParamSwitch} value={defaultOption} /> in {parameterUnit[this.state.selectedParameter]}.</div>
+        <div className='legend-title'>Showing values for <Dropdown options={options} onChange={this._handleParamSwitch} value={defaultOption} /> in {parameterUnit[this.props.parameter]}.</div>
         <div className='map-legend'>
           <ul>
             {colorScale.range().map((s, i) => {
