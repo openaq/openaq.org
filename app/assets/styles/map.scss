@@ -96,3 +96,13 @@
     padding: 0 10%;
   }
 }
+
+.mapboxgl-ctrl-attrib {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: modular-scale(-1);
+  a {
+    color: $primary-color;
+  }
+}
