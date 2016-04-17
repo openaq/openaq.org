@@ -1,44 +1,45 @@
 'use strict';
 
-var Reflux = require('reflux');
-// var _ = require('lodash');
+import { findWhere } from 'lodash';
+import Reflux from 'reflux';
 
-var locationsStore = require('./locations');
-// var sourcesStore = require('./sources');
-var actions = require('../actions/actions');
+import locationsStore from './locations';
+import sourcesStore from './sources';
+import { latestLocationsLoaded, latestSourcesLoaded, metadataLoaded } from '../actions/actions';
 
 var MetadataStore = Reflux.createStore({
 
   init: function () {
     this.joinTrailing(
-      actions.latestLocationsLoaded,
-      // actions.latestSourcesLoaded,
+      latestLocationsLoaded,
+      latestSourcesLoaded,
       this.createMetadata
     );
   },
 
   storage: {
-    countries: []
+    countries: [],
+    sourceURLs: {}
   },
 
   createMetadata: function () {
     // Go through and merge sites and sources data
-    var countries = locationsStore.storage.countries;
-    // var sources = sourcesStore.storage.sources;
-    // _.map(countries, function (c) {
-    //   return _.map(c.cities, function (ci) {
-    //     return _.map(ci.locations, function (l) {
-    //       var s = _.findWhere(sources, { name: l.sourceName });
-    //       l.sourceURL = s.sourceURL;
-    //       l.resolution = s.resolution;
-    //       return l;
-    //     });
-    //   });
-    // });
+    let countries = locationsStore.storage.countries;
+    let sources = sourcesStore.storage.sources;
+    countries.forEach((c) => {
+      c.cities.forEach((ci) => {
+        ci.locations.forEach((l) => {
+          let s = findWhere(sources, { name: l.sourceName });
+          l.sourceURL = s && s.sourceURL;
+          // Since we're already doing this, save in a nicer format for later use
+          this.storage.sourceURLs[l.location] = l.sourceURL;
+        });
+      });
+    });
 
     this.storage.countries = countries;
     // Done, send out action
-    actions.metadataLoaded();
+    metadataLoaded();
   }
 
 });
