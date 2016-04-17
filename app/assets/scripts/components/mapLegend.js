@@ -7,7 +7,7 @@ import Dropdown from 'react-dropdown';
 
 import latestStore from '../stores/latest';
 import { generateColorScale, getPrettyParameterName } from '../utils';
-import { latestValuesLoaded, mapParameterChanged } from '../actions/actions';
+import { mapParameterChanged } from '../actions/actions';
 import { parameterMax, parameterUnit } from '../components/mapConfig';
 
 /**
@@ -58,7 +58,10 @@ const MapLegend = createClass({
             })}
           </ul>
         </div>
-        <div className='legend-info'>Recent PM2.5, PM10, Ozone, NO<sub>2</sub>, SO<sub>2</sub>, and CO data from official sources. Values older than 24hrs are displayed in gray.</div>
+        <div className='legend-info'>
+          Recent PM2.5, PM10, Ozone, NO<sub>2</sub>, SO<sub>2</sub>, and CO data
+          from official sources. Values older than 24hrs are displayed in gray. <a href='https://medium.com/@openaq/about-the-openaq-air-quality-map-1692e0bc3404#.jfjak6g73' target='_blank' title='More Info'>More info</a>
+          </div>
       </div>
     );
   }
