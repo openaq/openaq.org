@@ -41,6 +41,35 @@
   }
 }
 
+.about {
+  .sponsors {
+    @include span-columns(8);
+    @include shift(2);
+    text-align: center;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .title {
+      font-size: modular-scale(1);
+      font-weight: $base-font-regular;
+    }
+
+    hr {
+      width: 100px;
+      margin-bottom: 20px;
+      border: none;
+      border-top: 1px solid lighten($tertiary-color, 50%);
+    }
+
+    img {
+      margin: 20px;
+      width: 150px;
+      vertical-align: middle;
+    }
+  }
+}
+
 .home {
   .banner {
     @include span-columns(12);

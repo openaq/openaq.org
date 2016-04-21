@@ -26,6 +26,31 @@ var About = React.createClass({
           <div className='intro'>
             <MdastComponent>{this.getIntlMessage('about.intro')}</MdastComponent>
           </div>
+          <div className='sponsors'>
+            <div className='title'>Partners and Sponsors</div>
+            <hr />
+            <a href='https://developmentseed.org' title='Development Seed' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/devseed.png'/>
+            </a>
+            <a href='https://aws.amazon.com' title='Amazon Web Services' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/aws.png'/>
+            </a>
+            <a href='http://thrivingearthexchange.org/' title='Thriving Earth Exchange' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/tex.png'/>
+            </a>
+            <a href='http://sites.agu.org/' title='American Geophysical Union' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/agu.jpg'/>
+            </a>
+            <a href='http://earthjournalism.net/' title='Earth Journalism Network' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/ejn.png'/>
+            </a>
+            <a href='https://www.internews.org/' title='Internews' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/internews.png'/>
+            </a>
+            <a href='https://keen.io' title='Keen.io' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/keenio.jpg'/>
+            </a>
+          </div>
         </div>
         <Footer locales={this.props.locales} messages={this.props.messages} />
       </div>
