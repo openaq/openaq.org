@@ -3,6 +3,7 @@
 var React = require('react');
 import { createClass } from 'react';
 import Dropdown from 'react-dropdown';
+import { uniq } from 'lodash';
 
 import { generateColorScale, getPrettyParameterName } from '../utils';
 import { mapParameterChanged } from '../actions/actions';
@@ -31,6 +32,15 @@ const MapLegend = createClass({
       return (<div></div>);
     }
 
+    // Determine level of precision to have unique values on legend
+    let precision = 2;
+    let ranges = colorScale.range().map((s) => {
+      return colorScale.invertExtent(s)[0].toFixed(2);
+    });
+    if (uniq(ranges).length < colorScale.range().length) {
+      precision = 3;
+    }
+
     const options = [
       {value: 'pm25', label: getPrettyParameterName('pm25')},
       {value: 'pm10', label: getPrettyParameterName('pm10')},
@@ -49,7 +59,7 @@ const MapLegend = createClass({
             {colorScale.range().map((s, i) => {
               // Add a plus sign to indicate higher values for last item
               let text = colorScale.invertExtent(s)[0];
-              text = (text < 1 && text !== 0) ? text.toFixed(2) : text.toFixed();
+              text = (text < 1 && text !== 0) ? text.toFixed(precision) : text.toFixed();
               text = (i === colorScale.range().length - 1) ? text += '+' : text;
               text = (i === 0) ? text += ` ${parameterUnit[this.props.parameter]}` : text;
               return <li key={i} className='legend-item' style={{borderTopColor: s}}>{text}</li>;
