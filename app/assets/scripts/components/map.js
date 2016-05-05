@@ -15,10 +15,11 @@ import config from '../config';
 import Sidebar from './mapSidebar';
 import MapLegend from './mapLegend';
 let map;
-let relevantLayers = [];
 
 // Map config
-import { millisecondsToOld, colorScale as colors, parameterMax, parameterConversion } from './mapConfig';
+import { millisecondsToOld, colorScale as colors, parameterMax,
+         parameterConversion, unusedColor, circleOpacity, circleBlur,
+         coloredCircleRadius, unusedCircleRadius } from './mapConfig';
 
 let Map = React.createClass({
 
@@ -111,31 +112,23 @@ let Map = React.createClass({
         'data': markers
       });
 
-      // Add filtered layers
-      let filters = _this._generateFilters();
-      for (let i = 0; i < filters.length; i++) {
-        const layerID = `markers-${i}`;
-        relevantLayers.push(layerID);
-        map.addLayer({
-          'id': layerID,
-          'interactive': true,
-          'type': 'circle',
-          'source': 'markers',
-          'paint': {
-            'circle-color': colors[i],
-            'circle-opacity': {
-              'stops': [[0, 0.8], [7, 0.6], [11, 0.4]]
-            },
-            'circle-radius': {
-              'stops': [[0, 4], [5, 5], [7, 8]]
-            },
-            'circle-blur': {
-              'stops': [[0, 0.8], [5, 0.5], [7, 0]]
-            }
+      // Add main data layer
+      map.addLayer({
+        'id': 'markers',
+        'interactive': true,
+        'type': 'circle',
+        'source': 'markers',
+        'paint': {
+          'circle-color': {
+            property: 'convertedValue',
+            stops: _this._generateColorStops()
           },
-          filter: filters[i]
-        });
-      }
+          'circle-opacity': circleOpacity,
+          'circle-radius': coloredCircleRadius,
+          'circle-blur': circleBlur
+        },
+        'filter': _this._generateFilter()
+      });
 
       // And a special layer just for unused data
       map.addLayer({
@@ -144,16 +137,10 @@ let Map = React.createClass({
         'type': 'circle',
         'source': 'markers',
         'paint': {
-          'circle-color': '#B3B3B3',
-          'circle-opacity': {
-            'stops': [[0, 0.8], [7, 0.6], [11, 0.4]]
-          },
-          'circle-radius': {
-            'stops': [[0, 2], [5, 5], [7, 8]]
-          },
-          'circle-blur': {
-            'stops': [[0, 0.8], [5, 0.5], [7, 0]]
-          }
+          'circle-color': unusedColor,
+          'circle-opacity': circleOpacity,
+          'circle-radius': unusedCircleRadius,
+          'circle-blur': circleBlur
         },
         filter: _this._generateUnusedFilter()
       });
@@ -171,9 +158,24 @@ let Map = React.createClass({
     // Use the same approach as above to indicate that the symbols are clickable
     // by changing the cursor style to 'pointer'.
     map.on('mousemove', function (e) {
-      const features = map.queryRenderedFeatures(e.point, {layers: relevantLayers});
+      const features = map.queryRenderedFeatures(e.point, {layers: ['markers']});
       map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
     });
+  },
+
+  /**
+   * Generate the color stops needed for the map circls
+   */
+  _generateColorStops: function () {
+    const colorScale = generateColorScale(latestStore.storage.hasGeo[this.state.selectedParameter], parameterMax[this.state.selectedParameter]);
+    let stops = colors.map((c) => {
+      return [colorScale.invertExtent(c)[0], c];
+    });
+
+    // And add one stop to the beginning to account for interpolation
+    stops.unshift([-1, unusedColor]);
+
+    return stops;
   },
 
   /*
@@ -183,7 +185,7 @@ let Map = React.createClass({
     if (!this.state.selectedPoint) {
       return;
     }
-    const features = map.queryRenderedFeatures(this.state.selectedPoint, {layers: relevantLayers});
+    const features = map.queryRenderedFeatures(this.state.selectedPoint, {layers: ['markers']});
     this.setState({
       selectedFeatures: features
     });
@@ -202,34 +204,11 @@ let Map = React.createClass({
   },
 
   /*
-   * Generate the filters we want to use for the data, dependent on data
-   * @return {array} An array of filter arrays
+   * Generate the filter we want to use for the data, cuts out old data
+   * @return {array} A mapbox-gl filter
    */
-  _generateFilters: function () {
-    // Generate color scale for colors and extents
-    const colorScale = generateColorScale(latestStore.storage.hasGeo[this.state.selectedParameter], parameterMax[this.state.selectedParameter]);
-
-    let arr = [];
-    for (let p = 0; p < colors.length; p++) {
-      let filters;
-      const b = colorScale.invertExtent(colors[p]);
-      if (p < colors.length - 1) {
-        filters = [ 'all',
-          [ '>=', 'convertedValue', b[0] ],
-          [ '<', 'convertedValue', b[1] ],
-          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
-        ];
-      } else {
-        filters = [ 'all',
-          [ '>=', 'convertedValue', b[0] ],
-          [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ]
-        ];
-      }
-
-      arr.push(filters);
-    }
-
-    return arr;
+  _generateFilter: function () {
+    return [ '<=', 'lastUpdatedMilliseconds', millisecondsToOld ];
   },
 
   /**
@@ -242,12 +221,12 @@ let Map = React.createClass({
       // Update data source
       map.getSource('markers').setData(this.state.geojson);
 
-      // Add filtered layers
-      let filters = this._generateFilters();
-      for (let i = 0; i < filters.length; i++) {
-        map.setFilter(`markers-${i}`, filters[i]);
-      }
-      map.setFilter('unused-data', this._generateUnusedFilter());
+      // Update style for colored markers to apply new color stops
+      const circleColor = {
+        property: 'convertedValue',
+        stops: this._generateColorStops()
+      };
+      map.setPaintProperty('markers', 'circle-color', circleColor);
     });
   },
 
