@@ -1,5 +1,20 @@
 // Color scales
 export const colorScale = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'];
+export const unusedColor = '#B3B3B3';
+
+// Map styling
+export const circleOpacity = {
+  'stops': [[0, 0.8], [7, 0.6], [11, 0.4]]
+};
+export const unusedCircleRadius = {
+  'stops': [[0, 2], [5, 5], [7, 8]]
+};
+export const coloredCircleRadius = {
+  'stops': [[0, 4], [5, 5], [7, 8]]
+};
+export const circleBlur = {
+  'stops': [[0, 0.8], [5, 0.5], [7, 0]]
+};
 
  // Point at which measurements should be considered old
 export const millisecondsToOld = 24 * 60 * 60 * 1000;
