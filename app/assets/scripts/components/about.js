@@ -35,6 +35,9 @@ var About = React.createClass({
             <a href='https://aws.amazon.com' title='Amazon Web Services' target='_blank'>
               <img src='/assets/graphics/layout/sponsors/aws.png'/>
             </a>
+            <a href='https://www.nih.gov/' title='National Institutes of Health' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/nih.jpg'/>
+            </a>
             <a href='http://thrivingearthexchange.org/' title='Thriving Earth Exchange' target='_blank'>
               <img src='/assets/graphics/layout/sponsors/tex.png'/>
             </a>
@@ -49,6 +52,15 @@ var About = React.createClass({
             </a>
             <a href='https://keen.io' title='Keen.io' target='_blank'>
               <img src='/assets/graphics/layout/sponsors/keenio.jpg'/>
+            </a>
+            <a href='http://www.wellcome.ac.uk/' title='Wellcome Trust' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/wellcome.jpg'/>
+            </a>
+            <a href='http://openscienceprize.org/' title='The Open Science Prize' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/openscience.png'/>
+            </a>
+            <a href='https://www.hhmi.org/' title='Howard Hughes Medical Institute' target='_blank'>
+              <img src='/assets/graphics/layout/sponsors/hhmi.jpg'/>
             </a>
           </div>
         </div>
