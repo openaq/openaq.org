@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Global: Inpages
+   ========================================================================== */
+
+$page-header-y: $global-spacing * 5;
+
+.inpage {
+  &__header {
+    position: relative;
+    color: $base-font-color;
+    padding: {
+      top: ($global-spacing * 2) + $page-header-y;
+      right: 0;
+      bottom: ($global-spacing * 2);
+      left: 0;
+    }
+    margin-top: -$page-header-y;
+    background-color: tint($base-color, 92%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    > .inner {
+      @extend .row, .row--centered;
+    }
+
+    &::after {
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      content: '';
+      background: $base-semi-alpha-color;
+    }
+
+    @include media(medium-up) {
+      padding: {
+        top: ($global-spacing * 3) + $page-header-y;
+        bottom: ($global-spacing * 3);
+      }
+    }
+
+    @include media(large-up) {
+      padding: {
+        top: ($global-spacing * 4) + $page-header-y;
+        bottom: ($global-spacing * 4);
+      }
+    }
+  }
+
+  &__headline {
+    @include col(12/12);
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    @include media(medium-up) {
+      @include col(10/12);
+    }
+
+    @include media(large-up) {
+      @include col(8/12);
+    }
+  }
+
+  &__title {
+    @extend .heading, .heading--xlarge;
+  }
+
+  &__subtitle {
+    text-transform: uppercase;
+    font-weight: $base-font-regular;
+    color: rgba($base-font-color, 0.48);
+    font-size: 0.875rem;
+    line-height: 1.25;
+    margin: 0;
+
+    @include media(medium-up) {
+      position: absolute;
+      transform: translate(0, -100%);
+    }
+  }
+
+  &__introduction {
+    color: rgba($base-font-color, 0.64);
+    font-size: 1.25rem;
+    line-height: 2rem;
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    @include media(medium-up) {
+      font-size: 1.5rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  &__body {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+/* Dark theme modifier
+   ========================================================================== */
+
+.page--dark {
+  .inpage__header {
+    @extend .antialiased;
+    background-color: $base-color;
+    color: #fff;
+  }
+
+  .inpage__subtitle {
+    color: rgba(#fff, 0.48);
+  }
+  
+  .inpage__introduction {
+    color: rgba(#fff, 0.64);
+  }
+}

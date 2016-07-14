@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Homepage: Content
+   ========================================================================== */
+
+.page--homepage {
+  .inpage__header {
+    background-image: url(../graphics/content/page-hero-default.png);
+  }
+  
+  .inpage__title {
+    em {
+      display: block;
+      font-style: normal;
+      font-weight: $base-font-weight;
+      font-size: 64%;
+      line-height: 1;
+    }
+  }
+}
+
+/* Dark theme modifier
+   ========================================================================== */
+
+#home-stats {
+  .fold__body {
+    @include col(12/12);
+
+    @include media(medium-up) {
+      @include col(10/12);
+    }
+
+    @include media(large-up) {
+      @include col(8/12);
+    }
+  }
+}

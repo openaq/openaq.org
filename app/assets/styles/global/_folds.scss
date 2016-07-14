@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Global: Folds
+   ========================================================================== */
+
+.fold {
+  background: #fff;
+  padding: ($global-spacing * 2) 0;
+  box-shadow: inset 0 -2px 0 0 $base-alpha-color;
+
+  > .inner {
+    @extend .row, .row--centered;
+  }
+
+  &,
+  .fold__header,
+  .fold__body {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include media(medium-up) {
+    padding: ($global-spacing * 3) 0;
+  }
+
+  @include media(large-up) {
+    padding: ($global-spacing * 4) 0;
+  }
+}
+
+.fold__header {
+  margin-bottom: $global-spacing;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @include media(medium-up) {
+    margin-bottom: ($global-spacing * 2)
+  }
+}
+
+.fold__title {
+  @include heading(1rem, medium-up);
+  @extend .heading-deco;
+}
+
+
+/* Modifiers
+   ========================================================================== */
+
+.fold--filled {
+  background: tint($base-color, 92%);
+}
