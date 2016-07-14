@@ -78,6 +78,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
+    "classnames": "^2.2.5",
     "lodash": "^4.13.1",
     "openaq-design-system": "git+https://github.com/openaq/openaq-design-system",
     "react": "^15.2.1",

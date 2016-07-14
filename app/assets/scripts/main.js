@@ -17,6 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 import App from './views/app';
 import Home from './views/home';
+import About from './views/about';
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
@@ -26,8 +27,9 @@ render((
   <Provider store={store}>
     <Router history={history}>
       <Route path='/' component={App}>
-        <IndexRoute component={Home}/>
+        <Route path='about' component={About} pageClass='page--about' />
+        <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>
   </Provider>
-), document.querySelector('.site-canvas'));
+), document.querySelector('#app-container'));
