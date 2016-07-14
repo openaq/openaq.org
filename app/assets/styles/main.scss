@@ -1,29 +1,33 @@
-// Charset
-@charset "UTF-8";
+/* ==========================================================================
+   Main
+   ========================================================================== */
 
-// Google Fonts
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700);
+/* Libraries
+   ========================================================================== */
 
-// Libs
+/**
+ * Bourbon for extended SASS functionality:
+ * http://bourbon.io/
+ */
+
 @import "bourbon";
-@import "neat";
 
-// Reset and normalize
-@import "normalize";
-@import "reset";
-@import "normalize-opentype";
+/**
+ * Jeet, a grid system designed for humans:
+ * http://jeet.gs/
+ */
 
-// Fonts
-@import url(../../fonts/icons.css);
+@import "jeet/jeet";
 
-// Settings
-@import "variables";
+/**
+ * OpenAerialMap Design System
+ */
 
-// Custom styles
-@import "base";
-@import "header";
-@import "footer";
-@import "location-detail";
-@import "page";
-@import "map";
-@import "map-sidebar";
+@import "openaq-design-system";
+
+
+/* Custom
+   ========================================================================== */
+
+@import "structure";
+@import "content";

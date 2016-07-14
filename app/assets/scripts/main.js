@@ -1,46 +1,33 @@
 'use strict';
+import 'babel-polyfill';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { syncHistoryWithStore } from 'react-router-redux';
+import createLogger from 'redux-logger';
+import {whyDidYouUpdate} from 'why-did-you-update';
+import reducer from './reducers/index';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router');
-
-// Config variables
-var config = require('./config');
-
-// Language, hard code for now, do better detection later?
-var i18n = require('./i18n/en');
-
-// Router
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var NotFoundRoute = Router.NotFoundRoute;
-
-// Components
-var App = require('./components/app');
-var About = require('./components/about');
-var Methodology = require('./components/methodology');
-var Sources = require('./components/sources');
-var NotFound = require('./components/notFound');
-var Home = require('./components/home');
-var Map = require('./components/map');
-
-console.log.apply(console, config.consoleMessage);
-if (config.environment !== 'production') {
-  console.log('--' + config.environment.toUpperCase() + '--');
+if (process.env.NODE_ENV !== 'production') {
+  whyDidYouUpdate(React);
 }
 
-// declare our routes and their hierarchy
-var routes = (
-  <Route handler={App} path='/'>
-    <DefaultRoute name ='default' handler={Home} />
-    <Route path='map' name ='map' handler={Map} />
-    <Route path='about' name='about' handler={About}/>
-    <Route path='methodology' name='methodology' handler={Methodology}/>
-    <Route path='sources' name='sources' handler={Sources}/>
-    <NotFoundRoute handler={NotFound}/>
-  </Route>
-);
+import App from './views/app';
+import Home from './views/home';
 
-Router.run(routes, function (Handler) {
-  ReactDOM.render(<Handler locales={i18n.locales} messages={i18n.messages} />, document.getElementById('site-canvas'));
-});
+const logger = createLogger();
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
+const history = syncHistoryWithStore(hashHistory, store);
+
+render((
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path='/' component={App}>
+        <IndexRoute component={Home}/>
+      </Route>
+    </Router>
+  </Provider>
+), document.querySelector('.site-canvas'));

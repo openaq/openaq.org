@@ -1,1 +1,0 @@
-Globally, thousands of stations publish real-time air quality info that just disappears after it’s displayed. We are aggregating, standardizing and sharing this info so that the public - from researchers to the media - can do awesome things with it.
