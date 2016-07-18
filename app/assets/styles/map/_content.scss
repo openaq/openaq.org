@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Global: Map
+   ========================================================================== */
+
+$page-header-y: $global-spacing * 5;
+
+.page--map {
+  .inpage__header,
+  .page__footer {
+    @extend .visually-hidden;
+  }
+
+  .map-container {
+    position: absolute;
+    top: $page-header-y;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+  }
+}

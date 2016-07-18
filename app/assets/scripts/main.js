@@ -18,6 +18,7 @@ if (process.env.NODE_ENV !== 'production') {
 import App from './views/app';
 import Home from './views/home';
 import About from './views/about';
+import Map from './views/map';
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
@@ -28,6 +29,7 @@ render((
     <Router history={history}>
       <Route path='/' component={App}>
         <Route path='about' component={About} pageClass='page--about' />
+        <Route path='map' component={Map} pageClass='page--map' />
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>
