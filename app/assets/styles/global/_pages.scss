@@ -62,10 +62,10 @@
 .page__footer {
   background: tint($base-color, 92%);
   padding: 2rem 0;
-  text-align: center;
+  // text-align: center;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: rgba($base-font-color, 0.64);
+  // color: rgba($base-font-color, 0.64);
   
   > .inner {
     @extend .row, .row--centered;

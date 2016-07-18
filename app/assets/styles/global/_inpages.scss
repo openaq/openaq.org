@@ -69,14 +69,15 @@ $page-header-y: $global-spacing * 5;
 
   &__actions {
     @include col(12/12);
-    margin-top: 3.25rem;
+    margin-top: 1rem;
 
     > *:last-child {
       margin-bottom: 0;
     }
 
     @include media(medium-up) {
-      @include col(4/12);
+      margin-top: 3.25rem;
+      @include col(3/12, $offset: 1/12);
     }
   }
 
