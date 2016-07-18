@@ -19,6 +19,7 @@ import App from './views/app';
 import Home from './views/home';
 import About from './views/about';
 import Map from './views/map';
+import Locations from './views/locations-hub';
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
@@ -30,6 +31,7 @@ render((
       <Route path='/' component={App}>
         <Route path='about' component={About} pageClass='page--about' />
         <Route path='map' component={Map} pageClass='page--map' />
+        <Route path='locations' component={Locations} pageClass='page--locations' />
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>

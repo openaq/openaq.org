@@ -1,0 +1,21 @@
+/* ==========================================================================
+   Global: content
+   ========================================================================== */
+
+
+/* Special button for inpage header
+   ========================================================================== */
+
+.button-inpage-download {
+  @extend .button, .button--small, .button--primary-unbounded;
+
+  &:before {
+    @extend %openaq-ds-icon-download;
+  }
+}
+
+.button-inpage-api {
+  @extend .button, .button--large, .button--primary-bounded;
+  width: 100%;
+  max-width: 10rem;
+}
