@@ -12,7 +12,9 @@
   }
 
   &,
+  > .inner,
   .fold__header,
+  .fold__introduction,
   .fold__body {
     > *:last-child {
       margin-bottom: 0;
@@ -30,6 +32,7 @@
 
 .fold__header {
   margin-bottom: $global-spacing;
+  overflow: hidden;
 
   > *:last-child {
     margin-bottom: 0;
@@ -37,6 +40,20 @@
 
   @include media(medium-up) {
     margin-bottom: ($global-spacing * 2)
+  }
+}
+
+.fold__introduction {
+  @include col(12/12);
+  font-family: $heading-font-family;
+  font-weight: $heading-font-regular;
+
+  @include media(medium-up) {
+    @include col(10/12);
+  }
+
+  @include media(large-up) {
+    @include col(8/12);
   }
 }
 

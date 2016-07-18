@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Global: Cards
+   ========================================================================== */
+
+.card {
+  @include col(4/12);
+
+  .card__subtitle {
+    margin-bottom: 0;
+  }
+}
+
+.card__footer {
+  margin: 0 (-$global-spacing) (-$global-spacing) (-$global-spacing);
+  box-shadow: inset 0 2px 0 0 $base-alpha-color;
+}
+
+.card__actions {
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    float: left;
+    box-shadow: 2px 0 0 0 $base-alpha-color;
+    width: 50%;
+
+    &:last-child {
+      box-shadow: none;
+    }
+
+    .button {
+      padding: ($global-spacing/2) 0;
+    }
+
+  }
+
+  .button-card-download,
+  .button-card-view {
+    @extend .button, .button--small, .button--primary-unbounded, .button--block;
+  }
+
+  .button-card-download:before {
+    @extend %openaq-ds-icon-download;
+  }
+
+  .button-card-view:after {
+    @extend %openaq-ds-icon-sm-chevron-right;
+  }
+}
+
+.card__meta-details {
+  list-style: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+
+  li {
+    float: left;
+    margin-right: 1rem;
+  }
+
+  .card--data-compact & {
+    li {
+      float: none;
+    }
+  }
+}

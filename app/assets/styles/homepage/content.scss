@@ -20,17 +20,3 @@
 
 /* Dark theme modifier
    ========================================================================== */
-
-#home-stats {
-  .fold__body {
-    @include col(12/12);
-
-    @include media(medium-up) {
-      @include col(10/12);
-    }
-
-    @include media(large-up) {
-      @include col(8/12);
-    }
-  }
-}
