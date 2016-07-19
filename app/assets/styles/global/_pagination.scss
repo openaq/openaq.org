@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Global: pagination
+   ========================================================================== */
+
+.pagination {
+  @extend .clearfix;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: $global-spacing * 2;
+
+  > li {
+    float: left;
+  }
+
+  .previous a, .next a {
+    @extend .button;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    padding-right: 0;
+    padding-left: 0;
+    span {
+      @extend .visually-hidden;
+    }
+  }
+
+  .previous a {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: $primary-color;
+    &:before {
+      @extend %openaq-ds-icon-chevron-left;
+    }
+  }
+
+  .next a {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: $primary-color;
+    &:before {
+      @extend %openaq-ds-icon-chevron-right;
+    }
+  }
+
+  .pages {
+    @extend .clearfix;
+    &__wrapper {
+      float: left;
+      
+      &.active .pages__page {
+        @include button-variation("filled", "light", tint($base-color, 64%));
+      }
+
+      .pages__page {
+        @extend .button;
+        @include button-variation("filled", "light", tint($base-color, 92%));
+        border-radius: 0;
+      }
+    }
+  }
+
+  .break {
+    .pages__page {
+      @extend .button;
+      border-radius: 0;
+      background: tint($base-color, 92%);
+      opacity: 1;
+    }
+  }
+}

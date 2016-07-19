@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .card {
-  @include col(4/12);
+  // @include col(4/12);
 
   .card__subtitle {
     margin-bottom: 0;
@@ -57,12 +57,23 @@
   padding: 0;
 
   li {
-    float: left;
-    margin-right: 1rem;
+    @extend .truncated;
+    margin-bottom: 0.5rem;
+    margin-right: 2rem;
+
+    &:nth-child(even) {
+      clear: right;
+    }
+
+    @include media(medium-up) {
+      width: 35%;
+      float: left;
+    }
   }
 
   .card--data-compact & {
     li {
+      width: 100%;
       float: none;
     }
   }

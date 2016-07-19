@@ -114,8 +114,39 @@ $page-header-y: $global-spacing * 5;
   }
 
   &__body {
+    > .inner {
+      @extend .row, .row--centered;
+    }
+
     > *:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  &__aside {
+    @include col(12/12);
+    padding: 1rem 0;
+
+    @include media(medium-up) {
+      @include col(4/12);
+      padding: 2rem 0;
+    }
+    @include media(large-up) {
+      @include col(3/12);
+      padding: 2rem 0;
+    }
+  }
+  &__content {
+    @include col(12/12);
+    padding: 1rem 0;
+
+    @include media(medium-up) {
+      @include col(8/12);
+      padding: 2rem 0;
+    }
+    @include media(large-up) {
+      @include col(9/12);
+      padding: 2rem 0;
     }
   }
 }
