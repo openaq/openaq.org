@@ -1,16 +1,18 @@
 'use strict';
 import React from 'react';
+import c from 'classnames';
 
 var LocationCard = React.createClass({
   displayName: 'LocationCard',
 
   propTypes: {
+    compact: React.PropTypes.bool
   },
 
   render: function () {
     // card--data-compact
     return (
-      <article className='card'>
+      <article className={c('card', {'card--data-compact': this.props.compact})}>
         <div className='card__contents'>
           <header className='card__header'>
             <p className='card__subtitle'>Updated <strong>1 hour ago</strong></p>

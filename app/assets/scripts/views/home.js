@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import LocationCard from '../components/location-card';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -15,27 +16,7 @@ var Home = React.createClass({
     <div>
       {[0, 0, 0].map(o => {
         return (
-          <article className='card card--data-compact'>
-            <div className='card__contents'>
-              <header className='card__header'>
-                <p className='card__subtitle'>Updated <strong>1 hour ago</strong></p>
-                <h1 className='card__title'><a href='#' title='View Wollogong page'>Wollogong</a> in Illawara, Australia</h1>
-              </header>
-              <div className='card__body'>
-                <ul className='card__meta-details'>
-                  <li>Measurements: 30,665 since 01/03/2015</li>
-                  <li>Values: PM2.5, PM10, O3</li>
-                  <li>Source: <a href='#' title='View source for Wollogong'>EPA</a></li>
-                </ul>
-              </div>
-              <footer className='card__footer'>
-                <ul className='card__actions'>
-                  <li><a href='#' className='button-card-download' title='Download data for Wollogong'>Download</a></li>
-                  <li><a href='#' className='button-card-view' title='View Wollogong page'>View More</a></li>
-                </ul>
-              </footer>
-            </div>
-          </article>
+          <LocationCard compact/>
         );
       })}
       </div>
@@ -69,7 +50,7 @@ var Home = React.createClass({
             </div>
           </section>
 
-          <section className='fold'>
+          <section className='fold' id='home-nearby'>
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__title'>Nearby locations</h1>

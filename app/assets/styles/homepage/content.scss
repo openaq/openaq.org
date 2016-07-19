@@ -13,3 +13,26 @@
     }
   }
 }
+
+#home-nearby {
+  .fold__body {
+    @extend .clearfix;
+  }
+  .card {
+    @include col(12/12);
+    margin-bottom: 2rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include media(medium-up) {
+      @include col(6/12, $cycle: 2);
+    }
+
+    @include media(large-up) {
+      @include col(4/12, $cycle: 3);
+      margin-bottom: 0;
+    }
+  }
+}
