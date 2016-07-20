@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 import c from 'classnames';
 import PageHeader from '../components/page-header';
@@ -10,17 +11,25 @@ var App = React.createClass({
 
   propTypes: {
     routes: React.PropTypes.array,
+    baseDataReady: React.PropTypes.bool,
     children: React.PropTypes.object
   },
 
   render: function () {
     let pageClass = _.get(_.last(this.props.routes), 'pageClass', '');
 
+    let content = (
+      <div>Preparing the site for you!</div>
+    );
+    if (this.props.baseDataReady) {
+      content = this.props.children;
+    }
+
     return (
       <div className={c('page', pageClass)}>
         <PageHeader />
         <main className='page__body' role='main'>
-          {this.props.children}
+          {content}
         </main>
         <PageFooter />
       </div>
@@ -31,16 +40,17 @@ var App = React.createClass({
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-// function selector (state) {
-//   return {
-//   };
-// }
+function selector (state) {
+  return {
+    baseDataReady: state.baseData.fetched && !state.baseData.fetching
+  };
+}
 
-// function dispatcher (dispatch) {
-//   return {
-//   };
-// }
+function dispatcher (dispatch) {
+  return {
+  };
+}
 
-// module.exports = connect(selector, dispatcher)(App);
+module.exports = connect(selector, dispatcher)(App);
 
-module.exports = App;
+// module.exports = App;

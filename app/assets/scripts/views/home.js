@@ -16,7 +16,7 @@ var Home = React.createClass({
     <div>
       {[0, 0, 0].map(o => {
         return (
-          <LocationCard compact/>
+          <LocationCard compact />
         );
       })}
       </div>

@@ -10,9 +10,10 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createLogger from 'redux-logger';
 import {whyDidYouUpdate} from 'why-did-you-update';
 import reducer from './reducers/index';
+import { fetchBaseData } from './actions/action-creators';
 
 if (process.env.NODE_ENV !== 'production') {
-  whyDidYouUpdate(React);
+  // whyDidYouUpdate(React, { exclude: /Scroll/ });
 }
 
 import App from './views/app';
@@ -24,6 +25,9 @@ import Locations from './views/locations-hub';
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 const history = syncHistoryWithStore(hashHistory, store);
+
+// Base data.
+store.dispatch(fetchBaseData());
 
 render((
   <Provider store={store}>

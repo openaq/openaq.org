@@ -3,8 +3,12 @@
    ========================================================================== */
 
 .inpage {
+  .full-flex {
+    padding: 0;
+  }
+
   @include media(medium-up) {
-    .full-flex {
+    .full-flex > .inner {
       display: flex;
     }
 
@@ -34,7 +38,7 @@
 
 .filters-summary {
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   box-shadow: 0 2px 0 0 $base-alpha-color;
 }
 
@@ -77,6 +81,7 @@
   background-color: tint($secondary-color, 64%);
   color: $secondary-color;
   margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 
   &::after {
     @extend %openaq-ds-icon-sm-xmark;
