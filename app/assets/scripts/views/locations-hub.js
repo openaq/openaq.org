@@ -254,7 +254,7 @@ var LocationsHub = React.createClass({
 
                 <div className='disclaimers'>
                   <p>Data are from official, stationary government monitors and not smaller-scale or mobile monitors. It is our intent to attribute all data to their originating sources. Please contact us if you notice otherwise. </p>
-                  <p>Note: We do not guarantee the accuracy of any data aggregated to the platform.  Please see originating sites for more information.</p>
+                  <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
                 </div>
               </div>
             </div>
