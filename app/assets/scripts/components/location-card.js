@@ -1,29 +1,45 @@
 'use strict';
 import React from 'react';
 import c from 'classnames';
+import moment from 'moment';
+import { formatThousands } from '../utils/format';
 
 var LocationCard = React.createClass({
   displayName: 'LocationCard',
 
   propTypes: {
-    compact: React.PropTypes.bool
+    compact: React.PropTypes.bool,
+    name: React.PropTypes.string,
+    city: React.PropTypes.string,
+    countryData: React.PropTypes.object,
+    sourceData: React.PropTypes.object,
+    totalMeasurements: React.PropTypes.number,
+    parametersList: React.PropTypes.array,
+    lastUpdate: React.PropTypes.string,
+    collectionStart: React.PropTypes.string
+  },
+
+  renderParameters: function () {
+    return this.props.parametersList.map(o => o.name).join(', ');
   },
 
   render: function () {
-    // card--data-compact
+    let updated = moment(this.props.lastUpdate).fromNow();
+    let started = moment(this.props.collectionStart).format('YYYY/MM/DD');
+
     return (
       <article className={c('card', {'card--data-compact': this.props.compact})}>
         <div className='card__contents'>
           <header className='card__header'>
-            <p className='card__subtitle'>Updated <strong>1 hour ago</strong></p>
-            <h1 className='card__title'><a href='#' title='View Wollogong page'>Wollogong</a> in Illawara, Australia</h1>
+            <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
+            <h1 className='card__title'><a href='#' title='View Wollogong page'>{this.props.name}</a> in {this.props.city}, {this.props.countryData.name}</h1>
           </header>
           <div className='card__body'>
             <ul className='card__meta-details'>
-              <li>Collection Start: 2015/03/01</li>
-              <li>Measurements: 30,665</li>
-              <li>Values: PM2.5, PM10, O3</li>
-              <li>Source: <a href='#' title='View source for Wollogong'>EPA</a></li>
+              <li>Collection Start: {started}</li>
+              <li>Measurements: {formatThousands(this.props.totalMeasurements)}</li>
+              <li>Values: {this.renderParameters()}</li>
+              <li>Source: <a href={this.props.sourceData.url} title='View source for Wollogong'>{this.props.sourceData.name}</a></li>
             </ul>
           </div>
           <footer className='card__footer'>

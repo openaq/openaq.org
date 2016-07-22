@@ -19,3 +19,18 @@
   width: 100%;
   max-width: 10rem;
 }
+
+// TEMP!!!!
+.temp-loading {
+  border: 2px dashed tint($base-color, 64%);
+  border-radius: $base-border-radius;
+  padding: 4rem 0;
+  text-align: center;
+  color: tint($base-color, 32%);
+  margin: 0 0 2rem 0;
+
+  &--alert {
+    border-color: tint($danger-color, 64%);
+    color: tint($danger-color, 32%);
+  }
+}

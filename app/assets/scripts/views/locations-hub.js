@@ -5,25 +5,41 @@ import { ScrollArea, Dropdown } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
+import moment from 'moment';
 import LocationCard from '../components/location-card';
 import { toggleValue } from '../utils/array';
+import { buildQS } from '../utils/url';
+import { fetchLocations } from '../actions/action-creators';
 
 var LocationsHub = React.createClass({
   displayName: 'LocationsHub',
 
   propTypes: {
     location: React.PropTypes.object,
+    _fetchLocations: React.PropTypes.func,
+
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
-    parameters: React.PropTypes.array
+    parameters: React.PropTypes.array,
+
+    locFetching: React.PropTypes.bool,
+    locFetched: React.PropTypes.bool,
+    locError: React.PropTypes.string,
+    locations: React.PropTypes.array,
+    locPagination: React.PropTypes.object
   },
 
-  buildUrl: function (qParams) {
-    let stringified = _.map(qParams, (v, k) => {
-      let val = _.isArray(v) ? v.join(',') : v;
-      return `${k}=${val}`;
-    });
-    return stringified.join('&');
+  perPage: 15,
+
+  getPage: function () {
+    let page = this.props.location.query.page;
+    page = isNaN(page) || page < 1 ? 1 : +page;
+    return page;
+  },
+
+  getTotalPages: function () {
+    let {found, limit} = this.props.locPagination;
+    return Math.ceil(found / limit);
   },
 
   getQueryCountries: function () {
@@ -39,6 +55,27 @@ var LocationsHub = React.createClass({
     }
     return [];
   },
+
+  shouldFetchData: function (prevProps) {
+    let {countries: prevC, parameters: prevP} = prevProps.location.query;
+    let {countries: currC, parameters: currP} = this.props.location.query;
+    let prevPage = prevProps.location.query.page;
+    let currPage = this.props.location.query.page;
+
+    return prevC !== currC || prevP !== currP || prevPage !== currPage;
+  },
+
+  fetchData: function (page) {
+    let filters = {
+      country: this.getQueryCountries(),
+      parameter: this.getQueryParameters()
+    };
+    this.props._fetchLocations(page, filters, this.perPage);
+  },
+
+  //
+  // Event Listeners
+  //
 
   onFilterSelect: function (what, value) {
     let query = _.clone(this.props.location.query);
@@ -59,7 +96,7 @@ var LocationsHub = React.createClass({
         break;
     }
 
-    hashHistory.push(`/locations?${this.buildUrl(query)}`);
+    hashHistory.push(`/locations?${buildQS(query)}`);
   },
 
   clearFilters: function (e) {
@@ -67,10 +104,21 @@ var LocationsHub = React.createClass({
     this.onFilterSelect('clear');
   },
 
+  handlePageClick: function (d) {
+    let query = _.clone(this.props.location.query);
+    query.page = d.selected + 1;
+    hashHistory.push(`/locations?${buildQS(query)}`);
+  },
+
   //
   // Start life-cycle methods
   //
   componentDidMount: function () {
+    this.fetchData(1);
+  },
+
+  componentDidUpdate: function (prevProps) {
+    this.shouldFetchData(prevProps) && this.fetchData(this.getPage());
   },
 
   //
@@ -139,7 +187,6 @@ var LocationsHub = React.createClass({
 
     return (
       <div className='filters-summary'>
-        <h3 className='filters-summary-title'>Filters <a href='#' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear All)</small></a></h3>
         {this.props.countries.map(o => {
           let onClick = this.onFilterSelect.bind(null, 'countries', o.code);
           return countries.indexOf(o.code) !== -1
@@ -178,14 +225,53 @@ var LocationsHub = React.createClass({
     // </div>
   },
 
+  renderContent: function () {
+    if (!this.props.locFetched && !this.props.locFetching) {
+      return null;
+    }
+
+    if (this.props.locFetching) {
+      return <div className='temp-loading'>loading message</div>;
+    }
+
+    if (this.props.locError) {
+      return <div className='temp-loading temp-loading--alert'>error message</div>;
+    }
+
+    if (!this.props.locations.length) {
+      return <div className='temp-loading'>There's no data</div>;
+    }
+
+    return this.props.locations.map(o => {
+      let countryData = _.find(this.props.countries, {code: o.country});
+      let sourceData = _.find(this.props.sources, {name: o.sourceName});
+      let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
+      return <LocationCard
+              key={o.location}
+              name={o.location}
+              city={o.city}
+              countryData={countryData}
+              sourceData={sourceData}
+              totalMeasurements={o.count}
+              parametersList={params}
+              lastUpdate={o.lastUpdated}
+              collectionStart={o.firstUpdated}
+            />;
+    });
+  },
+
   renderPagination: function () {
+    if (!this.props.locFetched) {
+      return null;
+    }
+
     return (
       <ReactPaginate
         previousLabel={<span>previous</span>}
         nextLabel={<span>next</span>}
         breakLabel={<span className='pages__page'>...</span>}
-        pageNum={15}
-        forceSelected={3 - 1}
+        pageNum={this.getTotalPages()}
+        forceSelected={this.getPage() - 1}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         clickCallback={this.handlePageClick}
@@ -206,7 +292,7 @@ var LocationsHub = React.createClass({
               <h1 className='inpage__title'>Air Quality Data</h1>
               <div className='inpage__introduction'>
                 <p>We’re currently collecting data in 20 different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please suggest the source of send us an email.</p>
-                <p><a href='#' className='button-inpage-download'>Download Daily Data - 2016/07/18 <small>(3MB)</small></a></p>
+                <p><a href='#' className='button-inpage-download'>Download Daily Data - {moment().format('YYYY/MM/DD')} <small>(3MB)</small></a></p>
               </div>
             </div>
             <div className='inpage__actions'>
@@ -234,20 +320,21 @@ var LocationsHub = React.createClass({
 
               <div className='inpage__content'>
                 <div className='content__meta'>
-                  {this.renderFilterSummary()}
-                  {this.renderSort()}
 
-                  <div className='content__heading'>
-                    <h2 className='content-prime-title'>Results <small>Showing <strong>1235</strong> locations</small></h2>
+                  <div className="content__header">
+                    {this.renderSort()}
+
+                    <div className='content__heading'>
+                      <h2 className='content-prime-title'>Results <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear Filters)</small></button></h2>
+                      {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
+                    </div>
                   </div>
+
+                  {this.renderFilterSummary()}
                 </div>
 
                 <div className='inpage__results'>
-                  <LocationCard />
-                  <LocationCard />
-                  <LocationCard />
-                  <LocationCard />
-                  <LocationCard />
+                  {this.renderContent()}
                 </div>
 
                 {this.renderPagination()}
@@ -272,12 +359,19 @@ function selector (state) {
   return {
     countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
-    parameters: state.baseData.data.parameters
+    parameters: state.baseData.data.parameters,
+
+    locFetching: state.locations.fetching,
+    locFetched: state.locations.fetched,
+    locError: state.locations.error,
+    locations: state.locations.data.results,
+    locPagination: state.locations.data.meta
   };
 }
 
 function dispatcher (dispatch) {
   return {
+    _fetchLocations: (...args) => dispatch(fetchLocations(...args))
   };
 }
 
