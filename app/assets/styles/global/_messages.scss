@@ -1,0 +1,25 @@
+.info-msg {
+  @include col(12/12);
+
+  background: #fff;
+  box-shadow: 0 0 0 2px $base-alpha-color;
+  border-radius: $base-border-radius;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  @include media(medium-up) {
+    @include col(10/12, $offset: 1/12);
+  }
+
+  @include media(large-up) {
+    @include col(8/12, $offset: 2/12);
+  }
+
+  &__contents {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+}

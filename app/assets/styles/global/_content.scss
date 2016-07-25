@@ -20,6 +20,32 @@
   max-width: 10rem;
 }
 
+.general-message {
+  background-image: url(../graphics/content/page-hero-default.png);
+  position: relative;
+  color: $base-font-color;
+  padding: 12rem 0 18rem 0;
+  margin-top: -$page-header-y;
+  background-color: tint($base-color, 92%);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  > .inner {
+    @extend .row, .row--centered;
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 0;
+  }
+  p {
+    font-size: 1rem;
+    font-family: $heading-font-family;
+    color: tint($base-color, 32%);
+  }
+}
+
 // TEMP!!!!
 .temp-loading {
   border: 2px dashed tint($base-color, 64%);

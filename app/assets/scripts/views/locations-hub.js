@@ -113,6 +113,7 @@ var LocationsHub = React.createClass({
   //
   // Start life-cycle methods
   //
+
   componentDidMount: function () {
     this.fetchData(1);
   },

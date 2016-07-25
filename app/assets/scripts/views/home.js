@@ -2,24 +2,68 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import LocationCard from '../components/location-card';
+import { formatThousands } from '../utils/format';
+import NearbyLocations from '../components/nearby-locations';
+import { fetchBaseStats, geolocateUser, fetchNearbyLocations } from '../actions/action-creators';
 
 var Home = React.createClass({
   displayName: 'Home',
 
   propTypes: {
+    _fetchBaseStats: React.PropTypes.func,
+    _geolocateUser: React.PropTypes.func,
+    _fetchNearbyLocations: React.PropTypes.func,
+    statsCounts: React.PropTypes.object,
+    statsCountsFetching: React.PropTypes.bool,
+    statsCountsFetched: React.PropTypes.bool,
+
+    geolocationRequesting: React.PropTypes.bool,
+    geolocationRequested: React.PropTypes.bool,
+    geolocationError: React.PropTypes.string,
+    geolocationCoords: React.PropTypes.object,
+
+    locFetching: React.PropTypes.bool,
+    locFetched: React.PropTypes.bool,
+    locError: React.PropTypes.string,
+    locations: React.PropTypes.array,
+    locPagination: React.PropTypes.object,
+
+    countries: React.PropTypes.array,
+    sources: React.PropTypes.array,
+    parameters: React.PropTypes.array
   },
 
-  renderNearby: function () {
-    // temporary
+  //
+  // Start life-cycle methods
+  //
+  componentDidMount: function () {
+    this.props._fetchBaseStats();
+  },
+
+  //
+  // Start render methods
+  //
+
+  renderStatsCount: function () {
+    let {statsCountsFetching: fetched, statsCountsFetched: fetching, statsCounts: data} = this.props;
+
+    if (!fetched && !fetching) {
+      return null;
+    }
+
     return (
-    <div>
-      {[0, 0, 0].map(o => {
-        return (
-          <LocationCard compact />
-        );
-      })}
-      </div>
+      <section className='fold fold--filled' id='home-stats'>
+        <div className='inner'>
+          <header className='fold__header'>
+            <h1 className='fold__title'>Our data</h1>
+            <div className='fold__introduction prose prose--responsive'>
+              {fetching
+                ? (<p>OpenAQ has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data is aggregated from <strong>{formatThousands(data.sources)}</strong> sources.</p>)
+                : <p>Computing the stats for you.</p>}
+            </div>
+          </header>
+        </div>
+      </section>
     );
   },
 
@@ -39,30 +83,22 @@ var Home = React.createClass({
         </header>
         <div className='inpage__body'>
 
-          <section className='fold fold--filled' id='home-stats'>
-            <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Our data</h1>
-                <div className='fold__introduction prose prose--responsive'>
-                  <p>OpenAQ has collected <strong>14,104,644</strong> air quality measurements from <strong>12,341</strong> locations in <strong>22</strong> countries. Data is aggregated from <strong>146</strong> sources.</p>
-                </div>
-              </header>
-            </div>
-          </section>
+          {this.renderStatsCount()}
 
-          <section className='fold' id='home-nearby'>
-            <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Nearby locations</h1>
-                <div className='fold__introduction prose prose--responsive'>
-                  <p>There are <strong>3 sites</strong> located within <strong>5km</strong> radius of your current location.</p>
-                </div>
-              </header>
-              <div className='fold__body'>
-                {this.renderNearby()}
-              </div>
-            </div>
-          </section>
+          <NearbyLocations
+            _geolocateUser={this.props._geolocateUser}
+            _fetchNearbyLocations={this.props._fetchNearbyLocations}
+            geolocationRequesting={this.props.geolocationRequesting}
+            geolocationRequested={this.props.geolocationRequested}
+            geolocationCoords={this.props.geolocationCoords}
+            geolocationError={this.props.geolocationError}
+            locFetching={this.props.locFetching}
+            locFetched={this.props.locFetched}
+            locError={this.props.locError}
+            locations={this.props.locations}
+            countries={this.props.countries}
+            sources={this.props.sources}
+            parameters={this.props.parameters} />
 
           <section className='fold fold--filled'>
             <div className='inner'>
@@ -95,11 +131,31 @@ var Home = React.createClass({
 
 function selector (state) {
   return {
+    statsCounts: state.baseStats.data,
+    statsCountsFetching: state.baseStats.fetching,
+    statsCountsFetched: state.baseStats.fetched,
+
+    geolocationRequesting: state.geolocation.requesting,
+    geolocationRequested: state.geolocation.requested,
+    geolocationError: state.geolocation.error,
+    geolocationCoords: state.geolocation.coords,
+
+    locFetching: state.nearbyLocations.fetching,
+    locFetched: state.nearbyLocations.fetched,
+    locError: state.nearbyLocations.error,
+    locations: state.nearbyLocations.data.results,
+
+    countries: state.baseData.data.countries,
+    sources: state.baseData.data.sources,
+    parameters: state.baseData.data.parameters
   };
 }
 
 function dispatcher (dispatch) {
   return {
+    _fetchBaseStats: (...args) => dispatch(fetchBaseStats(...args)),
+    _geolocateUser: (...args) => dispatch(geolocateUser(...args)),
+    _fetchNearbyLocations: (...args) => dispatch(fetchNearbyLocations(...args))
   };
 }
 
