@@ -5,6 +5,7 @@ import _ from 'lodash';
 import c from 'classnames';
 import PageHeader from '../components/page-header';
 import PageFooter from '../components/page-footer';
+import HeaderMessage from '../components/header-message';
 
 var App = React.createClass({
   displayName: 'App',
@@ -21,12 +22,10 @@ var App = React.createClass({
     let pageClass = _.get(_.last(this.props.routes), 'pageClass', '');
 
     let content = (
-      <section className='general-message'>
-        <div className='inner'>
-          <h2>Take a deep breath.</h2>
-          <p>Air quality measurements loading...</p>
-        </div>
-      </section>
+      <HeaderMessage>
+        <h2>Take a deep breath.</h2>
+        <p>Air quality measurements loading...</p>
+      </HeaderMessage>
     );
 
     if (this.props.baseDataReady) {
@@ -35,13 +34,11 @@ var App = React.createClass({
 
     if (this.props.baseDataError) {
       content = (
-        <section className='general-message'>
-          <div className='inner'>
-            <h2>Uhoh, something went wrong</h2>
-            <p>There was a problem getting the data. If the problem persists let us know.</p>
-            <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
-          </div>
-        </section>
+        <HeaderMessage>
+          <h2>Uhoh, something went wrong</h2>
+          <p>There was a problem getting the data. If the problem persists let us know.</p>
+          <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
+        </HeaderMessage>
       );
     }
 
