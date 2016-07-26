@@ -1,13 +1,18 @@
 'use strict';
 import React from 'react';
+import { formatThousands } from '../utils/format';
 
 var PageFooter = React.createClass({
   displayName: 'PageFooter',
 
   propTypes: {
+    measurements: React.PropTypes.number
   },
-
   render: function () {
+    let copyright = this.props.measurements !== null
+      ? `${formatThousands(this.props.measurements)} measurements captured`
+      : 'Built';
+
     return (
       <footer className='page__footer' role='contentinfo'>
         <div className='inner'>
@@ -29,7 +34,8 @@ var PageFooter = React.createClass({
               </div>
             </div>
           </div>
-          <p className='copyright'>13,735,288 measurements captured with love by <a href='https://developmentseed.org' title='Visit Development Seed website'>Development Seed</a> and the <a href='https://openaq.org/' title='Visit the OpenAQ website'>OpenAQ</a> team.</p>
+          <p className='copyright'>
+            {copyright} with love by <a href='https://developmentseed.org' title='Visit Development Seed website'>Development Seed</a> and the <a href='https://openaq.org/' title='Visit the OpenAQ website'>OpenAQ</a> team.</p>
         </div>
       </footer>
     );

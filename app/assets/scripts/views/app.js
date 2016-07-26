@@ -13,6 +13,7 @@ var App = React.createClass({
     routes: React.PropTypes.array,
     baseDataReady: React.PropTypes.bool,
     baseDataError: React.PropTypes.string,
+    measurements: React.PropTypes.number,
     children: React.PropTypes.object
   },
 
@@ -50,7 +51,7 @@ var App = React.createClass({
         <main className='page__body' role='main'>
           {content}
         </main>
-        <PageFooter />
+        <PageFooter measurements={this.props.measurements} />
       </div>
     );
   }
@@ -62,7 +63,9 @@ var App = React.createClass({
 function selector (state) {
   return {
     baseDataReady: state.baseData.fetched && !state.baseData.fetching,
-    baseDataError: state.baseData.error
+    baseDataError: state.baseData.error,
+
+    measurements: state.baseStats.data.measurements
   };
 }
 
