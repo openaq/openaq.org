@@ -86,11 +86,9 @@ $page-header-y: $global-spacing * 5;
   }
 
   &__subtitle {
-    text-transform: uppercase;
-    font-weight: $base-font-regular;
-    color: rgba($base-font-color, 0.48);
+    @extend .heading-alt;
     font-size: 0.875rem;
-    line-height: 1.25;
+    line-height: 1.25rem;
     margin: 0;
 
     @include media(medium-up) {

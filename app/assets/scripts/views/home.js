@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { formatThousands } from '../utils/format';
 import NearbyLocations from '../components/nearby-locations';
+import CommunityCard from '../components/community-card';
 import { fetchBaseStats, geolocateUser, fetchNearbyLocations } from '../actions/action-creators';
 
 var Home = React.createClass({
@@ -67,6 +68,35 @@ var Home = React.createClass({
     );
   },
 
+  renderCommunity: function () {
+    return (
+      <section className='fold' id='home-community'>
+        <div className='inner'>
+          <header className='fold__header'>
+            <h1 className='fold__title'>Join our community</h1>
+            <div className='fold__introduction prose prose--responsive'>
+              <p>Developers, Scientists and Researchers are all using our data in interesting ways.</p>
+            </div>
+          </header>
+          <div className='fold__body'>
+
+            <CommunityCard
+              title='Build an App'
+              linkTitle='View this community contribution'
+              url=''
+              imageNode={<img width='256' height='256' src='http://placehold.it/256x256' alt='Card thumb' />} >
+              <p>To engage with his community on air quality issues in New Delhi, Amrit Sharma has built a free air quality app.</p>
+            </CommunityCard>
+
+          </div>
+          <div className='fold__footer'>
+            <Link to='/community' title='See community page' className='button button--primary-bounded button--semi-fluid'>Get Involved</Link>
+          </div>
+        </div>
+      </section>
+    );
+  },
+
   render: function () {
     return (
       <section className='inpage'>
@@ -110,15 +140,7 @@ var Home = React.createClass({
             </div>
           </section>
 
-          <section className='fold'>
-            <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Join our community</h1>
-              </header>
-              <div className='fold__body'>
-              </div>
-            </div>
-          </section>
+          {this.renderCommunity()}
 
         </div>
       </section>
