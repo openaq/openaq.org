@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Individual Location: Content
+   ========================================================================== */
+
+#location-source {
+  padding: 2rem;
+
+  .fold__header {
+    @extend .visually-hidden;
+  }
+  .fold__body {
+    @extend .clearfix;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .col-main {
+    @include col(4/12);
+  }
+  .col-sec {
+    @include col(8/12);
+  }
+}
