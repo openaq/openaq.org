@@ -10,7 +10,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createLogger from 'redux-logger';
 import {whyDidYouUpdate} from 'why-did-you-update';
 import reducer from './reducers/index';
-import { fetchBaseData } from './actions/action-creators';
+import { fetchBaseData, fetchBaseStats } from './actions/action-creators';
 
 if (process.env.NODE_ENV !== 'production') {
   // whyDidYouUpdate(React, { exclude: /Scroll/ });
@@ -21,6 +21,7 @@ import Home from './views/home';
 import About from './views/about';
 import Map from './views/map';
 import Locations from './views/locations-hub';
+import LocationItem from './views/location';
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
@@ -28,6 +29,7 @@ const history = syncHistoryWithStore(hashHistory, store);
 
 // Base data.
 store.dispatch(fetchBaseData());
+store.dispatch(fetchBaseStats());
 
 render((
   <Provider store={store}>
@@ -36,6 +38,7 @@ render((
         <Route path='about' component={About} pageClass='page--about' />
         <Route path='map' component={Map} pageClass='page--map' />
         <Route path='locations' component={Locations} pageClass='page--locations' />
+        <Route path='location/:name' component={LocationItem} pageClass='page--location' />
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>

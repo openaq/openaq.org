@@ -5,13 +5,12 @@ import { Link } from 'react-router';
 import { formatThousands } from '../utils/format';
 import NearbyLocations from '../components/nearby-locations';
 import CommunityCard from '../components/community-card';
-import { fetchBaseStats, geolocateUser, fetchNearbyLocations } from '../actions/action-creators';
+import { geolocateUser, fetchNearbyLocations } from '../actions/action-creators';
 
 var Home = React.createClass({
   displayName: 'Home',
 
   propTypes: {
-    _fetchBaseStats: React.PropTypes.func,
     _geolocateUser: React.PropTypes.func,
     _fetchNearbyLocations: React.PropTypes.func,
     statsCounts: React.PropTypes.object,
@@ -37,9 +36,6 @@ var Home = React.createClass({
   //
   // Start life-cycle methods
   //
-  componentDidMount: function () {
-    this.props._fetchBaseStats();
-  },
 
   //
   // Start render methods
@@ -175,7 +171,6 @@ function selector (state) {
 
 function dispatcher (dispatch) {
   return {
-    _fetchBaseStats: (...args) => dispatch(fetchBaseStats(...args)),
     _geolocateUser: (...args) => dispatch(geolocateUser(...args)),
     _fetchNearbyLocations: (...args) => dispatch(fetchNearbyLocations(...args))
   };
