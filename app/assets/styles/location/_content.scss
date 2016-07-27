@@ -22,3 +22,62 @@
     @include col(8/12);
   }
 }
+
+#location-stats {
+  .fold__header {
+    @extend .visually-hidden;
+  }
+
+  .col-main {
+    dl {
+      margin-bottom: 0.5rem;
+    }
+  }
+  .col-sec {
+    .heading-alt {
+      font-size: 0.875rem;
+      margin-bottom: 0;
+    }
+  }
+
+  @include media(medium-up) {
+    .fold__body {
+      display: flex;
+    }
+    .col-main {
+      box-shadow: 2px 0 0 0 $base-alpha-color;
+      @include span(3/12);
+    }
+    .col-sec {
+      @include span(8/12, $offset: 1/12);
+
+      .heading-alt {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+.measurements-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    margin-bottom: 1rem;
+    margin-right: 2rem;
+
+    &:nth-child(even) {
+      clear: right;
+    }
+
+    @include media(medium-up) {
+      width: 40%;
+      float: left;
+    }
+  }
+
+  strong {
+    display: block;
+  }
+}
