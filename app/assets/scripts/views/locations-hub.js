@@ -291,13 +291,15 @@ var LocationsHub = React.createClass({
           <div className='inner'>
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Air Quality Data</h1>
-              <div className='inpage__introduction'>
-                <p>We’re currently collecting data in 20 different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please suggest the source of send us an email.</p>
-                <p><a href='#' className='button-inpage-download'>Download Daily Data - {moment().format('YYYY/MM/DD')} <small>(3MB)</small></a></p>
-              </div>
+            </div>
+            <div className='inpage__introduction'>
+              <p>We’re currently collecting data in 20 different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please suggest the source of send us an email.</p>
             </div>
             <div className='inpage__actions'>
-              <a href='' className='button-inpage-api'>API</a>
+              <ul>
+                <li><a href='#' className='button-inpage-download'>Download Today's Data <small>(3MB)</small></a></li>
+                <li><a href='' title='View API documentation' className='button-inpage-api'>API Docs</a></li>
+              </ul>
             </div>
           </div>
         </header>

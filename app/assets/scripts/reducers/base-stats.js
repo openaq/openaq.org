@@ -15,12 +15,11 @@ const defaultState = {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case actions.RECEIVE_BASE_DATA:
-      console.log('RECEIVE_BASE_DATA');
+      console.log('base-stats: RECEIVE_BASE_DATA');
       state = _.cloneDeep(state);
       // The countries and sources count come from the RECEIVE_BASE_DATA action
       // it is safe to assume that this works because without this data the
       // site is not even displayed.
-      console.log('action', action);
       state.data.countries = action.json.countries.length;
       state.data.sources = action.json.sources.length;
       break;

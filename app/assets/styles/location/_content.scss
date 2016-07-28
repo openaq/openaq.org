@@ -1,6 +1,33 @@
 /* ==========================================================================
    Individual Location: Content
    ========================================================================== */
+.page--location {
+  .inpage__headline {
+    overflow: hidden;
+  }
+
+  .inpage__title {
+    @include col(8/12);
+  }
+  .inpage__headline-actions {
+    float: right;
+  }
+
+  .inpage__actions ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    li {
+      float: left;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      @include media(medium-up) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
 
 #location-source {
   padding: 2rem;
@@ -24,10 +51,6 @@
 }
 
 #location-stats {
-  .fold__header {
-    @extend .visually-hidden;
-  }
-
   .col-main {
     dl {
       margin-bottom: 0.5rem;

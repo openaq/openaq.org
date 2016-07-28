@@ -7,7 +7,7 @@
    ========================================================================== */
 
 .button-inpage-download {
-  @extend .button, .button--small, .button--primary-unbounded;
+  @extend .button, .button--medium, .button--primary-bounded;
 
   &:before {
     @extend %openaq-ds-icon-download;
@@ -15,10 +15,16 @@
 }
 
 .button-inpage-api {
-  @extend .button, .button--large, .button--primary-bounded;
-  width: 100%;
-  max-width: 10rem;
+  @extend .button, .button--medium, .button--primary-bounded;
 }
+
+.button-inpage-share {
+  @extend .button, .button--base, .button--medium;
+  &::before {
+    @extend %openaq-ds-icon-share;
+  }
+}
+
 
 .general-message {
   background-image: url(../graphics/content/page-hero-default.png);

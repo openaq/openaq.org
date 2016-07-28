@@ -3,7 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
-import { fetchLocationIfNeeded, fetchLocations } from '../actions/action-creators';
+import c from 'classnames';
+
+import { formatThousands } from '../utils/format';
+import { fetchLocationIfNeeded, fetchLocations, fetchLatestMeasurements,
+    fetchMeasurements, invalidateLocations } from '../actions/action-creators';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
 
@@ -14,6 +18,9 @@ var Location = React.createClass({
     params: React.PropTypes.object,
     _fetchLocationIfNeeded: React.PropTypes.func,
     _fetchLocations: React.PropTypes.func,
+    _fetchLatestMeasurements: React.PropTypes.func,
+    _fetchMeasurements: React.PropTypes.func,
+    _invalidateLocations: React.PropTypes.func,
 
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
@@ -29,7 +36,21 @@ var Location = React.createClass({
     locsFetching: React.PropTypes.bool,
     locsFetched: React.PropTypes.bool,
     locsError: React.PropTypes.string,
-    locations: React.PropTypes.array
+    locations: React.PropTypes.array,
+
+    latestMeasurements: React.PropTypes.shape({
+      fetching: React.PropTypes.bool,
+      fetched: React.PropTypes.bool,
+      error: React.PropTypes.string,
+      data: React.PropTypes.object
+    }),
+
+    measurements: React.PropTypes.shape({
+      fetching: React.PropTypes.bool,
+      fetched: React.PropTypes.bool,
+      error: React.PropTypes.string,
+      data: React.PropTypes.object
+    })
   },
 
   shouldFetchData: function (prevProps) {
@@ -44,19 +65,28 @@ var Location = React.createClass({
   //
 
   componentDidMount: function () {
+    this.props._invalidateLocations();
     this.props._fetchLocationIfNeeded(this.props.params.name);
   },
 
   componentDidUpdate: function (prevProps) {
     this.shouldFetchData(prevProps) && this.props._fetchLocationIfNeeded(this.props.params.name);
 
-    if (this.props.locFetched && !this.props.locFetching && !this.props.locsFetched && !this.props.locsFetching) {
-      // Got the location data, need to get the locations nearby.
+    if (this.props.locFetched && !this.props.locFetching &&
+      !this.props.locsFetched && !this.props.locsFetching) {
+      // Got the location data!
+      // Get the locations nearby.
       let loc = this.props.locData;
       this.props._fetchLocations(1, {
         city: loc.city,
         country: loc.country
       }, 100);
+
+      // Get the measurements.
+      let toDate = moment.utc();
+      let fromDate = toDate.clone().subtract(8, 'days');
+      this.props._fetchLatestMeasurements(loc.location);
+      this.props._fetchMeasurements(loc.location, fromDate, toDate);
     }
   },
 
@@ -65,39 +95,76 @@ var Location = React.createClass({
   //
 
   renderStatsInfo: function () {
-    let data = this.props.locData;
+    const {fetched: lastMFetched, fetching: lastMFetching, error: lastMError, data: lastM} = this.props.latestMeasurements;
+    const {fetched: mFetched, fetching: mFetching, error: mError, data: m} = this.props.measurements;
 
-    let sDate = moment(data.firstUpdated).format('YYYY/MM/DD');
-    let eDate = moment(data.lastUpdated).format('YYYY/MM/DD');
+    const error = lastMError || mError;
+    const fetched = lastMFetched || mFetched;
+    const fetching = lastMFetching || mFetching;
 
-    let lng = Math.floor(data.coordinates.longitude * 1000) / 1000;
-    let lat = Math.floor(data.coordinates.latitude * 1000) / 1000;
+    if (!fetched && !fetching) {
+      return null;
+    }
+
+    let content = null;
+    let intro = null;
+
+    if (fetching) {
+      content = <p>Fetching the data</p>;
+    } else if (error) {
+      intro = <p>We couldn't get stats.</p>;
+      content = (
+        <div className='fold__body'>
+          <InfoMessage>
+            <p>Please try again later.</p>
+            <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          </InfoMessage>
+        </div>
+      );
+    } else {
+      let locData = this.props.locData;
+
+      let sDate = moment(locData.firstUpdated).format('YYYY/MM/DD');
+      let eDate = moment(locData.lastUpdated).format('YYYY/MM/DD');
+
+      let lng = Math.floor(locData.coordinates.longitude * 1000) / 1000;
+      let lat = Math.floor(locData.coordinates.latitude * 1000) / 1000;
+
+      content = (
+        <div className='fold__body'>
+          <div className='col-main'>
+            <dl>
+              <dt>Measurements</dt>
+              <dd>{formatThousands(m.meta.found)}</dd>
+              <dt>Collection Dates</dt>
+              <dd>{sDate} - {eDate}</dd>
+              <dt>Coordinates</dt>
+              <dd>N{lat}, E{lng}</dd>
+            </dl>
+          </div>
+          <div className='col-sec'>
+            <p className='heading-alt'>Latest Measurements:</p>
+            <ul className='measurements-list'>
+              {lastM.measurements.map(o => {
+                let param = _.find(this.props.parameters, {id: o.parameter});
+                return <li key={o.parameter}><strong>{param.name}</strong>{o.value}{o.unit} at {moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</li>
+              })}
+            </ul>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <section className='fold' id='location-stats'>
         <div className='inner'>
-          <header className='fold__header'>
+          <header className={c('fold__header', {'visually-hidden': !error})}>
             <h1 className='fold__title'>Stats information</h1>
+            <div className='fold__introduction prose prose--responsive'>
+              {intro}
+            </div>
           </header>
-          <div className='fold__body'>
-            <div className='col-main'>
-              <dl>
-                <dt>Measurements</dt>
-                <dd>30,665</dd>
-                <dt>Collection Dates</dt>
-                <dd>{sDate} - {eDate}</dd>
-                <dt>Coordinates</dt>
-                <dd>N{lat}, E{lng}</dd>
-              </dl>
-            </div>
-            <div className='col-sec'>
-              <p className='heading-alt'>Latest Measurements:</p>
-              <ul className='measurements-list'>
-                <li><strong>CO</strong> 32ug/m3 at 2016/06/17 4:05pm</li>
-                <li><strong>SO2</strong> 32ug/m3 at 2016/06/17 4:05pm</li>
-              </ul>
-            </div>
-          </div>
+          {content}
         </div>
       </section>
     );
@@ -153,7 +220,7 @@ var Location = React.createClass({
       } else {
         intro = <p>There are <strong>{locations.length - 1}</strong> other locations in {this.props.locData.city}, {this.props.countryData.name}.</p>;
       }
-      content = locations.map(o => <p>{o.location}</p>);
+      content = _.map(locations, 'location').join(', ');
     }
 
     return (
@@ -204,9 +271,16 @@ var Location = React.createClass({
           <div className='inner'>
             <div className='inpage__headline'>
               <h1 className='inpage__title'>{data.location} <small>in {data.city}, {this.props.countryData.name}</small></h1>
-              <div className='inpage__introduction'>
-                <p>Good things come to those who wait...</p>
+              <div className='inpage__headline-actions'>
+                <button type='button' title='Open share options' className='button-inpage-share'><span>Share</span></button>
               </div>
+            </div>
+            <div className='inpage__actions'>
+              <ul>
+                <li><a href='' title='View in api' className='button button--primary-bounded button--medium'>API</a></li>
+                <li><button type='button' title='Download data for this location' className='button-inpage-download'>Download</button></li>
+                <li><a href='' title='Compare location with another' className='button button--primary button--medium'>Compare With</a></li>
+              </ul>
             </div>
           </div>
         </header>
@@ -252,14 +326,21 @@ function selector (state) {
     locsFetching: state.locations.fetching,
     locsFetched: state.locations.fetched,
     locsError: state.locations.error,
-    locations: state.locations.data.results
+    locations: state.locations.data.results,
+
+    latestMeasurements: state.latestMeasurements,
+
+    measurements: state.measurements
   };
 }
 
 function dispatcher (dispatch) {
   return {
     _fetchLocationIfNeeded: (...args) => dispatch(fetchLocationIfNeeded(...args)),
-    _fetchLocations: (...args) => dispatch(fetchLocations(...args))
+    _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
+    _fetchLatestMeasurements: (...args) => dispatch(fetchLatestMeasurements(...args)),
+    _fetchMeasurements: (...args) => dispatch(fetchMeasurements(...args)),
+    _invalidateLocations: (...args) => dispatch(invalidateLocations(...args))
   };
 }
 

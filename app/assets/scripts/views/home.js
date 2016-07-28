@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+
 import { formatThousands } from '../utils/format';
 import NearbyLocations from '../components/nearby-locations';
 import CommunityCard from '../components/community-card';

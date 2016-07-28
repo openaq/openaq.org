@@ -116,6 +116,12 @@ export function fetchLocations (page = 1, filters, limit = 15) {
   };
 }
 
+export function invalidateLocations () {
+  return {
+    type: actions.INVALIDATE_LOCATIONS
+  };
+}
+
 // ////////////////////////////////////////////////////////////////
 //                          BASE STATS                           //
 // ////////////////////////////////////////////////////////////////
@@ -315,6 +321,102 @@ export function fetchLocationIfNeeded (location) {
       }, e => {
         console.log('e', e);
         return dispatch(receiveLocation(null, 'Data not available'));
+      });
+  };
+}
+
+// ////////////////////////////////////////////////////////////////
+//                         MEASUREMENTS                          //
+// ////////////////////////////////////////////////////////////////
+
+function requestMeasurements () {
+  return {
+    type: actions.REQUEST_MEASUREMENTS
+  };
+}
+
+function receiveMeasurements (json, error = null) {
+  return {
+    type: actions.RECEIVE_MEASUREMENTS,
+    json: json,
+    error,
+    receivedAt: Date.now()
+  };
+}
+
+export function fetchMeasurements (location, startDate, endDate) {
+  return function (dispatch) {
+    dispatch(requestMeasurements());
+
+    let data = null;
+    let limit = 1000;
+
+    const fetcher = function (page) {
+      console.log('url', `${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`);
+      fetch(`${config.api}/measurements?location=${location}&page=${page}&limit=1000&date_from=${startDate}&date_to=${endDate}`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(json => {
+          if (data === null) {
+            data = json;
+          } else {
+            data.results = data.results.concat(json.results);
+          }
+          if (page * limit < json.meta.found) {
+            return fetcher(++page);
+          } else {
+            console.log('done', data);
+            return dispatch(receiveMeasurements(data));
+          }
+        }, e => {
+          console.log('e', e);
+          return dispatch(receiveMeasurements(null, 'Data not available'));
+        });
+    };
+
+    fetcher(1);
+  };
+}
+
+// ////////////////////////////////////////////////////////////////
+//                     LATEST MEASUREMENTS                       //
+// ////////////////////////////////////////////////////////////////
+
+function requestLatestMeasurements () {
+  return {
+    type: actions.REQUEST_LATEST_MEASUREMENTS
+  };
+}
+
+function receiveLatestMeasurements (json, error = null) {
+  return {
+    type: actions.RECEIVE_LATEST_MEASUREMENTS,
+    json: json,
+    error,
+    receivedAt: Date.now()
+  };
+}
+
+export function fetchLatestMeasurements (location) {
+  return function (dispatch) {
+    dispatch(requestLatestMeasurements());
+
+    fetch(`${config.api}/latest?location=${location}`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(json => {
+        return dispatch(receiveLatestMeasurements(json.results[0]));
+      }, e => {
+        console.log('e', e);
+        return dispatch(receiveLatestMeasurements(null, 'Data not available'));
       });
   };
 }
