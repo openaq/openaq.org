@@ -22,6 +22,18 @@ var About = React.createClass({
           </div>
         </header>
         <div className='inpage__body'>
+
+          <section className='fold fold--filled'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Our data</h1>
+              </header>
+              <div className='fold__body'>
+                Some fold content
+              </div>
+            </div>
+          </section>
+
         </div>
       </section>
     );
