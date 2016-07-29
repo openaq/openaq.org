@@ -15,7 +15,7 @@ const MapComponent = React.createClass({
 
   propTypes: {
     measurements: React.PropTypes.array,
-    highlight: React.PropTypes.object,
+    highlightLoc: React.PropTypes.string,
     center: React.PropTypes.array
   },
 
@@ -138,9 +138,7 @@ const MapComponent = React.createClass({
       'source': 'measurements',
       'type': 'circle',
       'paint': {
-        // make circles larger as the user zooms from z12 to z22
         'circle-radius': 5,
-        // color circles by ethnicity, using data-driven styles
         'circle-color': 'blue'
       }
     });
@@ -161,6 +159,7 @@ const MapComponent = React.createClass({
   },
 
   render: function () {
+    console.log('this.props.highlightLoc:', this.props.highlightLoc);
     return (
       <div className='map-container' ref='map'>
         {/* Map renders on componentDidMount. */}
