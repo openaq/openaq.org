@@ -10,6 +10,7 @@ import { fetchLocationIfNeeded, fetchLocations, fetchLatestMeasurements,
     fetchMeasurements, invalidateLocations } from '../actions/action-creators';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
+import MapComponent from '../components/map';
 
 var Location = React.createClass({
   displayName: 'Location',
@@ -28,15 +29,19 @@ var Location = React.createClass({
 
     countryData: React.PropTypes.object,
 
-    locFetching: React.PropTypes.bool,
-    locFetched: React.PropTypes.bool,
-    locError: React.PropTypes.string,
-    locData: React.PropTypes.object,
+    locations: React.PropTypes.shape({
+      fetching: React.PropTypes.bool,
+      fetched: React.PropTypes.bool,
+      error: React.PropTypes.string,
+      data: React.PropTypes.object
+    }),
 
-    locsFetching: React.PropTypes.bool,
-    locsFetched: React.PropTypes.bool,
-    locsError: React.PropTypes.string,
-    locations: React.PropTypes.array,
+    loc: React.PropTypes.shape({
+      fetching: React.PropTypes.bool,
+      fetched: React.PropTypes.bool,
+      error: React.PropTypes.string,
+      data: React.PropTypes.object
+    }),
 
     latestMeasurements: React.PropTypes.shape({
       fetching: React.PropTypes.bool,
@@ -72,11 +77,11 @@ var Location = React.createClass({
   componentDidUpdate: function (prevProps) {
     this.shouldFetchData(prevProps) && this.props._fetchLocationIfNeeded(this.props.params.name);
 
-    if (this.props.locFetched && !this.props.locFetching &&
-      !this.props.locsFetched && !this.props.locsFetching) {
+    if (this.props.loc.fetched && !this.props.loc.fetching &&
+      !this.props.locations.fetched && !this.props.locations.fetching) {
       // Got the location data!
       // Get the locations nearby.
-      let loc = this.props.locData;
+      let loc = this.props.loc.data;
       this.props._fetchLocations(1, {
         city: loc.city,
         country: loc.country
@@ -122,7 +127,7 @@ var Location = React.createClass({
         </div>
       );
     } else {
-      let locData = this.props.locData;
+      let locData = this.props.loc.data;
 
       let sDate = moment(locData.firstUpdated).format('YYYY/MM/DD');
       let eDate = moment(locData.lastUpdated).format('YYYY/MM/DD');
@@ -171,7 +176,7 @@ var Location = React.createClass({
   },
 
   renderSourceInfo: function () {
-    let source = _.find(this.props.sources, {name: this.props.locData.sourceName});
+    let source = _.find(this.props.sources, {name: this.props.loc.data.sourceName});
 
     return (
       <section className='fold fold--filled' id='location-source'>
@@ -196,7 +201,7 @@ var Location = React.createClass({
   },
 
   renderNearbyLoc: function () {
-    let {locsFetched: fetched, locsFetching: fetching, locsError: error, locations} = this.props;
+    let {fetched, fetching, error, data: {results: locations}} = this.props.locations;
     if (!fetched && !fetching) {
       return null;
     }
@@ -216,24 +221,25 @@ var Location = React.createClass({
       );
     } else {
       if (locations.length === 1) {
-        intro = <p>There are no other locations in {this.props.locData.city}, {this.props.countryData.name}.</p>;
+        intro = <p>There are no other locations in {this.props.loc.data.city}, {this.props.countryData.name}.</p>;
       } else {
-        intro = <p>There are <strong>{locations.length - 1}</strong> other locations in {this.props.locData.city}, {this.props.countryData.name}.</p>;
+        intro = <p>There are <strong>{locations.length - 1}</strong> other locations in {this.props.loc.data.city}, {this.props.countryData.name}.</p>;
       }
       content = _.map(locations, 'location').join(', ');
     }
 
     return (
-      <section className='fold'>
+      <section className='fold' id='location-nearby'>
         <div className='inner'>
           <header className='fold__header'>
             <h1 className='fold__title'>Nearby locations</h1>
             <div className='fold__introduction prose prose--responsive'>
               {intro}
+            {content}
             </div>
           </header>
           <div className='fold__body'>
-            {content}
+            <MapComponent />
           </div>
         </div>
       </section>
@@ -241,7 +247,7 @@ var Location = React.createClass({
   },
 
   render: function () {
-    let {locFetched: fetched, locFetching: fetching, locError: error, locData: data} = this.props;
+    let {fetched, fetching, error, data} = this.props.loc;
     if (!fetched && !fetching) {
       return null;
     }
@@ -318,18 +324,9 @@ function selector (state) {
 
     countryData: _.find(state.baseData.data.countries, {code: (state.location.data || {}).country}),
 
-    locFetching: state.location.fetching,
-    locFetched: state.location.fetched,
-    locError: state.location.error,
-    locData: state.location.data,
-
-    locsFetching: state.locations.fetching,
-    locsFetched: state.locations.fetched,
-    locsError: state.locations.error,
-    locations: state.locations.data.results,
-
+    loc: state.location,
+    locations: state.locations,
     latestMeasurements: state.latestMeasurements,
-
     measurements: state.measurements
   };
 }
