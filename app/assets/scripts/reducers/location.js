@@ -9,6 +9,10 @@ const defaultState = {
 
 export default function (state = defaultState, action) {
   switch (action.type) {
+    case actions.INVALIDATE_ALL_LOCATION_DATA:
+      console.log('location: INVALIDATE_ALL_LOCATION_DATA');
+      state = _.cloneDeep(defaultState);
+      break;
     case actions.REQUEST_LOCATION:
       console.log('REQUEST_LOCATION');
       state = _.cloneDeep(state);

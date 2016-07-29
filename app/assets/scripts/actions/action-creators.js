@@ -122,6 +122,12 @@ export function invalidateLocations () {
   };
 }
 
+export function invalidateAllLocationData () {
+  return {
+    type: actions.INVALIDATE_ALL_LOCATION_DATA
+  };
+}
+
 // ////////////////////////////////////////////////////////////////
 //                          BASE STATS                           //
 // ////////////////////////////////////////////////////////////////
@@ -401,22 +407,40 @@ function receiveLatestMeasurements (json, error = null) {
   };
 }
 
-export function fetchLatestMeasurements (location) {
+export function fetchLatestMeasurements (filters) {
   return function (dispatch) {
     dispatch(requestLatestMeasurements());
 
-    fetch(`${config.api}/latest?location=${location}`)
-      .then(response => {
-        if (response.status >= 400) {
-          throw new Error('Bad response');
-        }
-        return response.json();
-      })
-      .then(json => {
-        return dispatch(receiveLatestMeasurements(json.results[0]));
-      }, e => {
-        console.log('e', e);
-        return dispatch(receiveLatestMeasurements(null, 'Data not available'));
-      });
+    let data = null;
+    let limit = 1000;
+    let f = buildQS(filters);
+
+    const fetcher = function (page) {
+      fetch(`${config.api}/latest?page=${page}&limit=1000&${f}`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(json => {
+          if (data === null) {
+            data = json;
+          } else {
+            data.results = data.results.concat(json.results);
+          }
+          if (page * limit < json.meta.found) {
+            return fetcher(++page);
+          } else {
+            console.log('fetchLatestMeasurements done', data);
+            return dispatch(receiveLatestMeasurements(data));
+          }
+        }, e => {
+          console.log('e', e);
+          return dispatch(receiveLatestMeasurements(null, 'Data not available'));
+        });
+    };
+
+    fetcher(1);
   };
 }

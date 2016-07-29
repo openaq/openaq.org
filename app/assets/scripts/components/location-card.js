@@ -3,6 +3,7 @@ import React from 'react';
 import c from 'classnames';
 import moment from 'moment';
 import { Link } from 'react-router';
+
 import { formatThousands } from '../utils/format';
 
 var LocationCard = React.createClass({
@@ -33,7 +34,7 @@ var LocationCard = React.createClass({
         <div className='card__contents'>
           <header className='card__header'>
             <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
-            <h1 className='card__title'><Link to={`/location/${this.props.name}`} title='View Wollogong page'>{this.props.name}</Link> in {this.props.city}, {this.props.countryData.name}</h1>
+            <h1 className='card__title'><Link to={`/location/${this.props.name}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> in {this.props.city}, {this.props.countryData.name}</h1>
           </header>
           <div className='card__body'>
             <ul className='card__meta-details'>

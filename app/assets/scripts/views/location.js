@@ -6,8 +6,7 @@ import moment from 'moment';
 import c from 'classnames';
 
 import { formatThousands } from '../utils/format';
-import { fetchLocationIfNeeded, fetchLocations, fetchLatestMeasurements,
-    fetchMeasurements, invalidateLocations } from '../actions/action-creators';
+import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, invalidateAllLocationData } from '../actions/action-creators';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
 import MapComponent from '../components/map';
@@ -21,20 +20,13 @@ var Location = React.createClass({
     _fetchLocations: React.PropTypes.func,
     _fetchLatestMeasurements: React.PropTypes.func,
     _fetchMeasurements: React.PropTypes.func,
-    _invalidateLocations: React.PropTypes.func,
+    _invalidateAllLocationData: React.PropTypes.func,
 
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
     parameters: React.PropTypes.array,
 
     countryData: React.PropTypes.object,
-
-    locations: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
-    }),
 
     loc: React.PropTypes.shape({
       fetching: React.PropTypes.bool,
@@ -70,27 +62,33 @@ var Location = React.createClass({
   //
 
   componentDidMount: function () {
-    this.props._invalidateLocations();
+    // Invalidate all the data related to the location page.
+    // This is needed otherwise the system thinks there's data and
+    // throws errors.
+    this.props._invalidateAllLocationData();
     this.props._fetchLocationIfNeeded(this.props.params.name);
   },
 
   componentDidUpdate: function (prevProps) {
     this.shouldFetchData(prevProps) && this.props._fetchLocationIfNeeded(this.props.params.name);
+    if (this.shouldFetchData(prevProps)) {
+      // Invalidate all the data related to the location page.
+      // This is needed otherwise the system thinks there's data and
+      // throws errors.
+      this.props._invalidateAllLocationData();
+      this.props._fetchLocationIfNeeded(this.props.params.name);
+      return;
+    }
 
     if (this.props.loc.fetched && !this.props.loc.fetching &&
-      !this.props.locations.fetched && !this.props.locations.fetching) {
-      // Got the location data!
-      // Get the locations nearby.
+      !this.props.latestMeasurements.fetched && !this.props.latestMeasurements.fetching &&
+      !this.props.measurements.fetched && !this.props.measurements.fetching) {
       let loc = this.props.loc.data;
-      this.props._fetchLocations(1, {
-        city: loc.city,
-        country: loc.country
-      }, 100);
 
       // Get the measurements.
       let toDate = moment.utc();
       let fromDate = toDate.clone().subtract(8, 'days');
-      this.props._fetchLatestMeasurements(loc.location);
+      this.props._fetchLatestMeasurements({city: loc.city});
       this.props._fetchMeasurements(loc.location, fromDate, toDate);
     }
   },
@@ -100,8 +98,8 @@ var Location = React.createClass({
   //
 
   renderStatsInfo: function () {
-    const {fetched: lastMFetched, fetching: lastMFetching, error: lastMError, data: lastM} = this.props.latestMeasurements;
-    const {fetched: mFetched, fetching: mFetching, error: mError, data: m} = this.props.measurements;
+    const {fetched: lastMFetched, fetching: lastMFetching, error: lastMError, data: {results: lastMeasurements}} = this.props.latestMeasurements;
+    const {fetched: mFetched, fetching: mFetching, error: mError, data: measurements} = this.props.measurements;
 
     const error = lastMError || mError;
     const fetched = lastMFetched || mFetched;
@@ -135,12 +133,15 @@ var Location = React.createClass({
       let lng = Math.floor(locData.coordinates.longitude * 1000) / 1000;
       let lat = Math.floor(locData.coordinates.latitude * 1000) / 1000;
 
+      // Get latest measurements for this location in particular.
+      let locLastMeasurement = _.find(lastMeasurements, {location: locData.location});
+
       content = (
         <div className='fold__body'>
           <div className='col-main'>
             <dl>
               <dt>Measurements</dt>
-              <dd>{formatThousands(m.meta.found)}</dd>
+              <dd>{formatThousands(measurements.meta.found)}</dd>
               <dt>Collection Dates</dt>
               <dd>{sDate} - {eDate}</dd>
               <dt>Coordinates</dt>
@@ -150,9 +151,9 @@ var Location = React.createClass({
           <div className='col-sec'>
             <p className='heading-alt'>Latest Measurements:</p>
             <ul className='measurements-list'>
-              {lastM.measurements.map(o => {
+              {locLastMeasurement.measurements.map(o => {
                 let param = _.find(this.props.parameters, {id: o.parameter});
-                return <li key={o.parameter}><strong>{param.name}</strong>{o.value}{o.unit} at {moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</li>
+                return <li key={o.parameter}><strong>{param.name}</strong>{o.value}{o.unit} at {moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</li>;
               })}
             </ul>
           </div>
@@ -201,7 +202,7 @@ var Location = React.createClass({
   },
 
   renderNearbyLoc: function () {
-    let {fetched, fetching, error, data: {results: locations}} = this.props.locations;
+    let {fetched, fetching, error, data: {results: locMeasurements}} = this.props.latestMeasurements;
     if (!fetched && !fetching) {
       return null;
     }
@@ -220,12 +221,15 @@ var Location = React.createClass({
         </InfoMessage>
       );
     } else {
-      if (locations.length === 1) {
+      if (locMeasurements.length === 1) {
         intro = <p>There are no other locations in {this.props.loc.data.city}, {this.props.countryData.name}.</p>;
       } else {
-        intro = <p>There are <strong>{locations.length - 1}</strong> other locations in {this.props.loc.data.city}, {this.props.countryData.name}.</p>;
+        intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{this.props.countryData.name}</strong>.</p>;
       }
-      content = _.map(locations, 'location').join(', ');
+      content = <MapComponent
+              center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
+              highlightLoc={this.props.loc.data.location}
+              measurements={locMeasurements} />;
     }
 
     return (
@@ -235,11 +239,10 @@ var Location = React.createClass({
             <h1 className='fold__title'>Nearby locations</h1>
             <div className='fold__introduction prose prose--responsive'>
               {intro}
-            {content}
             </div>
           </header>
           <div className='fold__body'>
-            <MapComponent />
+            {content}
           </div>
         </div>
       </section>
@@ -325,7 +328,6 @@ function selector (state) {
     countryData: _.find(state.baseData.data.countries, {code: (state.location.data || {}).country}),
 
     loc: state.location,
-    locations: state.locations,
     latestMeasurements: state.latestMeasurements,
     measurements: state.measurements
   };
@@ -334,10 +336,9 @@ function selector (state) {
 function dispatcher (dispatch) {
   return {
     _fetchLocationIfNeeded: (...args) => dispatch(fetchLocationIfNeeded(...args)),
-    _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
     _fetchLatestMeasurements: (...args) => dispatch(fetchLatestMeasurements(...args)),
     _fetchMeasurements: (...args) => dispatch(fetchMeasurements(...args)),
-    _invalidateLocations: (...args) => dispatch(invalidateLocations(...args))
+    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args))
   };
 }
 
