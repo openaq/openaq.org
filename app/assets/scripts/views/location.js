@@ -10,6 +10,7 @@ import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, inva
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
 import MapComponent from '../components/map';
+import ShareBtn from '../components/share-btn';
 
 var Location = React.createClass({
   displayName: 'Location',
@@ -281,7 +282,7 @@ var Location = React.createClass({
             <div className='inpage__headline'>
               <h1 className='inpage__title'>{data.location} <small>in {data.city}, {this.props.countryData.name}</small></h1>
               <div className='inpage__headline-actions'>
-                <button type='button' title='Open share options' className='button-inpage-share'><span>Share</span></button>
+                <ShareBtn />
               </div>
             </div>
             <div className='inpage__actions'>

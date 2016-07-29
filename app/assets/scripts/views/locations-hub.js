@@ -5,7 +5,6 @@ import { ScrollArea, Dropdown } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
-import moment from 'moment';
 import LocationCard from '../components/location-card';
 import { toggleValue } from '../utils/array';
 import { buildQS } from '../utils/url';

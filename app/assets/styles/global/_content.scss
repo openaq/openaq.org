@@ -25,6 +25,18 @@
   }
 }
 
+.share-opt-facebook {
+  &::before {
+    margin-right: 0.5rem;
+    @extend %openaq-ds-icon-facebook;
+  }
+}
+.share-opt-twitter {
+  &::before {
+    margin-right: 0.5rem;
+    @extend %openaq-ds-icon-twitter;
+  }
+}
 
 .general-message {
   background-image: url(../graphics/content/page-hero-default.png);
