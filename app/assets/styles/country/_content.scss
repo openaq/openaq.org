@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Country: Content
+   ========================================================================== */
+
+.card-group {
+  padding-bottom: 2rem;
+  margin-bottom: 2rem; 
+  box-shadow: 0 2px 0 0 $base-alpha-color;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__contents {
+    @extend .clearfix;
+  }
+
+  &__header {
+    @extend .clearfix;
+
+    h2 {
+      margin-bottom: 0.5rem;  
+    }
+    .card-group__actions {
+      margin-bottom: 1rem;
+    }
+
+    @include media(medium-up) {
+      .card-group__actions {
+        float: right;
+      }
+
+      h2 {
+        float: left;
+        margin-bottom: 1rem;
+      }
+    }
+
+  }
+
+}

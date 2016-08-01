@@ -23,6 +23,7 @@ import Map from './views/map';
 import LocationsHub from './views/locations-hub';
 import LocationItem from './views/location';
 import CountriesHub from './views/countries-hub';
+import Country from './views/country';
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
@@ -41,6 +42,7 @@ render((
         <Route path='locations' component={LocationsHub} pageClass='page--locations' />
         <Route path='location/:name' component={LocationItem} pageClass='page--location' />
         <Route path='countries' component={CountriesHub} pageClass='page--countries' />
+        <Route path='countries/:name' component={Country} pageClass='page--country' />
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>
