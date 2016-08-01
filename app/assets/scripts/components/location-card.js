@@ -41,13 +41,13 @@ var LocationCard = React.createClass({
               <li>Collection Start: {started}</li>
               <li>Measurements: {formatThousands(this.props.totalMeasurements)}</li>
               <li>Values: {this.renderParameters()}</li>
-              <li>Source: <a href={this.props.sourceData.url} title='View source for Wollogong'>{this.props.sourceData.name}</a></li>
+              <li>Source: <a href={this.props.sourceData.url} title={`View source for  ${this.props.name}`}>{this.props.sourceData.name}</a></li>
             </ul>
           </div>
           <footer className='card__footer'>
             <ul className='card__actions'>
-              <li><a href='#' className='button-card-download' title='Download data for Wollogong'>Download</a></li>
-              <li><Link to={`/location/${this.props.name}`} className='button-card-view' title='View Wollogong page'>View More</Link></li>
+              <li><a href='#' className='button-card-download' title={`Download data for ${this.props.name}`}>Download</a></li>
+              <li><Link to={`/location/${this.props.name}`} className='button-card-view' title={`View ${this.props.name} page`}>View More</Link></li>
             </ul>
           </footer>
         </div>
