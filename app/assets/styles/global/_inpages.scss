@@ -4,6 +4,7 @@
 
 $page-header-y: $global-spacing * 5;
 .inpage {
+
   &__header {
     background-image: url(../graphics/content/page-hero-default.png);
     position: relative;
@@ -78,6 +79,7 @@ $page-header-y: $global-spacing * 5;
 
   &__title {
     @extend .heading, .heading--medium;
+    @include col(8/12);
   }
 
   &__subtitle {
@@ -90,6 +92,10 @@ $page-header-y: $global-spacing * 5;
       position: absolute;
       transform: translate(0, -100%);
     }
+  }
+
+  &__headline-actions {
+    float: right;
   }
 
   &__introduction {

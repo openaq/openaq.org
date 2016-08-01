@@ -2,17 +2,6 @@
    Individual Location: Content
    ========================================================================== */
 .page--location {
-  .inpage__headline {
-    overflow: hidden;
-  }
-
-  .inpage__title {
-    @include col(8/12);
-  }
-  .inpage__headline-actions {
-    float: right;
-  }
-
   .inpage__actions ul {
     margin: 0;
     padding: 0;

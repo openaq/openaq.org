@@ -131,8 +131,12 @@ var Location = React.createClass({
       let sDate = moment(locData.firstUpdated).format('YYYY/MM/DD');
       let eDate = moment(locData.lastUpdated).format('YYYY/MM/DD');
 
-      let lng = Math.floor(locData.coordinates.longitude * 1000) / 1000;
-      let lat = Math.floor(locData.coordinates.latitude * 1000) / 1000;
+      let lng = ' --';
+      let lat = ' --';
+      if (locData.coordinates) {
+        lng = Math.floor(locData.coordinates.longitude * 1000) / 1000;
+        lat = Math.floor(locData.coordinates.latitude * 1000) / 1000;
+      }
 
       // Get latest measurements for this location in particular.
       let locLastMeasurement = _.find(lastMeasurements, {location: locData.location});
@@ -222,20 +226,28 @@ var Location = React.createClass({
         </InfoMessage>
       );
     } else {
-      if (locMeasurements.length === 1) {
-        intro = <p>There are no other locations in {this.props.loc.data.city}, {this.props.countryData.name}.</p>;
+      let addIntro = null;
+      if (this.props.loc.data.coordinates) {
+        content = <MapComponent
+          center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
+          zoom={9}
+          highlightLoc={this.props.loc.data.location}
+          measurements={locMeasurements}
+          parameter={_.find(this.props.parameters, {id: 'pm25'})}
+          disableScrollZoom >
+            <p>Showing most recent values for PM2.5</p>
+          </MapComponent>;
       } else {
-        intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{this.props.countryData.name}</strong>.</p>;
+        content = null;
+        addIntro = `However we can't show a map for ${this.props.loc.data.location} because there's no geographical information.`;
       }
-      content = <MapComponent
-        center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
-        zoom={9}
-        highlightLoc={this.props.loc.data.location}
-        measurements={locMeasurements}
-        parameter={_.find(this.props.parameters, {id: 'pm25'})}
-        disableScrollZoom >
-          <p>Showing most recent values for PM2.5</p>
-        </MapComponent>;
+
+      if (locMeasurements.length === 1) {
+        intro = <p>There are no other locations in {this.props.loc.data.city}, {this.props.countryData.name}. {addIntro ? <br/> : null}{addIntro}</p>;
+      } else {
+        intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{this.props.countryData.name}</strong>.
+          {addIntro ? <br/> : null}{addIntro}</p>;
+      }
     }
 
     return (
@@ -247,9 +259,11 @@ var Location = React.createClass({
               {intro}
             </div>
           </header>
-          <div className='fold__body'>
-            {content}
-          </div>
+          {content ? (
+            <div className='fold__body'>
+              {content}
+            </div>
+          ) : null}
         </div>
       </section>
     );

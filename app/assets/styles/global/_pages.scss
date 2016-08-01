@@ -3,6 +3,9 @@
    ========================================================================== */
 
 html {
+  // The map using bleed-full was creating some horizontal offset because
+  // the scroll bar was not being taken into account when using vw.
+  // By forcing the scroll the bar is always taken into account.
   overflow-y: scroll;
 }
 

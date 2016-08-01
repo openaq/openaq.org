@@ -48,7 +48,7 @@ var Map = React.createClass({
 
   componentDidMount: function () {
     this.props._invalidateAllLocationData();
-    this.props._fetchLatestMeasurements();
+    this.props._fetchLatestMeasurements({has_geo: 'true'});
   },
 
   renderMapLegend: function () {

@@ -8,6 +8,7 @@ import { formatThousands } from '../utils/format';
 import { fetchLocations, invalidateAllLocationData } from '../actions/action-creators';
 import InfoMessage from '../components/info-message';
 import LocationCard from '../components/location-card';
+import ShareBtn from '../components/share-btn';
 
 var Country = React.createClass({
   displayName: 'Country',
@@ -84,7 +85,7 @@ var Country = React.createClass({
       .groupBy('city')
       .value();
 
-    return _.map(groupped, (locations, k) => (
+    let countriesList = _.map(groupped, (locations, k) => (
       <div key={k} className='card-group'>
         <div className='card-group__header'>
           <h2>{k} <small>{locations.length} {locations.length > 1 ? 'locations' : 'location'}</small></h2>
@@ -112,10 +113,29 @@ var Country = React.createClass({
         </div>
       </div>
     ));
+
+    return (
+      <div>
+        <aside className='inpage__aside'>
+          <ul>
+            {_.map(groupped, (o, k) => (
+              <li key={`list-${k}`}><a href='#'>{k}</a></li>
+            ))}
+          </ul>
+        </aside>
+
+        <div className='inpage__content'>
+          <div className='countries-list'>
+            {countriesList}
+          </div>
+        </div>
+      </div>
+    );
   },
 
   render: function () {
     let countryData = _.find(this.props.countries, {code: this.props.params.name});
+    let sourcesData = _.filter(this.props.sources, {country: this.props.params.name});
 
     return (
       <section className='inpage'>
@@ -123,12 +143,16 @@ var Country = React.createClass({
           <div className='inner'>
             <div className='inpage__headline'>
               <h1 className='inpage__title'>{countryData.name}</h1>
+              <div className='inpage__headline-actions'>
+                <ShareBtn />
+              </div>
             </div>
-            <div className='inpage__introduction'>
-              <ul>
+            <div>
+              <ul className='country-stats'>
                 <li><strong>{countryData.cities}</strong> cities</li>
                 <li><strong>{countryData.locations}</strong> locations</li>
                 <li><strong>{formatThousands(countryData.count)}</strong> measurements</li>
+                <li><strong>{sourcesData.length}</strong> {sourcesData.length > 1 ? 'sources' : 'source'}</li>
               </ul>
             </div>
             <div className='inpage__actions'>
@@ -141,16 +165,13 @@ var Country = React.createClass({
         </header>
         <div className='inpage__body'>
 
-          <section className='fold' id='countries-list'>
+          <div className='fold' id='country-data-fold'>
             <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Country list</h1>
-              </header>
               <div className='fold__body'>
                 {this.renderContent()}
               </div>
             </div>
-          </section>
+          </div>
 
         </div>
       </section>

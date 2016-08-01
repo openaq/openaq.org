@@ -2,7 +2,7 @@
    Countries: Content
    ========================================================================== */
 
-#countries-list {
+.countries-list {
   .card {
     @include col(12/12);
     margin-top: 2rem;
@@ -23,6 +23,5 @@
         margin-top: 0;
       }
     }
-    
   }
 }

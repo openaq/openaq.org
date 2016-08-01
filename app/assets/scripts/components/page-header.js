@@ -28,6 +28,10 @@ var PageHeader = React.createClass({
     this.setState({dataMenu: !this.state.dataMenu});
   },
 
+  dataMenuItemClick: function (e) {
+    this.setState({dataMenu: false});
+  },
+
   offcanvasMenuClick: function (e) {
     e.preventDefault();
     document.documentElement.classList.toggle('offcanvas-revealed');
@@ -72,9 +76,9 @@ var PageHeader = React.createClass({
                   <a href='#' title='Show data sections' className={c('browse-menu__item', {'browse-menu__item--active': activeData})} onClick={this.dataMenuClick}><span>Data</span></a>
                   <div className='sub-nav-block' id='sub-nav-block-data'>
                     <ul className='browse-menu browse-menu--sub'>
-                      <li><Link to='/map' title='Visit Map page' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>Map</span></Link></li>
-                      <li><Link to='/locations' title='Visit locations page' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>Locations</span></Link></li>
-                      <li><Link to='/countries' title='Visit Countries page' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>Countries</span></Link></li>
+                      <li><Link to='/map' title='Visit Map page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Map</span></Link></li>
+                      <li><Link to='/locations' title='Visit locations page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Locations</span></Link></li>
+                      <li><Link to='/countries' title='Visit Countries page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Countries</span></Link></li>
                     </ul>
                   </div>
                 </li>

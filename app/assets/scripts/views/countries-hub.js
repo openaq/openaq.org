@@ -56,16 +56,15 @@ var CountriesHub = React.createClass({
         </header>
         <div className='inpage__body'>
 
-          <section className='fold' id='countries-list'>
+          <div className='fold' id='countries-list'>
             <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Country list</h1>
-              </header>
               <div className='fold__body'>
-                {this.renderCountryList()}
+                <div className='countries-list'>
+                  {this.renderCountryList()}
+                </div>
               </div>
             </div>
-          </section>
+          </div>
 
         </div>
       </section>

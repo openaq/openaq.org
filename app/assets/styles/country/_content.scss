@@ -2,6 +2,32 @@
    Country: Content
    ========================================================================== */
 
+.page--country {
+  .inpage__title {
+    margin-bottom: 0.5rem;
+  }
+  .country-stats {
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2rem;
+
+    @include media(medium-up) {
+      font-size: 1.25rem;
+    }
+
+    li {
+      float: left;
+      margin-right: 2rem;
+    }
+  }
+
+  .inpage__aside {
+    box-shadow: none;
+  }
+}
+
 .card-group {
   padding-bottom: 2rem;
   margin-bottom: 2rem; 
@@ -9,6 +35,7 @@
 
   &:last-child {
     margin-bottom: 0;
+    box-shadow: none;
   }
 
   &__contents {
@@ -35,7 +62,9 @@
         margin-bottom: 1rem;
       }
     }
-
   }
+}
 
+#country-data-fold {
+  padding: 0;
 }
