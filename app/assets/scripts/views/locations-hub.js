@@ -308,8 +308,8 @@ var LocationsHub = React.createClass({
             </div>
             <div className='inpage__actions'>
               <ul>
+                <li><a href='' title='View API documentation' className='button-inpage-api'>View API Docs</a></li>
                 <li><a href='#' className='button-inpage-download'>Download Today's Data <small>(3MB)</small></a></li>
-                <li><a href='' title='View API documentation' className='button-inpage-api'>API Docs</a></li>
               </ul>
             </div>
           </div>

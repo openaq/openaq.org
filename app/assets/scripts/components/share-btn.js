@@ -12,7 +12,7 @@ var ShareBtn = React.createClass({
     return (
       <Dropdown
         triggerElement='button'
-        triggerClassName='button-inpage-share drop__toggle--caret'
+        triggerClassName='button-inpage-share'
         triggerTitle='Show/hide share options'
         triggerText='Share' >
 

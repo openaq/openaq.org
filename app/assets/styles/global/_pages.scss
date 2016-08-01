@@ -2,6 +2,10 @@
    Global: Pages
    ========================================================================== */
 
+html {
+  overflow-y: scroll;
+}
+
 .page {
   background: #fff;
 }

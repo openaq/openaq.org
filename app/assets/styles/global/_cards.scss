@@ -7,6 +7,10 @@
     margin-bottom: 0;
   }
 
+  &__title small {
+    font-weight: $heading-font-bold;
+  }
+
   &__body {
     font-size: 1rem;
   }

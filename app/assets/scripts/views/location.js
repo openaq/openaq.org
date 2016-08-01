@@ -292,9 +292,9 @@ var Location = React.createClass({
             </div>
             <div className='inpage__actions'>
               <ul>
-                <li><a href='' title='View in api' className='button button--primary-bounded button--medium'>API</a></li>
+                <li><a href='' title='View in api' className='button-inpage-api' target='_blank'>View API</a></li>
                 <li><button type='button' title='Download data for this location' className='button-inpage-download'>Download</button></li>
-                <li><a href='' title='Compare location with another' className='button button--primary button--medium'>Compare With</a></li>
+                <li><a href='' title='Compare location with another' className='button button--primary button--medium'>Compare</a></li>
               </ul>
             </div>
           </div>

@@ -239,7 +239,7 @@ const MapPopover = React.createClass({
           <div className='popover__body'>
             {reading}
             <ul className='popover__actions'>
-              <li><a href={``} className='button button--primary-bounded' title={`Compare ${this.props.location} with another location`}>Compare with</a></li>
+              <li><a href={``} className='button button--primary-bounded' title={`Compare ${this.props.location} with another location`}>Compare</a></li>
               <li><a href={`#/location/${this.props.location}`} title={`View ${this.props.location} page`}className='button button--primary-bounded'>View More</a></li>
             </ul>
           </div>

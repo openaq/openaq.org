@@ -16,6 +16,10 @@
 
 .button-inpage-api {
   @extend .button, .button--medium, .button--primary-bounded;
+
+  &:before {
+    @extend %openaq-ds-icon-code;
+  }
 }
 
 .button-inpage-share {
