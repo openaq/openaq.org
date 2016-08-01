@@ -37,12 +37,12 @@ render((
   <Provider store={store}>
     <Router history={history}>
       <Route path='/' component={App}>
-        <Route path='about' component={About} pageClass='page--about' />
-        <Route path='map' component={Map} pageClass='page--map' />
-        <Route path='locations' component={LocationsHub} pageClass='page--locations' />
-        <Route path='location/:name' component={LocationItem} pageClass='page--location' />
-        <Route path='countries' component={CountriesHub} pageClass='page--countries' />
-        <Route path='countries/:name' component={Country} pageClass='page--country' />
+        <Route name='about' path='about' component={About} pageClass='page--about' />
+        <Route name='map' path='map' component={Map} pageClass='page--map' />
+        <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations' />
+        <Route name='location' path='location/:name' component={LocationItem} pageClass='page--location' />
+        <Route name='countriesHub' path='countries' component={CountriesHub} pageClass='page--countries' />
+        <Route name='country' path='countries/:name' component={Country} pageClass='page--country' />
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>

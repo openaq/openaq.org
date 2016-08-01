@@ -15,18 +15,13 @@ html {
 
 .page__header {
   position: relative;
-  z-index: 10;
+  z-index: 100000;
   background: transparent;
   color: $base-font-color;
-  padding: $global-spacing 0;
   box-shadow: 0 2px 0 0 $base-semi-alpha-color;
 
   > .inner {
-    @extend .row, .row--centered;
-  }
-  
-  @include media(medium-up) {
-    padding: ($global-spacing * 2) 0;
+    @extend .clearfix, .row, .row--centered;
   }
 }
 
@@ -34,7 +29,7 @@ html {
 
 .page__headline {
   float: left;
-  margin: -0.5rem 0;
+  padding: $global-spacing 0;
 }
 
 .page__title {

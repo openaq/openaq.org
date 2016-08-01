@@ -44,7 +44,7 @@ var App = React.createClass({
 
     return (
       <div className={c('page', pageClass)}>
-        <PageHeader />
+        <PageHeader routes={this.props.routes} />
         <main className='page__body' role='main'>
           {content}
         </main>
