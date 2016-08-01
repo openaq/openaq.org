@@ -5,10 +5,12 @@ import { ScrollArea, Dropdown } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
-import LocationCard from '../components/location-card';
+
 import { toggleValue } from '../utils/array';
 import { buildQS } from '../utils/url';
 import { fetchLocations } from '../actions/action-creators';
+import LocationCard from '../components/location-card';
+import InfoMessage from '../components/info-message';
 
 var LocationsHub = React.createClass({
   displayName: 'LocationsHub',
@@ -235,11 +237,21 @@ var LocationsHub = React.createClass({
     }
 
     if (this.props.locError) {
-      return <div className='temp-loading temp-loading--alert'>error message</div>;
+      return (
+        <InfoMessage>
+          <p>We coudn't get the data. Please try again later.</p>
+          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+        </InfoMessage>
+      );
     }
 
     if (!this.props.locations.length) {
-      return <div className='temp-loading'>There's no data</div>;
+      return (
+        <InfoMessage>
+          <p>No data was found for your criteria.</p>
+          <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a> or <a href='#' title='Contact openaq'>let us know</a> what location you'd like to see data for.</p>
+        </InfoMessage>
+      );
     }
 
     return this.props.locations.map(o => {
@@ -261,7 +273,7 @@ var LocationsHub = React.createClass({
   },
 
   renderPagination: function () {
-    if (!this.props.locFetched) {
+    if (!this.props.locFetched || this.props.locError || !this.props.locations.length) {
       return null;
     }
 
