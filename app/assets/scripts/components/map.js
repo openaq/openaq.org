@@ -16,7 +16,11 @@ const MapComponent = React.createClass({
   propTypes: {
     measurements: React.PropTypes.array,
     highlightLoc: React.PropTypes.string,
-    center: React.PropTypes.array
+    parameter: React.PropTypes.object,
+    center: React.PropTypes.array,
+    zoom: React.PropTypes.number,
+    disableScrollZoom: React.PropTypes.bool,
+    children: React.PropTypes.object
   },
 
   nearbyKm: 10,
@@ -34,7 +38,7 @@ const MapComponent = React.createClass({
   },
 
   showPopover: function (data) {
-    let measurement = _.find(data.measurements, {parameter: 'pm25'});
+    let measurement = _.find(data.measurements, {parameter: this.props.parameter.id});
 
     // Find the nearby ones.
     let start = {
@@ -72,6 +76,7 @@ const MapComponent = React.createClass({
     render(<MapPopover
       location={data.location}
       measurement={measurement}
+      parameter={this.props.parameter}
       nearbyKm={this.nearbyKm}
       nearby={nearby}
       nearbyClick={this.nearbyLocationClick} />, popoverContent);
@@ -148,9 +153,14 @@ const MapComponent = React.createClass({
     this.map = new mapboxgl.Map({
       container: this.refs.map,
       center: this.props.center,
-      zoom: 9,
+      zoom: this.props.zoom,
       style: config.mapbox.baseStyle
     });
+
+    if (this.props.disableScrollZoom) {
+      this.map.scrollZoom.disable();
+      this.map.addControl(new mapboxgl.Navigation());
+    }
 
     this.map.on('load', () => {
       this.setupMapData();
@@ -161,8 +171,13 @@ const MapComponent = React.createClass({
   render: function () {
     console.log('this.props.highlightLoc:', this.props.highlightLoc);
     return (
-      <div className='map-container' ref='map'>
-        {/* Map renders on componentDidMount. */}
+      <div className='map'>
+        <div className='map__container' ref='map'>
+          {/* Map renders on componentDidMount. */}
+        </div>
+        <div className='map__legend'>
+          {this.props.children}
+        </div>
       </div>
     );
   }
@@ -176,6 +191,7 @@ const MapPopover = React.createClass({
   propTypes: {
     location: React.PropTypes.string,
     measurement: React.PropTypes.object,
+    parameter: React.PropTypes.object,
     nearbyKm: React.PropTypes.number,
     nearby: React.PropTypes.array,
     nearbyClick: React.PropTypes.func
@@ -191,12 +207,12 @@ const MapPopover = React.createClass({
         <p>Showing <strong>{this.props.nearby.length}</strong> other locations within {this.props.nearbyKm}km</p>
         <ul className='popover-nearby-loc'>
           {this.props.nearby.map(o => {
-            let measurement = _.find(o.measurements, {parameter: 'pm25'});
+            let measurement = _.find(o.measurements, {parameter: this.props.parameter.id});
             return (
               <li key={o.location}>
                 {measurement
                   ? <strong>{measurement.value} {measurement.unit}</strong>
-                  : <strong>PM2.5 N/A</strong>}
+                  : <strong>{this.props.parameter.name} N/A</strong>}
                 <a onClick={this.props.nearbyClick.bind(null, o.location)} href='' title={`Open ${o.location} popover`}>{o.location}</a>
               </li>
             );
@@ -208,7 +224,7 @@ const MapPopover = React.createClass({
 
   render: function () {
     let m = this.props.measurement;
-    let reading = <p>PM2.5 N/A</p>;
+    let reading = <p>{this.props.parameter.name} N/A</p>;
     if (m) {
       let lastUp = moment.utc(m.lastUpdated).format('YYYY/MM/DD HH:mm');
       reading = <p>Last reading <strong>{m.value}{m.unit}</strong> at <strong>{lastUp}</strong></p>;
@@ -218,13 +234,13 @@ const MapPopover = React.createClass({
       <article className='popover'>
         <div className='popover__contents'>
           <header className='popover__header'>
-            <h1 className='popover__title'><Link to={`/location/${this.props.location}`} title={`View ${this.props.location} page`}>{this.props.location}</Link></h1>
+            <h1 className='popover__title'><a href={`#/location/${this.props.location}`} title={`View ${this.props.location} page`}>{this.props.location}</a></h1>
           </header>
           <div className='popover__body'>
             {reading}
             <ul className='popover__actions'>
-              <li><Link to={``} className='button button--primary-bounded' title={`Compare ${this.props.location} with another location`}>Compare with</Link></li>
-              <li><Link to={`/location/${this.props.location}`} title={`View ${this.props.location} page`}className='button button--primary-bounded'>View More</Link></li>
+              <li><a href={``} className='button button--primary-bounded' title={`Compare ${this.props.location} with another location`}>Compare with</a></li>
+              <li><a href={`#/location/${this.props.location}`} title={`View ${this.props.location} page`}className='button button--primary-bounded'>View More</a></li>
             </ul>
           </div>
           <footer className='popover__footer'>

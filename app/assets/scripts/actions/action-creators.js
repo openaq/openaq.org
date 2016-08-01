@@ -416,7 +416,7 @@ export function fetchLatestMeasurements (filters) {
     let f = buildQS(filters);
 
     const fetcher = function (page) {
-      fetch(`${config.api}/latest?page=${page}&limit=1000&${f}`)
+      fetch(`${config.api}/latest?has_geo&page=${page}&limit=${limit}&${f}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');

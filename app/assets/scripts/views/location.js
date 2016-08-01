@@ -228,9 +228,14 @@ var Location = React.createClass({
         intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{this.props.countryData.name}</strong>.</p>;
       }
       content = <MapComponent
-              center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
-              highlightLoc={this.props.loc.data.location}
-              measurements={locMeasurements} />;
+        center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
+        zoom={9}
+        highlightLoc={this.props.loc.data.location}
+        measurements={locMeasurements}
+        parameter={_.find(this.props.parameters, {id: 'pm25'})}
+        disableScrollZoom >
+          <p>Showing most recent values for PM2.5</p>
+        </MapComponent>;
     }
 
     return (

@@ -2,9 +2,8 @@
    Global: Map popover
    ========================================================================== */
 
-.map-container {
-  .mapboxgl-popup-close-button,
-  .mapboxgl-popup-tip {
+.map__container {
+  .mapboxgl-popup-close-button {
     display: none;
   }
 
@@ -16,6 +15,7 @@
 .popover {
   padding: $global-spacing * 2;
   font-size: 1rem;
+  max-width: 25rem;
 
   &__header {
     margin-bottom: 0.5rem;
