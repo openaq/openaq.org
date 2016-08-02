@@ -10,6 +10,7 @@ import { hashHistory } from 'react-router';
 import MapComponent from '../components/map';
 import HeaderMessage from '../components/header-message';
 import { fetchLatestMeasurements, invalidateAllLocationData } from '../actions/action-creators';
+import { getMapColors } from '../utils/colors';
 import config from '../config';
 mapboxgl.accessToken = config.mapbox.token;
 
@@ -70,8 +71,18 @@ var Map = React.createClass({
       </Dropdown>
     );
 
+    const mapColors = getMapColors();
+    const colorWidth = 100 / mapColors.length;
+
     return (
-      <p>Showing the most recent values for {drop}</p>
+      <div>
+        <p>Showing the most recent values for {drop}</p>
+        <ul className='color-scale'>
+          {mapColors.map(o => (
+            <li key={o.label} style={{'backgroundColor': o.color, width: `${colorWidth}%`}} className='color-scale__item'><span className='color-scale__value'>{o.label}</span></li>
+          ))}
+        </ul>
+      </div>
     );
   },
 

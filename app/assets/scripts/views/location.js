@@ -7,6 +7,7 @@ import c from 'classnames';
 
 import { formatThousands } from '../utils/format';
 import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, invalidateAllLocationData } from '../actions/action-creators';
+import { getMapColors } from '../utils/colors';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
 import MapComponent from '../components/map';
@@ -228,6 +229,9 @@ var Location = React.createClass({
     } else {
       let addIntro = null;
       if (this.props.loc.data.coordinates) {
+        const mapColors = getMapColors();
+        const colorWidth = 100 / mapColors.length;
+
         content = <MapComponent
           center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
           zoom={9}
@@ -235,7 +239,14 @@ var Location = React.createClass({
           measurements={locMeasurements}
           parameter={_.find(this.props.parameters, {id: 'pm25'})}
           disableScrollZoom >
-            <p>Showing most recent values for PM2.5</p>
+            <div>
+              <p>Showing most recent values for PM2.5</p>
+              <ul className='color-scale'>
+                {mapColors.map(o => (
+                  <li key={o.label} style={{'backgroundColor': o.color, width: `${colorWidth}%`}} className='color-scale__item'><span className='color-scale__value'>{o.label}</span></li>
+                ))}
+              </ul>
+            </div>
           </MapComponent>;
       } else {
         content = null;
