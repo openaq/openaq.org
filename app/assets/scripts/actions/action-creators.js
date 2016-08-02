@@ -357,6 +357,26 @@ export function fetchMeasurements (location, startDate, endDate) {
     let data = null;
     let limit = 1000;
 
+    // The api returns the total number of measurements in the filtered set.
+    // Taking the dates into account. However we also need to total number of
+    // measurements since ever. This query takes care of that and then we start
+    // the actual requests for measurements.
+    let totalMeasurements = 0;
+    fetch(`${config.api}/measurements?location=${location}&limit=1`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(json => {
+        totalMeasurements = json.meta.found;
+        fetcher(1);
+      }, e => {
+        console.log('e', e);
+        return dispatch(receiveMeasurements(null, 'Data not available'));
+      });
+
     const fetcher = function (page) {
       console.log('url', `${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`);
       fetch(`${config.api}/measurements?location=${location}&page=${page}&limit=1000&date_from=${startDate}&date_to=${endDate}`)
@@ -376,6 +396,7 @@ export function fetchMeasurements (location, startDate, endDate) {
             return fetcher(++page);
           } else {
             console.log('done', data);
+            data.meta.totalMeasurements = totalMeasurements;
             return dispatch(receiveMeasurements(data));
           }
         }, e => {
