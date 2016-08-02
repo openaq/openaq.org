@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { formatThousands } from '../utils/format';
 import { fetchLocations, invalidateAllLocationData, fetchLatestMeasurements } from '../actions/action-creators';
 import { getMapColors } from '../utils/colors';
+import { getCountryBbox } from '../utils/countries';
 import InfoMessage from '../components/info-message';
 import LocationCard from '../components/location-card';
 import ShareBtn from '../components/share-btn';
@@ -154,11 +155,12 @@ var Country = React.createClass({
 
     const mapColors = getMapColors();
     const colorWidth = 100 / mapColors.length;
+    const bbox = getCountryBbox(this.props.params.name);
 
     return (
       <div className='country-map'>
         <MapComponent
-          center={[0, 0]}
+          bbox={bbox}
           zoom={1}
           measurements={results}
           parameter={_.find(this.props.parameters, {id: 'pm25'})}

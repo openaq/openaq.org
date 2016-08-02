@@ -2361,4 +2361,8 @@ const countries = [
   }
 ];
 
-export default countries;
+export function getCountryBbox (iso) {
+  iso = iso.toUpperCase();
+  let country = countries.find(o => o.iso === iso);
+  return country ? country.bbox : null;
+}

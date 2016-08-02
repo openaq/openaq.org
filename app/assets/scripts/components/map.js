@@ -17,6 +17,7 @@ const MapComponent = React.createClass({
     highlightLoc: React.PropTypes.string,
     parameter: React.PropTypes.object,
     center: React.PropTypes.array,
+    bbox: React.PropTypes.array,
     zoom: React.PropTypes.number,
     disableScrollZoom: React.PropTypes.bool,
     children: React.PropTypes.object
@@ -149,12 +150,23 @@ const MapComponent = React.createClass({
   },
 
   componentDidMount: function () {
+    if (!this.props.center && !this.props.bbox) {
+      throw new Error('At least center or bbox has to be provided to MapComponent');
+    }
+
     this.map = new mapboxgl.Map({
       container: this.refs.map,
-      center: this.props.center,
+      center: this.props.center || [0, 0],
       zoom: this.props.zoom,
       style: config.mapbox.baseStyle
     });
+
+    if (this.props.bbox) {
+      this.map.fitBounds([
+        [this.props.bbox[0], this.props.bbox[1]],
+        [this.props.bbox[2], this.props.bbox[3]]
+      ]);
+    }
 
     if (this.props.disableScrollZoom) {
       this.map.scrollZoom.disable();
