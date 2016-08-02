@@ -90,7 +90,7 @@ var Location = React.createClass({
       // Get the measurements.
       let toDate = moment.utc();
       let fromDate = toDate.clone().subtract(8, 'days');
-      this.props._fetchLatestMeasurements({city: loc.city});
+      this.props._fetchLatestMeasurements({city: loc.city, has_geo: 'true'});
       this.props._fetchMeasurements(loc.location, fromDate, toDate);
     }
   },

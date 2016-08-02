@@ -5,6 +5,9 @@
 $page-header-y: $global-spacing * 5;
 
 .page--map {
+  .page__header {
+    background-color: rgba(#fff, 0.64);
+  }
   .inpage__header,
   .page__footer {
     @extend .visually-hidden;
