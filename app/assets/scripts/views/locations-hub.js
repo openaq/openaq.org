@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollArea, Dropdown } from 'openaq-design-system';
+import { ScrollArea } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';

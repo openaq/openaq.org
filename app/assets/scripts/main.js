@@ -8,7 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createLogger from 'redux-logger';
-import {whyDidYouUpdate} from 'why-did-you-update';
+// import {whyDidYouUpdate} from 'why-did-you-update';
 import reducer from './reducers/index';
 import { fetchBaseData, fetchBaseStats } from './actions/action-creators';
 

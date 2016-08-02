@@ -2,7 +2,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import mapboxgl from 'mapbox-gl';
-import { Link } from 'react-router';
 import _ from 'lodash';
 import moment from 'moment';
 import distance from 'turf-distance';
