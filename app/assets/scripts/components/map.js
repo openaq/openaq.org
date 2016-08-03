@@ -5,10 +5,10 @@ import mapboxgl from 'mapbox-gl';
 import _ from 'lodash';
 import moment from 'moment';
 import distance from 'turf-distance';
-import { colorScale as colors, parameterMax,
-         parameterConversion, unusedColor, circleOpacity, circleBlur,
-         coloredCircleRadius, unusedCircleRadius, borderCircleRadius, selectCircleRadius, selectShadowCircleRadius } from '../utils/map-settings';
-import { generateColorStops } from '../utils/color-scale';
+
+import { convertParamIfNeeded, circleOpacity, circleBlur,
+         coloredCircleRadius, borderCircleRadius, selectCircleRadius, selectShadowCircleRadius } from '../utils/map-settings';
+import { generateColorStops } from '../utils/colors';
 // import  from '../utils/color-scale';
 
 import config from '../config';
@@ -205,8 +205,11 @@ const MapComponent = React.createClass({
   //
 
   generateFeature: function (locMeasurement) {
-    let val = _.find(locMeasurement.measurements, {parameter: this.props.parameter.id});
-    val = val ? val.value : -1;
+    let param = _.find(locMeasurement.measurements, {parameter: this.props.parameter.id});
+
+    let val = param ? convertParamIfNeeded(param) : -1;
+    val = val < 0 ? -1 : val;
+
     return {
       type: 'Feature',
       properties: {
@@ -275,8 +278,11 @@ const MapComponent = React.createClass({
 
   componentDidUpdate: function (prevProps) {
     if (this.props.parameter.id !== prevProps.parameter.id) {
-      const source = this.generateSourceData();
-      this.map.getSource('measurements').setData(source);
+      // We need to update. Delete source + layers and setup again.
+      this.map.getSource('measurements') && this.map.removeSource('measurements');
+      this.map.getLayer('pointOutlines') && this.map.removeLayer('pointOutlines');
+      this.map.getLayer('measurements') && this.map.removeLayer('measurements');
+      this.setupMapData();
     }
   },
 

@@ -28,3 +28,7 @@ export function formatCurrency (number, decimals = 2) {
   }
   return d3.format(',.' + decimals + 'f')(number);
 }
+
+export function round (number, decimals = 2) {
+  return d3.format('.' + decimals + 'f')(number);
+}
