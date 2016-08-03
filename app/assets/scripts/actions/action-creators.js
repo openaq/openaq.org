@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
+import { stringify as buildAPIQS } from 'qs';
 import * as actions from './action-types';
 import config from '../config';
-import { buildQS } from '../utils/url';
 
 // ////////////////////////////////////////////////////////////////
 //                           BASE DATA                           //
@@ -93,7 +93,7 @@ export function fetchLocations (page = 1, filters, limit = 15) {
   return function (dispatch) {
     dispatch(requestLocations());
 
-    let f = buildQS(filters);
+    let f = buildAPIQS(filters);
 
     // console.log('url', `${config.api}/locations?page=${page}&limit=${limit}&${f}`);
 
@@ -434,7 +434,7 @@ export function fetchLatestMeasurements (filters) {
 
     let data = null;
     let limit = 1000;
-    let f = buildQS(filters);
+    let f = buildAPIQS(filters);
 
     const fetcher = function (page) {
       fetch(`${config.api}/latest?page=${page}&limit=${limit}&${f}`)
