@@ -5,6 +5,11 @@ import mapboxgl from 'mapbox-gl';
 import _ from 'lodash';
 import moment from 'moment';
 import distance from 'turf-distance';
+import { colorScale as colors, parameterMax,
+         parameterConversion, unusedColor, circleOpacity, circleBlur,
+         coloredCircleRadius, unusedCircleRadius, borderCircleRadius, selectCircleRadius, selectShadowCircleRadius } from '../utils/map-settings';
+import { generateColorStops } from '../utils/color-scale';
+// import  from '../utils/color-scale';
 
 import config from '../config';
 mapboxgl.accessToken = config.mapbox.token;
@@ -17,7 +22,6 @@ const MapComponent = React.createClass({
     highlightLoc: React.PropTypes.string,
     parameter: React.PropTypes.object,
     center: React.PropTypes.array,
-    bbox: React.PropTypes.array,
     zoom: React.PropTypes.number,
     disableScrollZoom: React.PropTypes.bool,
     children: React.PropTypes.object
@@ -93,6 +97,69 @@ const MapComponent = React.createClass({
       .addTo(this.map);
   },
 
+  // Creates highlight for selected points
+  setupMapSelect: function () {
+    this.map.on('click', (e) => {
+      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
+      if (!features.length) {
+        return;
+      }
+      if (typeof this.map.getLayer('selectedPoint' || 'selectedPointShadow' || 'selectedPointHighlight') !== 'undefined') {
+        this.map.removeLayer('selectedPointShadow');
+        this.map.removeLayer('selectedPointHighlight');
+        this.map.removeLayer('selectedPoint');
+        this.map.removeSource('selectedPoint');
+      }
+      var feature = features[0];
+
+      this.map.addSource('selectedPoint', {
+        'type': 'geojson',
+        'data': feature.toJSON()
+      });
+      // Add Shadow
+      this.map.addLayer({
+        'id': 'selectedPointShadow',
+        'type': 'circle',
+        'source': 'selectedPoint',
+        'paint': {
+          'circle-color': '#000',
+          'circle-opacity': 0.2,
+          'circle-radius': selectShadowCircleRadius,
+          'circle-blur': 0.5,
+          'circle-translate': [0.5, 0.5]
+        }
+      });
+      // Add Highlight
+      this.map.addLayer({
+        'id': 'selectedPointHighlight',
+        'type': 'circle',
+        'source': 'selectedPoint',
+        'paint': {
+          'circle-color': '#fff',
+          'circle-opacity': 1,
+          'circle-radius': selectCircleRadius,
+          'circle-blur': 0
+        }
+      });
+      // Re-add fill by value
+      this.map.addLayer({
+        'id': 'selectedPoint',
+        'type': 'circle',
+        'source': 'selectedPoint',
+        'paint': {
+          'circle-color': {
+            property: 'convertedValue',
+            stops: generateColorStops(this.props.parameter.id)
+            // replace with generateColorStops()
+          },
+          'circle-opacity': 1,
+          'circle-radius': coloredCircleRadius,
+          'circle-blur': 0
+        }
+      });
+    });
+  },
+
   setupMapPopover: function () {
     // When a click event occurs near a place, open a popup at the location of
     // the feature, with description HTML from its properties.
@@ -123,7 +190,9 @@ const MapComponent = React.createClass({
         features: this.props.measurements.map(o => ({
           type: 'Feature',
           properties: {
-            location: o.location
+            location: o.location,
+            // Controls which color is applied to the point. Needs to be the points measurement.
+            value: o.measurements[3]
           },
           geometry: {
             type: 'Point',
@@ -136,37 +205,54 @@ const MapComponent = React.createClass({
       }
     };
 
+    // OLD CODE for converting the value above.
+    // latestStore.storage.hasGeo[this.state.selectedParameter].forEach((l) => {
+    //   // Handle conversion from ug/m3 to ppm for certain parameters here
+    //   l.convertedValue = l.value;
+    //   if (['co', 'so2', 'no2', 'o3'].indexOf(l.parameter) !== -1) {
+    //     l.convertedValue = parameterConversion[l.parameter] * l.value;
+    //   }
+
+    // console.log(this.props.measurements.map(o => ({ o })))
+
     this.map.addSource('measurements', source);
+
+    // Layer for outline
+    this.map.addLayer({
+      'id': 'pointOutlines',
+      'source': 'measurements',
+      'type': 'circle',
+      'paint': {
+        'circle-color': '#1e4280',
+        'circle-opacity': 1,
+        'circle-radius': borderCircleRadius,
+        'circle-blur': 0
+      }
+    });
 
     this.map.addLayer({
       'id': 'measurements',
       'source': 'measurements',
       'type': 'circle',
       'paint': {
-        'circle-radius': 5,
-        'circle-color': 'blue'
+        'circle-color': {
+          property: 'value',
+          stops: generateColorStops(this.props.parameter.id)
+        },
+        'circle-opacity': circleOpacity,
+        'circle-radius': coloredCircleRadius,
+        'circle-blur': circleBlur
       }
     });
   },
 
   componentDidMount: function () {
-    if (!this.props.center && !this.props.bbox) {
-      throw new Error('At least center or bbox has to be provided to MapComponent');
-    }
-
     this.map = new mapboxgl.Map({
       container: this.refs.map,
-      center: this.props.center || [0, 0],
+      center: this.props.center,
       zoom: this.props.zoom,
       style: config.mapbox.baseStyle
     });
-
-    if (this.props.bbox) {
-      this.map.fitBounds([
-        [this.props.bbox[0], this.props.bbox[1]],
-        [this.props.bbox[2], this.props.bbox[3]]
-      ]);
-    }
 
     if (this.props.disableScrollZoom) {
       this.map.scrollZoom.disable();
@@ -176,6 +262,7 @@ const MapComponent = React.createClass({
     this.map.on('load', () => {
       this.setupMapData();
       this.setupMapPopover();
+      this.setupMapSelect();
     });
   },
 

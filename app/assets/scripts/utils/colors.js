@@ -21,3 +21,4 @@ export function getMapColorsHex () {
 export function getMapColorsLabels () {
   return mapColors.map(o => o.label);
 }
+
