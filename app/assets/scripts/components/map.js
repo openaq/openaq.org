@@ -22,6 +22,7 @@ const MapComponent = React.createClass({
     highlightLoc: React.PropTypes.string,
     parameter: React.PropTypes.object,
     center: React.PropTypes.array,
+    bbox: React.PropTypes.array,
     zoom: React.PropTypes.number,
     disableScrollZoom: React.PropTypes.bool,
     children: React.PropTypes.object
@@ -34,11 +35,53 @@ const MapComponent = React.createClass({
 
   popover: null,
 
+  //
+  // Start events methods
+  //
+
   nearbyLocationClick: function (location, e) {
     e.preventDefault();
     let data = _.find(this.props.measurements, {location: location});
     this.map.panTo([data.coordinates.longitude, data.coordinates.latitude]);
     this.showPopover(data);
+
+    // We we click a nearby location we need to show the popup but also
+    // select the appropriate point. However the point needs feature data.
+    // From the measurement data we regenerate the feature and pass it to the
+    // selectPoint function.
+    // Another option would be to do a map query for features with the point
+    // projected from the coordinates, but that's slower for sure.
+    // Code follows anyway:
+    //     let projectedPoint = this.map.project([data.coordinates.longitude, data.coordinates.latitude]);
+    //     let features = this.map.queryRenderedFeatures(projectedPoint, { layers: ['measurements'] });
+    //     this.selectPoint(features[0]);
+    this.selectPoint(this.generateFeature(data));
+  },
+
+  setupMapEvents: function () {
+    // When a click event occurs near a place, open a popup at the location of
+    // the feature, with description HTML from its properties.
+    this.map.on('click', (e) => {
+      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
+
+      if (!features.length) {
+        // Unselect point.
+        this.selectPoint(null);
+        return;
+      }
+
+      // Popover.
+      let data = _.find(this.props.measurements, {location: features[0].properties.location});
+      this.showPopover(data);
+      this.selectPoint(features[0].toJSON());
+    });
+
+    // Use the same approach as above to indicate that the symbols are clickable
+    // by changing the cursor style to 'pointer'.
+    this.map.on('mousemove', (e) => {
+      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
+      this.map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+    });
   },
 
   showPopover: function (data) {
@@ -97,125 +140,105 @@ const MapComponent = React.createClass({
       .addTo(this.map);
   },
 
-  // Creates highlight for selected points
-  setupMapSelect: function () {
-    this.map.on('click', (e) => {
-      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
-      if (!features.length) {
-        return;
-      }
-      if (typeof this.map.getLayer('selectedPoint' || 'selectedPointShadow' || 'selectedPointHighlight') !== 'undefined') {
-        this.map.removeLayer('selectedPointShadow');
-        this.map.removeLayer('selectedPointHighlight');
-        this.map.removeLayer('selectedPoint');
-        this.map.removeSource('selectedPoint');
-      }
-      var feature = features[0];
+  selectPoint: function (feature) {
+    if (this.map.getSource('selectedPoint')) {
+      this.map.getLayer('selectedPointShadow') && this.map.removeLayer('selectedPointShadow');
+      this.map.getLayer('selectedPointHighlight') && this.map.removeLayer('selectedPointHighlight');
+      this.map.getLayer('selectedPoint') && this.map.removeLayer('selectedPoint');
+      this.map.getSource('selectedPoint') && this.map.removeSource('selectedPoint');
+    }
 
-      this.map.addSource('selectedPoint', {
-        'type': 'geojson',
-        'data': feature.toJSON()
-      });
-      // Add Shadow
-      this.map.addLayer({
-        'id': 'selectedPointShadow',
-        'type': 'circle',
-        'source': 'selectedPoint',
-        'paint': {
-          'circle-color': '#000',
-          'circle-opacity': 0.2,
-          'circle-radius': selectShadowCircleRadius,
-          'circle-blur': 0.5,
-          'circle-translate': [0.5, 0.5]
-        }
-      });
-      // Add Highlight
-      this.map.addLayer({
-        'id': 'selectedPointHighlight',
-        'type': 'circle',
-        'source': 'selectedPoint',
-        'paint': {
-          'circle-color': '#fff',
-          'circle-opacity': 1,
-          'circle-radius': selectCircleRadius,
-          'circle-blur': 0
-        }
-      });
-      // Re-add fill by value
-      this.map.addLayer({
-        'id': 'selectedPoint',
-        'type': 'circle',
-        'source': 'selectedPoint',
-        'paint': {
-          'circle-color': {
-            property: 'convertedValue',
-            stops: generateColorStops(this.props.parameter.id)
-            // replace with generateColorStops()
-          },
-          'circle-opacity': 1,
-          'circle-radius': coloredCircleRadius,
-          'circle-blur': 0
-        }
-      });
+    // Passing feature: null clears selection.
+    if (feature === null) {
+      return;
+    }
+
+    this.map.addSource('selectedPoint', {
+      'type': 'geojson',
+      'data': feature
     });
+    // Add Shadow
+    this.map.addLayer({
+      'id': 'selectedPointShadow',
+      'type': 'circle',
+      'source': 'selectedPoint',
+      'paint': {
+        'circle-color': '#000',
+        'circle-opacity': 0.2,
+        'circle-radius': selectShadowCircleRadius,
+        'circle-blur': 0.5,
+        'circle-translate': [0.5, 0.5]
+      }
+    });
+    // Add Highlight
+    this.map.addLayer({
+      'id': 'selectedPointHighlight',
+      'type': 'circle',
+      'source': 'selectedPoint',
+      'paint': {
+        'circle-color': '#fff',
+        'circle-opacity': 1,
+        'circle-radius': selectCircleRadius,
+        'circle-blur': 0
+      }
+    });
+    // Re-add fill by value
+    // this.map.addLayer({
+    //   'id': 'selectedPoint',
+    //   'type': 'circle',
+    //   'source': 'selectedPoint',
+    //   'paint': {
+    //     'circle-color': {
+    //       property: 'convertedValue',
+    //       stops: generateColorStops(this.props.parameter.id)
+    //       // replace with generateColorStops()
+    //     },
+    //     'circle-opacity': 1,
+    //     'circle-radius': coloredCircleRadius,
+    //     'circle-blur': 0
+    //   }
+    // });
   },
 
-  setupMapPopover: function () {
-    // When a click event occurs near a place, open a popup at the location of
-    // the feature, with description HTML from its properties.
-    this.map.on('click', (e) => {
-      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
+  //
+  // Start data methods
+  //
 
-      if (!features.length) {
-        return;
+  generateFeature: function (locMeasurement) {
+    let val = _.find(locMeasurement.measurements, {parameter: this.props.parameter.id});
+    val = val ? val.value : -1;
+    return {
+      type: 'Feature',
+      properties: {
+        location: locMeasurement.location,
+        // Controls which color is applied to the point.
+        // Needs to be the points measurement.
+        value: val
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [
+          locMeasurement.coordinates.longitude,
+          locMeasurement.coordinates.latitude
+        ]
       }
+    };
+  },
 
-      let data = _.find(this.props.measurements, {location: features[0].properties.location});
-      this.showPopover(data);
-    });
-
-    // Use the same approach as above to indicate that the symbols are clickable
-    // by changing the cursor style to 'pointer'.
-    this.map.on('mousemove', (e) => {
-      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
-      this.map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-    });
+  generateSourceData: function () {
+    return {
+      type: 'FeatureCollection',
+      features: this.props.measurements.map(o => this.generateFeature(o))
+    };
   },
 
   setupMapData: function () {
-    const source = {
+    const source = this.generateSourceData();
+
+    this.map.addSource('measurements', {
       'type': 'geojson',
-      'data': {
-        type: 'FeatureCollection',
-        features: this.props.measurements.map(o => ({
-          type: 'Feature',
-          properties: {
-            location: o.location,
-            // Controls which color is applied to the point. Needs to be the points measurement.
-            value: o.measurements[3]
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [
-              o.coordinates.longitude,
-              o.coordinates.latitude
-            ]
-          }
-        }))
-      }
-    };
-
-    // OLD CODE for converting the value above.
-    // latestStore.storage.hasGeo[this.state.selectedParameter].forEach((l) => {
-    //   // Handle conversion from ug/m3 to ppm for certain parameters here
-    //   l.convertedValue = l.value;
-    //   if (['co', 'so2', 'no2', 'o3'].indexOf(l.parameter) !== -1) {
-    //     l.convertedValue = parameterConversion[l.parameter] * l.value;
-    //   }
-
-    // console.log(this.props.measurements.map(o => ({ o })))
-
-    this.map.addSource('measurements', source);
+      'data': source
+    });
 
     // Layer for outline
     this.map.addLayer({
@@ -246,13 +269,35 @@ const MapComponent = React.createClass({
     });
   },
 
+  //
+  // Start life-cycle methods
+  //
+
+  componentDidUpdate: function (prevProps) {
+    if (this.props.parameter.id !== prevProps.parameter.id) {
+      const source = this.generateSourceData();
+      this.map.getSource('measurements').setData(source);
+    }
+  },
+
   componentDidMount: function () {
+    if (!this.props.center && !this.props.bbox) {
+      throw new Error('At least center or bbox has to be provided to MapComponent');
+    }
+
     this.map = new mapboxgl.Map({
       container: this.refs.map,
       center: this.props.center,
       zoom: this.props.zoom,
       style: config.mapbox.baseStyle
     });
+
+    if (this.props.bbox) {
+      this.map.fitBounds([
+        [this.props.bbox[0], this.props.bbox[1]],
+        [this.props.bbox[2], this.props.bbox[3]]
+      ]);
+    }
 
     if (this.props.disableScrollZoom) {
       this.map.scrollZoom.disable();
@@ -261,10 +306,13 @@ const MapComponent = React.createClass({
 
     this.map.on('load', () => {
       this.setupMapData();
-      this.setupMapPopover();
-      this.setupMapSelect();
+      this.setupMapEvents();
     });
   },
+
+  //
+  // Start render methods
+  //
 
   render: function () {
     console.log('this.props.highlightLoc:', this.props.highlightLoc);
