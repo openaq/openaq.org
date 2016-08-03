@@ -1,7 +1,5 @@
-import scale from 'd3-scale';
+var d3 = require('d3');
 import { colorScale as colors, parameterMax, unusedColor } from '../utils/map-settings';
-
-console.log(scale)
 
 /**
 * Generate the color scale based on domain and range
@@ -39,7 +37,7 @@ export function generateColorScale (parameterMax) {
 
   // Clamp to max value for the parameter
 
-  const colorScale = scale.quantize().domain([0, parameterMax]).range(colors);
+  const colorScale = d3.scaleQuantize().domain([0, parameterMax]).range(colors);
 
   return colorScale;
 }
