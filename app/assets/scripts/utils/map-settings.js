@@ -4,25 +4,29 @@ export const circleBlur = {
   'stops': [[0, 0.8], [5, 0.5], [7, 0]]
 };
 
-// for default fill size for old measurements
+// Fill Radius for stations w/o measurements
 export const unusedCircleRadius = {
   'stops': [[0, 2], [5, 5], [7, 8]]
 };
-// for default fill size
+
+// Fill Radius for all station points w/ values
 export const coloredCircleRadius = {
   'stops': [[0, 2], [5, 3], [7, 7]]
 };
-// for default border
+
+// Border Radius for all points
 export const borderCircleRadius = {
-  'stops': [[0, 2.5], [5, 2.75], [7, 9]]
+  'stops': [[0, 2.2], [5, 3.5], [7, 8.5], [9, 9]]
 };
-// for a selected points white highlight
+
+// Border Radius for the white outline around selected points
 export const selectCircleRadius = {
-  'stops': [[0, 2.75], [5, 3.5], [7, 9]]
+  'stops': [[0, 2.8], [5, 4.5], [7, 9.5]]
 };
-// for selected points shadow
+
+// Fill Radius for the shadow around selected points
 export const selectShadowCircleRadius = {
-  'stops': [[0, 3.5], [5, 4], [7, 12]]
+  'stops': [[0, 3.5], [5, 6], [7, 12]]
 };
 
 // The max values are there to keep the scale from getting skewed too high.

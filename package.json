@@ -79,6 +79,7 @@
   "dependencies": {
     "babel-polyfill": "^6.9.1",
     "classnames": "^2.2.5",
+    "chroma-js": "^1.2.1",
     "d3": "^4.2.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.13.1",

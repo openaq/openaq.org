@@ -45,16 +45,16 @@ const MapComponent = React.createClass({
     this.map.panTo([data.coordinates.longitude, data.coordinates.latitude]);
     this.showPopover(data);
 
-    // We we click a nearby location we need to show the popup but also
+    // We click a nearby location we need to show the popup but also
     // select the appropriate point. However the point needs feature data.
     // From the measurement data we regenerate the feature and pass it to the
     // selectPoint function.
     // Another option would be to do a map query for features with the point
     // projected from the coordinates, but that's slower for sure.
     // Code follows anyway:
-    //     let projectedPoint = this.map.project([data.coordinates.longitude, data.coordinates.latitude]);
-    //     let features = this.map.queryRenderedFeatures(projectedPoint, { layers: ['measurements'] });
-    //     this.selectPoint(features[0]);
+        // let projectedPoint = this.map.project([data.coordinates.longitude, data.coordinates.latitude]);
+        // let features = this.map.queryRenderedFeatures(projectedPoint, { layers: ['measurements'] });
+        // this.selectPoint(features[0]);
     this.selectPoint(this.generateFeature(data));
   },
 
@@ -164,7 +164,7 @@ const MapComponent = React.createClass({
       'source': 'selectedPoint',
       'paint': {
         'circle-color': '#000',
-        'circle-opacity': 0.2,
+        'circle-opacity': 0.3,
         'circle-radius': selectShadowCircleRadius,
         'circle-blur': 0.5,
         'circle-translate': [0.5, 0.5]
@@ -183,21 +183,21 @@ const MapComponent = React.createClass({
       }
     });
     // Re-add fill by value
-    // this.map.addLayer({
-    //   'id': 'selectedPoint',
-    //   'type': 'circle',
-    //   'source': 'selectedPoint',
-    //   'paint': {
-    //     'circle-color': {
-    //       property: 'convertedValue',
-    //       stops: generateColorStops(this.props.parameter.id)
-    //       // replace with generateColorStops()
-    //     },
-    //     'circle-opacity': 1,
-    //     'circle-radius': coloredCircleRadius,
-    //     'circle-blur': 0
-    //   }
-    // });
+    this.map.addLayer({
+      'id': 'selectedPoint',
+      'type': 'circle',
+      'source': 'selectedPoint',
+      'paint': {
+        'circle-color': {
+          property: 'value',
+          stops: generateColorStops(this.props.parameter.id)
+          // replace with generateColorStops()
+        },
+        'circle-opacity': 1,
+        'circle-radius': coloredCircleRadius,
+        'circle-blur': 0
+      }
+    });
   },
 
   //
@@ -249,7 +249,10 @@ const MapComponent = React.createClass({
       'source': 'measurements',
       'type': 'circle',
       'paint': {
-        'circle-color': '#1e4280',
+        'circle-color': {
+          property: 'value',
+          stops: generateColorStops(this.props.parameter.id, 'dark')
+        },
         'circle-opacity': 1,
         'circle-radius': borderCircleRadius,
         'circle-blur': 0
@@ -295,15 +298,16 @@ const MapComponent = React.createClass({
       container: this.refs.map,
       center: this.props.center,
       zoom: this.props.zoom,
-      style: config.mapbox.baseStyle
+      style: config.mapbox.baseStyle,
+      fitBounds: [[-180, 90], [180, -90]]
     });
 
-    if (this.props.bbox) {
-      this.map.fitBounds([
-        [this.props.bbox[0], this.props.bbox[1]],
-        [this.props.bbox[2], this.props.bbox[3]]
-      ]);
-    }
+    // if (this.props.bbox) {
+    //   this.map.fitBounds([
+    //     [this.props.bbox[0], this.props.bbox[1]],
+    //     [this.props.bbox[2], this.props.bbox[3]]
+    //   ]);
+    // }
 
     if (this.props.disableScrollZoom) {
       this.map.scrollZoom.disable();
