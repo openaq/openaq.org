@@ -44,17 +44,12 @@ const MapComponent = React.createClass({
     let data = _.find(this.props.measurements, {location: location});
     this.map.panTo([data.coordinates.longitude, data.coordinates.latitude]);
     this.showPopover(data);
+    this.selectPoint(this.generateFeature(data));
+  },
 
-    // We click a nearby location we need to show the popup but also
-    // select the appropriate point. However the point needs feature data.
-    // From the measurement data we regenerate the feature and pass it to the
-    // selectPoint function.
-    // Another option would be to do a map query for features with the point
-    // projected from the coordinates, but that's slower for sure.
-    // Code follows anyway:
-        // let projectedPoint = this.map.project([data.coordinates.longitude, data.coordinates.latitude]);
-        // let features = this.map.queryRenderedFeatures(projectedPoint, { layers: ['measurements'] });
-        // this.selectPoint(features[0]);
+  locationPageSetup: function () {
+    let data = _.find(this.props.measurements, {location: this.props.highlightLoc});
+    this.showPopover(data);
     this.selectPoint(this.generateFeature(data));
   },
 
@@ -141,6 +136,7 @@ const MapComponent = React.createClass({
   },
 
   selectPoint: function (feature) {
+    console.log(feature);
     if (this.map.getSource('selectedPoint')) {
       this.map.getLayer('selectedPointShadow') && this.map.removeLayer('selectedPointShadow');
       this.map.getLayer('selectedPointHighlight') && this.map.removeLayer('selectedPointHighlight');
@@ -317,6 +313,10 @@ const MapComponent = React.createClass({
     this.map.on('load', () => {
       this.setupMapData();
       this.setupMapEvents();
+      // There is probably a better test for this if statement.
+      if (this.props.highlightLoc) {
+        this.locationPageSetup();
+      }
     });
   },
 
@@ -325,7 +325,6 @@ const MapComponent = React.createClass({
   //
 
   render: function () {
-    console.log('this.props.highlightLoc:', this.props.highlightLoc);
     return (
       <div className='map'>
         <div className='map__container' ref='map'>
