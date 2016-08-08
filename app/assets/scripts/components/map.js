@@ -296,18 +296,18 @@ const MapComponent = React.createClass({
 
     this.map = new mapboxgl.Map({
       container: this.refs.map,
-      center: this.props.center,
+      center: this.props.center || [0, 0],
       zoom: this.props.zoom,
       style: config.mapbox.baseStyle,
-      fitBounds: [[-180, 90], [180, -90]]
+      maxBounds: [[-180, 90], [180, -90]]
     });
 
-    // if (this.props.bbox) {
-    //   this.map.fitBounds([
-    //     [this.props.bbox[0], this.props.bbox[1]],
-    //     [this.props.bbox[2], this.props.bbox[3]]
-    //   ]);
-    // }
+    if (this.props.bbox) {
+      this.map.fitBounds([
+        [this.props.bbox[0], this.props.bbox[1]],
+        [this.props.bbox[2], this.props.bbox[3]]
+      ]);
+    }
 
     if (this.props.disableScrollZoom) {
       this.map.scrollZoom.disable();
