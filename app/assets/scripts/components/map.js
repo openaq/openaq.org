@@ -136,7 +136,6 @@ const MapComponent = React.createClass({
   },
 
   selectPoint: function (feature) {
-    console.log(feature);
     if (this.map.getSource('selectedPoint')) {
       this.map.getLayer('selectedPointShadow') && this.map.removeLayer('selectedPointShadow');
       this.map.getLayer('selectedPointHighlight') && this.map.removeLayer('selectedPointHighlight');
