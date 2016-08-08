@@ -299,7 +299,7 @@ const MapComponent = React.createClass({
       center: this.props.center || [0, 0],
       zoom: this.props.zoom,
       style: config.mapbox.baseStyle,
-      maxBounds: [[-180, 90], [180, -90]]
+      maxBounds: [[-180, -84], [180, 84]]
     });
 
     if (this.props.bbox) {
