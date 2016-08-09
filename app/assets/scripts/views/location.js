@@ -7,7 +7,7 @@ import c from 'classnames';
 
 import { formatThousands } from '../utils/format';
 import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, invalidateAllLocationData } from '../actions/action-creators';
-import { getMapColors } from '../utils/colors';
+import { generateLegendStops } from '../utils/colors';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
@@ -230,8 +230,8 @@ var Location = React.createClass({
     } else {
       let addIntro = null;
       if (this.props.loc.data.coordinates) {
-        const mapColors = getMapColors();
-        const colorWidth = 100 / mapColors.length;
+        const scaleStops = generateLegendStops('pm25');
+        const colorWidth = 100 / scaleStops.length;
 
         content = <MapComponent
           center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
@@ -243,7 +243,7 @@ var Location = React.createClass({
             <div>
               <p>Showing most recent values for PM2.5</p>
               <ul className='color-scale'>
-                {mapColors.map(o => (
+                {scaleStops.map(o => (
                   <li key={o.label} style={{'backgroundColor': o.color, width: `${colorWidth}%`}} className='color-scale__item'><span className='color-scale__value'>{o.label}</span></li>
                 ))}
               </ul>

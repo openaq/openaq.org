@@ -20,3 +20,11 @@ $page-header-y: $global-spacing * 5;
     top: 0;
   }
 }
+
+.mapboxgl-popup-anchor-top, .mapboxgl-popup-anchor-top-left, .mapboxgl-popup-anchor-top-right{
+  top: 12px;
+}
+
+.mapboxgl-popup-anchor-bottom, .mapboxgl-popup-anchor-bottom-left, .mapboxgl-popup-anchor-bottom-right{
+  top: -10px;
+}
