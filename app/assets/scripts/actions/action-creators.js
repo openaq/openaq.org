@@ -332,6 +332,57 @@ export function fetchLocationIfNeeded (location) {
 }
 
 // ////////////////////////////////////////////////////////////////
+//                           LOCATIONS                           //
+// ////////////////////////////////////////////////////////////////
+
+function requestCompareLocation (index) {
+  return {
+    type: actions.REQUEST_COMPARE_LOCATION,
+    index
+  };
+}
+
+function receiveCompareLocation (json, index, error = null) {
+  return {
+    type: actions.RECEIVE_COMPARE_LOCATION,
+    index,
+    json: json,
+    error,
+    receivedAt: Date.now()
+  };
+}
+
+export function fetchCompareLocationIfNeeded (index, location) {
+  return function (dispatch, getState) {
+    dispatch(requestCompareLocation(index));
+
+    // Search for the location in the state.
+    let state = getState();
+    let l = _.find(state.locations.data.results, {location: location});
+    if (l) {
+      return dispatch(receiveCompareLocation(l, index));
+    }
+
+    fetch(`${config.api}/locations?location=${location}`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(json => {
+        // setTimeout(() => {
+        //   dispatch(receiveLocation(json));
+        // }, 2000);
+        dispatch(receiveCompareLocation(json.results[0], index));
+      }, e => {
+        console.log('e', e);
+        return dispatch(receiveLocation(null, index, 'Data not available'));
+      });
+  };
+}
+
+// ////////////////////////////////////////////////////////////////
 //                         MEASUREMENTS                          //
 // ////////////////////////////////////////////////////////////////
 
