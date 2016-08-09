@@ -5,9 +5,10 @@ import _ from 'lodash';
 
 import { formatThousands } from '../utils/format';
 import { fetchLocations, invalidateAllLocationData, fetchLatestMeasurements } from '../actions/action-creators';
-import { getMapColors } from '../utils/colors';
+import { generateLegendStops } from '../utils/colors';
 import { getCountryBbox } from '../utils/countries';
 import InfoMessage from '../components/info-message';
+import LoadingMessage from '../components/loading-message';
 import LocationCard from '../components/location-card';
 import ShareBtn from '../components/share-btn';
 import MapComponent from '../components/map';
@@ -79,7 +80,7 @@ var Country = React.createClass({
     }
 
     if (fetching) {
-      return (<p>Data is loading</p>);
+      return <LoadingMessage />;
     }
 
     if (error) {
@@ -140,7 +141,7 @@ var Country = React.createClass({
     }
 
     if (fetching) {
-      return (<p>Data is loading</p>);
+      return <LoadingMessage />;
     }
 
     if (error) {
@@ -153,8 +154,8 @@ var Country = React.createClass({
       );
     }
 
-    const mapColors = getMapColors();
-    const colorWidth = 100 / mapColors.length;
+    const scaleStops = generateLegendStops('pm25');
+    const colorWidth = 100 / scaleStops.length;
     const bbox = getCountryBbox(this.props.params.name);
 
     return (
@@ -168,7 +169,7 @@ var Country = React.createClass({
             <div>
               <p>Showing most recent values for PM2.5</p>
               <ul className='color-scale'>
-                {mapColors.map(o => (
+                {scaleStops.map(o => (
                   <li key={o.label} style={{'backgroundColor': o.color, width: `${colorWidth}%`}} className='color-scale__item'><span className='color-scale__value'>{o.label}</span></li>
                 ))}
               </ul>

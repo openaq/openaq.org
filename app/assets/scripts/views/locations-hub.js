@@ -11,6 +11,7 @@ import { buildQS } from '../utils/url';
 import { fetchLocations } from '../actions/action-creators';
 import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
+import LoadingMessage from '../components/loading-message';
 
 var LocationsHub = React.createClass({
   displayName: 'LocationsHub',
@@ -233,7 +234,7 @@ var LocationsHub = React.createClass({
     }
 
     if (this.props.locFetching) {
-      return <div className='temp-loading'>loading message</div>;
+      return <LoadingMessage />;
     }
 
     if (this.props.locError) {
