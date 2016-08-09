@@ -10,6 +10,7 @@ import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, inva
 import { getMapColors } from '../utils/colors';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
+import LoadingMessage from '../components/loading-message';
 import MapComponent from '../components/map';
 import ShareBtn from '../components/share-btn';
 
@@ -115,7 +116,7 @@ var Location = React.createClass({
     let intro = null;
 
     if (fetching) {
-      content = <p>Fetching the data</p>;
+      content = <LoadingMessage />;
     } else if (error) {
       intro = <p>We couldn't get stats.</p>;
       content = (
@@ -217,7 +218,7 @@ var Location = React.createClass({
     let content = null;
 
     if (fetching) {
-      intro = <p>Fetching the data</p>;
+      intro = <LoadingMessage />;
     } else if (error) {
       intro = <p>We couldn't get any nearby locations.</p>;
       content = (

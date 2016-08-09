@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { Link } from 'react-router';
 import LocationCard from './location-card';
 import InfoMessage from './info-message';
+import LoadingMessage from './loading-message';
 
 var NearbyLocations = React.createClass({
   displayName: 'NearbyLocations',
@@ -93,7 +94,7 @@ var NearbyLocations = React.createClass({
     // Position acquired. Verify status of locations.
     if (requested && !requesting && !error) {
       if (this.props.locFetching) {
-        content = <p>fetching locations</p>;
+        content = <LoadingMessage />;
       } else if (this.props.locError) {
         intro = <p>We couldn't get any nearby locations.</p>;
         content = (
@@ -120,8 +121,6 @@ var NearbyLocations = React.createClass({
         content = this.renderNearby();
       }
     }
-
-    // <p>There are <strong>3 sites</strong> located within <strong>5km</strong> radius of your current location.</p>
 
     return (
       <section className='fold' id='home-nearby'>
