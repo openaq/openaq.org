@@ -24,6 +24,7 @@ import LocationsHub from './views/locations-hub';
 import LocationItem from './views/location';
 import CountriesHub from './views/countries-hub';
 import Country from './views/country';
+import Compare from './views/compare';
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
@@ -43,6 +44,7 @@ render((
         <Route name='location' path='location/:name' component={LocationItem} pageClass='page--location' />
         <Route name='countriesHub' path='countries' component={CountriesHub} pageClass='page--countries' />
         <Route name='country' path='countries/:name' component={Country} pageClass='page--country' />
+        <Route name='country' path='compare(/:loc1)(/:loc2)(/:loc3)' component={Compare} pageClass='page--compare' />
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>
