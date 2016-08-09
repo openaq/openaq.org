@@ -29,6 +29,11 @@ export const selectShadowCircleRadius = {
   'stops': [[0, 3.5], [5, 6], [7, 12]]
 };
 
+// Fill Radius for the shadow around the point a location page is on
+export const locationShadowCircleRadius = {
+  'stops': [[0, 4], [5, 7], [7, 14]]
+};
+
 // The max values are there to keep the scale from getting skewed too high.
 // So for example if New Delhi has really bad pollution one day,
 // it’d make everywhere else look good, which would not be true
