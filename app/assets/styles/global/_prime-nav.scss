@@ -93,8 +93,9 @@
   @include media(large-up) {
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 50%;
     z-index: 1000;
+    transform: translate(-50%, 0);
     width: 10rem;
     margin: 0;
     padding: $global-spacing;
@@ -112,14 +113,14 @@
 
     opacity: 0;
     visibility: hidden;
-    margin-top: -$global-spacing;
+    margin-top: -($global-spacing * 2);
 
     /* Post animation */
 
     .sub-revealed & {
       opacity: 1;
       visibility: visible;
-      margin-top: $global-spacing / 2;
+      margin-top: -($global-spacing / 2);
     }
   }
 }
