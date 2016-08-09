@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { formatThousands } from '../utils/format';
+import { geolocateUser, fetchNearbyLocations } from '../actions/action-creators';
 import NearbyLocations from '../components/nearby-locations';
 import CommunityCard from '../components/community-card';
-import { geolocateUser, fetchNearbyLocations } from '../actions/action-creators';
+import LoadingMessage from '../components/loading-message';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -57,7 +58,7 @@ var Home = React.createClass({
             <div className='fold__introduction prose prose--responsive'>
               {fetching
                 ? (<p>OpenAQ has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data is aggregated from <strong>{formatThousands(data.sources)}</strong> sources.</p>)
-                : <p>Computing the stats for you.</p>}
+                : <LoadingMessage />}
             </div>
           </header>
         </div>

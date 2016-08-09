@@ -27,3 +27,41 @@
   }
 
 }
+
+.data-loading-msg {
+  background-color: tint($base-color, 88%);
+  padding: 4rem 0;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .wind-animated {
+    width: 10rem;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .fold--filled & {
+    background-color: tint($base-color, 80%);
+  }
+}
+
+.wind-animated .wind {
+  fill: none;
+  stroke: $base-color;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 3s linear forwards infinite;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: 0;}
+  0% { opacity: 0;}
+  15% { opacity: 1;}
+  80% { opacity: 1;}
+  100% { opacity: 0;}
+}

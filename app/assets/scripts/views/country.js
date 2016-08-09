@@ -8,6 +8,7 @@ import { fetchLocations, invalidateAllLocationData, fetchLatestMeasurements } fr
 import { getMapColors } from '../utils/colors';
 import { getCountryBbox } from '../utils/countries';
 import InfoMessage from '../components/info-message';
+import LoadingMessage from '../components/loading-message';
 import LocationCard from '../components/location-card';
 import ShareBtn from '../components/share-btn';
 import MapComponent from '../components/map';
@@ -79,7 +80,7 @@ var Country = React.createClass({
     }
 
     if (fetching) {
-      return (<p>Data is loading</p>);
+      return <LoadingMessage />;
     }
 
     if (error) {
@@ -140,7 +141,7 @@ var Country = React.createClass({
     }
 
     if (fetching) {
-      return (<p>Data is loading</p>);
+      return <LoadingMessage />;
     }
 
     if (error) {
