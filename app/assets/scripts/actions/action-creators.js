@@ -332,7 +332,7 @@ export function fetchLocationIfNeeded (location) {
 }
 
 // ////////////////////////////////////////////////////////////////
-//                           LOCATIONS                           //
+//                       COMPARE LOCATION                        //
 // ////////////////////////////////////////////////////////////////
 
 function requestCompareLocation (index) {
@@ -372,13 +372,53 @@ export function fetchCompareLocationIfNeeded (index, location) {
       })
       .then(json => {
         // setTimeout(() => {
-        //   dispatch(receiveLocation(json));
-        // }, 2000);
+        //   dispatch(receiveCompareLocation(json.results[0], index));
+        // }, 5000);
         dispatch(receiveCompareLocation(json.results[0], index));
       }, e => {
         console.log('e', e);
         return dispatch(receiveLocation(null, index, 'Data not available'));
       });
+  };
+}
+
+export function removeCompareLocation (index) {
+  return {
+    type: actions.REMOVE_COMPARE_LOCATION,
+    index
+  };
+}
+
+export function selectCompareOptions () {
+  return {
+    type: actions.SELECT_COMPARE_OPTIONS
+  };
+}
+
+export function cancelCompareOptions () {
+  return {
+    type: actions.CANCEL_COMPARE_OPTIONS
+  };
+}
+
+export function selectCompareCountry (country) {
+  return {
+    type: actions.SELECT_COMPARE_OPT_COUNTRY,
+    country
+  };
+}
+
+export function selectCompareArea (area) {
+  return {
+    type: actions.SELECT_COMPARE_OPT_AREA,
+    area
+  };
+}
+
+export function selectCompareLocation (location) {
+  return {
+    type: actions.SELECT_COMPARE_OPT_LOCATION,
+    location
   };
 }
 

@@ -54,6 +54,14 @@
     @include media(small-up) {
       margin-top: 0;
     }
+
+    .form__actions .button {
+      margin-right: 0.5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 
   &__subtitle {
