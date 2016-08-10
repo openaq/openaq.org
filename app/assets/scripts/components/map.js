@@ -457,7 +457,11 @@ const MapPopover = React.createClass({
           <div className='popover__body'>
             {reading}
             <ul className='popover__actions'>
-              <li><a href={``} className='button button--primary-bounded' title={`Compare ${this.props.location} with another location`}>Compare</a></li>
+              { /*
+                Using `a` instead of `Link` because these are rendered outside
+                the router context and `Link` needs that context to work.
+              */ }
+              <li><a href={`#/compare/${this.props.location}`} className='button button--primary-bounded' title={`Compare ${this.props.location} with other locations`}>Compare</a></li>
               <li><a href={`#/location/${this.props.location}`} title={`View ${this.props.location} page`}className='button button--primary-bounded'>View More</a></li>
             </ul>
           </div>
