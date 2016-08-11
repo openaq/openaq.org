@@ -66,6 +66,41 @@ var Home = React.createClass({
     );
   },
 
+  renderCompareLocations: function () {
+    return (
+      <section className='fold fold--filled' id='home-compare'>
+        <div className='inner'>
+          <header className='fold__header'>
+            <h1 className='fold__title'>Compare locations</h1>
+            <div className='fold__introduction prose prose--responsive'>
+              <p>See how air quality compares among 2 random locations</p>
+            </div>
+          </header>
+          <div className='fold__body'>
+
+          <div className='col-main'>
+            <ul className='compare__location-list'>
+              <li className='compare__location'>
+                <p className='compare__subtitle'>Updated 2 hours ago</p>
+                <h2 className='compare__title'><span className={'compare-marker compare-marker--st'}>location name</span> <small>in city, country</small></h2>
+              </li>
+              <li className='compare__location'>
+                <p className='compare__subtitle'>Updated 2 hours ago</p>
+                <h2 className='compare__title'><span className={'compare-marker compare-marker--nd'}>location name</span> <small>in city, country</small></h2>
+              </li>
+            </ul>
+          </div>
+
+          <div className='col-sec'>
+            <div style={{textAlign: 'center', border: '2px lightgray dashed', padding: '5rem 0'}}>CHART</div>
+          </div>
+
+          </div>
+        </div>
+      </section>
+    );
+  },
+
   renderCommunity: function () {
     return (
       <section className='fold' id='home-community'>
@@ -128,15 +163,7 @@ var Home = React.createClass({
             sources={this.props.sources}
             parameters={this.props.parameters} />
 
-          <section className='fold fold--filled'>
-            <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Compare locations</h1>
-              </header>
-              <div className='fold__body'>
-              </div>
-            </div>
-          </section>
+          {this.renderCompareLocations()}
 
           {this.renderCommunity()}
 
