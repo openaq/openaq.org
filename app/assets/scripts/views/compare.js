@@ -120,7 +120,7 @@ var Compare = React.createClass({
   renderCompareSelectOpts: function () {
     if (this.props.compareSelectOpts.status === 'none') {
       return (
-        <li className='compare__location-actions' key='actions'>
+        <li className='compare__location compare__location--actions' key='actions'>
           <button type='button' className='button-compare-location' onClick={this.props._selectCompareOptions}>Add Location</button>
         </li>
       );
@@ -166,7 +166,7 @@ var Compare = React.createClass({
       let disableConfirm = disableLocation || this.props.compareSelectOpts.location === '--';
 
       return (
-        <li className='compare__location-actions' key='actions-form'>
+        <li className='compare__location compare__location--actions' key='actions-form'>
           <h2>Choose Location</h2>
           <form>
             <div className='form__group'>

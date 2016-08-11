@@ -46,20 +46,22 @@
         margin-top: 0;
       }
     }
-  }
 
-  &__location-actions {
-    @include col(4/12);
-    margin-top: 2rem;
-    @include media(small-up) {
-      margin-top: 0;
-    }
+    &--actions {
+      @include col(12/12);
+      margin-top: 2rem;
+      padding-left: 0;
 
-    .form__actions .button {
-      margin-right: 0.5rem;
+      @include media(medium-up) {
+        @include col(4/12);
+      }
 
-      &:last-child {
-        margin-right: 0;
+      .form__actions .button {
+        margin-right: 0.5rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
   }
