@@ -102,7 +102,7 @@ gulp.task('javascript', function () {
     cache: {},
     packageCache: {},
     fullPaths: true
-  }));
+  }), {poll: true});
 
   function bundler () {
     if (pkg.dependencies) {

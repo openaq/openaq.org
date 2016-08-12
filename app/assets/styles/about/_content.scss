@@ -1,0 +1,19 @@
+.sponsors {
+	li {
+		display: inline;
+		list-style: none;
+		@include col(6/12, $cycle: 2);
+		@include media(medium-up) {
+			@include col(4/12, $cycle: 3);
+		}
+		padding: ($global-spacing * 2) 0;
+		box-shadow: 0 0 0 2px $base-alpha-color;
+  	border-radius: $base-border-radius;
+  	text-align: center;
+  	margin: $global-spacing 0;
+  	height: 125px;
+		img {
+			max-height: 4rem;
+		}
+	}
+}
