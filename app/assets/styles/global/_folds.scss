@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Global: Folds
+   ========================================================================== */
+
+.fold {
+  background: #fff;
+  padding: ($global-spacing * 2) 0;
+  box-shadow: inset 0 -2px 0 0 $base-alpha-color;
+
+  > .inner {
+    @extend .row, .row--centered;
+  }
+
+  &,
+  > .inner,
+  .fold__header,
+  .fold__introduction,
+  .fold__body {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include media(medium-up) {
+    padding: ($global-spacing * 3) 0;
+  }
+
+  @include media(large-up) {
+    padding: ($global-spacing * 4) 0;
+  }
+}
+
+.fold__body {
+  margin-bottom: 2rem;
+}
+
+.fold__footer {
+  text-align: center;
+}
+
+.fold__header {
+  margin-bottom: $global-spacing;
+  overflow: hidden;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @include media(medium-up) {
+    margin-bottom: ($global-spacing * 2)
+  }
+}
+
+.fold__introduction {
+  @include col(12/12);
+  font-family: $heading-font-family;
+  font-weight: $heading-font-regular;
+
+  @include media(medium-up) {
+    @include col(10/12);
+  }
+
+  @include media(large-up) {
+    @include col(8/12);
+  }
+}
+
+.fold__title {
+  @include heading(1rem, medium-up);
+  @extend .heading-deco;
+}
+
+
+/* Modifiers
+   ========================================================================== */
+
+.fold--filled {
+  background: tint($base-color, 92%);
+}
+
+.fold--double {
+  padding: 0;
+  > .inner {
+      padding:0;
+    @include media(medium-up){
+      padding-left: 0;
+    }
+  }
+}
+
+.fold--media {
+  @include col(12/12);
+  @include media(medium-up) {
+    @include col(6/12);
+    background-size: contain;
+    background-position: top right;
+  };
+}
+
+.about-img1 {
+  background:     
+  linear-gradient(
+    rgba(73, 106, 144, 0.50), 
+    rgba(73, 106, 144, 0.50)
+  ), url(../graphics/content/about1.png) no-repeat;
+  background-size: cover;
+  background-position: top center;
+  margin-right: 0;
+
+}
+
+.about-img2 {
+  background:     
+  linear-gradient(
+    rgba(54, 170, 144, 0.50), 
+    rgba(54, 170, 144, 0.50)
+  ), url(../graphics/content/about2.png) no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+
+.fold--img {
+  @include media(medium-up) {
+    max-height: 400px;
+  };
+  max-height: 250px;
+  opacity: 0;
+}
+
+.fold--content {
+  @include col(12/12);
+  padding: ($global-spacing * 2) $global-spacing;
+
+  @include media(small-up) {
+    padding: $global-spacing * 2;
+  }
+
+  @include media(medium-up) {
+    @include col(6/12);
+    padding: ($global-spacing * 3) $global-spacing;
+  }
+}

@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Homepage: Content
+   ========================================================================== */
+
+.page--homepage {
+  .inpage__title {
+    em {
+      display: block;
+      font-style: normal;
+      font-weight: $base-font-weight;
+      font-size: 64%;
+      line-height: 1;
+    }
+  }
+}
+
+#home-nearby {
+  .fold__body {
+    @extend .clearfix;
+  }
+  .card {
+    @include col(12/12);
+    margin-bottom: 2rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include media(medium-up) {
+      @include col(6/12, $cycle: 2);
+    }
+
+    @include media(large-up) {
+      @include col(4/12, $cycle: 3);
+      margin-bottom: 0;
+    }
+  }
+}
+
+#home-community {
+  .fold__body {
+    @extend .clearfix;
+  }
+
+  .card {
+    @include col(12/12);
+
+    @include media(medium-up) {
+      @include col(10/12, $offset: 1/12);
+    }
+
+    @include media(large-up) {
+      @include col(8/12, $offset: 2/12);
+    }
+  }
+}

@@ -1,0 +1,30 @@
+/* ==========================================================================
+   Global: Map
+   ========================================================================== */
+
+$page-header-y: $global-spacing * 5;
+
+.page--map {
+  .page__header {
+    background-color: rgba(#fff, 0.64);
+  }
+  .inpage__header,
+  .page__footer {
+    @extend .visually-hidden;
+  }
+
+  .map {
+    position: static;
+  }
+  .map__container {
+    top: 0;
+  }
+}
+
+.mapboxgl-popup-anchor-top, .mapboxgl-popup-anchor-top-left, .mapboxgl-popup-anchor-top-right{
+  top: 12px;
+}
+
+.mapboxgl-popup-anchor-bottom, .mapboxgl-popup-anchor-bottom-left, .mapboxgl-popup-anchor-bottom-right{
+  top: -10px;
+}

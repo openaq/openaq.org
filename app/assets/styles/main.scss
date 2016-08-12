@@ -1,29 +1,85 @@
-// Charset
-@charset "UTF-8";
+/* ==========================================================================
+   Main
+   ========================================================================== */
 
-// Google Fonts
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700);
+/* Third-party
+   ========================================================================== */
 
-// Libs
+/**
+ * Bourbon for extended SASS functionality:
+ * http://bourbon.io/
+ */
+
 @import "bourbon";
-@import "neat";
 
-// Reset and normalize
-@import "normalize";
-@import "reset";
-@import "normalize-opentype";
+/**
+ * Jeet, a grid system designed for humans:
+ * http://jeet.gs/
+ */
 
-// Fonts
-@import url(../../fonts/icons.css);
+@import "jeet/jeet";
 
-// Settings
-@import "variables";
 
-// Custom styles
-@import "base";
-@import "header";
-@import "footer";
-@import "location-detail";
-@import "page";
-@import "map";
-@import "map-sidebar";
+/* OpenAQ Design System
+   ========================================================================== */
+
+@import "openaq-design-system";
+@import "../../../node_modules/mapbox-gl/dist/mapbox-gl";
+
+
+/* Global
+   ========================================================================== */
+
+@import "global/pages";
+@import "global/inpages";
+@import "global/folds";
+@import "global/cards";
+@import "global/map";
+@import "global/popover";
+@import "global/messages";
+@import "global/prime-nav";
+@import "global/footer";
+@import "global/content";
+
+
+/* Homepage
+   ========================================================================== */
+
+@import "homepage/content";
+
+
+/* Map
+   ========================================================================== */
+
+@import "map/content";
+
+
+/* Locations
+   ========================================================================== */
+
+@import "locations/content";
+
+
+/* Individual Location
+   ========================================================================== */
+
+@import "location/content";
+
+
+/* Countries
+   ========================================================================== */
+
+@import "countries/content";
+
+
+
+/* Country
+   ========================================================================== */
+
+@import "country/content";
+
+/* About
+   ========================================================================== */
+
+@import "about/content";
+

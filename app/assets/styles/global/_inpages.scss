@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Global: Inpages
+   ========================================================================== */
+
+$page-header-y: $global-spacing * 5;
+.inpage {
+
+  &__header {
+    background-image: url(../graphics/content/page-hero-default.png);
+    position: relative;
+    color: $base-font-color;
+    padding: {
+      top: ($global-spacing * 2) + $page-header-y;
+      right: 0;
+      bottom: ($global-spacing * 2);
+      left: 0;
+    }
+    margin-top: -$page-header-y;
+    background-color: tint($base-color, 92%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    > .inner {
+      @extend .row, .row--centered;
+    }
+
+    &::after {
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      content: '';
+      background: $base-semi-alpha-color;
+    }
+
+    @include media(medium-up) {
+      padding: {
+        top: ($global-spacing * 3) + $page-header-y;
+        bottom: ($global-spacing * 3);
+      }
+    }
+
+    @include media(large-up) {
+      padding: {
+        top: ($global-spacing * 4) + $page-header-y;
+        bottom: ($global-spacing * 4);
+      }
+    }
+  }
+
+  &__headline {
+    overflow: hidden;
+  }
+
+  &__actions {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      li {
+        float: left;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        @include media(medium-up) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &__title {
+    @extend .heading, .heading--medium;
+    @include col(8/12);
+  }
+
+  &__subtitle {
+    @extend .heading-alt;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin: 0;
+
+    @include media(medium-up) {
+      position: absolute;
+      transform: translate(0, -100%);
+    }
+  }
+
+  &__headline-actions {
+    float: right;
+  }
+
+  &__introduction {
+    color: rgba($base-font-color, 0.64);
+    font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 1rem;
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    @include media(medium-up) {
+      max-width: 8/12*100%;
+      font-size: 1.25rem;
+      line-height: 2rem;
+    }
+  }
+
+  &__body {
+    > .inner {
+      @extend .row, .row--centered;
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__aside {
+    @include col(12/12);
+    padding: 1rem 0;
+
+    @include media(medium-up) {
+      @include col(4/12);
+      padding: 2rem 0;
+    }
+    @include media(large-up) {
+      @include col(3/12);
+      padding: 2rem 0;
+    }
+  }
+  &__content {
+    @include col(12/12);
+    padding: 1rem 0;
+
+    @include media(medium-up) {
+      @include col(8/12);
+      padding: 2rem 0;
+    }
+    @include media(large-up) {
+      @include col(9/12);
+      padding: 2rem 0;
+    }
+  }
+
+  > .inner > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/* Dark theme modifier
+   ========================================================================== */
+
+.page--dark {
+  .inpage__header {
+    @extend .antialiased;
+    background-color: $base-color;
+    color: #fff;
+  }
+
+  .inpage__subtitle {
+    color: rgba(#fff, 0.48);
+  }
+  
+  .inpage__introduction {
+    color: rgba(#fff, 0.64);
+  }
+}
+
+.header--centered {
+  .inpage__title {
+    text-align: center;
+    @include col(6/12, $offset: 3/12);
+  }
+  
+  .inpage__introduction {
+    text-align: center;
+    @include col(8/12, $offset: 2/12);
+  }
+}
