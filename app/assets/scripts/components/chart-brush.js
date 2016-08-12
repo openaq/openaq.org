@@ -293,7 +293,12 @@ var Chart = function (options) {
           .attr('class', 'y axis')
           .append('text')
           .attr('class', 'label')
-          .attr('text-anchor', 'start');
+          .attr('text-anchor', 'end')
+          .attr('dy', '16px')
+          .attr('transform', 'rotate(-90)');
+
+        yAx.select('.label')
+          .text(_yLabel);
 
         yAx
           .attr('transform', `translate(${margin.left},${margin.top})`)

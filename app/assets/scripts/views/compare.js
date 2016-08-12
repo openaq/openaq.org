@@ -307,6 +307,7 @@ var Compare = React.createClass({
   },
 
   renderBrushChart: function () {
+    let activeParam = this.getActiveParameterData();
     // All the times are local and shouldn't be converted to UTC.
     // The values should be compared at the same time local to ensure an
     // accurate comparison.
@@ -364,7 +365,7 @@ var Compare = React.createClass({
         data={chartData}
         xRange={xRange}
         yRange={[0, yMax]}
-        yLabel='meh' />
+        yLabel={`Values in ${activeParam.preferredUnit}`} />
     );
   },
 
