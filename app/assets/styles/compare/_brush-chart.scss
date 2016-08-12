@@ -19,6 +19,13 @@
     transform: translate(0, 0.5px);
   }
 
+  .brush .selection {
+    fill: $base-color;
+    fill-opacity: 0.16;
+    stroke: $base-color;
+    stroke-opacity: 0.32;
+  }
+
   .location-data {
     &--st circle {
       fill: $infographic-color-a;
