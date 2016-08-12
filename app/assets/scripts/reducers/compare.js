@@ -25,6 +25,23 @@ const defaultState = {
       fetched: false,
       data: null
     }
+  ],
+  measurements: [
+    {
+      fetching: false,
+      fetched: false,
+      data: null
+    },
+    {
+      fetching: false,
+      fetched: false,
+      data: null
+    },
+    {
+      fetching: false,
+      fetched: false,
+      data: null
+    }
   ]
 };
 
@@ -51,6 +68,7 @@ export default function (state = defaultState, action) {
       console.log('REMOVE_COMPARE_LOCATION');
       state = _.cloneDeep(state);
       state.locations[action.index] = _.cloneDeep(defaultState.locations[0]);
+      state.measurements[action.index] = _.cloneDeep(defaultState.measurements[0]);
       break;
 
     case actions.SELECT_COMPARE_OPTIONS:
@@ -84,6 +102,24 @@ export default function (state = defaultState, action) {
       console.log('SELECT_COMPARE_OPT_LOCATION');
       state = _.cloneDeep(state);
       state.compareSelectOpts.location = action.location;
+      break;
+
+    case actions.REQUEST_COMPARE_LOCATION_MEASUREMENTS:
+      console.log('REQUEST_COMPARE_LOCATION_MEASUREMENTS');
+      state = _.cloneDeep(state);
+      state.measurements[action.index].error = null;
+      state.measurements[action.index].fetching = true;
+      break;
+    case actions.RECEIVE_COMPARE_LOCATION_MEASUREMENTS:
+      console.log('RECEIVE_COMPARE_LOCATION_MEASUREMENTS');
+      state = _.cloneDeep(state);
+      if (action.error) {
+        state.measurements[action.index].error = action.error;
+      } else {
+        state.measurements[action.index].data = action.json;
+      }
+      state.measurements[action.index].fetching = false;
+      state.measurements[action.index].fetched = true;
       break;
   }
   return state;

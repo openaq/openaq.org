@@ -5,6 +5,8 @@ import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';
 import { hashHistory } from 'react-router';
+import { Dropdown } from 'openaq-design-system';
+import * as d3 from 'd3';
 
 import {
   fetchCompareLocationIfNeeded,
@@ -15,10 +17,14 @@ import {
   selectCompareArea,
   selectCompareLocation,
   fetchLocations,
-  invalidateLocations
+  invalidateLocations,
+  fetchCompareLocationMeasurements
 } from '../actions/action-creators';
 import ShareBtn from '../components/share-btn';
 import LoadingMessage from '../components/loading-message';
+import InfoMessage from '../components/info-message';
+import ChartBrush from '../components/chart-brush';
+import { convertParamIfNeeded } from '../utils/map-settings';
 
 var Compare = React.createClass({
   displayName: 'Compare',
@@ -33,25 +39,67 @@ var Compare = React.createClass({
     _selectCompareLocation: React.PropTypes.func,
     _fetchLocations: React.PropTypes.func,
     _invalidateLocations: React.PropTypes.func,
+    _fetchCompareLocationMeasurements: React.PropTypes.func,
+
     params: React.PropTypes.object,
+    location: React.PropTypes.object,
 
     countries: React.PropTypes.array,
+    parameters: React.PropTypes.array,
 
     compareLoc: React.PropTypes.array,
+    compareMeasurements: React.PropTypes.array,
     compareSelectOpts: React.PropTypes.object,
 
     locations: React.PropTypes.object
   },
 
+  getActiveParameterData: function () {
+    let parameter = this.props.location.query.parameter;
+    let parameterData = _.find(this.props.parameters, {id: parameter});
+    return parameterData || _.find(this.props.parameters, {id: 'pm25'});
+  },
+
+  fetchLocationData: function (index, loc) {
+    this.props._fetchCompareLocationIfNeeded(index, loc);
+
+    let toDate = moment.utc();
+    let fromDate = toDate.clone().subtract(8, 'days');
+    this.props._fetchCompareLocationMeasurements(index, loc, fromDate.toISOString(), toDate.toISOString());
+  },
+
+  // Returns an array with the names of the locations being compared.
+  // It also accepts a filter function to further remove locations.
+  // Mostly used to construct the url.
+  getLocNames: function (filter) {
+    return this.props.compareLoc
+      .filter((o, i) => {
+        if (!o.data) return false;
+        if (filter) return filter(o, i);
+        return true;
+      })
+      .map(o => o.data.location);
+  },
+
+  //
+  // Start event listeners
+  //
+
+  onFilterSelect: function (parameter, e) {
+    e.preventDefault();
+    let locsUrl = this.getLocNames()
+      .join('/');
+
+    hashHistory.push(`/compare/${locsUrl}?parameter=${parameter}`);
+  },
+
   removeLocClick: function (index, e) {
     // To build the url filter out the location at the given index.
     // Ensure that non loaded locations are also out.
-    let locsUrl = this.props.compareLoc
-      .filter((o, i) => i !== index && o.data)
-      .map(o => o.data.location)
+    let locsUrl = this.getLocNames((o, i) => i !== index)
       .join('/');
 
-    hashHistory.push(`/compare/${locsUrl}`);
+    hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
   },
 
   onCompareOptSelect: function (key, e) {
@@ -73,12 +121,10 @@ var Compare = React.createClass({
   compareOptionsConfirmClick: function () {
     this.props._cancelCompareOptions();
 
-    let locsUrl = this.props.compareLoc
-      .filter((o, i) => o.data)
-      .map(o => o.data.location);
+    let locsUrl = this.getLocNames();
     locsUrl.push(this.props.compareSelectOpts.location);
 
-    hashHistory.push(`/compare/${locsUrl.join('/')}`);
+    hashHistory.push(`/compare/${locsUrl.join('/')}?parameter=${this.getActiveParameterData().id}`);
   },
 
   //
@@ -87,9 +133,9 @@ var Compare = React.createClass({
 
   componentDidMount: function () {
     let {loc1, loc2, loc3} = this.props.params;
-    loc1 && this.props._fetchCompareLocationIfNeeded(0, loc1);
-    loc2 && this.props._fetchCompareLocationIfNeeded(1, loc2);
-    loc3 && this.props._fetchCompareLocationIfNeeded(2, loc3);
+    loc1 && this.fetchLocationData(0, loc1);
+    loc2 && this.fetchLocationData(1, loc2);
+    loc3 && this.fetchLocationData(2, loc3);
   },
 
   componentWillReceiveProps: function (nextProps) {
@@ -98,17 +144,17 @@ var Compare = React.createClass({
 
     if (prevLoc1 !== currLoc1) {
       currLoc1
-        ? this.props._fetchCompareLocationIfNeeded(0, currLoc1)
+        ? this.fetchLocationData(0, currLoc1)
         : this.props._removeCompareLocation(0);
     }
     if (prevLoc2 !== currLoc2) {
       currLoc2
-        ? this.props._fetchCompareLocationIfNeeded(1, currLoc2)
+        ? this.fetchLocationData(1, currLoc2)
         : this.props._removeCompareLocation(1);
     }
     if (prevLoc3 !== currLoc3) {
       currLoc3
-        ? this.props._fetchCompareLocationIfNeeded(2, currLoc3)
+        ? this.fetchLocationData(2, currLoc3)
         : this.props._removeCompareLocation(2);
     }
   },
@@ -236,7 +282,95 @@ var Compare = React.createClass({
     return locsEl;
   },
 
+  renderParameterSelector: function () {
+    let activeParam = this.getActiveParameterData();
+    let drop = (
+      <Dropdown
+        triggerElement='button'
+        triggerClassName='button button--base-unbounded drop__toggle--caret'
+        triggerTitle='Show/hide parameter options'
+        triggerText={activeParam.name} >
+
+        <ul role='menu' className='drop__menu drop__menu--select'>
+        {this.props.parameters.map(o => (
+          <li key={o.id}>
+            <a className={c('drop__menu-item', {'drop__menu-item--active': activeParam.id === o.id})} href='#' title={`Show values for ${o.name}`} data-hook='dropdown:close' onClick={this.onFilterSelect.bind(null, o.id)}><span>{o.name}</span></a>
+          </li>
+        ))}
+        </ul>
+      </Dropdown>
+    );
+
+    return (
+      <p>Comparing {drop} values for local times</p>
+    );
+  },
+
+  renderBrushChart: function () {
+    // All the times are local and shouldn't be converted to UTC.
+    // The values should be compared at the same time local to ensure an
+    // accurate comparison.
+    let userNow = moment().format('YYYY/MM/DD HH:mm:ss');
+    let weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
+
+    const filterFn = (o) => {
+      if (o.parameter !== this.getActiveParameterData().id) {
+        return false;
+      }
+      let localDate = moment.parseZone(o.date.local).format('YYYY/MM/DD HH:mm:ss');
+      return localDate >= weekAgo && localDate <= userNow;
+    };
+
+    // Prepare data.
+    let chartData = _(this.props.compareMeasurements)
+      .filter(o => o.fetched && !o.fetching && o.data)
+      .map(o => {
+        return _.cloneDeep(o.data.results)
+          .filter(filterFn)
+          .map(o => {
+            o.value = convertParamIfNeeded(o);
+            // Disregard timezone on local date.
+            let dt = o.date.local.match(/^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/)[0];
+            // `measurement` local date converted directly to user local.
+            o.date.localNoTZ = new Date(dt);
+            return o;
+          });
+      })
+      .value();
+
+    let yMax = d3.max(chartData || [], r => d3.max(r, o => o.value)) || 0;
+
+    // 1 Week.
+    let xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
+
+    // Only show the "no results" message if stuff has loaded
+    let fetchedMeasurements = this.props.compareMeasurements.filter(o => o.fetched && !o.fetching);
+    if (fetchedMeasurements.length) {
+      let dataCount = chartData.reduce((prev, curr) => prev + curr.length, 0);
+
+      if (!dataCount) {
+        return (
+          <InfoMessage>
+            <p>There's no data for the selected parameter</p>
+            <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
+          </InfoMessage>
+        );
+      }
+    }
+
+    return (
+      <ChartBrush
+        className='brush-chart'
+        data={chartData}
+        xRange={xRange}
+        yRange={[0, yMax]}
+        yLabel='meh' />
+    );
+  },
+
   render: function () {
+    let locs = this.props.compareLoc.filter(o => o.fetched || o.fetching);
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -257,17 +391,21 @@ var Compare = React.createClass({
           </div>
         </header>
         <div className='inpage__body'>
-
-          <section className='fold fold--filled'>
-            <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Our data</h1>
-              </header>
-              <div className='fold__body'>
+          {locs.length ? (
+            <section className='fold'>
+              <div className='inner'>
+                <header className='fold__header'>
+                  <h1 className='fold__title'>Comparing measurements</h1>
+                  <div className='fold__introduction'>
+                    {this.renderParameterSelector()}
+                  </div>
+                </header>
+                <div className='fold__body'>
+                  {this.renderBrushChart()}
+                </div>
               </div>
-            </div>
-          </section>
-
+            </section>
+          ) : null}
         </div>
       </section>
     );
@@ -280,9 +418,11 @@ var Compare = React.createClass({
 function selector (state) {
   return {
     countries: state.baseData.data.countries,
+    parameters: state.baseData.data.parameters,
 
     compareLoc: state.compare.locations,
     compareSelectOpts: state.compare.compareSelectOpts,
+    compareMeasurements: state.compare.measurements,
 
     locations: state.locations
   };
@@ -301,7 +441,9 @@ function dispatcher (dispatch) {
     _invalidateLocations: (...args) => dispatch(invalidateLocations(...args)),
 
     _fetchCompareLocationIfNeeded: (...args) => dispatch(fetchCompareLocationIfNeeded(...args)),
-    _removeCompareLocation: (...args) => dispatch(removeCompareLocation(...args))
+    _removeCompareLocation: (...args) => dispatch(removeCompareLocation(...args)),
+
+    _fetchCompareLocationMeasurements: (...args) => dispatch(fetchCompareLocationMeasurements(...args))
   };
 }
 

@@ -49,7 +49,7 @@ export function fetchMeasurements (location, startDate, endDate) {
 
     const fetcher = function (page) {
       console.log('url', `${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`);
-      fetch(`${config.api}/measurements?location=${location}&page=${page}&limit=1000&date_from=${startDate}&date_to=${endDate}`)
+      fetch(`${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -74,7 +74,5 @@ export function fetchMeasurements (location, startDate, endDate) {
           return dispatch(receiveMeasurements(null, 'Data not available'));
         });
     };
-
-    fetcher(1);
   };
 }

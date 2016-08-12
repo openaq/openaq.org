@@ -14,7 +14,7 @@ function requestCompareLocation (index) {
   };
 }
 
-function receiveCompareLocation (json, index, error = null) {
+function receiveCompareLocation (index, json, error = null) {
   return {
     type: actions.RECEIVE_COMPARE_LOCATION,
     index,
@@ -32,7 +32,7 @@ export function fetchCompareLocationIfNeeded (index, location) {
     let state = getState();
     let l = _.find(state.locations.data.results, {location: location});
     if (l) {
-      return dispatch(receiveCompareLocation(l, index));
+      return dispatch(receiveCompareLocation(index, l));
     }
 
     fetch(`${config.api}/locations?location=${location}`)
@@ -44,12 +44,12 @@ export function fetchCompareLocationIfNeeded (index, location) {
       })
       .then(json => {
         // setTimeout(() => {
-        //   dispatch(receiveCompareLocation(json.results[0], index));
+        //   dispatch(receiveCompareLocation(index, json.results[0]));
         // }, 5000);
-        dispatch(receiveCompareLocation(json.results[0], index));
+        dispatch(receiveCompareLocation(index, json.results[0]));
       }, e => {
         console.log('e', e);
-        return dispatch(receiveCompareLocation(null, index, 'Data not available'));
+        return dispatch(receiveCompareLocation(index, null, 'Data not available'));
       });
   };
 }
@@ -91,5 +91,60 @@ export function selectCompareLocation (location) {
   return {
     type: actions.SELECT_COMPARE_OPT_LOCATION,
     location
+  };
+}
+
+function requestCompareLocationMeasurements (index) {
+  return {
+    type: actions.REQUEST_COMPARE_LOCATION_MEASUREMENTS,
+    index
+  };
+}
+
+function receiveCompareLocationMeasurements (index, json, error = null) {
+  return {
+    type: actions.RECEIVE_COMPARE_LOCATION_MEASUREMENTS,
+    index,
+    json: json,
+    error,
+    receivedAt: Date.now()
+  };
+}
+
+export function fetchCompareLocationMeasurements (index, location, startDate, endDate) {
+  return function (dispatch) {
+    dispatch(requestCompareLocationMeasurements(index));
+
+    let data = null;
+    let limit = 10000;
+
+    const fetcher = function (page) {
+      console.log('url', `${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`);
+      fetch(`${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(json => {
+          if (data === null) {
+            data = json;
+          } else {
+            data.results = data.results.concat(json.results);
+          }
+          if (page * limit < json.meta.found) {
+            return fetcher(++page);
+          } else {
+            console.log('done', data);
+            return dispatch(receiveCompareLocationMeasurements(index, data));
+          }
+        }, e => {
+          console.log('e', e);
+          return dispatch(receiveCompareLocationMeasurements(index, null, 'Data not available'));
+        });
+    };
+
+    fetcher(1);
   };
 }
