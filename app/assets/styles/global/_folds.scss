@@ -77,3 +77,66 @@
 .fold--filled {
   background: tint($base-color, 92%);
 }
+
+.fold--double {
+  padding: 0;
+  > .inner {
+      padding:0;
+    @include media(medium-up){
+      padding-left: 0;
+    }
+  }
+}
+
+.fold--media {
+  @include col(12/12);
+  @include media(medium-up) {
+    @include col(6/12);
+    background-size: contain;
+    background-position: top right;
+  };
+}
+
+.about-img1 {
+  background:     
+  linear-gradient(
+    rgba(73, 106, 144, 0.50), 
+    rgba(73, 106, 144, 0.50)
+  ), url(../graphics/content/about1.png) no-repeat;
+  background-size: cover;
+  background-position: top center;
+  margin-right: 0;
+
+}
+
+.about-img2 {
+  background:     
+  linear-gradient(
+    rgba(54, 170, 144, 0.50), 
+    rgba(54, 170, 144, 0.50)
+  ), url(../graphics/content/about2.png) no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+
+.fold--img {
+  @include media(medium-up) {
+    max-height: 400px;
+  };
+  max-height: 250px;
+  opacity: 0;
+}
+
+.fold--content {
+  @include col(12/12);
+  padding: ($global-spacing * 2) $global-spacing;
+
+  @include media(small-up) {
+    padding: $global-spacing * 2;
+  }
+
+  @include media(medium-up) {
+    @include col(6/12);
+    padding: ($global-spacing * 3) $global-spacing;
+  }
+}
