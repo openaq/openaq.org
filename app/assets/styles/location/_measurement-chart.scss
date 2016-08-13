@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Location: Measurement Chart
+   ========================================================================== */
+
+.location-measurement-chart {
+  height: 20rem;
+
+  .axis {
+    text {
+      fill: $base-color;
+    }
+    .domain {
+      stroke: $base-color;
+      stroke-width: 2px
+    }
+  }
+  .location-data {
+    circle {
+      fill: $infographic-color-a;
+    }
+  }
+}
+
