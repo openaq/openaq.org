@@ -46,6 +46,7 @@
    ========================================================================== */
 
 @import "homepage/content";
+@import "homepage/compare-chart";
 
 
 /* Map
@@ -73,9 +74,15 @@
 @import "countries/content";
 
 
-
 /* Country
    ========================================================================== */
 
 @import "country/content";
+
+
+/* Compare
+   ========================================================================== */
+
+@import "compare/content";
+@import "compare/brush-chart";
 

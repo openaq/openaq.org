@@ -5,8 +5,14 @@ import _ from 'lodash';
 
 const CHART_DEBUG = false;
 
-var ChartMeasurement = React.createClass({
-  displayName: 'ChartMeasurement',
+// Resources:
+// Brush & Zoom
+//  http://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172
+// D3 Advanced Brush Style - Part 5
+//  http://bl.ocks.org/jisaacks/5678983
+
+var BrushChart = React.createClass({
+  displayName: 'BrushChart',
 
   propTypes: {
     className: React.PropTypes.string,
@@ -24,7 +30,7 @@ var ChartMeasurement = React.createClass({
   },
 
   componentDidMount: function () {
-    // console.log('ChartMeasurement componentDidMount');
+    // console.log('BrushChart componentDidMount');
     // Debounce event.
     this.onWindowResize = _.debounce(this.onWindowResize, 200);
 
@@ -40,13 +46,13 @@ var ChartMeasurement = React.createClass({
   },
 
   componentWillUnmount: function () {
-    // console.log('ChartMeasurement componentWillUnmount');
+    // console.log('BrushChart componentWillUnmount');
     window.removeEventListener('resize', this.onWindowResize);
     this.chart.destroy();
   },
 
   componentDidUpdate: function (prevProps/* prevState */) {
-    // console.log('ChartMeasurement componentDidUpdate');
+    // console.log('BrushChart componentDidUpdate');
     this.chart.pauseUpdate();
     if (prevProps.data !== this.props.data) {
       this.chart.data(this.props.data);
@@ -70,7 +76,7 @@ var ChartMeasurement = React.createClass({
   }
 });
 
-module.exports = ChartMeasurement;
+module.exports = BrushChart;
 
 var Chart = function (options) {
   // Data related variables for which we have getters and setters.
@@ -84,6 +90,10 @@ var Chart = function (options) {
   var $el, $svg;
   // Var declaration.
   const margin = {top: 16, right: 32, bottom: 32, left: 48};
+
+  const calcFocusHeight = () => _height * 0.70;
+  const calcContextYPos = () => calcFocusHeight() + 32;
+  const calcContextHeight = () => _height - calcContextYPos();
 
   // Colors suffix
   const indexSuffix = ['st', 'nd', 'rd'];
@@ -100,6 +110,11 @@ var Chart = function (options) {
   // Y scale.
   var y = d3.scaleLinear();
 
+  // X scale for brush.
+  var xBrush = d3.scaleTime();
+  // Y scale for brush.
+  var yBrush = d3.scaleLinear();
+
   // Define xAxis function.
   var xAxis = d3.axisBottom(x)
     .tickPadding(8)
@@ -110,6 +125,13 @@ var Chart = function (options) {
     .tickPadding(8)
     .ticks(5)
     .tickSize(0);
+
+  // Define xAxis brush function.
+  var xAxisBrush = d3.axisBottom(xBrush)
+    .tickPadding(8)
+    .tickSize(0);
+
+  var brush = d3.brushX().handleSize(8);
 
   function _calcSize () {
     _width = parseInt($el.style('width'), 10) - margin.left - margin.right;
@@ -127,7 +149,8 @@ var Chart = function (options) {
           .data([0]);
 
         let enter = focusR.enter().append('g')
-          .attr('class', 'focus');
+          .attr('class', 'focus')
+          .attr('clip-path', 'url(#clip)');
 
         if (CHART_DEBUG) {
           // Debug rectangle
@@ -140,8 +163,68 @@ var Chart = function (options) {
 
           focusR.select('rect.debug')
             .attr('width', _width)
-            .attr('height', _height);
+            .attr('height', calcFocusHeight());
         }
+      },
+
+      // The area for the brush.
+      contextRegion: function () {
+        // Append Focus Region. Where the data is actually displayed.
+        let contextR = $dataCanvas.selectAll('g.context')
+          .data([0]);
+
+        let enter = contextR.enter().append('g')
+          .attr('class', 'context');
+
+        if (CHART_DEBUG) {
+          // Debug rectangle
+          enter.append('rect')
+            .attr('class', 'debug')
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('fill', 'green')
+            .attr('opacity', 0.2);
+
+          contextR.select('rect.debug')
+            .attr('width', _width)
+            .attr('height', calcContextHeight());
+        }
+
+        contextR
+          .attr('transform', `translate(${0},${calcContextYPos()})`);
+      },
+
+      contextData: function () {
+        let $context = $dataCanvas.select('g.context');
+
+        let dataContainer = $context.selectAll('g.data').data([0]);
+        dataContainer
+          .enter().append('g')
+            .attr('class', 'data');
+
+        if (!_data) return;
+
+        let contextDataGroups = dataContainer.selectAll('g.location-data')
+          .data(_data);
+
+        contextDataGroups.exit().remove();
+
+        let circles = contextDataGroups.enter().append('g')
+          .merge(contextDataGroups)
+            .attr('class', (o, i) => `location-data location-data--${indexSuffix[i]}`)
+            .selectAll('circle')
+              .data(o => o);
+
+        circles.exit().remove();
+
+        circles.enter()
+          .append('circle')
+          .attr('r', 3)
+          .merge(circles)
+            // `localNoTZ` is the measurement local date converted
+            // directly to user local.
+            .attr('cx', o => xBrush(o.date.localNoTZ))
+            .attr('cy', o => yBrush(o.value));
       },
 
       focusData: function () {
@@ -185,8 +268,25 @@ var Chart = function (options) {
           .attr('text-anchor', 'start');
 
         xAx
-          .attr('transform', `translate(${margin.left},${_height + margin.top + 8})`)
+          .attr('transform', `translate(${margin.left},${calcFocusHeight() + margin.top + 8})`)
           .call(xAxis);
+      },
+
+      xAxisBrush: function () {
+        // Append xAxisBrush.
+        // X axis brush.
+        let xAx = $svg.selectAll('.x.axis-brush')
+          .data([0]);
+
+        xAx.enter().append('g')
+          .attr('class', 'x axis axis-brush')
+          .append('text')
+          .attr('class', 'label')
+          .attr('text-anchor', 'start');
+
+        xAx
+          .attr('transform', `translate(${margin.left},${_height + margin.top + 8})`)
+          .call(xAxisBrush);
       },
 
       yAxis: function () {
@@ -209,6 +309,22 @@ var Chart = function (options) {
         yAx
           .attr('transform', `translate(${margin.left},${margin.top})`)
           .call(yAxis);
+      },
+
+      brush: function () {
+        let contextR = $dataCanvas.select('g.context');
+
+        if (contextR.select('g.brush').empty()) {
+          contextR.append('g')
+          .attr('class', 'brush')
+          .call(brush)
+          .call(brush.move, x.range());
+        }
+
+        contextR.selectAll('.brush .handle')
+          .attr('fill', '#496A90')
+          .attr('height', calcContextHeight() * 0.5)
+          .attr('y', calcContextHeight() * 0.25);
       }
     };
 
@@ -221,15 +337,45 @@ var Chart = function (options) {
         .attr('width', _width)
         .attr('height', _height);
 
+      $svg.select('#clip rect')
+        // The 8 and the 16 are to add some top and bottom space to
+        // avoid clipping the data.
+        .attr('x', 0)
+        .attr('y', -8)
+        .attr('width', _width)
+        .attr('height', calcFocusHeight() + 16);
+
+      if (CHART_DEBUG) {
+        // To view the area taken by the #clip rect.
+        $dataCanvas.select('.data-canvas-shadow')
+          .attr('x', 0)
+          .attr('y', -8)
+          .attr('width', _width)
+          .attr('height', calcFocusHeight() + 16);
+      }
+
       // Update scale ranges.
       x.range([0, _width]);
-      y.range([_height, 0]);
+      xBrush.range([0, _width]);
+      y.range([calcFocusHeight(), 0]);
+      yBrush.range([calcContextHeight(), 0]);
+
+      // Update brush.
+      // HACK-ish way of covering all the points. FIX!
+      brush.extent([[0, -4], [_width, calcContextHeight() + 8]]);
+      $dataCanvas.select('g.brush')
+        .call(brush)
+        .call(brush.move, x.range());
 
       // Redraw.
+      layers.contextRegion();
+      layers.contextData();
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
+      layers.xAxisBrush();
       layers.yAxis();
+      layers.brush();
     };
 
     updateData = function () {
@@ -239,13 +385,19 @@ var Chart = function (options) {
 
       // Update scale domains.
       x.domain(_xRange);
+      xBrush.domain(_xRange);
       y.domain(_yRange);
+      yBrush.domain(_yRange);
 
       // Redraw.
+      layers.contextRegion();
+      layers.contextData();
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
+      layers.xAxisBrush();
       layers.yAxis();
+      layers.brush();
     };
 
     // -----------------------------------------------------------------
@@ -258,6 +410,32 @@ var Chart = function (options) {
     var $dataCanvas = $svg.append('g')
       .attr('class', 'data-canvas')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+    $svg.append('defs')
+      .append('clipPath')
+      .attr('id', 'clip')
+      .append('rect');
+
+    if (CHART_DEBUG) {
+      // To view the area taken by the #clip rect.
+      $dataCanvas.append('rect')
+        .attr('class', 'data-canvas-shadow')
+        .style('fill', '#000')
+        .style('opacity', 0.16);
+    }
+
+    brush.on('brush end start', function () {
+      if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') return; // ignore brush-by-zoom
+
+      var s = d3.event.selection || xBrush.range();
+      x.domain(s.map(xBrush.invert, xBrush));
+
+      // Redraw.
+      layers.focusRegion();
+      layers.focusData();
+      layers.xAxis();
+      layers.brush();
+    });
 
     _calcSize();
     upateSize();

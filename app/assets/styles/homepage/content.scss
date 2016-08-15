@@ -54,3 +54,32 @@
     }
   }
 }
+
+#home-compare {
+  .fold__body {
+    @extend .clearfix;
+  }
+
+  .compare__location {
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  @include media(medium-up) {
+    .col-main {
+      @include col(4/12);
+
+      .compare__location {
+        @include col(12/12);
+        margin-bottom: 2rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .col-sec {
+      @include col(8/12);
+    }
+  }
+}

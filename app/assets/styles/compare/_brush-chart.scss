@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Compare: Brush Chart
+   ========================================================================== */
+
+.brush-chart {
+  // TEMP
+  height: 30rem;
+
+  .axis {
+    text {
+      fill: $base-color;
+    }
+    .domain {
+      stroke: $base-color;
+      stroke-width: 2px
+    }
+  }
+  .axis-brush .domain {
+    transform: translate(0, 0.5px);
+  }
+
+  .brush .selection {
+    fill: $base-color;
+    fill-opacity: 0.16;
+    stroke: $base-color;
+    stroke-opacity: 0.32;
+  }
+
+  .location-data {
+    &--st circle {
+      fill: $infographic-color-a;
+    }
+    &--nd circle {
+      fill: $infographic-color-b;
+    }
+    &--rd circle {
+      fill: $infographic-color-c;
+    }
+  }
+}
+
