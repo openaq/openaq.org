@@ -7,6 +7,7 @@ import * as location from './location';
 import * as locations from './locations';
 import * as measurements from './measurements';
 import * as nearbyLocations from './nearby-locations';
+import * as locationsByCountry from './locations-by-country';
 
 module.exports = Object.assign({},
   baseData,
@@ -17,5 +18,6 @@ module.exports = Object.assign({},
   location,
   locations,
   measurements,
-  nearbyLocations
+  nearbyLocations,
+  locationsByCountry
 );

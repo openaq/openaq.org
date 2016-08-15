@@ -16,8 +16,8 @@ import {
   selectCompareCountry,
   selectCompareArea,
   selectCompareLocation,
-  fetchLocations,
-  invalidateLocations,
+  fetchLocationsByCountry,
+  invalidateLocationsByCountry,
   fetchCompareLocationMeasurements,
   invalidateCompare
 } from '../actions/action-creators';
@@ -38,8 +38,8 @@ var Compare = React.createClass({
     _selectCompareCountry: React.PropTypes.func,
     _selectCompareArea: React.PropTypes.func,
     _selectCompareLocation: React.PropTypes.func,
-    _fetchLocations: React.PropTypes.func,
-    _invalidateLocations: React.PropTypes.func,
+    _fetchLocationsByCountry: React.PropTypes.func,
+    _invalidateLocationsByCountry: React.PropTypes.func,
     _invalidateCompare: React.PropTypes.func,
     _fetchCompareLocationMeasurements: React.PropTypes.func,
 
@@ -53,7 +53,7 @@ var Compare = React.createClass({
     compareMeasurements: React.PropTypes.array,
     compareSelectOpts: React.PropTypes.object,
 
-    locations: React.PropTypes.object
+    locationsByCountry: React.PropTypes.object
   },
 
   getActiveParameterData: function () {
@@ -107,9 +107,9 @@ var Compare = React.createClass({
   onCompareOptSelect: function (key, e) {
     switch (key) {
       case 'country':
-        this.props._invalidateLocations();
+        this.props._invalidateLocationsByCountry();
         this.props._selectCompareCountry(e.target.value);
-        this.props._fetchLocations(1, {country: e.target.value}, 1000);
+        this.props._fetchLocationsByCountry(e.target.value);
         break;
       case 'area':
         this.props._selectCompareArea(e.target.value);
@@ -174,7 +174,7 @@ var Compare = React.createClass({
         </li>
       );
     } else if (this.props.compareSelectOpts.status === 'selecting') {
-      let {fetching: fetchingLocations, fetched: fetchedLocations, data: {results: locations}} = this.props.locations;
+      let {fetching: fetchingLocations, fetched: fetchedLocations, data: {results: locations}} = this.props.locationsByCountry;
 
       // Mental Sanity note: we use area to designate the broader region where a sensor
       // is while the API call it city.
@@ -428,7 +428,7 @@ function selector (state) {
     compareSelectOpts: state.compare.compareSelectOpts,
     compareMeasurements: state.compare.measurements,
 
-    locations: state.locations
+    locationsByCountry: state.locationsByCountry
   };
 }
 
@@ -441,8 +441,8 @@ function dispatcher (dispatch) {
     _selectCompareArea: (...args) => dispatch(selectCompareArea(...args)),
     _selectCompareLocation: (...args) => dispatch(selectCompareLocation(...args)),
 
-    _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
-    _invalidateLocations: (...args) => dispatch(invalidateLocations(...args)),
+    _fetchLocationsByCountry: (...args) => dispatch(fetchLocationsByCountry(...args)),
+    _invalidateLocationsByCountry: (...args) => dispatch(invalidateLocationsByCountry(...args)),
 
     _invalidateCompare: (...args) => dispatch(invalidateCompare(...args)),
 
