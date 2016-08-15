@@ -5,8 +5,8 @@ import _ from 'lodash';
 import moment from 'moment';
 import c from 'classnames';
 import { Link, hashHistory } from 'react-router';
-import { Dropdown } from 'openaq-design-system';
 import * as d3 from 'd3';
+import { Dropdown } from 'openaq-design-system';
 
 import { formatThousands } from '../utils/format';
 import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, invalidateAllLocationData } from '../actions/action-creators';
@@ -17,6 +17,7 @@ import LoadingMessage from '../components/loading-message';
 import MapComponent from '../components/map';
 import ShareBtn from '../components/share-btn';
 import ChartMeasurement from '../components/chart-measurement';
+import ModalDownload from '../components/modal-download';
 
 var Location = React.createClass({
   displayName: 'Location',
@@ -58,6 +59,12 @@ var Location = React.createClass({
     })
   },
 
+  getInitialState: function () {
+    return {
+      modalDownloadOpen: false
+    };
+  },
+
   shouldFetchData: function (prevProps) {
     let prevLoc = prevProps.params.name;
     let currLoc = this.props.params.name;
@@ -79,6 +86,14 @@ var Location = React.createClass({
     e.preventDefault();
 
     hashHistory.push(`/location/${this.props.params.name}?parameter=${parameter}`);
+  },
+
+  onModalClose: function () {
+    this.setState({modalDownloadOpen: false});
+  },
+
+  onDownloadClick: function () {
+    this.setState({modalDownloadOpen: true});
   },
 
   //
@@ -459,7 +474,7 @@ var Location = React.createClass({
             <div className='inpage__actions'>
               <ul>
                 <li><a href='' title='View in api' className='button-inpage-api' target='_blank'>View API</a></li>
-                <li><button type='button' title='Download data for this location' className='button-inpage-download'>Download</button></li>
+                <li><button type='button' title='Download data for this location' className='button-inpage-download' onClick={this.onDownloadClick}>Download</button></li>
                 <li><Link to={`/compare/${data.location}`} title='Compare location with another' className='button button--primary button--medium'>Compare</Link></li>
               </ul>
             </div>
@@ -470,6 +485,14 @@ var Location = React.createClass({
           {this.renderSourceInfo()}
           {this.renderValuesBreakdown()}
           {this.renderNearbyLoc()}
+
+          {this.state.modalDownloadOpen ? (
+            <ModalDownload
+              country={data.country}
+              area={data.city}
+              location={data.location}
+              onModalClose={this.onModalClose} />
+          ) : null}
         </div>
       </section>
     );
