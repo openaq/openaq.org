@@ -5,6 +5,12 @@ import _ from 'lodash';
 
 const CHART_DEBUG = false;
 
+// Resources:
+// Brush & Zoom
+//  http://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172
+// D3 Advanced Brush Style - Part 5
+//  http://bl.ocks.org/jisaacks/5678983
+
 var BrushChart = React.createClass({
   displayName: 'BrushChart',
 
