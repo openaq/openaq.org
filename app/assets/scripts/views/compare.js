@@ -18,7 +18,8 @@ import {
   selectCompareLocation,
   fetchLocations,
   invalidateLocations,
-  fetchCompareLocationMeasurements
+  fetchCompareLocationMeasurements,
+  invalidateCompare
 } from '../actions/action-creators';
 import ShareBtn from '../components/share-btn';
 import LoadingMessage from '../components/loading-message';
@@ -39,6 +40,7 @@ var Compare = React.createClass({
     _selectCompareLocation: React.PropTypes.func,
     _fetchLocations: React.PropTypes.func,
     _invalidateLocations: React.PropTypes.func,
+    _invalidateCompare: React.PropTypes.func,
     _fetchCompareLocationMeasurements: React.PropTypes.func,
 
     params: React.PropTypes.object,
@@ -132,6 +134,7 @@ var Compare = React.createClass({
   //
 
   componentDidMount: function () {
+    this.props._invalidateCompare();
     let {loc1, loc2, loc3} = this.props.params;
     loc1 && this.fetchLocationData(0, loc1);
     loc2 && this.fetchLocationData(1, loc2);
@@ -440,6 +443,8 @@ function dispatcher (dispatch) {
 
     _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
     _invalidateLocations: (...args) => dispatch(invalidateLocations(...args)),
+
+    _invalidateCompare: (...args) => dispatch(invalidateCompare(...args)),
 
     _fetchCompareLocationIfNeeded: (...args) => dispatch(fetchCompareLocationIfNeeded(...args)),
     _removeCompareLocation: (...args) => dispatch(removeCompareLocation(...args)),

@@ -121,6 +121,11 @@ export default function (state = defaultState, action) {
       state.measurements[action.index].fetching = false;
       state.measurements[action.index].fetched = true;
       break;
+
+    case actions.INVALIDATE_COMPARE:
+      console.log('INVALIDATE_COMPARE');
+      state = _.cloneDeep(defaultState);
+      break;
   }
   return state;
 }

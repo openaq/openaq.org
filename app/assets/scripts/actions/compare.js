@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { stringify as buildAPIQS } from 'qs';
 import _ from 'lodash';
 import * as actions from './action-types';
 import config from '../config';
@@ -6,6 +7,12 @@ import config from '../config';
 // ////////////////////////////////////////////////////////////////
 //                       COMPARE LOCATION                        //
 // ////////////////////////////////////////////////////////////////
+
+export function invalidateCompare () {
+  return {
+    type: actions.INVALIDATE_COMPARE
+  };
+}
 
 function requestCompareLocation (index) {
   return {
@@ -24,18 +31,24 @@ function receiveCompareLocation (index, json, error = null) {
   };
 }
 
-export function fetchCompareLocationIfNeeded (index, location) {
+export function fetchCompareLocationIfNeeded (index, location, filters = {}) {
   return function (dispatch, getState) {
     dispatch(requestCompareLocation(index));
+    if (location) {
+      // Search for the location in the state.
+      let state = getState();
+      let l = _.find(state.locations.data.results, {location: location});
+      if (l) {
+        return dispatch(receiveCompareLocation(index, l));
+      }
 
-    // Search for the location in the state.
-    let state = getState();
-    let l = _.find(state.locations.data.results, {location: location});
-    if (l) {
-      return dispatch(receiveCompareLocation(index, l));
+      filters.location = location;
     }
 
-    fetch(`${config.api}/locations?location=${location}`)
+    let f = buildAPIQS(filters);
+    // console.log('fetchCompareLocationIfNeeded url', `${config.api}/locations?${f}`);
+
+    fetch(`${config.api}/locations?${f}`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
@@ -119,8 +132,16 @@ export function fetchCompareLocationMeasurements (index, location, startDate, en
     let limit = 10000;
 
     const fetcher = function (page) {
-      console.log('url', `${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`);
-      fetch(`${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`)
+      let qs = buildAPIQS({
+        location,
+        page,
+        limit,
+        date_from: startDate,
+        date_to: endDate
+      });
+      // console.log('fetchCompareLocationMeasurements', `${config.api}/measurements?${qs}`);
+
+      fetch(`${config.api}/measurements?${qs}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -136,7 +157,6 @@ export function fetchCompareLocationMeasurements (index, location, startDate, en
           if (page * limit < json.meta.found) {
             return fetcher(++page);
           } else {
-            console.log('done', data);
             return dispatch(receiveCompareLocationMeasurements(index, data));
           }
         }, e => {

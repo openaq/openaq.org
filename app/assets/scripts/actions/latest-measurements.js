@@ -47,7 +47,6 @@ export function fetchLatestMeasurements (filters) {
           if (page * limit < json.meta.found) {
             return fetcher(++page);
           } else {
-            console.log('fetchLatestMeasurements done', data);
             return dispatch(receiveLatestMeasurements(data));
           }
         }, e => {

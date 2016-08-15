@@ -32,8 +32,7 @@ export function fetchLocationIfNeeded (location) {
     if (l) {
       return dispatch(receiveLocation(l));
     }
-
-    fetch(`${config.api}/locations?location=${location}`)
+    fetch(`${config.api}/locations?location=${encodeURIComponent(location)}`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');

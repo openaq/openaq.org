@@ -85,6 +85,9 @@ var Chart = function (options) {
   // Var declaration.
   const margin = {top: 16, right: 32, bottom: 32, left: 48};
 
+  // Colors suffix
+  const indexSuffix = ['st', 'nd', 'rd'];
+
   // width and height refer to the data canvas. To know the svg size the margins
   // must be added.
   var _width, _height;
@@ -153,7 +156,7 @@ var Chart = function (options) {
 
         let circles = focusDataGroups.enter().append('g')
           .merge(focusDataGroups)
-            .attr('class', (o, i) => `location-data`)
+            .attr('class', (o, i) => `location-data location-data--${indexSuffix[i]}`)
             .selectAll('circle')
               .data(o => o);
 

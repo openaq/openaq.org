@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { stringify as buildAPIQS } from 'qs';
 import * as actions from './action-types';
 import config from '../config';
 // ////////////////////////////////////////////////////////////////
@@ -32,7 +33,7 @@ export function fetchMeasurements (location, startDate, endDate) {
     // measurements since ever. This query takes care of that and then we start
     // the actual requests for measurements.
     let totalMeasurements = 0;
-    fetch(`${config.api}/measurements?location=${location}&limit=1`)
+    fetch(`${config.api}/measurements?location=${encodeURIComponent(location)}&limit=1`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
@@ -48,8 +49,17 @@ export function fetchMeasurements (location, startDate, endDate) {
       });
 
     const fetcher = function (page) {
-      console.log('url', `${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`);
-      fetch(`${config.api}/measurements?location=${location}&page=${page}&limit=${limit}&date_from=${startDate}&date_to=${endDate}`)
+      let qs = buildAPIQS({
+        location,
+        page,
+        limit,
+        date_from: startDate,
+        date_to: endDate
+      });
+
+      // console.log('fetchMeasurements url', `${config.api}/measurements?${qs}`);
+
+      fetch(`${config.api}/measurements?${qs}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -65,7 +75,6 @@ export function fetchMeasurements (location, startDate, endDate) {
           if (page * limit < json.meta.found) {
             return fetcher(++page);
           } else {
-            console.log('done', data);
             data.meta.totalMeasurements = totalMeasurements;
             return dispatch(receiveMeasurements(data));
           }

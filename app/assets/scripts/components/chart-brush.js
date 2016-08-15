@@ -89,7 +89,7 @@ var Chart = function (options) {
   const calcContextYPos = () => calcFocusHeight() + 32;
   const calcContextHeight = () => _height - calcContextYPos();
 
-  // COLORS TEMP
+  // Colors suffix
   const indexSuffix = ['st', 'nd', 'rd'];
 
   // width and height refer to the data canvas. To know the svg size the margins

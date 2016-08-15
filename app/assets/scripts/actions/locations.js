@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import _ from 'lodash';
 import { stringify as buildAPIQS } from 'qs';
 import * as actions from './action-types';
 import config from '../config';
