@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
 import c from 'classnames';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
+import { Dropdown } from 'openaq-design-system';
+import * as d3 from 'd3';
 
 import { formatThousands } from '../utils/format';
 import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, invalidateAllLocationData } from '../actions/action-creators';
@@ -14,12 +16,14 @@ import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 import MapComponent from '../components/map';
 import ShareBtn from '../components/share-btn';
+import ChartMeasurement from '../components/chart-measurement';
 
 var Location = React.createClass({
   displayName: 'Location',
 
   propTypes: {
     params: React.PropTypes.object,
+    location: React.PropTypes.object,
     _fetchLocationIfNeeded: React.PropTypes.func,
     _fetchLocations: React.PropTypes.func,
     _fetchLatestMeasurements: React.PropTypes.func,
@@ -59,6 +63,22 @@ var Location = React.createClass({
     let currLoc = this.props.params.name;
 
     return prevLoc !== currLoc;
+  },
+
+  getActiveParameterData: function () {
+    let parameter = this.props.location.query.parameter;
+    let parameterData = _.find(this.props.parameters, {id: parameter});
+    return parameterData || _.find(this.props.parameters, {id: 'pm25'});
+  },
+
+  //
+  // Start event listeners
+  //
+
+  onFilterSelect: function (parameter, e) {
+    e.preventDefault();
+
+    hashHistory.push(`/location/${this.props.params.name}?parameter=${parameter}`);
   },
 
   //
@@ -282,6 +302,125 @@ var Location = React.createClass({
     );
   },
 
+  renderParameterSelector: function () {
+    let activeParam = this.getActiveParameterData();
+    let drop = (
+      <Dropdown
+        triggerElement='button'
+        triggerClassName='button button--base-unbounded drop__toggle--caret'
+        triggerTitle='Show/hide parameter options'
+        triggerText={activeParam.name} >
+
+        <ul role='menu' className='drop__menu drop__menu--select'>
+        {this.props.parameters.map(o => (
+          <li key={o.id}>
+            <a className={c('drop__menu-item', {'drop__menu-item--active': activeParam.id === o.id})} href='#' title={`Show values for ${o.name}`} data-hook='dropdown:close' onClick={this.onFilterSelect.bind(null, o.id)}><span>{o.name}</span></a>
+          </li>
+        ))}
+        </ul>
+      </Dropdown>
+    );
+
+    return (
+      <p>Showing {drop} values over last week.</p>
+    );
+  },
+
+  renderMeasurementsChart: function () {
+    let measurements = this.props.measurements.data.results;
+    let activeParam = this.getActiveParameterData();
+    // All the times are local and shouldn't be converted to UTC.
+    // The values should be compared at the same time local to ensure an
+    // accurate comparison.
+    let userNow = moment().format('YYYY/MM/DD HH:mm:ss');
+    let weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
+
+    const filterFn = (o) => {
+      if (o.parameter !== this.getActiveParameterData().id) {
+        return false;
+      }
+      if (o.value < 0) return false;
+      let localDate = moment.parseZone(o.date.local).format('YYYY/MM/DD HH:mm:ss');
+      return localDate >= weekAgo && localDate <= userNow;
+    };
+
+    // Prepare data.
+    let chartData = _.cloneDeep(measurements)
+      .filter(filterFn)
+      .map(o => {
+        // Disregard timezone on local date.
+        let dt = o.date.local.match(/^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/)[0];
+        // `measurement` local date converted directly to user local.
+        o.date.localNoTZ = new Date(dt);
+        return o;
+      });
+
+    let yMax = d3.max(chartData, o => o.value) || 0;
+
+    // 1 Week.
+    let xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
+
+    if (!chartData.length) {
+      return (
+        <InfoMessage>
+          <p>There's no data for the selected parameter</p>
+          <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
+        </InfoMessage>
+      );
+    }
+
+    return (
+      <ChartMeasurement
+        className='location-measurement-chart'
+        data={[chartData]}
+        xRange={xRange}
+        yRange={[0, yMax]}
+        yLabel={`Values in ${activeParam.preferredUnit}`} />
+    );
+  },
+
+  renderValuesBreakdown: function () {
+    const {fetched, fetching, error} = this.props.measurements;
+
+    if (!fetched && !fetching) {
+      return null;
+    }
+
+    let intro = null;
+    let content = null;
+
+    if (fetching) {
+      intro = <LoadingMessage />;
+    } else if (error) {
+      intro = <p>We couldn't get any data.</p>;
+      content = (
+        <InfoMessage>
+          <p>Please try again later.</p>
+          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+        </InfoMessage>
+      );
+    } else {
+      intro = this.renderParameterSelector();
+      content = this.renderMeasurementsChart();
+    }
+
+    return (
+      <section className='fold'>
+        <div className='inner'>
+          <header className='fold__header'>
+            <h1 className='fold__title'>Values breakdown</h1>
+            <div className='fold__introduction'>
+              {intro}
+            </div>
+          </header>
+          <div className='fold__body'>
+            {content}
+          </div>
+        </div>
+      </section>
+    );
+  },
+
   render: function () {
     let {fetched, fetching, error, data} = this.props.loc;
     if (!fetched && !fetching) {
@@ -329,20 +468,8 @@ var Location = React.createClass({
         <div className='inpage__body'>
           {this.renderStatsInfo()}
           {this.renderSourceInfo()}
-
-          <section className='fold'>
-            <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Values breakdown</h1>
-              </header>
-              <div className='fold__body'>
-                coming soon...
-              </div>
-            </div>
-          </section>
-
+          {this.renderValuesBreakdown()}
           {this.renderNearbyLoc()}
-
         </div>
       </section>
     );
