@@ -23,41 +23,40 @@ var About = React.createClass({
         </header>
         <div className='inpage__body'>
 
-          <section className='fold fold--double'>
+          <section className='fold fold--duo'>
             <div className='inner'>
-              <div className='fold--media about-img1'>
-                <div>
-                  <img className='fold--img' src='assets/graphics/content/about1.png'/>
-                </div>
+              <div className='fold__media'>
+                <figure className='media'>
+                  <img className='media__item' src='assets/graphics/content/about1.png' width='768' height='768' alt='About image 1' />
+                </figure>
               </div>
-              <div className='fold--content'>
-                  <header className='fold__header'>
-                    <h1 className='fold__title'>Our Mission</h1>
-                  </header>
-                  <div className='fold__body'>
-                    <p>The mission of OpenAQ is to build the world’s first open air quality data hub in order to enable previously impossible science, inform policy and empower the public around air pollution.</p>
-                  </div>
-                     <button className='button button--large button--primary-bounded'>Learn More</button>
+              <div className='fold__copy'>
+                <header className='fold__header'>
+                  <h1 className='fold__title'>Our Mission</h1>
+                </header>
+                <div className='fold__body'>
+                  <p>The mission of OpenAQ is to build the world’s first open air quality data hub in order to enable previously impossible science, inform policy and empower the public around air pollution.</p>
+                </div>
+                <button className='button button--large button--primary-bounded'>Learn More</button>
               </div>
             </div>
           </section>
 
-
-          <section className='fold fold--filled fold--double'>
+          <section className='fold fold--filled fold--duo'>
             <div className='inner'>
-              <div className='fold--content'>
-                  <header className='fold__header'>
-                    <h1 className='fold__title'>Data Aggregation</h1>
-                  </header>
-                  <div className='fold__body'>
-                    <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
-                  </div>
-                     <button className='button button--large button--primary-bounded'>Learn More</button>
+              <div className='fold__media'>
+                <figure className='media'>
+                  <img className='media__item' src='assets/graphics/content/about2.png' width='768' height='768' alt='About image 2' />
+                </figure>
               </div>
-              <div className='fold--media about-img2'>
-                <div>
-                  <img className='fold--img'src='assets/graphics/content/about2.png'/>
+              <div className='fold__copy'>
+                <header className='fold__header'>
+                  <h1 className='fold__title'>Data Aggregation</h1>
+                </header>
+                <div className='fold__body'>
+                  <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
                 </div>
+                <button className='button button--large button--primary-bounded'>Learn More</button>
               </div>
             </div>
           </section>
