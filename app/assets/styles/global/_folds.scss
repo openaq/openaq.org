@@ -74,47 +74,134 @@
 /* Modifiers
    ========================================================================== */
 
-.fold--filled {
-  background: tint($base-color, 92%);
+.fold--media-bleed-left,
+.fold--media-bleed-right {
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+
+  > .inner {
+    @include media(medium-up) {
+      @include display(flex);
+      @include flex-flow(row nowrap);
+    }
+  }
+
+  .fold__copy,
+  .fold__media {
+    @include media(medium-up) {
+      @include flex(0 0 auto);
+    }
+  }
+
+  .fold__copy {
+    padding: ($global-spacing * 2) 0;
+
+    @include media(medium-up) {
+      padding: ($global-spacing * 3) 0;
+    }
+
+    @include media(large-up) {
+      padding: ($global-spacing * 8) 0;
+    }
+  }
+
+  .fold__media {
+    position: relative;
+    height: 16rem;
+
+    @include media(medium-up) {
+      height: auto;
+    }
+  }
+
+  .media {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 (-$global-spacing);
+    background: transparent left center / cover no-repeat;
+
+    &:before,
+    &:after {
+      position: absolute;
+      z-index: 2;
+      content: '';
+    }
+
+    &:before {
+      width: 100%;
+      height: 100%;
+      background: rgba($primary-color, 0.56);
+    }
+
+    &:after {
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: $base-alpha-color;
+    }
+
+    @include media(small-up) {
+      margin: 0 (-$global-spacing * 2);
+    }
+  }
+
+  .media__item {
+    @extend .visually-hidden;
+  }
 }
 
-// .fold--double {
-//   padding: 0;
-//   > .inner {
-//       padding:0;
-//     @include media(medium-up){
-//       padding-left: 0;
-//     }
-//   }
-// }
+.fold--media-bleed-left {
+  .fold__copy {
+    @include media(medium-up) {
+      @include col(6/12);
+    }
+  }
 
-// .fold--media {
-//   @include col(12/12);
-//   @include media(medium-up) {
-//     @include col(6/12);
-//     background-size: contain;
-//     background-position: top right;
-//   };
-// }
+  .fold__media {
+    @include media(medium-up) {
+      @include col(6/12);
+      @include shift(-0.5/12);
+    }
+  }
 
-// .fold--img {
-//   @include media(medium-up) {
-//     max-height: 400px;
-//   };
-//   max-height: 250px;
-//   opacity: 0;
-// }
+  .media {
+    @include media(medium-up) {
+      margin: 0 0 0 calc(100% - 50vw);
+    }
+  }
+}
 
-// .fold--content {
-//   @include col(12/12);
-//   padding: ($global-spacing * 2) $global-spacing;
+.fold--media-bleed-right {
+  .fold__copy {
+    @include media(medium-up) {
+      @include col(6/12);
+      @include shift(-6/12);
+    }
+  }
 
-//   @include media(small-up) {
-//     padding: $global-spacing * 2;
-//   }
+  .fold__media {
+    @include media(medium-up) {
+      @include col(6/12);
+      @include shift(6.5/12);
+    }
 
-//   @include media(medium-up) {
-//     @include col(6/12);
-//     padding: ($global-spacing * 3) $global-spacing;
-//   }
-// }
+    .media {
+      @include media(medium-up) {
+        margin: 0 calc(100% - 50vw) 0 0;
+      }
+    }
+  }
+}
+
+.fold--filled {
+  background: tint($base-color, 92%);
+
+  .media:before {
+    background: rgba($base-color, 0.56);
+  }
+}
