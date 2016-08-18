@@ -23,10 +23,10 @@ var About = React.createClass({
         </header>
         <div className='inpage__body'>
 
-          <section className='fold fold--duo'>
+          <section className='fold fold--media-bleed-left'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media'>
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.png)'}}>
                   <img className='media__item' src='assets/graphics/content/about1.png' width='768' height='768' alt='About image 1' />
                 </figure>
               </div>
@@ -42,10 +42,10 @@ var About = React.createClass({
             </div>
           </section>
 
-          <section className='fold fold--filled fold--duo'>
+          <section className='fold fold--filled fold--media-bleed-right'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media'>
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.png)'}}>
                   <img className='media__item' src='assets/graphics/content/about2.png' width='768' height='768' alt='About image 2' />
                 </figure>
               </div>
