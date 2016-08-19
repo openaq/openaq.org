@@ -8,6 +8,7 @@ import baseStats from './base-stats';
 import geolocation from './geolocation';
 import latestMeasurements from './latest-measurements';
 import measurements from './measurements';
+import compare from './compare';
 
 export default combineReducers({
   routing: routerReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   baseStats,
   geolocation,
   measurements,
-  latestMeasurements
+  latestMeasurements,
+  compare
 });

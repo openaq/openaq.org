@@ -19,11 +19,13 @@ if (process.env.NODE_ENV !== 'production') {
 import App from './views/app';
 import Home from './views/home';
 import About from './views/about';
+import Community from './views/community';
 import Map from './views/map';
 import LocationsHub from './views/locations-hub';
 import LocationItem from './views/location';
 import CountriesHub from './views/countries-hub';
 import Country from './views/country';
+import Compare from './views/compare';
 
 const logger = createLogger();
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
@@ -38,11 +40,13 @@ render((
     <Router history={history}>
       <Route path='/' component={App}>
         <Route name='about' path='about' component={About} pageClass='page--about' />
+        <Route name='community' path='community' component={Community} pageClass='page--community' />
         <Route name='map' path='map' component={Map} pageClass='page--map' />
         <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations' />
         <Route name='location' path='location/:name' component={LocationItem} pageClass='page--location' />
         <Route name='countriesHub' path='countries' component={CountriesHub} pageClass='page--countries' />
         <Route name='country' path='countries/:name' component={Country} pageClass='page--country' />
+        <Route name='country' path='compare(/:loc1)(/:loc2)(/:loc3)' component={Compare} pageClass='page--compare' />
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
     </Router>

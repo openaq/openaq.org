@@ -30,6 +30,11 @@ var PageHeader = React.createClass({
 
   dataMenuItemClick: function (e) {
     this.setState({dataMenu: false});
+    document.documentElement.classList.remove('offcanvas-revealed');
+  },
+
+  onRootMenuClick: function (e) {
+    document.documentElement.classList.remove('offcanvas-revealed');
   },
 
   offcanvasMenuClick: function (e) {
@@ -70,7 +75,7 @@ var PageHeader = React.createClass({
             <h2 className='page__prime-nav-title'><a href='#nav-block-browse' onClick={this.offcanvasMenuClick}><span>Menu</span></a></h2>
             <div className='nav-block' id='nav-block-browse'>
               <ul className='browse-menu'>
-                <li><IndexLink to='/' title='Go to OpenAQ homepage' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>Home</span></IndexLink></li>
+                <li><IndexLink to='/' title='Go to OpenAQ homepage' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Home</span></IndexLink></li>
 
                 <li className={c('sub-nav-block-wrapper', {'sub-revealed': this.state.dataMenu})} ref='navData'>
                   <a href='#' title='Show data sections' className={c('browse-menu__item', {'browse-menu__item--active': activeData})} onClick={this.dataMenuClick}><span>Data</span></a>
@@ -83,9 +88,9 @@ var PageHeader = React.createClass({
                   </div>
                 </li>
 
-                <li><Link to='/community' title='Visit community page' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>Community</span></Link></li>
-                <li><a href='https://medium.com/@openaq' title='Visit OpenAQ blog on medium' className='browse-menu__item'><span>Blog</span></a></li>
-                <li><Link to='/about' title='Visit about page' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>About</span></Link></li>
+                <li><Link to='/community' title='Visit community page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Community</span></Link></li>
+                <li><a href='https://medium.com/@openaq' title='Visit OpenAQ blog on medium' className='browse-menu__item' target='_blank' onClick={this.onRootMenuClick}><span>Blog</span></a></li>
+                <li><Link to='/about' title='Visit about page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>About</span></Link></li>
 
               </ul>
             </div>

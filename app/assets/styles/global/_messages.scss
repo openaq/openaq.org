@@ -29,10 +29,18 @@
 }
 
 .data-loading-msg {
-  background-color: tint($base-color, 88%);
-  padding: 4rem 0;
   text-align: center;
-  margin-bottom: 2rem;
+
+  &--default {
+    background-color: tint($base-color, 88%);
+    padding: 4rem 0;
+    margin-bottom: 2rem;
+  }
+
+  &--minimal {
+    background-color: rgba($base-color, 0.08);
+    padding: 1rem 0;
+  }
 
   .wind-animated {
     width: 10rem;

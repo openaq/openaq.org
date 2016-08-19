@@ -79,7 +79,7 @@ $page-header-y: $global-spacing * 5;
 
   &__title {
     @extend .heading, .heading--medium;
-    @include col(8/12);
+    width: column-width(8/12);
   }
 
   &__subtitle {
@@ -173,5 +173,17 @@ $page-header-y: $global-spacing * 5;
   
   .inpage__introduction {
     color: rgba(#fff, 0.64);
+  }
+}
+
+.header--centered {
+  .inpage__title {
+    text-align: center;
+    @include col(6/12, $offset: 3/12);
+  }
+  
+  .inpage__introduction {
+    text-align: center;
+    @include col(8/12, $offset: 2/12);
   }
 }
