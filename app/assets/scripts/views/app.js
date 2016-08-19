@@ -3,9 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import c from 'classnames';
+
+import { closeDownloadModal } from '../actions/action-creators';
 import PageHeader from '../components/page-header';
 import PageFooter from '../components/page-footer';
 import HeaderMessage from '../components/header-message';
+import ModalDownload from '../components/modal-download';
 
 var App = React.createClass({
   displayName: 'App',
@@ -15,7 +18,13 @@ var App = React.createClass({
     baseDataReady: React.PropTypes.bool,
     baseDataError: React.PropTypes.string,
     measurements: React.PropTypes.number,
+    downloadModal: React.PropTypes.object,
+    _closeDownloadModal: React.PropTypes.func,
     children: React.PropTypes.object
+  },
+
+  onModalClose: function () {
+    this.props._closeDownloadModal();
   },
 
   render: function () {
@@ -48,6 +57,13 @@ var App = React.createClass({
         <main className='page__body' role='main'>
           {content}
         </main>
+        {this.props.downloadModal.open ? (
+          <ModalDownload
+            country={this.props.downloadModal.country}
+            area={this.props.downloadModal.area}
+            location={this.props.downloadModal.location}
+            onModalClose={this.onModalClose} />
+        ) : null}
         <PageFooter measurements={this.props.measurements} />
       </div>
     );
@@ -62,12 +78,15 @@ function selector (state) {
     baseDataReady: state.baseData.fetched && !state.baseData.fetching,
     baseDataError: state.baseData.error,
 
-    measurements: state.baseStats.data.measurements
+    measurements: state.baseStats.data.measurements,
+
+    downloadModal: state.downloadModal
   };
 }
 
 function dispatcher (dispatch) {
   return {
+    _closeDownloadModal: (...args) => dispatch(closeDownloadModal(...args))
   };
 }
 

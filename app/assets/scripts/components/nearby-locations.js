@@ -12,6 +12,7 @@ var NearbyLocations = React.createClass({
   propTypes: {
     _geolocateUser: React.PropTypes.func,
     _fetchNearbyLocations: React.PropTypes.func,
+    _openDownloadModal: React.PropTypes.func,
     geolocationRequesting: React.PropTypes.bool,
     geolocationRequested: React.PropTypes.bool,
     geolocationError: React.PropTypes.string,
@@ -52,7 +53,13 @@ var NearbyLocations = React.createClass({
       let countryData = _.find(this.props.countries, {code: o.country});
       let sourceData = _.find(this.props.sources, {name: o.sourceName});
       let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
+      let openModal = () => this.props._openDownloadModal({
+        country: o.country,
+        area: o.city,
+        location: o.location
+      });
       return <LocationCard
+              onDownloadClick={openModal}
               key={o.location}
               compact
               name={o.location}

@@ -14,8 +14,6 @@ import { generateLegendStops } from '../utils/colors';
 import config from '../config';
 mapboxgl.accessToken = config.mapbox.token;
 
-import { parameterMax } from '../utils/map-settings';
-
 var Map = React.createClass({
   displayName: 'Map',
 

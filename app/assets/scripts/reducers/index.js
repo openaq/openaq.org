@@ -9,6 +9,8 @@ import geolocation from './geolocation';
 import latestMeasurements from './latest-measurements';
 import measurements from './measurements';
 import compare from './compare';
+import locationsByCountry from './locations-by-country';
+import downloadModal from './download-modal';
 
 export default combineReducers({
   routing: routerReducer,
@@ -20,5 +22,7 @@ export default combineReducers({
   geolocation,
   measurements,
   latestMeasurements,
-  compare
+  compare,
+  locationsByCountry,
+  downloadModal
 });

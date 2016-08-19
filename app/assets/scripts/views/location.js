@@ -5,11 +5,17 @@ import _ from 'lodash';
 import moment from 'moment';
 import c from 'classnames';
 import { Link, hashHistory } from 'react-router';
-import { Dropdown } from 'openaq-design-system';
 import * as d3 from 'd3';
+import { Dropdown } from 'openaq-design-system';
 
 import { formatThousands } from '../utils/format';
-import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, invalidateAllLocationData } from '../actions/action-creators';
+import {
+  fetchLocationIfNeeded,
+  fetchLatestMeasurements,
+  fetchMeasurements,
+  invalidateAllLocationData,
+  openDownloadModal
+} from '../actions/action-creators';
 import { generateLegendStops } from '../utils/colors';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
@@ -29,6 +35,7 @@ var Location = React.createClass({
     _fetchLatestMeasurements: React.PropTypes.func,
     _fetchMeasurements: React.PropTypes.func,
     _invalidateAllLocationData: React.PropTypes.func,
+    _openDownloadModal: React.PropTypes.func,
 
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
@@ -58,6 +65,12 @@ var Location = React.createClass({
     })
   },
 
+  getInitialState: function () {
+    return {
+      modalDownloadOpen: false
+    };
+  },
+
   shouldFetchData: function (prevProps) {
     let prevLoc = prevProps.params.name;
     let currLoc = this.props.params.name;
@@ -79,6 +92,15 @@ var Location = React.createClass({
     e.preventDefault();
 
     hashHistory.push(`/location/${this.props.params.name}?parameter=${parameter}`);
+  },
+
+  onDownloadClick: function () {
+    let d = this.props.loc.data;
+    this.props._openDownloadModal({
+      country: d.country,
+      area: d.city,
+      location: d.location
+    });
   },
 
   //
@@ -459,7 +481,7 @@ var Location = React.createClass({
             <div className='inpage__actions'>
               <ul>
                 <li><a href='' title='View in api' className='button-inpage-api' target='_blank'>View API</a></li>
-                <li><button type='button' title='Download data for this location' className='button-inpage-download'>Download</button></li>
+                <li><button type='button' title='Download data for this location' className='button-inpage-download' onClick={this.onDownloadClick}>Download</button></li>
                 <li><Link to={`/compare/${data.location}`} title='Compare location with another' className='button button--primary button--medium'>Compare</Link></li>
               </ul>
             </div>
@@ -498,7 +520,9 @@ function dispatcher (dispatch) {
     _fetchLocationIfNeeded: (...args) => dispatch(fetchLocationIfNeeded(...args)),
     _fetchLatestMeasurements: (...args) => dispatch(fetchLatestMeasurements(...args)),
     _fetchMeasurements: (...args) => dispatch(fetchMeasurements(...args)),
-    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args))
+    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args)),
+
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
   };
 }
 
