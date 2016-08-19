@@ -9,7 +9,13 @@ import * as d3 from 'd3';
 import { Dropdown } from 'openaq-design-system';
 
 import { formatThousands } from '../utils/format';
-import { fetchLocationIfNeeded, fetchLatestMeasurements, fetchMeasurements, invalidateAllLocationData } from '../actions/action-creators';
+import {
+  fetchLocationIfNeeded,
+  fetchLatestMeasurements,
+  fetchMeasurements,
+  invalidateAllLocationData,
+  openDownloadModal
+} from '../actions/action-creators';
 import { generateLegendStops } from '../utils/colors';
 import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
@@ -17,7 +23,6 @@ import LoadingMessage from '../components/loading-message';
 import MapComponent from '../components/map';
 import ShareBtn from '../components/share-btn';
 import ChartMeasurement from '../components/chart-measurement';
-import ModalDownload from '../components/modal-download';
 
 var Location = React.createClass({
   displayName: 'Location',
@@ -30,6 +35,7 @@ var Location = React.createClass({
     _fetchLatestMeasurements: React.PropTypes.func,
     _fetchMeasurements: React.PropTypes.func,
     _invalidateAllLocationData: React.PropTypes.func,
+    _openDownloadModal: React.PropTypes.func,
 
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
@@ -88,12 +94,13 @@ var Location = React.createClass({
     hashHistory.push(`/location/${this.props.params.name}?parameter=${parameter}`);
   },
 
-  onModalClose: function () {
-    this.setState({modalDownloadOpen: false});
-  },
-
   onDownloadClick: function () {
-    this.setState({modalDownloadOpen: true});
+    let d = this.props.loc.data;
+    this.props._openDownloadModal({
+      country: d.country,
+      area: d.city,
+      location: d.location
+    });
   },
 
   //
@@ -485,14 +492,6 @@ var Location = React.createClass({
           {this.renderSourceInfo()}
           {this.renderValuesBreakdown()}
           {this.renderNearbyLoc()}
-
-          {this.state.modalDownloadOpen ? (
-            <ModalDownload
-              country={data.country}
-              area={data.city}
-              location={data.location}
-              onModalClose={this.onModalClose} />
-          ) : null}
         </div>
       </section>
     );
@@ -521,7 +520,9 @@ function dispatcher (dispatch) {
     _fetchLocationIfNeeded: (...args) => dispatch(fetchLocationIfNeeded(...args)),
     _fetchLatestMeasurements: (...args) => dispatch(fetchLatestMeasurements(...args)),
     _fetchMeasurements: (...args) => dispatch(fetchMeasurements(...args)),
-    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args))
+    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args)),
+
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
   };
 }
 

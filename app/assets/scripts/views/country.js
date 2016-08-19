@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { formatThousands } from '../utils/format';
-import { fetchLocations, invalidateAllLocationData, fetchLatestMeasurements } from '../actions/action-creators';
+import { fetchLocations, invalidateAllLocationData, fetchLatestMeasurements, openDownloadModal } from '../actions/action-creators';
 import { generateLegendStops } from '../utils/colors';
 import { getCountryBbox } from '../utils/countries';
 import InfoMessage from '../components/info-message';
@@ -22,6 +22,7 @@ var Country = React.createClass({
     _invalidateAllLocationData: React.PropTypes.func,
     _fetchLocations: React.PropTypes.func,
     _fetchLatestMeasurements: React.PropTypes.func,
+    _openDownloadModal: React.PropTypes.func,
 
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
@@ -54,6 +55,11 @@ var Country = React.createClass({
       country: this.props.params.name
     }, 1000);
     this.props._fetchLatestMeasurements({country: this.props.params.name, has_geo: 'true'});
+  },
+
+  onDownloadClick: function (data, e) {
+    e && e.preventDefault();
+    this.props._openDownloadModal(data);
   },
 
   //
@@ -98,34 +104,46 @@ var Country = React.createClass({
       .groupBy('city')
       .value();
 
-    let countriesList = _.map(groupped, (locations, k) => (
-      <div key={k} className='card-group'>
-        <div className='card-group__header'>
-          <h2>{k} <small>{locations.length} {locations.length > 1 ? 'locations' : 'location'}</small></h2>
-          <div className='card-group__actions'>
-            <a href='#' className='button-inpage-download'>Download</a>
+    let countriesList = _.map(groupped, (locations, k) => {
+      let dlClick = this.onDownloadClick.bind(null, {
+        country: this.props.params.name,
+        area: k
+      });
+      return (
+        <div key={k} className='card-group'>
+          <div className='card-group__header'>
+            <h2>{k} <small>{locations.length} {locations.length > 1 ? 'locations' : 'location'}</small></h2>
+            <div className='card-group__actions'>
+              <a href='#' className='button-inpage-download' title={`Download ${k} data`} onClick={dlClick}>Download</a>
+            </div>
+          </div>
+          <div className='card-group__contents'>
+            {locations.map(o => {
+              let countryData = _.find(this.props.countries, {code: o.country});
+              let sourceData = _.find(this.props.sources, {name: o.sourceName});
+              let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
+              let openModal = () => this.props._openDownloadModal({
+                country: o.country,
+                area: o.city,
+                location: o.location
+              });
+              return <LocationCard
+                      onDownloadClick={openModal}
+                      key={o.location}
+                      name={o.location}
+                      city={o.city}
+                      countryData={countryData}
+                      sourceData={sourceData}
+                      totalMeasurements={o.count}
+                      parametersList={params}
+                      lastUpdate={o.lastUpdated}
+                      collectionStart={o.firstUpdated}
+                      compact />;
+            })}
           </div>
         </div>
-        <div className='card-group__contents'>
-          {locations.map(o => {
-            let countryData = _.find(this.props.countries, {code: o.country});
-            let sourceData = _.find(this.props.sources, {name: o.sourceName});
-            let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
-            return <LocationCard
-                    key={o.location}
-                    name={o.location}
-                    city={o.city}
-                    countryData={countryData}
-                    sourceData={sourceData}
-                    totalMeasurements={o.count}
-                    parametersList={params}
-                    lastUpdate={o.lastUpdated}
-                    collectionStart={o.firstUpdated}
-                    compact />;
-          })}
-        </div>
-      </div>
-    ));
+      );
+    });
 
     return (
       <div className='countries-list'>
@@ -204,7 +222,7 @@ var Country = React.createClass({
             <div className='inpage__actions'>
               <ul>
                 <li><a href='' title='View API documentation' className='button-inpage-api'>View API Docs</a></li>
-                <li><a href='#' className='button-inpage-download'>Download</a></li>
+                <li><a href='#' className='button-inpage-download' title={`Download ${countryData.name} data`} onClick={this.onDownloadClick.bind(null, {country: this.props.params.name})}>Download</a></li>
               </ul>
             </div>
           </div>
@@ -244,7 +262,9 @@ function dispatcher (dispatch) {
   return {
     _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
     _fetchLatestMeasurements: (...args) => dispatch(fetchLatestMeasurements(...args)),
-    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args))
+    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args)),
+
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
   };
 }
 

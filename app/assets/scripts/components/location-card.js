@@ -10,6 +10,7 @@ var LocationCard = React.createClass({
   displayName: 'LocationCard',
 
   propTypes: {
+    onDownloadClick: React.PropTypes.func,
     compact: React.PropTypes.bool,
     name: React.PropTypes.string,
     city: React.PropTypes.string,
@@ -19,6 +20,11 @@ var LocationCard = React.createClass({
     parametersList: React.PropTypes.array,
     lastUpdate: React.PropTypes.string,
     collectionStart: React.PropTypes.string
+  },
+
+  onDownloadClick: function (e) {
+    e.preventDefault();
+    this.props.onDownloadClick();
   },
 
   renderParameters: function () {
@@ -48,7 +54,7 @@ var LocationCard = React.createClass({
           </div>
           <footer className='card__footer'>
             <ul className='card__actions'>
-              <li><a href='#' className='button-card-download' title={`Download data for ${this.props.name}`}>Download</a></li>
+              <li><a href='#' className='button-card-download' title={`Download data for ${this.props.name}`} onClick={this.onDownloadClick}>Download</a></li>
               <li><Link to={`/location/${this.props.name}`} className='button-card-view' title={`View ${this.props.name} page`}>View More</Link></li>
             </ul>
           </footer>

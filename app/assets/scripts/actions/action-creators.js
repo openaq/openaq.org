@@ -8,6 +8,7 @@ import * as locations from './locations';
 import * as measurements from './measurements';
 import * as nearbyLocations from './nearby-locations';
 import * as locationsByCountry from './locations-by-country';
+import * as downloadModal from './download-modal';
 
 module.exports = Object.assign({},
   baseData,
@@ -19,5 +20,6 @@ module.exports = Object.assign({},
   locations,
   measurements,
   nearbyLocations,
-  locationsByCountry
+  locationsByCountry,
+  downloadModal
 );

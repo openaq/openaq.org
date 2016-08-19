@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import c from 'classnames';
 import _ from 'lodash';
+import moment from 'moment';
+import { stringify as buildAPIQS } from 'qs';
 import OpenAQ from 'openaq-design-system';
 const { Modal, ModalHeader, ModalBody } = OpenAQ.Modal;
 
@@ -12,6 +14,7 @@ import {
   fetchLocationsByCountry,
   invalidateLocationsByCountry
 } from '../actions/action-creators';
+import config from '../config';
 
 var ModalDownload = React.createClass({
   displayName: 'ModalDownload',
@@ -76,13 +79,57 @@ var ModalDownload = React.createClass({
   },
 
   onDownloadClick: function () {
-    let state = _.clone(this.state);
+  },
+
+  computeDownloadUrl: function (values) {
+    let state = _.clone(values);
     _.forEach(state, (o, i) => {
       if (o === '--' || !o.length) {
         delete state[i];
       }
     });
-    console.log('state', state);
+
+    if (state.startYear && state.startMonth && state.startDay) {
+      let sDate = moment(`${state.startYear}/${parseInt(state.startMonth) + 1}/${state.startDay}`, 'YYYY/M/D');
+      if (sDate.isValid()) {
+        state.sDate = sDate.toISOString();
+      }
+    }
+
+    if (state.endYear && state.endMonth && state.endDay) {
+      let eDate = moment(`${state.endYear}/${parseInt(state.endMonth) + 1}/${state.endDay}`, 'YYYY/M/D');
+      if (eDate.isValid()) {
+        state.eDate = eDate.toISOString();
+      }
+    }
+
+    // Build url.
+    let qs = {
+      limit: 10000,
+      format: 'csv'
+    };
+
+    // It's enough to have one of these.
+    if (state.locLocation) {
+      qs.location = state.locLocation;
+    } else if (state.locArea) {
+      qs.city = state.locArea;
+    } else if (state.locCountry) {
+      qs.country = state.locCountry;
+    }
+
+    if (state.sDate) {
+      qs.date_from = state.sDate;
+    }
+
+    if (state.eDate) {
+      qs.date_to = state.eDate;
+    }
+
+    qs = `${config.api}/measurements?${buildAPIQS(qs)}`;
+    // console.log('computeDownloadUrl', qs);
+
+    return qs;
   },
 
   //
@@ -174,7 +221,7 @@ var ModalDownload = React.createClass({
         <div className='form__group'>
           <label htmlFor='loc-country' className='form__label'>Country</label>
           <select id='loc-country' className='form__control form__control--small' value={this.state.locCountry} onChange={this.onOptSelect.bind(null, 'locCountry')}>
-            <option value='--'>Country</option>
+            <option value='--'>Select a Country</option>
             {this.props.countries.map(o => <option key={o.code} value={o.code}>{o.name}</option>)}
           </select>
         </div>
@@ -198,7 +245,7 @@ var ModalDownload = React.createClass({
 
   renderParameters: function () {
     return (
-      <fieldset className='form__fieldset form__fieldset--parameters'>
+      <fieldset className='form__fieldset form__fieldset--parameters disabled'>
         <legend className='form__legend'>Parameters</legend>
         <div className='form__option-group'>
           {this.props.parameters.map(o => {
@@ -242,9 +289,11 @@ var ModalDownload = React.createClass({
 
               <div className='form__actions'>
                 <button type='button' className='button button--primary-bounded' onClick={this.props.onModalClose}>Cancel</button>
-                <button type='button' className={c('button-modal-download', {disabled: false})} onClick={this.onDownloadClick}>Download Selection <small>(csv)</small></button>
+                <a href={this.computeDownloadUrl(this.state)} className={c('button-modal-download', {disabled: false})} target='_blank'>Download Selection <small>(csv)</small></a>
               </div>
             </form>
+
+            <p style={{textAlign: 'center'}}>Due to API limitations the download is limited to 10,000 measurements</p>
 
           </div>
         </ModalBody>

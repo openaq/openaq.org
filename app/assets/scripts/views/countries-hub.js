@@ -4,12 +4,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { formatThousands } from '../utils/format';
+import { openDownloadModal } from '../actions/action-creators';
 
 var CountriesHub = React.createClass({
   displayName: 'CountriesHub',
 
   propTypes: {
+    _openDownloadModal: React.PropTypes.func,
     countries: React.PropTypes.array
+  },
+
+  onDownloadClick: function (country, e) {
+    e.preventDefault();
+    this.props._openDownloadModal({country: country});
   },
 
   renderCountryList: function () {
@@ -27,7 +34,7 @@ var CountriesHub = React.createClass({
           </div>
           <footer className='card__footer'>
             <ul className='card__actions'>
-              <li><a href='#' className='button-card-download' title={`Download data for ${o.name}`}>Download</a></li>
+              <li><a href='#' className='button-card-download' title={`Download data for ${o.name}`} onClick={this.onDownloadClick.bind(null, o.code)}>Download</a></li>
               <li><Link to={`/countries/${o.code}`} className='button-card-view' title={`View ${o.name} page`}>View More</Link></li>
             </ul>
           </footer>
@@ -83,6 +90,7 @@ function selector (state) {
 
 function dispatcher (dispatch) {
   return {
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
   };
 }
 

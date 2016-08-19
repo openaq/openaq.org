@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 import { toggleValue } from '../utils/array';
 import { buildQS } from '../utils/url';
-import { fetchLocations } from '../actions/action-creators';
+import { fetchLocations, openDownloadModal } from '../actions/action-creators';
 import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
@@ -19,6 +19,7 @@ var LocationsHub = React.createClass({
   propTypes: {
     location: React.PropTypes.object,
     _fetchLocations: React.PropTypes.func,
+    _openDownloadModal: React.PropTypes.func,
 
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
@@ -259,7 +260,13 @@ var LocationsHub = React.createClass({
       let countryData = _.find(this.props.countries, {code: o.country});
       let sourceData = _.find(this.props.sources, {name: o.sourceName});
       let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
+      let openModal = () => this.props._openDownloadModal({
+        country: o.country,
+        area: o.city,
+        location: o.location
+      });
       return <LocationCard
+              onDownloadClick={openModal}
               key={o.location}
               name={o.location}
               city={o.city}
@@ -310,7 +317,7 @@ var LocationsHub = React.createClass({
             <div className='inpage__actions'>
               <ul>
                 <li><a href='' title='View API documentation' className='button-inpage-api'>View API Docs</a></li>
-                <li><a href='#' className='button-inpage-download'>Download Today's Data <small>(3MB)</small></a></li>
+                <li><a href='#' className='button-inpage-download disabled' title="Today's data in csv format" >Download Today's Data</a></li>
               </ul>
             </div>
           </div>
@@ -386,7 +393,8 @@ function selector (state) {
 
 function dispatcher (dispatch) {
   return {
-    _fetchLocations: (...args) => dispatch(fetchLocations(...args))
+    _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
   };
 }
 

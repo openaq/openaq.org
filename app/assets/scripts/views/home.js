@@ -12,7 +12,8 @@ import { geolocateUser,
   fetchNearbyLocations,
   fetchCompareLocationIfNeeded,
   fetchCompareLocationMeasurements,
-  invalidateCompare } from '../actions/action-creators';
+  invalidateCompare,
+  openDownloadModal } from '../actions/action-creators';
 import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
 import NearbyLocations from '../components/nearby-locations';
 import CommunityCard from '../components/community-card';
@@ -29,6 +30,7 @@ var Home = React.createClass({
     _fetchCompareLocationIfNeeded: React.PropTypes.func,
     _fetchCompareLocationMeasurements: React.PropTypes.func,
     _invalidateCompare: React.PropTypes.func,
+    _openDownloadModal: React.PropTypes.func,
 
     statsCounts: React.PropTypes.object,
     statsCountsFetching: React.PropTypes.bool,
@@ -305,6 +307,7 @@ var Home = React.createClass({
           <NearbyLocations
             _geolocateUser={this.props._geolocateUser}
             _fetchNearbyLocations={this.props._fetchNearbyLocations}
+            _openDownloadModal={this.props._openDownloadModal}
             geolocationRequesting={this.props.geolocationRequesting}
             geolocationRequested={this.props.geolocationRequested}
             geolocationCoords={this.props.geolocationCoords}
@@ -363,7 +366,9 @@ function dispatcher (dispatch) {
     _invalidateCompare: (...args) => dispatch(invalidateCompare(...args)),
 
     _fetchCompareLocationIfNeeded: (...args) => dispatch(fetchCompareLocationIfNeeded(...args)),
-    _fetchCompareLocationMeasurements: (...args) => dispatch(fetchCompareLocationMeasurements(...args))
+    _fetchCompareLocationMeasurements: (...args) => dispatch(fetchCompareLocationMeasurements(...args)),
+
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
   };
 }
 
