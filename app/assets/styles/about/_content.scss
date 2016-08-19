@@ -1,0 +1,42 @@
+/* ==========================================================================
+   About: Content
+   ========================================================================== */
+
+
+/* Sponsors
+   ========================================================================== */
+
+.sponsors {
+  &__list {
+    @extend .clearfix;
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      box-shadow: 0 0 0 2px $base-alpha-color;
+      border-radius: $base-border-radius;
+      margin: $global-spacing 0;
+
+      @include media(small-up) {
+        @include col(6/12, $cycle: 2);
+      }
+
+      @include media(medium-up) {
+        @include col(4/12, $cycle: 3);
+      }
+    }
+  }
+
+  &__item {
+    display: block;
+    height: 8rem;
+    text-align: center;
+    line-height: 8rem;
+
+    img {
+      max-height: 4rem;
+      vertical-align: middle;
+    }
+  }
+}

@@ -175,3 +175,15 @@ $page-header-y: $global-spacing * 5;
     color: rgba(#fff, 0.64);
   }
 }
+
+.header--centered {
+  .inpage__title {
+    text-align: center;
+    @include col(6/12, $offset: 3/12);
+  }
+  
+  .inpage__introduction {
+    text-align: center;
+    @include col(8/12, $offset: 2/12);
+  }
+}
