@@ -15,7 +15,8 @@
   > .inner,
   .fold__header,
   .fold__introduction,
-  .fold__body {
+  .fold__body,
+  .fold__copy {
     > *:last-child {
       margin-bottom: 0;
     }

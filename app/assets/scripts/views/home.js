@@ -247,7 +247,7 @@ var Home = React.createClass({
           {body}
           <div className='fold__footer'>
           {l1.data && l2.data
-          ? <Link to={`/compare/${l1.data.location}/${l2.data.location}`} title='View Locations' className='button button--primary-bounded button--semi-fluid'>Compare Locations</Link>
+          ? <Link to={`/compare/${l1.data.location}/${l2.data.location}`} title='View Locations' className='button button--large button--primary-bounded button--semi-fluid'>Compare Locations</Link>
           : null}
           </div>
         </div>
@@ -277,7 +277,7 @@ var Home = React.createClass({
 
           </div>
           <div className='fold__footer'>
-            <Link to='/community' title='See community page' className='button button--primary-bounded button--semi-fluid'>Get Involved</Link>
+            <Link to='/community' title='See community page' className='button button--large button--primary-bounded button--semi-fluid'>Get Involved</Link>
           </div>
         </div>
       </section>

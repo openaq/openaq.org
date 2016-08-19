@@ -23,7 +23,7 @@ var About = React.createClass({
         </header>
         <div className='inpage__body'>
 
-          <section className='fold fold--media-bleed-left'>
+          <section className='fold fold--media-bleed-left' id='community-connect'>
             <div className='inner'>
               <div className='fold__media'>
                 <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.png)'}}>
@@ -51,7 +51,6 @@ var About = React.createClass({
 
           <section className='fold fold--filled'>
             <div className='inner'>
-            <div className='fold__copy'>
               <header className='fold__header'>
                 <h1 className='fold__title'>Contribute Code</h1>
               </header>
@@ -64,7 +63,6 @@ var About = React.createClass({
                   <button className='button button--large button--primary-bounded'>See Project Repos</button>
                 </div>
               </div>
-            </div>
             </div>
           </section>
 

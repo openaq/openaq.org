@@ -135,7 +135,7 @@ var NearbyLocations = React.createClass({
             {content}
           </div>
           <div className='fold__footer'>
-            <Link to='/locations' title='View all locations' className='button button--primary-bounded button--semi-fluid'>View All Locations</Link>
+            <Link to='/locations' title='View all locations' className='button button--large button--primary-bounded button--semi-fluid'>View All Locations</Link>
           </div>
         </div>
       </section>
