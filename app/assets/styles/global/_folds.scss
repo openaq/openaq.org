@@ -32,10 +32,31 @@
 
 .fold__body {
   margin-bottom: 2rem;
+
+  &--prose {
+    width: column-width(12/12);
+
+    @include media(medium-up) {
+      width: column-width(10/12);
+    }
+
+    @include media(large-up) {
+      width: column-width(8/12);
+    }
+  }
 }
 
 .fold__footer {
   text-align: center;
+}
+
+.fold__actions {
+  .button {
+    margin-right: 1rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .fold__header {
