@@ -58,10 +58,10 @@ var About = React.createClass({
                 <div className='fold__body--prose'>
                   <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
                 </div>
-                <div className='fold__actions'>
-                  <button className='button button--large button--primary-bounded'>View Open Issues</button>
-                  <button className='button button--large button--primary-bounded'>See Project Repos</button>
-                </div>
+              </div>
+              <div className='fold__actions'>
+                <button className='button button--large button--primary-bounded'>View Open Issues</button>
+                <button className='button button--large button--primary-bounded'>See Project Repos</button>
               </div>
             </div>
           </section>
@@ -80,7 +80,9 @@ var About = React.createClass({
                 <div className='fold__body'>
                   <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
                 </div>
-                <button className='button button--large button--primary-bounded'>View Details</button>
+                <div className='fold__actions'>
+                  <button className='button button--large button--primary-bounded'>View Details</button>
+                </div>
               </div>
             </div>
           </section>

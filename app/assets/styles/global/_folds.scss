@@ -53,9 +53,13 @@
 
 .fold__actions {
   .button {
+    margin-bottom: 1rem;
     margin-right: 1rem;
-    &:last-child {
-      margin-right: 0;
+
+    @include media(small-up) {
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }
