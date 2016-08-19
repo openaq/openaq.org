@@ -67,18 +67,18 @@ var About = React.createClass({
                 <h1 className='fold__title'>Partners and Sponsors</h1>
               </header>
               <div className='fold__body'>
-                <ul className='sponsors'>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/devseed.png'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/aws.png'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/agu.jpg'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/ejn.png'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/internews.png'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/keenio.jpg'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/nih.jpg'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/openscience.png'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/tex.png'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/wellcome.jpg'/></a></li>
-                  <li><a href=''><img src='assets/graphics/content/sponsors/hhmi.jpg'/></a></li>
+                <ul className='sponsors__list'>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/ejn.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/internews.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/keenio.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/nih.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/openscience.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/tex.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/wellcome.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
                 </ul>
               </div>
             </div>
