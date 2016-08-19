@@ -2,6 +2,17 @@
    Global: Pages
    ========================================================================== */
 
+html, body, #app-container, .page {
+  // Make page have always 100% height.
+  // To ensure that when we have absolutely positioned elements the page still
+  // takes up the full viewport. Ex: map page.
+  height: 100%;
+}
+
+html.unscrollable-y {
+  height: auto;
+}
+
 html {
   // The map using bleed-full was creating some horizontal offset because
   // the scroll bar was not being taken into account when using vw.
