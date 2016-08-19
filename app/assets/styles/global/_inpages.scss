@@ -79,7 +79,7 @@ $page-header-y: $global-spacing * 5;
 
   &__title {
     @extend .heading, .heading--medium;
-    width: column-width(8/12);
+    @include col(8/12);
   }
 
   &__subtitle {
@@ -103,6 +103,7 @@ $page-header-y: $global-spacing * 5;
     font-size: 1rem;
     line-height: 1.75rem;
     margin-bottom: 1rem;
+    clear: both;
     > *:last-child {
       margin-bottom: 0;
     }
