@@ -427,13 +427,27 @@ var Chart = function (options) {
     brush.on('brush end start', function () {
       if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') return; // ignore brush-by-zoom
 
-      var s = d3.event.selection || xBrush.range();
-      x.domain(s.map(xBrush.invert, xBrush));
+      let s = d3.event.selection || xBrush.range();
+      let newXDomain = s.map(xBrush.invert);
+      // Compute new yMax.
+      let yMax = _(_data)
+        .map(l => {
+          let max = _(l)
+            .filter(m => m.date.localNoTZ >= newXDomain[0] && m.date.localNoTZ <= newXDomain[1])
+            .maxBy('value');
+
+          return max ? max.value : 0;
+        })
+        .max();
+
+      x.domain(newXDomain);
+      y.domain([0, yMax]);
 
       // Redraw.
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
+      layers.yAxis();
       layers.brush();
     });
 
