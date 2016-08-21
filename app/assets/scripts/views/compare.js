@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';
@@ -268,7 +269,7 @@ var Compare = React.createClass({
       return (
         <li className='compare__location' key={d.location}>
           <p className='compare__subtitle'>Updated {updated}</p>
-          <h2 className='compare__title'><span className={c('compare-marker', kl[i])}>{d.location}</span> <small>in {d.city}, {countryData.name}</small></h2>
+          <h2 className='compare__title'><Link to={`/location/${d.location}`}><span className={c('compare-marker', kl[i])}>{d.location}</span></Link> <small>in {d.city}, {countryData.name}</small></h2>
           <div className='compare__actions'>
             { /* <button type='button' className='button button--small button--primary-unbounded'>Edit</button> */ }
             <button type='button' className='button button--small button--primary-unbounded' onClick={this.removeLocClick.bind(null, i)}>Remove</button>
