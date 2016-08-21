@@ -221,6 +221,15 @@ var Chart = function (options) {
         .attr('width', _width)
         .attr('height', _height);
 
+      // Update Axis.
+      if (_width <= 544) {
+        xAxis.ticks(3);
+      } else if (_width <= 768) {
+        xAxis.ticks(5);
+      } else {
+        xAxis.ticks(15);
+      }
+
       // Update scale ranges.
       x.range([0, _width]);
       y.range([_height, 0]);

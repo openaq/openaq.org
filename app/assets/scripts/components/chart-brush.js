@@ -371,6 +371,18 @@ var Chart = function (options) {
           .attr('height', calcFocusHeight() + 16);
       }
 
+      // Update Axis.
+      if (_width <= 544) {
+        xAxis.ticks(3);
+        xAxisBrush.ticks(3);
+      } else if (_width <= 768) {
+        xAxis.ticks(5);
+        xAxisBrush.ticks(5);
+      } else {
+        xAxis.ticks(15);
+        xAxisBrush.ticks(15);
+      }
+
       // Update scale ranges.
       x.range([0, _width]);
       xBrush.range([0, _width]);
