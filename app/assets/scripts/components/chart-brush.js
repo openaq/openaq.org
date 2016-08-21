@@ -29,6 +29,23 @@ var BrushChart = React.createClass({
     this.chart.checkSize();
   },
 
+  shouldComponentUpdate: function (nextProps) {
+    // Quickly check if the data is the same.
+    if (this.props.data.length !== nextProps.data.length) {
+      return true;
+    }
+
+    // Use location name and parameter name to compare.
+    let currentHash = this.props.data.map(o => o[0] ? o[0].location + o[0].parameter : '').join('');
+    let nextHash = nextProps.data.map(o => o[0] ? o[0].location + o[0].parameter : '').join('');
+
+    if (currentHash === nextHash) {
+      return false;
+    }
+
+    return true;
+  },
+
   componentDidMount: function () {
     // console.log('BrushChart componentDidMount');
     // Debounce event.
@@ -364,7 +381,6 @@ var Chart = function (options) {
       // HACK-ish way of covering all the points. FIX!
       brush.extent([[0, -4], [_width, calcContextHeight() + 8]]);
       $dataCanvas.select('g.brush')
-        .call(brush)
         .call(brush.move, x.range());
 
       // Redraw.
@@ -388,6 +404,9 @@ var Chart = function (options) {
       xBrush.domain(_xRange);
       y.domain(_yRange);
       yBrush.domain(_yRange);
+
+      $dataCanvas.select('g.brush')
+        .call(brush.move, x.range());
 
       // Redraw.
       layers.contextRegion();
