@@ -78,9 +78,6 @@ var ModalDownload = React.createClass({
     this.setState({parameters});
   },
 
-  onDownloadClick: function () {
-  },
-
   computeDownloadUrl: function (values) {
     let state = _.clone(values);
     _.forEach(state, (o, i) => {
@@ -105,7 +102,7 @@ var ModalDownload = React.createClass({
 
     // Build url.
     let qs = {
-      limit: 10000,
+      // limit: 65536,
       format: 'csv'
     };
 
@@ -124,6 +121,10 @@ var ModalDownload = React.createClass({
 
     if (state.eDate) {
       qs.date_to = state.eDate;
+    }
+
+    if (state.parameters) {
+      qs.parameter = state.parameters;
     }
 
     qs = `${config.api}/measurements?${buildAPIQS(qs)}`;
@@ -245,7 +246,7 @@ var ModalDownload = React.createClass({
 
   renderParameters: function () {
     return (
-      <fieldset className='form__fieldset form__fieldset--parameters disabled'>
+      <fieldset className='form__fieldset form__fieldset--parameters'>
         <legend className='form__legend'>Parameters</legend>
         <div className='form__option-group'>
           {this.props.parameters.map(o => {
@@ -293,7 +294,7 @@ var ModalDownload = React.createClass({
               </div>
             </form>
 
-            <p style={{textAlign: 'center'}}>Due to API limitations the download is limited to 10,000 measurements</p>
+            <p style={{textAlign: 'center'}}>Due to API limitations the download is limited to 65,536 measurements</p>
 
           </div>
         </ModalBody>
