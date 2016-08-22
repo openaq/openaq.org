@@ -20,6 +20,7 @@ import CommunityCard from '../components/community-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 import ChartMeasurement from '../components/chart-measurement';
+import content from '../../content/content.json';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -258,6 +259,20 @@ var Home = React.createClass({
   },
 
   renderCommunity: function () {
+    let cards = _.filter(content.projects, o => o.featured)
+      .map(o => {
+        return (
+          <CommunityCard
+            key={_.kebabCase(o.title)}
+            title={o.title}
+            linkTitle='View this community contribution'
+            url={o.url}
+            imageNode={<img width='256' height='256' src={o.image} alt='Project image' />} >
+            <div dangerouslySetInnerHTML={{__html: o.body}} />
+          </CommunityCard>
+        );
+      });
+
     return (
       <section className='fold' id='home-community'>
         <div className='inner'>
@@ -268,15 +283,7 @@ var Home = React.createClass({
             </div>
           </header>
           <div className='fold__body'>
-
-            <CommunityCard
-              title='Build an App'
-              linkTitle='View this community contribution'
-              url=''
-              imageNode={<img width='256' height='256' src='http://placehold.it/256x256' alt='Card thumb' />} >
-              <p>To engage with his community on air quality issues in New Delhi, Amrit Sharma has built a free air quality app.</p>
-            </CommunityCard>
-
+            {cards}
           </div>
           <div className='fold__footer'>
             <Link to='/community' title='See community page' className='button button--large button--primary-bounded button--semi-fluid'>Get Involved</Link>
