@@ -60,8 +60,8 @@ var About = React.createClass({
                 </div>
               </div>
               <div className='fold__actions'>
-                <button className='button button--large button--primary-bounded'>View Open Issues</button>
-                <button className='button button--large button--primary-bounded'>See Project Repos</button>
+                <a href='https://github.com/openaq/openaq-api/issues' target='_blank' className='button button--large button--primary-bounded'>View Open Issues</a>
+                <a href='https://github.com/openaq/' target='_blank' className='button button--large button--primary-bounded'>See Project Repos</a>
               </div>
             </div>
           </section>
@@ -81,7 +81,7 @@ var About = React.createClass({
                   <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
                 </div>
                 <div className='fold__actions'>
-                  <button className='button button--large button--primary-bounded'>View Details</button>
+                  <a href='https://medium.com/@openaq/were-going-to-be-doing-more-openaq-workshops-tell-us-where-we-should-go-94d7d2eab234#.y7g82pqn2' target='_blank' className='button button--large button--primary-bounded'>View Details</a>
                 </div>
               </div>
             </div>
