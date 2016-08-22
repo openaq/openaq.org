@@ -85,7 +85,7 @@ var NearbyLocations = React.createClass({
     let content = null;
     let intro = null;
     if (requesting) {
-      content = <p>Waiting for your position</p>;
+      content = <LoadingMessage><p>Determining your location</p></LoadingMessage>;
     }
 
     if (error) {
