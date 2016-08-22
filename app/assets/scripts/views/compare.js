@@ -322,6 +322,7 @@ var Compare = React.createClass({
       if (o.parameter !== this.getActiveParameterData().id) {
         return false;
       }
+      if (o.value < 0) return false;
       let localDate = moment.parseZone(o.date.local).format('YYYY/MM/DD HH:mm:ss');
       return localDate >= weekAgo && localDate <= userNow;
     };
