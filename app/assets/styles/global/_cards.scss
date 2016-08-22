@@ -9,6 +9,8 @@
 
   &__title small {
     font-weight: $heading-font-bold;
+    display: block;
+    line-height: 1;
   }
 
   &__body {

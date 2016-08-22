@@ -5,6 +5,7 @@ import { ScrollArea } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
+import moment from 'moment';
 
 import { toggleValue } from '../utils/array';
 import { buildQS } from '../utils/url';
@@ -304,6 +305,8 @@ var LocationsHub = React.createClass({
   },
 
   render: function () {
+    let yesterday = moment().subtract(1, 'day').format('YYYY-MM-DD');
+    let yesterdayDataUrl = `https://openaq-data.s3.amazonaws.com/${yesterday}.csv`;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -317,7 +320,7 @@ var LocationsHub = React.createClass({
             <div className='inpage__actions'>
               <ul>
                 <li><a href='' title='View API documentation' className='button-inpage-api'>View API Docs</a></li>
-                <li><a href='#' className='button-inpage-download disabled' title="Today's data in csv format" >Download Today's Data</a></li>
+                <li><a href={yesterdayDataUrl} className='button-inpage-download' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
               </ul>
             </div>
           </div>

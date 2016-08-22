@@ -197,7 +197,6 @@ const MapComponent = React.createClass({
         'circle-color': {
           property: 'value',
           stops: generateColorStops(this.props.parameter.id)
-          // replace with generateColorStops()
         },
         'circle-opacity': 1,
         'circle-radius': coloredCircleRadius,
@@ -250,7 +249,6 @@ const MapComponent = React.createClass({
         'circle-color': {
           property: 'value',
           stops: generateColorStops(this.props.parameter.id)
-          // replace with generateColorStops()
         },
         'circle-opacity': 1,
         'circle-radius': coloredCircleRadius,
@@ -263,11 +261,26 @@ const MapComponent = React.createClass({
   // Start data methods
   //
 
+  // Date control. To avoid constructing new moment objects.
+  dayAgo: null,
+
   generateFeature: function (locMeasurement) {
     let param = _.find(locMeasurement.measurements, {parameter: this.props.parameter.id});
 
     let val = param ? convertParamIfNeeded(param) : -1;
     val = val < 0 ? -1 : val;
+
+    if (this.dayAgo === null) {
+      this.dayAgo = moment.utc().subtract(1, 'day').toISOString();
+    }
+    // Check if the value is older than 24 hours and style it differently.
+    if (param && param.lastUpdated < this.dayAgo) {
+      // TODO:
+      // Set a specific value to control the color. (like -99)
+      // Alternatively add a new property to the feature, add add a completely
+      // different style layer.
+      val = -1;
+    }
 
     return {
       type: 'Feature',

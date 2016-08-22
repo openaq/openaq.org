@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';
@@ -208,7 +209,7 @@ var Compare = React.createClass({
       let compareLocationsLabel = fetchingLocations ? 'Loading Data' : (compareLocations.length ? 'Select a Location' : 'No locations available');
 
       // Disable area while the locations are not fetched.
-      let disableArea = !fetchedLocations || fetchingLocations;
+      let disableArea = !fetchedLocations || fetchingLocations || this.props.compareSelectOpts.country === '--';
       // Disable locations if locations are not fetched or are not selected
       let disableLocation = disableArea || this.props.compareSelectOpts.area === '--' || !compareLocations.length;
       // Disable confirm until everything is selected.
@@ -241,7 +242,7 @@ var Compare = React.createClass({
             </div>
             <div className='form__actions'>
               <button type='button' className='button button--small button--base' onClick={this.props._cancelCompareOptions}>Cancel</button>
-              <button type='button' className={c('button button--small button--primary', {disabled: disableConfirm})} onClick={this.compareOptionsConfirmClick}>Confirm</button>
+              <button type='button' className={c('button button--small button--primary', {disabled: disableConfirm})} onClick={this.compareOptionsConfirmClick}>Add</button>
             </div>
           </form>
         </li>
@@ -268,7 +269,7 @@ var Compare = React.createClass({
       return (
         <li className='compare__location' key={d.location}>
           <p className='compare__subtitle'>Updated {updated}</p>
-          <h2 className='compare__title'><span className={c('compare-marker', kl[i])}>{d.location}</span> <small>in {d.city}, {countryData.name}</small></h2>
+          <h2 className='compare__title'><Link to={`/location/${d.location}`}><span className={c('compare-marker', kl[i])}>{d.location}</span></Link> <small>in {d.city}, {countryData.name}</small></h2>
           <div className='compare__actions'>
             { /* <button type='button' className='button button--small button--primary-unbounded'>Edit</button> */ }
             <button type='button' className='button button--small button--primary-unbounded' onClick={this.removeLocClick.bind(null, i)}>Remove</button>
@@ -321,6 +322,7 @@ var Compare = React.createClass({
       if (o.parameter !== this.getActiveParameterData().id) {
         return false;
       }
+      if (o.value < 0) return false;
       let localDate = moment.parseZone(o.date.local).format('YYYY/MM/DD HH:mm:ss');
       return localDate >= weekAgo && localDate <= userNow;
     };
@@ -368,7 +370,7 @@ var Compare = React.createClass({
         data={chartData}
         xRange={xRange}
         yRange={[0, yMax]}
-        yLabel={`Values in ${activeParam.preferredUnit}`} />
+        yLabel={activeParam.preferredUnit} />
     );
   },
 

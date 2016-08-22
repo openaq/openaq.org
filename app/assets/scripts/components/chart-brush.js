@@ -29,6 +29,23 @@ var BrushChart = React.createClass({
     this.chart.checkSize();
   },
 
+  shouldComponentUpdate: function (nextProps) {
+    // Quickly check if the data is the same.
+    if (this.props.data.length !== nextProps.data.length) {
+      return true;
+    }
+
+    // Use location name and parameter name to compare.
+    let currentHash = this.props.data.map(o => o[0] ? o[0].location + o[0].parameter : '').join('');
+    let nextHash = nextProps.data.map(o => o[0] ? o[0].location + o[0].parameter : '').join('');
+
+    if (currentHash === nextHash) {
+      return false;
+    }
+
+    return true;
+  },
+
   componentDidMount: function () {
     // console.log('BrushChart componentDidMount');
     // Debounce event.
@@ -124,7 +141,8 @@ var Chart = function (options) {
   var yAxis = d3.axisLeft(y)
     .tickPadding(8)
     .ticks(5)
-    .tickSize(0);
+    .tickSize(0)
+    .tickFormat(o => o === 0 ? `0 ${_yLabel}` : o);
 
   // Define xAxis brush function.
   var xAxisBrush = d3.axisBottom(xBrush)
@@ -296,15 +314,15 @@ var Chart = function (options) {
           .data([0]);
 
         yAx.enter().append('g')
-          .attr('class', 'y axis')
-          .append('text')
-          .attr('class', 'label')
-          .attr('text-anchor', 'end')
-          .attr('dy', '16px')
-          .attr('transform', 'rotate(-90)');
+          .attr('class', 'y axis');
+        //   .append('text')
+        //   .attr('class', 'label')
+        //   .attr('text-anchor', 'end')
+        //   .attr('dy', '16px')
+        //   .attr('transform', 'rotate(-90)');
 
-        yAx.select('.label')
-          .text(_yLabel);
+        // yAx.select('.label')
+        //   .text(_yLabel);
 
         yAx
           .attr('transform', `translate(${margin.left},${margin.top})`)
@@ -354,6 +372,18 @@ var Chart = function (options) {
           .attr('height', calcFocusHeight() + 16);
       }
 
+      // Update Axis.
+      if (_width <= 544) {
+        xAxis.ticks(3);
+        xAxisBrush.ticks(3);
+      } else if (_width <= 768) {
+        xAxis.ticks(5);
+        xAxisBrush.ticks(5);
+      } else {
+        xAxis.ticks(15);
+        xAxisBrush.ticks(15);
+      }
+
       // Update scale ranges.
       x.range([0, _width]);
       xBrush.range([0, _width]);
@@ -364,7 +394,6 @@ var Chart = function (options) {
       // HACK-ish way of covering all the points. FIX!
       brush.extent([[0, -4], [_width, calcContextHeight() + 8]]);
       $dataCanvas.select('g.brush')
-        .call(brush)
         .call(brush.move, x.range());
 
       // Redraw.
@@ -388,6 +417,9 @@ var Chart = function (options) {
       xBrush.domain(_xRange);
       y.domain(_yRange);
       yBrush.domain(_yRange);
+
+      $dataCanvas.select('g.brush')
+        .call(brush.move, x.range());
 
       // Redraw.
       layers.contextRegion();
@@ -427,13 +459,27 @@ var Chart = function (options) {
     brush.on('brush end start', function () {
       if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') return; // ignore brush-by-zoom
 
-      var s = d3.event.selection || xBrush.range();
-      x.domain(s.map(xBrush.invert, xBrush));
+      let s = d3.event.selection || xBrush.range();
+      let newXDomain = s.map(xBrush.invert);
+      // Compute new yMax.
+      let yMax = _(_data)
+        .map(l => {
+          let max = _(l)
+            .filter(m => m.date.localNoTZ >= newXDomain[0] && m.date.localNoTZ <= newXDomain[1])
+            .maxBy('value');
+
+          return max ? max.value : 0;
+        })
+        .max();
+
+      x.domain(newXDomain);
+      y.domain([0, yMax]);
 
       // Redraw.
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
+      layers.yAxis();
       layers.brush();
     });
 

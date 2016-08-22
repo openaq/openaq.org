@@ -2,7 +2,7 @@
    Global: Pages
    ========================================================================== */
 
-html, body, #app-container, .page {
+html, body, #app-container, .page--map {
   // Make page have always 100% height.
   // To ensure that when we have absolutely positioned elements the page still
   // takes up the full viewport. Ex: map page.

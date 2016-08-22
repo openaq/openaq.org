@@ -6,7 +6,8 @@ var LoadingMessage = React.createClass({
   displayName: 'LoadingMessage',
 
   propTypes: {
-    type: React.PropTypes.string
+    type: React.PropTypes.string,
+    children: React.PropTypes.object
   },
 
   getClasses: function () {
@@ -17,7 +18,10 @@ var LoadingMessage = React.createClass({
   },
 
   renderMsg: function () {
-    return this.props.type === 'minimal' ? '' : <p>Data is loading...</p>;
+    if (this.props.type === 'minimal') {
+      return '';
+    }
+    return this.props.children ? this.props.children : <p>Data is loading...</p>;
   },
 
   renderSvg: function () {

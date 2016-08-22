@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import c from 'classnames';
@@ -15,6 +16,7 @@ import {
   invalidateLocationsByCountry
 } from '../actions/action-creators';
 import config from '../config';
+import { formatThousands } from '../utils/format';
 
 var ModalDownload = React.createClass({
   displayName: 'ModalDownload',
@@ -35,6 +37,8 @@ var ModalDownload = React.createClass({
     location: React.PropTypes.string
   },
 
+  apiLimit: 65536,
+
   getInitialState: function () {
     return {
       locCountry: this.props.country || '--',
@@ -49,7 +53,9 @@ var ModalDownload = React.createClass({
       endMonth: '--',
       endDay: '--',
 
-      parameters: []
+      parameters: [],
+
+      selectionCount: null
     };
   },
 
@@ -78,13 +84,10 @@ var ModalDownload = React.createClass({
     this.setState({parameters});
   },
 
-  onDownloadClick: function () {
-  },
-
-  computeDownloadUrl: function (values) {
+  computeApiUrl: function (values, initalQS = {}) {
     let state = _.clone(values);
     _.forEach(state, (o, i) => {
-      if (o === '--' || !o.length) {
+      if (o === null || o === '--' || !o.length) {
         delete state[i];
       }
     });
@@ -104,10 +107,7 @@ var ModalDownload = React.createClass({
     }
 
     // Build url.
-    let qs = {
-      limit: 10000,
-      format: 'csv'
-    };
+    let qs = initalQS;
 
     // It's enough to have one of these.
     if (state.locLocation) {
@@ -126,10 +126,44 @@ var ModalDownload = React.createClass({
       qs.date_to = state.eDate;
     }
 
+    if (state.parameters) {
+      qs.parameter = state.parameters;
+    }
+
     qs = `${config.api}/measurements?${buildAPIQS(qs)}`;
     // console.log('computeDownloadUrl', qs);
 
     return qs;
+  },
+
+  computeDownloadUrl: function (values) {
+    return this.computeApiUrl(values, {format: 'csv'});
+  },
+
+  checkSelectionCount: function (url) {
+    // What is going on here?
+    // The api is limited to 65,536 results, but some download options
+    // combinations yield a lot more results. They could potentially
+    // return the whole database (when nothing is selected). This is not
+    // really an option, so the results are limited.
+    // Nevertheless the user has to be warned of this, so on every parameter
+    // change we query the api to know how many results would be returned, and
+    // show a message in case the number is above the limit.
+    // This is clearly a redux antipattern specially because we're not using
+    // action but this is supposed to be temporary although we all know this
+    // will probably stay here for a while.
+    // Alas, TODO: do it properly!
+    fetch(url)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => this.setState({selectionCount: json.meta.found}),
+        e => console.log('e', e)
+      );
   },
 
   //
@@ -140,6 +174,12 @@ var ModalDownload = React.createClass({
     if (this.props.country) {
       this.props._fetchLocationsByCountry(this.props.country);
     }
+  },
+
+  componentWillUpdate: function (nextProps, nextState) {
+    let prevUrl = this.computeApiUrl(this.state, {limit: 1});
+    let nextUrl = this.computeApiUrl(nextState, {limit: 1});
+    prevUrl !== nextUrl && this.checkSelectionCount(nextUrl);
   },
 
   //
@@ -155,21 +195,21 @@ var ModalDownload = React.createClass({
         <legend className='form__legend'>{what === 'start' ? 'Start' : 'End'} Date</legend>
         <div className='form__group'>
           <label htmlFor={`${what}-year`} className='form__label'>Year</label>
-          <select id={`${what}-year`} className='form__control form__control--small' value={this.state[`${what}Year`]} onChange={this.onOptSelect.bind(null, `${what}Year`)}>
+          <select id={`${what}-year`} className='form__control form__control--medium select--base-bounded' value={this.state[`${what}Year`]} onChange={this.onOptSelect.bind(null, `${what}Year`)}>
             <option value='--'>Year</option>
             {years.map(o => <option key={`startyear-${o}`} value={o}>{o}</option>)}
           </select>
         </div>
         <div className='form__group'>
           <label htmlFor={`${what}-month`} className='form__label'>Month</label>
-          <select id={`${what}-month`} className='form__control form__control--small' value={this.state[`${what}Month`]} onChange={this.onOptSelect.bind(null, `${what}Month`)}>
+          <select id={`${what}-month`} className='form__control form__control--medium select--base-bounded' value={this.state[`${what}Month`]} onChange={this.onOptSelect.bind(null, `${what}Month`)}>
             <option value='--'>Month</option>
             {months.map((o, i) => <option key={o} value={i}>{o}</option>)}
           </select>
         </div>
         <div className='form__group'>
           <label htmlFor={`${what}-day`} className='form__label'>Day</label>
-          <select id={`${what}-day`} className='form__control form__control--small' value={this.state[`${what}Day`]} onChange={this.onOptSelect.bind(null, `${what}Day`)}>
+          <select id={`${what}-day`} className='form__control form__control--medium select--base-bounded' value={this.state[`${what}Day`]} onChange={this.onOptSelect.bind(null, `${what}Day`)}>
             <option value='--'>Day</option>
             {days.map(o => <option key={`startday-${o}`} value={o}>{o}</option>)}
           </select>
@@ -220,21 +260,21 @@ var ModalDownload = React.createClass({
         <legend className='form__legend'>Location Selector</legend>
         <div className='form__group'>
           <label htmlFor='loc-country' className='form__label'>Country</label>
-          <select id='loc-country' className='form__control form__control--small' value={this.state.locCountry} onChange={this.onOptSelect.bind(null, 'locCountry')}>
+          <select id='loc-country' className='form__control form__control--medium select--base-bounded' value={this.state.locCountry} onChange={this.onOptSelect.bind(null, 'locCountry')}>
             <option value='--'>Select a Country</option>
             {this.props.countries.map(o => <option key={o.code} value={o.code}>{o.name}</option>)}
           </select>
         </div>
         <div className={c('form__group', {disabled: disableArea})}>
           <label htmlFor='loc-area' className='form__label'>Area</label>
-          <select id='loc-area' className='form__control form__control--small' value={this.state.locArea} onChange={this.onOptSelect.bind(null, 'locArea')}>
+          <select id='loc-area' className='form__control form__control--medium select--base-bounded' value={this.state.locArea} onChange={this.onOptSelect.bind(null, 'locArea')}>
             <option value='--'>{compareAreasLabel}</option>
             {compareAreas.map(o => <option key={o.city} value={o.city}>{o.city}</option>)}
           </select>
         </div>
         <div className={c('form__group', {disabled: disableLocation})}>
           <label htmlFor='loc-location' className='form__label'>Location</label>
-          <select id='loc-location' className='form__control form__control--small' value={this.state.locLocation} onChange={this.onOptSelect.bind(null, 'locLocation')}>
+          <select id='loc-location' className='form__control form__control--medium select--base-bounded' value={this.state.locLocation} onChange={this.onOptSelect.bind(null, 'locLocation')}>
             <option value='--'>{compareLocationsLabel}</option>
             {compareLocations.map(o => <option key={o.location} value={o.location}>{o.location}</option>)}
           </select>
@@ -245,7 +285,7 @@ var ModalDownload = React.createClass({
 
   renderParameters: function () {
     return (
-      <fieldset className='form__fieldset form__fieldset--parameters disabled'>
+      <fieldset className='form__fieldset form__fieldset--parameters'>
         <legend className='form__legend'>Parameters</legend>
         <div className='form__option-group'>
           {this.props.parameters.map(o => {
@@ -262,6 +302,15 @@ var ModalDownload = React.createClass({
         </div>
       </fieldset>
     );
+  },
+
+  renderResultCountMessage: function () {
+    let countMessage = null;
+    if (this.state.selectionCount !== null && this.state.selectionCount > this.apiLimit) {
+      countMessage = <p style={{textAlign: 'center'}}>The API has a limit of {formatThousands(this.apiLimit)} measurements and your query yields {formatThousands(this.state.selectionCount)}, therefore results will be limited.</p>;
+    }
+
+    return countMessage;
   },
 
   render: function () {
@@ -286,14 +335,13 @@ var ModalDownload = React.createClass({
               {this.renderDateSelector('start')}
               {this.renderDateSelector('end')}
               {this.renderParameters()}
+              {this.renderResultCountMessage()}
 
               <div className='form__actions'>
                 <button type='button' className='button button--primary-bounded' onClick={this.props.onModalClose}>Cancel</button>
                 <a href={this.computeDownloadUrl(this.state)} className={c('button-modal-download', {disabled: false})} target='_blank'>Download Selection <small>(csv)</small></a>
               </div>
             </form>
-
-            <p style={{textAlign: 'center'}}>Due to API limitations the download is limited to 10,000 measurements</p>
 
           </div>
         </ModalBody>
