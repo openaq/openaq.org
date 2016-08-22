@@ -7,11 +7,11 @@
 
   .axis {
     text {
-      fill: $base-color;
+      fill: rgba($base-font-color, 0.64);
     }
     .domain {
-      stroke: $base-color;
-      stroke-width: 2px
+      stroke: rgba($base-font-color, 0.24);
+      stroke-width: 1px
     }
   }
   .location-data {
