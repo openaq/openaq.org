@@ -26,8 +26,8 @@ var About = React.createClass({
           <section className='fold fold--media-bleed-left' id='community-connect'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.png)'}}>
-                  <img className='media__item' src='assets/graphics/content/about1.png' width='768' height='768' alt='About image 1' />
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/community1.jpg)'}}>
+                  <img className='media__item' src='assets/graphics/content/community1.jpg' width='768' height='768' alt='About image 1' />
                 </figure>
               </div>
               <div className='fold__copy'>
@@ -69,8 +69,8 @@ var About = React.createClass({
           <section className='fold fold--media-bleed-right'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.png)'}}>
-                  <img className='media__item' src='assets/graphics/content/about2.png' width='768' height='768' alt='About image 2' />
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/community2.jpg)'}}>
+                  <img className='media__item' src='assets/graphics/content/community2.jpg' width='768' height='768' alt='About image 2' />
                 </figure>
               </div>
               <div className='fold__copy'>
