@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import c from 'classnames';
@@ -15,6 +16,7 @@ import {
   invalidateLocationsByCountry
 } from '../actions/action-creators';
 import config from '../config';
+import { formatThousands } from '../utils/format';
 
 var ModalDownload = React.createClass({
   displayName: 'ModalDownload',
@@ -35,6 +37,8 @@ var ModalDownload = React.createClass({
     location: React.PropTypes.string
   },
 
+  apiLimit: 65536,
+
   getInitialState: function () {
     return {
       locCountry: this.props.country || '--',
@@ -49,7 +53,9 @@ var ModalDownload = React.createClass({
       endMonth: '--',
       endDay: '--',
 
-      parameters: []
+      parameters: [],
+
+      selectionCount: null
     };
   },
 
@@ -78,10 +84,10 @@ var ModalDownload = React.createClass({
     this.setState({parameters});
   },
 
-  computeDownloadUrl: function (values) {
+  computeApiUrl: function (values, initalQS = {}) {
     let state = _.clone(values);
     _.forEach(state, (o, i) => {
-      if (o === '--' || !o.length) {
+      if (o === null || o === '--' || !o.length) {
         delete state[i];
       }
     });
@@ -101,10 +107,7 @@ var ModalDownload = React.createClass({
     }
 
     // Build url.
-    let qs = {
-      // limit: 65536,
-      format: 'csv'
-    };
+    let qs = initalQS;
 
     // It's enough to have one of these.
     if (state.locLocation) {
@@ -133,6 +136,36 @@ var ModalDownload = React.createClass({
     return qs;
   },
 
+  computeDownloadUrl: function (values) {
+    return this.computeApiUrl(values, {format: 'csv'});
+  },
+
+  checkSelectionCount: function (url) {
+    // What is going on here?
+    // The api is limited to 65,536 results, but some download options
+    // combinations yield a lot more results. They could potentially
+    // return the whole database (when nothing is selected). This is not
+    // really an option, so the results are limited.
+    // Nevertheless the user has to be warned of this, so on every parameter
+    // change we query the api to know how many results would be returned, and
+    // show a message in case the number is above the limit.
+    // This is clearly a redux antipattern specially because we're not using
+    // action but this is supposed to be temporary although we all know this
+    // will probably stay here for a while.
+    // Alas, TODO: do it properly!
+    fetch(url)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => this.setState({selectionCount: json.meta.found}),
+        e => console.log('e', e)
+      );
+  },
+
   //
   // life-cycle Methods
   //
@@ -141,6 +174,12 @@ var ModalDownload = React.createClass({
     if (this.props.country) {
       this.props._fetchLocationsByCountry(this.props.country);
     }
+  },
+
+  componentWillUpdate: function (nextProps, nextState) {
+    let prevUrl = this.computeApiUrl(this.state, {limit: 1});
+    let nextUrl = this.computeApiUrl(nextState, {limit: 1});
+    prevUrl !== nextUrl && this.checkSelectionCount(nextUrl);
   },
 
   //
@@ -265,6 +304,15 @@ var ModalDownload = React.createClass({
     );
   },
 
+  renderResultCountMessage: function () {
+    let countMessage = null;
+    if (this.state.selectionCount !== null && this.state.selectionCount > this.apiLimit) {
+      countMessage = <p style={{textAlign: 'center'}}>The API has a limit of {formatThousands(this.apiLimit)} measurements and your query yields {formatThousands(this.state.selectionCount)}, therefore results will be limited.</p>;
+    }
+
+    return countMessage;
+  },
+
   render: function () {
     return (
       <Modal
@@ -287,14 +335,13 @@ var ModalDownload = React.createClass({
               {this.renderDateSelector('start')}
               {this.renderDateSelector('end')}
               {this.renderParameters()}
+              {this.renderResultCountMessage()}
 
               <div className='form__actions'>
                 <button type='button' className='button button--primary-bounded' onClick={this.props.onModalClose}>Cancel</button>
                 <a href={this.computeDownloadUrl(this.state)} className={c('button-modal-download', {disabled: false})} target='_blank'>Download Selection <small>(csv)</small></a>
               </div>
             </form>
-
-            <p style={{textAlign: 'center'}}>Due to API limitations the download is limited to 65,536 measurements</p>
 
           </div>
         </ModalBody>
