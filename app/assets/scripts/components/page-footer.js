@@ -20,10 +20,10 @@ var PageFooter = React.createClass({
             <div className='contact contact--social'>
               <h2 className='contact__title'>Connect with us</h2>
               <ul>
-                <li><a href='' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
-                <li><a href='' className='contact-button-slack' title='View Slack'><span>Slack</span></a></li>
-                <li><a href='' className='contact-button-twitter' title='View Twitter'><span>Twitter</span></a></li>
-                <li><a href='' className='contact-button-mail' title='View Email'><span>Email</span></a></li>
+                <li><a href='https://github.com/openaq/' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
+                <li><a href='https://openaq-slackin.herokuapp.com/' className='contact-button-slack' title='View Slack'><span>Slack</span></a></li>
+                <li><a href='https://twitter.com/open_aq' className='contact-button-twitter' title='View Twitter'><span>Twitter</span></a></li>
+                <li><a href='mailto:info@openaq.org' className='contact-button-mail' title='View Email'><span>Email</span></a></li>
               </ul>
             </div>
             <div className='contact contact--newsletter'>

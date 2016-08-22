@@ -38,10 +38,10 @@ var About = React.createClass({
                   <p>Brainstorm and work together with us on new ideas from media articles to research uses to phone apps around air pollution data. Reach out to us on slack , twitter or by email. We’re happy to answer questions and work with you.</p>
                   <div className='contact contact--social'>
                     <ul>
-                      <li><a href='' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
-                      <li><a href='' className='contact-button-slack' title='View Slack'><span>Slack</span></a></li>
-                      <li><a href='' className='contact-button-twitter' title='View Twitter'><span>Twitter</span></a></li>
-                      <li><a href='' className='contact-button-mail' title='View Email'><span>Email</span></a></li>
+                      <li><a href='https://github.com/openaq' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
+                      <li><a href='https://openaq-slackin.herokuapp.com/' className='contact-button-slack' title='View Slack'><span>Slack</span></a></li>
+                      <li><a href='https://twitter.com/open_aq' className='contact-button-twitter' title='View Twitter'><span>Twitter</span></a></li>
+                      <li><a href='mailto:info@openaq.org' className='contact-button-mail' title='View Email'><span>Email</span></a></li>
                     </ul>
                   </div>
                 </div>
