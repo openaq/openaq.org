@@ -185,7 +185,7 @@ var Home = React.createClass({
         data={chartData}
         xRange={xRange}
         yRange={[0, yMax]}
-        yLabel={`Values in ${parameterUnit['pm25']}`} />
+        yLabel={parameterUnit['pm25']} />
     );
   },
 

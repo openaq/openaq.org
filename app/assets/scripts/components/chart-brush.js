@@ -141,7 +141,8 @@ var Chart = function (options) {
   var yAxis = d3.axisLeft(y)
     .tickPadding(8)
     .ticks(5)
-    .tickSize(0);
+    .tickSize(0)
+    .tickFormat(o => o === 0 ? `0 ${_yLabel}` : o);
 
   // Define xAxis brush function.
   var xAxisBrush = d3.axisBottom(xBrush)
@@ -313,15 +314,15 @@ var Chart = function (options) {
           .data([0]);
 
         yAx.enter().append('g')
-          .attr('class', 'y axis')
-          .append('text')
-          .attr('class', 'label')
-          .attr('text-anchor', 'end')
-          .attr('dy', '16px')
-          .attr('transform', 'rotate(-90)');
+          .attr('class', 'y axis');
+        //   .append('text')
+        //   .attr('class', 'label')
+        //   .attr('text-anchor', 'end')
+        //   .attr('dy', '16px')
+        //   .attr('transform', 'rotate(-90)');
 
-        yAx.select('.label')
-          .text(_yLabel);
+        // yAx.select('.label')
+        //   .text(_yLabel);
 
         yAx
           .attr('transform', `translate(${margin.left},${margin.top})`)

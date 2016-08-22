@@ -397,7 +397,7 @@ var Location = React.createClass({
         data={[chartData]}
         xRange={xRange}
         yRange={[0, yMax]}
-        yLabel={`Values in ${activeParam.preferredUnit}`} />
+        yLabel={activeParam.preferredUnit} />
     );
   },
 
