@@ -68,17 +68,17 @@ var About = React.createClass({
               </header>
               <div className='fold__body'>
                 <ul className='sponsors__list'>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/ejn.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/internews.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/keenio.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/nih.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/openscience.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/tex.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/wellcome.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://developmentseed.org/'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://aws.amazon.com/'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://sites.agu.org/'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://earthjournalism.net/'><img src='assets/graphics/content/sponsors/ejn.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.internews.org/'><img src='assets/graphics/content/sponsors/internews.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://keen.io/'><img src='assets/graphics/content/sponsors/keenio.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.nih.gov/'><img src='assets/graphics/content/sponsors/nih.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.openscienceprize.org/'><img src='assets/graphics/content/sponsors/openscience.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://thrivingearthexchange.org/'><img src='assets/graphics/content/sponsors/tex.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://wellcome.ac.uk/'><img src='assets/graphics/content/sponsors/wellcome.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.hhmi.org/'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
                 </ul>
               </div>
             </div>
