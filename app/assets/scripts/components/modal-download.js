@@ -156,21 +156,21 @@ var ModalDownload = React.createClass({
         <legend className='form__legend'>{what === 'start' ? 'Start' : 'End'} Date</legend>
         <div className='form__group'>
           <label htmlFor={`${what}-year`} className='form__label'>Year</label>
-          <select id={`${what}-year`} className='form__control form__control--small' value={this.state[`${what}Year`]} onChange={this.onOptSelect.bind(null, `${what}Year`)}>
+          <select id={`${what}-year`} className='form__control form__control--medium select--base-bounded' value={this.state[`${what}Year`]} onChange={this.onOptSelect.bind(null, `${what}Year`)}>
             <option value='--'>Year</option>
             {years.map(o => <option key={`startyear-${o}`} value={o}>{o}</option>)}
           </select>
         </div>
         <div className='form__group'>
           <label htmlFor={`${what}-month`} className='form__label'>Month</label>
-          <select id={`${what}-month`} className='form__control form__control--small' value={this.state[`${what}Month`]} onChange={this.onOptSelect.bind(null, `${what}Month`)}>
+          <select id={`${what}-month`} className='form__control form__control--medium select--base-bounded' value={this.state[`${what}Month`]} onChange={this.onOptSelect.bind(null, `${what}Month`)}>
             <option value='--'>Month</option>
             {months.map((o, i) => <option key={o} value={i}>{o}</option>)}
           </select>
         </div>
         <div className='form__group'>
           <label htmlFor={`${what}-day`} className='form__label'>Day</label>
-          <select id={`${what}-day`} className='form__control form__control--small' value={this.state[`${what}Day`]} onChange={this.onOptSelect.bind(null, `${what}Day`)}>
+          <select id={`${what}-day`} className='form__control form__control--medium select--base-bounded' value={this.state[`${what}Day`]} onChange={this.onOptSelect.bind(null, `${what}Day`)}>
             <option value='--'>Day</option>
             {days.map(o => <option key={`startday-${o}`} value={o}>{o}</option>)}
           </select>
@@ -221,21 +221,21 @@ var ModalDownload = React.createClass({
         <legend className='form__legend'>Location Selector</legend>
         <div className='form__group'>
           <label htmlFor='loc-country' className='form__label'>Country</label>
-          <select id='loc-country' className='form__control form__control--small' value={this.state.locCountry} onChange={this.onOptSelect.bind(null, 'locCountry')}>
+          <select id='loc-country' className='form__control form__control--medium select--base-bounded' value={this.state.locCountry} onChange={this.onOptSelect.bind(null, 'locCountry')}>
             <option value='--'>Select a Country</option>
             {this.props.countries.map(o => <option key={o.code} value={o.code}>{o.name}</option>)}
           </select>
         </div>
         <div className={c('form__group', {disabled: disableArea})}>
           <label htmlFor='loc-area' className='form__label'>Area</label>
-          <select id='loc-area' className='form__control form__control--small' value={this.state.locArea} onChange={this.onOptSelect.bind(null, 'locArea')}>
+          <select id='loc-area' className='form__control form__control--medium select--base-bounded' value={this.state.locArea} onChange={this.onOptSelect.bind(null, 'locArea')}>
             <option value='--'>{compareAreasLabel}</option>
             {compareAreas.map(o => <option key={o.city} value={o.city}>{o.city}</option>)}
           </select>
         </div>
         <div className={c('form__group', {disabled: disableLocation})}>
           <label htmlFor='loc-location' className='form__label'>Location</label>
-          <select id='loc-location' className='form__control form__control--small' value={this.state.locLocation} onChange={this.onOptSelect.bind(null, 'locLocation')}>
+          <select id='loc-location' className='form__control form__control--medium select--base-bounded' value={this.state.locLocation} onChange={this.onOptSelect.bind(null, 'locLocation')}>
             <option value='--'>{compareLocationsLabel}</option>
             {compareLocations.map(o => <option key={o.location} value={o.location}>{o.location}</option>)}
           </select>

@@ -66,3 +66,20 @@
     }
   }
 }
+
+/* Form color modifiers
+   ========================================================================== */
+
+.form__control.select--base-bounded {
+  background: none;
+  box-shadow: inset 0 0 0 2px $base-color;
+  color: $base-color;
+
+  &:hover {
+    background: none;
+  }
+
+  &:active {
+    background: none;
+  }
+}
