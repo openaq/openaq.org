@@ -10,11 +10,12 @@
       fill: rgba($base-font-color, 0.64);
     }
     .domain {
-      stroke: rgba($base-font-color, 0.64);
-      stroke-width: 2px
+      stroke: rgba($base-font-color, 0.24);
+      stroke-width: 1px
     }
   }
   .location-data {
+    opacity: 0.64;
     &--st circle {
       fill: $infographic-color-a;
     }

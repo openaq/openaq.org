@@ -26,8 +26,8 @@ var About = React.createClass({
           <section className='fold fold--media-bleed-left' id='community-connect'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.png)'}}>
-                  <img className='media__item' src='assets/graphics/content/about1.png' width='768' height='768' alt='About image 1' />
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/community1.jpg)'}}>
+                  <img className='media__item' src='assets/graphics/content/community1.jpg' width='768' height='768' alt='About image 1' />
                 </figure>
               </div>
               <div className='fold__copy'>
@@ -38,10 +38,10 @@ var About = React.createClass({
                   <p>Brainstorm and work together with us on new ideas from media articles to research uses to phone apps around air pollution data. Reach out to us on slack , twitter or by email. We’re happy to answer questions and work with you.</p>
                   <div className='contact contact--social'>
                     <ul>
-                      <li><a href='' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
-                      <li><a href='' className='contact-button-slack' title='View Slack'><span>Slack</span></a></li>
-                      <li><a href='' className='contact-button-twitter' title='View Twitter'><span>Twitter</span></a></li>
-                      <li><a href='' className='contact-button-mail' title='View Email'><span>Email</span></a></li>
+                      <li><a href='https://github.com/openaq' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
+                      <li><a href='https://openaq-slackin.herokuapp.com/' className='contact-button-slack' title='View Slack'><span>Slack</span></a></li>
+                      <li><a href='https://twitter.com/open_aq' className='contact-button-twitter' title='View Twitter'><span>Twitter</span></a></li>
+                      <li><a href='mailto:info@openaq.org' className='contact-button-mail' title='View Email'><span>Email</span></a></li>
                     </ul>
                   </div>
                 </div>
@@ -60,8 +60,8 @@ var About = React.createClass({
                 </div>
               </div>
               <div className='fold__actions'>
-                <button className='button button--large button--primary-bounded'>View Open Issues</button>
-                <button className='button button--large button--primary-bounded'>See Project Repos</button>
+                <a href='https://github.com/openaq/openaq-api/issues' target='_blank' className='button button--large button--primary-bounded'>View Open Issues</a>
+                <a href='https://github.com/openaq/' target='_blank' className='button button--large button--primary-bounded'>See Project Repos</a>
               </div>
             </div>
           </section>
@@ -69,8 +69,8 @@ var About = React.createClass({
           <section className='fold fold--media-bleed-right'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.png)'}}>
-                  <img className='media__item' src='assets/graphics/content/about2.png' width='768' height='768' alt='About image 2' />
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/community2.jpg)'}}>
+                  <img className='media__item' src='assets/graphics/content/community2.jpg' width='768' height='768' alt='About image 2' />
                 </figure>
               </div>
               <div className='fold__copy'>
@@ -81,7 +81,7 @@ var About = React.createClass({
                   <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
                 </div>
                 <div className='fold__actions'>
-                  <button className='button button--large button--primary-bounded'>View Details</button>
+                  <a href='https://medium.com/@openaq/were-going-to-be-doing-more-openaq-workshops-tell-us-where-we-should-go-94d7d2eab234#.y7g82pqn2' target='_blank' className='button button--large button--primary-bounded'>View Details</a>
                 </div>
               </div>
             </div>

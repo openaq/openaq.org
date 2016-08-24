@@ -26,7 +26,7 @@ var About = React.createClass({
           <section className='fold fold--media-bleed-left'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.png)'}}>
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.jpg)'}}>
                   <img className='media__item' src='assets/graphics/content/about1.png' width='768' height='768' alt='About image 1' />
                 </figure>
               </div>
@@ -37,7 +37,7 @@ var About = React.createClass({
                 <div className='fold__body'>
                   <p>The mission of OpenAQ is to build the world’s first open air quality data hub in order to enable previously impossible science, inform policy and empower the public around air pollution.</p>
                 </div>
-                <button className='button button--large button--primary-bounded'>Learn More</button>
+                <a href='https://medium.com/@openaq/the-mission-of-openaq-cb159084beeb#.moyanm8b0' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
               </div>
             </div>
           </section>
@@ -45,7 +45,7 @@ var About = React.createClass({
           <section className='fold fold--filled fold--media-bleed-right'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.png)'}}>
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.jpg)'}}>
                   <img className='media__item' src='assets/graphics/content/about2.png' width='768' height='768' alt='About image 2' />
                 </figure>
               </div>
@@ -56,7 +56,7 @@ var About = React.createClass({
                 <div className='fold__body'>
                   <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
                 </div>
-                <button className='button button--large button--primary-bounded'>Learn More</button>
+                <a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85#.m5njeuxu3' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
               </div>
             </div>
           </section>
@@ -68,17 +68,17 @@ var About = React.createClass({
               </header>
               <div className='fold__body'>
                 <ul className='sponsors__list'>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/ejn.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/internews.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/keenio.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/nih.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/openscience.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/tex.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/wellcome.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' href='#'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://developmentseed.org/'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://aws.amazon.com/'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://sites.agu.org/'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://earthjournalism.net/'><img src='assets/graphics/content/sponsors/ejn.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.internews.org/'><img src='assets/graphics/content/sponsors/internews.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://keen.io/'><img src='assets/graphics/content/sponsors/keenio.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.nih.gov/'><img src='assets/graphics/content/sponsors/nih.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.openscienceprize.org/'><img src='assets/graphics/content/sponsors/openscience.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://thrivingearthexchange.org/'><img src='assets/graphics/content/sponsors/tex.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://wellcome.ac.uk/'><img src='assets/graphics/content/sponsors/wellcome.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.hhmi.org/'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
                 </ul>
               </div>
             </div>

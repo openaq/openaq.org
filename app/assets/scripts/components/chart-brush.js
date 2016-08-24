@@ -237,7 +237,7 @@ var Chart = function (options) {
 
         circles.enter()
           .append('circle')
-          .attr('r', 3)
+          .attr('r', 2)
           .merge(circles)
             // `localNoTZ` is the measurement local date converted
             // directly to user local.
