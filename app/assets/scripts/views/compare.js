@@ -1,11 +1,10 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';
-import { hashHistory } from 'react-router';
 import { Dropdown } from 'openaq-design-system';
 import * as d3 from 'd3';
 
@@ -310,6 +309,28 @@ var Compare = React.createClass({
     );
   },
 
+  renderAvailabilityMessage: function () {
+    // Prepare data.
+    let activeParam = this.getActiveParameterData();
+    let weekAgo = moment().subtract(7, 'days').toISOString();
+    let messages = this.props.compareLoc
+      .filter(o => o.fetched && !o.fetching && o.data)
+      .map(o => {
+        if (o.data.parameters.indexOf(activeParam.id) === -1) {
+          return <p key={o.data.location}>{o.data.location} does not report for parameter {activeParam.name}.</p>;
+        }
+
+        if (o.data.lastUpdated < weekAgo) {
+          return <p key={o.data.location}>{o.data.location} has no values reported in the last week.</p>;
+        }
+
+        return null;
+      })
+      .filter(o => o !== null);
+
+    return <div className='compare__info-msg'>{messages}</div>;
+  },
+
   renderBrushChart: function () {
     let activeParam = this.getActiveParameterData();
     // All the times are local and shouldn't be converted to UTC.
@@ -404,6 +425,7 @@ var Compare = React.createClass({
                   <h1 className='fold__title'>Comparing measurements</h1>
                   <div className='fold__introduction'>
                     {this.renderParameterSelector()}
+                    {this.renderAvailabilityMessage()}
                   </div>
                 </header>
                 <div className='fold__body'>

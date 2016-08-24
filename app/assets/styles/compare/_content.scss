@@ -102,6 +102,16 @@
       text-transform: uppercase;
     }
   }
+
+  &__info-msg {
+    margin-top: -0.5rem;
+    p {
+      font-family: $base-font-family;
+      font-size: 0.875rem;
+      color: rgba($base-font-color, 0.48);
+      margin-bottom: 0.5rem;
+    }
+  }
 }
 
 .compare-marker {

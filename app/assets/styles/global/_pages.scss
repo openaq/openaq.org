@@ -44,7 +44,7 @@ html {
 
 .page__headline {
   float: left;
-  padding: $global-spacing 0;
+  padding: 0.625rem 0;
 }
 
 .page__title {
@@ -58,6 +58,10 @@ html {
     display: inline-block;
     vertical-align: top;
     color: inherit;
+
+    span {
+      @extend .visually-hidden;
+    }
   }
 }
 
