@@ -26,7 +26,7 @@ var About = React.createClass({
           <section className='fold fold--media-bleed-left'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.png)'}}>
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.jpg)'}}>
                   <img className='media__item' src='assets/graphics/content/about1.png' width='768' height='768' alt='About image 1' />
                 </figure>
               </div>
@@ -45,7 +45,7 @@ var About = React.createClass({
           <section className='fold fold--filled fold--media-bleed-right'>
             <div className='inner'>
               <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.png)'}}>
+                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.jpg)'}}>
                   <img className='media__item' src='assets/graphics/content/about2.png' width='768' height='768' alt='About image 2' />
                 </figure>
               </div>
