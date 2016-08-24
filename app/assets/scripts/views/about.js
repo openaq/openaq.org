@@ -37,7 +37,7 @@ var About = React.createClass({
                 <div className='fold__body'>
                   <p>The mission of OpenAQ is to build the world’s first open air quality data hub in order to enable previously impossible science, inform policy and empower the public around air pollution.</p>
                 </div>
-                <a a href='https://medium.com/@openaq/the-mission-of-openaq-cb159084beeb#.moyanm8b0' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
+                <a href='https://medium.com/@openaq/the-mission-of-openaq-cb159084beeb#.moyanm8b0' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
               </div>
             </div>
           </section>
