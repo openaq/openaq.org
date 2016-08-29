@@ -116,7 +116,6 @@ var Location = React.createClass({
   },
 
   componentDidUpdate: function (prevProps) {
-    this.shouldFetchData(prevProps) && this.props._fetchLocationIfNeeded(this.props.params.name);
     if (this.shouldFetchData(prevProps)) {
       // Invalidate all the data related to the location page.
       // This is needed otherwise the system thinks there's data and
@@ -134,7 +133,13 @@ var Location = React.createClass({
       // Get the measurements.
       let toDate = moment.utc();
       let fromDate = toDate.clone().subtract(8, 'days');
-      this.props._fetchLatestMeasurements({city: loc.city, has_geo: 'true'});
+      console.log('loc', loc);
+      // this.props._fetchLatestMeasurements({city: loc.city, has_geo: 'true'});
+      this.props._fetchLatestMeasurements({
+        coordinates: `${loc.coordinates.latitude},${loc.coordinates.longitude}`,
+        radius: 10 * 1000, // 10 Km
+        has_geo: 'true'
+      });
       this.props._fetchMeasurements(loc.location, fromDate.toISOString(), toDate.toISOString());
     }
   },
@@ -276,8 +281,11 @@ var Location = React.createClass({
         const scaleStops = generateLegendStops('pm25');
         const colorWidth = 100 / scaleStops.length;
 
+        // Gentle nudge to ensure the popup is visible.
+        let lat = this.props.loc.data.coordinates.latitude - 0.15;
+
         content = <MapComponent
-          center={[this.props.loc.data.coordinates.longitude, this.props.loc.data.coordinates.latitude]}
+          center={[this.props.loc.data.coordinates.longitude, lat]}
           zoom={9}
           highlightLoc={this.props.loc.data.location}
           measurements={locMeasurements}

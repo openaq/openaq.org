@@ -5,20 +5,20 @@ import { round } from '../utils/format';
 
 // Colors for the legend and point fills
 const mapColors = [
-  { label: '0', color: '#e0efda' },
-  { label: '10', color: '#cde6c4' },
-  { label: '20', color: '#abd9b5' },
-  { label: '30', color: '#7bccc4' },
-  { label: '40', color: '#4db3d2' },
-  { label: '50', color: '#2c8cbe' },
-  { label: '60', color: '#126aae' },
-  { label: '70', color: '#314899' },
-  { label: '80', color: '#3f2584' }
+  { label: '0', color: '#b5ebb1' },
+  { label: '10', color: '#97d8b5' },
+  { label: '20', color: '#6dc9c1' },
+  { label: '30', color: '#4db3d2' },
+  { label: '40', color: '#2c8cbe' },
+  { label: '50', color: '#126aae' },
+  { label: '60', color: '#4237a8' },
+  { label: '70', color: '#3f2086' },
+  { label: '80', color: '#400850' }
 ];
 
 // Colors for the stations without recent values
-export const unusedColor = '#ddd';
-export const unusedBorderColor = '#bababa';
+export const unusedColor = '#eee';
+export const unusedBorderColor = '#bbb';
 
 // Generate an array of darker colors for the point borders
 export function darkenColors () {

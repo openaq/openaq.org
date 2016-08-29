@@ -266,6 +266,11 @@ const MapComponent = React.createClass({
 
   generateFeature: function (locMeasurement) {
     let param = _.find(locMeasurement.measurements, {parameter: this.props.parameter.id});
+    // If there's no value for the active param return null.
+    // Null values will be filtered out.
+    if (!param) {
+      return null;
+    }
 
     let val = param ? convertParamIfNeeded(param) : -1;
     val = val < 0 ? -1 : val;
@@ -275,10 +280,6 @@ const MapComponent = React.createClass({
     }
     // Check if the value is older than 24 hours and style it differently.
     if (param && param.lastUpdated < this.dayAgo) {
-      // TODO:
-      // Set a specific value to control the color. (like -99)
-      // Alternatively add a new property to the feature, add add a completely
-      // different style layer.
       val = -1;
     }
 
@@ -303,7 +304,7 @@ const MapComponent = React.createClass({
   generateSourceData: function () {
     return {
       type: 'FeatureCollection',
-      features: this.props.measurements.map(o => this.generateFeature(o))
+      features: this.props.measurements.map(o => this.generateFeature(o)).filter(o => o !== null)
     };
   },
 
