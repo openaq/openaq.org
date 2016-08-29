@@ -16,7 +16,7 @@ var About = React.createClass({
             <div className='inpage__headline header--centered'>
               <h1 className='inpage__title'>About Us</h1>
               <div className='inpage__introduction'>
-                <p>We’re building the world’s first open platform that provides programmatic real-time and historical access to air quality data from around the globe.</p>
+                <p>We seek to empower communities to end air inequality through open data.</p>
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@ var About = React.createClass({
                   <h1 className='fold__title'>Our Mission</h1>
                 </header>
                 <div className='fold__body'>
-                  <p>The mission of OpenAQ is to build the world’s first open air quality data hub in order to enable previously impossible science, inform policy and empower the public around air pollution.</p>
+                  <p>Our mission is to enable previously impossible science, impact policy and empower the public to fight air pollution through open data, open-source tools, and cooperation.</p>
                 </div>
                 <a href='https://medium.com/@openaq/the-mission-of-openaq-cb159084beeb#.moyanm8b0' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
               </div>
@@ -51,10 +51,11 @@ var About = React.createClass({
               </div>
               <div className='fold__copy'>
                 <header className='fold__header'>
-                  <h1 className='fold__title'>Data Aggregation</h1>
+                  <h1 className='fold__title'>Data Sources</h1>
                 </header>
                 <div className='fold__body'>
-                  <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
+                  <p>
+We aggregate  physical air quality data from public real-time data sources provided by official, research-grade and other sources. These awesome groups do the hard work of measuring these data and publicly sharing them, and  our community makes them more universally-accessible to both humans and machines.</p>
                 </div>
                 <a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85#.m5njeuxu3' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
               </div>
