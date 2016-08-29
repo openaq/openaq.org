@@ -114,10 +114,10 @@ var Home = React.createClass({
       <section className='fold fold--filled' id='home-stats'>
         <div className='inner'>
           <header className='fold__header'>
-            <h1 className='fold__title'>Our data</h1>
+            <h1 className='fold__title'>The data</h1>
             <div className='fold__introduction prose prose--responsive'>
               {!fetching
-                ? (<p>OpenAQ has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data is aggregated from <strong>{formatThousands(data.sources)}</strong> sources.</p>)
+                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> sources.</p>)
                 : <LoadingMessage />}
             </div>
           </header>
@@ -172,7 +172,7 @@ var Home = React.createClass({
       if (!dataCount) {
         return (
           <InfoMessage>
-            <p>There's no data for the selected parameter</p>
+            <p>There are no data for the selected parameter</p>
             <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
           </InfoMessage>
         );
@@ -244,13 +244,13 @@ var Home = React.createClass({
           <header className='fold__header'>
             <h1 className='fold__title'>Compare locations</h1>
             <div className='fold__introduction prose prose--responsive'>
-              <p>See how air quality compares among 2 random locations</p>
+              <p>See how air quality compares between 2 random locations</p>
             </div>
           </header>
           {body}
           <div className='fold__footer'>
           {l1.data && l2.data
-          ? <Link to={`/compare/${l1.data.location}/${l2.data.location}`} title='View Locations' className='button button--large button--primary-bounded button--semi-fluid'>Compare Locations</Link>
+          ? <Link to={`/compare/${l1.data.location}/${l2.data.location}`} title='View Locations' className='button button--large button--primary-bounded button--semi-fluid'>Compare Other Locations</Link>
           : null}
           </div>
         </div>
@@ -279,7 +279,7 @@ var Home = React.createClass({
           <header className='fold__header'>
             <h1 className='fold__title'>Join our community</h1>
             <div className='fold__introduction prose prose--responsive'>
-              <p>Developers, Scientists and Researchers are all using our data in interesting ways.</p>
+              <p>Learn how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
             </div>
           </header>
           <div className='fold__body'>
@@ -301,7 +301,7 @@ var Home = React.createClass({
             <div className='inpage__headline'>
               <h1 className='inpage__title'><em>Open, Real-time</em> Air Quality Data</h1>
               <div className='inpage__introduction'>
-                <p>We are aggregating, standardzing and sharing air quality data by building a real-time database that provides programmatic and historical access to air quality data.</p>
+                <p>Our community aggregates and shares open air quality data from around the world. We believe open access to air quality data empowers the public to fight air inequality.</p>
                 <p><Link to='/about' className='button button--large button--base-bounded'>Learn More</Link></p>
               </div>
             </div>
