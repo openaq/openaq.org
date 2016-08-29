@@ -32,10 +32,10 @@ var About = React.createClass({
               </div>
               <div className='fold__copy'>
                 <header className='fold__header'>
-                  <h1 className='fold__title'>Talk with Us</h1>
+                  <h1 className='fold__title'>Connect</h1>
                 </header>
                 <div className='fold__body'>
-                  <p>Brainstorm and work together with us on new ideas from media articles to research uses to phone apps around air pollution data. Reach out to us on slack , twitter or by email. We’re happy to answer questions and work with you.</p>
+                  <p>Brainstorm and work together with our community on ways to use open air quality data to fight air inequality. Reach out on slack, twitter or by email. We’d love to help make your open air quality project a reality.</p>
                   <div className='contact contact--social'>
                     <ul>
                       <li><a href='https://github.com/openaq' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
@@ -52,11 +52,11 @@ var About = React.createClass({
           <section className='fold fold--filled'>
             <div className='inner'>
               <header className='fold__header'>
-                <h1 className='fold__title'>Contribute Code</h1>
+                <h1 className='fold__title'>Contribute</h1>
               </header>
               <div className='fold__body'>
                 <div className='fold__body--prose'>
-                  <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
+                  <p>Interested in contributing to this project? Suggest new data sources, fix GH issues, or otherwise help to continue building our infrastructure. Feel free to re-purpose any portion of our open-source project for your own work.</p>
                 </div>
               </div>
               <div className='fold__actions'>
