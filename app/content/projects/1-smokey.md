@@ -1,7 +1,7 @@
 ---
-title: Build an App
-url:
-image: assets/graphics/content/projects/app.png
+title: "Smokey: Air Quality Bot"
+url: https://www.facebook.com/smokeybot/
+image: assets/graphics/content/projects/smokey.png
 featured: true
 ---
 
