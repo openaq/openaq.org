@@ -264,6 +264,7 @@ var Home = React.createClass({
         return (
           <CommunityCard
             key={_.kebabCase(o.title)}
+            horizontal
             title={o.title}
             linkTitle='View this community contribution'
             url={o.url}
