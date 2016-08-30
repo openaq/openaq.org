@@ -75,7 +75,7 @@ var About = React.createClass({
               </div>
               <div className='fold__copy'>
                 <header className='fold__header'>
-                  <h1 className='fold__title'>Attend an Event</h1>
+                  <h1 className='fold__title'>Hold a Workshop</h1>
                 </header>
                 <div className='fold__body'>
                   <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
