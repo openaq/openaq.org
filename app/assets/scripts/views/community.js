@@ -1,11 +1,54 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+
+import CommunityCard from '../components/community-card';
+import content from '../../content/content.json';
 
 var About = React.createClass({
   displayName: 'Community',
 
   propTypes: {
+  },
+
+  renderProjects: function () {
+    let cards = _(content.projects)
+      .values()
+      .reverse()
+      .take(4)
+      .map(o => {
+        return (
+          <CommunityCard
+            key={_.kebabCase(o.title)}
+            horizontal
+            title={o.title}
+            linkTitle='View this community contribution'
+            url={o.url}
+            imageNode={<img width='256' height='256' src={o.image} alt='Project image' />} >
+            <div dangerouslySetInnerHTML={{__html: o.body}} />
+          </CommunityCard>
+        );
+      })
+      .value();
+
+    return (
+      <section className='fold fold--filled' id='community-projects'>
+        <div className='inner'>
+          <header className='fold__header'>
+            <h1 className='fold__title'>Join our community</h1>
+          </header>
+          <div className='fold__body'>
+            <div className='fold__body--prose'>
+              <p>Learn how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
+            </div>
+            <div>
+              {cards}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   },
 
   render: function () {
@@ -75,7 +118,7 @@ var About = React.createClass({
               </div>
               <div className='fold__copy'>
                 <header className='fold__header'>
-                  <h1 className='fold__title'>Attend an Event</h1>
+                  <h1 className='fold__title'>Hold a Workshop</h1>
                 </header>
                 <div className='fold__body'>
                   <p>We aggregate our data from public real-time data sources provided by official, usually government-level, organizations. They do the hard work of measuring these data and publicly sharing them, and we do the work of making them more universally accessible to both humans and machines.</p>
@@ -86,6 +129,8 @@ var About = React.createClass({
               </div>
             </div>
           </section>
+
+          {this.renderProjects()}
 
         </div>
       </section>

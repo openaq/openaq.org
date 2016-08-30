@@ -1,7 +1,7 @@
 ---
 title: Build an App
 url:
-image: http://placehold.it/256x256
+image: assets/graphics/content/projects/app.png
 featured: true
 ---
 

@@ -8,6 +8,7 @@ import { Link, hashHistory } from 'react-router';
 import * as d3 from 'd3';
 import { Dropdown } from 'openaq-design-system';
 
+import config from '../config';
 import { formatThousands } from '../utils/format';
 import {
   fetchLocationIfNeeded,
@@ -488,7 +489,7 @@ var Location = React.createClass({
             </div>
             <div className='inpage__actions'>
               <ul>
-                <li><a href='' title='View in api' className='button-inpage-api' target='_blank'>View API</a></li>
+                <li><a href={`${config.api}/locations?location=${data.location}`} title='View in api' className='button-inpage-api' target='_blank'>View API</a></li>
                 <li><button type='button' title='Download data for this location' className='button-inpage-download' onClick={this.onDownloadClick}>Download</button></li>
                 <li><Link to={`/compare/${data.location}`} title='Compare location with another' className='button button--primary button--medium'>Compare</Link></li>
               </ul>

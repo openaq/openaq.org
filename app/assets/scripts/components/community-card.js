@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import c from 'classnames';
 
 var CommunityCard = React.createClass({
   displayName: 'CommunityCard',
@@ -9,12 +10,19 @@ var CommunityCard = React.createClass({
     linkTitle: React.PropTypes.string,
     url: React.PropTypes.string,
     imageNode: React.PropTypes.node,
+    horizontal: React.PropTypes.bool,
     children: React.PropTypes.object
+  },
+
+  getDefaultProps: function () {
+    return {
+      horizontal: false
+    };
   },
 
   render: function () {
     return (
-      <article className='card card--horizontal card--horizontal--align-middle'>
+      <article className={c('card', {'card--horizontal card--horizontal--align-middle': this.props.horizontal})}>
         <div className='card__contents'>
           <figure className='card__media'>
             <div className='card__thumbnail'>
