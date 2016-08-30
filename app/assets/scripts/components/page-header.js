@@ -84,13 +84,13 @@ var PageHeader = React.createClass({
                   <a href='#' title='Show data sections' className={c('browse-menu__item', {'browse-menu__item--active': activeData})} onClick={this.dataMenuClick}><span>Data</span></a>
                   <div className='sub-nav-block' id='sub-nav-block-data'>
                     <ul className='browse-menu browse-menu--sub'>
-                      <li><Link to='/map' title='Visit Map page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Map</span></Link></li>
                       <li><Link to='/locations' title='Visit locations page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Locations</span></Link></li>
                       <li><Link to='/countries' title='Visit Countries page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Countries</span></Link></li>
                     </ul>
                   </div>
                 </li>
 
+                <li><Link to='/map' title='Visit Map page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Map</span></Link></li>
                 <li><Link to='/community' title='Visit community page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Community</span></Link></li>
                 <li><a href='https://medium.com/@openaq' title='Visit OpenAQ blog on medium' className='browse-menu__item' target='_blank' onClick={this.onRootMenuClick}><span>Blog</span></a></li>
                 <li><Link to='/about' title='Visit about page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>About</span></Link></li>
