@@ -141,7 +141,7 @@ var LocationsHub = React.createClass({
         smoothScrolling={true}
         horizontal={false} >
 
-        {this.props.countries.map(o => {
+        {_.sortBy(this.props.countries, 'name').map(o => {
           let checked = queryCountries.indexOf(o.code) !== -1;
           let onChange = this.onFilterSelect.bind(null, 'countries', o.code);
           return (

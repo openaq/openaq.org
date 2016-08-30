@@ -182,6 +182,7 @@ var Compare = React.createClass({
       // Will be filtered from the this.props.locations;
       let compareAreas = [];
       let compareLocations = [];
+      let compareCountries = _.sortBy(this.props.countries, 'name');
 
       if (locations) {
         compareAreas = _(locations)
@@ -222,7 +223,7 @@ var Compare = React.createClass({
               <label htmlFor='loc-country' className='form__label'>Country</label>
               <select id='loc-country' className='form__control form__control--small' value={this.props.compareSelectOpts.country} onChange={this.onCompareOptSelect.bind(null, 'country')}>
                 <option value='--'>Select a country</option>
-                {this.props.countries.map(o => <option key={o.code} value={o.code}>{o.name}</option>)}
+                {compareCountries.map(o => <option key={o.code} value={o.code}>{o.name}</option>)}
               </select>
             </div>
             <div className={c('form__group', {disabled: disableArea})}>
