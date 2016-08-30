@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import config from '../config';
 import { formatThousands } from '../utils/format';
 import { fetchLocations, invalidateAllLocationData, fetchLatestMeasurements, openDownloadModal } from '../actions/action-creators';
 import { generateLegendStops } from '../utils/colors';
@@ -221,7 +222,7 @@ var Country = React.createClass({
             </div>
             <div className='inpage__actions'>
               <ul>
-                <li><a href='' title='View API documentation' className='button-inpage-api'>View API Docs</a></li>
+                <li><a href={config.apiDocs} title='View API documentation' className='button-inpage-api' target='_blank'>View API Docs</a></li>
                 <li><a href='#' className='button-inpage-download' title={`Download ${countryData.name} data`} onClick={this.onDownloadClick.bind(null, {country: this.props.params.name})}>Download</a></li>
               </ul>
             </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+import config from '../config';
 import { formatThousands } from '../utils/format';
 import { openDownloadModal } from '../actions/action-creators';
 
@@ -56,7 +57,7 @@ var CountriesHub = React.createClass({
             </div>
             <div className='inpage__actions'>
               <ul>
-                <li><a href='' title='View API documentation' className='button-inpage-api'>View API Docs</a></li>
+                <li><a href={config.apiDocs} title='View API documentation' className='button-inpage-api' target='_blank'>View API Docs</a></li>
               </ul>
             </div>
           </div>

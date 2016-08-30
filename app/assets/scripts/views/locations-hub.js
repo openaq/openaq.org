@@ -7,6 +7,7 @@ import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
 import moment from 'moment';
 
+import config from '../config';
 import { toggleValue } from '../utils/array';
 import { buildQS } from '../utils/url';
 import { fetchLocations, openDownloadModal } from '../actions/action-creators';
@@ -319,7 +320,7 @@ var LocationsHub = React.createClass({
             </div>
             <div className='inpage__actions'>
               <ul>
-                <li><a href='' title='View API documentation' className='button-inpage-api'>View API Docs</a></li>
+                <li><a href={config.apiDocs} title='View API documentation' className='button-inpage-api' target='_blank'>View API Docs</a></li>
                 <li><a href={yesterdayDataUrl} className='button-inpage-download' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
               </ul>
             </div>
