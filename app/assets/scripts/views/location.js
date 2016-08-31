@@ -172,7 +172,7 @@ var Location = React.createClass({
         <div className='fold__body'>
           <InfoMessage>
             <p>Please try again later.</p>
-            <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+            <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
           </InfoMessage>
         </div>
       );
@@ -273,7 +273,7 @@ var Location = React.createClass({
       content = (
         <InfoMessage>
           <p>Please try again later.</p>
-          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     } else {
@@ -395,7 +395,7 @@ var Location = React.createClass({
       return (
         <InfoMessage>
           <p>There's no data for the selected parameter</p>
-          <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
+          <p>Maybe you'd like to suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a>.</p>
         </InfoMessage>
       );
     }
@@ -427,7 +427,7 @@ var Location = React.createClass({
       content = (
         <InfoMessage>
           <p>Please try again later.</p>
-          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     } else {

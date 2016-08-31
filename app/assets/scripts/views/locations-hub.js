@@ -244,7 +244,7 @@ var LocationsHub = React.createClass({
       return (
         <InfoMessage>
           <p>We coudn't get the data. Please try again later.</p>
-          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     }
@@ -253,7 +253,7 @@ var LocationsHub = React.createClass({
       return (
         <InfoMessage>
           <p>No data was found for your criteria.</p>
-          <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a> or <a href='#' title='Contact openaq'>let us know</a> what location you'd like to see data for.</p>
+          <p>Maybe you'd like to suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a> or <a href='mailto:info@openaq.org' title='Contact openaq'>let us know</a> what location you'd like to see data for.</p>
         </InfoMessage>
       );
     }
@@ -317,7 +317,7 @@ var LocationsHub = React.createClass({
               <h1 className='inpage__title'>Air Quality Data</h1>
             </div>
             <div className='inpage__introduction'>
-              <p>We’re currently collecting data in {this.props.countries.length} different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please <a href='#' title='Suggest a new source'>suggest a source</a> of <a href='#' title='Contact openaq'>send us an email</a>.</p>
+              <p>We’re currently collecting data in {this.props.countries.length} different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
             </div>
             <div className='inpage__actions'>
               <ul>

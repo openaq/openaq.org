@@ -53,7 +53,7 @@ var CountriesHub = React.createClass({
               <h1 className='inpage__title'>Browse by Country</h1>
             </div>
             <div className='inpage__introduction'>
-              <p>We’re currently collecting data in {this.props.countries.length} different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please <a href='#' title='Suggest a new source'>suggest a source</a> of <a href='#' title='Contact openaq'>send us an email</a>.</p>
+              <p>We’re currently collecting data in {this.props.countries.length} different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
             </div>
             <div className='inpage__actions'>
               <ul>

@@ -380,7 +380,7 @@ var Compare = React.createClass({
         return (
           <InfoMessage>
             <p>There's no data for the selected parameter</p>
-            <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
+            <p>Maybe you'd like to suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a>.</p>
           </InfoMessage>
         );
       }
