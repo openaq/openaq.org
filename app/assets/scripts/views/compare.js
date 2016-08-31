@@ -379,7 +379,7 @@ var Compare = React.createClass({
       if (!dataCount) {
         return (
           <InfoMessage>
-            <p>There are no data for the selected parameter</p>
+            <p>There are no data for the selected parameter.</p>
             <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
           </InfoMessage>
         );
