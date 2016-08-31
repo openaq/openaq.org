@@ -244,7 +244,7 @@ var LocationsHub = React.createClass({
       return (
         <InfoMessage>
           <p>We coudn't get the data. Please try again later.</p>
-          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem, please <a href='#' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     }
@@ -316,7 +316,7 @@ var LocationsHub = React.createClass({
               <h1 className='inpage__title'>Air Quality Data</h1>
             </div>
             <div className='inpage__introduction'>
-              <p>We’re currently collecting data in 20 different countries and continuously adding more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please <a href='#' title='Suggest a new source'>suggest a source</a> of <a href='#' title='Contact openaq'>send us an email</a>.</p>
+              <p>We’re currently collecting data in 20 different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please <a href='#' title='Suggest a new source'>suggest a source</a> of <a href='#' title='Contact openaq'>send us an email</a>.</p>
             </div>
             <div className='inpage__actions'>
               <ul>
@@ -366,7 +366,7 @@ var LocationsHub = React.createClass({
                 {this.renderPagination()}
 
                 <div className='disclaimers'>
-                  <p>Data are from official, stationary government monitors and not smaller-scale or mobile monitors. It is our intent to attribute all data to their originating sources. Please contact us if you notice otherwise. </p>
+                  <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution. </p>
                   <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
                 </div>
               </div>
