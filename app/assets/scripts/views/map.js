@@ -105,7 +105,7 @@ var Map = React.createClass({
       return (
         <HeaderMessage>
           <h2>Uhoh, something went wrong</h2>
-          <p>There was a problem getting the data. If the problem persists let us know.</p>
+          <p>There was a problem getting the data. If the problem continues, please let us know.</p>
           <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
         </HeaderMessage>
       );

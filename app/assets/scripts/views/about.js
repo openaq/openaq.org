@@ -16,7 +16,7 @@ var About = React.createClass({
             <div className='inpage__headline header--centered'>
               <h1 className='inpage__title'>About Us</h1>
               <div className='inpage__introduction'>
-                <p>We seek to empower communities to end air inequality through open data.</p>
+                <p>We empower communities to end air inequality through open data.</p>
               </div>
             </div>
           </div>

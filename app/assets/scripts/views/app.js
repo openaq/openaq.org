@@ -33,7 +33,7 @@ var App = React.createClass({
     let content = (
       <HeaderMessage>
         <h2>Take a deep breath.</h2>
-        <p>Air quality measurements loading...</p>
+        <p>Air quality awesomeness is loading...</p>
       </HeaderMessage>
     );
 
@@ -45,7 +45,7 @@ var App = React.createClass({
       content = (
         <HeaderMessage>
           <h2>Uhoh, something went wrong</h2>
-          <p>There was a problem getting the data. If the problem persists let us know.</p>
+          <p>There was a problem getting the data. If the problem persists, please let us know.</p>
           <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
         </HeaderMessage>
       );

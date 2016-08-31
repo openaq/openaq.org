@@ -172,7 +172,7 @@ var Location = React.createClass({
         <div className='fold__body'>
           <InfoMessage>
             <p>Please try again later.</p>
-            <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
+            <p>If you think there's a problem, please <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
           </InfoMessage>
         </div>
       );
@@ -273,7 +273,7 @@ var Location = React.createClass({
       content = (
         <InfoMessage>
           <p>Please try again later.</p>
-          <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem, please <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     } else {
@@ -394,7 +394,7 @@ var Location = React.createClass({
     if (!chartData.length) {
       return (
         <InfoMessage>
-          <p>There's no data for the selected parameter</p>
+          <p>There are no data for the selected parameter.</p>
           <p>Maybe you'd like to suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a>.</p>
         </InfoMessage>
       );
@@ -427,7 +427,7 @@ var Location = React.createClass({
       content = (
         <InfoMessage>
           <p>Please try again later.</p>
-          <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem, please <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     } else {
@@ -470,8 +470,8 @@ var Location = React.createClass({
     if (error) {
       return (
         <HeaderMessage>
-          <h2>Uhoh, something went wrong.</h2>
-          <p>There was a problem getting the data. If the problem persists let us know.</p>
+          <h2>Uh oh, something went wrong.</h2>
+          <p>There was a problem getting the data. If you continue to have problems, please let us know.</p>
           <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
         </HeaderMessage>
       );
