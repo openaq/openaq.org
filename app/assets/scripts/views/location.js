@@ -172,7 +172,7 @@ var Location = React.createClass({
         <div className='fold__body'>
           <InfoMessage>
             <p>Please try again later.</p>
-            <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+            <p>If you think there's a problem, please <a href='#' title='Contact openaq'>contact us.</a></p>
           </InfoMessage>
         </div>
       );
@@ -273,7 +273,7 @@ var Location = React.createClass({
       content = (
         <InfoMessage>
           <p>Please try again later.</p>
-          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem, please <a href='#' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     } else {
@@ -394,7 +394,7 @@ var Location = React.createClass({
     if (!chartData.length) {
       return (
         <InfoMessage>
-          <p>There's no data for the selected parameter</p>
+          <p>There are no data for the selected parameter</p>
           <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
         </InfoMessage>
       );
@@ -427,7 +427,7 @@ var Location = React.createClass({
       content = (
         <InfoMessage>
           <p>Please try again later.</p>
-          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem, please <a href='#' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     } else {
