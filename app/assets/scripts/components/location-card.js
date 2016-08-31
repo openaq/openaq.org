@@ -48,7 +48,7 @@ var LocationCard = React.createClass({
               <li>Measurements: {formatThousands(this.props.totalMeasurements)}</li>
               <li>Values: {this.renderParameters()}</li>
               {this.props.sourceData
-              ? <li>Source: <a href={this.props.sourceData.url} title={`View source for  ${this.props.name}`}>{this.props.sourceData.name}</a></li>
+              ? <li>Source: <a href={this.props.sourceData.sourceURL} title={`View source for  ${this.props.name}`}>{this.props.sourceData.name}</a></li>
               : null}
             </ul>
           </div>
