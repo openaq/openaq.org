@@ -5,4 +5,4 @@ image: assets/graphics/content/projects/smokey.png
 featured: true
 ---
 
-To engage with his community on air quality issues in New Delhi, Amrit Sharma has built a free air quality app.
+Amrit Sharma of New Delhi has built a free app to inform his community with air quality data.
