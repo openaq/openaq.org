@@ -318,11 +318,11 @@ var Compare = React.createClass({
       .filter(o => o.fetched && !o.fetching && o.data)
       .map(o => {
         if (o.data.parameters.indexOf(activeParam.id) === -1) {
-          return <p key={o.data.location}>{o.data.location} does not report for parameter {activeParam.name}.</p>;
+          return <p key={o.data.location}>{o.data.location} does not report {activeParam.name}.</p>;
         }
 
         if (o.data.lastUpdated < weekAgo) {
-          return <p key={o.data.location}>{o.data.location} has no values reported in the last week.</p>;
+          return <p key={o.data.location}>{o.data.location} has not reported values in the last week.</p>;
         }
 
         return null;
@@ -379,7 +379,7 @@ var Compare = React.createClass({
       if (!dataCount) {
         return (
           <InfoMessage>
-            <p>There's no data for the selected parameter</p>
+            <p>There are no data for the selected parameter</p>
             <p>Maybe you'd like to suggest a <a href='#' title='Suggest a new source'>new source</a>.</p>
           </InfoMessage>
         );
