@@ -360,7 +360,14 @@ var Compare = React.createClass({
             // Disregard timezone on local date.
             let dt = o.date.local.match(/^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/)[0];
             // `measurement` local date converted directly to user local.
-            o.date.localNoTZ = new Date(dt);
+            // We have to use moment instead of new Date() because the behavior
+            // is not consistent across browsers.
+            // Firefox interprets the string as being in the current timezone
+            // while chrome interprets it as being utc. So:
+            // Date: 2016-08-25T14:00:00
+            // Firefox result: Thu Aug 25 2016 14:00:00 GMT-0400 (EDT)
+            // Chrome result: Thu Aug 25 2016 10:00:00 GMT-0400 (EDT)
+            o.date.localNoTZ = moment(dt).toDate();
             return o;
           });
       })
