@@ -80,6 +80,7 @@ We aggregate  physical air quality data from public real-time data sources provi
                   <li><a className='sponsors__item' target='_blank' href='http://thrivingearthexchange.org/'><img src='assets/graphics/content/sponsors/tex.png' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='https://wellcome.ac.uk/'><img src='assets/graphics/content/sponsors/wellcome.jpg' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='https://www.hhmi.org/'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://www.echoinggreen.org/'><img src='assets/graphics/content/sponsors/echoing-green.jpeg' alt='View sponsor website'/></a></li>
                 </ul>
               </div>
             </div>
