@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Global: Pages
+   ========================================================================== */
+
+html, body, #app-container, .page--map {
+  // Make page have always 100% height.
+  // To ensure that when we have absolutely positioned elements the page still
+  // takes up the full viewport. Ex: map page.
+  height: 100%;
+}
+
+html.unscrollable-y {
+  height: auto;
+}
+
+html {
+  // The map using bleed-full was creating some horizontal offset because
+  // the scroll bar was not being taken into account when using vw.
+  // By forcing the scroll the bar is always taken into account.
+  overflow-y: scroll;
+}
+
+.page {
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* Header
+   ========================================================================== */
+
+.page__header {
+  position: relative;
+  z-index: 100000;
+  background: transparent;
+  color: $base-font-color;
+  box-shadow: 0 2px 0 0 $base-semi-alpha-color;
+
+  > .inner {
+    @extend .clearfix, .row, .row--centered;
+  }
+}
+
+/* Headline */
+
+.page__headline {
+  float: left;
+  padding: 0.625rem 0;
+}
+
+.page__title {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  font-weight: $base-font-bold;
+  text-transform: uppercase;
+  margin: 0;
+
+  a {
+    display: inline-block;
+    vertical-align: top;
+    color: inherit;
+
+    span {
+      @extend .visually-hidden;
+    }
+  }
+}
+
+
+/* Body
+   ========================================================================== */
+
+.page__body {
+  @extend .clearfix;
+}
+
+
+/* Footer
+   ========================================================================== */
+
+.page__footer {
+  // background: tint($base-color, 92%);
+  padding: 2rem 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  
+  > .inner {
+    @extend .row, .row--centered;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/* Dark theme modifier
+   ========================================================================== */
+
+.page--dark {
+  .page__header {
+    @extend .antialiased;
+    color: #fff;
+    box-shadow: 0 2px 0 0 rgba(#fff, 0.08);
+  }
+}

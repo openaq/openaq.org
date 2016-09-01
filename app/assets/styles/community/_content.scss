@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Community: Content
+   ========================================================================== */
+
+#community-connect {
+  .contact {
+    float: none;
+  }
+}
+
+#community-projects {
+  .card {
+    @include col(12/12);
+    margin-top: 2rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    @include media(large-up) {
+      @include col(6/12, $cycle: 2);
+
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+    }
+  }
+}

@@ -1,46 +1,60 @@
 'use strict';
+import 'babel-polyfill';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, hashHistory, applyRouterMiddleware } from 'react-router';
+import { useScroll } from 'react-router-scroll';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { syncHistoryWithStore } from 'react-router-redux';
+import createLogger from 'redux-logger';
+// import {whyDidYouUpdate} from 'why-did-you-update';
+import reducer from './reducers/index';
+import { fetchBaseData, fetchBaseStats } from './actions/action-creators';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router');
-
-// Config variables
-var config = require('./config');
-
-// Language, hard code for now, do better detection later?
-var i18n = require('./i18n/en');
-
-// Router
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var NotFoundRoute = Router.NotFoundRoute;
-
-// Components
-var App = require('./components/app');
-var About = require('./components/about');
-var Methodology = require('./components/methodology');
-var Sources = require('./components/sources');
-var NotFound = require('./components/notFound');
-var Home = require('./components/home');
-var Map = require('./components/map');
-
-console.log.apply(console, config.consoleMessage);
-if (config.environment !== 'production') {
-  console.log('--' + config.environment.toUpperCase() + '--');
+if (process.env.NODE_ENV !== 'production') {
+  // whyDidYouUpdate(React, { exclude: /Scroll/ });
 }
 
-// declare our routes and their hierarchy
-var routes = (
-  <Route handler={App} path='/'>
-    <DefaultRoute name ='default' handler={Home} />
-    <Route path='map' name ='map' handler={Map} />
-    <Route path='about' name='about' handler={About}/>
-    <Route path='methodology' name='methodology' handler={Methodology}/>
-    <Route path='sources' name='sources' handler={Sources}/>
-    <NotFoundRoute handler={NotFound}/>
-  </Route>
-);
+import App from './views/app';
+import Home from './views/home';
+import About from './views/about';
+import Community from './views/community';
+import Map from './views/map';
+import LocationsHub from './views/locations-hub';
+import LocationItem from './views/location';
+import CountriesHub from './views/countries-hub';
+import Country from './views/country';
+import Compare from './views/compare';
 
-Router.run(routes, function (Handler) {
-  ReactDOM.render(<Handler locales={i18n.locales} messages={i18n.messages} />, document.getElementById('site-canvas'));
+const logger = createLogger();
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
+const history = syncHistoryWithStore(hashHistory, store);
+
+// Base data.
+store.dispatch(fetchBaseData());
+store.dispatch(fetchBaseStats());
+
+const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
+  return prevRouterProps &&
+    decodeURIComponent(currRouterProps.location.pathname) !== decodeURIComponent(prevRouterProps.location.pathname);
 });
+
+render((
+  <Provider store={store}>
+    <Router history={history} render={applyRouterMiddleware(scrollerMiddleware)}>
+      <Route path='/' component={App}>
+        <Route name='about' path='about' component={About} pageClass='page--about' />
+        <Route name='community' path='community' component={Community} pageClass='page--community' />
+        <Route name='map' path='map' component={Map} pageClass='page--map' />
+        <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations' />
+        <Route name='location' path='location/:name' component={LocationItem} pageClass='page--location' />
+        <Route name='countriesHub' path='countries' component={CountriesHub} pageClass='page--countries' />
+        <Route name='country' path='countries/:name' component={Country} pageClass='page--country' />
+        <Route name='country' path='compare(/:loc1)(/:loc2)(/:loc3)' component={Compare} pageClass='page--compare' />
+        <IndexRoute component={Home} pageClass='page--homepage' />
+      </Route>
+    </Router>
+  </Provider>
+), document.querySelector('#app-container'));

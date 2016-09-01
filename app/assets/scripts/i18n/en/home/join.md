@@ -1,1 +1,0 @@
-Our highest priority is building a community around open real-time air quality data, and we’d love you to join us.  Chat with us on [Slack](https://openaq-slackin.herokuapp.com/), contribute code on [GitHub](https://github.com/openaq), suggest new [data sources](/#/sources) or just [join the mailing list](http://eepurl.com/bi1Uhn).

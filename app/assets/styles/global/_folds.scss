@@ -1,0 +1,233 @@
+/* ==========================================================================
+   Global: Folds
+   ========================================================================== */
+
+.fold {
+  background: #fff;
+  padding: ($global-spacing * 2) 0;
+  box-shadow: inset 0 -2px 0 0 $base-alpha-color;
+
+  > .inner {
+    @extend .row, .row--centered;
+  }
+
+  &,
+  > .inner,
+  .fold__header,
+  .fold__introduction,
+  .fold__body,
+  .fold__copy {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include media(medium-up) {
+    padding: ($global-spacing * 3) 0;
+  }
+
+  @include media(large-up) {
+    padding: ($global-spacing * 4) 0;
+  }
+}
+
+.fold__body {
+  margin-bottom: 2rem;
+
+  &--prose {
+    width: column-width(12/12);
+
+    @include media(medium-up) {
+      width: column-width(10/12);
+    }
+
+    @include media(large-up) {
+      width: column-width(8/12);
+    }
+  }
+}
+
+.fold__footer {
+  text-align: center;
+}
+
+.fold__actions {
+  .button {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+    @include media(small-up) {
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.fold__header {
+  margin-bottom: $global-spacing;
+  overflow: hidden;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @include media(medium-up) {
+    margin-bottom: ($global-spacing * 2)
+  }
+}
+
+.fold__introduction {
+  @include col(12/12);
+  font-family: $heading-font-family;
+  font-weight: $heading-font-regular;
+
+  @include media(medium-up) {
+    @include col(10/12);
+  }
+
+  @include media(large-up) {
+    @include col(8/12);
+  }
+}
+
+.fold__title {
+  @include heading(1rem, medium-up);
+  @extend .heading-deco;
+}
+
+
+/* Modifiers
+   ========================================================================== */
+
+.fold--media-bleed-left,
+.fold--media-bleed-right {
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+
+  > .inner {
+    @include media(medium-up) {
+      @include display(flex);
+      @include flex-flow(row nowrap);
+    }
+  }
+
+  .fold__copy,
+  .fold__media {
+    @include media(medium-up) {
+      @include flex(0 0 auto);
+    }
+  }
+
+  .fold__copy {
+    padding: ($global-spacing * 2) 0;
+
+    @include media(medium-up) {
+      padding: ($global-spacing * 3) 0;
+    }
+
+    @include media(large-up) {
+      padding: ($global-spacing * 8) 0;
+    }
+  }
+
+  .fold__media {
+    position: relative;
+    height: 16rem;
+
+    @include media(medium-up) {
+      height: auto;
+    }
+  }
+
+  .media {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 (-$global-spacing);
+    background: transparent left center / cover no-repeat;
+
+    &:before,
+    &:after {
+      position: absolute;
+      z-index: 2;
+      content: '';
+    }
+
+    &:before {
+      width: 100%;
+      height: 100%;
+      background: rgba($primary-color, 0.56);
+    }
+
+    &:after {
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: $base-alpha-color;
+    }
+
+    @include media(small-up) {
+      margin: 0 (-$global-spacing * 2);
+    }
+  }
+
+  .media__item {
+    @extend .visually-hidden;
+  }
+}
+
+.fold--media-bleed-left {
+  .fold__copy {
+    @include media(medium-up) {
+      @include col(6/12);
+    }
+  }
+
+  .fold__media {
+    @include media(medium-up) {
+      @include col(6/12);
+      @include shift(-0.5/12);
+    }
+  }
+
+  .media {
+    @include media(medium-up) {
+      margin: 0 0 0 calc(100% - 50vw);
+    }
+  }
+}
+
+.fold--media-bleed-right {
+  .fold__copy {
+    @include media(medium-up) {
+      @include col(6/12);
+      @include shift(-6/12);
+    }
+  }
+
+  .fold__media {
+    @include media(medium-up) {
+      @include col(6/12);
+      @include shift(6.5/12);
+    }
+
+    .media {
+      @include media(medium-up) {
+        margin: 0 calc(100% - 50vw) 0 0;
+      }
+    }
+  }
+}
+
+.fold--filled {
+  background: tint($base-color, 92%);
+
+  .media:before {
+    background: rgba($base-color, 0.56);
+  }
+}
