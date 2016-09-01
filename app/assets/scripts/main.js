@@ -3,7 +3,8 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory, applyRouterMiddleware } from 'react-router';
+import { useScroll } from 'react-router-scroll';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -35,9 +36,14 @@ const history = syncHistoryWithStore(hashHistory, store);
 store.dispatch(fetchBaseData());
 store.dispatch(fetchBaseStats());
 
+const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
+  return prevRouterProps &&
+    decodeURIComponent(currRouterProps.location.pathname) !== decodeURIComponent(prevRouterProps.location.pathname);
+});
+
 render((
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={history} render={applyRouterMiddleware(scrollerMiddleware)}>
       <Route path='/' component={App}>
         <Route name='about' path='about' component={About} pageClass='page--about' />
         <Route name='community' path='community' component={Community} pageClass='page--community' />
