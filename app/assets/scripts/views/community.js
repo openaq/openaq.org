@@ -15,7 +15,7 @@ var About = React.createClass({
   renderProjects: function () {
     let cards = _(content.projects)
       .values()
-      .reverse()
+      .sortBy('fileName')
       .take(4)
       .map(o => {
         return (
