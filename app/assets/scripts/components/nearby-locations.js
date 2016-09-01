@@ -93,7 +93,7 @@ var NearbyLocations = React.createClass({
       content = (
         <InfoMessage>
           <p>Try enabling location services or using a different browser.</p>
-          <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+          <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
         </InfoMessage>
       );
     }
@@ -107,7 +107,7 @@ var NearbyLocations = React.createClass({
         content = (
           <InfoMessage>
             <p>Please try again later.</p>
-            <p>If you think there's a problem <a href='#' title='Contact openaq'>contact us.</a></p>
+            <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
           </InfoMessage>
         );
       } else if (!this.props.locations.length) {
@@ -115,7 +115,7 @@ var NearbyLocations = React.createClass({
         content = (
           <InfoMessage>
             <p>We're sorry, there's currently no data available in your area.</p>
-            <p>Suggest a <a href='#' title='Suggest a new source'>new source</a> or <a href='#' title='Contact openaq'>let us know</a> what location you'd like to see data for.</p>
+            <p>Suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a> or <a href='mailto:info@openaq.org' title='Contact openaq'>let us know</a> what location you'd like to see data for.</p>
           </InfoMessage>
         );
       } else {
