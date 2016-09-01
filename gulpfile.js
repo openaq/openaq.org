@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
@@ -17,6 +18,7 @@ var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');
 var SassString = require('node-sass').types.String;
 var notifier = require('node-notifier');
+var marked = require('marked');
 var OPENAQ_ADDONS = require('openaq-design-system/gulp-addons');
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -246,6 +248,9 @@ gulp.task('extras', function () {
 gulp.task('markdown', function () {
   return gulp.src('app/content/**/*.md')
     .pipe(gutil.buffer())
-    .pipe($.markdownToJson('content.json'))
+    .pipe($.markdownToJson(marked, 'content.json', function (data, file) {
+      data.filename = path.basename(file.path);
+      return data;
+    }))
     .pipe(gulp.dest('app/assets/content'));
 });
