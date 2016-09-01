@@ -60,6 +60,7 @@ const MapComponent = React.createClass({
 
   locationPageSetup: function () {
     let data = _.find(this.props.measurements, {location: this.props.highlightLoc});
+    if (!data) return;
     this.showPopover(data);
     this.selectLocationPoint(this.generateFeature(data));
   },
