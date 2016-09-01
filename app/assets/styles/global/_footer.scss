@@ -83,4 +83,9 @@
     text-align: center;
     margin-top: 2rem;
   }
+  .heart::before {
+    @extend %openaq-ds-icon-heart-full;
+    opacity: 0.8;
+    vertical-align: middle;
+  }
 }
