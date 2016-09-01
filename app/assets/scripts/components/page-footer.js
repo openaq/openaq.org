@@ -41,7 +41,7 @@ var PageFooter = React.createClass({
             </div>
           </div>
           <p className='copyright'>
-            {copyright} with love by <a href='https://developmentseed.org' title='Visit Development Seed website'>Development Seed</a> and the <a href='https://openaq.org/' title='Visit the OpenAQ website'>OpenAQ</a> team.</p>
+            {copyright} with <span className='openaq-ds-icon openaq-ds-icon-heart-full'></span> by <a href='https://developmentseed.org' title='Visit Development Seed website'>Development Seed</a> and the <a href='https://openaq.org/' title='Visit the OpenAQ website'>OpenAQ</a> team.</p>
         </div>
       </footer>
     );
