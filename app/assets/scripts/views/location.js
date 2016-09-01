@@ -134,7 +134,6 @@ var Location = React.createClass({
       // Get the measurements.
       let toDate = moment.utc();
       let fromDate = toDate.clone().subtract(8, 'days');
-      console.log('loc', loc);
       // this.props._fetchLatestMeasurements({city: loc.city, has_geo: 'true'});
       this.props._fetchLatestMeasurements({
         coordinates: `${loc.coordinates.latitude},${loc.coordinates.longitude}`,
@@ -206,12 +205,14 @@ var Location = React.createClass({
           </div>
           <div className='col-sec'>
             <p className='heading-alt'>Latest Measurements:</p>
-            <ul className='measurements-list'>
-              {locLastMeasurement.measurements.map(o => {
-                let param = _.find(this.props.parameters, {id: o.parameter});
-                return <li key={o.parameter}><strong>{param.name}</strong>{o.value}{o.unit} at {moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</li>;
-              })}
-            </ul>
+            {locLastMeasurement ? (
+              <ul className='measurements-list'>
+                {locLastMeasurement.measurements.map(o => {
+                  let param = _.find(this.props.parameters, {id: o.parameter});
+                  return <li key={o.parameter}><strong>{param.name}</strong>{o.value}{o.unit} at {moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</li>;
+                })}
+              </ul>
+            ) : <p>N/A</p>}
           </div>
         </div>
       );
