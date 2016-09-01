@@ -1,10 +1,16 @@
+'use strict';
 var logo = require('./logo');
 /*
  * App config for production.
  */
 module.exports = {
   environment: 'production',
-  apiURL: 'https://api.openaq.org/v1/',
-  mapboxToken: 'pk.eyJ1IjoidW1waHJleTEwMTIiLCJhIjoiQ1MzNldBYyJ9.fM0A16yfZbqCIH0--_X7Eg',
-  consoleMessage: logo
+  consoleMessage: logo,
+  mapbox: {
+    token: 'pk.eyJ1IjoiZGV2c2VlZCIsImEiOiJnUi1mbkVvIn0.018aLhX0Mb0tdtaT2QNe2Q',
+    baseStyle: 'mapbox://styles/devseed/ciqs29d060000clnr9222bg5x'
+  },
+  api: 'https://api.openaq.org/v1',
+  apiDocs: 'https://docs.openaq.org'
 };
+

@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Compare: Content
+   ========================================================================== */
+
+%list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page--compare {
+  .inpage__header {
+    padding-top: 7rem;
+  }
+
+  .inpage__headline {
+    margin-bottom: 1rem;
+  }
+
+  .inpage__title {
+    @extend .heading--small;
+  }
+}
+
+
+.compare {
+  &__location-list {
+    @extend %list-reset;
+    overflow: hidden;
+  }
+
+  &__location {
+    @include col(12/12);
+    padding-left: 2rem;
+    margin-top: 2rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    @include media(small-up) {
+      @include col(6/12, $cycle: 2);
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+    }
+    @include media(medium-up) {
+      @include col(4/12, $cycle: 3);
+      &:nth-child(3) {
+        margin-top: 0;
+      }
+    }
+
+    &--actions {
+      @include col(12/12);
+      margin-top: 2rem;
+      padding-left: 0;
+
+      @include media(medium-up) {
+        @include col(4/12);
+      }
+
+      .form__actions .button {
+        margin-right: 0.5rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &__subtitle {
+    @extend .heading-alt;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    margin-bottom: 0;
+
+    @include media(medium-up) {
+      font-size: 0.875rem;
+    }
+  }
+
+  &__title {
+    @extend .heading--small;
+    position: relative;
+    line-height: 1.75rem;
+    margin-bottom: 0.5rem;
+
+    small {
+      display: block;
+    }
+
+  }
+
+  &__actions {
+    > [class*="button"]:first-child {
+      margin-left: - $global-spacing / 2;
+    }
+
+    .button {
+      text-transform: uppercase;
+    }
+  }
+
+  &__info-msg {
+    margin-top: -0.5rem;
+    p {
+      font-family: $base-font-family;
+      font-size: 0.875rem;
+      color: rgba($base-font-color, 0.48);
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.compare-marker {
+  display: inline-block;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    top: 0.325rem;
+    left: -2rem;
+    border-radius: $base-border-radius;
+    background: $base-color;
+
+    @include media(medium-up) {
+      width: 1.25rem;
+      height: 1.25rem;
+      top: 0.25rem;
+    }
+  }
+
+  &--st::before {
+    background-color: $infographic-color-a;
+  }
+
+  &--nd::before {
+    background-color: $infographic-color-b;
+  }
+
+  &--rd::before {
+    background-color: $infographic-color-c;
+  }
+}
+
+.button-compare-location {
+  @extend .button, .button--medium, .button--base-unbounded;
+  color: rgba($base-font-color, 0.80);
+  margin-left: -($global-spacing / 2);
+
+  &::before {
+    @extend %openaq-ds-icon-plus;
+  }
+}

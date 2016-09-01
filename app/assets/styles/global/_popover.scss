@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Global: Map popover
+   ========================================================================== */
+
+.map__container {
+  .mapboxgl-popup-close-button {
+    display: none;
+  }
+
+  .mapboxgl-popup-content {
+    padding: 0;
+  }
+}
+
+.popover {
+  padding: $global-spacing * 2;
+  font-size: 1rem;
+  max-width: 25rem;
+
+  &__header {
+    margin-bottom: 0.5rem;
+  }
+
+  &__body {
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    @include heading(1.5rem);
+    margin-bottom: 0;
+  }
+
+  &__actions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      float: left;
+      margin-right: 1rem;
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__footer {
+    box-shadow: 0 -2px 0 0 $base-alpha-color;
+    padding-top: 1rem;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .popover-nearby-loc {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      @include col(6/12, $cycle: 2);
+      margin-top: 0.5rem;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+
+      strong {
+        display: block;
+      }
+    }
+  }
+}

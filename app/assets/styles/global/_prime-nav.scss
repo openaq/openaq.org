@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Global: Page Prime Nav
+   ========================================================================== */
+
+.page__prime-nav {
+  float: right;
+}
+
+.page__prime-nav-title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0;
+  padding: ($global-spacing * 1.5) $global-spacing;
+  transition: all 0.32s ease 0s;
+
+  a {
+    color: inherit;
+
+    &, *, &::after {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    &::after {
+      @extend %openaq-ds-icon-hamburger-menu;
+      margin-left: $global-spacing / 4;
+    }
+  }
+
+  .offcanvas-revealed & {
+    width: 12rem;
+    background: #fff;
+    right: 0;
+    box-shadow: 0 2px 0 0 $base-semi-alpha-color;
+
+    a::after {
+      @extend %openaq-ds-icon-xmark;
+      margin-left: $global-spacing / 4;
+    }
+  }
+
+  @include media(small-up) {
+    right: $global-spacing;
+  }
+
+  @include media(large-up) {
+    display: none;
+  }
+}
+
+.nav-block {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 12rem;
+  padding: ($global-spacing * 4.5) 0 0 0;
+  background: #fff;
+  box-shadow: 0 0 32px 16px $base-alpha-color;
+  overflow-y: scroll;
+  height: 100vh;
+  transition: opacity 0.16s ease 0s, right 0.16s ease 0s, visibility 0.16s linear 0s;
+
+  /* Pre animation */
+  opacity: 0;
+  visibility: hidden;
+  right: -12rem;
+
+  /* Post animation */
+  .offcanvas-revealed & {
+    opacity: 1;
+    visibility: visible;
+    right: 0;
+  }
+
+  @include media(large-up) {
+    position: initial;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    opacity: 1;
+    visibility: visible;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+
+.sub-nav-block {
+  @include media(large-up) {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1000;
+    transform: translate(-50%, 0);
+    width: 10rem;
+    margin: 0;
+    padding: $global-spacing;
+    overflow: hidden;
+    text-align: left;
+    color: $base-font-color;
+    font-size: 1rem;
+    line-height: 1.5;
+    background: #fff;
+    box-shadow: 0 0 32px 16px $base-alpha-color;
+    border-radius: $base-border-radius;
+    transition: opacity 0.16s ease 0s, margin 0.16s ease 0s, visibility 0.16s linear 0s;
+
+    /* Pre animation */
+
+    opacity: 0;
+    visibility: hidden;
+    margin-top: -($global-spacing * 2);
+
+    /* Post animation */
+
+    .sub-revealed & {
+      opacity: 1;
+      visibility: visible;
+      margin-top: -($global-spacing / 2);
+    }
+  }
+}
+
+.browse-menu {
+  list-style: none;
+  margin: 0 $global-spacing;
+  padding: 0;
+
+  > li {
+    position: relative;
+    margin: 0 0 ($global-spacing / 2) 0;
+  }
+
+  @include media(large-up) {
+    float: left;
+
+    > li {
+      float: left;
+      margin: 0 ($global-spacing * 1.5) 0 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.browse-menu--sub {
+  @include media(large-up) {
+    &,
+    > li {
+      margin: 0;
+      float: none;
+    }
+  }
+}
+
+.browse-menu__item {
+  position: relative;
+  display: inline-block;
+  line-height: 1.25rem;
+  font-size: 1rem;
+  font-weight: $base-font-regular;
+  padding: ($global-spacing / 2) 0;
+
+  &, &:visited {
+    color: inherit;
+  }
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    height: 2px;
+    width: 100%;
+    background: transparent;
+    content: '';
+  }
+
+  &--active {
+    font-weight: $base-font-bold;
+    &::before {
+      background: $base-color;
+    }
+  }
+
+  @include media(large-up) {
+    margin: 0;
+    padding: ($global-spacing * 1.5) 0;
+
+    .browse-menu--sub & {
+      padding: ($global-spacing / 2) 0;
+    }
+  }
+}
+
+.offcanvas-revealed {
+  overflow-y: hidden;
+
+  @include media(large-up) {
+    overflow-y: visible;
+  }
+}

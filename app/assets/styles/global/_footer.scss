@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Global: Footer
+   ========================================================================== */
+
+.contact-info {
+  overflow: hidden;
+}
+
+.contact {
+  margin-bottom: 2rem;
+  &__title {
+    @include heading(1rem, medium-up);
+  }
+
+  &--social {
+    @include col(12/12);
+    > ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    li {
+      float: left;
+      margin-right: 1.5rem;
+    }
+
+    a {
+      font-size: 1.25rem;
+    }
+
+    @include media(small-up) {
+      @include col(6/12);
+    }
+  }
+
+  .contact-button-gh,
+  .contact-button-slack,
+  .contact-button-twitter,
+  .contact-button-mail {
+    span {
+      @extend .visually-hidden;
+    }
+  }
+
+  .contact-button-gh::before {
+    @extend %openaq-ds-icon-github;
+  }
+  .contact-button-slack::before {
+    @extend %openaq-ds-icon-slack;
+  }
+  .contact-button-twitter::before {
+    @extend %openaq-ds-icon-twitter;
+  }
+  .contact-button-mail::before {
+    @extend %openaq-ds-icon-envelope;
+  }
+
+  &--newsletter {
+    @include col(12/12);
+
+    @include media(small-up) {
+      @include col(6/12, $offset: 0);
+    }
+
+    @include media(large-up) {
+      @include col(4/12, $offset: 2/12);
+    }
+
+    .button--subscribe {
+      @extend .button, .button--primary, .button--text-hidden, .button--medium;
+
+      &::before {
+        @extend %openaq-ds-icon-arrow-right;
+      }
+    }
+  }
+}
+
+.page__footer {
+  .copyright {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .heart::before {
+    @extend %openaq-ds-icon-heart-full;
+    opacity: 0.8;
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Homepage: Measurement Chart
+   ========================================================================== */
+
+.home-compare-chart {
+  height: 20rem;
+
+  .axis {
+    text {
+      fill: rgba($base-font-color, 0.64);
+    }
+    .domain {
+      stroke: rgba($base-font-color, 0.24);
+      stroke-width: 1px
+    }
+  }
+  .location-data {
+    opacity: 0.64;
+    &--st circle {
+      fill: $infographic-color-a;
+    }
+    &--nd circle {
+      fill: $infographic-color-b;
+    }
+  }
+}
+
+.chart-description {
+  font-family: $heading-font-family;
+  text-align: center;
+  color: rgba($base-font-color, 0.64);
+
+  @include media(medium-up) {
+    text-align: left;
+    padding-left: 3rem;
+  }
+}
