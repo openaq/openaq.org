@@ -21,7 +21,7 @@ var About = React.createClass({
         return (
           <CommunityCard
             key={_.kebabCase(o.title)}
-            horizontal
+            horizontal={true}
             title={o.title}
             linkTitle='View this community contribution'
             url={o.url}
