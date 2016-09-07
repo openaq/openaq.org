@@ -117,7 +117,7 @@ var Home = React.createClass({
             <h1 className='fold__title'>The data</h1>
             <div className='fold__introduction prose prose--responsive'>
               {!fetching
-                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). Note: (1) We do not validate or transform the data from their originating sources. (2) Real-time data, by their nature, often have not undergone quality assurance or control processes by their originating sources.</p>)
+                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. We aggregate PM2.5, PM10, ozone, sulfur dioxide, nitrogen dioxide, carbon monoxide, and black carbon. We cannot guarantee data accuracy. Real-time data, by their nature, often have not undergone quality assurance processes by their originating sources.</p>)
                 : <LoadingMessage />}
             </div>
           </header>
