@@ -317,7 +317,7 @@ var LocationsHub = React.createClass({
               <h1 className='inpage__title'>Air Quality Data</h1>
             </div>
             <div className='inpage__introduction'>
-              <p>We’re currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC). If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
+              <p>We’re currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. Please note: (1) We do not validate or transform the data from their originating sources. (2) Real-time data, by their nature, often have not undergone quality assurance or control processes by their originating sources. (3) Please contact originating sources for more detailed information not provided on this platform. (4) If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
             </div>
             <div className='inpage__actions'>
               <ul>
