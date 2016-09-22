@@ -40,7 +40,7 @@ var LocationCard = React.createClass({
         <div className='card__contents'>
           <header className='card__header'>
             <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
-            <h1 className='card__title'><Link to={`/location/${this.props.name}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {this.props.countryData.name}</small></h1>
+            <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {this.props.countryData.name}</small></h1>
           </header>
           <div className='card__body'>
             <ul className='card__meta-details'>
@@ -55,7 +55,7 @@ var LocationCard = React.createClass({
           <footer className='card__footer'>
             <ul className='card__actions'>
               <li><a href='#' className='button-card-download' title={`Download data for ${this.props.name}`} onClick={this.onDownloadClick}>Download</a></li>
-              <li><Link to={`/location/${this.props.name}`} className='button-card-view' title={`View ${this.props.name} page`}>View More</Link></li>
+              <li><Link to={`/location/${encodeURIComponent(this.props.name)}`} className='button-card-view' title={`View ${this.props.name} page`}>View More</Link></li>
             </ul>
           </footer>
         </div>

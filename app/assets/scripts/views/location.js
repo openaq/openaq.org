@@ -92,7 +92,7 @@ var Location = React.createClass({
   onFilterSelect: function (parameter, e) {
     e.preventDefault();
 
-    hashHistory.push(`/location/${this.props.params.name}?parameter=${parameter}`);
+    hashHistory.push(`/location/${encodeURIComponent(this.props.params.name)}?parameter=${parameter}`);
   },
 
   onDownloadClick: function () {
@@ -499,7 +499,7 @@ var Location = React.createClass({
               <ul>
                 <li><a href={`${config.api}/locations?location=${data.location}`} title='View in api' className='button-inpage-api' target='_blank'>View API</a></li>
                 <li><button type='button' title='Download data for this location' className='button-inpage-download' onClick={this.onDownloadClick}>Download</button></li>
-                <li><Link to={`/compare/${data.location}`} title='Compare location with another' className='button button--primary button--medium'>Compare</Link></li>
+                <li><Link to={`/compare/${encodeURIComponent(data.location)}`} title='Compare location with another' className='button button--primary button--medium'>Compare</Link></li>
               </ul>
             </div>
           </div>
