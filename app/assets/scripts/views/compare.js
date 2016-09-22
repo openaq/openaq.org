@@ -90,6 +90,7 @@ var Compare = React.createClass({
   onFilterSelect: function (parameter, e) {
     e.preventDefault();
     let locsUrl = this.getLocNames()
+      .map(encodeURIComponent)
       .join('/');
 
     hashHistory.push(`/compare/${locsUrl}?parameter=${parameter}`);
@@ -99,6 +100,7 @@ var Compare = React.createClass({
     // To build the url filter out the location at the given index.
     // Ensure that non loaded locations are also out.
     let locsUrl = this.getLocNames((o, i) => i !== index)
+      .map(encodeURIComponent)
       .join('/');
 
     hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
@@ -126,7 +128,11 @@ var Compare = React.createClass({
     let locsUrl = this.getLocNames();
     locsUrl.push(this.props.compareSelectOpts.location);
 
-    hashHistory.push(`/compare/${locsUrl.join('/')}?parameter=${this.getActiveParameterData().id}`);
+    locsUrl = locsUrl
+      .map(encodeURIComponent)
+      .join('/');
+
+    hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
   },
 
   //
