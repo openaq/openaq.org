@@ -231,7 +231,7 @@ var Home = React.createClass({
                 return (
                   <li className='compare__location' key={d.location} >
                     <p className='compare__subtitle'>Updated {updated}</p>
-                    <h2 className='compare__title'><Link to={`/location/${d.location}`}><span className={c('compare-marker', kl[i])}>{d.location}</span></Link> <small>in {d.city}, {countryData.name}</small></h2>
+                    <h2 className='compare__title'><Link to={`/location/${encodeURIComponent(d.location)}`}><span className={c('compare-marker', kl[i])}>{d.location}</span></Link> <small>in {d.city}, {countryData.name}</small></h2>
                   </li>
                 );
               })}
@@ -257,7 +257,7 @@ var Home = React.createClass({
           {body}
           <div className='fold__footer'>
           {l1.data && l2.data
-          ? <Link to={`/compare/${l1.data.location}/${l2.data.location}`} title='View Locations' className='button button--large button--primary-bounded button--semi-fluid'>Compare Other Locations</Link>
+          ? <Link to={`/compare/${encodeURIComponent(l1.data.location)}/${encodeURIComponent(l2.data.location)}`} title='View Locations' className='button button--large button--primary-bounded button--semi-fluid'>Compare Other Locations</Link>
           : null}
           </div>
         </div>

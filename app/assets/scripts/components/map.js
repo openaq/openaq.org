@@ -467,7 +467,7 @@ const MapPopover = React.createClass({
       <article className='popover'>
         <div className='popover__contents'>
           <header className='popover__header'>
-            <h1 className='popover__title'><a href={`#/location/${this.props.location}`} title={`View ${this.props.location} page`}>{this.props.location}</a></h1>
+            <h1 className='popover__title'><a href={`#/location/${encodeURIComponent(this.props.location)}`} title={`View ${this.props.location} page`}>{this.props.location}</a></h1>
           </header>
           <div className='popover__body'>
             {reading}
@@ -476,8 +476,8 @@ const MapPopover = React.createClass({
                 Using `a` instead of `Link` because these are rendered outside
                 the router context and `Link` needs that context to work.
               */ }
-              <li><a href={`#/compare/${this.props.location}`} className='button button--primary-bounded' title={`Compare ${this.props.location} with other locations`}>Compare</a></li>
-              <li><a href={`#/location/${this.props.location}`} title={`View ${this.props.location} page`}className='button button--primary-bounded'>View More</a></li>
+              <li><a href={`#/compare/${encodeURIComponent(this.props.location)}`} className='button button--primary-bounded' title={`Compare ${this.props.location} with other locations`}>Compare</a></li>
+              <li><a href={`#/location/${encodeURIComponent(this.props.location)}`} title={`View ${this.props.location} page`}className='button button--primary-bounded'>View More</a></li>
             </ul>
           </div>
           <footer className='popover__footer'>

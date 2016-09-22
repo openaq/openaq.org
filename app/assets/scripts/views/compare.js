@@ -90,6 +90,7 @@ var Compare = React.createClass({
   onFilterSelect: function (parameter, e) {
     e.preventDefault();
     let locsUrl = this.getLocNames()
+      .map(encodeURIComponent)
       .join('/');
 
     hashHistory.push(`/compare/${locsUrl}?parameter=${parameter}`);
@@ -99,6 +100,7 @@ var Compare = React.createClass({
     // To build the url filter out the location at the given index.
     // Ensure that non loaded locations are also out.
     let locsUrl = this.getLocNames((o, i) => i !== index)
+      .map(encodeURIComponent)
       .join('/');
 
     hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
@@ -126,7 +128,11 @@ var Compare = React.createClass({
     let locsUrl = this.getLocNames();
     locsUrl.push(this.props.compareSelectOpts.location);
 
-    hashHistory.push(`/compare/${locsUrl.join('/')}?parameter=${this.getActiveParameterData().id}`);
+    locsUrl = locsUrl
+      .map(encodeURIComponent)
+      .join('/');
+
+    hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
   },
 
   //
@@ -269,7 +275,7 @@ var Compare = React.createClass({
       return (
         <li className='compare__location' key={d.location}>
           <p className='compare__subtitle'>Updated {updated}</p>
-          <h2 className='compare__title'><Link to={`/location/${d.location}`}><span className={c('compare-marker', kl[i])}>{d.location}</span></Link> <small>in {d.city}, {countryData.name}</small></h2>
+          <h2 className='compare__title'><Link to={`/location/${encodeURIComponent(d.location)}`}><span className={c('compare-marker', kl[i])}>{d.location}</span></Link> <small>in {d.city}, {countryData.name}</small></h2>
           <div className='compare__actions'>
             { /* <button type='button' className='button button--small button--primary-unbounded'>Edit</button> */ }
             <button type='button' className='button button--small button--primary-unbounded' onClick={this.removeLocClick.bind(null, i)}>Remove</button>
