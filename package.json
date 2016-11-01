@@ -1,10 +1,10 @@
 {
-  "name": "openaq.github.io",
+  "name": "openaq.org",
   "version": "2.0.0",
   "description": "Website for OpenAQ project.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/developmentseed/openaq.github.io.git"
+    "url": "https://github.com/developmentseed/openaq.org"
   },
   "author": {
     "name": "Development Seed",
@@ -12,7 +12,7 @@
   },
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/developmentseed/openaq.github.io/issues"
+    "url": "https://github.com/developmentseed/openaq.org/issues"
   },
   "homepage": "https://openaq.org",
   "scripts": {
