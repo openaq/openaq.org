@@ -3,7 +3,7 @@ node_js:
 - '4'
 env:
   global:
-  - PRODUCTION_BRANCH=master
+  - DEPLOY_BRANCH=master
   - STAGING_BRANCH=develop
 cache:
   directories:
@@ -36,4 +36,4 @@ deploy:
     skip-cleanup: true
     on:
       repo: openaq/openaq.org
-      branch: ${PRODUCTION_BRANCH}
+      branch: ${DEPLOY_BRANCH}
