@@ -384,9 +384,10 @@ const MapComponent = React.createClass({
       ]);
     }
 
+    this.map.addControl(new mapboxgl.Navigation());
+
     if (this.props.disableScrollZoom) {
       this.map.scrollZoom.disable();
-      this.map.addControl(new mapboxgl.Navigation());
     }
 
     this.map.on('load', () => {
