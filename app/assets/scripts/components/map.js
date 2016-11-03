@@ -9,6 +9,7 @@ import distance from 'turf-distance';
 import { convertParamIfNeeded, circleOpacity, circleBlur,
          coloredCircleRadius, borderCircleRadius, selectCircleRadius, selectShadowCircleRadius, locationShadowCircleRadius } from '../utils/map-settings';
 import { generateColorStops } from '../utils/colors';
+import { round } from '../utils/format';
 // import  from '../utils/color-scale';
 
 import config from '../config';
@@ -444,7 +445,7 @@ const MapPopover = React.createClass({
             return (
               <li key={o.location}>
                 {measurement
-                  ? <strong>{measurement.value} {measurement.unit}</strong>
+                  ? <strong>{round(measurement.value)} {measurement.unit}</strong>
                   : <strong>{this.props.parameter.name} N/A</strong>}
                 <a onClick={this.props.nearbyClick.bind(null, o.location)} href='' title={`Open ${o.location} popover`}>{o.location}</a>
               </li>
@@ -460,7 +461,7 @@ const MapPopover = React.createClass({
     let reading = <p>{this.props.parameter.name} N/A</p>;
     if (m) {
       let lastUp = moment.utc(m.lastUpdated).format('YYYY/MM/DD HH:mm');
-      reading = <p>Last reading <strong>{m.value}{m.unit}</strong> at <strong>{lastUp}</strong></p>;
+      reading = <p>Last reading <strong>{round(m.value)} {m.unit}</strong> at <strong>{lastUp}</strong></p>;
     }
 
     return (
