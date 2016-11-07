@@ -3,9 +3,8 @@ node_js:
 - '4'
 env:
   global:
-  - PRODUCTION_BRANCH=publish
+  - DEPLOY_BRANCH=master
   - STAGING_BRANCH=develop
-  - V2_BRANCH=feature/v2
 cache:
   directories:
   - node_modules
@@ -20,23 +19,12 @@ deploy:
     access_key_id: AKIAIHACHLPCT2PIL4TA
     secret_access_key:
       secure: CHTMZ13ooRXGY0ruRp3mTcg8TMPyM5Ymtg8V7kMmFKPznPMSoQjjHVazuqMTKgP/I5qq6U8S8tTBX/IuhD5MxZJrdBg/ocwpKhgu75xd4SgJsbmpd97jMxX0QU3hA0deDykxYBOKSv9tkZUJRZp8eOlfAjTK6lIKT4cvxGpk3s3VAimLA1e9jGp6vmbXV2GCj0oDBLrkcSrIBBrzClpgM5pmxXDWY1LDhY3vksOKz0GU/btZ8mxdEj3zJ6ZOx9Ny3skMX2eGO0N4JWd/HpEUtPWCp9XdCsXFbH/mQUZcAF5sFUjxsuqPgWkItKt9+TpVCgArhW1E+5DMTnYYPVYMxBhQrL60BaEQ/98rl4KxH+8otvfDlH19f3ESIPbPh0VLGwj9CJ/WQtJ2xhxZmypkfgbD3sGomHpbbSAIHvYSZUcJn34UikBx233JA6jN2ILRr8jvmDaOKg8i3x4aOkrUeMM0n+7alIymuVLlR53wOVifrtQG2xTEiIBkv6cwXyA+MyF3QCEaPOpgzPZLo6Vo+jZgW7XwYvs+TwfbZ9VVuj67E7QuTrwNHKG+CFpJz6SzlMgVJIYD5cwvh+D+py4jfN6+AoXWw4/3I30BzTe01wK2aBuWKHXaxEuj4JoXbACy6eAoTw5ePteAUj6YkK9hSkgByZhbStaeeGjd/ffxMwQ=
-    bucket: openaq-redesign
-    acl: public_read
-    local-dir: dist
-    skip-cleanup: true
-    on:
-      repo: openaq/openaq.github.io
-      branch: ${V2_BRANCH}
-  - provider: s3
-    access_key_id: AKIAIHACHLPCT2PIL4TA
-    secret_access_key:
-      secure: CHTMZ13ooRXGY0ruRp3mTcg8TMPyM5Ymtg8V7kMmFKPznPMSoQjjHVazuqMTKgP/I5qq6U8S8tTBX/IuhD5MxZJrdBg/ocwpKhgu75xd4SgJsbmpd97jMxX0QU3hA0deDykxYBOKSv9tkZUJRZp8eOlfAjTK6lIKT4cvxGpk3s3VAimLA1e9jGp6vmbXV2GCj0oDBLrkcSrIBBrzClpgM5pmxXDWY1LDhY3vksOKz0GU/btZ8mxdEj3zJ6ZOx9Ny3skMX2eGO0N4JWd/HpEUtPWCp9XdCsXFbH/mQUZcAF5sFUjxsuqPgWkItKt9+TpVCgArhW1E+5DMTnYYPVYMxBhQrL60BaEQ/98rl4KxH+8otvfDlH19f3ESIPbPh0VLGwj9CJ/WQtJ2xhxZmypkfgbD3sGomHpbbSAIHvYSZUcJn34UikBx233JA6jN2ILRr8jvmDaOKg8i3x4aOkrUeMM0n+7alIymuVLlR53wOVifrtQG2xTEiIBkv6cwXyA+MyF3QCEaPOpgzPZLo6Vo+jZgW7XwYvs+TwfbZ9VVuj67E7QuTrwNHKG+CFpJz6SzlMgVJIYD5cwvh+D+py4jfN6+AoXWw4/3I30BzTe01wK2aBuWKHXaxEuj4JoXbACy6eAoTw5ePteAUj6YkK9hSkgByZhbStaeeGjd/ffxMwQ=
     bucket: openaq-staging.org
     acl: public_read
     local-dir: dist
     skip-cleanup: true
     on:
-      repo: openaq/openaq.github.io
+      repo: openaq/openaq.org
       branch: ${STAGING_BRANCH}
   - provider: s3
     access_key_id: AKIAIHACHLPCT2PIL4TA
@@ -47,5 +35,5 @@ deploy:
     local-dir: dist
     skip-cleanup: true
     on:
-      repo: openaq/openaq.github.io
-      branch: ${PRODUCTION_BRANCH}
+      repo: openaq/openaq.org
+      branch: ${DEPLOY_BRANCH}

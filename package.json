@@ -1,10 +1,10 @@
 {
-  "name": "openaq.github.io",
+  "name": "openaq.org",
   "version": "2.0.0",
   "description": "Website for OpenAQ project.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/developmentseed/openaq.github.io.git"
+    "url": "https://github.com/developmentseed/openaq.org"
   },
   "author": {
     "name": "Development Seed",
@@ -12,7 +12,7 @@
   },
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/developmentseed/openaq.github.io/issues"
+    "url": "https://github.com/developmentseed/openaq.org/issues"
   },
   "homepage": "https://openaq.org",
   "scripts": {
@@ -87,7 +87,7 @@
     "lodash": "^4.13.1",
     "mapbox-gl": "^0.21.0",
     "moment": "^2.14.1",
-    "openaq-design-system": "git+https://github.com/openaq/openaq-design-system",
+    "openaq-design-system": "git+https://github.com/openaq/openaq-design-system#v2.0.0",
     "qs": "^6.2.1",
     "react": "^15.2.1",
     "react-addons-create-fragment": "^15.2.1",

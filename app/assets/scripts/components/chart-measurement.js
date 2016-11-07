@@ -109,8 +109,7 @@ var Chart = function (options) {
   var yAxis = d3.axisLeft(y)
     .tickPadding(8)
     .ticks(5)
-    .tickSize(0)
-    .tickFormat(o => o === 0 ? `0 ${_yLabel}` : o);
+    .tickSize(0);
 
   function _calcSize () {
     _width = parseInt($el.style('width'), 10) - margin.left - margin.right;
@@ -165,7 +164,7 @@ var Chart = function (options) {
 
         circles.enter()
           .append('circle')
-          .attr('r', 3)
+          .attr('r', 4)
           .merge(circles)
             // `localNoTZ` is the measurement local date converted
             // directly to user local.
@@ -198,18 +197,29 @@ var Chart = function (options) {
 
         yAx.enter().append('g')
           .attr('class', 'y axis');
-        //   .append('text')
-        //   .attr('class', 'label')
-        //   .attr('text-anchor', 'end')
-        //   .attr('dy', '16px')
-        //   .attr('transform', 'rotate(-90)');
-
-        // yAx.select('.label')
-        //   .text(_yLabel);
 
         yAx
           .attr('transform', `translate(${margin.left},${margin.top})`)
           .call(yAxis);
+
+        // There's no straightforward way to add axix labels with line breaks,
+        // so we need to append a new text element to the last tick.
+        let ticks = yAx.selectAll('.tick');
+        if (ticks.size()) {
+          let lastTick = d3.select(ticks.nodes()[ticks.size() - 1]);
+          let lastTickVal = lastTick.select('text');
+
+          // The "last" axix changes according to the data so we need to remove
+          // all the additional units before adding new ones.
+          yAx.selectAll('.tick .unit').remove();
+
+          lastTick.append('text')
+            .attr('class', 'unit')
+            .text(_yLabel)
+            .attr('x', lastTickVal.attr('x'))
+            .attr('y', lastTickVal.attr('y'))
+            .attr('dy', '1.5em');
+        }
       }
     };
 
