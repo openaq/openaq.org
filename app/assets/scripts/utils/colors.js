@@ -5,15 +5,15 @@ import { round } from '../utils/format';
 
 // Colors for the legend and point fills
 const mapColors = [
-  { label: '0', color: '#b5ebb1' },
-  { label: '10', color: '#97d8b5' },
-  { label: '20', color: '#6dc9c1' },
-  { label: '30', color: '#4db3d2' },
-  { label: '40', color: '#2c8cbe' },
-  { label: '50', color: '#126aae' },
-  { label: '60', color: '#4237a8' },
-  { label: '70', color: '#3f2086' },
-  { label: '80', color: '#400850' }
+  { label: '0', color: '#0b75a9' },
+  { label: '10', color: '#21b5bb' },
+  { label: '20', color: '#8fd4d9' },
+  { label: '30', color: '#bfe6ec' },
+  { label: '40', color: '#e3f0d9' },
+  { label: '50', color: '#f6e19e' },
+  { label: '60', color: '#faad5b' },
+  { label: '70', color: '#f36d3c' },
+  { label: '80', color: '#d93127' }
 ];
 
 // Colors for the stations without recent values
