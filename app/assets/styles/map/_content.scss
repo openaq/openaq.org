@@ -19,6 +19,11 @@ $page-header-y: $global-spacing * 5;
   .map__container {
     top: 0;
   }
+
+  .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+    margin-top: 5.25rem;
+    margin-right: 1rem;
+  }
 }
 
 .mapboxgl-popup-anchor-top, .mapboxgl-popup-anchor-top-left, .mapboxgl-popup-anchor-top-right{

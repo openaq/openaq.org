@@ -86,6 +86,7 @@ var PageHeader = React.createClass({
                     <ul className='browse-menu browse-menu--sub'>
                       <li><Link to='/locations' title='Visit locations page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Locations</span></Link></li>
                       <li><Link to='/countries' title='Visit Countries page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Countries</span></Link></li>
+                      <li><a href='https://docs.openaq.org/' title='View OpenAQ API documentation' className='browse-menu__item' onClick={this.dataMenuItemClick} target='_blank'><span>API</span></a></li>
                     </ul>
                   </div>
                 </li>

@@ -87,7 +87,7 @@
     "lodash": "^4.13.1",
     "mapbox-gl": "^0.21.0",
     "moment": "^2.14.1",
-    "openaq-design-system": "git+https://github.com/openaq/openaq-design-system",
+    "openaq-design-system": "git+https://github.com/openaq/openaq-design-system#v2.0.0",
     "qs": "^6.2.1",
     "react": "^15.2.1",
     "react-addons-create-fragment": "^15.2.1",

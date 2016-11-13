@@ -117,7 +117,7 @@ var Home = React.createClass({
             <h1 className='fold__title'>The data</h1>
             <div className='fold__introduction prose prose--responsive'>
               {!fetching
-                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. We aggregate PM2.5, PM10, ozone, sulfur dioxide, nitrogen dioxide, carbon monoxide, and black carbon. We cannot guarantee data accuracy. Real-time data, by their nature, often have not undergone quality assurance processes by their originating sources.</p>)
+                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small></p>)
                 : <LoadingMessage />}
             </div>
           </header>
