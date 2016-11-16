@@ -2,9 +2,11 @@
 import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router';
+
 import LocationCard from './location-card';
 import InfoMessage from './info-message';
 import LoadingMessage from './loading-message';
+import { formatThousands } from '../utils/format';
 
 var NearbyLocations = React.createClass({
   displayName: 'NearbyLocations',
@@ -112,21 +114,8 @@ var NearbyLocations = React.createClass({
             <p>If you think there's a problem <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
           </InfoMessage>
         );
-      } else if (!this.props.locations.length) {
-        intro = <p>There are <strong>0 sites</strong> located within a <strong>5km</strong> radius of your location.</p>;
-        content = (
-          <InfoMessage>
-            <p>We're sorry, there's currently no data available in your area.</p>
-            <p>Suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a> or <a href='mailto:info@openaq.org' title='Contact openaq'>let us know</a> what location you'd like to see data for.</p>
-          </InfoMessage>
-        );
-      } else {
-        let l = this.props.locations.length;
-        if (l === 1) {
-          intro = <p>There is <strong>1 site</strong> located within a <strong>5km</strong> radius of your location.</p>;
-        } else {
-          intro = <p>There are <strong>{Math.min(this.props.locations.length, 3)} sites</strong> located within a <strong>5km</strong> radius of your location.</p>;
-        }
+      } else if (this.props.locations.length) {
+        intro = <p>These are the <strong>3 sites</strong> closest to you.<br/><strong>{this.props.locations[0].location}</strong> is <strong>{formatThousands(this.props.locations[0].distance / 1000, 0)}km</strong> from your position.</p>;
         content = this.renderNearby();
       }
     }
@@ -135,7 +124,7 @@ var NearbyLocations = React.createClass({
       <section className='fold' id='home-nearby'>
         <div className='inner'>
           <header className='fold__header'>
-            <h1 className='fold__title'>Nearby locations</h1>
+            <h1 className='fold__title'>Nearest locations</h1>
             <div className='fold__introduction prose prose--responsive'>
               {intro}
             </div>
