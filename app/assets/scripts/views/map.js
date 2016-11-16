@@ -24,6 +24,7 @@ var Map = React.createClass({
     _fetchLatestMeasurements: React.PropTypes.func,
 
     parameters: React.PropTypes.array,
+    sources: React.PropTypes.array,
 
     latestMeasurements: React.PropTypes.shape({
       fetching: React.PropTypes.bool,
@@ -127,6 +128,7 @@ var Map = React.createClass({
             center={[0, 0]}
             zoom={1}
             measurements={data.results}
+            sources={this.props.sources}
             parameter={activeParam} >
             {this.renderMapLegend()}
           </MapComponent>
@@ -141,6 +143,7 @@ var Map = React.createClass({
 
 function selector (state) {
   return {
+    sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
     latestMeasurements: state.latestMeasurements
   };
