@@ -51,7 +51,9 @@ var NearbyLocations = React.createClass({
   renderNearby: function () {
     return this.props.locations.map(o => {
       let countryData = _.find(this.props.countries, {code: o.country});
-      let sourceData = _.find(this.props.sources, {name: o.sourceName});
+      let sourcesData = o.sourceNames
+        .map(s => _.find(this.props.sources, {name: s}))
+        .filter(s => s);
       let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
       let openModal = () => this.props._openDownloadModal({
         country: o.country,
@@ -65,7 +67,7 @@ var NearbyLocations = React.createClass({
               name={o.location}
               city={o.city}
               countryData={countryData}
-              sourceData={sourceData}
+              sourcesData={sourcesData}
               totalMeasurements={o.count}
               parametersList={params}
               lastUpdate={o.lastUpdated}
