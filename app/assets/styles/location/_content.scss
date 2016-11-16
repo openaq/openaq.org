@@ -37,6 +37,11 @@
   .col-sec {
     @include col(8/12);
   }
+
+  .sources__list {
+    padding: 0;
+    list-style: none;
+  }
 }
 
 #location-stats {

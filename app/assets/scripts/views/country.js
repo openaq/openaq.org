@@ -121,7 +121,9 @@ var Country = React.createClass({
           <div className='card-group__contents'>
             {locations.map(o => {
               let countryData = _.find(this.props.countries, {code: o.country});
-              let sourceData = _.find(this.props.sources, {name: o.sourceName});
+              let sourcesData = o.sourceNames
+                .map(s => _.find(this.props.sources, {name: s}))
+                .filter(s => s);
               let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
               let openModal = () => this.props._openDownloadModal({
                 country: o.country,
@@ -134,7 +136,7 @@ var Country = React.createClass({
                       name={o.location}
                       city={o.city}
                       countryData={countryData}
-                      sourceData={sourceData}
+                      sourcesData={sourcesData}
                       totalMeasurements={o.count}
                       parametersList={params}
                       lastUpdate={o.lastUpdated}
@@ -184,6 +186,7 @@ var Country = React.createClass({
           zoom={1}
           measurements={results}
           parameter={_.find(this.props.parameters, {id: 'pm25'})}
+          sources={this.props.sources}
           disableScrollZoom >
             <div>
               <p>Showing most recent values for PM2.5</p>
