@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import config from '../config';
+import { sortBy } from 'lodash';
 import { formatThousands } from '../utils/format';
 import { openDownloadModal } from '../actions/action-creators';
 
@@ -21,7 +22,7 @@ var CountriesHub = React.createClass({
   },
 
   renderCountryList: function () {
-    return this.props.countries.map(o => (
+    return sortBy(this.props.countries, 'name').map(o => (
       <article className='card card--data-compact' key={o.code}>
         <div className='card__contents'>
           <header className='card__header'>
