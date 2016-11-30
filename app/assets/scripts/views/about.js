@@ -56,8 +56,8 @@ var About = React.createClass({
                 <div className='fold__body'>
                   <p>
 We aggregate physical air quality data from public data sources provided by government, research-grade and other sources. These awesome groups do the hard work of measuring these data and publicly sharing them, and our community makes them more universally-accessible to both humans and machines. Note: (1) We do not validate or transform the data from their originating sources. (2) Real-time data, by their nature, often have not undergone quality assurance or control processes by their originating sources. (3) Please contact originating sources for more detailed information not provided on this platform.</p>
+                <a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a>
                 </div>
-                <a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85#.m5njeuxu3' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
               </div>
             </div>
           </section>

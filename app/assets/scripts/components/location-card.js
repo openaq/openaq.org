@@ -15,7 +15,7 @@ var LocationCard = React.createClass({
     name: React.PropTypes.string,
     city: React.PropTypes.string,
     countryData: React.PropTypes.object,
-    sourceData: React.PropTypes.object,
+    sourcesData: React.PropTypes.array,
     totalMeasurements: React.PropTypes.number,
     parametersList: React.PropTypes.array,
     lastUpdate: React.PropTypes.string,
@@ -34,6 +34,17 @@ var LocationCard = React.createClass({
   render: function () {
     let updated = moment(this.props.lastUpdate).fromNow();
     let started = moment(this.props.collectionStart).format('YYYY/MM/DD');
+    let sourcesData = this.props.sourcesData;
+
+    let sources = [];
+    if (sourcesData.length) {
+      sourcesData.forEach((o, i) => {
+        sources.push(<a href={o.sourceURL} title={`View source for  ${this.props.name}`} key={o.name}>{o.name}</a>);
+        if (i < sourcesData.length - 1) {
+          sources.push(', ');
+        }
+      });
+    }
 
     return (
       <article className={c('card', {'card--data-compact': this.props.compact})}>
@@ -47,9 +58,7 @@ var LocationCard = React.createClass({
               <li>Collection Start: {started}</li>
               <li>Measurements: {formatThousands(this.props.totalMeasurements)}</li>
               <li>Values: {this.renderParameters()}</li>
-              {this.props.sourceData
-              ? <li>Source: <a href={this.props.sourceData.sourceURL} title={`View source for  ${this.props.name}`}>{this.props.sourceData.name}</a></li>
-              : null}
+              {sources.length ? <li>Source: {sources}</li> : null}
             </ul>
           </div>
           <footer className='card__footer'>

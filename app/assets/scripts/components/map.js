@@ -26,6 +26,7 @@ const MapComponent = React.createClass({
     bbox: React.PropTypes.array,
     zoom: React.PropTypes.number,
     disableScrollZoom: React.PropTypes.bool,
+    sources: React.PropTypes.array,
     children: React.PropTypes.object
   },
 
@@ -94,6 +95,7 @@ const MapComponent = React.createClass({
 
   showPopover: function (data) {
     let measurement = _.find(data.measurements, {parameter: this.props.parameter.id});
+    let sourceData = _.find(this.props.sources, {name: measurement.sourceName});
 
     // Find the nearby ones.
     let start = {
@@ -132,6 +134,7 @@ const MapComponent = React.createClass({
       location={data.location}
       measurement={measurement}
       parameter={this.props.parameter}
+      sourceData={sourceData}
       nearbyKm={this.nearbyKm}
       nearby={nearby}
       nearbyClick={this.nearbyLocationClick} />, popoverContent);
@@ -427,6 +430,7 @@ const MapPopover = React.createClass({
     location: React.PropTypes.string,
     measurement: React.PropTypes.object,
     parameter: React.PropTypes.object,
+    sourceData: React.PropTypes.object,
     nearbyKm: React.PropTypes.number,
     nearby: React.PropTypes.array,
     nearbyClick: React.PropTypes.func
@@ -473,6 +477,7 @@ const MapPopover = React.createClass({
           </header>
           <div className='popover__body'>
             {reading}
+            <p>Source: <a href={this.props.sourceData.sourceURL} title='View source information'>{this.props.sourceData.name}</a></p>
             <ul className='popover__actions'>
               { /*
                 Using `a` instead of `Link` because these are rendered outside

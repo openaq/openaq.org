@@ -11,12 +11,12 @@ export const unusedCircleRadius = {
 
 // Fill Radius for all station points w/ values
 export const coloredCircleRadius = {
-  'stops': [[0, 2], [5, 3], [7, 7]]
+  'stops': [[0, 2.5], [5, 3.5], [7, 7.5]]
 };
 
 // Border Radius for all points
 export const borderCircleRadius = {
-  'stops': [[0, 2.2], [5, 3.5], [7, 8.5], [9, 9]]
+  'stops': [[0, 2.7], [5, 4], [7, 9], [9, 9.5]]
 };
 
 // Border Radius for the white outline around selected points
