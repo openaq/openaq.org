@@ -234,7 +234,9 @@ var Location = React.createClass({
   },
 
   renderSourceInfo: function () {
-    let source = _.find(this.props.sources, {name: this.props.loc.data.sourceName});
+    let sources = this.props.loc.data.sourceNames
+      .map(o => _.find(this.props.sources, {name: o}))
+      .filter(o => o);
 
     return (
       <section className='fold fold--filled' id='location-source'>
@@ -243,15 +245,19 @@ var Location = React.createClass({
             <h1 className='fold__title'>Source information</h1>
           </header>
           <div className='fold__body'>
-            <div className='col-main'>
-              <p>Source: <a href={source.sourceURL} title='View source information'>{source.name}</a></p>
-            </div>
-            <div className='col-sec'>
-              {source.description
-                ? <p>{source.description}</p>
-                : null}
-              For more information contact <a href={`mailto:${source.contacts[0]}`}>{source.contacts[0]}</a>.
-            </div>
+            <ul className='sources__list'>
+              {sources.map(source => <li key={source.name}>
+                <div className='col-main'>
+                  <p>Source: <a href={source.sourceURL} title='View source information'>{source.name}</a></p>
+                </div>
+                <div className='col-sec'>
+                  {source.description
+                    ? <p>{source.description}</p>
+                    : null}
+                  For more information contact <a href={`mailto:${source.contacts[0]}`}>{source.contacts[0]}</a>.
+                </div>
+              </li>)}
+            </ul>
           </div>
         </div>
       </section>
@@ -292,6 +298,7 @@ var Location = React.createClass({
           highlightLoc={this.props.loc.data.location}
           measurements={locMeasurements}
           parameter={_.find(this.props.parameters, {id: 'pm25'})}
+          sources={this.props.sources}
           disableScrollZoom >
             <div>
               <p>Showing most recent values for PM2.5</p>

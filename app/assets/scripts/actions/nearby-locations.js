@@ -21,11 +21,11 @@ function receiveNearbyLocations (json, error = null) {
   };
 }
 
-export function fetchNearbyLocations (coords, radius = 5) {
+export function fetchNearbyLocations (coords) {
   return function (dispatch) {
     dispatch(requestNearbyLocations());
 
-    fetch(`${config.api}/locations?limit=3&radius=${radius * 1000}&coordinates=${coords.join(',')}`)
+    fetch(`${config.api}/locations?nearest=3&coordinates=${coords.join(',')}`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
