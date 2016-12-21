@@ -1550,6 +1550,16 @@ const countries = [
     ]
   },
   {
+    iso: 'NO',
+    name: 'Norway',
+    bbox: [
+      1.41,
+      53.29,
+      32.17,
+      71.47
+    ]
+  },
+  {
     iso: 'NU',
     name: 'Niue',
     bbox: [
