@@ -9,6 +9,7 @@ import * as measurements from './measurements';
 import * as nearbyLocations from './nearby-locations';
 import * as locationsByCountry from './locations-by-country';
 import * as downloadModal from './download-modal';
+import * as voteModal from './vote-modal';
 
 module.exports = Object.assign({},
   baseData,
@@ -21,5 +22,6 @@ module.exports = Object.assign({},
   measurements,
   nearbyLocations,
   locationsByCountry,
-  downloadModal
+  downloadModal,
+  voteModal
 );

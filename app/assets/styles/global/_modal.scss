@@ -8,7 +8,7 @@
   z-index: 1000000 !important;
 }
 
-#modal-download {
+#modal-download, #modal-vote {
   .modal__inner {
     width: 100%;
   }
@@ -25,4 +25,8 @@
   &:before {
     @extend %openaq-ds-icon-download;
   }
+}
+
+.button-modal-vote {
+  @extend .button, .button--primary;
 }
