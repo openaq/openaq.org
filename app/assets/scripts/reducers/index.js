@@ -11,6 +11,7 @@ import measurements from './measurements';
 import compare from './compare';
 import locationsByCountry from './locations-by-country';
 import downloadModal from './download-modal';
+import voteModal from './vote-modal';
 
 export default combineReducers({
   routing: routerReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
   latestMeasurements,
   compare,
   locationsByCountry,
-  downloadModal
+  downloadModal,
+  voteModal
 });

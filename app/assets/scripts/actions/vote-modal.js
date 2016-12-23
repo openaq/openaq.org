@@ -1,0 +1,11 @@
+import * as actions from './action-types';
+
+// ////////////////////////////////////////////////////////////////
+//                         VOTE MODAL                            //
+// ////////////////////////////////////////////////////////////////
+
+export function closeVoteModal () {
+  return {
+    type: actions.CLOSE_VOTE_MODAL
+  };
+}
