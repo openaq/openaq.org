@@ -26,7 +26,7 @@ var ModalVote = React.createClass({
 
         <ModalHeader>
           <div className='modal__headline'>
-            <h1 className='modal__title'>All we want for the Holidays is for you to vote!</h1>
+            <h1 className='modal__title'>The Open Science Prize Vote ends on Friday, Jan 6! Have you voted?</h1>
           </div>
         </ModalHeader>
         <ModalBody>
