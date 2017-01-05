@@ -9,6 +9,9 @@ var ShareBtn = React.createClass({
   },
 
   render: function () {
+
+    var encodedURI = encodeURIComponent(window.location.href);
+
     return (
       <Dropdown
         triggerElement='button'
@@ -17,8 +20,8 @@ var ShareBtn = React.createClass({
         triggerText='Share' >
 
         <ul role='menu' className='drop__menu drop__menu--select'>
-          <li><a className='drop__menu-item share-opt-twitter' href={`https://twitter.com/share?url=${window.location.href}`} target='_blank' title='Share on twitter' data-hook='dropdown:close'><span>Twitter</span></a></li>
-          <li><a className='drop__menu-item share-opt-facebook' href={`http://facebook.com/sharer.php?u=${window.location.href}`} target='_blank' title='Share on Facebook' data-hook='dropdown:close'><span>Facebook</span></a></li>
+          <li><a className='drop__menu-item share-opt-twitter' href={`https://twitter.com/share?url=${encodedURI}`} target='_blank' title='Share on twitter' data-hook='dropdown:close'><span>Twitter</span></a></li>
+          <li><a className='drop__menu-item share-opt-facebook' href={`http://facebook.com/sharer.php?u=${encodedURI}`} target='_blank' title='Share on Facebook' data-hook='dropdown:close'><span>Facebook</span></a></li>
         </ul>
       </Dropdown>
     );
