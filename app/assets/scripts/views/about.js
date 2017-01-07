@@ -27,7 +27,7 @@ var About = React.createClass({
             <div className='inner'>
               <div className='fold__media'>
                 <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.jpg)'}}>
-                  <img className='media__item' src='assets/graphics/content/about1.png' width='768' height='768' alt='About image 1' />
+                  <img className='media__item' src='assets/graphics/content/about1.jpg' width='768' height='768' alt='About image 1' />
                 </figure>
               </div>
               <div className='fold__copy'>
@@ -46,7 +46,7 @@ var About = React.createClass({
             <div className='inner'>
               <div className='fold__media'>
                 <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.jpg)'}}>
-                  <img className='media__item' src='assets/graphics/content/about2.png' width='768' height='768' alt='About image 2' />
+                  <img className='media__item' src='assets/graphics/content/about2.jpg' width='768' height='768' alt='About image 2' />
                 </figure>
               </div>
               <div className='fold__copy'>
