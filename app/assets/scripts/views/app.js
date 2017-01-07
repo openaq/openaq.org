@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import c from 'classnames';
 
-import { closeDownloadModal, closeVoteModal } from '../actions/action-creators';
+import { closeDownloadModal } from '../actions/action-creators';
 import PageHeader from '../components/page-header';
 import PageFooter from '../components/page-footer';
 import HeaderMessage from '../components/header-message';
 import ModalDownload from '../components/modal-download';
-import ModalVote from '../components/modal-vote';
 
 var App = React.createClass({
   displayName: 'App',
@@ -20,18 +19,12 @@ var App = React.createClass({
     baseDataError: React.PropTypes.string,
     measurements: React.PropTypes.number,
     downloadModal: React.PropTypes.object,
-    voteModal: React.PropTypes.object,
     _closeDownloadModal: React.PropTypes.func,
-    _closeVoteModal: React.PropTypes.func,
     children: React.PropTypes.object
   },
 
   onModalClose: function () {
     this.props._closeDownloadModal();
-  },
-
-  onVoteModalClose: function () {
-    this.props._closeVoteModal();
   },
 
   render: function () {
@@ -60,10 +53,6 @@ var App = React.createClass({
 
     return (
       <div className={c('page', pageClass)}>
-        {this.props.voteModal.open ? (
-          <ModalVote
-            onModalClose={this.onVoteModalClose} />
-        ) : null}
         <PageHeader routes={this.props.routes} />
         <main className='page__body' role='main'>
           {content}
@@ -91,15 +80,13 @@ function selector (state) {
 
     measurements: state.baseStats.data.measurements,
 
-    downloadModal: state.downloadModal,
-    voteModal: state.voteModal
+    downloadModal: state.downloadModal
   };
 }
 
 function dispatcher (dispatch) {
   return {
-    _closeDownloadModal: (...args) => dispatch(closeDownloadModal(...args)),
-    _closeVoteModal: (...args) => dispatch(closeVoteModal(...args))
+    _closeDownloadModal: (...args) => dispatch(closeDownloadModal(...args))
   };
 }
 
