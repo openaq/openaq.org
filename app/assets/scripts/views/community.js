@@ -16,7 +16,6 @@ var About = React.createClass({
     let cards = _(content.projects)
       .values()
       .sortBy('fileName')
-      .take(6)
       .map(o => {
         return (
           <CommunityCard
