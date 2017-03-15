@@ -5,5 +5,5 @@
 
 module.exports = {
   environment: 'staging',
-  api: 'https://api.openaq-staging.org/v1',
+  api: 'https://api.openaq-staging.org/v1'
 };

@@ -9,7 +9,6 @@ var ShareBtn = React.createClass({
   },
 
   render: function () {
-
     var encodedURI = encodeURIComponent(window.location.href);
 
     return (
