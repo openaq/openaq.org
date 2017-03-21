@@ -274,7 +274,7 @@ var Home = React.createClass({
           <header className='fold__header'>
             <h1 className='fold__title'>Join our community</h1>
             <div className='fold__introduction prose prose--responsive'>
-              <p>Learn how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
+              <p>Below is just one example of how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
             </div>
           </header>
           <div className='fold__body'>
