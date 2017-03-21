@@ -22,6 +22,8 @@ import LoadingMessage from '../components/loading-message';
 import ChartMeasurement from '../components/chart-measurement';
 import content from '../../content/content.json';
 
+const communityProject = _.shuffle(content.projects)[0];
+
 var Home = React.createClass({
   displayName: 'Home',
 
@@ -266,32 +268,24 @@ var Home = React.createClass({
   },
 
   renderCommunity: function () {
-    let cards = _.filter(content.projects, o => o.featured)
-      .map(o => {
-        return (
-          <CommunityCard
-            key={_.kebabCase(o.title)}
-            horizontal={true}
-            title={o.title}
-            linkTitle='View this community contribution'
-            url={o.url}
-            imageNode={<img width='256' height='256' src={o.image} alt='Project image' />} >
-            <div dangerouslySetInnerHTML={{__html: o.body}} />
-          </CommunityCard>
-        );
-      });
-
     return (
       <section className='fold' id='home-community'>
         <div className='inner'>
           <header className='fold__header'>
             <h1 className='fold__title'>Join our community</h1>
             <div className='fold__introduction prose prose--responsive'>
-              <p>Learn how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
+              <p>Below is just one example of how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
             </div>
           </header>
           <div className='fold__body'>
-            {cards}
+            <CommunityCard
+              horizontal={true}
+              title={communityProject.title}
+              linkTitle='View this community contribution'
+              url={communityProject.url}
+              imageNode={<img width='256' height='256' src={communityProject.image} alt='Project image' />} >
+              <div dangerouslySetInnerHTML={{__html: communityProject.body}} />
+            </CommunityCard>
           </div>
           <div className='fold__footer'>
             <Link to='/community' title='See community page' className='button button--large button--primary-bounded button--semi-fluid'>Get Involved</Link>
