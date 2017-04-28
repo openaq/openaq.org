@@ -4,5 +4,4 @@ url: http://www.cleanairjournal.org.za/download/caj_vol26_no2_2016_p08.pdf
 image: assets/graphics/content/projects/cleanair.jpg
 ---
 
-The OpenAQ Community Members came together to write a commentary in the Clean Air Journal: "To combat air inequality, governments and
-researchers must open their data."
+Twelve OpenAQ Community Members from 10 countries came together to write a commentary in the Clean Air Journal: "To combat air inequality, governments and researchers must open their data."
