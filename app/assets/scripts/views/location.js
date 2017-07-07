@@ -135,7 +135,7 @@ var Location = React.createClass({
       let toDate = moment.utc();
       let fromDate = toDate.clone().subtract(8, 'days');
       // this.props._fetchLatestMeasurements({city: loc.city, has_geo: 'true'});
-      if (this.props.loc.coordinates) {
+      if (loc.coordinates) {
         this.props._fetchLatestMeasurements({
           coordinates: `${loc.coordinates.latitude},${loc.coordinates.longitude}`,
           radius: 10 * 1000, // 10 Km
@@ -144,7 +144,7 @@ var Location = React.createClass({
       } else {
         this.props._fetchLatestMeasurements({
           location: loc.location
-        })
+        });
       }
       this.props._fetchMeasurements(loc.location, fromDate.toISOString(), toDate.toISOString());
     }
