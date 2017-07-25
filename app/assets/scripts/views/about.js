@@ -82,7 +82,8 @@ We aggregate physical air quality data from public data sources provided by gove
                   <li><a className='sponsors__item' target='_blank' href='https://www.hhmi.org/'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='http://www.echoinggreen.org/'><img src='assets/graphics/content/sponsors/echoing-green.jpeg' alt='View sponsor website'/></a></li>
                      <li><a className='sponsors__item' target='_blank' href='http://www.wri.org/'><img src='assets/graphics/content/sponsors/WRI.jpg' alt='View sponsor website'/></a></li>
-                </ul>
+                <li><a className='sponsors__item' target='_blank' href='https://www.paulhastings.com/'><img src='assets/graphics/content/sponsors/PH.jpg' alt='View sponsor website'/></a></li>
+                       </ul>
               </div>
             </div>
           </section>
