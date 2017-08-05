@@ -65,6 +65,8 @@ var About = React.createClass({
         </header>
         <div className='inpage__body'>
 
+          {this.renderProjects()}
+
           <section className='fold fold--media-bleed-left' id='community-connect'>
             <div className='inner'>
               <div className='fold__media'>
@@ -128,9 +130,6 @@ var About = React.createClass({
               </div>
             </div>
           </section>
-
-          {this.renderProjects()}
-
         </div>
       </section>
     );
