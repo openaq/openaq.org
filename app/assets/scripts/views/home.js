@@ -119,7 +119,7 @@ var Home = React.createClass({
             <h1 className='fold__title'>The data</h1>
             <div className='fold__introduction prose prose--responsive'>
               {!fetching
-                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small></p>)
+                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>License, Data Disclaimer and More Information</a></small></p>)
                 : <LoadingMessage />}
             </div>
           </header>
@@ -301,9 +301,9 @@ var Home = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
-              <h1 className='inpage__title'><em>Open, Real-time</em> Air Quality Data</h1>
+              <h1 className='inpage__title'><em>Fighting Air Inequality</em> With Open Data and Community</h1>
               <div className='inpage__introduction'>
-                <p>Our community aggregates and shares open air quality data from around the world. We believe open access to air quality data empowers the public to fight air inequality.</p>
+                <p>We fight air inequality through open data, open-source tools, and a global, grassroots community. Because data need a collaborative community for impact.</p>
                 <p><Link to='/about' className='button button--large button--base-bounded'>Learn More</Link></p>
               </div>
             </div>
