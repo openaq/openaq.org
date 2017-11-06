@@ -78,7 +78,7 @@ function selector (state) {
     baseDataReady: state.baseData.fetched && !state.baseData.fetching,
     baseDataError: state.baseData.error,
 
-    measurements: state.baseStats.data.measurements,
+    measurements: state.baseData.data.totalMeasurements,
 
     downloadModal: state.downloadModal
   };

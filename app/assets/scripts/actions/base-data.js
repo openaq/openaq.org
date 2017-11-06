@@ -32,7 +32,8 @@ export function fetchBaseData () {
     let data = {
       countries: [],
       sources: [],
-      parameters: []
+      parameters: [],
+      totalMeasurements: 0
     };
 
     // Data fetcher.
@@ -46,6 +47,15 @@ export function fetchBaseData () {
         })
         .then(json => {
           data[what] = json.results;
+
+          // Special case to grab all measurements
+          // from the /countries endpoint instead
+          // of using the more limited /measurements
+          if (what === 'countries') {
+            json.results.forEach((c) => {
+              data.totalMeasurements += c.count;
+            });
+          }
           // Check if we're done with the requests.
           if (complete === -1 || ++complete < 3) {
             return;

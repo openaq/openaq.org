@@ -7,7 +7,8 @@ const defaultState = {
   data: {
     countries: null,
     sources: null,
-    parameters: null
+    parameters: null,
+    totalMeasurements: null
   }
 };
 
@@ -28,6 +29,7 @@ export default function (state = defaultState, action) {
         state.data.countries = action.json.countries;
         state.data.sources = action.json.sources;
         state.data.parameters = action.json.parameters;
+        state.data.totalMeasurements = action.json.totalMeasurements;
       }
       state.fetching = false;
       state.fetched = true;
