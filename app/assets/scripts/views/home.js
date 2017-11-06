@@ -53,6 +53,7 @@ var Home = React.createClass({
     countries: React.PropTypes.array,
     sources: React.PropTypes.array,
     parameters: React.PropTypes.array,
+    totalMeasurements: React.PropTypes.number,
 
     compareLoc: React.PropTypes.array,
     compareMeasurements: React.PropTypes.array
@@ -69,7 +70,7 @@ var Home = React.createClass({
     // the future this should be dynamic.
     // Total pages come from this query.
     // https://api.openaq.org/v1/locations?parameter=pm25&limit=1
-    let totalPages = 1213;
+    let totalPages = 2780;
 
     this.props._fetchCompareLocationIfNeeded(0, null, {
       page: Math.floor(Math.random() * totalPages) + 1,
@@ -119,7 +120,7 @@ var Home = React.createClass({
             <h1 className='fold__title'>The data</h1>
             <div className='fold__introduction prose prose--responsive'>
               {!fetching
-                ? (<p>Our community has collected <strong>{formatThousands(data.measurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>License, Data Disclaimer and More Information</a></small></p>)
+                ? (<p>Our community has collected <strong>{formatThousands(data.totalMeasurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>License, Data Disclaimer and More Information</a></small></p>)
                 : <LoadingMessage />}
             </div>
           </header>
@@ -327,6 +328,7 @@ var Home = React.createClass({
             locations={this.props.locations}
             countries={this.props.countries}
             sources={this.props.sources}
+            totalMeasurements={this.props.totalMeasurements}
             parameters={this.props.parameters} />
 
           {this.renderCompareLocations()}
@@ -361,6 +363,7 @@ function selector (state) {
     countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
+    totalMeasurements: state.baseData.data.totalMeasurements,
 
     compareLoc: state.compare.locations,
     compareMeasurements: state.compare.measurements
