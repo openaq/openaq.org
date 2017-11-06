@@ -8,7 +8,7 @@ const defaultState = {
     countries: null,
     sources: null,
     locations: null,
-    measurements: null
+    totalMeasurements: null
   }
 };
 
@@ -25,6 +25,7 @@ export default function (state = defaultState, action) {
       // site is not even displayed.
       state.data.countries = action.json.countries.length;
       state.data.sources = action.json.sources.length;
+      state.data.totalMeasurements = action.json.totalMeasurements;
       break;
     case actions.REQUEST_BASE_STATS:
       console.log('REQUEST_BASE_STATS');
@@ -38,7 +39,6 @@ export default function (state = defaultState, action) {
       if (action.error) {
         state.error = action.error;
       } else {
-        state.data.measurements = action.json.measurements;
         state.data.locations = action.json.locations;
       }
       state.fetching = false;

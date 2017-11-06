@@ -26,12 +26,10 @@ function receiveBaseStats (json, error = null) {
 export function fetchBaseStats () {
   return function (dispatch) {
     dispatch(requestBaseStats());
-    // We have to make 2 separate request.
     // Keep track of what's finished.
     let complete = 0;
     let data = {
-      locations: null,
-      measurements: null
+      locations: null
       // We're also tracking countries and sources, but those are already
       // queried with the base data, there's no need for an additional one.
     };
@@ -47,10 +45,6 @@ export function fetchBaseStats () {
         })
         .then(json => {
           data[what] = json.meta.found;
-          // Check if we're done with the requests.
-          if (complete === -1 || ++complete < 2) {
-            return;
-          }
           dispatch(receiveBaseStats(data));
         }, e => {
           // Throw error only once.
@@ -64,6 +58,5 @@ export function fetchBaseStats () {
     };
 
     fetcher('locations');
-    fetcher('measurements');
   };
 }
