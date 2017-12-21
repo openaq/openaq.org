@@ -329,8 +329,7 @@ var ModalDownload = React.createClass({
         </ModalHeader>
         <ModalBody>
           <div className='prose'>
-            <p className='modal__description'>Customize the data you want to download. Currently, only the last 90 days is available from this form. <a href="https://openaq-fetches.s3.amazonaws.com/index.html" target="_blank">Realtime</a> and <a href="http://openaq-data.s3.amazonaws.com/index.html" target="_blank">daily</a> archives of all {formatThousands(measurementsCount)} are also avai
-. <a href="https://github.com/openaq/openaq-info/blob/master/FAQ.md#90days" target="_blank">More Info</a> </p>
+            <p className='modal__description'>Customize the data you want to download. Currently, only the last 90 days is available from this form. <a href="https://openaq-fetches.s3.amazonaws.com/index.html" target="_blank">Realtime</a> and <a href="http://openaq-data.s3.amazonaws.com/index.html" target="_blank">daily</a> archives of all {formatThousands(measurementsCount)} are also available. <a href="https://github.com/openaq/openaq-info/blob/master/FAQ.md#90days" target="_blank">More Info</a> </p>
 
             <form className='form form--download'>
               {this.renderLocationSelector()}
