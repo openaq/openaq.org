@@ -1,6 +1,6 @@
 ---
 title: "Future scenarios of ozone and PM2.5 over India"
-url: https://www.atmos-chem-phys-discuss.net/acp-2017-519/acp-2017-519.pdf
+url: https://www.atmos-chem-phys.net/18/103/2018/acp-18-103-2018.pdf
 image: assets/graphics/content/projects/pommier.jpg
 featured: true
 ---
