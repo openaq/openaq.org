@@ -72,7 +72,7 @@
     "marked": "^0.3.6",
     "node-bourbon": "^4.2.8",
     "node-notifier": "^4.6.0",
-    "node-sass": "^3.8.0",
+    "node-sass": "^3.13.1",
     "require-globify": "^1.4.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

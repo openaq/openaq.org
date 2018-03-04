@@ -294,7 +294,8 @@ const MapComponent = React.createClass({
         location: locMeasurement.location,
         // Controls which color is applied to the point.
         // Needs to be the points measurement.
-        value: val
+        value: val,
+        lastUpdated: param.lastUpdated
       },
       geometry: {
         type: 'Point',
@@ -306,10 +307,17 @@ const MapComponent = React.createClass({
     };
   },
 
+  // Make sure to sort at the end to account for situations where we have two different location
+  // names at the same lat/long. We want the most recent to show up on top.
   generateSourceData: function () {
     return {
       type: 'FeatureCollection',
-      features: this.props.measurements.map(o => this.generateFeature(o)).filter(o => o !== null)
+      features: this.props.measurements
+      .map(o => this.generateFeature(o))
+      .filter(o => o !== null)
+      .sort((a, b) => {
+        return new Date(a.properties.lastUpdated) - new Date(b.properties.lastUpdated);
+      })
     };
   },
 
