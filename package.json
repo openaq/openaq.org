@@ -17,8 +17,8 @@
   "homepage": "https://openaq.org",
   "scripts": {
     "postinstall": "[ -f app/assets/scripts/config/local.js ] || echo 'module.exports = {};' > app/assets/scripts/config/local.js",
-    "serve": "DS_ENV=development gulp serve",
-    "build": "NODE_ENV=production gulp",
+    "serve": "cross-env DS_ENV=development gulp serve",
+    "build": "cross-env NODE_ENV=production gulp",
     "lint": "eslint app/assets/scripts/ --ext .js",
     "test": "echo \"No tests\" && exit 0"
   },
@@ -44,6 +44,7 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.13.0",
     "browserify": "^13.0.1",
+    "cross-env": "^5.1.4",
     "del": "^2.2.1",
     "envify": "^3.4.1",
     "eslint": "^3.0.1",
