@@ -15,7 +15,7 @@ var About = React.createClass({
   renderProjects: function () {
     let cards = _(content.projects)
       .values()
-      .sortBy('fileName')
+      .shuffle()
       .map(o => {
         return (
           <CommunityCard
