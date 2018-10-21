@@ -368,9 +368,9 @@ const MapComponent = React.createClass({
   componentDidUpdate: function (prevProps) {
     if (this.props.parameter.id !== prevProps.parameter.id) {
       // We need to update. Delete source + layers and setup again.
-      this.map.getSource('measurements') && this.map.removeSource('measurements');
       this.map.getLayer('pointOutlines') && this.map.removeLayer('pointOutlines');
       this.map.getLayer('measurements') && this.map.removeLayer('measurements');
+      this.map.getSource('measurements') && this.map.removeSource('measurements');
       this.setupMapData();
     }
   },
