@@ -57,11 +57,6 @@ export function fetchBaseData () {
             });
           }
 
-          // Temporary fix for https://github.com/openaq/openaq-fetch/issues/533
-          if (what === 'sources') {
-            data[what] = data[what].flat();
-          }
-
           // Check if we're done with the requests.
           if (complete === -1 || ++complete < 3) {
             return;
