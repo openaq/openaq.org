@@ -33,7 +33,8 @@ export function fetchMeasurements (location, startDate, endDate) {
     // measurements since ever. This query takes care of that and then we start
     // the actual requests for measurements.
     let totalMeasurements = 0;
-    fetch(`${config.api}/measurements?location=${encodeURIComponent(location)}&limit=1`)
+    let attribution;
+    fetch(`${config.api}/measurements?location=${encodeURIComponent(location)}&include_fields=attribution&limit=1`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
@@ -42,6 +43,7 @@ export function fetchMeasurements (location, startDate, endDate) {
       })
       .then(json => {
         totalMeasurements = json.meta.found;
+        attribution = json.results.length > 0 ? json.results[0].attribution : null;
         fetcher(1);
       }, e => {
         console.log('e', e);
@@ -76,6 +78,7 @@ export function fetchMeasurements (location, startDate, endDate) {
             return fetcher(++page);
           } else {
             data.meta.totalMeasurements = totalMeasurements;
+            data.attribution = attribution;
             return dispatch(receiveMeasurements(data));
           }
         }, e => {
