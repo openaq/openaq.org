@@ -31,16 +31,23 @@
       margin-bottom: 0;
     }
   }
-  .col-main {
-    @include col(4/12);
-  }
-  .col-sec {
-    @include col(8/12);
-  }
+    @include media(medium-up) {
+    .col-main {
+      padding-right: 1rem;
+      padding-bottom: .5rem;
+      @include col(4/12);
+    }
+    .col-sec {
+      @include col(8/12);
+    }
+}
 
   .sources__list {
     padding: 0;
     list-style: none;
+    li{
+      margin-bottom: .3rem;
+    }
   }
 }
 
