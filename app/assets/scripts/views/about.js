@@ -69,6 +69,7 @@ We aggregate physical air quality data from public data sources provided by gove
               </header>
               <div className='fold__body'>
                 <ul className='sponsors__list'>
+                  <li><a className='sponsors__item' target='_blank' href='https://www.climateworks.org/'><img src='assets/graphics/content/sponsors/climateworks.jpg' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='https://developmentseed.org/'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='https://aws.amazon.com/'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='http://sites.agu.org/'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
