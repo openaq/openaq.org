@@ -72,6 +72,8 @@ We aggregate physical air quality data from public data sources provided by gove
                   <li><a className='sponsors__item' target='_blank' href='https://www.climateworks.org/'><img src='assets/graphics/content/sponsors/climateworks.jpg' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='https://developmentseed.org/'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='https://aws.amazon.com/'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='http://www.fz-juelich.de/portal/DE/Home/home_node.html/'><img src='assets/graphics/content/sponsors/fj.png' alt='View sponsor website'/></a></li>
+                  <li><a className='sponsors__item' target='_blank' href='https://erc.europa.eu/'><img src='assets/graphics/content/sponsors/erc.png' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='http://sites.agu.org/'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='http://earthjournalism.net/'><img src='assets/graphics/content/sponsors/ejn.png' alt='View sponsor website'/></a></li>
                   <li><a className='sponsors__item' target='_blank' href='https://www.internews.org/'><img src='assets/graphics/content/sponsors/internews.png' alt='View sponsor website'/></a></li>
