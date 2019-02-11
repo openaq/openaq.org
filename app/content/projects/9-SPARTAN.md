@@ -1,6 +1,6 @@
 ---
 title: "SPARTAN PM2.5 Data"
-url: http://spartan-network.weebly.com/
+url: https://www.spartan-network.org/
 image: assets/graphics/content/projects/spartan.jpg
 ---
 
