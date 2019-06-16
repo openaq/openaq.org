@@ -20,6 +20,7 @@ var SassString = require('node-sass').types.String;
 var notifier = require('node-notifier');
 var marked = require('marked');
 var OPENAQ_ADDONS = require('openaq-design-system/gulp-addons');
+var runSequence = require('run-sequence');
 
 // /////////////////////////////////////////////////////////////////////////////
 // --------------------------- Variables -------------------------------------//
@@ -58,29 +59,31 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('serve', ['vendorScripts', 'markdown', 'javascript', 'styles', 'fonts'], function () {
-  browserSync({
-    port: 3000,
-    server: {
-      baseDir: ['.tmp', 'app'],
-      routes: {
-        '/node_modules': './node_modules'
-      },
-      middleware: OPENAQ_ADDONS.graphicsMiddleware(fs)
-    }
+gulp.task('serve', function () {
+  runSequence('markdown', ['vendorScripts', 'javascript', 'styles', 'fonts'], function () {
+    browserSync({
+      port: 3000,
+      server: {
+        baseDir: ['.tmp', 'app'],
+        routes: {
+          '/node_modules': './node_modules'
+        },
+        middleware: OPENAQ_ADDONS.graphicsMiddleware(fs)
+      }
+    });
+
+    // watch for changes
+    gulp.watch([
+      'app/*.html',
+      'app/assets/graphics/**/*',
+      '.tmp/assets/fonts/**/*'
+    ]).on('change', reload);
+
+    gulp.watch('app/assets/styles/**/*.scss', ['styles']);
+    gulp.watch('app/assets/fonts/**/*', ['fonts']);
+    gulp.watch('app/content/**/*', ['markdown']);
+    gulp.watch('package.json', ['vendorScripts']);
   });
-
-  // watch for changes
-  gulp.watch([
-    'app/*.html',
-    'app/assets/graphics/**/*',
-    '.tmp/assets/fonts/**/*'
-  ]).on('change', reload);
-
-  gulp.watch('app/assets/styles/**/*.scss', ['styles']);
-  gulp.watch('app/assets/fonts/**/*', ['fonts']);
-  gulp.watch('app/content/**/*', ['markdown']);
-  gulp.watch('package.json', ['vendorScripts']);
 });
 
 gulp.task('clean', function () {
@@ -163,8 +166,8 @@ gulp.task('vendorScripts', function () {
 // --------------------------- Helper tasks -----------------------------------//
 // ----------------------------------------------------------------------------//
 
-gulp.task('build', ['vendorScripts', 'markdown', 'javascript'], function () {
-  gulp.start(['html', 'images', 'fonts', 'extras'], function () {
+gulp.task('build', function () {
+  runSequence('markdown', ['vendorScripts', 'javascript'], ['html', 'images', 'fonts', 'extras'], function () {
     return gulp.src('dist/**/*')
       .pipe($.size({title: 'build', gzip: true}))
       .pipe(exit());

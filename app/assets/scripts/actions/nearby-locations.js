@@ -25,7 +25,7 @@ export function fetchNearbyLocations (coords) {
   return function (dispatch) {
     dispatch(requestNearbyLocations());
 
-    fetch(`${config.api}/locations?nearest=3&coordinates=${coords.join(',')}`)
+    fetch(`${config.api}/locations?order_by=distance&radius=99999999&limit=3&coordinates=${coords.join(',')}`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
@@ -33,9 +33,6 @@ export function fetchNearbyLocations (coords) {
         return response.json();
       })
       .then(json => {
-        // setTimeout(() => {
-        //   dispatch(receiveNearbyLocations(json));
-        // }, 2000);
         dispatch(receiveNearbyLocations(json));
       }, e => {
         console.log('e', e);

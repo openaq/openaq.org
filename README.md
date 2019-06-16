@@ -1,17 +1,24 @@
 # OpenAQ
 
-OpenAQ is a community of scientists, software developers, and lovers of open environmental data. OpenAQ is building an open, real-time database that provides programmatic and historical access to air quality data.
+OpenAQ is a community of scientists, software developers and lovers of open environmental data. OpenAQ is building an open, real-time database that provides programmatic and historical access to air quality data.
 
 ## Development environment
-To set up the development environment for this website, you'll need to install the following on your system:
 
-- Node (v4.2.x) & Npm ([nvm](https://github.com/creationix/nvm) usage is advised)
+Requirements:
 
-> The versions mentioned are the ones used during development. It could work with newer ones.
+- [git](https://git-scm.com)
+- [nvm](https://github.com/creationix/nvm)
 
-After these basic requirements are met, run the following commands in the website's folder:
+Clone this repository locally and activate the required Node.js version:
+
 ```
-$ npm install
+nvm install
+```
+
+Install module dependencies:
+
+```
+npm install
 ```
 
 ### Getting started

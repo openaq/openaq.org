@@ -18,7 +18,7 @@
   "scripts": {
     "postinstall": "[ -f app/assets/scripts/config/local.js ] || echo 'module.exports = {};' > app/assets/scripts/config/local.js",
     "serve": "cross-env DS_ENV=development gulp serve",
-    "build": "cross-env NODE_ENV=production gulp",
+    "build": "cross-env DS_ENV=production NODE_ENV=production gulp",
     "lint": "eslint app/assets/scripts/ --ext .js",
     "test": "echo \"No tests\" && exit 0"
   },
@@ -70,11 +70,12 @@
     "gulp-useref": "^3.1.0",
     "gulp-util": "^3.0.7",
     "jeet": "6.1.4",
-    "marked": "^0.3.6",
+    "marked": "^0.6.2",
     "node-bourbon": "^4.2.8",
     "node-notifier": "^4.6.0",
     "node-sass": "^3.13.1",
     "require-globify": "^1.4.0",
+    "run-sequence": "^2.2.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
@@ -85,7 +86,7 @@
     "classnames": "^2.2.5",
     "d3": "^4.2.1",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.13.1",
+    "lodash": "^4.17.11",
     "mapbox-gl": "^0.50.0",
     "moment": "^2.14.1",
     "openaq-design-system": "git+https://github.com/openaq/openaq-design-system#v2.0.0",
@@ -101,7 +102,6 @@
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
-    "turf-distance": "^3.0.12",
-    "why-did-you-update": "0.0.8"
+    "turf-distance": "^3.0.12"
   }
 }
