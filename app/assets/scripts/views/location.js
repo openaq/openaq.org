@@ -285,7 +285,7 @@ var Location = React.createClass({
           break;
         }
         case 1: {
-          propertiesSec.push(<dt key={`${key}-${prop.title}`} style={{ marginBottom: 0 }}>{`${prop.title}`}</dt>);
+          propertiesSec.push(<dt key={`${key}-${prop.title}`} style={{ marginBottom: 0 }}>{prop.title}</dt>);
           propertiesSec.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
           break;
         }
