@@ -280,7 +280,7 @@ var Location = React.createClass({
 
       switch (sectionIndex) {
         case 0: {
-          propertiesMain.push(<dt key={`${key}-${prop.title}`}>{`${prop.title}`}</dt>);
+          propertiesMain.push(<dt key={`${key}-${prop.title}`}>{prop.title}</dt>);
           propertiesMain.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
           break;
         }
