@@ -280,12 +280,12 @@ var Location = React.createClass({
 
       switch (sectionIndex) {
         case 0: {
-          propertiesMain.push(<dt key={`${key}-${prop.title}`}>{prop.title}</dt>);
+          propertiesMain.push(<dt key={`${key}-${prop.title}`} className='metadata-detail-title'>{prop.title}</dt>);
           propertiesMain.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
           break;
         }
         case 1: {
-          propertiesSec.push(<dt key={`${key}-${prop.title}`} style={{ marginBottom: 0 }}>{prop.title}</dt>);
+          propertiesSec.push(<dt key={`${key}-${prop.title}`} className='metadata-detail-title'>{prop.title}</dt>);
           propertiesSec.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
           break;
         }
@@ -310,9 +310,9 @@ var Location = React.createClass({
           </div>
 
         </div>
-        <div className='inner' style={{ marginTop: 30 }}>
+        <div className='inner update-metadata-callout'>
           <p>
-            Have more information about this location? <a href={`${config.metadata}/location/${loc.data.id}`}>Update the metadata</a>
+            Have more information about this location? <a href={`${config.metadata}/location/${loc.data.id}`} title="Update the metadata">Update the metadata</a>
           </p>
         </div>
       </section>
@@ -358,7 +358,7 @@ var Location = React.createClass({
               sources[0] && (
                 <div className='col-sec'>
                   {sources[0].description ? <p>{sources[0].description}</p> : null}
-                  For more information contact <a href={`mailto:${sources[0].contacts[0]}`}>{sources[0].contacts[0]}</a>.
+                  For more information contact <a href={`mailto:${sources[0].contacts[0]}`} title={sources[0].contacts[0]}>{sources[0].contacts[0]}</a>.
                 </div>
               )
             }
