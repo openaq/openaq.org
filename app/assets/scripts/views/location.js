@@ -295,7 +295,7 @@ var Location = React.createClass({
     return (
       <section className='fold' id='location-stats'>
         <div className='inner'>
-          <header className=''>
+          <header>
             <h5 className='fold__title'>Metadata:</h5>
           </header>
           <div className='col-main'>
