@@ -53,7 +53,7 @@ render((
         <Route name='countriesHub' path='countries' component={CountriesHub} pageClass='page--countries' />
         <Route name='country' path='countries/:name' component={Country} pageClass='page--country' />
         <Route name='country' path='compare(/:loc1)(/:loc2)(/:loc3)' component={Compare} pageClass='page--compare' />
-        <IndexRoute component={Home} pageClass='page--homepage' />
+        <IndexRoute component={Home} pageClass='page--homepage page--dark' />
       </Route>
     </Router>
   </Provider>

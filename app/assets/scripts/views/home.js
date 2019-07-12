@@ -302,9 +302,9 @@ var Home = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
-              <h1 className='inpage__title'><em>Fighting Air Inequality</em> With Open Data and Community</h1>
+              <h1 className='inpage__title'>Fighting air inequality through open data and community.</h1>
               <div className='inpage__introduction'>
-                <p>We fight air inequality through open data, open-source tools, and a global, grassroots community. Because data need a collaborative community for impact.</p>
+                <p>OpenAQ is a non-profit organization on a mission to empower communities to clean their air by harmonizing, sharing, and using open air quality data from around the globe.</p>
                 <p><Link to='/about' className='button button--large button--base-bounded'>Learn More</Link></p>
               </div>
             </div>

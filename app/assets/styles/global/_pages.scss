@@ -96,15 +96,3 @@ html {
     margin-bottom: 0;
   }
 }
-
-
-/* Dark theme modifier
-   ========================================================================== */
-
-.page--dark {
-  .page__header {
-    @extend .antialiased;
-    color: #fff;
-    box-shadow: 0 2px 0 0 rgba(#fff, 0.08);
-  }
-}
