@@ -69,10 +69,12 @@ var PageHeader = React.createClass({
       <header className='page__header' role='banner'>
         <div className='inner'>
           <div className='page__headline'>
-            <h1 className='page__title'><a href='/' title='Visit homepage'>
-              <img src='/assets/graphics/layout/logo.svg' alt='OpenAQ logotype' height='48' />
-              <span>OpenAQ</span>
-            </a></h1>
+            <h1 className='page__title'>
+              <a href='/' title='Visit homepage'>
+                <img src='assets/graphics/layout/oaq-logo-col-pos.svg' alt='OpenAQ logotype' width='72' height='40' />
+                <span>OpenAQ</span>
+              </a>
+            </h1>
           </div>
           <nav className='page__prime-nav'>
             <h2 className='page__prime-nav-title'><a href='#nav-block-browse' onClick={this.offcanvasMenuClick}><span>Menu</span></a></h2>
