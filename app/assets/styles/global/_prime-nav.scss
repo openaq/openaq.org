@@ -190,7 +190,7 @@
 
   @include media(large-up) {
     margin: 0;
-    padding: ($global-spacing * 1.5) 0;
+    padding: $global-spacing 0;
 
     .browse-menu--sub & {
       padding: ($global-spacing / 2) 0;

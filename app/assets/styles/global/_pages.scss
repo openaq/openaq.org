@@ -30,13 +30,18 @@ html {
 
 .page__header {
   position: relative;
-  z-index: 100000;
-  background: transparent;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  background: #fff;
   color: $base-font-color;
-  box-shadow: 0 2px 0 0 $base-semi-alpha-color;
+  padding: $global-spacing 0;
+  box-shadow: 0 4px 16px 0 $base-semi-alpha-color;
+  min-height: 5rem;
 
   > .inner {
-    @extend .clearfix, .row, .row--centered;
+    @extend .row, .row--centered;
+    flex: 1;
   }
 }
 
