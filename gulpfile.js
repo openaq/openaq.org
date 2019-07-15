@@ -3,7 +3,16 @@
 var fs = require('fs');
 var path = require('path');
 var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+const $ = require('gulp-load-plugins')({
+  rename: {
+    'gulp-uglify-es': 'uglify'
+  },
+  postRequireTransforms: {
+    'uglify': function (uglify) {
+      return uglify.default;
+    }
+  }
+});
 var del = require('del');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;

@@ -7,6 +7,7 @@ import c from 'classnames';
 import { Link, hashHistory } from 'react-router';
 import * as d3 from 'd3';
 import { Dropdown } from 'openaq-design-system';
+import { schemas } from 'openaq-data-format';
 
 import config from '../config';
 import { formatThousands } from '../utils/format';
@@ -24,6 +25,8 @@ import LoadingMessage from '../components/loading-message';
 import MapComponent from '../components/map';
 import ShareBtn from '../components/share-btn';
 import ChartMeasurement from '../components/chart-measurement';
+
+const locationSchema = schemas.location;
 
 var Location = React.createClass({
   displayName: 'Location',
@@ -239,6 +242,83 @@ var Location = React.createClass({
     );
   },
 
+  renderMetadata: function () {
+    const { loc, loc: { data: { metadata } } } = this.props;
+
+    const exclude = [
+      'id',
+      'coordinates',
+      'city',
+      'country',
+      'instruments',
+      'parameters',
+      'attribution'
+    ];
+
+    const allProperties = Object.keys(locationSchema.properties)
+      .filter((key) => {
+        return !exclude.includes(key) && metadata[key];
+      });
+
+    const propertiesMain = [];
+    const propertiesSec = [];
+    const length = Math.ceil(allProperties.length / 2);
+
+    allProperties.forEach((key, i) => {
+      const prop = locationSchema.properties[key];
+      prop.key = key;
+      let val = metadata[prop.key];
+
+      if (prop.format && prop.format === 'date-time') {
+        val = moment.utc(val).format('YYYY/MM/DD');
+      }
+      if (prop.type && prop.type === 'boolean') {
+        val = val ? 'Yes' : 'No';
+      }
+
+      const sectionIndex = Math.floor(i / length);
+
+      switch (sectionIndex) {
+        case 0: {
+          propertiesMain.push(<dt key={`${key}-${prop.title}`} className='metadata-detail-title'>{prop.title}</dt>);
+          propertiesMain.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
+          break;
+        }
+        case 1: {
+          propertiesSec.push(<dt key={`${key}-${prop.title}`} className='metadata-detail-title'>{prop.title}</dt>);
+          propertiesSec.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
+          break;
+        }
+      }
+    });
+
+    return (
+      <section className='fold' id='location-stats'>
+        <div className='inner'>
+          <header>
+            <h5 className='fold__title'>Metadata:</h5>
+          </header>
+          <div className='col-main'>
+            <dl>
+              {propertiesMain}
+            </dl>
+          </div>
+          <div className='col-sec'>
+            <dl>
+              {propertiesSec}
+            </dl>
+          </div>
+
+        </div>
+        <div className='inner update-metadata-callout'>
+          <p>
+            Have more information about this location? <a href={`${config.metadata}/location/${loc.data.id}`} title="Update the metadata">Update the metadata</a>
+          </p>
+        </div>
+      </section>
+    );
+  },
+
   renderSourceInfo: function () {
     const {data} = this.props.measurements;
 
@@ -274,10 +354,14 @@ var Location = React.createClass({
               )}
             </ul>
             </div>
-            <div className='col-sec'>
-              {sources[0].description ? <p>{sources[0].description}</p> : null}
-              For more information contact <a href={`mailto:${sources[0].contacts[0]}`}>{sources[0].contacts[0]}</a>.
-            </div>
+            {
+              sources[0] && (
+                <div className='col-sec'>
+                  {sources[0].description ? <p>{sources[0].description}</p> : null}
+                  For more information contact <a href={`mailto:${sources[0].contacts[0]}`} title={sources[0].contacts[0]}>{sources[0].contacts[0]}</a>.
+                </div>
+              )
+            }
           </div>
         </div>
       </section>
@@ -285,10 +369,13 @@ var Location = React.createClass({
   },
 
   renderNearbyLoc: function () {
+    const { countryData } = this.props;
     let {fetched, fetching, error, data: {results: locMeasurements}} = this.props.latestMeasurements;
     if (!fetched && !fetching) {
       return null;
     }
+
+    const country = countryData || {};
 
     let intro = null;
     let content = null;
@@ -335,9 +422,9 @@ var Location = React.createClass({
       }
 
       if (locMeasurements.length === 1) {
-        intro = <p>There are no other locations in {this.props.loc.data.city}, {this.props.countryData.name}. {addIntro ? <br/> : null}{addIntro}</p>;
+        intro = <p>There are no other locations in {this.props.loc.data.city}, {country.name}. {addIntro ? <br/> : null}{addIntro}</p>;
       } else {
-        intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{this.props.countryData.name}</strong>.
+        intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{country.name}</strong>.
           {addIntro ? <br/> : null}{addIntro}</p>;
       }
     }
@@ -488,10 +575,13 @@ var Location = React.createClass({
   },
 
   render: function () {
+    const { countryData } = this.props;
     let {fetched, fetching, error, data} = this.props.loc;
     if (!fetched && !fetching) {
       return null;
     }
+
+    const country = countryData || {};
 
     if (fetching) {
       return (
@@ -516,7 +606,7 @@ var Location = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
-              <h1 className='inpage__title'>{data.location} <small>in {data.city}, {this.props.countryData.name}</small></h1>
+              <h1 className='inpage__title'>{data.location} <small>in {data.city}, {country.name}</small></h1>
               <div className='inpage__headline-actions'>
                 <ShareBtn />
               </div>
@@ -532,6 +622,7 @@ var Location = React.createClass({
         </header>
         <div className='inpage__body'>
           {this.renderStatsInfo()}
+          {this.renderMetadata()}
           {this.renderSourceInfo()}
           {this.renderValuesBreakdown()}
           {this.renderNearbyLoc()}

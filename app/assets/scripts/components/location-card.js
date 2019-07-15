@@ -32,6 +32,7 @@ var LocationCard = React.createClass({
   },
 
   render: function () {
+    const { countryData } = this.props;
     let updated = moment(this.props.lastUpdate).fromNow();
     let started = moment(this.props.collectionStart).format('YYYY/MM/DD');
     let sourcesData = this.props.sourcesData;
@@ -46,12 +47,14 @@ var LocationCard = React.createClass({
       });
     }
 
+    const country = countryData || {};
+
     return (
       <article className={c('card', {'card--data-compact': this.props.compact})}>
         <div className='card__contents'>
           <header className='card__header'>
             <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
-            <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {this.props.countryData.name}</small></h1>
+            <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
           </header>
           <div className='card__body'>
             <ul className='card__meta-details'>
