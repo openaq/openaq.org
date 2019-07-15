@@ -95,7 +95,6 @@ $page-header-y: $global-spacing * 5;
   }
 
   &__introduction {
-    color: rgba($base-font-color, 0.64);
     font-size: 1rem;
     line-height: 1.75rem;
     margin-bottom: 1rem;
@@ -162,6 +161,10 @@ $page-header-y: $global-spacing * 5;
     @extend .antialiased;
     background-color: $primary-color;
     color: #fff;
+  }
+
+  .inpage__title {
+    color: inherit;
   }
 
   .inpage__subtitle {

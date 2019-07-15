@@ -312,6 +312,23 @@ var Home = React.createClass({
         </header>
         <div className='inpage__body'>
 
+          <section className='fold fold--type-a'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__subtitle'>What we do</h1>
+                <h2 className='fold__title'>Harmonizing air quality data</h2>
+              </header>
+              <div className='fold__body prose prose--responsive'>
+                <p>Our community harmonizes disparate air quality data from across the world so that various people and organizations can do more with the data, build open-source tools around them, and engage with one another. All of this is so people don't have to reinvent the same data access-, tool-, and community-wheels and can instead get down to fighting "air inequality" more efficiently.</p>
+              </div>
+              <div className='fold__media'>
+                <figure>
+                  <img src='https://via.placeholder.com/150' />
+                </figure>
+              </div>
+            </div>
+          </section>
+
           {this.renderStatsCount()}
 
           <NearbyLocations
