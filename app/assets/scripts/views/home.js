@@ -323,7 +323,7 @@ var Home = React.createClass({
               </div>
               <div className='fold__media'>
                 <figure>
-                  <img src='https://via.placeholder.com/150' />
+                  <img src='https://via.placeholder.com/960' />
                 </figure>
               </div>
             </div>

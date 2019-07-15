@@ -21,12 +21,17 @@
     }
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   @include media(medium-up) {
-    padding: ($global-spacing * 3) 0;
+    padding: ($global-spacing * 4) 0;
   }
 
   @include media(large-up) {
-    padding: ($global-spacing * 4) 0;
+    padding: ($global-spacing * 8) 0;
   }
 }
 
@@ -64,15 +69,15 @@
 }
 
 .fold__header {
-  margin-bottom: $global-spacing;
+  // margin-bottom: $global-spacing;
 
   > *:last-child {
     margin-bottom: 0;
   }
 
-  @include media(medium-up) {
-    margin-bottom: ($global-spacing * 1.5)
-  }
+  // @include media(medium-up) {
+  //   margin-bottom: ($global-spacing * 1.5)
+  // }
 }
 
 .fold__introduction {
@@ -115,6 +120,12 @@
   background: transparent url('assets/graphics/layout/oaq-icon-illu-40-swirl.svg') no-repeat left center;
   padding: 0 0 0 3.25rem;
   margin-bottom: 1.5rem;
+}
+
+.fold__media {
+  figure {
+    margin: 0;
+  }
 }
 
 
@@ -250,5 +261,29 @@
 
   .media:before {
     background: rgba($base-color, 0.56);
+  }
+}
+
+
+.fold--type-a {
+  > .inner {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 2rem;
+    grid-template-rows: auto;
+    grid-template-areas: 'sec sec sec sec sec sec . main main main main main';
+    align-items: center;
+  }
+
+  .fold__media {
+    grid-area: 1 / sec / last-line / sec;
+  }
+
+  .fold__header {
+    grid-area: main;
+  }
+
+  .fold__body {
+    grid-area: 2 / main;
   }
 }
