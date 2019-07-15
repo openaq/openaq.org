@@ -89,7 +89,7 @@
     "lodash": "^4.17.11",
     "mapbox-gl": "^0.50.0",
     "moment": "^2.14.1",
-    "openaq-data-format": "github:openaq/openaq-data-format#e3bda716006e1f69c82b8b1e98e5614688f4718e",
+    "openaq-data-format": "github:openaq/openaq-data-format#master",
     "openaq-design-system": "git+https://github.com/openaq/openaq-design-system#v2.0.0",
     "qs": "^6.2.1",
     "react": "^15.2.1",
