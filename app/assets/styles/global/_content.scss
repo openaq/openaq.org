@@ -3,6 +3,24 @@
    ========================================================================== */
 
 
+.go-link {
+  font-size: 1rem;
+  line-height: 1.25rem;
+
+  &,
+  * {
+    display: inline-flex;
+  }
+
+  &::after {
+    @extend %openaq-ds-icon-oaq-32-arrow-right;
+    font-size: 2rem;
+    line-height: inherit;
+    margin-left: 0.375rem;
+    transform: translate(0, 0.05em);
+  }
+}
+
 /* Special button for inpage header
    ========================================================================== */
 
@@ -32,13 +50,13 @@
 .share-opt-facebook {
   &::before {
     margin-right: 0.5rem;
-    @extend %openaq-ds-icon-facebook;
+    @extend %openaq-ds-icon-brand-facebook;
   }
 }
 .share-opt-twitter {
   &::before {
     margin-right: 0.5rem;
-    @extend %openaq-ds-icon-twitter;
+    @extend %openaq-ds-icon-brand-twitter;
   }
 }
 

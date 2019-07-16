@@ -82,7 +82,7 @@
   margin-bottom: 0.5rem;
 
   &::after {
-    @extend %openaq-ds-icon-sm-xmark;
+    @extend %openaq-ds-icon-xmark--small;
   }
 }
 

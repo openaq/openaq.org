@@ -45,13 +45,13 @@
   }
 
   .contact-button-gh::before {
-    @extend %openaq-ds-icon-github;
+    @extend %openaq-ds-icon-brand-github;
   }
   .contact-button-slack::before {
-    @extend %openaq-ds-icon-slack;
+    @extend %openaq-ds-icon-brand-slack;
   }
   .contact-button-twitter::before {
-    @extend %openaq-ds-icon-twitter;
+    @extend %openaq-ds-icon-brand-twitter;
   }
   .contact-button-mail::before {
     @extend %openaq-ds-icon-envelope;
@@ -84,7 +84,7 @@
     margin-top: 2rem;
   }
   .heart::before {
-    @extend %openaq-ds-icon-heart-full;
+    @extend %openaq-ds-icon-heart;
     opacity: 0.8;
     vertical-align: middle;
   }
