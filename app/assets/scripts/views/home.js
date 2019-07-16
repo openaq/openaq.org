@@ -130,7 +130,16 @@ var Home = React.createClass({
           </header>
           <div className='fold__media'>
             {!fetching
-              ? (<p>Our community has collected <strong>{formatThousands(data.totalMeasurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>License, Data Disclaimer and More Information</a></small></p>)
+              ? (<dl className='od-stats'>
+                  <dt>Air quality measurements</dt>
+                  <dd><span>{formatThousands(data.totalMeasurements)}</span></dd>
+                  <dt>Data sources</dt>
+                  <dd><span>{formatThousands(data.sources)}</span></dd>
+                  <dt>Locations</dt>
+                  <dd><span>{formatThousands(data.locations)}</span></dd>
+                  <dt>Countries</dt>
+                  <dd><span>{formatThousands(data.countries)}</span></dd>
+                </dl>)
               : <LoadingMessage />}
           </div>
         </div>

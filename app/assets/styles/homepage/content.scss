@@ -144,3 +144,33 @@
 .od-quick-menu__compare-link::before {
   @extend %openaq-ds-icon-oaq-32-circle-scale;
 }
+
+.od-stats {
+  @extend .prose, .prose--responsive;
+
+  dt {
+    font-size: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+    color: inherit;
+  }
+
+  dd {
+    font-size: 4rem;
+    line-height: 1;
+    font-weight: $base-font-bold;
+    font-feature-settings: normal;
+  }
+
+  span {
+    display: inline-flex;
+    background-image: linear-gradient($secondary-color, $secondary-color);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size:100% 0.75rem;
+  }
+
+  > * {
+    margin: 0;
+  }
+}
