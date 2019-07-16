@@ -16,6 +16,10 @@
 
   > .inner {
     @extend .constrainer;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 2rem;
+    grid-template-rows: auto;
   }
 
   > .inner,
@@ -32,6 +36,7 @@
   @extend .heading;
   font-size: 1.75rem;
   line-height: 2.25rem;
+  margin-bottom: 1.5rem;
 
   @include media(medium-up) {
     font-size: 2.25rem;
@@ -75,12 +80,18 @@
   background: tint($base-color, 96%);
 }
 
+.fold--dark {
+  @extend .antialiased;
+  background: $primary-color;
+  color: #fff;
+
+  .fold__title {
+    color: inherit;
+  }
+}
+
 .fold--type-a {
   > .inner {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 2rem;
-    grid-template-rows: auto;
     align-items: center;
   }
 
@@ -104,6 +115,35 @@
     @include media(medium-up) {
       grid-row: 1;
       grid-column: 1 / span 6;
+    }
+  }
+}
+
+.fold--type-b {
+  > .inner {
+    align-items: center;
+  }
+
+  .fold__header {
+    grid-row: 1;
+    grid-column: 1 / span 12;
+
+    @include media(medium-up) {
+      grid-column: 1 / span 6;
+    }
+
+    @include media(large-up) {
+      grid-column: 1 / span 5;
+    }
+  }
+
+  .fold__media {
+    grid-row: 2;
+    grid-column: 1 / span 12;
+
+    @include media(medium-up) {
+      grid-row: 1;
+      grid-column: 7 / span 6;
     }
   }
 }

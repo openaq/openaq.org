@@ -93,3 +93,54 @@
     }
   }
 }
+
+
+/* Fold: Open Data
+   ========================================================================== */
+
+#home-fold-open-data {
+
+}
+
+.od-quick-menu {
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-gap: 1rem 2rem;
+  list-style: none;
+  padding: 0;
+
+  @include media(medium-up) {
+    grid-gap: 1.5rem 2rem;
+  }
+
+  a {
+    display: flex;
+    flex-wrap: nowrap;
+    color: inherit;
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: $base-font-bold;
+    white-space: nowrap;
+
+    &::before {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+  }
+}
+
+.od-quick-menu__locations-link::before {
+  @extend %openaq-ds-icon-oaq-32-circle-marker;
+}
+
+.od-quick-menu__api-link::before {
+  @extend %openaq-ds-icon-oaq-32-circle-cog;
+}
+
+.od-quick-menu__countries-link::before {
+  @extend %openaq-ds-icon-oaq-32-circle-flag;
+}
+
+.od-quick-menu__compare-link::before {
+  @extend %openaq-ds-icon-oaq-32-circle-scale;
+}

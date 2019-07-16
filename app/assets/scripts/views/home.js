@@ -114,16 +114,25 @@ var Home = React.createClass({
     }
 
     return (
-      <section className='fold fold--filled' id='home-stats'>
+      <section className='fold fold--dark fold--type-b' id='home-fold-open-data'>
         <div className='inner'>
           <header className='fold__header'>
-            <h1 className='fold__title'>The data</h1>
-            <div className='fold__introduction prose prose--responsive'>
-              {!fetching
-                ? (<p>Our community has collected <strong>{formatThousands(data.totalMeasurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>License, Data Disclaimer and More Information</a></small></p>)
-                : <LoadingMessage />}
+            <h1 className='fold__title'>Open Data</h1>
+            <div className='fold__teaser prose prose--responsive'>
+              <p>The data is captured from multiple sources and available for anyone to access through our open-source platform.</p>
+              <ol className='od-quick-menu'>
+                <li><a href='#' title='View page' className='od-quick-menu__locations-link'>Location view</a></li>
+                <li><a href='#' title='View page' className='od-quick-menu__api-link'>API</a></li>
+                <li><a href='#' title='View page' className='od-quick-menu__countries-link'>Country view</a></li>
+                <li><a href='#' title='View page' className='od-quick-menu__compare-link'>Compare data</a></li>
+              </ol>
             </div>
           </header>
+          <div className='fold__media'>
+            {!fetching
+              ? (<p>Our community has collected <strong>{formatThousands(data.totalMeasurements)}</strong> air quality measurements from <strong>{formatThousands(data.locations)}</strong> locations in <strong>{formatThousands(data.countries)}</strong> countries. Data are aggregated from <strong>{formatThousands(data.sources)}</strong> government level and research-grade sources. <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>License, Data Disclaimer and More Information</a></small></p>)
+              : <LoadingMessage />}
+          </div>
         </div>
       </section>
     );
