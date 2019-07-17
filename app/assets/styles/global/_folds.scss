@@ -25,7 +25,8 @@
   > .inner,
   .fold__header,
   .fold__body,
-  .fold__teaser {
+  .fold__teaser,
+  .fold__media {
     > *:last-child {
       margin-bottom: 0;
     }
