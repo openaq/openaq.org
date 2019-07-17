@@ -156,10 +156,12 @@
   }
 
   dd {
-    font-size: 4rem;
+    font-family: $heading-font-family;
+    font-size: 4.5rem;
     line-height: 1;
-    font-weight: $base-font-bold;
+    font-weight: $heading-font-bold;
     font-feature-settings: normal;
+    text-transform: uppercase;
   }
 
   span {
