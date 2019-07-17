@@ -7,7 +7,9 @@ import c from 'classnames';
 import _ from 'lodash';
 import * as d3 from 'd3';
 
-import { formatThousands } from '../utils/format';
+import {
+  formatThousands,
+  shortenLargeNumber } from '../utils/format';
 import { geolocateUser,
   fetchNearbyLocations,
   fetchCompareLocationIfNeeded,
@@ -132,13 +134,13 @@ var Home = React.createClass({
             {!fetching
               ? (<dl className='od-stats'>
                   <dt>Air quality measurements</dt>
-                  <dd><span>{formatThousands(data.totalMeasurements)}</span></dd>
+                  <dd><span>{shortenLargeNumber(data.totalMeasurements, 0)}</span></dd>
                   <dt>Data sources</dt>
-                  <dd><span>{formatThousands(data.sources)}</span></dd>
+                  <dd><span>{shortenLargeNumber(data.sources, 0)}</span></dd>
                   <dt>Locations</dt>
-                  <dd><span>{formatThousands(data.locations)}</span></dd>
+                  <dd><span>{shortenLargeNumber(data.locations, 0)}</span></dd>
                   <dt>Countries</dt>
-                  <dd><span>{formatThousands(data.countries)}</span></dd>
+                  <dd><span>{shortenLargeNumber(data.countries, 0)}</span></dd>
                 </dl>)
               : <LoadingMessage />}
           </div>
