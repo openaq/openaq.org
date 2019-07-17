@@ -350,6 +350,34 @@ var Home = React.createClass({
 
           {this.renderStatsCount()}
 
+          <section className='fold fold--type-a' id='home-community-fold'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__subtitle'>Community</h1>
+                <h2 className='fold__title'>Our community creates collective impact</h2>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>Improving global air quality requires diverse activities across many sectors and geographies. Our worldwide community leverages open data, tools, and one another for impact.</p>
+                  <ol className='community-details'>
+                    <li>Apps</li>
+                    <li>Browsers</li>
+                    <li>Modeling/Forecasting</li>
+                    <li>Products</li>
+                    <li>Data Platforms</li>
+                    <li>News/Journal Articles</li>
+                    <li>Workshops</li>
+                    <li>Maps</li>
+                  </ol>
+                  <p><a href='#' title='Learn more' className='go-link'><span>Learn more</span></a></p>
+                </div>
+              </header>
+              <div className='fold__media'>
+                <figure>
+                  <img src='https://via.placeholder.com/960' width='960' height='960' alt='Imag placeholder' />
+                </figure>
+              </div>
+            </div>
+          </section>
+
           <NearbyLocations
             _geolocateUser={this.props._geolocateUser}
             _fetchNearbyLocations={this.props._fetchNearbyLocations}

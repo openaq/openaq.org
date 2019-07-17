@@ -174,3 +174,28 @@
     margin: 0;
   }
 }
+
+/* Fold: Community
+   ========================================================================== */
+
+#home-fold-community {
+
+}
+
+.community-details {
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-gap: 0 2rem;
+  list-style: none;
+  padding: 0;
+
+  > * {
+    display: flex;
+    flex-flow: row nowrap;
+
+    &::before {
+      content: '—';
+      margin-right: 0.5rem;
+    }
+  }
+}
