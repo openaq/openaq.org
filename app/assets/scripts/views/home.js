@@ -3,28 +3,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import moment from 'moment';
-import c from 'classnames';
-import _ from 'lodash';
-import * as d3 from 'd3';
 
-import {
-  formatThousands,
-  shortenLargeNumber } from '../utils/format';
+import { shortenLargeNumber } from '../utils/format';
 import { geolocateUser,
   fetchNearbyLocations,
   fetchCompareLocationIfNeeded,
   fetchCompareLocationMeasurements,
   invalidateCompare,
   openDownloadModal } from '../actions/action-creators';
-import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
-import NearbyLocations from '../components/nearby-locations';
-import CommunityCard from '../components/community-card';
-import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
-import ChartMeasurement from '../components/chart-measurement';
-import content from '../../content/content.json';
-
-const communityProject = _.shuffle(content.projects)[0];
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -149,173 +136,6 @@ var Home = React.createClass({
     );
   },
 
-  renderCompareChart: function () {
-    // All the times are local and shouldn't be converted to UTC.
-    // The values should be compared at the same time local to ensure an
-    // accurate comparison.
-    let userNow = moment().format('YYYY/MM/DD HH:mm:ss');
-    let weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
-
-    const filterFn = (o) => {
-      if (o.parameter !== 'pm25') {
-        return false;
-      }
-      if (o.value < 0) return false;
-      let localDate = moment.parseZone(o.date.local).format('YYYY/MM/DD HH:mm:ss');
-      return localDate >= weekAgo && localDate <= userNow;
-    };
-
-    // Prepare data.
-    let chartData = _(this.props.compareMeasurements)
-      .filter(o => o.fetched && !o.fetching && o.data)
-      .map(o => {
-        return _.cloneDeep(o.data.results)
-          .filter(filterFn)
-          .map(o => {
-            o.value = convertParamIfNeeded(o);
-            // Disregard timezone on local date.
-            let dt = o.date.local.match(/^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/)[0];
-            // `measurement` local date converted directly to user local.
-            // We have to use moment instead of new Date() because the behavior
-            // is not consistent across browsers.
-            // Firefox interprets the string as being in the current timezone
-            // while chrome interprets it as being utc. So:
-            // Date: 2016-08-25T14:00:00
-            // Firefox result: Thu Aug 25 2016 14:00:00 GMT-0400 (EDT)
-            // Chrome result: Thu Aug 25 2016 10:00:00 GMT-0400 (EDT)
-            o.date.localNoTZ = moment(dt).toDate();
-            return o;
-          });
-      })
-      .value();
-
-    let yMax = d3.max(chartData || [], r => d3.max(r, o => o.value)) || 0;
-
-    // 1 Week.
-    let xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
-
-    // Only show the "no results" message if stuff has loaded
-    let fetchedMeasurements = this.props.compareMeasurements.filter(o => o.fetched && !o.fetching);
-    if (fetchedMeasurements.length) {
-      let dataCount = chartData.reduce((prev, curr) => prev + curr.length, 0);
-
-      if (!dataCount) {
-        return (
-          <InfoMessage>
-            <p>There are no data for the selected parameter</p>
-            <p>Maybe you'd like to suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a>.</p>
-          </InfoMessage>
-        );
-      }
-    }
-
-    return (
-      <ChartMeasurement
-        className='home-compare-chart'
-        data={chartData}
-        xRange={xRange}
-        yRange={[0, yMax]}
-        yLabel={parameterUnit['pm25']} />
-    );
-  },
-
-  renderCompareLocations: function () {
-    let [l1, l2] = this.props.compareLoc;
-    let [m1, m2] = this.props.compareMeasurements;
-    let body = null;
-
-    // Wait until something is actually fetching.
-    if (!l1.fetched && !l2.fetched &&
-      !m1.fetched && !m2.fetched) {
-      return null;
-    }
-
-    // Anything loading?
-    if (l1.fetching || l2.fething ||
-      m1.fetching || m2.fething) {
-      body = (
-        <div className='fold__body'>
-          <LoadingMessage />
-        </div>
-      );
-    } else {
-      body = (
-        <div className='fold__body'>
-          <div className='col-main'>
-            <ul className='compare__location-list'>
-              {[l1, l2].map((o, i) => {
-                if (!o.fetched) return null;
-
-                let d = o.data;
-                let updated = moment(d.lastUpdated).fromNow();
-                let countryData = _.find(this.props.countries, {code: d.country});
-                let kl = ['compare-marker--st', 'compare-marker--nd'];
-
-                return (
-                  <li className='compare__location' key={d.location} >
-                    <p className='compare__subtitle'>Updated {updated}</p>
-                    <h2 className='compare__title'><Link to={`/location/${encodeURIComponent(d.location)}`}><span className={c('compare-marker', kl[i])}>{d.location}</span></Link> <small>in {d.city}, {countryData.name}</small></h2>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className='col-sec'>
-            <p className='chart-description'>PM2.5 values over last week</p>
-            <div>{this.renderCompareChart()}</div>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <section className='fold fold--filled' id='home-compare'>
-        <div className='inner'>
-          <header className='fold__header'>
-            <h1 className='fold__title'>Compare locations</h1>
-            <div className='fold__introduction prose prose--responsive'>
-              <p>See how air quality compares between 2 random locations</p>
-            </div>
-          </header>
-          {body}
-          <div className='fold__footer'>
-          {l1.data && l2.data
-          ? <Link to={`/compare/${encodeURIComponent(l1.data.location)}/${encodeURIComponent(l2.data.location)}`} title='View Locations' className='button button--large button--primary-bounded button--semi-fluid'>Compare Other Locations</Link>
-          : null}
-          </div>
-        </div>
-      </section>
-    );
-  },
-
-  renderCommunity: function () {
-    return (
-      <section className='fold' id='home-community'>
-        <div className='inner'>
-          <header className='fold__header'>
-            <h1 className='fold__title'>Join our community</h1>
-            <div className='fold__introduction prose prose--responsive'>
-              <p>Below is just one example of how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
-            </div>
-          </header>
-          <div className='fold__body'>
-            <CommunityCard
-              horizontal={true}
-              title={communityProject.title}
-              linkTitle='View this community contribution'
-              url={communityProject.url}
-              imageNode={<img width='256' height='256' src={communityProject.image} alt='Project image' />} >
-              <div dangerouslySetInnerHTML={{__html: communityProject.body}} />
-            </CommunityCard>
-          </div>
-          <div className='fold__footer'>
-            <Link to='/community' title='See community page' className='button button--large button--primary-bounded button--semi-fluid'>Get Involved</Link>
-          </div>
-        </div>
-      </section>
-    );
-  },
-
   render: function () {
     return (
       <section className='inpage'>
@@ -344,7 +164,7 @@ var Home = React.createClass({
               </header>
               <div className='fold__media'>
                 <figure>
-                  <img src='https://via.placeholder.com/960' width='960' height='960' alt='Imag placeholder' />
+                  <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
                 </figure>
               </div>
             </div>
@@ -374,32 +194,63 @@ var Home = React.createClass({
               </header>
               <div className='fold__media'>
                 <figure>
-                  <img src='https://via.placeholder.com/960' width='960' height='960' alt='Imag placeholder' />
+                  <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
                 </figure>
               </div>
             </div>
           </section>
 
-          <NearbyLocations
-            _geolocateUser={this.props._geolocateUser}
-            _fetchNearbyLocations={this.props._fetchNearbyLocations}
-            _openDownloadModal={this.props._openDownloadModal}
-            geolocationRequesting={this.props.geolocationRequesting}
-            geolocationRequested={this.props.geolocationRequested}
-            geolocationCoords={this.props.geolocationCoords}
-            geolocationError={this.props.geolocationError}
-            locFetching={this.props.locFetching}
-            locFetched={this.props.locFetched}
-            locError={this.props.locError}
-            locations={this.props.locations}
-            countries={this.props.countries}
-            sources={this.props.sources}
-            totalMeasurements={this.props.totalMeasurements}
-            parameters={this.props.parameters} />
-
-          {this.renderCompareLocations()}
-
-          {this.renderCommunity()}
+          <section className='fold fold--semi-light fold--type-b' id='home-partners-fold'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__subtitle'>Partners and sponsors</h1>
+                <h2 className='fold__title'>Together making a difference</h2>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>Our non-profit work is made possible through the support of a variety of organizations.</p>
+                </div>
+              </header>
+              <div className='fold__media'>
+                <ol className='hpf-sponsors-list'>
+                  <li>
+                    <a href='#' title='Visit partner'>
+                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
+                      <span>Partner name</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href='#' title='Visit partner'>
+                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
+                      <span>Partner name</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href='#' title='Visit partner'>
+                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
+                      <span>Partner name</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href='#' title='Visit partner'>
+                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
+                      <span>Partner name</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href='#' title='Visit partner'>
+                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
+                      <span>Partner name</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href='#' title='Visit partner'>
+                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
+                      <span>Partner name</span>
+                    </a>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </section>
 
         </div>
       </section>

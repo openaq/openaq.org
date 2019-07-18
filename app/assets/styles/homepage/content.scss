@@ -258,3 +258,43 @@
     }
   }
 }
+
+
+/* Fold: Partners
+   ========================================================================== */
+
+#home-fold-partners{
+
+}
+
+.hpf-sponsors-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-content: center;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    @extend .visually-hidden;
+  }
+
+  img {
+    display: inline-flex;
+    width: auto;
+    max-width: 100%;
+    max-height: 3rem;
+  }
+
+  /* Compensate DevSeed logo proportions and alignment */
+  .logo-devseed img {
+    max-height: 2rem;
+  }
+}
