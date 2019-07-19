@@ -252,6 +252,30 @@ var Home = React.createClass({
             </div>
           </section>
 
+          <section className='testimonials'>
+            <div className='inner'>
+              <h1 className='testimonials__title'>Testimonials</h1>
+              <ol className='testimonials-list'>
+                <li>
+                  <blockquote className='testimonial'>
+                    <div className='testimonial__media'>
+                      <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
+                    </div>
+                    <div className='testimonial__copy'>
+                      <div className='testimonial__quote'>
+                        <p>OpenAQ is the Wikipedia of Air Quality.</p>
+                      </div>
+                      <footer className='testimonial__footer'>
+                        <strong>Ian Schuler</strong>
+                        <small>CEO/Development Seed / Washington, DC USA</small>
+                      </footer>
+                    </div>
+                  </blockquote>
+                </li>
+              </ol>
+            </div>
+          </section>
+
         </div>
       </section>
     );
