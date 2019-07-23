@@ -71,7 +71,7 @@ var PageHeader = React.createClass({
           <div className='page__headline'>
             <h1 className='page__title'>
               <a href='/' title='Visit homepage'>
-                <img src='assets/graphics/layout/oaq-logo-col-pos.svg' alt='OpenAQ logotype' width='72' height='40' />
+                <img src='/assets/graphics/layout/oaq-logo-col-pos.svg' alt='OpenAQ logotype' width='72' height='40' />
                 <span>OpenAQ</span>
               </a>
             </h1>
