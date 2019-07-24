@@ -11,15 +11,6 @@ $page-header-y: $global-spacing * 5;
     padding: ($global-spacing * 8) 0;
     background-color: #fff;
 
-    > * {
-      position: relative;
-      z-index: 2;
-    }
-
-    > .inner {
-      @extend .row, .row--centered;
-    }
-
     @include media(medium-up) {
       padding: ($global-spacing * 10) 0;
     }
@@ -27,21 +18,27 @@ $page-header-y: $global-spacing * 5;
     @include media(large-up) {
       padding: ($global-spacing * 12) 0;
     }
+
+    > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    > .inner {
+      @extend .constrainer;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: 2rem;
+      grid-template-rows: auto;
+    }
   }
 
   &__headline {
-    @include column(12/12);
-
-    > *:last-child {
-      margin-bottom: 0;
-    }
-
-    @include media(medium-up) {
-      @include column(10/12);
-    }
+    grid-row: 1;
+    grid-column: 1 / span 12;
 
     @include media(large-up) {
-      @include column(8/12);
+      grid-column: 1 / span 6;
     }
   }
 
@@ -51,10 +48,12 @@ $page-header-y: $global-spacing * 5;
       padding: 0;
       list-style: none;
       overflow: hidden;
+
       li {
         float: left;
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
+
         @include media(medium-up) {
           margin-bottom: 0;
         }
@@ -66,6 +65,7 @@ $page-header-y: $global-spacing * 5;
     @extend .heading;
     font-size: 2rem;
     line-height: 2.5rem;
+    margin-bottom: 1.5rem;
 
     @include media(medium-up) {
       font-size: 2.5rem;
@@ -97,16 +97,14 @@ $page-header-y: $global-spacing * 5;
   &__introduction {
     font-size: 1rem;
     line-height: 1.75rem;
-    margin-bottom: 1rem;
-    clear: both;
-    > *:last-child {
-      margin-bottom: 0;
-    }
 
     @include media(medium-up) {
-      max-width: 8/12*100%;
       font-size: 1.25rem;
       line-height: 2rem;
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
     }
   }
 
