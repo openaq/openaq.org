@@ -61,6 +61,12 @@
       height: auto;
     }
   }
+
+  .block__teaser {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 
@@ -380,9 +386,9 @@
     width: 100%;
     max-width: 22rem;
 
-    @include media(large-up) {
-      min-height: 20rem;
+    @include media(medium-up) {
       flex-direction: column;
+      min-height: 20rem;
       flex: 1;
     }
   }
@@ -423,6 +429,15 @@
   flex: 1;
 }
 
+.join-card__title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+
+  @include media(medium-up) {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+}
 
 .join-card__main-action {
   margin-top: auto;
