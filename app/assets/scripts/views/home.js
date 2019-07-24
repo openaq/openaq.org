@@ -110,11 +110,15 @@ var Home = React.createClass({
             <div className='fold__teaser prose prose--responsive'>
               <p>The data is captured from multiple sources and available for anyone to access through our open-source platform.</p>
               <ol className='od-quick-menu'>
-                <li><a href='#' title='View page' className='od-quick-menu__locations-link'>Location view</a></li>
-                <li><a href='#' title='View page' className='od-quick-menu__api-link'>API</a></li>
-                <li><a href='#' title='View page' className='od-quick-menu__countries-link'>Country view</a></li>
-                <li><a href='#' title='View page' className='od-quick-menu__compare-link'>Compare data</a></li>
+                <li><Link to='#' title='View page' className='od-quick-menu__locations-link'>Location view</Link></li>
+                <li><Link to='#' title='View page' className='od-quick-menu__api-link'>API</Link></li>
+                <li><Link to='#' title='View page' className='od-quick-menu__countries-link'>Country view</Link></li>
+                <li><Link to='#' title='View page' className='od-quick-menu__compare-link'>Compare data</Link></li>
               </ol>
+              <p className='fold__main-action'>
+                <Link to='#' className='button button--large button--primary-ghost button--capsule' title='View page'><span>See open data</span></Link>
+                <Link to='#' className='button button--large button--white-bounded button--capsule' title='View page'><span>Use API</span></Link>
+              </p>
             </div>
           </header>
           <div className='fold__media'>
@@ -145,7 +149,6 @@ var Home = React.createClass({
               <h1 className='inpage__title'>Fighting air inequality through open data and community.</h1>
               <div className='inpage__introduction'>
                 <p>OpenAQ is a non-profit organization on a mission to empower communities to clean their air by harmonizing, sharing, and using open air quality data from around the globe.</p>
-                <p><Link to='/about' className='button button--large button--base-bounded'>Learn More</Link></p>
               </div>
             </div>
           </div>
@@ -161,7 +164,7 @@ var Home = React.createClass({
                 <figure>
                   <img src='/assets/graphics/layout/oaq-illu-home-stats.svg' width='408' height='80' alt='Illustration' />
                 </figure>
-                <p><a href='#' title='Learn more' className='go-link'><span>Learn more about this problem</span></a></p>
+                <p><Link to='#' title='Learn more' className='go-link'><span>Learn more about this problem</span></Link></p>
               </div>
             </header>
           </div>
@@ -174,7 +177,7 @@ var Home = React.createClass({
                 <h2 className='fold__title'>Harmonizing air quality data</h2>
                 <div className='fold__teaser prose prose--responsive'>
                   <p>Our community harmonizes disparate air quality data from across the world so that various people and organizations can do more with the data, build open-source tools around them, and engage with one another. All of this is so people don't have to reinvent the same data access-, tool-, and community-wheels and can instead get down to fighting "air inequality" more efficiently.</p>
-                  <p><a href='#' title='Learn more' className='go-link'><span>Learn more</span></a></p>
+                  <p><Link to='#' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
               <div className='fold__media'>
@@ -204,7 +207,7 @@ var Home = React.createClass({
                     <li>Workshops</li>
                     <li>Maps</li>
                   </ol>
-                  <p><a href='#' title='Learn more' className='go-link'><span>Learn more</span></a></p>
+                  <p><Link to='#' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
               <div className='fold__media'>
@@ -308,7 +311,9 @@ var Home = React.createClass({
                     <div className='join-card__copy'>
                       <h1 className='join-card__title'>Participate</h1>
                       <p>Be a data source, a consumer or a platform builder.</p>
-                      <p className='join-card__action'><a href='#' className='join-card__go-link' title='View more'>Participate<span></span></a></p>
+                      <p className='join-card__main-action'>
+                        <Link to='#' className='join-card__go-link' title='View more'><span>Participate</span></Link>
+                      </p>
                     </div>
                   </div>
                 </article>
@@ -323,7 +328,9 @@ var Home = React.createClass({
                     <div className='join-card__copy'>
                       <h1 className='join-card__title'>Support our mission</h1>
                       <p>Be a financial partner to help fight air inequality.</p>
-                      <p className='join-card__action'><a href='#' className='join-card__go-link' title='View more'>Support<span></span></a></p>
+                      <p className='join-card__main-action'>
+                        <Link to='#' className='join-card__go-link' title='View more'><span>Support</span></Link>
+                      </p>
                     </div>
                   </div>
                 </article>

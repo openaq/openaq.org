@@ -424,6 +424,12 @@
 }
 
 
-.join-card__action {
+.join-card__main-action {
   margin-top: auto;
+}
+
+.join-card__go-link {
+  @extend .button, .button--primary, .button--large, .button--capsule;
+  width: 100%;
+  max-width: 10rem;
 }
