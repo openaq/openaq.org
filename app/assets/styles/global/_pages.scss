@@ -40,7 +40,7 @@ html {
   min-height: 5rem;
 
   > .inner {
-    @extend .row, .row--centered;
+    @extend .constrainer;
     flex: 1;
   }
 }
@@ -83,16 +83,235 @@ html {
    ========================================================================== */
 
 .page__footer {
-  // background: tint($base-color, 92%);
-  padding: 2rem 0;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  padding: ($global-spacing * 3) 0;
 
-  > .inner {
-    @extend .row, .row--centered;
+  @include media(medium-up) {
+    padding: ($global-spacing * 4) 0;
   }
 
-  *:last-child {
-    margin-bottom: 0;
+  > .inner {
+    @extend .constrainer;
+  }
+}
+
+.page__foot-title {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  font-weight: $base-font-bold;
+  text-transform: uppercase;
+  margin: 0 0 2rem 0;
+
+  a {
+    display: inline-block;
+    vertical-align: top;
+    color: inherit;
+
+    span {
+      @extend .visually-hidden;
+    }
+  }
+}
+
+.page__foot-nav {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 2rem;
+  grid-template-rows: auto;
+  margin: 0 0 2rem 0;
+
+  @include media(medium-up) {
+    margin-bottom: 3rem;
+  }
+
+  @include media(large-up) {
+    margin-bottom: 4rem;
+  }
+}
+
+.foot-nav-block {
+  h2 {
+    font-weight: $heading-font-bold;
+    font-size: 0.875rem;
+    line-height: 1rem;
+  }
+}
+
+.foot-nav-block:nth-child(1) {
+  grid-row: 1;
+  grid-column: 1 / span 12;
+
+  @include media(large-up) {
+    grid-column: 1 / span 4;
+  }
+
+  h2 {
+    @extend .visually-hidden;
+  }
+}
+
+.foot-nav-block:nth-child(2) {
+  grid-row: 2;
+  grid-column: 1 / span 6;
+
+  @include media(medium-up) {
+    grid-row: 2;
+    grid-column: 1 / span 3;
+  }
+
+  @include media(large-up) {
+    grid-row: 1;
+    grid-column: 5 / span 2;
+  }
+}
+
+.foot-nav-block:nth-child(3) {
+  grid-row: 2;
+  grid-column: 7 / span 6;
+
+  @include media(medium-up) {
+    grid-column: 4 / span 3;
+  }
+
+  @include media(large-up) {
+    grid-row: 1;
+    grid-column: 7 / span 2;
+  }
+}
+
+.foot-nav-block:nth-child(4) {
+  grid-row: 3;
+  grid-column: 1 / span 6;
+
+  @include media(medium-up) {
+    grid-row: 2;
+    grid-column: 7 / span 3;
+  }
+
+  @include media(large-up) {
+    grid-row: 1;
+    grid-column: 9/ span 2;
+  }
+}
+
+.foot-nav-block:nth-child(5) {
+  grid-row: 3;
+  grid-column: 7 / span 6;
+
+  @include media(medium-up) {
+    grid-row: 2;
+    grid-column: 10 / span 3;
+  }
+
+  @include media(large-up) {
+    grid-row: 1;
+    grid-column: 11 / span 2;
+  }
+}
+
+.connect-menu {
+  display: flex;
+  flex-flow: row nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  > * {
+    margin-right: 1rem;
+  }
+
+  > *:first-child {
+    margin-left: -0.5rem;
+  }
+
+  a {
+    @extend .button, .button--base-unbounded, .button--capsule, .button--text-hidden;
+
+    &::before {
+      font-size: 1.25rem;
+      opacity: 0.48;
+    }
+  }
+}
+
+.connect-menu__link--github::before {
+  @extend %openaq-ds-icon-brand-github;
+}
+
+.connect-menu__link--slack::before {
+  @extend %openaq-ds-icon-brand-slack;
+}
+
+.connect-menu__link--twitter::before {
+  @extend %openaq-ds-icon-brand-twitter;
+}
+
+.connect-menu__link--email::before {
+  @extend %openaq-ds-icon-envelope;
+}
+
+.foot-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  a,
+  a:visited {
+    color: rgba($base-color, 0.56);
+  }
+}
+
+.foot-info {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 2rem;
+  grid-template-rows: auto;
+  color: rgba($base-color, 0.56);
+}
+
+.foot-newsletter {
+  grid-row: 1;
+  grid-column: 1 / span 12;
+
+
+  @include media(large-up) {
+    grid-column: 7 / span 6;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  h2 {
+    font-weight: $heading-font-bold;
+    font-size: 0.875rem;
+    line-height: 1rem;
+
+    @include media(large-up) {
+      margin: 0 1rem 0 0;
+      line-height: 2rem;
+    }
+  }
+
+  form {
+    flex: 1;
+  }
+
+  .button--subscribe {
+    @extend .button, .button--primary, .button--text-hidden, .button--medium;
+
+    &::before {
+      @extend %openaq-ds-icon-arrow-right;
+    }
+  }
+}
+
+.foot-copyright {
+  grid-row: 2;
+  grid-column: 1 / span 12;
+  font-size: 0.875rem;
+  margin: 0;
+
+  @include media(large-up) {
+    grid-row: 1;
+    grid-column: 1 / span 6;
+    padding-top: 0.375rem;
   }
 }

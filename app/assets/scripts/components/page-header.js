@@ -70,10 +70,10 @@ var PageHeader = React.createClass({
         <div className='inner'>
           <div className='page__headline'>
             <h1 className='page__title'>
-              <a href='/' title='Visit homepage'>
+              <IndexLink to='/' title='Visit homepage'>
                 <img src='/assets/graphics/layout/oaq-logo-col-pos.svg' alt='OpenAQ logotype' width='72' height='40' />
                 <span>OpenAQ</span>
-              </a>
+              </IndexLink>
             </h1>
           </div>
           <nav className='page__prime-nav'>
