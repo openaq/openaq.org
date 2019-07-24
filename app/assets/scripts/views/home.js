@@ -151,6 +151,28 @@ var Home = React.createClass({
                 <p>OpenAQ is a non-profit organization on a mission to empower communities to clean their air by harmonizing, sharing, and using open air quality data from around the globe.</p>
               </div>
             </div>
+            <div className='home-rand-meas'>
+              <h2>Here's how two random locations compare</h2>
+              <article className='meas-card'>
+                <div className='inner'>
+                  <h1>Station ID1</h1>
+                  <dl>
+                    <dt>Term</dt>
+                    <dd>Value</dd>
+                  </dl>
+                </div>
+              </article>
+
+              <article className='meas-card'>
+                <div className='inner'>
+                  <h1>Station ID1</h1>
+                  <dl>
+                    <dt>Term</dt>
+                    <dd>Value</dd>
+                  </dl>
+                </div>
+              </article>
+            </div>
           </div>
         </header>
         <div className='inpage__body'>

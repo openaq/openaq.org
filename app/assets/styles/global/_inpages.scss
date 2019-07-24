@@ -30,6 +30,7 @@ $page-header-y: $global-spacing * 5;
       grid-template-columns: repeat(12, 1fr);
       grid-gap: 2rem;
       grid-template-rows: auto;
+      align-items: center;
     }
   }
 
