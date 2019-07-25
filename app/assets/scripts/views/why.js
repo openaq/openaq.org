@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import JoinFold from '../components/join-fold';
 
 var Why = React.createClass({
   displayName: 'Why open air quality?',
@@ -29,6 +30,8 @@ var Why = React.createClass({
         <div className='inpage__body'>
 
           <p>Content goes here.</p>
+
+          <JoinFold />
 
         </div>
       </section>
