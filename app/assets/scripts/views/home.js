@@ -154,23 +154,35 @@ var Home = React.createClass({
             <div className='home-rand-meas'>
               <h2>Here's how two random locations compare</h2>
               <article className='meas-card'>
-                <div className='inner'>
-                  <h1>Station ID1</h1>
-                  <dl>
-                    <dt>Term</dt>
-                    <dd>Value</dd>
+                <a href='#' className='inner' title='View more'>
+                  <h1 className='meas-card__title'>Station ID1</h1>
+                  <dl className='meas-card__details'>
+                    <dt>Measurements</dt>
+                    <dd>PM2.5</dd>
+                    <dd><strong>6</strong> <sub>µg/m3</sub></dd>
+                    <dt>Location</dt>
+                    <dd>Kahului-Wailuku<span>, </span><small>United States</small></dd>
                   </dl>
-                </div>
+                  <figure className='meas-card__chart'>
+                    <img src='https://via.placeholder.com/512x256' width='512' height='256' alt='Chart placeholder' />
+                  </figure>
+                </a>
               </article>
 
               <article className='meas-card'>
-                <div className='inner'>
-                  <h1>Station ID1</h1>
-                  <dl>
-                    <dt>Term</dt>
-                    <dd>Value</dd>
+                <a href='#' className='inner' title='View more'>
+                  <h1 className='meas-card__title'>Station ID1</h1>
+                  <dl className='meas-card__details'>
+                    <dt>Measurements</dt>
+                    <dd>PM2.5</dd>
+                    <dd><strong>75</strong> <sub>µg/m3</sub></dd>
+                    <dt>Location</dt>
+                    <dd>Kahului-Wailuku<span>, </span><small>United States</small></dd>
                   </dl>
-                </div>
+                  <figure className='meas-card__chart'>
+                    <img src='https://via.placeholder.com/512x256' width='512' height='256' alt='Chart placeholder' />
+                  </figure>
+                </a>
               </article>
             </div>
           </div>
