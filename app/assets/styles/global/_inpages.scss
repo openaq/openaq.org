@@ -10,6 +10,10 @@ $page-header-y: $global-spacing * 5;
     color: $base-font-color;
     padding: ($global-spacing * 8) 0;
     background-color: #fff;
+    display: flex;
+
+    /* Animation */
+    transition: all 0.16s ease 0s;
 
     @include media(medium-up) {
       padding: ($global-spacing * 10) 0;
@@ -30,7 +34,22 @@ $page-header-y: $global-spacing * 5;
       grid-template-columns: repeat(12, 1fr);
       grid-gap: 2rem;
       grid-template-rows: auto;
-      align-items: center;
+    }
+
+    &--jumbo {
+      min-height: calc(100vh - 4rem);
+      justify-content: flex-start;
+
+      @include media(large-up) {
+        min-height: 44rem;
+        justify-content: center;
+      }
+
+      > .inner {
+        @include media(large-up) {
+          align-items: center;
+        }
+      }
     }
   }
 
@@ -148,6 +167,60 @@ $page-header-y: $global-spacing * 5;
 
   > .inner > *:last-child {
     margin-bottom: 0;
+  }
+}
+
+
+/* Inpage media
+   ========================================================================== */
+
+.inpage__media--cover,
+.inpage__media--cover .media__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  margin: 0;
+}
+
+.inpage__media--cover .media__item {
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    content: '';
+  }
+
+  img {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.inpage__media--cover {
+  figcaption {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    z-index: 5;
+
+    @include media(small-up) {
+      right: 1.5rem;
+      bottom: 1rem;
+    }
+
+    @include media(medium-up) {
+      right: 1.5rem;
+      bottom: 1.5rem;
+    }
   }
 }
 

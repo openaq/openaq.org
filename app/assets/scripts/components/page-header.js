@@ -81,7 +81,7 @@ var PageHeader = React.createClass({
             <div className='nav-block' id='nav-block-browse'>
               <ul className='browse-menu'>
                 <li><IndexLink to='/' title='Go to OpenAQ homepage' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Home</span></IndexLink></li>
-
+                <li><Link to='/why' title='View page' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>Why open air quality?</span></Link></li>
                 <li className={c('sub-nav-block-wrapper', {'sub-revealed': this.state.dataMenu})} ref='navData'>
                   <a href='#' title='Show data sections' className={c('browse-menu__item', {'browse-menu__item--active': activeData})} onClick={this.dataMenuClick}><span>Data</span></a>
                   <div className='sub-nav-block' id='sub-nav-block-data'>

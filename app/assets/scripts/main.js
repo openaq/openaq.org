@@ -19,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 import App from './views/app';
 import Home from './views/home';
+import Why from './views/why';
 import About from './views/about';
 import Community from './views/community';
 import Map from './views/map';
@@ -45,6 +46,7 @@ render((
   <Provider store={store}>
     <Router history={history} render={applyRouterMiddleware(scrollerMiddleware)}>
       <Route path='/' component={App}>
+        <Route name='why' path='why' component={Why} pageClass='page--why page--dark' />
         <Route name='about' path='about' component={About} pageClass='page--about' />
         <Route name='community' path='community' component={Community} pageClass='page--community' />
         <Route name='map' path='map' component={Map} pageClass='page--map' />
