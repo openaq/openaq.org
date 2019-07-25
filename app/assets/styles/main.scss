@@ -39,9 +39,11 @@
 @import "global/messages";
 @import "global/prime-nav";
 @import "global/forms";
+@import "global/charts";
 @import "global/content";
 @import "global/modal";
 @import "global/testimonials";
+@import "global/join-fold";
 
 
 /* Homepage
@@ -49,6 +51,12 @@
 
 @import "homepage/content";
 @import "homepage/compare-chart";
+
+
+/* Why
+   ========================================================================== */
+
+@import "why/content";
 
 
 /* Map

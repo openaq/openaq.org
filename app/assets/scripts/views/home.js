@@ -197,7 +197,7 @@ var Home = React.createClass({
 
         <section className='block' id='home-block-intro'>
           <div className='inner'>
-            <header className='fold__header'>
+            <header className='block__header'>
               <h1 className='block__title'>1 out of 8 deaths in the world is due to poor air quality</h1>
               <div className='block__teaser prose prose--responsive'>
                 <p>This is one of the largest public health threats of our time.</p>
