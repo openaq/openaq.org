@@ -22,8 +22,6 @@
       grid-column: 1 / span 6;
     }
   }
-
-
 }
 
 
@@ -54,42 +52,13 @@
   }
 }
 
-.meas-card {
-  display: flex;
-  text-align: left;
+.card--measurement {
   align-items: stretch;
-  justify-content: center;
+  width: 100%;
+  max-width: 16rem;
+  min-height: 20rem;
 
-  > .inner,
-  .meas-card__media,
-  .meas-card__copy {
-    > *:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  > .inner {
-    display: flex;
-    background: #fff;
-    padding: 2rem;
-    color: $base-font-color;
-    box-shadow: 0 12px 24px 0 rgba($base-color, 0.12);
-    width: 100%;
-    max-width: 16rem;
-    flex-direction: column;
-    min-height: 20rem;
-    flex: 1;
-
-    /* Animation */
-    transition: all 0.16s ease 0s;
-
-    &:hover {
-      opacity: 1;
-      box-shadow: 0 24px 32px 8px rgba($base-color, 0.12);
-    }
-  }
-
-  &:first-of-type > .inner {
+  &:first-of-type {
     transform: translate(0.5rem, -4rem);
 
     @include media(large-up) {
@@ -97,7 +66,7 @@
     }
   }
 
-  &:last-of-type > .inner {
+  &:last-of-type {
     transform: translate(-0.5rem, 4rem);
 
     @include media(large-up) {
@@ -105,55 +74,60 @@
     }
   }
 
-  .meas-card__title {
+  .card__header {
     @extend .visually-hidden;
   }
 
-  .meas-card__details {
-    color: $base-color;
-    font-feature-settings: normal;
-    margin: 0 0 2rem 0;
 
-    dt,
-    span {
-      @extend .visually-hidden;
-    }
+  .card__body {
+    padding: $contained-spacing;
+  }
+}
 
-    dd:first-of-type {
-      margin-bottom: -0.5rem;
-    }
+.card--measurement__details {
+  color: $base-color;
+  font-feature-settings: normal;
+  margin: 0 0 2rem 0;
 
-    sub {
-      font-size: inherit;
-      vertical-align: -2.65em;
-      font-feature-settings: inherit;
+  dt,
+  span {
+    @extend .visually-hidden;
+  }
 
-      @include media(large-up) {
-        vertical-align: -3.75em;
-      }
-    }
+  dd:first-of-type {
+    margin-bottom: -0.5rem;
+  }
 
-    small {
-      display: block;
-      font-size: inherit;
-    }
+  sub {
+    font-size: inherit;
+    vertical-align: -2.65em;
+    font-feature-settings: inherit;
 
-    strong {
-      font-family: $heading-font-family;
-      font-size: 3.5rem;
-      font-weight: $heading-font-regular;
-      display: inline;
-      vertical-align: top;
-
-      @include media(large-up) {
-        font-size: 4.5rem;
-      }
+    @include media(large-up) {
+      vertical-align: -3.75em;
     }
   }
 
-  .meas-card__chart {
-    margin: 0;
+  small {
+    display: block;
+    font-size: inherit;
   }
+
+  strong {
+    font-family: $heading-font-family;
+    font-size: 3.5rem;
+    font-weight: $heading-font-regular;
+    display: inline;
+    vertical-align: top;
+
+    @include media(large-up) {
+      font-size: 4.5rem;
+    }
+  }
+}
+
+.card--measurement__chart {
+  margin: 0;
 
   img {
     max-width: 100%;
