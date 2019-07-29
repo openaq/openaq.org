@@ -29,17 +29,17 @@ var Why = React.createClass({
         </header>
         <div className='inpage__body'>
 
-          <section className='block' id='why-block-intro'>
+          <section className='fold fold--intro'>
             <div className='inner'>
-              <header className='block__header'>
-                <h1 className='block__title'>Poor air quality is one of the largest public health threats of our time.</h1>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Poor air quality is one of the largest public health threats of our time.</h1>
               </header>
-              <div className='block__teaser prose prose--responsive'>
-                <ul className='big-stats'>
-                  <li><strong>8.8M</strong> <span>deaths each year</span></li>
-                  <li><strong>90%</strong> <span>in developing countries</span></li>
+              <figure className='fold__media prose prose--responsive'>
+                <ul className='big-stats-list'>
+                  <li className='big-stat'><strong className='big-stat__value'>8.8M</strong> <span className='big-stat__label'>deaths each year</span></li>
+                  <li className='big-stat'><strong className='big-stat__value'>90%</strong> <span className='big-stat__label'>in developing countries</span></li>
                 </ul>
-              </div>
+              </figure>
             </div>
           </section>
 

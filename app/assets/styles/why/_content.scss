@@ -3,70 +3,24 @@
    ========================================================================== */
 
 
-/* Block: Intro
+/* Fold: Intro
    ========================================================================== */
 
-#why-block-intro {
-  background: #fff;
-  padding: ($global-spacing * 4) 0;
-  text-align: center;
+.page--why {
+  .fold--intro {
+    .big-stats-list {
 
-  @include media(medium-up) {
-    padding: ($global-spacing * 6) 0;
-  }
+      @include media(small-down) {
+        flex-flow: column;
 
-  @include media(large-up) {
-    padding: ($global-spacing * 8) 0;
-  }
+        > li {
+          margin: 0 0 1rem 0;
+        }
 
-  > .inner {
-    @extend .constrainer;
-    display: grid;
-    grid-column-gap: 2rem;
-    grid-auto-rows: auto;
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .block__header {
-    grid-row: 1;
-    grid-column: 4 / span 8;
-
-    @include media(large-up) {
-      font-size: 2rem;
-      line-height: 2.5rem;
-    }
-  }
-
-  .block__title {
-    @extend .heading;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    margin-bottom: 1.5rem;
-
-    @include media(medium-up) {
-      font-size: 1.75rem;
-      line-height: 2.25rem;
-    }
-
-    @include media(large-up) {
-      font-size: 2rem;
-      line-height: 2.5rem;
-    }
-  }
-
-  figure {
-    margin: 3rem auto;
-
-    img {
-      vertical-align: top;
-      max-width: 100%;
-      height: auto;
-    }
-  }
-
-  .block__teaser {
-    > *:last-child {
-      margin-bottom: 0;
+        > *:last-child {
+          margin: 0;
+        }
+      }
     }
   }
 }
