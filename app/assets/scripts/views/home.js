@@ -122,20 +122,28 @@ var Home = React.createClass({
               </p>
             </div>
           </header>
-          <div className='fold__media'>
+          <figure className='fold__media'>
             {!fetching
-              ? (<dl className='od-stats'>
-                  <dt>Air quality measurements</dt>
-                  <dd><span>{shortenLargeNumber(data.totalMeasurements, 0)}</span></dd>
-                  <dt>Data sources</dt>
-                  <dd><span>{shortenLargeNumber(data.sources, 0)}</span></dd>
-                  <dt>Locations</dt>
-                  <dd><span>{shortenLargeNumber(data.locations, 0)}</span></dd>
-                  <dt>Countries</dt>
-                  <dd><span>{shortenLargeNumber(data.countries, 0)}</span></dd>
-                </dl>)
+              ? (<ol className='big-stats-list'>
+                  <li className='big-stat'>
+                    <strong className='big-stat__value'>{shortenLargeNumber(data.totalMeasurements, 0)}</strong>
+                    <span className='big-stat__label'>Air quality measurements</span>
+                  </li>
+                  <li className='big-stat'>
+                    <strong className='big-stat__value'>{shortenLargeNumber(data.sources, 0)}</strong>
+                    <span className='big-stat__label'>Data sources</span>
+                  </li>
+                  <li className='big-stat'>
+                    <strong className='big-stat__value'>{shortenLargeNumber(data.locations, 0)}</strong>
+                    <span className='big-stat__label'>Locations</span>
+                  </li>
+                  <li className='big-stat'>
+                    <strong className='big-stat__value'>{shortenLargeNumber(data.countries, 0)}</strong>
+                    <span className='big-stat__label'>Countries</span>
+                  </li>
+                </ol>)
               : <LoadingMessage />}
-          </div>
+          </figure>
         </div>
       </section>
     );

@@ -6,19 +6,17 @@
 /* Fold: Intro
    ========================================================================== */
 
-.page--why {
-  .fold--intro {
-    .big-stats-list {
-      @include media(small-down) {
-        flex-flow: column;
+.page--why .fold--intro {
+  .big-stats-list {
+    @include media(small-down) {
+      flex-flow: column;
 
-        > li {
-          margin: 0 0 1rem 0;
-        }
+      > li {
+        margin: 0 0 1rem 0;
+      }
 
-        > *:last-child {
-          margin: 0;
-        }
+      > *:last-child {
+        margin: 0;
       }
     }
   }
