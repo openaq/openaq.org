@@ -9,7 +9,6 @@
 .page--why {
   .fold--intro {
     .big-stats-list {
-
       @include media(small-down) {
         flex-flow: column;
 

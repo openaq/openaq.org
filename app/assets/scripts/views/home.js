@@ -207,20 +207,20 @@ var Home = React.createClass({
         </header>
         <div className='inpage__body'>
 
-        <section className='block' id='home-block-intro'>
-          <div className='inner'>
-            <header className='block__header'>
-              <h1 className='block__title'>1 out of 8 deaths in the world is due to poor air quality</h1>
-              <div className='block__teaser prose prose--responsive'>
-                <p>This is one of the largest public health threats of our time.</p>
-                <figure>
-                  <img src='/assets/graphics/layout/oaq-illu-home-stats.svg' width='408' height='80' alt='Illustration' />
-                </figure>
-                <p><Link to='#' title='Learn more' className='go-link'><span>Learn more about this problem</span></Link></p>
-              </div>
-            </header>
-          </div>
-        </section>
+          <section className='fold fold--intro'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>1 out of 8 deaths in the world is due to poor air quality</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>This is one of the largest public health threats of our time.</p>
+                </div>
+              </header>
+              <figure className='fold__media'>
+                <img src='/assets/graphics/layout/oaq-illu-home-stats.svg' width='408' height='80' alt='Illustration' />
+              </figure>
+              <p className='fold__action'><Link to='#' title='Learn more' className='go-link'><span>Learn more about this problem</span></Link></p>
+            </div>
+          </section>
 
           <section className='fold fold--semi-light fold--type-a'>
             <div className='inner'>
@@ -232,11 +232,9 @@ var Home = React.createClass({
                   <p><Link to='#' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
-              <div className='fold__media'>
-                <figure>
-                  <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
-                </figure>
-              </div>
+              <figure className='fold__media'>
+                <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
+              </figure>
             </div>
           </section>
 
@@ -262,11 +260,9 @@ var Home = React.createClass({
                   <p><Link to='#' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
-              <div className='fold__media'>
-                <figure>
-                  <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
-                </figure>
-              </div>
+              <figure className='fold__media'>
+                <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
+              </figure>
             </div>
           </section>
 
@@ -279,7 +275,7 @@ var Home = React.createClass({
                   <p>Our non-profit work is made possible through the support of a variety of organizations.</p>
                 </div>
               </header>
-              <div className='fold__media'>
+              <figure className='fold__media'>
                 <ol className='hpf-sponsors-list'>
                   <li>
                     <a href='#' title='Visit partner'>
@@ -318,7 +314,7 @@ var Home = React.createClass({
                     </a>
                   </li>
                 </ol>
-              </div>
+              </figure>
             </div>
           </section>
 

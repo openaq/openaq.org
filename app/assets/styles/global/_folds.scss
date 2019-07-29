@@ -58,10 +58,8 @@
 }
 
 .fold__media {
-  figure {
-    margin: 0;
-  }
-
+  margin: 0;
+  
   img {
     max-width: 100%;
     height: auto;
@@ -166,7 +164,7 @@
     grid-column: 1 / span 12;
 
     @include media(medium-up) {
-      grid-column: 3 / span 8;
+      grid-column: 2 / span 10;
     }
   }
 
@@ -176,7 +174,7 @@
 
     @include media(medium-up) {
       grid-row: 2;
-      grid-column: 3 / span 8;
+      grid-column: 2 / span 10;
     }
   }
 
