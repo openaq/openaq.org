@@ -6,7 +6,8 @@ html, body, #app-container, .page--map {
   // Make page have always 100% height.
   // To ensure that when we have absolutely positioned elements the page still
   // takes up the full viewport. Ex: map page.
-  height: 100%;
+  min-height: 100vh;
+  background: #fff;
 }
 
 html.unscrollable-y {
@@ -21,9 +22,12 @@ html {
 }
 
 .page {
-  background: #fff;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
   overflow-x: hidden;
 }
+
 
 /* Header
    ========================================================================== */
@@ -84,6 +88,8 @@ html {
 
 .page__footer {
   padding: ($global-spacing * 3) 0;
+  background: #fff;
+  box-shadow: 0 -1px 0 0 $base-semi-alpha-color;
 
   @include media(medium-up) {
     padding: ($global-spacing * 4) 0;

@@ -322,8 +322,8 @@ var LocationsHub = React.createClass({
                 <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
               </div>
               <ul className='ipha'>
-                <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
                 <li><a href={yesterdayDataUrl} className='ipha-download' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
+                <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
               </ul>
             </div>
           </div>
@@ -336,48 +336,45 @@ var LocationsHub = React.createClass({
         </header>
 
         <div className='inpage__body'>
-          <div className='fold full-flex'>
-            <div className='inner'>
+          <div className='inpage__diptych inner'>
+            <aside className='inpage__aside'>
+              <h2 className='content-prime-title'>Filter Locations</h2>
 
-              <aside className='inpage__aside'>
-                <h2 className='content-prime-title'>Filter Locations</h2>
+              <div className='filters filters--country'>
+                <h3 className='filters__title'>Countries</h3>
+                {this.renderCountries()}
+              </div>
 
-                <div className='filters filters--country'>
-                  <h3 className='filters__title'>Countries</h3>
-                  {this.renderCountries()}
-                </div>
+              <div className='filters filters--values'>
+                <h3 className='filters__title'>Values</h3>
+                {this.renderParameters()}
+              </div>
+            </aside>
 
-                <div className='filters filters--values'>
-                  <h3 className='filters__title'>Values</h3>
-                  {this.renderParameters()}
-                </div>
-              </aside>
+            <div className='inpage__content'>
+              <div className='content__meta'>
 
-              <div className='inpage__content'>
-                <div className='content__meta'>
+                <div className="content__header">
+                  {this.renderSort()}
 
-                  <div className="content__header">
-                    {this.renderSort()}
-
-                    <div className='content__heading'>
-                      <h2 className='content-prime-title'>Results <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear Filters)</small></button></h2>
-                      {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
-                    </div>
+                  <div className='content__heading'>
+                    <h2 className='content-prime-title'>Results <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear Filters)</small></button></h2>
+                    {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
                   </div>
-
-                  {this.renderFilterSummary()}
                 </div>
 
-                <div className='inpage__results'>
-                  {this.renderContent()}
-                </div>
+                {this.renderFilterSummary()}
+              </div>
 
-                {this.renderPagination()}
+              <div className='inpage__results'>
+                {this.renderContent()}
+              </div>
 
-                <div className='disclaimers'>
-                  <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution. </p>
-                  <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
-                </div>
+              {this.renderPagination()}
+
+              <div className='disclaimers'>
+                <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution. </p>
+                <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
               </div>
             </div>
           </div>

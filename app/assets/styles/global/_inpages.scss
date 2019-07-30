@@ -112,7 +112,11 @@ $page-header-y: $global-spacing * 5;
 
   &__body {
     > .inner {
-      @extend .row, .row--centered;
+      @extend .constrainer;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: 2rem;
+      grid-template-rows: auto;
     }
 
     > *:last-child {
@@ -120,35 +124,65 @@ $page-header-y: $global-spacing * 5;
     }
   }
 
-  &__aside {
-    @include col(12/12);
-    padding: 1rem 0;
-
-    @include media(medium-up) {
-      @include col(4/12);
-      padding: 2rem 0;
-    }
-    @include media(large-up) {
-      @include col(3/12);
-      padding: 2rem 0;
-    }
-  }
-  &__content {
-    @include col(12/12);
-    padding: 1rem 0;
-
-    @include media(medium-up) {
-      @include col(8/12);
-      padding: 2rem 0;
-    }
-    @include media(large-up) {
-      @include col(9/12);
-      padding: 2rem 0;
-    }
-  }
-
   > .inner > *:last-child {
     margin-bottom: 0;
+  }
+}
+
+.inpage__aside,
+.inpage__content {
+  padding: ($global-spacing * 2) 0;
+
+  @include media(medium-up) {
+    padding: ($global-spacing * 4) 0;
+  }
+
+  @include media(large-up) {
+    padding: ($global-spacing * 6) 0;
+  }
+}
+
+.inpage__aside {
+  grid-row: 1;
+  grid-column: 1 / span 12;
+
+  @include media(medium-up) {
+    grid-column: 1 / span 4;
+  }
+
+  @include media(large-up) {
+    grid-column: 1 / span 3;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.inpage__content {
+  grid-row: 2;
+  grid-column: 1 / span 12;
+
+  @include media(medium-up) {
+    grid-row: 1;
+    grid-column: 5 / span 8;
+    box-shadow: -1px 0 0 0 $base-semi-alpha-color;
+    padding-left: 2rem;
+  }
+
+  @include media(large-up) {
+    grid-column: 4 / span 9;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+.inpage__aside + .inpage__content {
+  @include media(medium-down) {
+    margin-top: -6rem;
   }
 }
 
@@ -292,4 +326,15 @@ $page-header-y: $global-spacing * 5;
   &::before {
     @extend %openaq-ds-icon-download;
   }
+}
+
+
+/* Inpage body layout
+   ========================================================================== */
+
+.inpage__diptych {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 2rem;
+  grid-template-rows: auto;
 }

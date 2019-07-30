@@ -53,8 +53,10 @@ var LocationCard = React.createClass({
       <article className={c('card', {'card--data-compact': this.props.compact})}>
         <div className='card__contents'>
           <header className='card__header'>
-            <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
-            <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
+            <div className='card__headline'>
+              <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
+              <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
+            </div>
           </header>
           <div className='card__body'>
             <ul className='card__meta-details'>
