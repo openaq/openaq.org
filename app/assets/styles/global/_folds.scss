@@ -59,7 +59,7 @@
 
 .fold__media {
   margin: 0;
-  
+
   img {
     max-width: 100%;
     height: auto;
@@ -75,6 +75,26 @@
     &:not(:last-child) {
       margin-right: 1rem;
     }
+  }
+}
+
+.fold__claim {
+  @extend .heading;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+
+  @include media(medium-up) {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
+
+  @include media(large-up) {
+    font-size: 2rem;
+    line-height: 2.75rem;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
   }
 }
 
