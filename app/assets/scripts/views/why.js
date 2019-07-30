@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import widont from '../utils/widont';
 import JoinFold from '../components/join-fold';
 
 var Why = React.createClass({
@@ -32,7 +33,7 @@ var Why = React.createClass({
           <section className='fold fold--intro'>
             <div className='inner'>
               <header className='fold__header'>
-                <h1 className='fold__title'>Poor air quality is one of the largest public health threats of our time.</h1>
+                <h1 className='fold__title'>{widont('Poor air quality is one of the largest public health threats of our time.')}</h1>
               </header>
               <figure className='fold__media prose prose--responsive'>
                 <ul className='big-stats-list'>
