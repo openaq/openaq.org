@@ -241,14 +241,14 @@ var Home = React.createClass({
                 </div>
               </header>
               <figure className='fold__media'>
-                <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
+                <img src='/assets/graphics/content/view--home/fold-what-we-do-media.png' alt='Fold media' width='1246' height='1076' />
               </figure>
             </div>
           </section>
 
           {this.renderStatsCount()}
 
-          <section className='fold fold--type-a' id='home-community-fold'>
+          <section className='fold fold--type-a' id='home-fold-community'>
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__subtitle'>Community</h1>
@@ -269,7 +269,7 @@ var Home = React.createClass({
                 </div>
               </header>
               <figure className='fold__media'>
-                <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
+                <img src='/assets/graphics/content/view--home/fold-community-media.png' alt='Fold media' width='932' height='1128' />
               </figure>
             </div>
           </section>

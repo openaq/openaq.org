@@ -222,7 +222,19 @@
    ========================================================================== */
 
 #home-fold-community {
+ .fold__media {
+   text-align: center;
 
+   @include media(large-up) {
+     text-align: left;
+   }
+
+   img {
+     width: 100%;
+     max-width: 30rem;
+     transform: translateY(2rem);
+   }
+ }
 }
 
 .community-details {
