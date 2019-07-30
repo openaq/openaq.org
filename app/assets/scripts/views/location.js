@@ -586,8 +586,10 @@ var Location = React.createClass({
     if (fetching) {
       return (
         <HeaderMessage>
-          <h2>Take a deep breath.</h2>
-          <p>Location data is loading...</p>
+          <h1>Take a deep breath.</h1>
+          <div className='prose prose--responsive'>
+            <p>Location data is loading...</p>
+          </div>
         </HeaderMessage>
       );
     }
@@ -595,9 +597,11 @@ var Location = React.createClass({
     if (error) {
       return (
         <HeaderMessage>
-          <h2>Uh oh, something went wrong.</h2>
-          <p>There was a problem getting the data. If you continue to have problems, please let us know.</p>
-          <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
+          <h1>Uh oh, something went wrong.</h1>
+          <div className='prose prose--responsive'>
+            <p>There was a problem getting the data. If you continue to have problems, please let us know.</p>
+            <p><a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a></p>
+          </div>
         </HeaderMessage>
       );
     }
