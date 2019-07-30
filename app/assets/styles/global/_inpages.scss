@@ -5,6 +5,10 @@
 $page-header-y: $global-spacing * 5;
 
 .inpage {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+
   &__header {
     position: relative;
     color: $base-font-color;
