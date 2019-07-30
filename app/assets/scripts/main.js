@@ -50,7 +50,7 @@ render((
         <Route name='about' path='about' component={About} pageClass='page--about' />
         <Route name='community' path='community' component={Community} pageClass='page--community' />
         <Route name='map' path='map' component={Map} pageClass='page--map' />
-        <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations' />
+        <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations page--dark' />
         <Route name='location' path='location/:name' component={LocationItem} pageClass='page--location' />
         <Route name='countriesHub' path='countries' component={CountriesHub} pageClass='page--countries' />
         <Route name='country' path='countries/:name' component={Country} pageClass='page--country' />

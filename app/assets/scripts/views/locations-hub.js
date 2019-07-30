@@ -317,19 +317,24 @@ var LocationsHub = React.createClass({
           <div className='inner'>
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Air Quality Data</h1>
-            </div>
-            <div className='inpage__introduction'>
-              <p>We’re currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
-              <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
-            </div>
-            <div className='inpage__actions'>
-              <ul>
-                <li><a href={config.apiDocs} title='View API documentation' className='button-inpage-api' target='_blank'>View API Docs</a></li>
-                <li><a href={yesterdayDataUrl} className='button-inpage-download' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
+              <div className='inpage__introduction'>
+                <p>We’re currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
+                <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
+              </div>
+              <ul className='ipha'>
+                <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
+                <li><a href={yesterdayDataUrl} className='ipha-download' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
               </ul>
             </div>
           </div>
+
+          <figure className='inpage__media inpage__media--cover media'>
+            <div className='media__item'>
+              <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
+            </div>
+          </figure>
         </header>
+
         <div className='inpage__body'>
           <div className='fold full-flex'>
             <div className='inner'>
