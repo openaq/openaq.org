@@ -21,7 +21,8 @@ import App from './views/app';
 import Home from './views/home';
 import Why from './views/why';
 import About from './views/about';
-import Community from './views/community';
+import CommunityHub from './views/community-hub';
+import CommunityProjects from './views/community-projects';
 import Map from './views/map';
 import LocationsHub from './views/locations-hub';
 import LocationItem from './views/location';
@@ -48,7 +49,8 @@ render((
       <Route path='/' component={App}>
         <Route name='why' path='why' component={Why} pageClass='page--why page--dark' />
         <Route name='about' path='about' component={About} pageClass='page--about' />
-        <Route name='community' path='community' component={Community} pageClass='page--community' />
+        <Route name='communityHub' path='community' component={CommunityHub} pageClass='page--community-hub page--dark' />
+        <Route name='communityProjects' path='community/projects' component={CommunityProjects} pageClass='page--community-projects page--dark' />
         <Route name='map' path='map' component={Map} pageClass='page--map' />
         <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations page--dark' />
         <Route name='location' path='location/:name' component={LocationItem} pageClass='page--location page--dark' />

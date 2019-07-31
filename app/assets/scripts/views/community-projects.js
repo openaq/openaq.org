@@ -6,8 +6,8 @@ import _ from 'lodash';
 import CommunityCard from '../components/community-card';
 import content from '../../content/content.json';
 
-var About = React.createClass({
-  displayName: 'Community',
+var CommunityProjects = React.createClass({
+  displayName: 'Community Impact',
 
   propTypes: {
   },
@@ -35,7 +35,7 @@ var About = React.createClass({
       <section className='fold fold--filled' id='community-projects'>
         <div className='inner'>
           <header className='fold__header'>
-            <h1 className='fold__title'>Join our community</h1>
+            <h1 className='fold__title'>Community Impact</h1>
           </header>
           <div className='fold__body'>
             <div className='fold__body--prose'>
@@ -149,4 +149,4 @@ function dispatcher (dispatch) {
   };
 }
 
-module.exports = connect(selector, dispatcher)(About);
+module.exports = connect(selector, dispatcher)(CommunityProjects);

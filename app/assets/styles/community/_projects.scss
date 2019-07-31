@@ -1,6 +1,14 @@
 /* ==========================================================================
-   Community: Content
+   Community: Projects
    ========================================================================== */
+
+.page--community-projects {
+  .inpage__headline {
+    @include media(large-up) {
+      grid-column: 1 / span 8;
+    }
+  }
+}
 
 #community-connect {
   .contact {

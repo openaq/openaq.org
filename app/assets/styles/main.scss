@@ -33,7 +33,7 @@
 @import "global/pages";
 @import "global/inpages";
 @import "global/folds";
-// @import "global/cards";
+@import "global/cards";
 @import "global/map";
 @import "global/popover";
 @import "global/messages";
@@ -44,6 +44,7 @@
 @import "global/modal";
 @import "global/testimonials";
 @import "global/join-fold";
+@import "global/connect-fold";
 
 
 /* Homepage
@@ -106,4 +107,5 @@
 /* Community
    ========================================================================== */
 
-@import "community/content";
+@import "community/hub";
+@import "community/projects";
