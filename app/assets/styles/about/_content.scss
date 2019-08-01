@@ -96,20 +96,10 @@
 }
 
 
-/* Fold: Sponsors
+/* Fold: Story
    ========================================================================== */
 
 #about-fold-story {
-  margin-bottom: ($global-spacing * 4);
-
-  @include media(medium-up) {
-    margin-bottom: ($global-spacing * 6);
-  }
-
-  @include media(large-up) {
-    margin-bottom: ($global-spacing * 8);
-  }
-
   > .inner {
     position: relative;
 
@@ -160,6 +150,83 @@
       grid-column: 1 / span 4;
     }
   }
+}
+
+
+/* Fold: Board
+   ========================================================================== */
+
+#about-fold-board {
+  > .inner {
+    grid-gap: 2rem;
+
+    @include media(large-up) {
+      grid-gap: 4rem 2rem;
+    }
+  }
+
+  .fold__header {
+    grid-row: 1;
+    grid-column: 1 / span 12;
+    text-align: center;
+
+    @include media(medium-up) {
+      grid-column: 1 / span 6;
+      text-align: left;
+    }
+  }
+}
+
+.board-list {
+  grid-row: 2;
+  grid-column: 1 / span 12;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2rem;
+
+  @include media(small-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.board-member {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.board-member__avatar {
+  overflow: hidden;
+  width: 100%;
+  max-width: 10rem;
+  margin: 0 0 $global-spacing 0;
+  border-radius: $full-border-radius;
+
+  img {
+    display: inline-flex;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.board-member__title {
+  @include heading(1.25rem);
+  margin: 0 0 0.25rem 0;
 }
 
 

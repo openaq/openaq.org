@@ -128,6 +128,58 @@ var About = React.createClass({
             </div>
           </section>
 
+          <section className='fold' id='about-fold-board'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Our board</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>Mauris posuere mauris a molestie ultrices. Donec risus ligula, rutrum laoreet elementum aliquam, ullamcorper in nibh.</p>
+                </div>
+              </header>
+              <ul className='board-list'>
+                <li>
+                  <article className='board-member'>
+                    <figure className='board-member__avatar'>
+                      <img src='/assets/graphics/content/board/board-avatar--christa-hasenkopt.jpg' width='320' height='320' alt='Board avatar' />
+                    </figure>
+                    <h1 className='board-member__title'>Christa Hasenkopf</h1>
+                    <p className='board-member__role'>Chief Executive Officer</p>
+                  </article>
+                </li>
+
+                <li>
+                  <article className='board-member'>
+                    <figure className='board-member__avatar'>
+                      <img src='/assets/graphics/content/board/board-avatar--sarah-menon.jpg' width='320' height='320' alt='Board avatar' />
+                    </figure>
+                    <h1 className='board-member__title'>Sarah Menon</h1>
+                    <p className='board-member__role'>Secretary</p>
+                  </article>
+                </li>
+
+                <li>
+                  <article className='board-member'>
+                    <figure className='board-member__avatar'>
+                      <img src='/assets/graphics/content/board/board-avatar--heidi-yoon.jpg' width='320' height='320' alt='Board avatar' />
+                    </figure>
+                    <h1 className='board-member__title'>Heidi Yoon</h1>
+                    <p className='board-member__role'>Community Engagement Officer</p>
+                  </article>
+                </li>
+
+                <li>
+                  <article className='board-member'>
+                    <figure className='board-member__avatar'>
+                      <img src='/assets/graphics/content/board/board-avatar--olaf-veerman.jpg' width='320' height='320' alt='Board avatar' />
+                    </figure>
+                    <h1 className='board-member__title'>Olaf Veerman</h1>
+                    <p className='board-member__role'>Chair</p>
+                  </article>
+                </li>
+              </ul>
+            </div>
+          </section>
+
           <section className='fold fold--semi-light' id='about-fold-sponsors'>
             <div className='inner'>
               <header className='fold__header'>
