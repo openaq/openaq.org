@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import widont from '../utils/widont';
 import _ from 'lodash';
 
 import CommunityCard from '../components/community-card';
@@ -32,19 +33,21 @@ var CommunityProjects = React.createClass({
       .value();
 
     return (
-      <section className='fold fold--filled' id='community-projects'>
+      <section className='fold' id='community-fold-projects'>
         <div className='inner'>
           <header className='fold__header'>
-            <h1 className='fold__title'>Community Impact</h1>
+            <h1 className='fold__title'>Projects</h1>
+            <nav className='fold__nav'>
+              <h2>Filter by</h2>
+              <h3>Type</h3>
+              <a href='#' title='Filter by type'><span>Project type</span></a>
+              <h3>Location</h3>
+              <a href='#' title='Filter by location'><span>Location</span></a>
+            </nav>
           </header>
-          <div className='fold__body'>
-            <div className='fold__body--prose'>
-              <p>Learn how researchers, software developers, educators, and journalists are using open air quality data in exciting ways to fight air inequality.</p>
-            </div>
-            <div>
-              {cards}
-            </div>
-          </div>
+          <ul className='project-list'>
+            {cards}
+          </ul>
         </div>
       </section>
     );
@@ -56,80 +59,20 @@ var CommunityProjects = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline header--centered'>
-              <h1 className='inpage__title'>Get Involved</h1>
+              <h1 className='inpage__title'>Community Impact</h1>
               <div className='inpage__introduction'>
-                <p>We are a community of scientists, software developers, and lovers of open environmental data.</p>
+                <p>{widont('Projects of our community using the data to fight air inquality in the most exciting ways..')}</p>
               </div>
             </div>
           </div>
+          <figure className='inpage__media inpage__media--cover media'>
+            <div className='media__item'>
+              <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
+            </div>
+          </figure>
         </header>
         <div className='inpage__body'>
-
           {this.renderProjects()}
-
-          <section className='fold fold--media-bleed-left' id='community-connect'>
-            <div className='inner'>
-              <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/community1.jpg)'}}>
-                  <img className='media__item' src='assets/graphics/content/community1.jpg' width='768' height='768' alt='About image 1' />
-                </figure>
-              </div>
-              <div className='fold__copy'>
-                <header className='fold__header'>
-                  <h1 className='fold__title'>Connect</h1>
-                </header>
-                <div className='fold__body'>
-                  <p>Brainstorm and work together with our community on ways to use open air quality data to fight air inequality. Reach out on slack, twitter or by email. We’d love to help make your open air quality project a reality.</p>
-                  <div className='contact contact--social'>
-                    <ul>
-                      <li><a href='https://github.com/openaq' className='contact-button-gh' title='View Github'><span>Github</span></a></li>
-                      <li><a href='https://openaq-slackin.herokuapp.com/' className='contact-button-slack' title='View Slack'><span>Slack</span></a></li>
-                      <li><a href='https://twitter.com/open_aq' className='contact-button-twitter' title='View Twitter'><span>Twitter</span></a></li>
-                      <li><a href='mailto:info@openaq.org' className='contact-button-mail' title='View Email'><span>Email</span></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className='fold fold--filled'>
-            <div className='inner'>
-              <header className='fold__header'>
-                <h1 className='fold__title'>Contribute</h1>
-              </header>
-              <div className='fold__body'>
-                <div className='fold__body--prose'>
-                  <p>Interested in contributing to this project? Suggest new data sources, fix GH issues, or otherwise help to continue building our infrastructure. Feel free to re-purpose any portion of our open-source project for your own work.</p>
-                </div>
-              </div>
-              <div className='fold__actions'>
-                <a href='https://github.com/openaq/openaq-api/issues' target='_blank' className='button button--large button--primary-bounded'>View Open Issues</a>
-                <a href='https://github.com/openaq/' target='_blank' className='button button--large button--primary-bounded'>See Project Repos</a>
-              </div>
-            </div>
-          </section>
-
-          <section className='fold fold--media-bleed-right'>
-            <div className='inner'>
-              <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/community2.jpg)'}}>
-                  <img className='media__item' src='assets/graphics/content/community2.jpg' width='768' height='768' alt='About image 2' />
-                </figure>
-              </div>
-              <div className='fold__copy'>
-                <header className='fold__header'>
-                  <h1 className='fold__title'>Hold a Workshop</h1>
-                </header>
-                <div className='fold__body'>
-                  <p>Interested in convening various members of your community around open air quality data? We can help - either by planning an in-person or virtual visit to your community or sharing resources from previous OpenAQ workshops and meet ups.</p>
-                </div>
-                <div className='fold__actions'>
-                  <a href='https://medium.com/@openaq/were-going-to-be-doing-more-openaq-workshops-tell-us-where-we-should-go-94d7d2eab234#.y7g82pqn2' target='_blank' className='button button--large button--primary-bounded'>View Details</a>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
       </section>
     );

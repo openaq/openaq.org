@@ -49,7 +49,7 @@ var CommunityHub = React.createClass({
                   <article className='card card--participate'>
                     <div className='card__contents'>
                       <figure className='card__media'>
-                        <Link to='/' className='link-wrapper' title='View more'>
+                        <Link to='/community/projects' className='link-wrapper' title='View more'>
                           <div className='card__cover'>
                             <img src='/assets/graphics/content/view--community-hub/card-participate--impact.jpg' width='1080' height='720' alt='Card cover' />
                           </div>
@@ -57,7 +57,7 @@ var CommunityHub = React.createClass({
                       </figure>
                       <header className='card__header'>
                         <div className='card__headline'>
-                          <Link to='/' className='link-wrapper' title='View more'>
+                          <Link to='/community/projects' className='link-wrapper' title='View more'>
                             <h1 className='card__title'>Community impact</h1>
                           </Link>
                         </div>
@@ -68,7 +68,7 @@ var CommunityHub = React.createClass({
                         </div>
                       </div>
                       <footer className='card__footer'>
-                        <Link to='/' className='card__go-link' title='View more'><span>See projects</span></Link>
+                        <Link to='/community/projects' className='card__go-link' title='View more'><span>See projects</span></Link>
                       </footer>
                     </div>
                   </article>

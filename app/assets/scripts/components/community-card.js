@@ -22,24 +22,30 @@ var CommunityCard = React.createClass({
 
   render: function () {
     return (
-      <article className={c('card', {'card--horizontal card--horizontal--align-middle': this.props.horizontal})}>
-        <div className='card__contents'>
-          <figure className='card__media'>
-            <div className='card__thumbnail'>
-              {this.props.imageNode}
-            </div>
-          </figure>
-          <div className="card__copy">
+      <li>
+        <article className='card card--project'>
+          <div className='card__contents'>
+            <figure className='card__media'>
+              <a href={this.props.url} className='link-wrapper' title='View project'>
+                <div className='card__thumbnail'>
+                  {this.props.imageNode}
+                </div>
+              </a>
+            </figure>
             <header className='card__header'>
-              <h1 className='card__title'><a title={this.props.linkTitle} href={this.props.url}>{this.props.title}</a></h1>
+              <div className='card__headline'>
+                <a href={this.props.url} className='link-wrapper' title='View project'>
+                  <h1 className='card__title'>{this.props.title}</h1>
+                </a>
+              </div>
             </header>
             <div className='card__body'>
               {this.props.children}
               <a title={this.props.linkTitle} href={this.props.url}>Learn More</a>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </li>
     );
   }
 });

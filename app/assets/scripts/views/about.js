@@ -21,7 +21,6 @@ var About = React.createClass({
               </div>
             </div>
           </div>
-
           <figure className='inpage__media inpage__media--cover media'>
             <div className='media__item'>
               <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
