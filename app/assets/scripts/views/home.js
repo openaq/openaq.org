@@ -13,6 +13,7 @@ import { geolocateUser,
   openDownloadModal } from '../actions/action-creators';
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
+import testimonials from '../../content/testimonials.json';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -150,6 +151,9 @@ var Home = React.createClass({
   },
 
   render: function () {
+    // Pick a random testimonial
+    const testimonial = testimonials[Math.floor(Math.random() * Math.floor(testimonials.length - 1))];
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -333,15 +337,15 @@ var Home = React.createClass({
                 <li>
                   <blockquote className='testimonial'>
                     <div className='testimonial__media'>
-                      <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
+                      <img src={`/assets/graphics/content/${testimonial.image}`} width='960' height='960' alt='Image placeholder' />
                     </div>
                     <div className='testimonial__copy'>
                       <div className='testimonial__quote'>
-                        <p>OpenAQ is the Wikipedia of Air Quality.</p>
+                        <p>{testimonial.short_quote ? testimonial.short_quote : testimonial.long_quote}</p>
                       </div>
                       <footer className='testimonial__footer'>
-                        <strong>Ian Schuler</strong>
-                        <small>CEO/Development Seed / Washington, DC USA</small>
+                        <strong>{testimonial.name}</strong>
+                        <small>{`${testimonial.title} / ${testimonial.affiliation} / ${testimonial.location}`}</small>
                       </footer>
                     </div>
                   </blockquote>
