@@ -73,6 +73,93 @@ var CommunityHub = React.createClass({
                     </div>
                   </article>
                 </li>
+
+                <li>
+                  <article className='card card--participate'>
+                    <div className='card__contents'>
+                      <figure className='card__media'>
+                        <Link to='/' className='link-wrapper' title='View more'>
+                          <div className='card__cover'>
+                            <img src='/assets/graphics/content/view--community-hub/card-participate--workshops.jpg' width='1080' height='720' alt='Card cover' />
+                          </div>
+                        </Link>
+                      </figure>
+                      <header className='card__header'>
+                        <div className='card__headline'>
+                          <Link to='/' className='link-wrapper' title='View more'>
+                            <h1 className='card__title'>Workshops</h1>
+                          </Link>
+                        </div>
+                      </header>
+                      <div className='card__body'>
+                        <div className='card__prose prose prose--responsive'>
+                          <p>Convene local communities to start new projects and collaborations to fight air pollution.</p>
+                        </div>
+                      </div>
+                      <footer className='card__footer'>
+                        <Link to='/' className='card__go-link' title='View more'><span>See workshops</span></Link>
+                      </footer>
+                    </div>
+                  </article>
+                </li>
+
+                <li>
+                  <article className='card card--participate'>
+                    <div className='card__contents'>
+                      <figure className='card__media'>
+                        <Link to='/' className='link-wrapper' title='View more'>
+                          <div className='card__cover'>
+                            <img src='/assets/graphics/content/view--community-hub/card-participate--tools.jpg' width='1080' height='720' alt='Card cover' />
+                          </div>
+                        </Link>
+                      </figure>
+                      <header className='card__header'>
+                        <div className='card__headline'>
+                          <Link to='/' className='link-wrapper' title='View more'>
+                            <h1 className='card__title'>Community tools</h1>
+                          </Link>
+                        </div>
+                      </header>
+                      <div className='card__body'>
+                        <div className='card__prose prose prose--responsive'>
+                          <p>Access free, open-source community tools created by the OpenAQ community.</p>
+                        </div>
+                      </div>
+                      <footer className='card__footer'>
+                        <Link to='/' className='card__go-link' title='View more'><span>See the tools</span></Link>
+                      </footer>
+                    </div>
+                  </article>
+                </li>
+
+                <li>
+                  <article className='card card--participate'>
+                    <div className='card__contents'>
+                      <figure className='card__media'>
+                        <Link to='/' className='link-wrapper' title='View more'>
+                          <div className='card__cover'>
+                            <img src='/assets/graphics/content/view--community-hub/card-participate--data-sources.jpg' width='1080' height='720' alt='Card cover' />
+                          </div>
+                        </Link>
+                      </figure>
+                      <header className='card__header'>
+                        <div className='card__headline'>
+                          <Link to='/' className='link-wrapper' title='View more'>
+                            <h1 className='card__title'>Data sources</h1>
+                          </Link>
+                        </div>
+                      </header>
+                      <div className='card__body'>
+                        <div className='card__prose prose prose--responsive'>
+                          <p>Official organizations  measuring air quality data and publicly sharing them.</p>
+                        </div>
+                      </div>
+                      <footer className='card__footer'>
+                        <Link to='/' className='card__go-link' title='View more'><span>Become a data source</span></Link>
+                      </footer>
+                    </div>
+                  </article>
+                </li>
               </ul>
             </div>
           </section>
