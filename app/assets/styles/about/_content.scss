@@ -99,6 +99,73 @@
 /* Fold: Sponsors
    ========================================================================== */
 
+#about-fold-story {
+  margin-bottom: ($global-spacing * 4);
+
+  @include media(medium-up) {
+    margin-bottom: ($global-spacing * 6);
+  }
+
+  @include media(large-up) {
+    margin-bottom: ($global-spacing * 8);
+  }
+
+  > .inner {
+    position: relative;
+
+    > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::before {
+      position: absolute;
+      top: (-$global-spacing * 4);
+      bottom: ($global-spacing * 2);
+      left: -50vw;
+      width: 200vw;
+      content: '';
+      background: tint($base-color, 96%);
+
+      @include media(medium-up) {
+        top: (-$global-spacing * 6);
+        bottom: (-$global-spacing * 6);
+        left: ($global-spacing * 8);
+      }
+
+      @include media(large-up) {
+        top: (-$global-spacing * 8);
+        bottom: (-$global-spacing * 8);
+        left: ($global-spacing * 16);
+      }
+    }
+  }
+
+  .fold__media {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 2rem;
+  }
+
+  .aside-highlight {
+    max-width: none;
+    grid-column: 2 / span 4;
+
+    @include media(medium-up) {
+      grid-column: 1 / span 6;
+    }
+
+    @include media(large-up) {
+      grid-column: 1 / span 4;
+    }
+  }
+}
+
+
+/* Fold: Sponsors
+   ========================================================================== */
+
 #about-fold-sponsors {
   > .inner {
     @include media(large-up) {
@@ -236,7 +303,7 @@
 
   .card__header,
   .card__media,
-  .card--footer {
+  .card__footer {
     @include media(large-up) {
       padding: $global-spacing * 3;
     }

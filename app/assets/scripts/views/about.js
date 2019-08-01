@@ -106,6 +106,28 @@ var About = React.createClass({
             </div>
           </section>
 
+          <section className='fold fold--type-a' id='about-fold-story'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Our story</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>The seed of the idea for OpenAQ emerged from a small open air quality project in Ulaanbaatar, Mongolia, launched by co- founders Joe Flasher and Christa Hasenkopf along with Mongolian colleagues.</p>
+                  <p>Amazed at the outsized-impact a little open air quality data can have on a community, Christa, an atmospheric scientist, fell in love with open air quality projects.</p>
+                  <p>A few years later, she and Joe, a software developer, wondered: what would happen if all of the world’s air quality data were made available for the public to explore? One day, they quit wondering, started building, and began asking passionate people around the world to help.</p>
+                </div>
+              </header>
+              <figure className='fold__media'>
+                <aside className='aside-highlight'>
+                  <div className='aside-highlight__contents'>
+                    <div className='aside-highlight__prose'>
+                      <p>We believe in organizational missions evolving over time.</p>
+                    </div>
+                  </div>
+                </aside>
+              </figure>
+            </div>
+          </section>
+
           <section className='fold fold--semi-light' id='about-fold-sponsors'>
             <div className='inner'>
               <header className='fold__header'>
