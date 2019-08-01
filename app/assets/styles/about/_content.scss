@@ -137,11 +137,10 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  a {
-    display: flex;
+  &__item {
+    @extend .card__contents;
     align-items: center;
     justify-content: center;
-    background: #fff;
     padding: $global-spacing;
     height: 100%;
 
@@ -166,4 +165,96 @@
   @extend .button, .button--large, .button--primary, .button--capsule;
   width: 100%;
   max-width: 16rem;
+}
+
+
+/* Fold: Book
+   ========================================================================== */
+
+#about-fold-book {
+  .fold__header {
+    text-align: center;
+
+    @include media(medium-up) {
+      text-align: left;
+    }
+  }
+
+  .fold__media {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .fold__main-action {
+    justify-content: center;
+
+    @include media(medium-up) {
+      justify-content: flex-start;
+    }
+  }
+}
+
+.button-book-download {
+  @extend .button, .button--large, .button--primary, .button--capsule;
+  width: 100%;
+  max-width: 16rem;
+
+  &::before {
+    @extend %openaq-ds-icon-download;
+  }
+}
+
+.card--book {
+  position: relative;
+  max-width: 28rem;
+  min-height: 20rem;
+
+  @include media(medium-down) {
+    display: none;
+  }
+
+  @include media(large-up) {
+    min-height: 32rem;
+  }
+
+  &::after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    background: $secondary-color;
+    content: '';
+    transform: translate(3rem, 3rem);
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .card__header,
+  .card__media,
+  .card--footer {
+    @include media(large-up) {
+      padding: $global-spacing * 3;
+    }
+  }
+
+  .card__media {
+    padding-top: 0;
+  }
+
+  .card__footer {
+    text-align: right;
+
+    img {
+      width: 3.5rem;
+    }
+  }
+
+  .card__subtitle {
+    color: $primary-color;
+  }
 }
