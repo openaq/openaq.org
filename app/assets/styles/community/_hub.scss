@@ -53,6 +53,7 @@
 
 .card--participate {
   .card__header {
+    padding-top: $global-spacing * 1.5;
     padding-bottom: $global-spacing;
 
     @include media(medium-up) {
@@ -72,5 +73,9 @@
     @include media(medium-up) {
       padding: $global-spacing ($global-spacing * 4) ($global-spacing * 2) ($global-spacing * 4);
     }
+  }
+
+  .card__go-link {
+    min-width: 12rem;
   }
 }

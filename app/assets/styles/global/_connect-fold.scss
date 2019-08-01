@@ -16,7 +16,6 @@
 
   @include media(large-up) {
     padding: ($global-spacing * 8) 0;
-    text-align: left;
   }
 
   > .inner {
@@ -26,13 +25,27 @@
     grid-gap: 2rem;
     grid-template-rows: auto;
     align-items: center;
+
+    @include media(medium-up) {
+      grid-gap: 4rem 2rem;
+    }
   }
 
   > .inner,
-  .connect-fold__header {
+  .connect-fold__header,
+  .prose {
     > *:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+.connect-fold__header {
+  grid-row: 1;
+  grid-column: 1 / span 12;
+
+  @include media(medium-up) {
+    grid-column: 2 / span 10;
   }
 }
 
@@ -54,65 +67,82 @@
   }
 }
 
-.connect-fold__header {
-  grid-row: 1;
-  grid-column: 1 / span 12;
-
-  @include media(large-up) {
-    grid-column: 2 / span 4;
-  }
-}
-
-.connect-fold__cards {
+.connect-list {
   grid-row: 2;
   grid-column: 1 / span 12;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2rem;
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @include media(large-up) {
-    grid-row: 1;
-    grid-column: 7 / span 6;
-    flex-flow: row nowrap;
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  > * {
-    margin-bottom: $global-spacing * 2;
-  }
-
-  > *:last-child {
-    margin-bottom: 0;
+  .card {
+    height: 100%;
   }
 }
 
 .card--connect {
-  align-items: stretch;
-  width: 100%;
-  max-width: 24rem;
+  text-align: center;
 
   @include media(large-up) {
-    max-width: 14rem;
-    min-height: 20rem;
+    min-height: 18rem;
+  }
+
+  .card__headline {
+    justify-content: center;
   }
 
   .card__header {
+    display: block;
     padding-bottom: $global-spacing / 2;
-  }
 
-  .card__body {
-    @include media(medium-down) {
-      grid-column: 2;
+    @include media(large-up) {
+      padding-top: $global-spacing * 3;
     }
   }
 
-  .card__footer {
-    @include media(medium-down) {
-      grid-column: 2;
+  .card__title {
+    &::before {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: $global-spacing / 2;
+      color: $primary-color;
+
+      @include media(large-up) {
+        margin-bottom: $global-spacing;
+      }
     }
+  }
+
+  .card__go-link {
+    width: 100%;
+    max-width: 14rem;
   }
 }
 
-.connect-card__go-link {
-  @extend .button, .button--primary, .button--large, .button--block, .button--capsule;
+.card--connect-github .card__title::before {
+  @extend %openaq-ds-icon-brand-github;
+}
+
+.card--connect-slack .card__title::before {
+  @extend %openaq-ds-icon-brand-slack;
+}
+
+.card--connect-twitter .card__title::before {
+  @extend %openaq-ds-icon-brand-twitter;
+}
+
+.card--connect-email .card__title::before {
+  @extend %openaq-ds-icon-envelope;
 }
