@@ -164,6 +164,30 @@ var CommunityHub = React.createClass({
             </div>
           </section>
 
+          <section className='testimonials'>
+            <div className='inner'>
+              <h1 className='testimonials__title'>Testimonials</h1>
+              <ol className='testimonials-list'>
+                <li>
+                  <blockquote className='testimonial'>
+                    <div className='testimonial__media'>
+                      <img src='/assets/graphics/content/testimonials/testimonial-avatar--amrit-sharma.jpg' width='762' height='830' alt='Testimonial avatar' />
+                    </div>
+                    <div className='testimonial__copy'>
+                      <div className='testimonial__quote'>
+                        <p>{widont('Every time I take a breath in Delhi, I\'m grateful that OpenAQ exists <3.')}</p>
+                      </div>
+                      <footer className='testimonial__footer'>
+                        <strong>Amrit Sharma</strong>
+                        <small>airairair.org Founder, Canada/India</small>
+                      </footer>
+                    </div>
+                  </blockquote>
+                </li>
+              </ol>
+            </div>
+          </section>
+
           <ConnectFold />
 
         </div>
