@@ -15,7 +15,6 @@
 
 #community-fold-participate {
   > .inner {
-
     @include media(large-up) {
       grid-gap: 3rem;
     }
@@ -24,10 +23,6 @@
   .fold__header {
     grid-row: 1;
     grid-column: 1 / span 12;
-  }
-
-  .fold__title {
-    @include heading(1.75rem, large-up);
   }
 }
 

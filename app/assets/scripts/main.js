@@ -48,7 +48,7 @@ render((
     <Router history={history} render={applyRouterMiddleware(scrollerMiddleware)}>
       <Route path='/' component={App}>
         <Route name='why' path='why' component={Why} pageClass='page--why page--dark' />
-        <Route name='about' path='about' component={About} pageClass='page--about' />
+        <Route name='about' path='about' component={About} pageClass='page--about page--dark' />
         <Route name='communityHub' path='community' component={CommunityHub} pageClass='page--community-hub page--dark' />
         <Route name='communityProjects' path='community/projects' component={CommunityProjects} pageClass='page--community-projects page--dark' />
         <Route name='map' path='map' component={Map} pageClass='page--map' />
