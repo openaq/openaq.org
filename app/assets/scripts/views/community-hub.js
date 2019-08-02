@@ -2,13 +2,25 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+
+import testimonials from '../../content/testimonials.json';
 import widont from '../utils/widont';
 import ConnectFold from '../components/connect-fold';
+import Testimonials from '../components/testimonials.js';
 
 var CommunityHub = React.createClass({
   displayName: 'About the Community',
 
   propTypes: {
+  },
+
+  getTestimonial: function () {
+    if (!this.randomTestimonial) {
+      // Pick a random testimonial for this mount.
+      // This will be removed in the future in favor of a carousel
+      this.randomTestimonial = testimonials[Math.floor(Math.random() * (testimonials.length - 1))];
+    }
+    return [this.randomTestimonial];
   },
 
   render: function () {
@@ -164,29 +176,7 @@ var CommunityHub = React.createClass({
             </div>
           </section>
 
-          <section className='testimonials'>
-            <div className='inner'>
-              <h1 className='testimonials__title'>Testimonials</h1>
-              <ol className='testimonials-list'>
-                <li>
-                  <blockquote className='testimonial'>
-                    <div className='testimonial__media'>
-                      <img src='/assets/graphics/content/testimonials/testimonial-avatar--amrit-sharma.jpg' width='762' height='830' alt='Testimonial avatar' />
-                    </div>
-                    <div className='testimonial__copy'>
-                      <div className='testimonial__quote'>
-                        <p>{widont('Every time I take a breath in Delhi, I\'m grateful that OpenAQ exists <3.')}</p>
-                      </div>
-                      <footer className='testimonial__footer'>
-                        <strong>Amrit Sharma</strong>
-                        <small>airairair.org Founder, Canada/India</small>
-                      </footer>
-                    </div>
-                  </blockquote>
-                </li>
-              </ol>
-            </div>
-          </section>
+          <Testimonials items={this.getTestimonial()} />
 
           <ConnectFold />
 

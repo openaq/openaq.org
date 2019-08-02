@@ -14,6 +14,7 @@ import { geolocateUser,
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
 import testimonials from '../../content/testimonials.json';
+import Testimonials from '../components/testimonials';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -94,6 +95,15 @@ var Home = React.createClass({
     }
   },
 
+  getTestimonial: function () {
+    if (!this.randomTestimonial) {
+      // Pick a random testimonial for this mount.
+      // This will be removed in the future in favor of a carousel
+      this.randomTestimonial = testimonials[Math.floor(Math.random() * (testimonials.length - 1))];
+    }
+    return [this.randomTestimonial];
+  },
+
   //
   // Start render methods
   //
@@ -151,9 +161,6 @@ var Home = React.createClass({
   },
 
   render: function () {
-    // Pick a random testimonial
-    const testimonial = testimonials[Math.floor(Math.random() * Math.floor(testimonials.length - 1))];
-
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -330,29 +337,7 @@ var Home = React.createClass({
             </div>
           </section>
 
-          <section className='testimonials'>
-            <div className='inner'>
-              <h1 className='testimonials__title'>Testimonials</h1>
-              <ol className='testimonials-list'>
-                <li>
-                  <blockquote className='testimonial'>
-                    <div className='testimonial__media'>
-                      <img src={`/assets/graphics/content/${testimonial.image}`} width='960' height='960' alt='Image placeholder' />
-                    </div>
-                    <div className='testimonial__copy'>
-                      <div className='testimonial__quote'>
-                        <p>{testimonial.short_quote ? testimonial.short_quote : testimonial.long_quote}</p>
-                      </div>
-                      <footer className='testimonial__footer'>
-                        <strong>{testimonial.name}</strong>
-                        <small>{`${testimonial.title} / ${testimonial.affiliation} / ${testimonial.location}`}</small>
-                      </footer>
-                    </div>
-                  </blockquote>
-                </li>
-              </ol>
-            </div>
-          </section>
+          <Testimonials items={this.getTestimonial()} />
 
           <JoinFold />
 
