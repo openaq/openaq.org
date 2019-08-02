@@ -1,7 +1,7 @@
 ---
 title: "Google BigQuery"
 url: https://cloud.google.com/bigquery/public-data/openaq
-image: assets/graphics/content/projects/google.jpg
+image: assets/graphics/content/view--community-projects/projects/covers/google.jpg
 featured: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Smokey: Air Quality Bot"
 url: https://www.facebook.com/smokeybot/
-image: assets/graphics/content/projects/smokey.png
+image: assets/graphics/content/view--community-projects/projects/covers/smokey.png
 featured: true
 ---
 

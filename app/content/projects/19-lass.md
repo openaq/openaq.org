@@ -1,7 +1,7 @@
 ---
 title: "AirBox"
 url: https://pm25.lass-net.org/
-image: assets/graphics/content/projects/lass.jpg
+image: assets/graphics/content/view--community-projects/projects/covers/lass.jpg
 featured: true
 ---
 

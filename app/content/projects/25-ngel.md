@@ -1,7 +1,7 @@
 ---
 title: "NextGen Earth Labs"
 url: https://www.nexgenearth.info/
-image: assets/graphics/content/projects/ngel.jpg
+image: assets/graphics/content/view--community-projects/projects/covers/ngel.jpg
 featured: true
 ---
 

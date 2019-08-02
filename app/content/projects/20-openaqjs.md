@@ -1,7 +1,7 @@
 ---
 title: "JavaScript Client for OpenAQ"
 url: https://github.com/nickolasclarke/openaq
-image: assets/graphics/content/projects/jsopenaq.jpg
+image: assets/graphics/content/view--community-projects/projects/covers/jsopenaq.jpg
 featured: true
 ---
 

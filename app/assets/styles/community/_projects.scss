@@ -22,7 +22,7 @@
       grid-gap: 4rem 2rem;
     }
   }
-  
+
   .fold__header {
     grid-row: 1;
     grid-column: 1 / span 12;
@@ -54,4 +54,39 @@
 }
 
 .card--project {
+  .card__title {
+    @extend .visually-hidden;
+  }
+
+  .card__subtitle {
+    color: $primary-color;
+  }
+
+  .card__prose {
+    @include heading(1.25rem, medium-up);
+    color: $base-color;
+  }
+
+  .card__footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    img {
+      margin-left: auto;
+      max-height: 1.5rem;
+      width: auto;
+    }
+  }
+
+  .card__footer-detail {
+    position: relative;
+    font-family: $heading-font-family;
+    font-weight: 700;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.125em;
+    margin: ($global-spacing / 4) 0;
+  }
 }

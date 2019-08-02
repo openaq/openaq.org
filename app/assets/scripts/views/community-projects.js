@@ -25,8 +25,12 @@ var CommunityProjects = React.createClass({
             title={o.title}
             linkTitle='View this community contribution'
             url={o.url}
-            imageNode={<img width='256' height='256' src={o.image} alt='Project image' />} >
-            <div dangerouslySetInnerHTML={{__html: o.body}} />
+            imageNode={<img width='256' height='256' src={o.image} alt='Project image' />}
+            type={o.type}
+            location={o.location}
+            logo={o.logo}
+          >
+            <div className='card__prose' dangerouslySetInnerHTML={{__html: o.body}} />
           </CommunityCard>
         );
       })
