@@ -2,104 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import JoinFold from '../components/join-fold';
+import SponsorsList from '../components/sponsors-list';
 
-const sponsors = [
-  {
-    name: 'Sponsor',
-    url: 'https://www.climateworks.org/',
-    logo: 'sponsors/climateworks.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://developmentseed.org/',
-    logo: 'sponsors/devseed.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://aws.amazon.com/',
-    logo: 'sponsors/aws.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'http://www.fz-juelich.de/portal/DE/Home/home_node.html/',
-    logo: 'sponsors/fj.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://erc.europa.eu/',
-    logo: 'sponsors/erc.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'http://sites.agu.org/',
-    logo: 'sponsors/agu.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'http://earthjournalism.net/',
-    logo: 'sponsors/ejn.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://www.internews.org/',
-    logo: 'sponsors/internews.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://keen.io/',
-    logo: 'sponsors/keenio.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://www.nih.gov/',
-    logo: 'sponsors/nih.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://www.openscienceprize.org/',
-    logo: 'sponsors/openscience.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'http://thrivingearthexchange.org/',
-    logo: 'sponsors/tex.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://wellcome.ac.uk/',
-    logo: 'sponsors/wellcome.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://www.hhmi.org/',
-    logo: 'sponsors/hhmi.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'http://www.echoinggreen.org/',
-    logo: 'echoing-green.jpeg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'http://www.wri.org/',
-    logo: 'sponsors/WRI.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://www.paulhastings.com/',
-    logo: 'sponsors/PH.jpg'
-  },
-  {
-    name: 'Sponsor',
-    url: 'http://godleyfamilyfoundation.org/',
-    logo: 'sponsors/godley.png'
-  },
-  {
-    name: 'Sponsor',
-    url: 'https://www.radiant.earth/',
-    logo: 'sponsors/radiantearth.png'
-  }
-];
+import sponsors from '../../content/sponsors.json';
 
 var About = React.createClass({
   displayName: 'About',
@@ -282,15 +187,7 @@ var About = React.createClass({
               <header className='fold__header'>
                 <h1 className='fold__title'>Partners and Sponsors</h1>
               </header>
-              <ul className='sponsor-list'>
-                {sponsors.map(({ name, logo, url }) => (
-                  <li key={url}>
-                    <a title={`Visit ${name} website`} className='sponsor-list__item' target='_blank' href={url}>
-                      <img src={`/assets/graphics/content/${logo}`} alt={`${name} logo`} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <SponsorsList items={sponsors} />
               <footer className='fold__footer'>
                 <a href='mailto:' className='sponsor-button' title='View page'><span>Become a sponsor</span></a>
               </footer>

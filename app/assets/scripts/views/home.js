@@ -13,8 +13,10 @@ import { geolocateUser,
   openDownloadModal } from '../actions/action-creators';
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
-import testimonials from '../../content/testimonials.json';
 import Testimonials from '../components/testimonials';
+import testimonials from '../../content/testimonials.json';
+import sponsors from '../../content/sponsors.json';
+import SponsorsList from '../components/sponsors-list';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -102,6 +104,15 @@ var Home = React.createClass({
       this.randomTestimonial = testimonials[Math.floor(Math.random() * (testimonials.length - 1))];
     }
     return [this.randomTestimonial];
+  },
+
+  getSponsors: function () {
+    if (!this.randomSponsors) {
+      const shuffled = [...sponsors].sort(() => Math.random() - 0.5);
+      this.randomSponsors = shuffled.slice(0, 6);
+      console.log('shuffled', shuffled);
+    }
+    return this.randomSponsors;
   },
 
   //
@@ -295,44 +306,7 @@ var Home = React.createClass({
                 </div>
               </header>
               <figure className='fold__media'>
-                <ol className='hpf-sponsors-list'>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                </ol>
+                <SponsorsList items={this.getSponsors()} />
               </figure>
             </div>
           </section>
