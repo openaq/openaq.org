@@ -248,7 +248,7 @@ var Home = React.createClass({
               <figure className='fold__media'>
                 <img src='/assets/graphics/layout/oaq-illu-home-stats.svg' width='408' height='80' alt='Illustration' />
               </figure>
-              <p className='fold__action'><Link to='#' title='Learn more' className='go-link'><span>Learn more about this problem</span></Link></p>
+              <p className='fold__action'><Link to='/why' title='Learn more' className='go-link'><span>Learn more about this problem</span></Link></p>
             </div>
           </section>
 
@@ -287,7 +287,7 @@ var Home = React.createClass({
                     <li>Workshops</li>
                     <li>Maps</li>
                   </ol>
-                  <p><Link to='#' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
+                  <p><Link to='/community' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
               <figure className='fold__media'>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import widont from '../utils/widont';
 import _ from 'lodash';
 
+import ConnectFold from '../components/connect-fold';
 import CommunityCard from '../components/community-card';
 import content from '../../content/content.json';
 
@@ -44,9 +45,10 @@ var CommunityProjects = React.createClass({
             <nav className='fold__nav'>
               <h2>Filter by</h2>
               <h3>Type</h3>
-              <a href='#' title='Filter by type'><span>Project type</span></a>
+              <a href='#' title='Filter by type'><span>All types</span></a>
               <h3>Location</h3>
-              <a href='#' title='Filter by location'><span>Location</span></a>
+              <a href='#' title='Filter by location'><span>All locations</span></a>
+              <p className='summary'>Showing 34 projects</p>
             </nav>
           </header>
           <ul className='project-list'>
@@ -77,6 +79,7 @@ var CommunityProjects = React.createClass({
         </header>
         <div className='inpage__body'>
           {this.renderProjects()}
+          <ConnectFold />
         </div>
       </section>
     );

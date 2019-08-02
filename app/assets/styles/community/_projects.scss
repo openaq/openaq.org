@@ -27,6 +27,46 @@
     grid-row: 1;
     grid-column: 1 / span 12;
   }
+
+  .fold__title {
+    @extend .visually-hidden;
+  }
+
+  .fold__nav {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+
+    h2 {
+      width: 100%;
+      position: relative;
+      font-family: $heading-font-family;
+      font-weight: 700;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.125em;
+      color: $base-color;
+      margin: 0 0 $global-spacing 0;
+    }
+
+    a {
+      @extend .button, .button--large, .button--primary-bounded, .button--capsule;
+      margin-right: 0.5rem;
+
+      &::after {
+        @extend %openaq-ds-icon-chevron-down--small;
+      }
+    }
+
+    h3 {
+      @extend .visually-hidden;
+    }
+
+    .summary {
+      margin: 0 0 0 auto;
+    }
+  }
 }
 
 .project-list {
