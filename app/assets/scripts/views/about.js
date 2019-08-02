@@ -3,6 +3,104 @@ import React from 'react';
 import { connect } from 'react-redux';
 import JoinFold from '../components/join-fold';
 
+const sponsors = [
+  {
+    name: 'Sponsor',
+    url: 'https://www.climateworks.org/',
+    logo: 'sponsors/climateworks.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://developmentseed.org/',
+    logo: 'sponsors/devseed.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://aws.amazon.com/',
+    logo: 'sponsors/aws.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'http://www.fz-juelich.de/portal/DE/Home/home_node.html/',
+    logo: 'sponsors/fj.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://erc.europa.eu/',
+    logo: 'sponsors/erc.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'http://sites.agu.org/',
+    logo: 'sponsors/agu.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'http://earthjournalism.net/',
+    logo: 'sponsors/ejn.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://www.internews.org/',
+    logo: 'sponsors/internews.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://keen.io/',
+    logo: 'sponsors/keenio.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://www.nih.gov/',
+    logo: 'sponsors/nih.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://www.openscienceprize.org/',
+    logo: 'sponsors/openscience.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'http://thrivingearthexchange.org/',
+    logo: 'sponsors/tex.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://wellcome.ac.uk/',
+    logo: 'sponsors/wellcome.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://www.hhmi.org/',
+    logo: 'sponsors/hhmi.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'http://www.echoinggreen.org/',
+    logo: 'echoing-green.jpeg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'http://www.wri.org/',
+    logo: 'sponsors/WRI.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://www.paulhastings.com/',
+    logo: 'sponsors/PH.jpg'
+  },
+  {
+    name: 'Sponsor',
+    url: 'http://godleyfamilyfoundation.org/',
+    logo: 'sponsors/godley.png'
+  },
+  {
+    name: 'Sponsor',
+    url: 'https://www.radiant.earth/',
+    logo: 'sponsors/radiantearth.png'
+  }
+];
+
 var About = React.createClass({
   displayName: 'About',
 
@@ -185,25 +283,13 @@ var About = React.createClass({
                 <h1 className='fold__title'>Partners and Sponsors</h1>
               </header>
               <ul className='sponsor-list'>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://www.climateworks.org/'><img src='/assets/graphics/content/sponsors/climateworks.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://developmentseed.org/'><img src='/assets/graphics/content/sponsors/devseed.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://aws.amazon.com/'><img src='/assets/graphics/content/sponsors/aws.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='http://www.fz-juelich.de/portal/DE/Home/home_node.html/'><img src='/assets/graphics/content/sponsors/fj.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://erc.europa.eu/'><img src='/assets/graphics/content/sponsors/erc.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='http://sites.agu.org/'><img src='/assets/graphics/content/sponsors/agu.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='http://earthjournalism.net/'><img src='/assets/graphics/content/sponsors/ejn.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://www.internews.org/'><img src='/assets/graphics/content/sponsors/internews.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://keen.io/'><img src='/assets/graphics/content/sponsors/keenio.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://www.nih.gov/'><img src='/assets/graphics/content/sponsors/nih.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://www.openscienceprize.org/'><img src='/assets/graphics/content/sponsors/openscience.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='http://thrivingearthexchange.org/'><img src='/assets/graphics/content/sponsors/tex.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://wellcome.ac.uk/'><img src='/assets/graphics/content/sponsors/wellcome.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://www.hhmi.org/'><img src='/assets/graphics/content/sponsors/hhmi.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='http://www.echoinggreen.org/'><img src='/assets/graphics/content/sponsors/echoing-green.jpeg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='http://www.wri.org/'><img src='/assets/graphics/content/sponsors/WRI.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://www.paulhastings.com/'><img src='/assets/graphics/content/sponsors/PH.jpg' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='http://godleyfamilyfoundation.org/'><img src='/assets/graphics/content/sponsors/godley.png' alt='Sponsor logo' /></a></li>
-                <li><a title='Visit sponsor website' className='sponsor-list__item' target='_blank' href='https://www.radiant.earth/'><img src='/assets/graphics/content/sponsors/radiantearth.png' alt='Sponsor logo' /></a></li>
+                {sponsors.map(({ name, logo, url }) => (
+                  <li key={url}>
+                    <a title={`Visit ${name} website`} className='sponsor-list__item' target='_blank' href={url}>
+                      <img src={`/assets/graphics/content/${logo}`} alt={`${name} logo`} />
+                    </a>
+                  </li>
+                ))}
               </ul>
               <footer className='fold__footer'>
                 <a href='mailto:' className='sponsor-button' title='View page'><span>Become a sponsor</span></a>
