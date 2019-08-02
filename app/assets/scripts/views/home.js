@@ -13,6 +13,10 @@ import { geolocateUser,
   openDownloadModal } from '../actions/action-creators';
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
+import Testimonials from '../components/testimonials';
+import testimonials from '../../content/testimonials.json';
+import sponsors from '../../content/sponsors.json';
+import SponsorsList from '../components/sponsors-list';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -60,7 +64,7 @@ var Home = React.createClass({
     // the future this should be dynamic.
     // Total pages come from this query.
     // https://api.openaq.org/v1/locations?parameter=pm25&limit=1
-    let totalPages = 2780;
+    let totalPages = 5024;
 
     this.props._fetchCompareLocationIfNeeded(0, null, {
       page: Math.floor(Math.random() * totalPages) + 1,
@@ -91,6 +95,24 @@ var Home = React.createClass({
       // Fetch measurements after we have the location name.
       this.props._fetchCompareLocationMeasurements(1, l2.data.location, fromDate.toISOString(), toDate.toISOString());
     }
+  },
+
+  getTestimonial: function () {
+    if (!this.randomTestimonial) {
+      // Pick a random testimonial for this mount.
+      // This will be removed in the future in favor of a carousel
+      this.randomTestimonial = testimonials[Math.floor(Math.random() * (testimonials.length - 1))];
+    }
+    return [this.randomTestimonial];
+  },
+
+  getSponsors: function () {
+    if (!this.randomSponsors) {
+      const shuffled = [...sponsors].sort(() => Math.random() - 0.5);
+      this.randomSponsors = shuffled.slice(0, 6);
+      console.log('shuffled', shuffled);
+    }
+    return this.randomSponsors;
   },
 
   //
@@ -284,71 +306,12 @@ var Home = React.createClass({
                 </div>
               </header>
               <figure className='fold__media'>
-                <ol className='hpf-sponsors-list'>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' title='Visit partner'>
-                      <img src='https://via.placeholder.com/960x480' width='960' height='480' alt='Logo placeholder' />
-                      <span>Partner name</span>
-                    </a>
-                  </li>
-                </ol>
+                <SponsorsList items={this.getSponsors()} />
               </figure>
             </div>
           </section>
 
-          <section className='testimonials'>
-            <div className='inner'>
-              <h1 className='testimonials__title'>Testimonials</h1>
-              <ol className='testimonials-list'>
-                <li>
-                  <blockquote className='testimonial'>
-                    <div className='testimonial__media'>
-                      <img src='https://via.placeholder.com/960' width='960' height='960' alt='Image placeholder' />
-                    </div>
-                    <div className='testimonial__copy'>
-                      <div className='testimonial__quote'>
-                        <p>OpenAQ is the Wikipedia of Air Quality.</p>
-                      </div>
-                      <footer className='testimonial__footer'>
-                        <strong>Ian Schuler</strong>
-                        <small>CEO/Development Seed / Washington, DC USA</small>
-                      </footer>
-                    </div>
-                  </blockquote>
-                </li>
-              </ol>
-            </div>
-          </section>
+          <Testimonials items={this.getTestimonial()} />
 
           <JoinFold />
 

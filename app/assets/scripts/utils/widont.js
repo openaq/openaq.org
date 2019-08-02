@@ -12,18 +12,11 @@
  *
  * &nbsp; = \u00A0
  */
-export default function (string, breakBefore) {
-  breakBefore = breakBefore || 22;
+export default function widont (string, breakBefore = 12) {
+  const breakPoint = Math.max(string.length - breakBefore, 0);
 
-  string = string.replace(/\u00A0([^\s]+)$/, ' $1');
-  var s = string.split(' ');
+  const left = string.substring(0, breakPoint);
+  const right = string.substring(breakPoint);
 
-  if (s.length > 1) {
-    var l = s.length;
-    var breakLength = (s[l - 1] + ' ' + s[l - 2]).length;
-    if (breakBefore === 'always' || breakLength < breakBefore) {
-      return string.replace(/\s([^\s]+)\s*$/, '\u00A0$1');
-    }
-  }
-  return string;
+  return left + right.replace(/ /g, '\u00A0');
 }

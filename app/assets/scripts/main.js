@@ -9,13 +9,8 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createLogger from 'redux-logger';
-// import {whyDidYouUpdate} from 'why-did-you-update';
 import reducer from './reducers/index';
 import { fetchBaseData, fetchBaseStats } from './actions/action-creators';
-
-if (process.env.NODE_ENV !== 'production') {
-  // whyDidYouUpdate(React, { exclude: /Scroll/ });
-}
 
 import App from './views/app';
 import Home from './views/home';
@@ -30,7 +25,13 @@ import CountriesHub from './views/countries-hub';
 import Country from './views/country';
 import Compare from './views/compare';
 
-const logger = createLogger();
+const logger = createLogger({
+  level: 'info',
+  collapsed: true,
+  predicate: (getState, action) => {
+    return (process.env.NODE_ENV !== 'production');
+  }
+});
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 const history = syncHistoryWithStore(hashHistory, store);
 
