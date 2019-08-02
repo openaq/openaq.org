@@ -64,7 +64,7 @@ var Home = React.createClass({
     // the future this should be dynamic.
     // Total pages come from this query.
     // https://api.openaq.org/v1/locations?parameter=pm25&limit=1
-    let totalPages = 2780;
+    let totalPages = 5024;
 
     this.props._fetchCompareLocationIfNeeded(0, null, {
       page: Math.floor(Math.random() * totalPages) + 1,
