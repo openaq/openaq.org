@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import c from 'classnames';
 
 var CommunityCard = React.createClass({
   displayName: 'CommunityCard',
