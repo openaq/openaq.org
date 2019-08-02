@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import JoinFold from '../components/join-fold';
-import SponsorsList from '../components/sponsors-list';
+import SponsorList from '../components/sponsor-list';
 
 import sponsors from '../../content/sponsors.json';
 
@@ -187,7 +187,7 @@ var About = React.createClass({
               <header className='fold__header'>
                 <h1 className='fold__title'>Partners and Sponsors</h1>
               </header>
-              <SponsorsList items={sponsors} />
+              <SponsorList items={sponsors} />
               <footer className='fold__footer'>
                 <a href='mailto:' className='sponsor-button' title='View page'><span>Become a sponsor</span></a>
               </footer>

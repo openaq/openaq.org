@@ -16,7 +16,7 @@ import JoinFold from '../components/join-fold';
 import Testimonials from '../components/testimonials';
 import testimonials from '../../content/testimonials.json';
 import sponsors from '../../content/sponsors.json';
-import SponsorsList from '../components/sponsors-list';
+import SponsorList from '../components/sponsor-list';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -296,7 +296,7 @@ var Home = React.createClass({
             </div>
           </section>
 
-          <section className='fold fold--semi-light fold--type-b' id='home-partners-fold'>
+          <section className='fold fold--semi-light fold--type-b' id='home-fold-sponsors'>
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__subtitle'>Partners and sponsors</h1>
@@ -306,7 +306,7 @@ var Home = React.createClass({
                 </div>
               </header>
               <figure className='fold__media'>
-                <SponsorsList items={this.getSponsors()} />
+                <SponsorList items={this.getSponsors()} />
               </figure>
             </div>
           </section>
