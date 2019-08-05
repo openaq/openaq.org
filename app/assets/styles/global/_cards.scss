@@ -5,3 +5,14 @@
 .card__go-link {
   @extend .button, .button--primary, .button--large, .button--capsule;
 }
+
+.card__footer-detail {
+  position: relative;
+  font-family: $heading-font-family;
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  margin: ($global-spacing / 4) 0;
+}
