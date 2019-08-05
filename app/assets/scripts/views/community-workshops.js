@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import widont from '../utils/widont';
 
-import ConnectFold from '../components/connect-fold';
+import WorkshopFold from '../components/workshop-fold';
 
 var CommunityWorkshops = React.createClass({
   displayName: 'Workshops',
@@ -88,7 +88,7 @@ var CommunityWorkshops = React.createClass({
             </div>
           </section>
 
-          <ConnectFold />
+          <WorkshopFold />
         </div>
       </section>
     );
