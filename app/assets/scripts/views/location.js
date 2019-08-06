@@ -610,6 +610,7 @@ var Location = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
+              <p className='inpage__subtitle'>location</p>
               <h1 className='inpage__title'>{data.location} <small>in {data.city}, {country.name}</small></h1>
               <ul className='ipha'>
                 <li><a href={`${config.api}/locations?location=${data.location}`} title='View in API documentation' className='ipha-api' target='_blank'>View API</a></li>
