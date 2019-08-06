@@ -322,7 +322,7 @@ var LocationsHub = React.createClass({
                 <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
               </div>
               <ul className='ipha'>
-                <li><a href={yesterdayDataUrl} className='ipha-download' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
+                <li><a href={yesterdayDataUrl} className='ipha-download ipha-main' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
                 <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
               </ul>
             </div>

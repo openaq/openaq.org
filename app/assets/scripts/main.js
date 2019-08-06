@@ -55,8 +55,8 @@ render((
         <Route name='communityProjects' path='community/projects' component={CommunityProjects} pageClass='page--community-projects page--dark' />
         <Route name='communityWorkshops' path='community/workshops' component={CommunityWorkshops} pageClass='page--community-workshops page--dark' />
         <Route name='map' path='map' component={Map} pageClass='page--map' />
-        <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations page--dark' />
-        <Route name='location' path='location/:name' component={LocationItem} pageClass='page--location page--dark' />
+        <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations-hub page--dark' />
+        <Route name='location' path='location/:name' component={LocationItem} pageClass='page--locations-single page--dark' />
         <Route name='countriesHub' path='countries' component={CountriesHub} pageClass='page--countries page--dark' />
         <Route name='country' path='countries/:name' component={Country} pageClass='page--country' />
         <Route name='country' path='compare(/:loc1)(/:loc2)(/:loc3)' component={Compare} pageClass='page--compare' />

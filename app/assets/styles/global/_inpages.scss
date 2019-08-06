@@ -85,6 +85,10 @@ $page-header-y: $global-spacing * 5;
       font-size: 3.5rem;
       line-height: 4rem;
     }
+
+    small {
+      display: block;
+    }
   }
 
   &__subtitle {
@@ -289,8 +293,6 @@ $page-header-y: $global-spacing * 5;
 
   > li {
     margin: 0.25rem 0.5rem 0.25rem 0;
-    flex: 1;
-    max-width: 16rem;
   }
 }
 
@@ -300,24 +302,30 @@ $page-header-y: $global-spacing * 5;
 
 [class^="ipha-"],
 [class*=" ipha-"] {
-  @extend .button, .button--large, .button--capsule;
+  @extend .button, .button--large, .button--white-bounded, .button--capsule;
   display: block;
 }
 
 .ipha-api {
-  @extend .button--white-bounded;
-
   &::before {
     @extend %openaq-ds-icon-code;
   }
 }
 
 .ipha-download {
-  @extend .button--primary-ghost;
-
   &::before {
     @extend %openaq-ds-icon-download;
   }
+}
+
+.ipha-compare {
+  &::before {
+    @extend %openaq-ds-icon-swap-horizontal;
+  }
+}
+
+.ipha-main {
+  @extend .button--primary-ghost;
 }
 
 

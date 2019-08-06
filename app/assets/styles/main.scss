@@ -72,14 +72,9 @@
 /* Locations
    ========================================================================== */
 
-@import "locations/content";
-
-
-/* Individual Location
-   ========================================================================== */
-
-@import "location/content";
-@import "location/measurement-chart";
+@import "locations/hub";
+@import "locations/single";
+@import "locations/measurement-chart";
 
 
 /* Countries
