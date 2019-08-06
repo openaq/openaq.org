@@ -2,28 +2,32 @@
    Compare: Content
    ========================================================================== */
 
+.page--compare {
+  .inpage__header {
+    background: tint($base-color, 96%);
+  }
+
+  .inpage__headline {
+    @include media(large-up) {
+      grid-column: 1 / span 8;
+    }
+  }
+
+  .fold > .inner {
+    grid-template-columns: 1fr;
+  }
+}
+
 %list-reset {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.page--compare {
-  .inpage__header {
-    padding-top: 7rem;
-  }
-
-  .inpage__headline {
-    margin-bottom: 1rem;
-  }
-
-  .inpage__title {
-    @extend .heading--small;
-  }
-}
-
-
 .compare {
+  grid-row: 2;
+  grid-column: 1 / span 12;
+
   &__location-list {
     @extend %list-reset;
     overflow: hidden;
@@ -154,4 +158,12 @@
   &::before {
     @extend %openaq-ds-icon-plus;
   }
+}
+
+
+/* Fold: Measurements
+   ========================================================================== */
+
+#compare-fold-measurements {
+
 }
