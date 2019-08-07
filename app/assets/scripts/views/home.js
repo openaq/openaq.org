@@ -110,7 +110,6 @@ var Home = React.createClass({
     if (!this.randomSponsors) {
       const shuffled = [...sponsors].sort(() => Math.random() - 0.5);
       this.randomSponsors = shuffled.slice(0, 6);
-      console.log('shuffled', shuffled);
     }
     return this.randomSponsors;
   },
