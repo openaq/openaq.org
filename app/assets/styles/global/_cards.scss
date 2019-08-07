@@ -2,6 +2,35 @@
    Global: Cards
    ========================================================================== */
 
+.card--data {
+  .card__title small {
+    display: block;
+    line-height: 1.25;
+  }
+}
+
+.card__meta-details {
+  display: grid;
+  grid-template-columns: repeat(2, fit-content(50%));
+  grid-gap: 0.5rem 1rem;
+  font-feature-settings: normal;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  > * {
+    line-height: 1rem;
+    margin: 0;
+  }
+
+  dt {
+    font-family: $heading-font-family;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+}
+
 .card__go-link {
   @extend .button, .button--primary, .button--large, .button--capsule;
 }
@@ -15,4 +44,40 @@
   text-transform: uppercase;
   letter-spacing: 0.125em;
   margin: ($global-spacing / 4) 0;
+}
+
+.card__footer-actions {
+  list-style: none;
+  padding: 0;
+  margin: 0 (-$contained-spacing) (-$contained-spacing) (-$contained-spacing) !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: inset 0 1px 0 0 $base-semi-alpha-color;
+
+  > *:not(:last-child) {
+    box-shadow: 1px 0 0 0 $base-semi-alpha-color;
+  }
+}
+
+/**
+ * "cfa-" prefix stands for "card footer actions"
+ */
+
+[class^="cfa-"],
+[class*=" cfa-"] {
+  @extend .button, .button--xlarge, .button--primary-unbounded;
+  border-radius: 0;
+  display: block;
+}
+
+.cfa-download {
+  &::before {
+    @extend %openaq-ds-icon-download;
+  }
+}
+
+.cfa-go {
+  &::after {
+    @extend %openaq-ds-icon-arrow-right;
+  }
 }

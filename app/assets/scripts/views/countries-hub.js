@@ -24,7 +24,7 @@ var CountriesHub = React.createClass({
   renderCountryList: function () {
     return sortBy(this.props.countries, 'name').map(o => (
       <li className='country-list__item' key={o.code}>
-        <article className='card card--data-compact'>
+        <article className='card'>
           <div className='card__contents'>
             <header className='card__header'>
               <div className='card__headline'>
@@ -32,15 +32,17 @@ var CountriesHub = React.createClass({
               </div>
             </header>
             <div className='card__body'>
-              <ul className='card__meta-details'>
-                <li>Measurements: {formatThousands(o.count)}</li>
-                <li>Locations: {formatThousands(o.locations)}</li>
-              </ul>
+              <dl className='card__meta-details'>
+                <dt>Measurements</dt>
+                <dd>{formatThousands(o.count)}</dd>
+                <dt>Locations</dt>
+                <dd>{formatThousands(o.locations)}</dd>
+              </dl>
             </div>
             <footer className='card__footer'>
-              <ul className='card__actions'>
-                <li><a href='#' className='button-card-download' title={`Download data for ${o.name}`} onClick={this.onDownloadClick.bind(null, o.code)}>Download</a></li>
-                <li><Link to={`/countries/${o.code}`} className='button-card-view' title={`View ${o.name} page`}>View More</Link></li>
+              <ul className='card__footer-actions'>
+                <li><a href='#' className='cfa-download' title={`Download data for ${o.name}`} onClick={this.onDownloadClick.bind(null, o.code)}>Download</a></li>
+                <li><Link to={`/countries/${o.code}`} className='cfa-go' title={`View ${o.name} page`}>View More</Link></li>
               </ul>
             </footer>
           </div>
