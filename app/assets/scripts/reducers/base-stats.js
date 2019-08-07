@@ -15,7 +15,6 @@ const defaultState = {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case actions.RECEIVE_BASE_DATA:
-      console.log('base-stats: RECEIVE_BASE_DATA');
       if (action.error) {
         break;
       }
@@ -28,13 +27,11 @@ export default function (state = defaultState, action) {
       state.data.totalMeasurements = action.json.totalMeasurements;
       break;
     case actions.REQUEST_BASE_STATS:
-      console.log('REQUEST_BASE_STATS');
       state = _.cloneDeep(state);
       state.error = null;
       state.fetching = true;
       break;
     case actions.RECEIVE_BASE_STATS:
-      console.log('RECEIVE_BASE_STATS');
       state = _.cloneDeep(state);
       if (action.error) {
         state.error = action.error;
