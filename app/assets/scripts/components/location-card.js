@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import c from 'classnames';
 import moment from 'moment';
 import { Link } from 'react-router';
 
