@@ -35,43 +35,10 @@ html {
 .page__header {
   position: relative;
   z-index: 10;
-  display: flex;
-  align-items: center;
-  background: #fff;
-  color: $base-font-color;
-  padding: $global-spacing 0;
-  box-shadow: 0 4px 16px 0 $base-semi-alpha-color;
-  min-height: 5rem;
-
-  > .inner {
-    @extend .constrainer;
-    flex: 1;
-  }
-}
-
-/* Headline */
-
-.page__headline {
-  float: left;
-  padding: 0.625rem 0;
 }
 
 .page__title {
-  font-size: 1.25rem;
-  line-height: 2rem;
-  font-weight: $base-font-bold;
-  text-transform: uppercase;
-  margin: 0;
-
-  a {
-    display: inline-block;
-    vertical-align: top;
-    color: inherit;
-
-    span {
-      @extend .visually-hidden;
-    }
-  }
+  @extend .visually-hidden;
 }
 
 

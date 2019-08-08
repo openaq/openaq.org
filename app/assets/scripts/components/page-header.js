@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
-import c from 'classnames';
-import _ from 'lodash';
+
+const m = (min, max) => window.innerWidth >= min && window.innerWidth <= max;
 
 var PageHeader = React.createClass({
   displayName: 'PageHeader',
@@ -11,98 +11,88 @@ var PageHeader = React.createClass({
     routes: React.PropTypes.array
   },
 
-  getInitialState: function () {
-    return {
-      dataMenu: false
-    };
-  },
-
-  documentListener: function (e) {
-    if (e.preventClose !== true && this.state.dataMenu) {
-      this.setState({dataMenu: false});
-    }
-  },
-
-  dataMenuClick: function (e) {
-    e.preventDefault();
-    this.setState({dataMenu: !this.state.dataMenu});
-  },
-
-  dataMenuItemClick: function (e) {
-    this.setState({dataMenu: false});
-    document.documentElement.classList.remove('offcanvas-revealed');
-  },
-
-  onRootMenuClick: function (e) {
-    document.documentElement.classList.remove('offcanvas-revealed');
-  },
-
-  offcanvasMenuClick: function (e) {
-    e.preventDefault();
-    document.documentElement.classList.toggle('offcanvas-revealed');
-  },
-
-  onNavDataClick: function (e) {
-    // When clicking a nav block, add a property to the event indicating that
-    // the block shouldn't be toggled on body click.
-    e.preventClose = true;
-  },
-
-  componentDidMount: function () {
-    document.addEventListener('click', this.documentListener);
-    this.refs.navData.addEventListener('click', this.onNavDataClick);
-  },
-
-  componentWillUnmount: function () {
-    document.removeEventListener('click', this.documentListener);
-    this.refs.navData.removeEventListener('click', this.onNavDataClick);
-  },
-
   render: function () {
-    let pageName = _.get(_.last(this.props.routes), 'name', '');
-    let activeData = [
-      'countriesHub', 'country',
-      'locationsHub', 'location'
-    ].indexOf(pageName) !== -1;
+    window.refresh = () => this.setState({a: Date.now()});
 
     return (
       <header className='page__header' role='banner'>
-        <div className='inner'>
-          <div className='page__headline'>
-            <h1 className='page__title'>
-              <IndexLink to='/' title='Visit homepage'>
+        <h1 className='page__title'>OpenAQ</h1>
+
+        <nav className='page__prime-nav nav'>
+
+          <div className='nav__group nav__group--main'>
+            <div className='inner'>
+
+              <IndexLink to='/' title='Visit homepage' className='nav__home-link'>
                 <img src='/assets/graphics/layout/oaq-logo-col-pos.svg' alt='OpenAQ logotype' width='72' height='40' />
-                <span>OpenAQ</span>
+                <span>Home</span>
               </IndexLink>
-            </h1>
+              <Link to='/community' title='View page' className='nav__action-link'><span>Get involved</span></Link>
+              {m(991, 3000) && (
+                <ul className='global-menu'>
+                  <li><a href='#' title='View page' className='global-menu__link'><span>Home</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link'><span>Why open air quality?</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link global-menu__link--alt global-menu__link--active'><span>Open data</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link global-menu__link--alt'><span>Community</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link'><span>Blog</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link global-menu__link--alt'><span>About us</span></a></li>
+                </ul>
+              )}
+              {m(0, 991) && (
+                <a href='#nav-group-global' title='View menu' className='nav__burguer-link nav__burguer-link--alt'><span>Jump to main menu</span></a>
+              )}
+            </div>
           </div>
-          <nav className='page__prime-nav'>
-            <h2 className='page__prime-nav-title'><a href='#nav-block-browse' onClick={this.offcanvasMenuClick}><span>Menu</span></a></h2>
-            <div className='nav-block' id='nav-block-browse'>
-              <ul className='browse-menu'>
-                <li><IndexLink to='/' title='Go to OpenAQ homepage' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Home</span></IndexLink></li>
-                <li><Link to='/why' title='View page' className='browse-menu__item' activeClassName='browse-menu__item--active'><span>Why open air quality?</span></Link></li>
-                <li className={c('sub-nav-block-wrapper', {'sub-revealed': this.state.dataMenu})} ref='navData'>
-                  <a href='#' title='Show data sections' className={c('browse-menu__item', {'browse-menu__item--active': activeData})} onClick={this.dataMenuClick}><span>Data</span></a>
-                  <div className='sub-nav-block' id='sub-nav-block-data'>
-                    <ul className='browse-menu browse-menu--sub'>
-                      <li><Link to='/locations' title='Visit locations page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Locations</span></Link></li>
-                      <li><Link to='/countries' title='Visit Countries page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Countries</span></Link></li>
-                      <li><a href='https://docs.openaq.org/' title='View OpenAQ API documentation' className='browse-menu__item' onClick={this.dataMenuItemClick} target='_blank'><span>API</span></a></li>
-                    </ul>
-                  </div>
+
+          {m(0, 991) && (
+            <div className='nav__group nav__group--sub' id='nav-group-global'>
+              <div className='inner'>
+                <h3 className='nav__title visually-hidden'>Main</h3>
+                <ul className='global-menu'>
+                  <li><a href='#' title='View page' className='global-menu__link'><span>Home</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link'><span>Why open air quality?</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link global-menu__link--alt'><span>Open data</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link global-menu__link--alt'><span>Community</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link'><span>Blog</span></a></li>
+                  <li><a href='#' title='View page' className='global-menu__link global-menu__link--alt'><span>About us</span></a></li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          <div className='nav__group nav__group--sub' id='nav-group-open-data'>
+            <div className='inner'>
+              <h3 className='nav__title nav__title--sub'><a href='#' title='Back'><span>Open data</span></a></h3>
+              <ul className='sub-menu'>
+                <li>
+                  <a href='#' title='View page' className='sub-menu__link sub-menu__link--locations'>
+                    <h5>Locations</h5>
+                    <p>Mauris posuere mauris a molestie ultrices.</p>
+                  </a>
                 </li>
-
-                <li><Link to='/map' title='Visit Map page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Map</span></Link></li>
-                <li><Link to='/community' title='Visit community page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Community</span></Link></li>
-                <li><a href='https://medium.com/@openaq' title='Visit OpenAQ blog on medium' className='browse-menu__item' target='_blank' onClick={this.onRootMenuClick}><span>Blog</span></a></li>
-                <li><a href='https://github.com/openaq/openaq-info/blob/master/FAQ.md' title='See Frequently Asked Questions' className='browse-menu__item' target='_blank' onClick={this.onRootMenuClick}><span>FAQ</span></a></li>
-                <li><Link to='/about' title='Visit about page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>About</span></Link></li>
-
+                <li>
+                  <a href='#' title='View page' className='sub-menu__link sub-menu__link--countries'>
+                    <h5>Countries</h5>
+                    <p>Mauris posuere mauris a molestie ultrices.</p>
+                  </a>
+                </li>
+                <li>
+                  <a href='#' title='View page' className='sub-menu__link sub-menu__link--map'>
+                    <h5>World map</h5>
+                    <p>Mauris posuere mauris a molestie ultrices.</p>
+                  </a>
+                </li>
+                <li>
+                  <a href='#' title='View page' className='sub-menu__link sub-menu__link--api'>
+                    <h5>Use API</h5>
+                    <p>Mauris posuere mauris a molestie ultrices.</p>
+                  </a>
+                </li>
               </ul>
             </div>
-          </nav>
-        </div>
+          </div>
+
+        </nav>
       </header>
     );
   }
