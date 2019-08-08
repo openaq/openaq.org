@@ -416,7 +416,17 @@ class CompareLocationCard extends React.Component {
       measurement
     } = this.props;
 
-    if (!location.fetched || !measurement.fetched) return null;
+    if (!location.fetched || !measurement.fetched) {
+      return (
+        <article className='card card--measurement'>
+          <div className='card__contents'>
+            <div className='card__body'>
+              <p>Loading data</p>
+            </div>
+          </div>
+        </article>
+      );
+    }
 
     const {
       city,
