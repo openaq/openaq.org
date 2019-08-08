@@ -1,41 +1,129 @@
 'use strict';
-import React from 'react';
+import React, { PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 import widont from '../utils/widont';
 import _ from 'lodash';
+import c from 'classnames';
+import { Dropdown } from 'openaq-design-system';
 
 import ConnectFold from '../components/connect-fold';
 import CommunityCard from '../components/community-card';
 import content from '../../content/content.json';
+import QsState from '../utils/qs-state';
 
-var CommunityProjects = React.createClass({
-  displayName: 'Community Impact',
-
-  propTypes: {
+// Values for the filters.
+const filterData = {
+  type: {
+    values: _(content.projects)
+      .values()
+      .map(o => o.type)
+      .filter(Boolean)
+      .uniq()
+      .value(),
+    label: 'types'
   },
 
-  renderProjects: function () {
-    let cards = _(content.projects)
+  location: {
+    values: _(content.projects)
       .values()
-      .shuffle()
-      .map(o => {
-        return (
-          <CommunityCard
-            key={_.kebabCase(o.title)}
-            horizontal={true}
-            title={o.title}
-            linkTitle='View this community contribution'
-            url={o.url}
-            imageNode={<img width='256' height='256' src={o.image} alt='Project image' />}
-            type={o.type}
-            location={o.location}
-            logo={o.logo}
-          >
-            <div className='card__prose' dangerouslySetInnerHTML={{__html: o.body}} />
-          </CommunityCard>
-        );
+      .map(o => o.location)
+      .filter(Boolean)
+      .uniq()
+      .value(),
+    label: 'locations'
+  }
+};
+
+class CommunityProjects extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.qsState = new QsState({
+      type: {
+        accessor: 'filter.type',
+        default: null
+      },
+      location: {
+        accessor: 'filter.location',
+        default: null
+      }
+    });
+
+    this.state = this.qsState.getState(props.location.search.substr(1));
+  }
+
+  onFilterSelect (what, value, e) {
+    e.preventDefault();
+    this.setState({
+      filter: Object.assign({}, this.state.filter, {
+        [what]: value
       })
-      .value();
+    }, () => {
+      const qObj = this.qsState.getQueryObject(this.state);
+      this.props.history.push(Object.assign({}, this.props.location, { query: qObj }));
+    });
+  }
+
+  renderFilterDropdown (what) {
+    const values = filterData[what].values;
+    const label = `All ${filterData[what].label}`;
+    const current = this.state.filter[what];
+
+    return (
+      <Dropdown
+        triggerElement='a'
+        triggerTitle={`Filter by ${what}`}
+        triggerText={current || label} >
+        <ul role='menu' className='drop__menu drop__menu--select'>
+          <li>
+            <a className={c('drop__menu-item', {'drop__menu-item--active': current === null})} href='#' target='_blank' title='Show all values' data-hook='dropdown:close' onClick={this.onFilterSelect.bind(this, what, null)}><span>{label}</span></a>
+          </li>
+          {values.map(o => (
+            <li key={o}>
+              <a className={c('drop__menu-item', {'drop__menu-item--active': current === o})} href='#' target='_blank' title={`Filter by ${o}`} data-hook='dropdown:close' onClick={this.onFilterSelect.bind(this, what, o)}><span>{o}</span></a>
+            </li>
+          ))}
+        </ul>
+      </Dropdown>
+    );
+  }
+
+  renderProjects () {
+    const {type, location} = this.state.filter;
+
+    let cards = _(content.projects).values();
+
+    // Apply filters if they're set
+    if (type || location) {
+      cards = cards.filter(o => {
+        if (type && o.type !== type) {
+          return false;
+        }
+        if (location && o.location !== location) {
+          return false;
+        }
+        return true;
+      });
+    }
+
+    cards = cards.map(o => {
+      return (
+        <CommunityCard
+          key={_.kebabCase(o.title)}
+          horizontal={true}
+          title={o.title}
+          linkTitle='View this community contribution'
+          url={o.url}
+          imageNode={<img width='256' height='256' src={o.image} alt='Project image' />}
+          type={o.type}
+          location={o.location}
+          logo={o.logo}
+        >
+          <div className='card__prose' dangerouslySetInnerHTML={{__html: o.body}} />
+        </CommunityCard>
+      );
+    })
+    .value();
 
     return (
       <section className='fold' id='community-fold-projects'>
@@ -45,21 +133,23 @@ var CommunityProjects = React.createClass({
             <nav className='fold__nav'>
               <h2>Filter by</h2>
               <h3>Type</h3>
-              <a href='#' title='Filter by type'><span>All types</span></a>
+              {this.renderFilterDropdown('type')}
               <h3>Location</h3>
-              <a href='#' title='Filter by location'><span>All locations</span></a>
-              <p className='summary'>Showing 34 projects</p>
+              {this.renderFilterDropdown('location')}
+              <p className='summary'>Showing {cards.length} projects</p>
             </nav>
           </header>
           <ul className='project-list'>
-            {cards}
+            {cards.length ? cards : (
+              <p>No projects found for the given filters</p>
+            )}
           </ul>
         </div>
       </section>
     );
-  },
+  }
 
-  render: function () {
+  render () {
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -84,19 +174,15 @@ var CommunityProjects = React.createClass({
       </section>
     );
   }
-});
+}
+
+CommunityProjects.propTypes = {
+  location: T.object,
+  history: T.object
+};
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-function selector (state) {
-  return {
-  };
-}
-
-function dispatcher (dispatch) {
-  return {
-  };
-}
-
-module.exports = connect(selector, dispatcher)(CommunityProjects);
+// Connect to access router.
+module.exports = connect()(CommunityProjects);
