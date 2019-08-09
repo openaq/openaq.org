@@ -4,6 +4,7 @@ import { IndexLink, Link } from 'react-router';
 import c from 'classnames';
 
 import Breakpoint from './breakpoint';
+import SmartLink from './smart-link';
 
 const subMenus = [
   {
@@ -32,8 +33,7 @@ const subMenus = [
         title: 'Use API',
         description: 'Mauris posuere mauris a molestie ultrices.',
         className: 'sub-menu__link--api',
-        url: 'https://docs.openaq.org/',
-        target: '_blank'
+        url: 'https://docs.openaq.org/'
       }
     ]
   },
@@ -75,8 +75,7 @@ const subMenus = [
         title: 'Frequently Asked Questions',
         description: 'What, why and who.',
         className: null,
-        url: 'https://github.com/openaq/openaq-info/blob/master/FAQ.md',
-        target: '_blank'
+        url: 'https://github.com/openaq/openaq-info/blob/master/FAQ.md'
       }
     ]
   }
@@ -104,6 +103,7 @@ class PageHeader extends React.Component {
 
     this.onMobileMenuClick = this.onMobileMenuClick.bind(this);
     this.onBodyClick = this.onBodyClick.bind(this);
+    this.onLinkNavigate = this.onLinkNavigate.bind(this);
   }
 
   componentDidMount () {
@@ -133,6 +133,14 @@ class PageHeader extends React.Component {
     });
   }
 
+  onLinkNavigate () {
+    // When navigating reset menu.
+    this.setState({
+      openMobileMenu: null,
+      openSubMenu: null
+    });
+  }
+
   onMobileMenuClick (e) {
     e.preventDefault();
     this.setState({
@@ -150,12 +158,12 @@ class PageHeader extends React.Component {
     return (
       <ul className='global-menu'>
         <li>
-          <Link to='/' title='View page' className='global-menu__link'>
+          <Link to='/' title='View page' className='global-menu__link' onClick={this.onLinkNavigate}>
             <span>Home</span>
           </Link>
         </li>
         <li>
-          <Link to='/why' title='View page' className='global-menu__link'>
+          <Link to='/why' title='View page' className='global-menu__link' onClick={this.onLinkNavigate}>
             <span>Why open air quality?</span>
           </Link>
         </li>
@@ -180,7 +188,7 @@ class PageHeader extends React.Component {
           </a>
         </li>
         <li>
-          <a href='https://medium.com/@openaq' title='View blog' className='global-menu__link' target='_blank'>
+          <a href='https://medium.com/@openaq' title='View blog' className='global-menu__link' target='_blank' onClick={this.onLinkNavigate}>
             <span>Blog</span>
           </a>
         </li>
@@ -210,6 +218,7 @@ class PageHeader extends React.Component {
                 to='/'
                 title='Visit homepage'
                 className='nav__home-link'
+                onClick={this.onLinkNavigate}
               >
                 <img
                   src='/assets/graphics/layout/oaq-logo-col-pos.svg'
@@ -223,6 +232,7 @@ class PageHeader extends React.Component {
                 to='/community'
                 title='View page'
                 className='nav__action-link'
+                onClick={this.onLinkNavigate}
               >
                 <span>Get involved</span>
               </Link>
@@ -287,14 +297,15 @@ class PageHeader extends React.Component {
                 <ul className='sub-menu'>
                   {group.items.map(item => (
                     <li key={item.title}>
-                      <Link
+                      <SmartLink
                         to={item.url}
                         title='View page'
                         className={c('sub-menu__link', item.className)}
-                      >
+                        onClick={this.onLinkNavigate}
+                     >
                         <h5>{item.title}</h5>
                         {item.description && (<p>{item.description}</p>)}
-                      </Link>
+                      </SmartLink>
                     </li>
                   ))}
                 </ul>
