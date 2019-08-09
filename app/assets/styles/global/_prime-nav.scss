@@ -180,7 +180,6 @@
 
   @include media(large-up) {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    align-items: flex-end;
   }
 
   h5 {
