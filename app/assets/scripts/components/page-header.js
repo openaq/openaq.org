@@ -14,25 +14,26 @@ const subMenus = [
         title: 'Locations',
         description: 'Mauris posuere mauris a molestie ultrices.',
         className: 'sub-menu__link--locations',
-        url: '#'
+        url: '/locations'
       },
       {
         title: 'Countries',
         description: 'Mauris posuere mauris a molestie ultrices.',
         className: 'sub-menu__link--countries',
-        url: '#'
+        url: '/countries'
       },
       {
         title: 'World map',
         description: 'Mauris posuere mauris a molestie ultrices.',
         className: 'sub-menu__link--map',
-        url: '#'
+        url: '/map'
       },
       {
         title: 'Use API',
         description: 'Mauris posuere mauris a molestie ultrices.',
         className: 'sub-menu__link--api',
-        url: '#'
+        url: 'https://docs.openaq.org/',
+        target: '_blank'
       }
     ]
   },
@@ -41,34 +42,41 @@ const subMenus = [
     title: 'Community',
     items: [
       {
-        title: 'Item 1',
-        description: 'The first item',
+        title: 'Overview',
+        description: 'Passioned about air quality data? Join our community.',
         className: null,
-        url: '#'
+        url: '/community'
       },
       {
-        title: 'Item 2',
-        description: '',
+        title: 'Impact',
+        description: 'A community using the data to fight air inquality in the most exciting ways.',
         className: null,
-        url: '#'
+        url: '/community/projects'
+      },
+      {
+        title: 'Workshops',
+        description: 'Convene local communities to start new projects and collaborations to fight air pollution.',
+        className: null,
+        url: '/community/workshops'
       }
     ]
   },
   {
     id: 'about',
-    title: 'About',
+    title: 'About us',
     items: [
       {
-        title: 'Item 1',
-        description: 'The first item',
+        title: 'Our organization',
+        description: 'Our mission is to fight air inequality.',
         className: null,
         url: '#'
       },
       {
-        title: 'Item 2',
-        description: 'The second item',
+        title: 'Frequently Asked Questions',
+        description: 'What, why and who.',
         className: null,
-        url: '#'
+        url: 'https://github.com/openaq/openaq-info/blob/master/FAQ.md',
+        target: '_blank'
       }
     ]
   }
@@ -140,21 +148,21 @@ class PageHeader extends React.Component {
       });
 
     return (
-      <ul className="global-menu">
+      <ul className='global-menu'>
         <li>
-          <a href="#" title="View page" className="global-menu__link">
+          <Link to='/' title='View page' className='global-menu__link'>
             <span>Home</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" title="View page" className="global-menu__link">
+          <Link to='/why' title='View page' className='global-menu__link'>
             <span>Why open air quality?</span>
-          </a>
+          </Link>
         </li>
         <li>
           <a
-            href="#nav-group-open-data"
-            title="View page"
+            href='#nav-group-open-data'
+            title='View menu'
             className={altClass('open-data')}
             onClick={this.onMenuClick.bind(this, 'open-data')}
           >
@@ -163,8 +171,8 @@ class PageHeader extends React.Component {
         </li>
         <li>
           <a
-            href="#nav-group-community"
-            title="View page"
+            href='#nav-group-community'
+            title='View menu'
             className={altClass('community')}
             onClick={this.onMenuClick.bind(this, 'community')}
           >
@@ -172,14 +180,14 @@ class PageHeader extends React.Component {
           </a>
         </li>
         <li>
-          <a href="#" title="View page" className="global-menu__link">
+          <a href='https://medium.com/@openaq' title='View blog' className='global-menu__link' target='_blank'>
             <span>Blog</span>
           </a>
         </li>
         <li>
           <a
-            href="#nav-group-about"
-            title="View page"
+            href='#nav-group-about'
+            title='View menu'
             className={altClass('about')}
             onClick={this.onMenuClick.bind(this, 'about')}
           >
@@ -192,29 +200,29 @@ class PageHeader extends React.Component {
 
   render () {
     return (
-      <header className="page__header" role="banner">
-        <h1 className="page__title">OpenAQ</h1>
+      <header className='page__header' role='banner'>
+        <h1 className='page__title'>OpenAQ</h1>
 
-        <nav className="page__prime-nav nav" id='page-prime-nav'>
-          <div className="nav__group nav__group--main">
-            <div className="inner">
+        <nav className='page__prime-nav nav' id='page-prime-nav'>
+          <div className='nav__group nav__group--main'>
+            <div className='inner'>
               <IndexLink
-                to="/"
-                title="Visit homepage"
-                className="nav__home-link"
+                to='/'
+                title='Visit homepage'
+                className='nav__home-link'
               >
                 <img
-                  src="/assets/graphics/layout/oaq-logo-col-pos.svg"
-                  alt="OpenAQ logotype"
-                  width="72"
-                  height="40"
+                  src='/assets/graphics/layout/oaq-logo-col-pos.svg'
+                  alt='OpenAQ logotype'
+                  width='72'
+                  height='40'
                 />
                 <span>Home</span>
               </IndexLink>
               <Link
-                to="/community"
-                title="View page"
-                className="nav__action-link"
+                to='/community'
+                title='View page'
+                className='nav__action-link'
               >
                 <span>Get involved</span>
               </Link>
@@ -224,8 +232,8 @@ class PageHeader extends React.Component {
                     this.renderGlobalMenu()
                   ) : (
                     <a
-                      href="#nav-group-global"
-                      title="View menu"
+                      href='#nav-group-global'
+                      title='Jump to main menu'
                       className={c('nav__burguer-link', {
                         'nav__burguer-link--alt': this.state.openMobileMenu
                       })}
@@ -247,10 +255,10 @@ class PageHeader extends React.Component {
                     'nav__group--active':
                       this.state.openMobileMenu && !this.state.openSubMenu
                   })}
-                  id="nav-group-global"
+                  id='nav-group-global'
                 >
-                  <div className="inner">
-                    <h3 className="nav__title visually-hidden">Main</h3>
+                  <div className='inner'>
+                    <h3 className='nav__title visually-hidden'>Main</h3>
                     {this.renderGlobalMenu()}
                   </div>
                 </div>
@@ -266,22 +274,22 @@ class PageHeader extends React.Component {
               })}
               id={`nav-group-${group.id}`}
             >
-              <div className="inner">
-                <h3 className="nav__title nav__title--sub">
+              <div className='inner'>
+                <h3 className='nav__title nav__title--sub'>
                   <a
-                    href="#"
-                    title="Back"
+                    href='#nav-group-global'
+                    title='Jump to main menu'
                     onClick={this.onMenuClick.bind(this, null)}
                   >
                     <span>{group.title}</span>
                   </a>
                 </h3>
-                <ul className="sub-menu">
+                <ul className='sub-menu'>
                   {group.items.map(item => (
                     <li key={item.title}>
                       <Link
                         to={item.url}
-                        title="View page"
+                        title='View page'
                         className={c('sub-menu__link', item.className)}
                       >
                         <h5>{item.title}</h5>

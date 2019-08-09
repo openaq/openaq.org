@@ -67,7 +67,7 @@ var CommunityProjects = React.createClass({
             <div className='inpage__headline header--centered'>
               <h1 className='inpage__title'>Community Impact</h1>
               <div className='inpage__introduction'>
-                <p>{widont('Projects of our community using the data to fight air inquality in the most exciting ways..')}</p>
+                <p>{widont('Projects of our community using the data to fight air inquality in the most exciting ways.')}</p>
               </div>
             </div>
           </div>
