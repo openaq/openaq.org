@@ -51,6 +51,7 @@
 }
 
 .nav__group--sub {
+  display: none;
   @include media(large-up) {
     position: absolute;
     width: 100%;
@@ -68,6 +69,10 @@
       align-items: center;
     }
   }
+}
+
+.nav__group--active {
+  display: block;
 }
 
 .nav__action-link,
