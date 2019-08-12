@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import moment from 'moment';
+import _ from 'lodash';
+import * as d3 from 'd3';
 
 import { shortenLargeNumber } from '../utils/format';
 import { geolocateUser,
@@ -14,113 +16,97 @@ import { geolocateUser,
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
 import Testimonials from '../components/testimonials';
-import testimonials from '../../content/testimonials.json';
-import sponsors from '../../content/sponsors.json';
+import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
+
 import SponsorList from '../components/sponsor-list';
+import { getCountryName } from '../utils/countries';
+import ChartMeasurement from '../components/chart-measurement';
 
-var Home = React.createClass({
-  displayName: 'Home',
+import sponsors from '../../content/sponsors.json';
+import testimonials from '../../content/testimonials.json';
 
-  propTypes: {
-    _geolocateUser: React.PropTypes.func,
-    _fetchNearbyLocations: React.PropTypes.func,
-    _fetchCompareLocationIfNeeded: React.PropTypes.func,
-    _fetchCompareLocationMeasurements: React.PropTypes.func,
-    _invalidateCompare: React.PropTypes.func,
-    _openDownloadModal: React.PropTypes.func,
+// We're currently showing 2 random locations in the homepage. However
+// there's no api endpoint to do this. The only way is to query for a random
+// page. For now we're hardcoding the total number of pages available but in
+// the future this should be dynamic.
+// Total pages come from this query.
+// https://api.openaq.org/v1/locations?parameter=pm25&limit=1
+const totalPages = 5024;
 
-    statsCounts: React.PropTypes.object,
-    statsCountsFetching: React.PropTypes.bool,
-    statsCountsFetched: React.PropTypes.bool,
+const MAX_TRIES = 5;
 
-    geolocationRequesting: React.PropTypes.bool,
-    geolocationRequested: React.PropTypes.bool,
-    geolocationError: React.PropTypes.string,
-    geolocationCoords: React.PropTypes.object,
+class Home extends React.Component {
+  fetchValidLocation (idx) {
+    // Keep count of how many tries as a safety kill switch
+    if (!this.compareTries) { this.compareTries = []; }
+    this.compareTries[idx] = (this.compareTries[idx] || 0) + 1;
+    if (this.compareTries[idx] > MAX_TRIES) return;
 
-    locFetching: React.PropTypes.bool,
-    locFetched: React.PropTypes.bool,
-    locError: React.PropTypes.string,
-    locations: React.PropTypes.array,
-    locPagination: React.PropTypes.object,
+    const now = Date.now();
+    const weekAgo = now - 8 * 86400 * 1000;
 
-    countries: React.PropTypes.array,
-    sources: React.PropTypes.array,
-    parameters: React.PropTypes.array,
-    totalMeasurements: React.PropTypes.number,
-
-    compareLoc: React.PropTypes.array,
-    compareMeasurements: React.PropTypes.array
-  },
+    this.props._fetchCompareLocationIfNeeded(idx, null, {
+      page: Math.floor(Math.random() * totalPages) + 1,
+      parameter: 'pm25',
+      limit: 1
+    })
+    .then(() => {
+      const loc = this.props.compareLoc[idx].data;
+      const lastUpdate = (new Date(loc.lastUpdated)).getTime();
+      if (lastUpdate > now || lastUpdate < weekAgo) {
+        // Try again.
+        return this.fetchValidLocation(idx);
+      }
+      // Fetch measurements after we have the location name.
+      const toDate = moment.utc(loc.lastUpdated);
+      const fromDate = toDate.clone().subtract(8, 'days');
+      return this.props._fetchCompareLocationMeasurements(idx, loc.location, fromDate.toISOString(), toDate.toISOString());
+    });
+  }
 
   //
   // Start life-cycle methods
   //
-  componentDidMount: function () {
+  componentDidMount () {
     this.props._invalidateCompare();
-    // We're currently showing 2 random locations in the homepage. However
-    // there's no api endpoint to do this. The only way is to query for a random
-    // page. For now we're hardcoding the total number of pages available but in
-    // the future this should be dynamic.
-    // Total pages come from this query.
-    // https://api.openaq.org/v1/locations?parameter=pm25&limit=1
-    let totalPages = 5024;
 
-    this.props._fetchCompareLocationIfNeeded(0, null, {
-      page: Math.floor(Math.random() * totalPages) + 1,
-      parameter: 'pm25',
-      limit: 1
-    });
+    this.fetchValidLocation(0);
+    this.fetchValidLocation(1);
+  }
 
-    this.props._fetchCompareLocationIfNeeded(1, null, {
-      page: Math.floor(Math.random() * totalPages) + 1,
-      parameter: 'pm25',
-      limit: 1
-    });
-  },
+  componentWillUnmount () {
+    // Void any tries to stop requests
+    this.compareTries = this.compareTries.map(() => Infinity);
+  }
 
-  componentDidUpdate: function () {
-    let [l1, l2] = this.props.compareLoc;
-    let [m1, m2] = this.props.compareMeasurements;
-
-    let toDate = moment.utc();
-    let fromDate = toDate.clone().subtract(8, 'days');
-
-    if (l1.fetched && !m1.fetched && !m1.fetching) {
-      // Fetch measurements after we have the location name.
-      this.props._fetchCompareLocationMeasurements(0, l1.data.location, fromDate.toISOString(), toDate.toISOString());
-    }
-
-    if (l2.fetched && !m2.fetched && !m2.fetching) {
-      // Fetch measurements after we have the location name.
-      this.props._fetchCompareLocationMeasurements(1, l2.data.location, fromDate.toISOString(), toDate.toISOString());
-    }
-  },
-
-  getTestimonial: function () {
+  getTestimonial () {
     if (!this.randomTestimonial) {
       // Pick a random testimonial for this mount.
       // This will be removed in the future in favor of a carousel
       this.randomTestimonial = testimonials[Math.floor(Math.random() * (testimonials.length - 1))];
     }
     return [this.randomTestimonial];
-  },
+  }
 
-  getSponsors: function () {
+  getSponsors () {
     if (!this.randomSponsors) {
       const shuffled = [...sponsors].sort(() => Math.random() - 0.5);
       this.randomSponsors = shuffled.slice(0, 6);
-      console.log('shuffled', shuffled);
     }
     return this.randomSponsors;
-  },
+  }
 
   //
   // Start render methods
   //
 
-  renderStatsCount: function () {
-    let {statsCountsFetching: fetching, statsCountsFetched: fetched, statsCounts: data} = this.props;
+  renderStatsCount () {
+    const {
+      statsCountsFetching: fetching,
+      statsCountsFetched: fetched,
+      statsCounts: data
+    } = this.props;
+
     if (!fetched && !fetching) {
       return null;
     }
@@ -169,9 +155,12 @@ var Home = React.createClass({
         </div>
       </section>
     );
-  },
+  }
 
-  render: function () {
+  render () {
+    const [l1, l2] = this.props.compareLoc;
+    const [m1, m2] = this.props.compareMeasurements;
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -184,49 +173,14 @@ var Home = React.createClass({
             </div>
             <div className='home-rand-meas'>
               <h2>Here's how two random locations compare</h2>
-              <article className='card card--measurement'>
-                <a href='#' className='card__contents' title='View more'>
-                  <header className='card__header'>
-                    <div className='card__headline'>
-                      <h1 className='card__title'>Station ID1</h1>
-                    </div>
-                  </header>
-                  <div className='card__body'>
-                    <dl className='card--measurement__details'>
-                      <dt>Measurements</dt>
-                      <dd>PM2.5</dd>
-                      <dd><strong>75</strong> <sub>µg/m3</sub></dd>
-                      <dt>Location</dt>
-                      <dd>Kahului-Wailuku<span>, </span><small>United States</small></dd>
-                    </dl>
-                    <figure className='card--measurement__chart'>
-                      <img src='https://via.placeholder.com/512x256' width='512' height='256' alt='Chart placeholder' />
-                    </figure>
-                  </div>
-                </a>
-              </article>
-
-              <article className='card card--measurement'>
-                <a href='#' className='card__contents' title='View more'>
-                  <header className='card__header'>
-                    <div className='card__headline'>
-                      <h1 className='card__title'>Station ID1</h1>
-                    </div>
-                  </header>
-                  <div className='card__body'>
-                    <dl className='card--measurement__details'>
-                      <dt>Measurements</dt>
-                      <dd>PM2.5</dd>
-                      <dd><strong>6</strong> <sub>µg/m3</sub></dd>
-                      <dt>Location</dt>
-                      <dd>Kahului-Wailuku<span>, </span><small>United States</small></dd>
-                    </dl>
-                    <figure className='card--measurement__chart'>
-                      <img src='https://via.placeholder.com/512x256' width='512' height='256' alt='Chart placeholder' />
-                    </figure>
-                  </div>
-                </a>
-              </article>
+              <CompareLocationCard
+                location={l1}
+                measurement={m1}
+              />
+              <CompareLocationCard
+                location={l2}
+                measurement={m2}
+              />
             </div>
           </div>
           <figure className='inpage__media inpage__media--cover media'>
@@ -319,7 +273,39 @@ var Home = React.createClass({
       </section>
     );
   }
-});
+}
+
+Home.propTypes = {
+  _geolocateUser: React.PropTypes.func,
+  _fetchNearbyLocations: React.PropTypes.func,
+  _fetchCompareLocationIfNeeded: React.PropTypes.func,
+  _fetchCompareLocationMeasurements: React.PropTypes.func,
+  _invalidateCompare: React.PropTypes.func,
+  _openDownloadModal: React.PropTypes.func,
+
+  statsCounts: React.PropTypes.object,
+  statsCountsFetching: React.PropTypes.bool,
+  statsCountsFetched: React.PropTypes.bool,
+
+  geolocationRequesting: React.PropTypes.bool,
+  geolocationRequested: React.PropTypes.bool,
+  geolocationError: React.PropTypes.string,
+  geolocationCoords: React.PropTypes.object,
+
+  locFetching: React.PropTypes.bool,
+  locFetched: React.PropTypes.bool,
+  locError: React.PropTypes.string,
+  locations: React.PropTypes.array,
+  locPagination: React.PropTypes.object,
+
+  countries: React.PropTypes.array,
+  sources: React.PropTypes.array,
+  parameters: React.PropTypes.array,
+  totalMeasurements: React.PropTypes.number,
+
+  compareLoc: React.PropTypes.array,
+  compareMeasurements: React.PropTypes.array
+};
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
@@ -365,3 +351,120 @@ function dispatcher (dispatch) {
 }
 
 module.exports = connect(selector, dispatcher)(Home);
+
+class CompareLocationCard extends React.Component {
+  renderCompareChart () {
+    const {
+      measurement
+    } = this.props;
+
+    // All the times are local and shouldn't be converted to UTC.
+    // The values should be compared at the same time local to ensure an
+    // accurate comparison.
+    const userNow = moment().format('YYYY/MM/DD HH:mm:ss');
+    const weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
+
+    const filterFn = (o) => {
+      if (o.parameter !== 'pm25') {
+        return false;
+      }
+      if (o.value < 0) return false;
+      const localDate = moment.parseZone(o.date.local).format('YYYY/MM/DD HH:mm:ss');
+      return localDate >= weekAgo && localDate <= userNow;
+    };
+
+    // Prepare data.
+    const chartData = _.cloneDeep(measurement.data.results)
+      .filter(filterFn)
+      .map(o => {
+        o.value = convertParamIfNeeded(o);
+        // Disregard timezone on local date.
+        const dt = o.date.local.match(/^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/)[0];
+        // `measurement` local date converted directly to user local.
+        // We have to use moment instead of new Date() because the behavior
+        // is not consistent across browsers.
+        // Firefox interprets the string as being in the current timezone
+        // while chrome interprets it as being utc. So:
+        // Date: 2016-08-25T14:00:00
+        // Firefox result: Thu Aug 25 2016 14:00:00 GMT-0400 (EDT)
+        // Chrome result: Thu Aug 25 2016 10:00:00 GMT-0400 (EDT)
+        o.date.localNoTZ = moment(dt).toDate();
+        return o;
+      });
+
+    const yMax = d3.max(chartData, o => o.value) || 0;
+
+    // 1 Week.
+    const xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
+
+    if (!chartData.length) return null;
+
+    return (
+      <ChartMeasurement
+        className='home-compare-chart'
+        data={[chartData]}
+        xRange={xRange}
+        yRange={[0, yMax]}
+        yLabel={parameterUnit['pm25']}
+        compressed />
+    );
+  }
+
+  render () {
+    const {
+      location,
+      measurement
+    } = this.props;
+
+    if (!location.fetched || !measurement.fetched) {
+      return (
+        <article className='card card--measurement'>
+          <div className='card__contents'>
+            <div className='card__body'>
+              <p>Loading data</p>
+            </div>
+          </div>
+        </article>
+      );
+    }
+
+    const {
+      city,
+      country,
+      location: loc
+    } = location.data;
+
+    // Get all pm25 measurements.
+    const pm25measure = measurement.data.results.filter(m => m.parameter === 'pm25');
+    const recentMeasure = pm25measure[0];
+
+    return (
+      <article className='card card--measurement'>
+        <Link to={`/location/${loc}`} className='card__contents' title='View more'>
+          <header className='card__header'>
+            <div className='card__headline'>
+              <h1 className='card__title'>{loc}</h1>
+            </div>
+          </header>
+          <div className='card__body'>
+            <dl className='card--measurement__details'>
+              <dt>Measurements</dt>
+              {recentMeasure && <dd>PM2.5</dd>}
+              {recentMeasure && <dd><strong>{Math.round(recentMeasure.value)}</strong> <sub>{recentMeasure.unit}</sub></dd>}
+              <dt>Location</dt>
+              <dd>{city}<span>, </span><small>{getCountryName(country) || 'N/A'}</small></dd>
+            </dl>
+            <figure className='card--measurement__chart'>
+              {this.renderCompareChart()}
+            </figure>
+          </div>
+        </Link>
+      </article>
+    );
+  }
+}
+
+CompareLocationCard.propTypes = {
+  location: React.PropTypes.object,
+  measurement: React.PropTypes.object
+};

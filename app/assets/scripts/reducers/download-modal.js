@@ -11,7 +11,6 @@ const defaultState = {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case actions.OPEN_DOWNLOAD_MODAL:
-      console.log('OPEN_DOWNLOAD_MODAL');
       state = _.cloneDeep(state);
       state.open = true;
       if (action.options.country) {
@@ -25,7 +24,6 @@ export default function (state = defaultState, action) {
       }
       break;
     case actions.CLOSE_DOWNLOAD_MODAL:
-      console.log('CLOSE_DOWNLOAD_MODAL');
       state = _.cloneDeep(defaultState);
       break;
   }

@@ -3,10 +3,11 @@
    ========================================================================== */
 
 .home-compare-chart {
-  height: 20rem;
+  height: 10rem;
 
   .axis {
     text {
+      font-family: $heading-font-family;
       fill: rgba($base-font-color, 0.64);
       font-size: 0.75rem;
     }
@@ -18,10 +19,7 @@
   .location-data {
     opacity: 0.64;
     &--st circle {
-      fill: $infographic-color-a;
-    }
-    &--nd circle {
-      fill: $infographic-color-b;
+      fill: $secondary-color;
     }
   }
 }

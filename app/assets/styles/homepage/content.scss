@@ -76,6 +76,7 @@
   width: 100%;
   max-width: 16rem;
   min-height: 20rem;
+  color: $base-color;
 
   &:first-of-type {
     transform: translate(0.5rem, -4rem);
@@ -146,12 +147,7 @@
 }
 
 .card--measurement__chart {
-  margin: 0;
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+  margin: 0 -1rem;
 }
 
 

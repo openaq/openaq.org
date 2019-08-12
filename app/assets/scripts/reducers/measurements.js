@@ -17,17 +17,14 @@ const defaultState = {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case actions.INVALIDATE_ALL_LOCATION_DATA:
-      console.log('measurements: INVALIDATE_ALL_LOCATION_DATA');
       state = _.cloneDeep(defaultState);
       break;
     case actions.REQUEST_MEASUREMENTS:
-      console.log('REQUEST_MEASUREMENTS');
       state = _.cloneDeep(state);
       state.error = null;
       state.fetching = true;
       break;
     case actions.RECEIVE_MEASUREMENTS:
-      console.log('RECEIVE_MEASUREMENTS');
       state = _.cloneDeep(state);
       if (action.error) {
         state.error = action.error;

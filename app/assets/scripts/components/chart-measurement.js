@@ -14,7 +14,8 @@ var ChartMeasurement = React.createClass({
 
     xRange: React.PropTypes.array,
     yRange: React.PropTypes.array,
-    yLabel: React.PropTypes.string
+    yLabel: React.PropTypes.string,
+    compressed: React.PropTypes.bool
   },
 
   chart: null,
@@ -35,6 +36,10 @@ var ChartMeasurement = React.createClass({
       .yLabel(this.props.yLabel)
       .xRange(this.props.xRange)
       .yRange(this.props.yRange);
+
+    if (this.props.compressed) {
+      this.chart.type('compressed');
+    }
 
     d3.select(this.refs.container).call(this.chart);
   },
@@ -60,6 +65,9 @@ var ChartMeasurement = React.createClass({
     if (prevProps.yRange !== this.props.yRange) {
       this.chart.yRange(this.props.yRange);
     }
+    if (prevProps.compressed !== this.props.compressed) {
+      this.chart.type('compressed');
+    }
     this.chart.continueUpdate();
   },
 
@@ -83,7 +91,7 @@ var Chart = function (options) {
   // Containers
   var $el, $svg;
   // Var declaration.
-  const margin = {top: 16, right: 32, bottom: 32, left: 48};
+  let margin = {top: 16, right: 32, bottom: 32, left: 48};
 
   // Colors suffix
   const indexSuffix = ['st', 'nd', 'rd'];
@@ -93,7 +101,10 @@ var Chart = function (options) {
   var _width, _height;
 
   // Update functions.
-  var updateData, upateSize;
+  var updateData, updateSize;
+
+  // Variation of the chart
+  var _type = 'normal';
 
   // X scale.
   var x = d3.scaleTime();
@@ -164,7 +175,7 @@ var Chart = function (options) {
 
         circles.enter()
           .append('circle')
-          .attr('r', 4)
+          .attr('r', _type === 'compressed' ? 2 : 4)
           .merge(circles)
             // `localNoTZ` is the measurement local date converted
             // directly to user local.
@@ -223,7 +234,7 @@ var Chart = function (options) {
       }
     };
 
-    upateSize = function () {
+    updateSize = function () {
       $svg
         .attr('width', _width + margin.left + margin.right)
         .attr('height', _height + margin.top + margin.bottom);
@@ -249,7 +260,10 @@ var Chart = function (options) {
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
-      layers.yAxis();
+
+      if (_type !== 'compressed') {
+        layers.yAxis();
+      }
     };
 
     updateData = function () {
@@ -265,7 +279,10 @@ var Chart = function (options) {
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
-      layers.yAxis();
+
+      if (_type !== 'compressed') {
+        layers.yAxis();
+      }
     };
 
     // -----------------------------------------------------------------
@@ -280,13 +297,13 @@ var Chart = function (options) {
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     _calcSize();
-    upateSize();
+    updateSize();
     updateData();
   }
 
   chartFn.checkSize = function () {
     _calcSize();
-    upateSize();
+    updateSize();
     return chartFn;
   };
 
@@ -331,6 +348,18 @@ var Chart = function (options) {
     if (!arguments.length) return _yRange;
     _yRange = d;
     if (typeof updateData === 'function') updateData();
+    return chartFn;
+  };
+
+  chartFn.type = function (d) {
+    if (!arguments.length) return _type;
+    _type = d;
+    if (_type === 'compressed') {
+      margin = Object.assign({}, margin, {
+        left: 16
+      });
+    }
+    if (typeof updateSize === 'function') updateSize();
     return chartFn;
   };
 
