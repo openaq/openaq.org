@@ -189,7 +189,7 @@ var About = React.createClass({
               </header>
               <SponsorList items={sponsors} />
               <footer className='fold__footer'>
-                <a href='mailto:' className='sponsor-button' title='View page'><span>Become a sponsor</span></a>
+                <a href='mailto:info@openaq.org' className='sponsor-button' title='View page'><span>Become a sponsor</span></a>
               </footer>
             </div>
           </section>
