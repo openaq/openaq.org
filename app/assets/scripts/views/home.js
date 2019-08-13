@@ -119,14 +119,14 @@ class Home extends React.Component {
             <div className='fold__teaser prose prose--responsive'>
               <p>The data is captured from multiple sources and available for anyone to access through our open-source platform.</p>
               <ol className='od-quick-menu'>
-                <li><Link to='#' title='View page' className='od-quick-menu__locations-link'>Location view</Link></li>
-                <li><Link to='#' title='View page' className='od-quick-menu__api-link'>API</Link></li>
-                <li><Link to='#' title='View page' className='od-quick-menu__countries-link'>Country view</Link></li>
-                <li><Link to='#' title='View page' className='od-quick-menu__compare-link'>Compare data</Link></li>
+                <li><Link to='/locations' title='View page' className='od-quick-menu__locations-link'>Location view</Link></li>
+                <li><a href='https://docs.openaq.org/' target='_blank' title='View API' className='od-quick-menu__api-link'>API</a></li>
+                <li><Link to='/countries' title='View page' className='od-quick-menu__countries-link'>Country view</Link></li>
+                <li><Link to='/compare' title='View page' className='od-quick-menu__compare-link'>Compare data</Link></li>
               </ol>
               <p className='fold__main-action'>
-                <Link to='#' className='button button--large button--primary-ghost button--capsule' title='View page'><span>See open data</span></Link>
-                <Link to='#' className='button button--large button--white-bounded button--capsule' title='View page'><span>Use API</span></Link>
+                <Link to='/locations' className='button button--large button--primary-ghost button--capsule' title='View page'><span>See open data</span></Link>
+                <a href='https://docs.openaq.org/' target='_blank' className='button button--large button--white-bounded button--capsule' title='View API'><span>Use API</span></a>
               </p>
             </div>
           </header>
@@ -213,7 +213,7 @@ class Home extends React.Component {
                 <h2 className='fold__title'>Harmonizing air quality data</h2>
                 <div className='fold__teaser prose prose--responsive'>
                   <p>Our community harmonizes disparate air quality data from across the world so that various people and organizations can do more with the data, build open-source tools around them, and engage with one another. All of this is so people don't have to reinvent the same data access-, tool-, and community-wheels and can instead get down to fighting "air inequality" more efficiently.</p>
-                  <p><Link to='#' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
+                  <p><Link to='/about' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
               <figure className='fold__media'>
