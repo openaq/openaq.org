@@ -92,10 +92,18 @@
 
 .nav__action-link {
   @extend .button--primary;
-  min-width: 10rem;
+
+  @include media(medium-up) {
+    min-width: 10rem;
+  }
 
   @include media(large-up) {
     order: 10;
+    min-width: auto;
+  }
+
+  @include media(xlarge-up) {
+    min-width: 10rem;
   }
 }
 
