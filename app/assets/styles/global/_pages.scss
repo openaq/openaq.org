@@ -93,17 +93,19 @@ html {
 
 .page__foot-nav {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
   grid-template-rows: auto;
   margin: 0 0 2rem 0;
 
   @include media(medium-up) {
     margin-bottom: 3rem;
+    grid-template-columns: repeat(8, 1fr);
   }
 
   @include media(large-up) {
     margin-bottom: 4rem;
+    grid-template-columns: repeat(12, 1fr);
   }
 }
 
@@ -117,7 +119,11 @@ html {
 
 .foot-nav-block:nth-child(1) {
   grid-row: 1;
-  grid-column: 1 / span 12;
+  grid-column: 1 / span 2;
+
+  @include media(medium-up) {
+    grid-column: 1 / span 8;
+  }
 
   @include media(large-up) {
     grid-column: 1 / span 4;
@@ -130,11 +136,11 @@ html {
 
 .foot-nav-block:nth-child(2) {
   grid-row: 2;
-  grid-column: 1 / span 6;
+  grid-column: 1 / span 1;
 
   @include media(medium-up) {
     grid-row: 2;
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 2;
   }
 
   @include media(large-up) {
@@ -145,10 +151,10 @@ html {
 
 .foot-nav-block:nth-child(3) {
   grid-row: 2;
-  grid-column: 7 / span 6;
+  grid-column: 2 / span 1;
 
   @include media(medium-up) {
-    grid-column: 4 / span 3;
+    grid-column: 3 / span 2;
   }
 
   @include media(large-up) {
@@ -159,11 +165,11 @@ html {
 
 .foot-nav-block:nth-child(4) {
   grid-row: 3;
-  grid-column: 1 / span 6;
+  grid-column: 1 / span 1;
 
   @include media(medium-up) {
     grid-row: 2;
-    grid-column: 7 / span 3;
+    grid-column: 5 / span 2;
   }
 
   @include media(large-up) {
@@ -174,11 +180,11 @@ html {
 
 .foot-nav-block:nth-child(5) {
   grid-row: 3;
-  grid-column: 7 / span 6;
+  grid-column: 2 / span 1;
 
   @include media(medium-up) {
     grid-row: 2;
-    grid-column: 10 / span 3;
+    grid-column: 7 / span 2;
   }
 
   @include media(large-up) {
@@ -241,16 +247,19 @@ html {
 
 .foot-info {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
   grid-template-rows: auto;
   color: rgba($base-color, 0.56);
+
+  @include media(large-up) {
+    grid-template-columns: repeat(12, 1fr);
+  }
 }
 
 .foot-newsletter {
   grid-row: 1;
-  grid-column: 1 / span 12;
-
+  grid-column: 1 / span 2;
 
   @include media(large-up) {
     grid-column: 7 / span 6;
@@ -284,7 +293,7 @@ html {
 
 .foot-copyright {
   grid-row: 2;
-  grid-column: 1 / span 12;
+  grid-column: 1 / span 2;
   font-size: 0.875rem;
   margin: 0;
 
