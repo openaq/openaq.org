@@ -18,6 +18,7 @@ $page-header-y: $global-spacing * 5;
 
     /* Animation */
     transition: all 0.16s ease 0s;
+    animation: reveal 0.32s ease 0s 1;
 
     @include media(medium-up) {
       padding: ($global-spacing * 10) 0;
@@ -119,6 +120,9 @@ $page-header-y: $global-spacing * 5;
   }
 
   &__body {
+    /* Animation */
+    animation: reveal 0.48s ease 0s 1;
+
     > .inner {
       @extend .constrainer;
       display: grid;

@@ -35,6 +35,9 @@ html {
 .page__header {
   position: relative;
   z-index: 10;
+
+  /* Animation */
+  animation: reveal 0.32s ease 0s 1;
 }
 
 .page__title {
@@ -57,6 +60,9 @@ html {
   padding: ($global-spacing * 3) 0;
   background: #fff;
   box-shadow: 0 -1px 0 0 $base-semi-alpha-color;
+
+  /* Animation */
+  animation: reveal 0.64s ease 0s 1;
 
   @include media(medium-up) {
     padding: ($global-spacing * 4) 0;
