@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { Link } from 'react-router';
 
 var WorkshopFold = React.createClass({
   displayName: 'WorkshopFold',
@@ -12,7 +13,7 @@ var WorkshopFold = React.createClass({
             <h1 className='workshop-fold__title'>Hold a Workshop</h1>
             <div className='prose prose--responsive'>
               <p>Interested in convening various members of your community around open air quality data? We can help!</p>
-              <p><a href='#' className='workshop-go-button' title='Learn more'><span>Learn how</span></a></p>
+              <p><Link to='/community' className='workshop-go-button' title='Learn more'><span>Learn how</span></Link></p>
             </div>
           </header>
 
