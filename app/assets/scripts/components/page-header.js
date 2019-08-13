@@ -69,7 +69,7 @@ const subMenus = [
         title: 'Our organization',
         description: 'Our mission is to fight air inequality.',
         className: null,
-        url: '#'
+        url: '/about'
       },
       {
         title: 'Frequently Asked Questions',
