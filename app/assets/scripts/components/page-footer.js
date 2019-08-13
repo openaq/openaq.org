@@ -27,9 +27,9 @@ var PageFooter = React.createClass({
               </h1>
               <h2 className='contact__title'>Connect with us</h2>
               <ul className='connect-menu'>
-                <li><a href='https://github.com/openaq/' className='connect-menu__link--github' title='View Github'><span>Github</span></a></li>
-                <li><a href='https://openaq-slackin.herokuapp.com/' className='connect-menu__link--slack' title='View Slack'><span>Slack</span></a></li>
-                <li><a href='https://twitter.com/open_aq' className='connect-menu__link--twitter' title='View Twitter'><span>Twitter</span></a></li>
+                <li><a href='https://github.com/openaq/' className='connect-menu__link--github' title='View Github' target='_blank'><span>Github</span></a></li>
+                <li><a href='https://openaq-slackin.herokuapp.com/' className='connect-menu__link--slack' title='View Slack' target='_blank'><span>Slack</span></a></li>
+                <li><a href='https://twitter.com/open_aq' className='connect-menu__link--twitter' title='View Twitter' target='_blank'><span>Twitter</span></a></li>
                 <li><a href='mailto:info@openaq.org' className='connect-menu__link--email' title='View Email'><span>Email</span></a></li>
               </ul>
             </div>
@@ -37,42 +37,39 @@ var PageFooter = React.createClass({
             <div className='foot-nav-block'>
               <h2 className='contact__title'>Get involved</h2>
               <ul className='foot-menu'>
-                <li><Link to='#' title='View page'>Participate</Link></li>
-                <li><Link to='#' title='View page'>Support our mission</Link></li>
+                <li><Link to='/community' title='View page'>Participate</Link></li>
+                <li><Link to='/community' title='View page'>Support our mission</Link></li>
               </ul>
             </div>
 
             <div className='foot-nav-block'>
               <h2 className='contact__title'>Open data</h2>
               <ul className='foot-menu'>
-                <li><Link to='#' title='View page'>Locations</Link></li>
-                <li><Link to='#' title='View page'>Countries</Link></li>
-                <li><Link to='#' title='View page'>World map</Link></li>
-                <li><Link to='#' title='View page'>Use API</Link></li>
-                <li><Link to='#' title='View page'>Data disclaimer</Link></li>
-                <li><Link to='#' title='View page'>Standards and licensing</Link></li>
+                <li><Link to='/locations' title='View page'>Locations</Link></li>
+                <li><Link to='/countries' title='View page'>Countries</Link></li>
+                <li><Link to='/map' title='View page'>World map</Link></li>
+                <li><a href='https://docs.openaq.org/' title='View API' target='_blank'>Use API</a></li>
+                <li><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85' title='View blog post' target='_blank'>License and data disclaimer</a></li>
               </ul>
             </div>
 
             <div className='foot-nav-block'>
               <h2 className='contact__title'>Community</h2>
               <ul className='foot-menu'>
-                <li><Link to='#' title='View page'>About the community</Link></li>
-                <li><Link to='#' title='View page'>Data tools</Link></li>
-                <li><Link to='#' title='View page'>Community impact</Link></li>
-                <li><Link to='#' title='View page'>Workshops</Link></li>
-                <li><Link to='#' title='View page'>Community wishlist</Link></li>
-                <li><Link to='#' title='View page'>Community code of conduct</Link></li>
+                <li><Link to='/community' title='View page'>About the community</Link></li>
+                <li><Link to='/community' title='View page'>Data tools</Link></li>
+                <li><Link to='/community/projects' title='View page'>Community impact</Link></li>
+                <li><Link to='/community/projects' title='View page'>Workshops</Link></li>
               </ul>
             </div>
 
             <div className='foot-nav-block'>
               <h2 className='contact__title'>About</h2>
               <ul className='foot-menu'>
-                <li><Link to='#' title='View page'>Our organization</Link></li>
-                <li><Link to='#' title='View page'>Blog</Link></li>
-                <li><Link to='#' title='View page'>Contact</Link></li>
-                <li><Link to='#' title='View page'>FAQs</Link></li>
+                <li><Link to='/about' title='View page'>Our organization</Link></li>
+                <li><a href='https://medium.com/@openaq' title='View blog' target='_blank'>Blog</a></li>
+                <li><Link to='/about' title='View page'>Contact</Link></li>
+                <li><a href='https://github.com/openaq/openaq-info/blob/master/FAQ.md' title='View FAQs'>FAQs</a></li>
               </ul>
             </div>
           </nav>
