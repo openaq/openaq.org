@@ -32,7 +32,7 @@ var JoinFold = React.createClass({
                   </div>
                 </div>
                 <footer className='card__footer'>
-                  <Link to='#' className='join-card__go-link' title='View more'><span>Participate</span></Link>
+                  <Link to='/community' className='join-card__go-link' title='View more'><span>Participate</span></Link>
                 </footer>
               </div>
             </article>
@@ -55,7 +55,7 @@ var JoinFold = React.createClass({
                   </div>
                 </div>
                 <footer className='card__footer'>
-                  <Link to='#' className='join-card__go-link' title='View more'><span>Support</span></Link>
+                  <Link to='/community' className='join-card__go-link' title='View more'><span>Support</span></Link>
                 </footer>
               </div>
             </article>
