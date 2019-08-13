@@ -75,6 +75,7 @@
   }
 
   img {
+    @extend %card-skin;
     width: 100%;
     max-width: 28rem;
     height: auto;
