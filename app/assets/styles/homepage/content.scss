@@ -15,7 +15,6 @@
 
   .inpage__headline {
     grid-row: 2;
-    grid-column: 1 / span 12;
 
     @include media(large-up) {
       grid-row: 1;
@@ -25,31 +24,12 @@
 }
 
 
-/* Fold: Intro
-   ========================================================================== */
-
-.page--homepage .fold--intro {
-  .fold__action {
-    grid-row: 3;
-    grid-column: 1 / span 12;
-
-    @include media(medium-up) {
-      grid-column: 2 / span 10;
-    }
-  }
-
-  .fold__media {
-    padding: $global-spacing 0;
-  }
-}
-
-
 /* Header Random Measurements
    ========================================================================== */
 
 .home-rand-meas {
   grid-row: 1;
-  grid-column: 1 / span 12;
+  grid-column: 1 / -1;
   margin-bottom: 4rem;
   display: flex;
   flex-flow: row nowrap;
@@ -151,6 +131,29 @@
 }
 
 
+/* Fold: Intro
+   ========================================================================== */
+
+.page--homepage .fold--intro {
+  .fold__action {
+    grid-row: 3;
+    grid-column: 1 / -1;
+
+    @include media(medium-up) {
+      grid-column: 2 / span 6;
+    }
+
+    @include media(large-up) {
+      grid-column: 2 / span 10;
+    }
+  }
+
+  .fold__media {
+    padding: $global-spacing 0;
+  }
+}
+
+
 /* Fold: Open Data
    ========================================================================== */
 
@@ -169,14 +172,34 @@
   .big-stat {
     color: inherit;
   }
+
+  .fold__main-action {
+    flex-flow: column;
+
+    @include media(small-up) {
+      flex-flow: row;
+    }
+
+    > * {
+      margin: 0.25rem 0;
+
+      @include media(small-up) {
+        margin: 0 1rem 0 0;
+      }
+    }
+  }
 }
 
 .od-quick-menu {
   display: grid;
-  grid-template-columns: repeat(2, min-content);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 1rem 2rem;
   list-style: none;
   padding: 0;
+
+  @include media(small-up) {
+    grid-template-columns: repeat(2, min-content);
+  }
 
   @include media(medium-up) {
     grid-gap: 1.5rem 2rem;
@@ -258,6 +281,10 @@
 
 #home-fold-sponsors {
   .sponsor-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+
+    @include media(small-up) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }

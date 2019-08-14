@@ -255,7 +255,11 @@
     grid-row: 2;
     grid-column: 1 / -1;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+
+    @include media(small-up) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     @include media(medium-up) {
       grid-template-columns: repeat(3, 1fr);
