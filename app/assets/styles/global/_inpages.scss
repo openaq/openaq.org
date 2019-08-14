@@ -134,9 +134,17 @@ $page-header-y: $global-spacing * 5;
     > .inner {
       @extend .constrainer;
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       grid-gap: 2rem;
       grid-template-rows: auto;
+
+      @include media(medium-up) {
+        grid-template-columns: repeat(8, 1fr);
+      }
+
+      @include media(large-up) {
+        grid-template-columns: repeat(12, 1fr);
+      }
     }
 
     > *:last-child {
@@ -164,10 +172,10 @@ $page-header-y: $global-spacing * 5;
 
 .inpage__aside {
   grid-row: 1;
-  grid-column: 1 / span 12;
+  grid-column: 1 / -1;
 
   @include media(medium-up) {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 3;
   }
 
   @include media(large-up) {
@@ -181,11 +189,11 @@ $page-header-y: $global-spacing * 5;
 
 .inpage__content {
   grid-row: 2;
-  grid-column: 1 / span 12;
+  grid-column: 1 / -1;
 
   @include media(medium-up) {
     grid-row: 1;
-    grid-column: 5 / span 8;
+    grid-column: 4 / span 5;
     box-shadow: -1px 0 0 0 $base-semi-alpha-color;
     padding-left: 2rem;
   }
