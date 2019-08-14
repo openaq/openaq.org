@@ -36,9 +36,17 @@ $page-header-y: $global-spacing * 5;
     > .inner {
       @extend .constrainer;
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       grid-gap: 2rem;
       grid-template-rows: auto;
+
+      @include media(medium-up) {
+        grid-template-columns: repeat(8, 1fr);
+      }
+
+      @include media(large-up) {
+        grid-template-columns: repeat(12, 1fr);
+      }
     }
 
     &--jumbo {
@@ -60,7 +68,7 @@ $page-header-y: $global-spacing * 5;
 
   &__headline {
     grid-row: 1;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     @include media(large-up) {
       grid-column: 1 / span 6;
