@@ -231,9 +231,13 @@
 
   .fold__header {
     grid-row: 1;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     @include media(medium-up) {
+      grid-column: 2 / span 6;
+    }
+
+    @include media(large-up) {
       grid-column: 2 / span 10;
     }
   }

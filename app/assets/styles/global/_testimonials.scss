@@ -27,27 +27,39 @@
   background: $tertiary-color;
   color: #fff;
   list-style: none;
-  padding: 4rem;
+  padding: 2rem;
   margin: 0;
+
+  @include media(medium-up) {
+    padding: 4rem;
+  }
 }
 
 .testimonial {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
   grid-template-rows: auto;
   align-items: center;
   padding: 0;
   margin: 0;
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  @include media(large-up) {
+    grid-template-columns: repeat(12, 1fr);
+  }
 }
 
 .testimonial__copy {
   grid-row: 2;
-  grid-column: 1 / span 12;
+  grid-column: 1 / -1;
 
   @include media(medium-up) {
     grid-row: 1;
-    grid-column: 7 / span 6;
+    grid-column: 5 / span 4;
   }
 
   @include media(large-up) {
@@ -57,10 +69,14 @@
 
 .testimonial__media {
   grid-row: 1;
-  grid-column: 1 / span 12;
+  grid-column: 1 / -1;
   margin-top: -6rem;
 
   @include media(medium-up) {
+    grid-column: 1 / span 4;
+  }
+
+  @include media(large-up) {
     grid-column: 1 / span 6;
   }
 
