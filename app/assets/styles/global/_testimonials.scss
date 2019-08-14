@@ -71,6 +71,7 @@
   grid-row: 1;
   grid-column: 1 / -1;
   margin-top: -6rem;
+  text-align: center;
 
   @include media(medium-up) {
     grid-column: 1 / span 4;
@@ -80,13 +81,16 @@
     grid-column: 1 / span 6;
   }
 
-  figure {
-    margin: 0;
-  }
-
   img {
-    max-width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    max-width: 20rem;
     height: auto;
+
+    @include media(medium-up) {
+      max-width: none;
+    }
   }
 }
 
