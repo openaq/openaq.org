@@ -31,21 +31,29 @@
 
   .fold__header {
     grid-row: 1;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 0 2rem;
+
+    @include media(medium-up) {
+      grid-template-columns: repeat(8, 1fr);
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(12, 1fr);
+    }
   }
 
   .fold__subtitle {
     grid-row: 1;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
   }
 
   .fold__title {
     grid-row: 2;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     @include media(large-up) {
       grid-column: 1 / span 5;
@@ -54,7 +62,7 @@
 
   .fold__teaser {
     grid-row: 3;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     @include media(large-up) {
       grid-row: 2;
@@ -65,21 +73,23 @@
   .fold__lead {
     position: relative;
     grid-row: 2;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 0 2rem;
 
     padding: ($global-spacing * 4) 0;
     margin: 2rem 0 4rem 0;
 
     @include media(medium-up) {
+      grid-template-columns: repeat(8, 1fr);
       padding: ($global-spacing * 6) 0;
       margin: 2rem 0 6rem 0;
     }
 
     @include media(large-up) {
+      grid-template-columns: repeat(12, 1fr);
       padding: ($global-spacing * 8) 0;
       margin: 4rem 0 10rem 0;
     }
@@ -106,11 +116,11 @@
 
   .fold__claim {
     grid-row: 1;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
     margin-bottom: 2rem;
 
     @include media(medium-up) {
-      grid-column: 3 / span 8;
+      grid-column: 2 / span 6;
     }
 
     @include media(large-up) {
@@ -121,11 +131,11 @@
 
   .fold__media {
     grid-row: 2;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
     margin-bottom: -8rem;
 
     @include media(medium-up) {
-      grid-column: 3 / span 8;
+      grid-column: 2 / span 6;
       margin-bottom: -12rem;
     }
 
@@ -137,10 +147,10 @@
 
   .fold__body {
     grid-row: 3;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     @include media(medium-up) {
-      grid-column: 3 / span 8;
+      grid-column: 2 / span 6;
     }
 
     @include media(large-up) {
@@ -166,29 +176,31 @@
 
   .fold__header {
     grid-row: 1;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 0 2rem;
 
     @include media(large-up) {
+      grid-template-columns: repeat(8, 1fr);
       margin-bottom: 2rem;
     }
 
     @include media(large-up) {
+      grid-template-columns: repeat(12, 1fr);
       margin-bottom: 4rem;
     }
   }
 
   .fold__subtitle {
     grid-row: 1;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
   }
 
   .fold__title {
     grid-row: 2;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     @include media(large-up) {
       grid-column: 1 / span 5;
@@ -197,7 +209,7 @@
 
   .fold__teaser {
     grid-row: 3;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     @include media(large-up) {
       grid-row: 2;
@@ -209,7 +221,7 @@
     position: relative;
     z-index: 2;
     grid-row: 2;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
     margin-bottom: -6rem;
 
     @include media(large-up) {
@@ -225,10 +237,10 @@
     position: relative;
     z-index: 1;
     grid-row: 3;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
     align-items: center;
 
@@ -236,11 +248,13 @@
     margin: 0 0 2rem 0;
 
     @include media(medium-up) {
+      grid-template-columns: repeat(8, 1fr);
       padding: ($global-spacing * 8) 0 ($global-spacing * 6) 0;
       margin: 0 0 4rem 0;
     }
 
     @include media(large-up) {
+      grid-template-columns: repeat(12, 1fr);
       padding: ($global-spacing * 12) 0 ($global-spacing * 8) 0;
       margin: 0 0 6rem 0;
     }
@@ -268,10 +282,10 @@
     }
 
     .infold__teaser {
-      grid-column: 1 / span 12;
+      grid-column: 1 / -1;
 
       @include media(medium-up) {
-        grid-column: 1 / span 8;
+        grid-column: 1 / span 5;
       }
 
       @include media(large-up) {
@@ -280,11 +294,11 @@
     }
 
     .infold__media {
-      grid-column: 1 / span 12;
+      grid-column: 1 / -1;
       margin: 0;
 
       @include media(medium-up) {
-        grid-column: 5 / span 8;
+        grid-column: 4 / span 5;
       }
 
       @include media(large-up) {
@@ -311,21 +325,29 @@
 
   .fold__block {
     grid-row: 4;
-    grid-column: 1 / span 12;
+    grid-column: 1 / -1;
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 2rem;
+
+    @include media(medium-up) {
+      grid-template-columns: repeat(8, 1fr);
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(12, 1fr);
+    }
 
     .big-stats-list {
       grid-row: 1;
-      grid-column: 1 / span 12;
+      grid-column: 1 / -1;
       justify-content: flex-start;
     }
 
     .fold__claim {
       grid-row: 2;
-      grid-column: 1 / span 12;
+      grid-column: 1 / -1;
       margin-bottom: 0;
 
       @include media(large-up) {
@@ -335,7 +357,7 @@
 
     .fold__body {
       grid-row: 3;
-      grid-column: 1 / span 12;
+      grid-column: 1 / -1;
 
       @include media(large-up) {
         grid-row: 2;
