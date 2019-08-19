@@ -76,7 +76,7 @@ var About = React.createClass({
                       </header>
                       <div className='card__body'>
                         <div className='card__prose prose prose--responsive'>
-                          <p>Encouraging open collaboration in the open.</p>
+                          <p>Encouraging collaboration in the open.</p>
                         </div>
                       </div>
                     </div>
@@ -199,7 +199,7 @@ var About = React.createClass({
               <header className='fold__header'>
                 <h1 className='fold__title'>We are an open book</h1>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>We value transparency so all our records are publically available.</p>
+                  <p>We value transparency so all our records are publicly available.</p>
                   <p className='fold__main-action'>
                     <a href='#' className='button-book-download' title='Download'><span>Download 2018 Form 990</span></a>
                   </p>

@@ -43,7 +43,7 @@ const subMenus = [
     items: [
       {
         title: 'Overview',
-        description: 'Passioned about air quality data? Join our community.',
+        description: 'Passionate about air quality data? Join our community.',
         className: null,
         url: '/community'
       },

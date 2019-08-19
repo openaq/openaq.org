@@ -31,7 +31,7 @@ var CommunityHub = React.createClass({
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Community overview</h1>
               <div className='inpage__introduction'>
-                <p>Passioned about air quality data? Join our community.</p>
+                <p>Passionate about air quality data? Join our community.</p>
               </div>
             </div>
           </div>
