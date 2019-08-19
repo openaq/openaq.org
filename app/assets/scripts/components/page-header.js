@@ -13,25 +13,25 @@ const subMenus = [
     items: [
       {
         title: 'Locations',
-        description: 'Mauris posuere mauris a molestie ultrices.',
+        description: 'An overview of locations in the dataset.',
         className: 'sub-menu__link--locations',
         url: '/locations'
       },
       {
         title: 'Countries',
-        description: 'Mauris posuere mauris a molestie ultrices.',
+        description: 'Air quality data by country.',
         className: 'sub-menu__link--countries',
         url: '/countries'
       },
       {
         title: 'World map',
-        description: 'Mauris posuere mauris a molestie ultrices.',
+        description: 'See the latest measurements on a map.',
         className: 'sub-menu__link--map',
         url: '/map'
       },
       {
         title: 'Use API',
-        description: 'Mauris posuere mauris a molestie ultrices.',
+        description: 'Access the data through our API.',
         className: 'sub-menu__link--api',
         url: 'https://docs.openaq.org/'
       }
