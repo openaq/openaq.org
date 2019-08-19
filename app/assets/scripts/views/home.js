@@ -36,11 +36,23 @@ const totalPages = 5024;
 const MAX_TRIES = 5;
 
 class Home extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      // Keep count of how many tries as a safety kill switch
+      compareTries: []
+    };
+  }
+
   fetchValidLocation (idx) {
     // Keep count of how many tries as a safety kill switch
-    if (!this.compareTries) { this.compareTries = []; }
-    this.compareTries[idx] = (this.compareTries[idx] || 0) + 1;
-    if (this.compareTries[idx] > MAX_TRIES) return;
+    this.setState({
+      compareTries: Object.assign([], this.state.compareTries, {
+        [idx]: (this.state.compareTries[idx] || 0) + 1
+      })
+    });
+    if (this.state.compareTries[idx] > MAX_TRIES) return;
 
     const now = Date.now();
     const weekAgo = now - 8 * 86400 * 1000;
@@ -76,7 +88,9 @@ class Home extends React.Component {
 
   componentWillUnmount () {
     // Void any tries to stop requests
-    this.compareTries = this.compareTries.map(() => Infinity);
+    this.setState({
+      compareTries: this.state.compareTries.map(() => Infinity)
+    });
   }
 
   getTestimonial () {
@@ -176,10 +190,12 @@ class Home extends React.Component {
               <CompareLocationCard
                 location={l1}
                 measurement={m1}
+                triesExhausted={this.state.compareTries[0] > MAX_TRIES}
               />
               <CompareLocationCard
                 location={l2}
                 measurement={m2}
+                triesExhausted={this.state.compareTries[1] > MAX_TRIES}
               />
             </div>
           </div>
@@ -413,8 +429,21 @@ class CompareLocationCard extends React.Component {
   render () {
     const {
       location,
-      measurement
+      measurement,
+      triesExhausted
     } = this.props;
+
+    if (triesExhausted) {
+      return (
+        <article className='card card--measurement'>
+          <div className='card__contents'>
+            <div className='card__body'>
+              <p>No locations with measurements were found</p>
+            </div>
+          </div>
+        </article>
+      );
+    }
 
     if (!location.fetched || !measurement.fetched) {
       return (
@@ -466,5 +495,6 @@ class CompareLocationCard extends React.Component {
 
 CompareLocationCard.propTypes = {
   location: React.PropTypes.object,
-  measurement: React.PropTypes.object
+  measurement: React.PropTypes.object,
+  triesExhausted: React.PropTypes.bool
 };
