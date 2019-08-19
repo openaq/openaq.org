@@ -62,8 +62,8 @@ var Why = React.createClass({
                 </figure>
               </div>
               <div className='fold__body prose prose--responsive'>
-                <p>Evidence of its solvability in the past abound from Bangkok to London to Pittsburgh. The consistent thread of success from city to city and country to country in battling air pollution involves a simple premise: positive change is effected when there is sustained will to address pollution and a solid set of plans to do so, whether these are formal government policies, informal community-led activities, or most often, a combination of the two.</p>
-                <p>Two drivers to build that sustained will from a community and those solid plans are: a multi-sectoral community (e.g. scientists, tech folks, policymakers, medical doctors, journalists, activists, etc.) and the community’s access to open data.</p>
+                <p>Evidence from Bangkok to London to Pittsburgh show that it can be solved. The common thread of success from city to city and country to country in battling air pollution involves a simple premise: positive change is effected when there is sustained will to address pollution and a solid set of plans to do so. Whether these are formal government policies, informal community-led activities, or most often, a combination of the two.</p>
+                <p>Two drivers that build that sustained will and solid plans are: a community with a diverse background (e.g. scientists, tech folks, policymakers, medical doctors, journalists, activists, etc.) and their access to open data.</p>
               </div>
             </div>
           </section>
@@ -115,8 +115,8 @@ var Why = React.createClass({
                   <p>The platform receives about 15 million data requests each month from individuals and organizations around the world.</p>
                 </div>
                 <div className='fold__body prose prose--responsive'>
-                  <p>To date, the data have been used for producing peer-reviewed scientific research papers, powering web and phone apps, calibrating citizen science and private sector low-cost sensor efforts, and more. Community members have built open-source tools off of the universal dataset, enabling a statistician in Indonesia to get right to analyzing data because of something someone in Mongolia created.</p>
-                  <p>Community members have connected virtually through our Slack Channel and also through our city-level workshops and have gone on to conduct new scientific studies done in collaboration with local policy experts, jointly lobbied for new air quality standards, and requested their government open up their air quality data.</p>
+                  <p>To date, data from OpenAQ have been used to produce peer-reviewed scientific research papers, to power web and phone apps, to calibrate citizen science and private sector low-cost sensor efforts, and more. Community members have built open-source tools off of the universal dataset, enabling a statistician in Indonesia to quickly analyze data because of something someone in Mongolia created.</p>
+                  <p>Community members have connected virtually through our Slack Channel and also through our city-level workshops. They have gone on to conduct new scientific studies done in collaboration with local policy experts, jointly lobbied for new air quality standards, and requested their government open up their air quality data.</p>
                 </div>
               </div>
             </div>
