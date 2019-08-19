@@ -289,6 +289,8 @@ var Chart = function (options) {
     // INIT.
     $svg = $el.append('svg')
       .attr('class', 'chart')
+      .attr('width', 0)
+      .attr('height', 0)
       .style('display', 'block');
 
     // Datacanvas
