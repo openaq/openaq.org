@@ -55,7 +55,7 @@ var JoinFold = React.createClass({
                   </div>
                 </div>
                 <footer className='card__footer'>
-                  <Link to='/community' className='join-card__go-link' title='View more'><span>Support</span></Link>
+                  <a href='mailto:info@openaq.org' className='join-card__go-link' title='View more'><span>Support</span></a>
                 </footer>
               </div>
             </article>

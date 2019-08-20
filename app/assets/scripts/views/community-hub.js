@@ -70,13 +70,13 @@ var CommunityHub = React.createClass({
                       <header className='card__header'>
                         <div className='card__headline'>
                           <Link to='/community/projects' className='link-wrapper' title='View more'>
-                            <h1 className='card__title'>Community impact</h1>
+                            <h1 className='card__title'>View Community impact</h1>
                           </Link>
                         </div>
                       </header>
                       <div className='card__body'>
                         <div className='card__prose prose prose--responsive'>
-                          <p>A community using the data to fight air inquality in the most exciting ways.</p>
+                          <p>Get inspired by the ways our community are using data to fight air inequality.</p>
                         </div>
                       </div>
                       <footer className='card__footer'>
@@ -99,13 +99,13 @@ var CommunityHub = React.createClass({
                       <header className='card__header'>
                         <div className='card__headline'>
                           <Link to='/community/workshops' className='link-wrapper' title='View more'>
-                            <h1 className='card__title'>Workshops</h1>
+                            <h1 className='card__title'>Invite us for a workshop</h1>
                           </Link>
                         </div>
                       </header>
                       <div className='card__body'>
                         <div className='card__prose prose prose--responsive'>
-                          <p>Convene local communities to start new projects and collaborations to fight air pollution.</p>
+                          <p>OpenAQ convenes local communities to build new collaborations and projects around open data.</p>
                         </div>
                       </div>
                       <footer className='card__footer'>
@@ -128,7 +128,7 @@ var CommunityHub = React.createClass({
                       <header className='card__header'>
                         <div className='card__headline'>
                           <Link to='/' className='link-wrapper' title='View more'>
-                            <h1 className='card__title'>Community tools</h1>
+                            <h1 className='card__title'>Find community tools</h1>
                           </Link>
                         </div>
                       </header>
@@ -138,7 +138,7 @@ var CommunityHub = React.createClass({
                         </div>
                       </div>
                       <footer className='card__footer'>
-                        <Link to='/' className='card__go-link' title='View more'><span>See the tools</span></Link>
+                        <Link to='/community/projects?type=Developer+tools' className='card__go-link' title='View more'><span>See the tools</span></Link>
                       </footer>
                     </div>
                   </article>
@@ -163,11 +163,11 @@ var CommunityHub = React.createClass({
                       </header>
                       <div className='card__body'>
                         <div className='card__prose prose prose--responsive'>
-                          <p>Official organizations  measuring air quality data and publicly sharing them.</p>
+                          <p>Join other official organizations and governments around the world and share your air quality data.</p>
                         </div>
                       </div>
                       <footer className='card__footer'>
-                        <Link to='/' className='card__go-link' title='View more'><span>Become a data source</span></Link>
+                        <a href='https://medium.com/@openaq/how-can-a-government-source-add-data-to-openaq-50b5d83ef13f' target='_blank' className='card__go-link' title='View more'><span>Become a data source</span></a>
                       </footer>
                     </div>
                   </article>
