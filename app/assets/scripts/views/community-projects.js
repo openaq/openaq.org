@@ -19,6 +19,7 @@ const filterData = {
       .map(o => o.type)
       .filter(Boolean)
       .uniq()
+      .sortBy()
       .value(),
     label: 'types'
   },
@@ -29,6 +30,7 @@ const filterData = {
       .map(o => o.location)
       .filter(Boolean)
       .uniq()
+      .sortBy()
       .value(),
     label: 'locations'
   }
