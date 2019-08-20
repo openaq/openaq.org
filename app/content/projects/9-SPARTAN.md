@@ -2,7 +2,7 @@
 title: "SPARTAN PM2.5 Data"
 url: https://www.spartan-network.org/
 logo: assets/graphics/content/view--community-projects/projects/logos/spartan.png
-type: Research
+type: Data platform
 location: Global
 ---
 

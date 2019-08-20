@@ -4,7 +4,7 @@ url: https://www.nexgenearth.info/
 image: assets/graphics/content/view--community-projects/projects/covers/ngel.jpg
 logo: assets/graphics/content/view--community-projects/projects/logos/ngel.jpg
 featured: true
-type: Research
+type: Modeling
 location: Global
 ---
 

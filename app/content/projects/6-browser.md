@@ -2,7 +2,7 @@
 title: OpenAQ Browser
 url: http://dolugen.github.io/openaq-browser
 image: assets/graphics/content/view--community-projects/projects/covers/browser.jpg
-type: Data platform
+type: Developer tools
 location: Global
 ---
 

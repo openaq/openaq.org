@@ -2,7 +2,7 @@
 title: "cityAQ"
 url: http://cityaq.com/
 image: assets/graphics/content/view--community-projects/projects/covers/cityaq.png
-location: USA
+location: Global
 type: Software
 ---
 
