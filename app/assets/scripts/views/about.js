@@ -151,6 +151,24 @@ var About = React.createClass({
             </div>
           </section>
 
+          <section className='fold' id='about-fold-board'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Our advisory board</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>Mauris posuere mauris a molestie ultrices. Donec risus ligula, rutrum laoreet elementum aliquam, ullamcorper in nibh.</p>
+                </div>
+              </header>
+
+              <TeamList items={_(content.advisoryBoard)
+                .values()
+                .sortBy(['order'])
+                .value()}
+              />
+
+            </div>
+          </section>
+
           <section className='fold fold--semi-light' id='about-fold-sponsors'>
             <div className='inner'>
               <header className='fold__header'>

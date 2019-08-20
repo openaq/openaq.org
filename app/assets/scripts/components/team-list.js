@@ -8,8 +8,14 @@ class TeamList extends Component {
     const {
       image,
       name,
-      role
+      role,
+      affiliation
     } = person;
+
+    const details = [
+      role,
+      affiliation
+    ].filter(Boolean).join(' / ');
 
     const img = image
       ? `/assets/graphics/content/${image}`
@@ -22,7 +28,7 @@ class TeamList extends Component {
             <img src={img} width='320' height='320' alt='Team avatar' />
           </figure>
           <h1 className='team-member__title'>{name}</h1>
-          <p className='team-member__role'>{role}</p>
+          <p className='team-member__role'>{details}</p>
         </article>
       </li>
     );
