@@ -1,9 +1,12 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import JoinFold from '../components/join-fold';
 import SponsorList from '../components/sponsor-list';
+import TeamList from '../components/team-list';
 
+import content from '../../content/content.json';
 import sponsors from '../../content/sponsors.json';
 
 var About = React.createClass({
@@ -138,47 +141,13 @@ var About = React.createClass({
                   <p>Mauris posuere mauris a molestie ultrices. Donec risus ligula, rutrum laoreet elementum aliquam, ullamcorper in nibh.</p>
                 </div>
               </header>
-              <ul className='board-list'>
-                <li>
-                  <article className='board-member'>
-                    <figure className='board-member__avatar'>
-                      <img src='/assets/graphics/content/board/board-avatar--christa-hasenkopf.jpg' width='320' height='320' alt='Board avatar' />
-                    </figure>
-                    <h1 className='board-member__title'>Christa Hasenkopf</h1>
-                    <p className='board-member__role'>Chief Executive Officer</p>
-                  </article>
-                </li>
 
-                <li>
-                  <article className='board-member'>
-                    <figure className='board-member__avatar'>
-                      <img src='/assets/graphics/content/board/board-avatar--placeholder.jpg' width='320' height='320' alt='Board avatar' />
-                    </figure>
-                    <h1 className='board-member__title'>Matthew Higgins</h1>
-                    <p className='board-member__role'>Treasurer</p>
-                  </article>
-                </li>
+              <TeamList items={_(content.governingBoard)
+                .values()
+                .sortBy(['order'])
+                .value()}
+              />
 
-                <li>
-                  <article className='board-member'>
-                    <figure className='board-member__avatar'>
-                      <img src='/assets/graphics/content/board/board-avatar--heidi-yoon.jpg' width='320' height='320' alt='Board avatar' />
-                    </figure>
-                    <h1 className='board-member__title'>Heidi Yoon</h1>
-                    <p className='board-member__role'>Community Engagement Officer</p>
-                  </article>
-                </li>
-
-                <li>
-                  <article className='board-member'>
-                    <figure className='board-member__avatar'>
-                      <img src='/assets/graphics/content/board/board-avatar--olaf-veerman.jpg' width='320' height='320' alt='Board avatar' />
-                    </figure>
-                    <h1 className='board-member__title'>Olaf Veerman</h1>
-                    <p className='board-member__role'>Chair</p>
-                  </article>
-                </li>
-              </ul>
             </div>
           </section>
 
