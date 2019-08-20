@@ -142,7 +142,7 @@ var About = React.createClass({
                 <li>
                   <article className='board-member'>
                     <figure className='board-member__avatar'>
-                      <img src='/assets/graphics/content/board/board-avatar--christa-hasenkopt.jpg' width='320' height='320' alt='Board avatar' />
+                      <img src='/assets/graphics/content/board/board-avatar--christa-hasenkopf.jpg' width='320' height='320' alt='Board avatar' />
                     </figure>
                     <h1 className='board-member__title'>Christa Hasenkopf</h1>
                     <p className='board-member__role'>Chief Executive Officer</p>
