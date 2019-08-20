@@ -138,7 +138,7 @@ var CommunityHub = React.createClass({
                         </div>
                       </div>
                       <footer className='card__footer'>
-                        <Link to='/' className='card__go-link' title='View more'><span>See the tools</span></Link>
+                        <Link to='/community/projects?type=Developer+tools' className='card__go-link' title='View more'><span>See the tools</span></Link>
                       </footer>
                     </div>
                   </article>
@@ -163,7 +163,7 @@ var CommunityHub = React.createClass({
                       </header>
                       <div className='card__body'>
                         <div className='card__prose prose prose--responsive'>
-                          <p>Official organizations  measuring air quality data and publicly sharing them.</p>
+                          <p>Official organizations measuring air quality data and publicly sharing them.</p>
                         </div>
                       </div>
                       <footer className='card__footer'>
