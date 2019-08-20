@@ -18,7 +18,7 @@ var Why = React.createClass({
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Why open air quality?</h1>
               <div className='inpage__introduction'>
-                <p>Because everyone sould have access to clean air.</p>
+                <p>Because everyone should have access to clean air.</p>
               </div>
             </div>
           </div>

@@ -131,7 +131,7 @@ class Home extends React.Component {
           <header className='fold__header'>
             <h1 className='fold__title'>Open Data</h1>
             <div className='fold__teaser prose prose--responsive'>
-              <p>The data is captured from multiple sources and available for anyone to access through our open-source platform.</p>
+              <p>The data is captured from multiple sources and made accessible to all through our open-source platform.</p>
               <ol className='od-quick-menu'>
                 <li><Link to='/locations' title='View page' className='od-quick-menu__locations-link'>Location view</Link></li>
                 <li><a href='https://docs.openaq.org/' target='_blank' title='View API' className='od-quick-menu__api-link'>API</a></li>
@@ -228,7 +228,7 @@ class Home extends React.Component {
                 <h1 className='fold__subtitle'>What we do</h1>
                 <h2 className='fold__title'>Harmonizing air quality data</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>Our community harmonizes disparate air quality data from across the world so that various people and organizations can do more with the data, build open-source tools around them, and engage with one another. All of this is so people don't have to reinvent the same data access-, tool-, and community-wheels and can instead get down to fighting "air inequality" more efficiently.</p>
+                  <p>The OpenAQ community harmonizes disparate air quality data from across the world so that citizens and organizations can fight air inequality more efficiently.</p>
                   <p><Link to='/about' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
@@ -244,9 +244,9 @@ class Home extends React.Component {
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__subtitle'>Community</h1>
-                <h2 className='fold__title'>Our community creates collective impact</h2>
+                <h2 className='fold__title'>Collective impact through community</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>Improving global air quality requires diverse activities across many sectors and geographies. Our worldwide community leverages open data, tools, and one another for impact.</p>
+                  <p>Improving global air quality requires action across sectors and geographies. Our worldwide community leverages open data to build:</p>
                   <ol className='community-details'>
                     <li>Apps</li>
                     <li>Browsers</li>
@@ -270,9 +270,9 @@ class Home extends React.Component {
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__subtitle'>Partners and sponsors</h1>
-                <h2 className='fold__title'>Together making a difference</h2>
+                <h2 className='fold__title'>Enabling change at scale</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>Our non-profit work is made possible through the support of a variety of organizations.</p>
+                  <p>Our nonprofit work is made possible with the support of our partners.</p>
                 </div>
               </header>
               <figure className='fold__media'>
