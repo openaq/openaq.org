@@ -9,6 +9,17 @@ import TeamList from '../components/team-list';
 import content from '../../content/content.json';
 import sponsors from '../../content/sponsors.json';
 
+const teamData = {
+  advisoryBoard: _(content.advisoryBoard)
+    .values()
+    .sortBy(['order'])
+    .value(),
+  governingBoard: _(content.governingBoard)
+    .values()
+    .sortBy(['order'])
+    .value()
+};
+
 var About = React.createClass({
   displayName: 'About',
 
@@ -142,11 +153,7 @@ var About = React.createClass({
                 </div>
               </header>
 
-              <TeamList items={_(content.governingBoard)
-                .values()
-                .sortBy(['order'])
-                .value()}
-              />
+              <TeamList items={teamData.governingBoard} />
 
             </div>
           </section>
@@ -160,11 +167,7 @@ var About = React.createClass({
                 </div>
               </header>
 
-              <TeamList items={_(content.advisoryBoard)
-                .values()
-                .sortBy(['order'])
-                .value()}
-              />
+              <TeamList items={teamData.advisoryBoard} />
 
             </div>
           </section>
