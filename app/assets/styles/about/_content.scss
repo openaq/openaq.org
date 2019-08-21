@@ -177,7 +177,7 @@
   }
 }
 
-.board-list {
+.team-list {
   grid-row: 2;
   grid-column: 1 / -1;
   list-style: none;
@@ -197,7 +197,7 @@
   }
 }
 
-.board-member {
+.team-member {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -209,7 +209,7 @@
   }
 }
 
-.board-member__avatar {
+.team-member__avatar {
   overflow: hidden;
   width: 100%;
   max-width: 10rem;
@@ -224,7 +224,7 @@
   }
 }
 
-.board-member__title {
+.team-member__title {
   @include heading(1.25rem);
   margin: 0 0 0.25rem 0;
 }
