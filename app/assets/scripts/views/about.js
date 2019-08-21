@@ -144,7 +144,7 @@ var About = React.createClass({
             </div>
           </section>
 
-          <section className='fold' id='about-fold-board'>
+          <section className='fold fold--stacked' id='about-fold-main-board'>
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__title'>Our board</h1>
@@ -158,7 +158,7 @@ var About = React.createClass({
             </div>
           </section>
 
-          <section className='fold' id='about-fold-board'>
+          <section className='fold fold--stacked' id='about-fold-advisory-board'>
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__title'>Our advisory board</h1>

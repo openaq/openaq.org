@@ -156,7 +156,8 @@
 /* Fold: Board
    ========================================================================== */
 
-#about-fold-board {
+#about-fold-main-board,
+#about-fold-advisory-board  {
   > .inner {
     grid-gap: 2rem;
 
@@ -172,6 +173,11 @@
 
     @include media(medium-up) {
       grid-column: 1 / span 4;
+      text-align: left;
+    }
+
+    @include media(large-up) {
+      grid-column: 1 / span 6;
       text-align: left;
     }
   }

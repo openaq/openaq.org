@@ -283,3 +283,7 @@
     }
   }
 }
+
+.fold--stacked + .fold--stacked {
+  padding-top: 0;
+}
