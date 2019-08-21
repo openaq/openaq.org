@@ -12,20 +12,15 @@ $page-header-y: $global-spacing * 5;
   &__header {
     position: relative;
     color: $base-font-color;
-    padding: ($global-spacing * 8) 0;
+    padding: ($global-spacing * 4) 0;
     background-color: #fff;
-    display: flex;
 
     /* Animation */
     transition: all 0.16s ease 0s;
     animation: reveal 0.32s ease 0s 1;
 
-    @include media(medium-up) {
-      padding: ($global-spacing * 10) 0;
-    }
-
     @include media(large-up) {
-      padding: ($global-spacing * 12) 0;
+      padding: ($global-spacing * 6) 0;
     }
 
     > * {
@@ -207,7 +202,6 @@ $page-header-y: $global-spacing * 5;
   }
 }
 
-
 .inpage__aside + .inpage__content {
   @include media(medium-down) {
     margin-top: -6rem;
@@ -218,8 +212,32 @@ $page-header-y: $global-spacing * 5;
 /* Inpage media
    ========================================================================== */
 
-.inpage__media--cover,
-.inpage__media--cover .media__item {
+.inpage__media--stripe {
+  @extend .constrainer;
+  margin-bottom: 0;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+  }
+
+  &:last-child:not(:first-child) {
+    margin-top: ($global-spacing * 2);
+    margin-bottom: -($global-spacing * 6);
+
+    @include media(large-up) {
+      margin-top: ($global-spacing * 4);
+      margin-bottom: -($global-spacing * 10);
+    }
+  }
+
+  .media__item {
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+.inpage__media--cover {
   position: absolute;
   top: 0;
   left: 0;
@@ -227,29 +245,28 @@ $page-header-y: $global-spacing * 5;
   bottom: 0;
   z-index: 1;
   margin: 0;
-}
 
-.inpage__media--cover .media__item {
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    content: '';
+  .media__item {
+    &,
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      content: '';
+    }
+
+    img {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
   }
 
-  img {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-}
-
-.inpage__media--cover {
   figcaption {
     position: absolute;
     right: 0.5rem;
@@ -277,6 +294,16 @@ $page-header-y: $global-spacing * 5;
     @extend .antialiased;
     background-color: $primary-color;
     color: #fff;
+    display: flex;
+    padding: ($global-spacing * 8) 0;
+
+    @include media(medium-up) {
+      padding: ($global-spacing * 10) 0;
+    }
+
+    @include media(large-up) {
+      padding: ($global-spacing * 12) 0;
+    }
   }
 
   .inpage__title {

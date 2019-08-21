@@ -52,8 +52,8 @@ render((
         <Route name='why' path='why' component={Why} pageClass='page--why page--dark' />
         <Route name='about' path='about' component={About} pageClass='page--about page--dark' />
         <Route name='communityHub' path='community' component={CommunityHub} pageClass='page--community-hub page--dark' />
-        <Route name='communityProjects' path='community/projects' component={CommunityProjects} pageClass='page--community-projects page--dark' />
-        <Route name='communityWorkshops' path='community/workshops' component={CommunityWorkshops} pageClass='page--community-workshops page--dark' />
+        <Route name='communityProjects' path='community/projects' component={CommunityProjects} pageClass='page--community-projects' />
+        <Route name='communityWorkshops' path='community/workshops' component={CommunityWorkshops} pageClass='page--community-workshops' />
         <Route name='map' path='map' component={Map} pageClass='page--map' />
         <Route name='locationsHub' path='locations' component={LocationsHub} pageClass='page--locations-hub page--dark' />
         <Route name='location' path='location/:name' component={LocationItem} pageClass='page--locations-single page--dark' />

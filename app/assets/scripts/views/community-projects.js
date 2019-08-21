@@ -163,9 +163,9 @@ class CommunityProjects extends React.Component {
               </div>
             </div>
           </div>
-          <figure className='inpage__media inpage__media--cover media'>
+          <figure className='inpage__media inpage__media--stripe media'>
             <div className='media__item'>
-              <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
+              <img src='/assets/graphics/content/view--community-projects/stripe--community-projects.jpg' alt='Stripe image' width='2880' height='960' />
             </div>
           </figure>
         </header>
