@@ -37,7 +37,7 @@ var CommunityHub = React.createClass({
           </div>
           <figure className='inpage__media inpage__media--cover media'>
             <div className='media__item'>
-              <img src='/assets/graphics/content/view--community-hub/cover--community-hub.jpg' alt='Cover image' width='1440' height='710' />
+              <img src='/assets/graphics/content/view--community-hub/cover--community.jpg' alt='Cover image' width='1440' height='710' />
             </div>
           </figure>
         </header>
