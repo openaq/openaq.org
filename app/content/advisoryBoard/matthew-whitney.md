@@ -2,5 +2,5 @@
 name: Matthew Whitney
 order: 10
 affiliation: Clean Air Fund
-image:
+image: team/avatar--matthew-whitney.png
 ---
