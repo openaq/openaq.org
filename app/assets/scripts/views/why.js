@@ -89,7 +89,7 @@ var Why = React.createClass({
                 <h1 className='fold__subtitle'>Harmonizing data for impact </h1>
                 <h2 className='fold__title'>Air quality data into a single format</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>We foster a community of data-users to build open-source, shareable tools on top of the data, to use the data in a variety of scientific, policy, and other community-driven ways, and to connect with one another across sectors and geographies.</p>
+                  <p>OpenAQ aggregates and harmonizes disparate air quality data into a single format so that more people can access the data for more impactful purposes.</p>
                 </div>
               </header>
 
@@ -99,7 +99,7 @@ var Why = React.createClass({
 
               <div className='infold'>
                 <div className='infold__teaser prose prose--responsive'>
-                  <p>We foster a community of data-users to build open-source, shareable tools on top of the data, to use the data in a variety of scientific, policy, and other community-driven ways, and to connect with one another across sectors and geographies.</p>
+                  <p>The OpenAQ platform includes the 7 ambient air pollutants most commonly measured by countries across the world. To learn more about where data on the OpenAQ platform comes from, go <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">here</a></p>
                 </div>
                 <figure className='infold__media'>
                   <img src='/assets/graphics/content/view--why/oaq-pollutats-graph.png' alt='Graphic: the 7 pollutants we share' width='1134' height='1188' />

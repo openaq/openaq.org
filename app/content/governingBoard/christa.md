@@ -1,7 +1,7 @@
 ---
 name: Christa Hasenkopf
 order: 1
-role: Chief Executive Officer
+role: Director
 image: team/avatar--christa-hasenkopf.jpg
 contact: christa@openaq.org
 ---
