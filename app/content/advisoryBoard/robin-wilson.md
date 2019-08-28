@@ -2,5 +2,5 @@
 name: Robin Wilson
 order: 9
 affiliation: Fairfax County Government
-image:
+image: team/avatar--robin-wilson.jpg
 ---
