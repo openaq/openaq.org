@@ -127,16 +127,16 @@ var About = React.createClass({
               <header className='fold__header'>
                 <h1 className='fold__title'>Our story</h1>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>The seed of the idea for OpenAQ emerged from a small open air quality project in Ulaanbaatar, Mongolia, launched by co- founders Joe Flasher and Christa Hasenkopf along with Mongolian colleagues.</p>
-                  <p>Amazed at the outsized-impact a little open air quality data can have on a community, Christa, an atmospheric scientist, fell in love with open air quality projects.</p>
-                  <p>A few years later, she and Joe, a software developer, wondered: what would happen if all of the world’s air quality data were made available for the public to explore? One day, they quit wondering, started building, and began asking passionate people around the world to help.</p>
+                  <p>The idea for OpenAQ came from observing the impact of a lone air quality monitor producing open data, set up by the U.S. Embassy in Beijing.</p>
+                  <p>It spurred OpenAQ co-founders, Christa Hasenkopf, an atmospheric scientist, and Joe Flasher, a software developer, to set up a small open air quality project in Ulaanbaatar along with Mongolian colleagues.</p>
+                  <p>Eventually, they and a community of open data lovers from around the world decided to see what would happen if all of the world’s air quality data were made available for the public to explore.</p>
                 </div>
               </header>
               <figure className='fold__media'>
                 <aside className='aside-highlight'>
                   <div className='aside-highlight__contents'>
                     <div className='aside-highlight__prose'>
-                      <p>We believe in organizational missions evolving over time.</p>
+                      <p>What if all of the world’s air quality data were available to explore?</p>
                     </div>
                   </div>
                 </aside>
