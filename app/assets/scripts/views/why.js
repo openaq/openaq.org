@@ -50,20 +50,20 @@ var Why = React.createClass({
                 <h1 className='fold__subtitle'>The toll of air inequality</h1>
                 <h2 className='fold__title'>1 in 8 premature deaths in the world</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>Air pollution is the 4th largest risk factor to human health on the planet, according to the Global Burden of Disease study. 92% of the world population lives in areas where the air quality does not meet the World Health Organization guideline, and air pollution disproportionately affects those in developing countries.</p>
+                  <p>Air pollution is the 4th largest risk factor to human health on the planet. According to the World Health Organization, more than 90% of the world breathes unhealthy air, and air pollution disproportionately affects those in developing countries.</p>
                 </div>
               </header>
               <div className='fold__lead'>
                 <div className='fold__claim'>
-                  <p>While air pollution poses one of the largest public health burdens on the planet, it is completely solvable with existing technologies and infrastructures.</p>
+                  <p>While air pollution poses one of the largest public health burdens on the planet, it is completely solvable.</p>
                 </div>
                 <figure className='fold__media'>
                   <img src='/assets/graphics/content/view--why/fold-toll-media.jpg' alt='Fold media' width='1652' height='972' />
                 </figure>
               </div>
               <div className='fold__body prose prose--responsive'>
-                <p>Evidence from Bangkok to London to Pittsburgh show that it can be solved. The common thread of success from city to city and country to country in battling air pollution involves a simple premise: positive change is effected when there is sustained will to address pollution and a solid set of plans to do so. Whether these are formal government policies, informal community-led activities, or most often, a combination of the two.</p>
-                <p>Two drivers that build that sustained will and solid plans are: a community with a diverse background (e.g. scientists, tech folks, policymakers, medical doctors, journalists, activists, etc.) and their access to open data.</p>
+                <p>Cities across the world, from Bangkok to London to Pittsburgh, have created powerful examples of how air pollution can be tackled.</p>
+                <p>One common lesson from nearly every community that has successfully battled air pollution: Communities need basic access to data to effect change.</p>
               </div>
             </div>
           </section>
@@ -72,9 +72,9 @@ var Why = React.createClass({
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__subtitle'>A lack of data access</h1>
-                <h2 className='fold__title'>People lack access to open air quality data</h2>
+                <h2 className='fold__title'>Communities lack access to open air quality data</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>Data, if measured, are often only shared in human-readable or temporary ways. Even in countries that provide data openly, the data are shared in disparate formats. In several places, even if data are generated, they are not shared openly. This lack of harmonized data access does not allow the full ecosystem of scientific work, policy analyses, data-driven media, open tools, and a global network to develop.</p>
+                  <p>Air quality data in many places are often only shared in human-readable or temporary ways. Even in countries that provide data openly, the data are shared in disparate formats. This lack of harmonized data access prevents many sectors, from science to police to media, to fully utilize these data for impact.</p>
                 </div>
               </header>
               <figure className='fold__media'>
