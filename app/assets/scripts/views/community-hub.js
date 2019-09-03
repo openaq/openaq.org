@@ -31,7 +31,7 @@ var CommunityHub = React.createClass({
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Community overview</h1>
               <div className='inpage__introduction'>
-                <p>Passionate about air quality data? Join our community.</p>
+                <p>Passionate about air quality data? Join our Community.</p>
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@ var CommunityHub = React.createClass({
                       </header>
                       <div className='card__body'>
                         <div className='card__prose prose prose--responsive'>
-                          <p>Get inspired by the ways our community are using data to fight air inequality.</p>
+                          <p>Get inspired by the ways our Community are using data to fight air inequality.</p>
                         </div>
                       </div>
                       <footer className='card__footer'>
@@ -128,13 +128,13 @@ var CommunityHub = React.createClass({
                       <header className='card__header'>
                         <div className='card__headline'>
                           <Link to='/' className='link-wrapper' title='View more'>
-                            <h1 className='card__title'>Find community tools</h1>
+                            <h1 className='card__title'>Find Community tools</h1>
                           </Link>
                         </div>
                       </header>
                       <div className='card__body'>
                         <div className='card__prose prose prose--responsive'>
-                          <p>Access free, open-source community tools created by the OpenAQ community.</p>
+                          <p>Access free, open-source community tools created by the OpenAQ Community.</p>
                         </div>
                       </div>
                       <footer className='card__footer'>
