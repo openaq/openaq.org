@@ -76,7 +76,9 @@ class CommunityWorkshops extends React.Component {
   renderWorkshops () {
     const {location} = this.state.filter;
 
-    let cards = _(content.workshops).values();
+    let cards = _(content.workshops)
+      .sortBy('order')
+      .values();
 
     // Apply filters if they're set
     if (location) {
@@ -92,7 +94,7 @@ class CommunityWorkshops extends React.Component {
       return (
         <li key={o.filename}>
           <article className='card card--workshop'>
-            <a className='card__contents' href={o.url} title='View more'>
+            <a className='card__contents' href={o.url} title='View more' target='_blank'>
               <figure className='card__media'>
                 <div className='card__cover'>
                   <img src={o.image || 'https://via.placeholder.com/640x320'} width='640' height='320' alt='Card cover' />
@@ -142,9 +144,10 @@ class CommunityWorkshops extends React.Component {
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline header--centered'>
-              <h1 className='inpage__title'>Workshops</h1>
+              <h1 className='inpage__title'>OpenAQ Workshops</h1>
               <div className='inpage__introduction'>
-                <p>{widont('TODO: Add description for workshops')}</p>
+                <p>{widont('We hold workshops to help people in various sectors find the most impactful ways they can fight air inequality in their local community.')}</p>
+                <p>{widont('Contact us, if you are interested in holding a workshop in your community.')}</p>
               </div>
             </div>
           </div>
