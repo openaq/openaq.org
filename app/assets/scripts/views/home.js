@@ -248,14 +248,14 @@ class Home extends React.Component {
                 <div className='fold__teaser prose prose--responsive'>
                   <p>Improving global air quality requires action across sectors and geographies. Our worldwide community leverages open data to build:</p>
                   <ol className='community-details'>
-                    <li>Apps</li>
-                    <li>Browsers</li>
-                    <li>Modeling/Forecasting</li>
-                    <li>Products</li>
-                    <li>Data Platforms</li>
-                    <li>News/Journal Articles</li>
-                    <li>Workshops</li>
-                    <li>Maps</li>
+                    <li>Data platforms</li>
+                    <li>Developer tools</li>
+                    <li>Education tools</li>
+                    <li>Low-cost sensors</li>
+                    <li>Media</li>
+                    <li>Models</li>
+                    <li>Research</li>
+                    <li>Software</li>
                   </ol>
                   <p><Link to='/community' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
