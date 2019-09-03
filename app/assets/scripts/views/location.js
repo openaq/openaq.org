@@ -244,6 +244,8 @@ var Location = React.createClass({
   renderMetadata: function () {
     const { loc, loc: { data: { metadata } } } = this.props;
 
+    if (!metadata) return null;
+
     const exclude = [
       'id',
       'coordinates',
