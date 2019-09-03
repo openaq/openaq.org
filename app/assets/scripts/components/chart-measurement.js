@@ -114,8 +114,8 @@ var Chart = function (options) {
   // Define xAxis function.
   var xAxis = d3.axisBottom(x)
     .tickPadding(8)
-    .tickSize(0);
-    // .tickFormat(d3.timeFormat('%H:%M'));
+    .tickSize(0)
+    .tickFormat(d3.timeFormat('%a %d'));
   // Define xAxis function.
   var yAxis = d3.axisLeft(y)
     .tickPadding(8)
@@ -189,6 +189,25 @@ var Chart = function (options) {
         let xAx = $svg.selectAll('.x.axis')
           .data([0]);
 
+        // Break the xAxis lables
+        function brk (text) {
+          text.each(function () {
+            const text = d3.select(this);
+            const words = text.text().split(/\s+/);
+            const y = text.attr('y');
+            const dy = parseFloat(text.attr('dy'));
+            const lineHeight = 1.3;
+            text.text(null);
+            words.forEach((word, i) => {
+              text.append('tspan')
+                .text(word)
+                .attr('x', 0)
+                .attr('y', y)
+                .attr('dy', `${i * lineHeight + dy}em`);
+            });
+          });
+        }
+
         xAx.enter().append('g')
           .attr('class', 'x axis')
           .append('text')
@@ -198,6 +217,12 @@ var Chart = function (options) {
         xAx
           .attr('transform', `translate(${margin.left},${_height + margin.top + 8})`)
           .call(xAxis);
+
+        if (_type === 'compressed') {
+          xAx
+            .selectAll('.tick text')
+            .call(brk);
+        }
       },
 
       yAxis: function () {
@@ -358,7 +383,8 @@ var Chart = function (options) {
     _type = d;
     if (_type === 'compressed') {
       margin = Object.assign({}, margin, {
-        left: 16
+        left: 16,
+        bottom: 48
       });
     }
     if (typeof updateSize === 'function') updateSize();
