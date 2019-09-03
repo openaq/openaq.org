@@ -59,7 +59,7 @@ var CountriesHub = React.createClass({
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Browse by Country</h1>
               <div className='inpage__introduction'>
-                <p>We’re currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
+                <p>We are currently collecting data in {this.props.countries.length} different countries and are always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. If you cannot find the location that you are looking for, please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> and <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
                 <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
               </div>
               <ul className='ipha'>
