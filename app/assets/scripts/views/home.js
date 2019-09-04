@@ -228,7 +228,7 @@ class Home extends React.Component {
                 <h1 className='fold__subtitle'>What we do</h1>
                 <h2 className='fold__title'>Harmonizing air quality data</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>The OpenAQ community harmonizes disparate air quality data from across the world so that citizens and organizations can fight air inequality more efficiently.</p>
+                  <p>The OpenAQ Community harmonizes disparate air quality data from across the world so that citizens and organizations can fight air inequality more efficiently.</p>
                   <p><Link to='/about' title='Learn more' className='go-link'><span>Learn more</span></Link></p>
                 </div>
               </header>
