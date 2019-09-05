@@ -62,7 +62,7 @@ var Why = React.createClass({
                 </figure>
               </div>
               <div className='fold__body prose prose--responsive'>
-                <p>From Bangkok to London to Pittsburgh, cities across the world have created powerful examples of how air pollution can be tackled.</p>
+                <p>Cities across the world, from Bangkok to London to Pittsburgh, have created powerful examples of how air pollution can be tackled.</p>
                 <p>One common lesson from nearly every community that has successfully battled air pollution: Communities need basic access to data to effect change.</p>
               </div>
             </div>
@@ -74,7 +74,7 @@ var Why = React.createClass({
                 <h1 className='fold__subtitle'>A lack of data access</h1>
                 <h2 className='fold__title'>Communities lack access to open air quality data</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>Air quality data in many places are often only shared in human-readable or temporary ways. Even in countries that provide data openly, the data are shared in disparate formats. This lack of harmonized data access prevents many sectors, from science to policy to media, to fully utilize these data for impact.</p>
+                  <p>Air quality data in many places are often only shared in human-readable or temporary ways. Even in countries that provide data openly, the data are shared in disparate formats. This lack of harmonized data access prevents many sectors from fully utilizing these data for impact.</p>
                 </div>
               </header>
               <figure className='fold__media'>
