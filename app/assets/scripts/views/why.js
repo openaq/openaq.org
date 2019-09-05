@@ -62,7 +62,7 @@ var Why = React.createClass({
                 </figure>
               </div>
               <div className='fold__body prose prose--responsive'>
-                <p>Cities across the world, from Bangkok to London to Pittsburgh, have created powerful examples of how air pollution can be tackled.</p>
+                <p>From Bangkok to London to Pittsburgh, cities across the world have created powerful examples of how air pollution can be tackled.</p>
                 <p>One common lesson from nearly every community that has successfully battled air pollution: Communities need basic access to data to effect change.</p>
               </div>
             </div>
