@@ -2391,8 +2391,16 @@ const countries = [
   }
 ];
 
-export function getCountryBbox (iso) {
+export function getCountryByIso (iso) {
   iso = iso.toUpperCase();
-  let country = countries.find(o => o.iso === iso);
-  return country ? country.bbox : null;
+  const country = countries.find(o => o.iso === iso);
+  return country || {};
+}
+
+export function getCountryBbox (iso) {
+  return getCountryByIso(iso).bbox || null;
+}
+
+export function getCountryName (iso) {
+  return getCountryByIso(iso).name || null;
 }

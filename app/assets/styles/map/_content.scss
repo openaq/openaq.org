@@ -1,16 +1,22 @@
 /* ==========================================================================
-   Global: Map
+   Map: Content
    ========================================================================== */
 
-$page-header-y: $global-spacing * 5;
-
 .page--map {
-  .page__header {
-    background-color: rgba(#fff, 0.64);
+  grid-template-rows: auto 1fr;
+
+  .inpage {
+    grid-template-rows: 1fr;
   }
+
   .inpage__header,
   .page__footer {
     @extend .visually-hidden;
+  }
+
+  .inpage__body {
+    position: relative;
+    z-index: 1;
   }
 
   .map {

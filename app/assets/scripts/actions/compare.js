@@ -48,7 +48,7 @@ export function fetchCompareLocationIfNeeded (index, location, filters = {}) {
     let f = buildAPIQS(filters);
     // console.log('fetchCompareLocationIfNeeded url', `${config.api}/locations?${f}`);
 
-    fetch(`${config.api}/locations?${f}`)
+    return fetch(`${config.api}/locations?${f}`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
@@ -59,7 +59,7 @@ export function fetchCompareLocationIfNeeded (index, location, filters = {}) {
         // setTimeout(() => {
         //   dispatch(receiveCompareLocation(index, json.results[0]));
         // }, 5000);
-        dispatch(receiveCompareLocation(index, json.results[0]));
+        return dispatch(receiveCompareLocation(index, json.results[0]));
       }, e => {
         console.log('e', e);
         return dispatch(receiveCompareLocation(index, null, 'Data not available'));

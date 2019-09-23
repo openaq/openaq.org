@@ -8,7 +8,6 @@ const defaultState = {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case actions.CLOSE_VOTE_MODAL:
-      console.log('CLOSE_VOTE_MODAL');
       state = _.cloneDeep(defaultState);
       state.open = false;
       break;

@@ -317,62 +317,64 @@ var LocationsHub = React.createClass({
           <div className='inner'>
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Air Quality Data</h1>
-            </div>
-            <div className='inpage__introduction'>
-              <p>We’re currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. If you can’t find the location you’re looking for please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> of <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
-              <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
-            </div>
-            <div className='inpage__actions'>
-              <ul>
-                <li><a href={config.apiDocs} title='View API documentation' className='button-inpage-api' target='_blank'>View API Docs</a></li>
-                <li><a href={yesterdayDataUrl} className='button-inpage-download' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
+              <div className='inpage__introduction'>
+                <p>We are currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. If you cannot find the location you are looking for, please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> and <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>.</p>
+                <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
+              </div>
+              <ul className='ipha'>
+                <li><a href={yesterdayDataUrl} className='ipha-download ipha-main' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
+                <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
               </ul>
             </div>
           </div>
+
+          <figure className='inpage__media inpage__media--cover media'>
+            <div className='media__item'>
+              <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
+            </div>
+          </figure>
         </header>
+
         <div className='inpage__body'>
-          <div className='fold full-flex'>
-            <div className='inner'>
+          <div className='inpage__diptych inner'>
+            <aside className='inpage__aside'>
+              <h2 className='content-prime-title'>Filter Locations</h2>
 
-              <aside className='inpage__aside'>
-                <h2 className='content-prime-title'>Filter Locations</h2>
+              <div className='filters filters--country'>
+                <h3 className='filters__title'>Countries</h3>
+                {this.renderCountries()}
+              </div>
 
-                <div className='filters filters--country'>
-                  <h3 className='filters__title'>Countries</h3>
-                  {this.renderCountries()}
-                </div>
+              <div className='filters filters--values'>
+                <h3 className='filters__title'>Values</h3>
+                {this.renderParameters()}
+              </div>
+            </aside>
 
-                <div className='filters filters--values'>
-                  <h3 className='filters__title'>Values</h3>
-                  {this.renderParameters()}
-                </div>
-              </aside>
+            <div className='inpage__content'>
+              <div className='content__meta'>
 
-              <div className='inpage__content'>
-                <div className='content__meta'>
+                <div className="content__header">
+                  {this.renderSort()}
 
-                  <div className="content__header">
-                    {this.renderSort()}
-
-                    <div className='content__heading'>
-                      <h2 className='content-prime-title'>Results <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear Filters)</small></button></h2>
-                      {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
-                    </div>
+                  <div className='content__heading'>
+                    <h2 className='content-prime-title'>Results <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear Filters)</small></button></h2>
+                    {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
                   </div>
-
-                  {this.renderFilterSummary()}
                 </div>
 
-                <div className='inpage__results'>
-                  {this.renderContent()}
-                </div>
+                {this.renderFilterSummary()}
+              </div>
 
-                {this.renderPagination()}
+              <div className='inpage__results'>
+                {this.renderContent()}
+              </div>
 
-                <div className='disclaimers'>
-                  <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution. </p>
-                  <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
-                </div>
+              {this.renderPagination()}
+
+              <div className='disclaimers'>
+                <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution. </p>
+                <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
               </div>
             </div>
           </div>

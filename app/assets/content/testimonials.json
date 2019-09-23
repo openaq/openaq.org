@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Ian Schuler",
+    "title": "CEO",
+    "affiliation": "Development Seed",
+    "location": "Washington, DC USA",
+    "image": "community/ianschuler.jpg",
+    "short_quote": "OpenAQ is the Wikipedia of Air Quality.",
+    "long_quote": "OpenAQ is the Wikipedia of Air Quality. This data, studiously collected by the OpenAQ community, contains hundreds of stories of inequality and oppression. And also the basis to understand these dynamics and to demand better of those who steward the air we breathe."
+  },
+  {
+    "name": "Collins Gameli",
+    "title": "Researcher",
+    "affiliation": "Cranfield University",
+    "location": "UK and Ghana",
+    "image": "community/collins_gameli_hodoli.jpg",
+    "short_quote": "OpenAQ brings to the limelight the state of the air in developing countries, in particular where information is very limited.",
+    "long_quote": "OpenAQ is doing a tremendous work by making air quality data readily available and organizing conferences / workshops around the world. This will not only bring a paradigm shift in how air quality data is stored and retrieved for purposes such as teaching and learning, visualization, public awareness creation integrated with behavioral changes but also bring to the limelight the state of the air in developing countries specifically where information is very limited on AQ data"
+  },
+  {
+    "name": "Sistema de Alerta Temprana de Medellín y el Valle de Aburrá",
+    "title": null,
+    "affiliation": null,
+    "location": "Medellin, Colombia ",
+    "image": "community/siata.jpg",
+    "short_quote": "We hope OpenAQ keeps growing and allowing people all around the world to have a comprehensive view of the global air quality state.",
+    "long_quote": "We hope OpenAQ initiative keep growing and allowing people all around the world (from citizens to environmental authorities and even researchers) to have a comprehensive view of the global air quality state. As communities get more informed, they can work better to tackle their problems. We thank OpenAQ for developing a tool aiming to do that possible"
+  },
+  {
+    "name": "Jessica Lam",
+    "title": null,
+    "affiliation": "ClimateWorks",
+    "location": "San Francisco, USA",
+    "image": "community/Jess_Lam.jpg",
+    "short_quote": "OpenAQ enables a wide range of users to access critical air quality data in a free and transparent manner.",
+    "long_quote": "OpenAQ enables a wide range of users to access critical air quality data in a free and transparent manner. The ability to retrieve, aggregate and compare these expansive data sets is a key step to creating solutions that protect the air we breathe every day."
+  },
+  {
+    "name": "Pallavi Pant",
+    "title": "Co-Founder",
+    "affiliation": "Air South Asia",
+    "location": null,
+    "image": "community/pallavi_pant.jpg",
+    "short_quote": "The OpenAQ Community offers an excellent example of collaboration and knowledge exchange among global peers and allies.",
+    "long_quote": "The OpenAQ website provides convenient access to an ever-growing global air quality datasets. Specifically, the data are enabling a wide variety of applications, several of which I have used over the last few years. More broadly, the OpenAQ community is fun to engage with, and offers an excellent example of collaboration and knowledge exchange among global peers and allies."
+  },
+  {
+    "name": "Gameli Adzaho",
+    "title": "Lead",
+    "affiliation": "Global Lab Network",
+    "location": "Accra, Ghana",
+    "image": "community/gameli_adzaho.jpg",
+    "short_quote": "OpenAQ has been instrumental in getting those interested in 'open data for air quality' in Accra together.",
+    "long_quote": "OpenAQ has been instrumental in getting some of us, interested in 'open data for air quality' in Accra, together. Since our inaugural workshop last May, singular and collective achievements of the group include a community statement, thought pieces, a datathon, radio interviews, and conference presentations. We are building momentum towards growing the community, engaging in more hands-on activities, and leading advocacy for air equality in Ghana. Thanks to continuous support from Christa, Pallavi, the OpenAQ community at large, and potential partners who have expressed interest in our work."
+  },
+  {
+    "name": "Sarath Guttikunda",
+    "title": "Founder",
+    "affiliation": "Urban Emissions",
+    "location": "Goa, India",
+    "image": "community/guttikunda.jpg",
+    "short_quote": "OpenAQ provides access to air quality data with a simple line of code, without having to understand web formats practiced by various countries.",
+    "long_quote": "We are always looking for air quality data, which is the key ingredient to formulate policy, to study contributors, and more importantly to inform public. OpenAQ created a platform where all of this is possible with a simple line code, without having to jump through hoops of understanding web formats practiced by various countries."
+  },
+  {
+    "name": "Karin Tuxen-Bettman",
+    "title": "Program Manager",
+    "affiliation": "Google Earth Outreach & Project Air View",
+    "location": "San Francisco, USA",
+    "image": "community/karin-tuxen-bettman.jpg",
+    "short_quote": "OpenAQ is a harmonizing force in the open air quality data space.",
+    "long_quote": "OpenAQ is a harmonizing force in the open air quality data space, helping to share and surface this important information worldwide."
+  }
+]

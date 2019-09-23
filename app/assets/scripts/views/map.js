@@ -97,8 +97,10 @@ var Map = React.createClass({
     if (fetching) {
       return (
         <HeaderMessage>
-          <h2>Take a deep breath.</h2>
-          <p>Map data is loading...</p>
+          <h1>Take a deep breath</h1>
+          <div className='prose prose--responsive'>
+            <p>Map data is loading...</p>
+          </div>
         </HeaderMessage>
       );
     }
@@ -106,9 +108,11 @@ var Map = React.createClass({
     if (error) {
       return (
         <HeaderMessage>
-          <h2>Uhoh, something went wrong</h2>
-          <p>There was a problem getting the data. If the problem continues, please let us know.</p>
-          <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
+          <h1>Uhoh, something went wrong</h1>
+          <div className='prose prose--responsive'>
+            <p>There was a problem getting the data. If the problem continues, please let us know.</p>
+            <p><a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a></p>
+          </div>
         </HeaderMessage>
       );
     }

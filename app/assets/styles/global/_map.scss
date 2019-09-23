@@ -5,6 +5,7 @@
 .map {
   position: relative;
   height: 100%;
+
   &__container {
     position: absolute;
     top: 0;
@@ -13,18 +14,17 @@
     width: 100%;
     z-index: 10;
   }
+
   &__legend {
+    @extend %card-skin;
     position: absolute;
     bottom: $global-spacing;
     left: $global-spacing;
+    right: $global-spacing;
     z-index: 20;
-    width: 100%;
-    max-width: 25rem;
-    background-color: #fff;
-    box-shadow: 0 0 0 2px $base-alpha-color;
-    border-radius: $base-border-radius;
-    backface-visibility: hidden;
-    padding: $global-spacing;
+  
+    max-width: 24rem;
+    padding: $contained-spacing;
     overflow: hidden;
 
     @include media(medium-up) {

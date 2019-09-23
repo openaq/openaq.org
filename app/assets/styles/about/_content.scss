@@ -2,41 +2,375 @@
    About: Content
    ========================================================================== */
 
+.page--about {
+  .inpage__headline {
+    @include media(large-up) {
+      grid-column: 1 / span 8;
+    }
+  }
+}
 
-/* Sponsors
+
+/* Fold: Intro
    ========================================================================== */
 
-.sponsors {
-  &__list {
-    @extend .clearfix;
-    margin: 0;
-    padding: 0;
+#about-fold-intro {
+  > .inner {
+    grid-gap: 2rem;
 
-    li {
-      list-style: none;
-      box-shadow: 0 0 0 2px $base-alpha-color;
-      border-radius: $base-border-radius;
-      margin: $global-spacing 0;
+    @include media(large-up) {
+      grid-gap: 4rem 2rem;
+    }
+  }
+}
 
-      @include media(small-up) {
-        @include col(6/12, $cycle: 2);
-      }
+.principles-list {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2rem;
 
-      @include media(medium-up) {
-        @include col(4/12, $cycle: 3);
+  @include media(medium-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media(large-up) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    height: 100%;
+  }
+}
+
+.card--principle {
+  text-align: center;
+
+  @include media(large-up) {
+    min-height: 20rem;
+  }
+
+  .card__headline {
+    justify-content: center;
+  }
+
+  .card__header {
+    display: block;
+    padding-top: 0;
+    padding-bottom: $global-spacing / 2;
+  }
+
+  .card__title {
+    &::before {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: $global-spacing / 2;
+      color: $primary-color;
+
+      @include media(large-up) {
+        margin-bottom: $global-spacing;
       }
     }
   }
 
-  &__item {
-    display: block;
-    height: 8rem;
-    text-align: center;
-    line-height: 8rem;
+  .card__media {
+    display: flex;
+    justify-content: center;
+    padding-top: $global-spacing * 3;
+  }
+
+  .card__badge {
+    width: 3rem;
+    height: 3rem;
 
     img {
-      max-height: 4rem;
-      vertical-align: middle;
+      width: 100%;
     }
+  }
+}
+
+
+/* Fold: Story
+   ========================================================================== */
+
+#about-fold-story {
+  > .inner {
+    position: relative;
+
+    > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::before {
+      position: absolute;
+      top: (-$global-spacing * 4);
+      bottom: ($global-spacing * 2);
+      left: -50vw;
+      width: 200vw;
+      content: '';
+      background: tint($base-color, 96%);
+
+      @include media(medium-up) {
+        top: (-$global-spacing * 6);
+        bottom: (-$global-spacing * 6);
+        left: ($global-spacing * 8);
+      }
+
+      @include media(large-up) {
+        top: (-$global-spacing * 8);
+        bottom: (-$global-spacing * 8);
+        left: ($global-spacing * 16);
+      }
+    }
+  }
+
+  .fold__media {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 2rem;
+  }
+
+  .aside-highlight {
+    max-width: none;
+    grid-column: 2 / span 4;
+
+    @include media(medium-up) {
+      grid-column: 1 / span 6;
+    }
+
+    @include media(large-up) {
+      grid-column: 1 / span 4;
+    }
+  }
+}
+
+
+/* Fold: Board
+   ========================================================================== */
+
+#about-fold-main-board,
+#about-fold-advisory-board  {
+  > .inner {
+    grid-gap: 2rem;
+
+    @include media(large-up) {
+      grid-gap: 4rem 2rem;
+    }
+  }
+
+  .fold__header {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    text-align: center;
+
+    @include media(medium-up) {
+      grid-column: 1 / span 4;
+      text-align: left;
+    }
+
+    @include media(large-up) {
+      grid-column: 1 / span 6;
+      text-align: left;
+    }
+  }
+}
+
+.team-list {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2rem;
+
+  @include media(small-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.team-member {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.team-member__avatar {
+  overflow: hidden;
+  width: 100%;
+  max-width: 10rem;
+  margin: 0 0 $global-spacing 0;
+  border-radius: $full-border-radius;
+
+  img {
+    display: inline-flex;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.team-member__title {
+  @include heading(1.25rem);
+  margin: 0 0 0.25rem 0;
+}
+
+
+/* Fold: Sponsors
+   ========================================================================== */
+
+#about-fold-sponsors {
+  > .inner {
+    @include media(large-up) {
+      grid-gap: 3rem;
+    }
+  }
+
+  .fold__header {
+    grid-row: 1;
+    grid-column: 1 / -1;
+  }
+
+  .fold__footer {
+    grid-row: 3;
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .sponsor-list {
+    grid-row: 2;
+    grid-column: 1 / -1;
+
+    grid-template-columns: repeat(1, 1fr);
+
+    @include media(small-up) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media(medium-up) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.sponsor-button {
+  @extend .button, .button--large, .button--primary, .button--capsule;
+  width: 100%;
+  max-width: 16rem;
+}
+
+
+/* Fold: Book
+   ========================================================================== */
+
+#about-fold-book {
+  .fold__header {
+    text-align: center;
+
+    @include media(medium-up) {
+      text-align: left;
+    }
+  }
+
+  .fold__media {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .fold__main-action {
+    justify-content: center;
+
+    @include media(medium-up) {
+      justify-content: flex-start;
+    }
+  }
+}
+
+.button-book-download {
+  @extend .button, .button--large, .button--primary, .button--capsule;
+  width: 100%;
+  max-width: 16rem;
+
+  &::before {
+    @extend %openaq-ds-icon-download;
+  }
+}
+
+.card--book {
+  position: relative;
+  max-width: 28rem;
+  min-height: 20rem;
+
+  @include media(medium-down) {
+    display: none;
+  }
+
+  @include media(large-up) {
+    min-height: 32rem;
+  }
+
+  &::after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    background: $secondary-color;
+    content: '';
+    transform: translate(3rem, 3rem);
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .card__header,
+  .card__media,
+  .card__footer {
+    @include media(large-up) {
+      padding: $global-spacing * 3;
+    }
+  }
+
+  .card__media {
+    padding-top: 0;
+  }
+
+  .card__footer {
+    text-align: right;
+
+    img {
+      width: 3.5rem;
+    }
+  }
+
+  .card__subtitle {
+    color: $primary-color;
   }
 }

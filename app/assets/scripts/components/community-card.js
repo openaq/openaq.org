@@ -1,15 +1,17 @@
 'use strict';
 import React from 'react';
-import c from 'classnames';
 
 var CommunityCard = React.createClass({
   displayName: 'CommunityCard',
 
   propTypes: {
     title: React.PropTypes.string,
+    type: React.PropTypes.string,
+    location: React.PropTypes.string,
     linkTitle: React.PropTypes.string,
     url: React.PropTypes.string,
     imageNode: React.PropTypes.node,
+    logo: React.PropTypes.string,
     horizontal: React.PropTypes.bool,
     children: React.PropTypes.object
   },
@@ -22,24 +24,25 @@ var CommunityCard = React.createClass({
 
   render: function () {
     return (
-      <article className={c('card', {'card--horizontal card--horizontal--align-middle': this.props.horizontal})}>
-        <div className='card__contents'>
-          <figure className='card__media'>
-            <div className='card__thumbnail'>
-              {this.props.imageNode}
-            </div>
-          </figure>
-          <div className="card__copy">
+      <li>
+        <article className='card card--project'>
+          <a href={this.props.url} className='card__contents' title='View project'>
             <header className='card__header'>
-              <h1 className='card__title'><a title={this.props.linkTitle} href={this.props.url}>{this.props.title}</a></h1>
+              <div className='card__headline'>
+                <p className='card__subtitle'>{this.props.type || 'N/A'}</p>
+                <h1 className='card__title'>{this.props.title}</h1>
+              </div>
             </header>
             <div className='card__body'>
               {this.props.children}
-              <a title={this.props.linkTitle} href={this.props.url}>Learn More</a>
             </div>
-          </div>
-        </div>
-      </article>
+            <footer className='card__footer'>
+              <p className='card__footer-detail'>{this.props.location || 'N/A'}</p>
+              {this.props.logo && <img src={this.props.logo} alt='Project logo' />}
+            </footer>
+          </a>
+        </article>
+      </li>
     );
   }
 });

@@ -21,7 +21,6 @@ import {
   fetchCompareLocationMeasurements,
   invalidateCompare
 } from '../actions/action-creators';
-import ShareBtn from '../components/share-btn';
 import LoadingMessage from '../components/loading-message';
 import InfoMessage from '../components/info-message';
 import ChartBrush from '../components/chart-brush';
@@ -417,10 +416,7 @@ var Compare = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
-              <h1 className='inpage__title'>Compare Locations</h1>
-              <div className='inpage__headline-actions'>
-                <ShareBtn />
-              </div>
+              <h1 className='inpage__title'>Compare locations</h1>
             </div>
 
             <div className='compare'>
@@ -428,12 +424,11 @@ var Compare = React.createClass({
                 {this.renderCompareLocations()}
               </ul>
             </div>
-
           </div>
         </header>
         <div className='inpage__body'>
           {locs.length ? (
-            <section className='fold'>
+            <section className='fold' id='compare-fold-measurements'>
               <div className='inner'>
                 <header className='fold__header'>
                   <h1 className='fold__title'>Comparing measurements</h1>
