@@ -7,6 +7,7 @@ import c from 'classnames';
 import { Link, hashHistory } from 'react-router';
 import * as d3 from 'd3';
 import { Dropdown } from 'openaq-design-system';
+import { schemas } from 'openaq-data-format';
 
 import config from '../config';
 import { formatThousands } from '../utils/format';
@@ -22,8 +23,9 @@ import HeaderMessage from '../components/header-message';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 import MapComponent from '../components/map';
-import ShareBtn from '../components/share-btn';
 import ChartMeasurement from '../components/chart-measurement';
+
+const locationSchema = schemas.location;
 
 var Location = React.createClass({
   displayName: 'Location',
@@ -172,13 +174,10 @@ var Location = React.createClass({
     if (fetching) {
       content = <LoadingMessage />;
     } else if (error) {
-      intro = <p>We couldn't get stats.</p>;
-      content = (
-        <div className='fold__body'>
-          <InfoMessage>
-            <p>Please try again later.</p>
-            <p>If you think there's a problem, please <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
-          </InfoMessage>
+      intro = (
+        <div className='fold__introduction prose prose--responsive'>
+          <p>We couldn't get stats. Please try again later.</p>
+          <p>If you think there's a problem, please <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
         </div>
       );
     } else {
@@ -200,7 +199,8 @@ var Location = React.createClass({
       content = (
         <div className='fold__body'>
           <div className='col-main'>
-            <dl>
+            <h2>Details</h2>
+            <dl className='global-details-list'>
               <dt>Measurements</dt>
               <dd>{formatThousands(measurements.meta.totalMeasurements)}</dd>
               <dt>Collection Dates</dt>
@@ -209,15 +209,19 @@ var Location = React.createClass({
               <dd>N{lat}, E{lng}</dd>
             </dl>
           </div>
+
           <div className='col-sec'>
-            <p className='heading-alt'>Latest Measurements:</p>
+            <h2>Latest measurements</h2>
             {locLastMeasurement ? (
-              <ul className='measurements-list'>
-                {locLastMeasurement.measurements.map(o => {
+              <dl className='global-details-list'>
+                {locLastMeasurement.measurements.reduce((acc, o) => {
                   let param = _.find(this.props.parameters, {id: o.parameter});
-                  return <li key={o.parameter}><strong>{param.name}</strong>{o.value}{o.unit} at {moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</li>;
-                })}
-              </ul>
+                  return acc.concat([
+                    <dt key={`dt-${o.parameter}`}>{param.name}</dt>,
+                    <dd key={`dd-${o.parameter}`}>{o.value}{o.unit} at {moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</dd>
+                  ]);
+                }, [])}
+              </dl>
             ) : <p>N/A</p>}
           </div>
         </div>
@@ -225,15 +229,93 @@ var Location = React.createClass({
     }
 
     return (
-      <section className='fold' id='location-stats'>
+      <section className='fold' id='location-fold-stats'>
         <div className='inner'>
-          <header className={c('fold__header', {'visually-hidden': !error})}>
-            <h1 className='fold__title'>Stats information</h1>
-            <div className='fold__introduction prose prose--responsive'>
-              {intro}
-            </div>
+          <header className='fold__header'>
+            <h1 className='fold__title'>Stats</h1>
+            {intro}
           </header>
           {content}
+        </div>
+      </section>
+    );
+  },
+
+  renderMetadata: function () {
+    const { loc, loc: { data: { metadata } } } = this.props;
+
+    if (!metadata) return null;
+
+    const exclude = [
+      'id',
+      'coordinates',
+      'city',
+      'country',
+      'instruments',
+      'parameters',
+      'attribution'
+    ];
+
+    const allProperties = Object.keys(locationSchema.properties)
+      .filter((key) => {
+        return !exclude.includes(key) && metadata[key];
+      });
+
+    const propertiesMain = [];
+    const propertiesSec = [];
+    const length = Math.ceil(allProperties.length / 2);
+
+    allProperties.forEach((key, i) => {
+      const prop = locationSchema.properties[key];
+      prop.key = key;
+      let val = metadata[prop.key];
+
+      if (prop.format && prop.format === 'date-time') {
+        val = moment.utc(val).format('YYYY/MM/DD');
+      }
+      if (prop.type && prop.type === 'boolean') {
+        val = val ? 'Yes' : 'No';
+      }
+
+      const sectionIndex = Math.floor(i / length);
+
+      switch (sectionIndex) {
+        case 0: {
+          propertiesMain.push(<dt key={`${key}-${prop.title}`} className='metadata-detail-title'>{prop.title}</dt>);
+          propertiesMain.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
+          break;
+        }
+        case 1: {
+          propertiesSec.push(<dt key={`${key}-${prop.title}`} className='metadata-detail-title'>{prop.title}</dt>);
+          propertiesSec.push(<dd key={`${key}-${prop.title}-val`}>{val}</dd>);
+          break;
+        }
+      }
+    });
+
+    return (
+      <section className='fold' id='location-fold-metadata'>
+        <div className='inner'>
+          <header className='fold__header'>
+            <h1 className='fold__title'>Metadata</h1>
+          </header>
+          <div className='fold__body'>
+            <div className='col-main'>
+              <dl className='global-details-list'>
+                {propertiesMain}
+              </dl>
+            </div>
+            <div className='col-sec'>
+              <dl className='global-details-list'>
+                {propertiesSec}
+              </dl>
+            </div>
+          </div>
+          <div className='update-metadata-callout'>
+            <p>
+              Have more information about this location? <a href={`${config.metadata}/location/${loc.data.id}`} title="Update the metadata">Update the metadata</a>
+            </p>
+          </div>
         </div>
       </section>
     );
@@ -253,10 +335,10 @@ var Location = React.createClass({
     }
 
     return (
-      <section className='fold fold--filled' id='location-source'>
+      <section className='fold' id='location-fold-source'>
         <div className='inner'>
           <header className=''>
-            <h5 className='fold__title'>Sources:</h5>
+            <h1 className='fold__title'>Sources</h1>
           </header>
           <div className='fold__body'>
             <div className='col-main'>
@@ -274,10 +356,14 @@ var Location = React.createClass({
               )}
             </ul>
             </div>
-            <div className='col-sec'>
-              {sources[0].description ? <p>{sources[0].description}</p> : null}
-              For more information contact <a href={`mailto:${sources[0].contacts[0]}`}>{sources[0].contacts[0]}</a>.
-            </div>
+            {
+              sources[0] && (
+                <div className='col-sec'>
+                  {sources[0].description ? <p>{sources[0].description}</p> : null}
+                  For more information contact <a href={`mailto:${sources[0].contacts[0]}`} title={sources[0].contacts[0]}>{sources[0].contacts[0]}</a>.
+                </div>
+              )
+            }
           </div>
         </div>
       </section>
@@ -285,10 +371,13 @@ var Location = React.createClass({
   },
 
   renderNearbyLoc: function () {
+    const { countryData } = this.props;
     let {fetched, fetching, error, data: {results: locMeasurements}} = this.props.latestMeasurements;
     if (!fetched && !fetching) {
       return null;
     }
+
+    const country = countryData || {};
 
     let intro = null;
     let content = null;
@@ -335,15 +424,15 @@ var Location = React.createClass({
       }
 
       if (locMeasurements.length === 1) {
-        intro = <p>There are no other locations in {this.props.loc.data.city}, {this.props.countryData.name}. {addIntro ? <br/> : null}{addIntro}</p>;
+        intro = <p>There are no other locations in {this.props.loc.data.city}, {country.name}. {addIntro ? <br/> : null}{addIntro}</p>;
       } else {
-        intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{this.props.countryData.name}</strong>.
+        intro = <p>There are <strong>{locMeasurements.length - 1}</strong> other locations in <strong>{this.props.loc.data.city}</strong>, <strong>{country.name}</strong>.
           {addIntro ? <br/> : null}{addIntro}</p>;
       }
     }
 
     return (
-      <section className='fold' id='location-nearby'>
+      <section className='fold' id='location-fold-nearby'>
         <div className='inner'>
           <header className='fold__header'>
             <h1 className='fold__title'>Nearby locations</h1>
@@ -488,16 +577,21 @@ var Location = React.createClass({
   },
 
   render: function () {
+    const { countryData } = this.props;
     let {fetched, fetching, error, data} = this.props.loc;
     if (!fetched && !fetching) {
       return null;
     }
 
+    const country = countryData || {};
+
     if (fetching) {
       return (
         <HeaderMessage>
-          <h2>Take a deep breath.</h2>
-          <p>Location data is loading...</p>
+          <h1>Take a deep breath.</h1>
+          <div className='prose prose--responsive'>
+            <p>Location data is loading...</p>
+          </div>
         </HeaderMessage>
       );
     }
@@ -505,9 +599,11 @@ var Location = React.createClass({
     if (error) {
       return (
         <HeaderMessage>
-          <h2>Uh oh, something went wrong.</h2>
-          <p>There was a problem getting the data. If you continue to have problems, please let us know.</p>
-          <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
+          <h1>Uh oh, something went wrong.</h1>
+          <div className='prose prose--responsive'>
+            <p>There was a problem getting the data. If you continue to have problems, please let us know.</p>
+            <p><a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a></p>
+          </div>
         </HeaderMessage>
       );
     }
@@ -516,22 +612,24 @@ var Location = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
-              <h1 className='inpage__title'>{data.location} <small>in {data.city}, {this.props.countryData.name}</small></h1>
-              <div className='inpage__headline-actions'>
-                <ShareBtn />
-              </div>
-            </div>
-            <div className='inpage__actions'>
-              <ul>
-                <li><a href={`${config.api}/locations?location=${data.location}`} title='View in api' className='button-inpage-api' target='_blank'>View API</a></li>
-                <li><button type='button' title='Download data for this location' className='button-inpage-download' onClick={this.onDownloadClick}>Download</button></li>
-                <li><Link to={`/compare/${encodeURIComponent(data.location)}`} title='Compare location with another' className='button button--primary button--medium'>Compare</Link></li>
+              <p className='inpage__subtitle'>location</p>
+              <h1 className='inpage__title'>{data.location} <small>in {data.city}, {country.name}</small></h1>
+              <ul className='ipha'>
+                <li><a href={`${config.api}/locations?location=${data.location}`} title='View in API documentation' className='ipha-api' target='_blank'>View API</a></li>
+                <li><button type='button' title='Download data for this location' className='ipha-download' onClick={this.onDownloadClick}>Download</button></li>
+                <li><Link to={`/compare/${encodeURIComponent(data.location)}`} title='Compare location with another' className='ipha-compare ipha-main'><span>Compare</span></Link></li>
               </ul>
             </div>
           </div>
+          <figure className='inpage__media inpage__media--cover media'>
+            <div className='media__item'>
+              <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
+            </div>
+          </figure>
         </header>
         <div className='inpage__body'>
           {this.renderStatsInfo()}
+          {this.renderMetadata()}
           {this.renderSourceInfo()}
           {this.renderValuesBreakdown()}
           {this.renderNearbyLoc()}

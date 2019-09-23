@@ -32,3 +32,14 @@ export function formatCurrency (number, decimals = 2) {
 export function round (number, decimals = 2) {
   return d3.format('.' + decimals + 'f')(number);
 }
+
+export function shortenLargeNumber (value, decimals = 2) {
+  if (value / 1e9 >= 1) {
+    value = round(value / 1e9, decimals) + 'B';
+  } else if (value / 1e6 >= 1) {
+    value = round(value / 1e6, decimals) + 'M';
+  } else if (value / 1e3 >= 1) {
+    value = round(value / 1e3, decimals) + 'k';
+  }
+  return value;
+}

@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Global: Asides
+   ========================================================================== */
+
+.aside-highlight {
+  @extend .card;
+  position: relative;
+  max-width: 24rem;
+  min-height: 20rem;
+
+  @include media(large-up) {
+    min-height: 24rem;
+  }
+
+  &::after {
+    position: absolute;
+    z-index: 1;
+    top: 11rem;
+    left: -3rem;
+    height: calc(100% - 8rem);
+    width: 100%;
+    background: $primary-color url('/assets/graphics/layout/aside-highlight-decoration.jpg') no-repeat left top;
+    background-size: cover;
+    content: '';
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.aside-highlight__contents {
+  @extend .card__contents;
+  padding: ($global-spacing * 2);
+  justify-content: center;
+
+  @include media(large-up) {
+    padding: $global-spacing * 3;
+  }
+}
+
+.aside-highlight__prose {
+  @extend .heading;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  background: transparent url('/assets/graphics/layout/oaq-icon-illu-40-swirl.svg') no-repeat left top;
+  padding-top: 3rem;
+
+  @include media(medium-up) {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
+
+  @include media(large-up) {
+    font-size: 2rem;
+    line-height: 2.75rem;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}

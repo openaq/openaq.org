@@ -14,7 +14,8 @@ var ChartMeasurement = React.createClass({
 
     xRange: React.PropTypes.array,
     yRange: React.PropTypes.array,
-    yLabel: React.PropTypes.string
+    yLabel: React.PropTypes.string,
+    compressed: React.PropTypes.bool
   },
 
   chart: null,
@@ -35,6 +36,10 @@ var ChartMeasurement = React.createClass({
       .yLabel(this.props.yLabel)
       .xRange(this.props.xRange)
       .yRange(this.props.yRange);
+
+    if (this.props.compressed) {
+      this.chart.type('compressed');
+    }
 
     d3.select(this.refs.container).call(this.chart);
   },
@@ -60,6 +65,9 @@ var ChartMeasurement = React.createClass({
     if (prevProps.yRange !== this.props.yRange) {
       this.chart.yRange(this.props.yRange);
     }
+    if (prevProps.compressed !== this.props.compressed) {
+      this.chart.type('compressed');
+    }
     this.chart.continueUpdate();
   },
 
@@ -83,7 +91,7 @@ var Chart = function (options) {
   // Containers
   var $el, $svg;
   // Var declaration.
-  const margin = {top: 16, right: 32, bottom: 32, left: 48};
+  let margin = {top: 16, right: 32, bottom: 32, left: 48};
 
   // Colors suffix
   const indexSuffix = ['st', 'nd', 'rd'];
@@ -93,7 +101,10 @@ var Chart = function (options) {
   var _width, _height;
 
   // Update functions.
-  var updateData, upateSize;
+  var updateData, updateSize;
+
+  // Variation of the chart
+  var _type = 'normal';
 
   // X scale.
   var x = d3.scaleTime();
@@ -103,8 +114,8 @@ var Chart = function (options) {
   // Define xAxis function.
   var xAxis = d3.axisBottom(x)
     .tickPadding(8)
-    .tickSize(0);
-    // .tickFormat(d3.timeFormat('%H:%M'));
+    .tickSize(0)
+    .tickFormat(d3.timeFormat('%a %d'));
   // Define xAxis function.
   var yAxis = d3.axisLeft(y)
     .tickPadding(8)
@@ -164,7 +175,7 @@ var Chart = function (options) {
 
         circles.enter()
           .append('circle')
-          .attr('r', 4)
+          .attr('r', _type === 'compressed' ? 2 : 4)
           .merge(circles)
             // `localNoTZ` is the measurement local date converted
             // directly to user local.
@@ -178,6 +189,25 @@ var Chart = function (options) {
         let xAx = $svg.selectAll('.x.axis')
           .data([0]);
 
+        // Break the xAxis lables
+        function brk (text) {
+          text.each(function () {
+            const text = d3.select(this);
+            const words = text.text().split(/\s+/);
+            const y = text.attr('y');
+            const dy = parseFloat(text.attr('dy'));
+            const lineHeight = 1.3;
+            text.text(null);
+            words.forEach((word, i) => {
+              text.append('tspan')
+                .text(word)
+                .attr('x', 0)
+                .attr('y', y)
+                .attr('dy', `${i * lineHeight + dy}em`);
+            });
+          });
+        }
+
         xAx.enter().append('g')
           .attr('class', 'x axis')
           .append('text')
@@ -187,6 +217,12 @@ var Chart = function (options) {
         xAx
           .attr('transform', `translate(${margin.left},${_height + margin.top + 8})`)
           .call(xAxis);
+
+        if (_type === 'compressed') {
+          xAx
+            .selectAll('.tick text')
+            .call(brk);
+        }
       },
 
       yAxis: function () {
@@ -223,7 +259,7 @@ var Chart = function (options) {
       }
     };
 
-    upateSize = function () {
+    updateSize = function () {
       $svg
         .attr('width', _width + margin.left + margin.right)
         .attr('height', _height + margin.top + margin.bottom);
@@ -249,7 +285,10 @@ var Chart = function (options) {
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
-      layers.yAxis();
+
+      if (_type !== 'compressed') {
+        layers.yAxis();
+      }
     };
 
     updateData = function () {
@@ -265,13 +304,18 @@ var Chart = function (options) {
       layers.focusRegion();
       layers.focusData();
       layers.xAxis();
-      layers.yAxis();
+
+      if (_type !== 'compressed') {
+        layers.yAxis();
+      }
     };
 
     // -----------------------------------------------------------------
     // INIT.
     $svg = $el.append('svg')
       .attr('class', 'chart')
+      .attr('width', 0)
+      .attr('height', 0)
       .style('display', 'block');
 
     // Datacanvas
@@ -280,13 +324,13 @@ var Chart = function (options) {
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     _calcSize();
-    upateSize();
+    updateSize();
     updateData();
   }
 
   chartFn.checkSize = function () {
     _calcSize();
-    upateSize();
+    updateSize();
     return chartFn;
   };
 
@@ -331,6 +375,19 @@ var Chart = function (options) {
     if (!arguments.length) return _yRange;
     _yRange = d;
     if (typeof updateData === 'function') updateData();
+    return chartFn;
+  };
+
+  chartFn.type = function (d) {
+    if (!arguments.length) return _type;
+    _type = d;
+    if (_type === 'compressed') {
+      margin = Object.assign({}, margin, {
+        left: 16,
+        bottom: 48
+      });
+    }
+    if (typeof updateSize === 'function') updateSize();
     return chartFn;
   };
 

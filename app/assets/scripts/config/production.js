@@ -11,6 +11,7 @@ module.exports = {
     baseStyle: 'mapbox://styles/devseed/ciqs29d060000clnr9222bg5x'
   },
   api: 'https://api.openaq.org/v1',
+  metadata: 'https://metadata.openaq.org',
   apiDocs: 'https://docs.openaq.org'
 };
 

@@ -1,6 +1,24 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+import JoinFold from '../components/join-fold';
+import SponsorList from '../components/sponsor-list';
+import TeamList from '../components/team-list';
+
+import content from '../../content/content.json';
+import sponsors from '../../content/sponsors.json';
+
+const teamData = {
+  advisoryBoard: _(content.advisoryBoard)
+    .values()
+    .sortBy(['order'])
+    .value(),
+  governingBoard: _(content.governingBoard)
+    .values()
+    .sortBy(['order'])
+    .value()
+};
 
 var About = React.createClass({
   displayName: 'About',
@@ -13,85 +31,194 @@ var About = React.createClass({
       <section className='inpage'>
         <header className='inpage__header'>
           <div className='inner'>
-            <div className='inpage__headline header--centered'>
-              <h1 className='inpage__title'>About Us</h1>
+            <div className='inpage__headline'>
+              <h1 className='inpage__title'>About us</h1>
               <div className='inpage__introduction'>
-                <p>We empower communities to end air inequality through open data.</p>
+                <p>Our mission is to fight air inequality by opening up air quality data and connecting a diverse global, grassroots community of individuals and organizations.</p>
               </div>
             </div>
           </div>
+          <figure className='inpage__media inpage__media--cover media'>
+            <div className='media__item'>
+              <img src='/assets/graphics/content/view--about/cover--about.jpg' alt='Cover image' width='1440' height='712' />
+            </div>
+          </figure>
         </header>
         <div className='inpage__body'>
 
-          <section className='fold fold--media-bleed-left'>
+          <section className='fold fold--intro' id='about-fold-intro'>
             <div className='inner'>
-              <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about1.jpg)'}}>
-                  <img className='media__item' src='assets/graphics/content/about1.jpg' width='768' height='768' alt='About image 1' />
-                </figure>
-              </div>
-              <div className='fold__copy'>
-                <header className='fold__header'>
-                  <h1 className='fold__title'>Our Mission</h1>
-                </header>
-                <div className='fold__body'>
-                  <p>Our mission is to enable previously impossible science, impact policy and empower the public to fight air pollution through open data, open-source tools, and cooperation.</p>
-                </div>
-                <a href='https://medium.com/@openaq/the-mission-of-openaq-e290e4ae4a0a' target='_blank' className='button button--large button--primary-bounded'>Learn More</a>
-              </div>
+              <header className='fold__header'>
+                <h1 className='fold__title'>We are guided by principles</h1>
+              </header>
+
+              <ul className='principles-list'>
+                <li>
+                  <article className='card card--principle'>
+                    <div className='card__contents'>
+                      <figure className='card__media'>
+                        <div className='card__badge'>
+                          <img src='/assets/graphics/layout/oaq-icon-illu-48-historical.svg' width='40' height='40' alt='Illustration' />
+                        </div>
+                      </figure>
+                      <header className='card__header'>
+                        <div className='card__headline'>
+                          <h1 className='card__title'>Historical + Programmatic access</h1>
+                        </div>
+                      </header>
+                      <div className='card__body'>
+                        <div className='card__prose prose prose--responsive'>
+                          <p>Giving air quality data a wider audience.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </li>
+
+                <li>
+                  <article className='card card--principle'>
+                    <div className='card__contents'>
+                      <figure className='card__media'>
+                        <div className='card__badge'>
+                          <img src='/assets/graphics/layout/oaq-icon-illu-48-opensource.svg' width='40' height='40' alt='Illustration' />
+                        </div>
+                      </figure>
+                      <header className='card__header'>
+                        <div className='card__headline'>
+                          <h1 className='card__title'>Open source</h1>
+                        </div>
+                      </header>
+                      <div className='card__body'>
+                        <div className='card__prose prose prose--responsive'>
+                          <p>Encouraging collaboration in the open.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </li>
+
+                <li>
+                  <article className='card card--principle'>
+                    <div className='card__contents'>
+                      <figure className='card__media'>
+                        <div className='card__badge'>
+                          <img src='/assets/graphics/layout/oaq-icon-illu-48-community.svg' width='40' height='40' alt='Illustration' />
+                        </div>
+                      </figure>
+                      <header className='card__header'>
+                        <div className='card__headline'>
+                          <h1 className='card__title'>Community driven</h1>
+                        </div>
+                      </header>
+                      <div className='card__body'>
+                        <div className='card__prose prose prose--responsive'>
+                          <p>Working to help each other do impactful work.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </li>
+              </ul>
             </div>
           </section>
 
-          <section className='fold fold--filled fold--media-bleed-right'>
+          <section className='fold fold--type-a' id='about-fold-story'>
             <div className='inner'>
-              <div className='fold__media'>
-                <figure className='media' style={{backgroundImage: 'url(assets/graphics/content/about2.jpg)'}}>
-                  <img className='media__item' src='assets/graphics/content/about2.jpg' width='768' height='768' alt='About image 2' />
-                </figure>
-              </div>
-              <div className='fold__copy'>
-                <header className='fold__header'>
-                  <h1 className='fold__title'>Data Sources</h1>
-                </header>
-                <div className='fold__body'>
-                  <p>
-We aggregate physical air quality data from public data sources provided by government, research-grade and other sources. These awesome groups do the hard work of measuring these data and publicly sharing them, and our community makes them more universally-accessible to both humans and machines. Note: (1) We do not validate or transform the data from their originating sources. (2) Real-time data, by their nature, often have not undergone quality assurance or control processes by their originating sources. (3) Please contact originating sources for more detailed information not provided on this platform.</p>
-                <a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Our story</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>The idea for OpenAQ came from observing the impact of a lone air quality monitor producing open data, set up by the U.S. Embassy in Beijing.</p>
+                  <p>It spurred OpenAQ co-founders, Christa Hasenkopf, an atmospheric scientist, and Joe Flasher, a software developer, to set up a small open air quality project in Ulaanbaatar along with Mongolian colleagues.</p>
+                  <p>Eventually, they and a community of open data lovers from around the world decided to see what would happen if all of the world’s air quality data were made available for the public to explore.</p>
                 </div>
-              </div>
+              </header>
+              <figure className='fold__media'>
+                <aside className='aside-highlight'>
+                  <div className='aside-highlight__contents'>
+                    <div className='aside-highlight__prose'>
+                      <p>What if all of the world’s air quality data were available to explore?</p>
+                    </div>
+                  </div>
+                </aside>
+              </figure>
             </div>
           </section>
 
-          <section className='fold'>
+          <section className='fold fold--stacked' id='about-fold-main-board'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Our Board</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>The Board oversees the legal and financial operations of OpenAQ. If you would like to make an inquiry to the board, please reach out to <a href='mailto:info@openaq.org'>info@openaq.org</a>.</p>
+                </div>
+              </header>
+
+              <TeamList items={teamData.governingBoard} />
+
+            </div>
+          </section>
+
+          <section className='fold fold--stacked' id='about-fold-advisory-board'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>Our Advisory Board</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>The Advisory Board consists of world-class leaders in air quality, public health, and open data. The board advises OpenAQ on its overall strategy.</p>
+                </div>
+              </header>
+
+              <TeamList items={teamData.advisoryBoard} />
+
+            </div>
+          </section>
+
+          <section className='fold fold--semi-light' id='about-fold-sponsors'>
             <div className='inner'>
               <header className='fold__header'>
                 <h1 className='fold__title'>Partners and Sponsors</h1>
               </header>
-              <div className='fold__body'>
-                <ul className='sponsors__list'>
-                  <li><a className='sponsors__item' target='_blank' href='https://www.climateworks.org/'><img src='assets/graphics/content/sponsors/climateworks.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://developmentseed.org/'><img src='assets/graphics/content/sponsors/devseed.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://aws.amazon.com/'><img src='assets/graphics/content/sponsors/aws.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='http://www.fz-juelich.de/portal/DE/Home/home_node.html/'><img src='assets/graphics/content/sponsors/fj.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://erc.europa.eu/'><img src='assets/graphics/content/sponsors/erc.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='http://sites.agu.org/'><img src='assets/graphics/content/sponsors/agu.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='http://earthjournalism.net/'><img src='assets/graphics/content/sponsors/ejn.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://www.internews.org/'><img src='assets/graphics/content/sponsors/internews.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://keen.io/'><img src='assets/graphics/content/sponsors/keenio.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://www.nih.gov/'><img src='assets/graphics/content/sponsors/nih.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://www.openscienceprize.org/'><img src='assets/graphics/content/sponsors/openscience.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='http://thrivingearthexchange.org/'><img src='assets/graphics/content/sponsors/tex.png' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://wellcome.ac.uk/'><img src='assets/graphics/content/sponsors/wellcome.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='https://www.hhmi.org/'><img src='assets/graphics/content/sponsors/hhmi.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='http://www.echoinggreen.org/'><img src='assets/graphics/content/sponsors/echoing-green.jpeg' alt='View sponsor website'/></a></li>
-                     <li><a className='sponsors__item' target='_blank' href='http://www.wri.org/'><img src='assets/graphics/content/sponsors/WRI.jpg' alt='View sponsor website'/></a></li>
-                <li><a className='sponsors__item' target='_blank' href='https://www.paulhastings.com/'><img src='assets/graphics/content/sponsors/PH.jpg' alt='View sponsor website'/></a></li>
-                  <li><a className='sponsors__item' target='_blank' href='http://godleyfamilyfoundation.org/'><img src='assets/graphics/content/sponsors/godley.png' alt='View sponsor website'/></a></li>
-                    <li><a className='sponsors__item' target='_blank' href='https://www.radiant.earth/'><img src='assets/graphics/content/sponsors/radiantearth.png' alt='View sponsor website'/></a></li>
-                       </ul>
-              </div>
+              <SponsorList items={sponsors} />
+              <footer className='fold__footer'>
+                <a href='mailto:info@openaq.org' className='sponsor-button' title='View page'><span>Become a sponsor</span></a>
+              </footer>
             </div>
           </section>
+
+          <section className='fold fold--type-b' id='about-fold-book'>
+            <div className='inner'>
+              <header className='fold__header'>
+                <h1 className='fold__title'>We are an open book</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>We value transparency so all our records are publicly available.</p>
+                  <p className='fold__main-action'>
+                    <a href='/assets/files/openaq-990-2018.pdf' target='_blank' className='button-book-download' title='Download'><span>Download 2018 Form 990</span></a>
+                  </p>
+                </div>
+              </header>
+              <figure className='fold__media'>
+                <article className='card card--book'>
+                  <a href='/assets/files/openaq-990-2018.pdf' target='_blank' className='card__contents' title='Download'>
+                    <header className='card__header'>
+                      <div className='card__headline'>
+                        <p className='card__subtitle'>2018</p>
+                        <h1 className='card__title'>Form 990</h1>
+                      </div>
+                    </header>
+                    <figure className='card__media'>
+                      <div className='card__thumb'>
+                        <img src='/assets/graphics/content/view--about/card-book-media.jpg' width='724' height='348' alt='Card media' />
+                      </div>
+                    </figure>
+                    <footer className='card__footer'>
+                      <img src='/assets/graphics/layout/oaq-logo-col-pos.svg' alt='OpenAQ logotype' width='72' height='40' />
+                    </footer>
+                  </a>
+                </article>
+              </figure>
+            </div>
+          </section>
+
+          <JoinFold />
 
         </div>
       </section>

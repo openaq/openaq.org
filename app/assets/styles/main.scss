@@ -34,14 +34,21 @@
 @import "global/inpages";
 @import "global/folds";
 @import "global/cards";
+@import "global/asides";
 @import "global/map";
 @import "global/popover";
 @import "global/messages";
 @import "global/prime-nav";
 @import "global/forms";
-@import "global/footer";
+@import "global/charts";
 @import "global/content";
 @import "global/modal";
+@import "global/testimonials";
+@import "global/sponsors";
+@import "global/join-fold";
+@import "global/connect-fold";
+@import "global/workshop-fold";
+@import "global/animation";
 
 
 /* Homepage
@@ -60,26 +67,17 @@
 /* Locations
    ========================================================================== */
 
-@import "locations/content";
-
-
-/* Individual Location
-   ========================================================================== */
-
-@import "location/content";
-@import "location/measurement-chart";
+@import "locations/global";
+@import "locations/hub";
+@import "locations/single";
+@import "locations/measurement-chart";
 
 
 /* Countries
    ========================================================================== */
 
-@import "countries/content";
-
-
-/* Country
-   ========================================================================== */
-
-@import "country/content";
+@import "countries/hub";
+@import "countries/single";
 
 
 /* Compare
@@ -89,13 +87,21 @@
 @import "compare/brush-chart";
 
 
+/* Community
+   ========================================================================== */
+
+@import "community/hub";
+@import "community/projects";
+@import "community/workshops";
+
+
 /* About
    ========================================================================== */
 
 @import "about/content";
 
 
-/* Community
+/* Why
    ========================================================================== */
 
-@import "community/content";
+@import "why/content";

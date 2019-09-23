@@ -2,87 +2,82 @@
    Global: Cards
    ========================================================================== */
 
-.card {
-  .card__subtitle {
-    margin-bottom: 0;
-  }
-
-  &__title small {
-    font-weight: $heading-font-bold;
+.card--data {
+  .card__title small {
     display: block;
-    line-height: 1;
-  }
-
-  &__body {
-    font-size: 1rem;
-  }
-}
-
-.card__footer {
-  margin: 0 (-$global-spacing) (-$global-spacing) (-$global-spacing);
-  box-shadow: inset 0 2px 0 0 $base-alpha-color;
-}
-
-.card__actions {
-  overflow: hidden;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    float: left;
-    box-shadow: 2px 0 0 0 $base-alpha-color;
-    width: 50%;
-
-    &:last-child {
-      box-shadow: none;
-    }
-
-    .button {
-      padding: 0.75rem 0;
-    }
-
-  }
-
-  .button-card-download,
-  .button-card-view {
-    @extend .button, .button--small, .button--primary-unbounded, .button--block;
-  }
-
-  .button-card-download:before {
-    @extend %openaq-ds-icon-download;
-  }
-
-  .button-card-view:after {
-    @extend %openaq-ds-icon-sm-chevron-right;
+    line-height: 1.25;
   }
 }
 
 .card__meta-details {
+  display: grid;
+  grid-template-columns: repeat(2, fit-content(50%));
+  grid-gap: 0.5rem 1rem;
+  font-feature-settings: normal;
   list-style: none;
-  overflow: hidden;
-  margin: 0;
   padding: 0;
+  margin: 0;
 
-  li {
-    @extend .truncated;
-    margin-bottom: 0.5rem;
-    margin-right: 2rem;
-
-    &:nth-child(even) {
-      clear: right;
-    }
-
-    @include media(medium-up) {
-      width: 35%;
-      float: left;
-    }
+  > * {
+    line-height: 1rem;
+    margin: 0;
   }
 
-  .card--data-compact & {
-    li {
-      width: 100%;
-      float: none;
-    }
+  dt {
+    font-family: $heading-font-family;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+}
+
+.card__go-link {
+  @extend .button, .button--primary, .button--large, .button--capsule;
+}
+
+.card__footer-detail {
+  position: relative;
+  font-family: $heading-font-family;
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  margin: ($global-spacing / 4) 0;
+}
+
+.card__footer-actions {
+  list-style: none;
+  padding: 0;
+  margin: 0 (-$contained-spacing) (-$contained-spacing) (-$contained-spacing) !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: inset 0 1px 0 0 $base-semi-alpha-color;
+
+  > *:not(:last-child) {
+    box-shadow: 1px 0 0 0 $base-semi-alpha-color;
+  }
+}
+
+/**
+ * "cfa-" prefix stands for "card footer actions"
+ */
+
+[class^="cfa-"],
+[class*=" cfa-"] {
+  @extend .button, .button--xlarge, .button--primary-unbounded;
+  border-radius: 0;
+  display: block;
+}
+
+.cfa-download {
+  &::before {
+    @extend %openaq-ds-icon-download;
+  }
+}
+
+.cfa-go {
+  &::after {
+    @extend %openaq-ds-icon-arrow-right;
   }
 }

@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import c from 'classnames';
 import moment from 'moment';
 import { Link } from 'react-router';
 
@@ -32,6 +31,7 @@ var LocationCard = React.createClass({
   },
 
   render: function () {
+    const { countryData } = this.props;
     let updated = moment(this.props.lastUpdate).fromNow();
     let started = moment(this.props.collectionStart).format('YYYY/MM/DD');
     let sourcesData = this.props.sourcesData;
@@ -46,25 +46,33 @@ var LocationCard = React.createClass({
       });
     }
 
+    const country = countryData || {};
+
     return (
-      <article className={c('card', {'card--data-compact': this.props.compact})}>
+      <article className='card card--data'>
         <div className='card__contents'>
           <header className='card__header'>
-            <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
-            <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {this.props.countryData.name}</small></h1>
+            <div className='card__headline'>
+              <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
+              <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
+            </div>
           </header>
           <div className='card__body'>
-            <ul className='card__meta-details'>
-              <li>Collection Start: {started}</li>
-              <li>Measurements: {formatThousands(this.props.totalMeasurements)}</li>
-              <li>Values: {this.renderParameters()}</li>
-              {sources.length ? <li>Source: {sources}</li> : null}
-            </ul>
+            <dl className='card__meta-details'>
+              <dt>Collection start</dt>
+              <dd>{started}</dd>
+              <dt>Measurements</dt>
+              <dd>{formatThousands(this.props.totalMeasurements)}</dd>
+              <dt>Values</dt>
+              <dd>{this.renderParameters()}</dd>
+              {sources.length ? <dt>Source</dt> : null}
+              {sources.length ? <dd>{sources}</dd> : null}
+            </dl>
           </div>
           <footer className='card__footer'>
-            <ul className='card__actions'>
-              <li><a href='#' className='button-card-download' title={`Download data for ${this.props.name}`} onClick={this.onDownloadClick}>Download</a></li>
-              <li><Link to={`/location/${encodeURIComponent(this.props.name)}`} className='button-card-view' title={`View ${this.props.name} page`}>View More</Link></li>
+            <ul className='card__footer-actions'>
+              <li><a href='#' className='cfa-download' title={`Download data for ${this.props.name}`} onClick={this.onDownloadClick}>Download</a></li>
+              <li><Link to={`/location/${encodeURIComponent(this.props.name)}`} className='cfa-go' title={`View ${this.props.name} page`}>View More</Link></li>
             </ul>
           </footer>
         </div>

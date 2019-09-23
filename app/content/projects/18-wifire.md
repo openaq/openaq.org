@@ -1,7 +1,10 @@
 ---
 title: "WIFIRE Project"
 url: https://wifire.ucsd.edu
-image: assets/graphics/content/projects/WIFIRE.jpg
+image: assets/graphics/content/view--community-projects/projects/covers/WIFIRE.jpg
+logo: assets/graphics/content/view--community-projects/projects/logos/project-logo-wifire.png
+type: Modeling
+location: USA
 featured: true
 ---
 

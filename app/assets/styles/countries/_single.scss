@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Countries: Single
+   ========================================================================== */
+
+.page--countries-single {
+  .country-stats {
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2rem;
+
+    @include media(medium-up) {
+      font-size: 1.25rem;
+    }
+
+    li {
+      float: left;
+      margin-right: 2rem;
+    }
+  }
+
+  .inpage__body .fold:nth-child(even) {
+    @extend .fold--semi-light;
+  }
+
+  .fold > .inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Fold: Map
+   ========================================================================== */
+
+#country-fold-map {
+  padding: 0;
+
+  .fold__header {
+    display: none;
+  }
+
+  .fold__body {
+    height: 24rem;
+
+    @include media(medium-up) {
+      height: 32rem;
+    }
+
+    @include media(large-up) {
+      height: 36rem;
+    }
+  }
+}
+
+
+/* Location folds
+   ========================================================================== */
+
+.fold--locations {
+  .fold__header {
+    display: flex;
+    flex-flow: column nowrap;
+
+    @include media(medium-up) {
+      font-size: 1.25rem;
+      flex-flow: row nowrap;
+      align-items: flex-end;
+    }
+  }
+
+  .fold__main-action {
+    @include media(medium-up) {
+      padding-left: 1rem;
+      margin-left: auto;
+    }
+  }
+
+  .fold__title {
+    @include media(medium-up) {
+      margin: 0;
+    }
+
+    small {
+      display: block;
+      font-size: 50%;
+      line-height: 1.5;
+    }
+  }
+}
+
+.location-download-button {
+  @extend .button, .button--large, .button--primary-bounded, .button--capsule;
+
+  &::before {
+    @extend %openaq-ds-icon-download;
+  }
+}
+
+.country-locations-list {
+  grid-column: 1 / span 12;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2rem;
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media(large-up) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    height: 100%;
+  }
+}

@@ -2,108 +2,325 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import c from 'classnames';
-import _ from 'lodash';
 
-var PageHeader = React.createClass({
-  displayName: 'PageHeader',
+import Breakpoint from './breakpoint';
+import SmartLink from './smart-link';
 
-  propTypes: {
-    routes: React.PropTypes.array
+const subMenus = [
+  {
+    id: 'open-data',
+    title: 'Open Data',
+    items: [
+      {
+        title: 'Locations',
+        description: 'An overview of locations in the dataset.',
+        className: 'sub-menu__link--locations',
+        url: '/locations'
+      },
+      {
+        title: 'Countries',
+        description: 'Air quality data by country.',
+        className: 'sub-menu__link--countries',
+        url: '/countries'
+      },
+      {
+        title: 'World map',
+        description: 'See the latest measurements on a map.',
+        className: 'sub-menu__link--map',
+        url: '/map'
+      },
+      {
+        title: 'Use API',
+        description: 'Access the data through our API.',
+        className: 'sub-menu__link--api',
+        url: 'https://docs.openaq.org/'
+      }
+    ]
   },
-
-  getInitialState: function () {
-    return {
-      dataMenu: false
-    };
+  {
+    id: 'community',
+    title: 'Community',
+    items: [
+      {
+        title: 'Overview',
+        description: 'Passionate about air quality data? Join our community.',
+        className: null,
+        url: '/community'
+      },
+      {
+        title: 'Impact',
+        description: 'A community using the data to fight air inquality in the most exciting ways.',
+        className: null,
+        url: '/community/projects'
+      },
+      {
+        title: 'Workshops',
+        description: 'Convene local communities to start new projects and collaborations to fight air pollution.',
+        className: null,
+        url: '/community/workshops'
+      }
+    ]
   },
+  {
+    id: 'about',
+    title: 'About us',
+    items: [
+      {
+        title: 'Our organization',
+        description: 'Our mission is to fight air inequality.',
+        className: null,
+        url: '/about'
+      },
+      {
+        title: 'Frequently Asked Questions',
+        description: 'What, why and who.',
+        className: null,
+        url: 'https://github.com/openaq/openaq-info/blob/master/FAQ.md'
+      }
+    ]
+  }
+];
 
-  documentListener: function (e) {
-    if (e.preventClose !== true && this.state.dataMenu) {
-      this.setState({dataMenu: false});
+function isDescendant (parent, child) {
+  var node = child.parentNode;
+  while (node !== null) {
+    if (node === parent) {
+      return true;
     }
-  },
+    node = node.parentNode;
+  }
+  return false;
+}
 
-  dataMenuClick: function (e) {
+class PageHeader extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      openMobileMenu: false,
+      openSubMenu: null
+    };
+
+    this.onMobileMenuClick = this.onMobileMenuClick.bind(this);
+    this.onBodyClick = this.onBodyClick.bind(this);
+    this.onLinkNavigate = this.onLinkNavigate.bind(this);
+  }
+
+  componentDidMount () {
+    document.addEventListener('click', this.onBodyClick);
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('click', this.onBodyClick);
+  }
+
+  onBodyClick (e) {
+    const descendant = isDescendant(document.querySelector('#page-prime-nav'), e.target);
+    if (!descendant) {
+      this.setState({
+        openMobileMenu: null,
+        openSubMenu: null
+      });
+    }
+  }
+
+  onMenuClick (what, e) {
     e.preventDefault();
-    this.setState({dataMenu: !this.state.dataMenu});
-  },
+    this.setState({
+      openSubMenu: this.state.openSubMenu === what
+        ? null
+        : what
+    });
+  }
 
-  dataMenuItemClick: function (e) {
-    this.setState({dataMenu: false});
-    document.documentElement.classList.remove('offcanvas-revealed');
-  },
+  onLinkNavigate () {
+    // When navigating reset menu.
+    this.setState({
+      openMobileMenu: null,
+      openSubMenu: null
+    });
+  }
 
-  onRootMenuClick: function (e) {
-    document.documentElement.classList.remove('offcanvas-revealed');
-  },
-
-  offcanvasMenuClick: function (e) {
+  onMobileMenuClick (e) {
     e.preventDefault();
-    document.documentElement.classList.toggle('offcanvas-revealed');
-  },
+    this.setState({
+      openMobileMenu: !this.state.openMobileMenu,
+      openSubMenu: null
+    });
+  }
 
-  onNavDataClick: function (e) {
-    // When clicking a nav block, add a property to the event indicating that
-    // the block shouldn't be toggled on body click.
-    e.preventClose = true;
-  },
-
-  componentDidMount: function () {
-    document.addEventListener('click', this.documentListener);
-    this.refs.navData.addEventListener('click', this.onNavDataClick);
-  },
-
-  componentWillUnmount: function () {
-    document.removeEventListener('click', this.documentListener);
-    this.refs.navData.removeEventListener('click', this.onNavDataClick);
-  },
-
-  render: function () {
-    let pageName = _.get(_.last(this.props.routes), 'name', '');
-    let activeData = [
-      'countriesHub', 'country',
-      'locationsHub', 'location'
-    ].indexOf(pageName) !== -1;
+  renderGlobalMenu () {
+    const altClass = name =>
+      c('global-menu__link global-menu__link--alt', {
+        'global-menu__link--active': this.state.openSubMenu === name
+      });
 
     return (
+      <ul className='global-menu'>
+        <li>
+          <Link to='/' title='View page' className='global-menu__link' onClick={this.onLinkNavigate}>
+            <span>Home</span>
+          </Link>
+        </li>
+        <li>
+          <Link to='/why' title='View page' className='global-menu__link' onClick={this.onLinkNavigate}>
+            <span>Why open air quality?</span>
+          </Link>
+        </li>
+        <li>
+          <a
+            href='#nav-group-open-data'
+            title='View menu'
+            className={altClass('open-data')}
+            onClick={this.onMenuClick.bind(this, 'open-data')}
+          >
+            <span>Open data</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href='#nav-group-community'
+            title='View menu'
+            className={altClass('community')}
+            onClick={this.onMenuClick.bind(this, 'community')}
+          >
+            <span>Community</span>
+          </a>
+        </li>
+        <li>
+          <a href='https://medium.com/@openaq' title='View blog' className='global-menu__link' target='_blank' onClick={this.onLinkNavigate}>
+            <span>Blog</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href='#nav-group-about'
+            title='View menu'
+            className={altClass('about')}
+            onClick={this.onMenuClick.bind(this, 'about')}
+          >
+            <span>About us</span>
+          </a>
+        </li>
+      </ul>
+    );
+  }
+
+  render () {
+    return (
       <header className='page__header' role='banner'>
-        <div className='inner'>
-          <div className='page__headline'>
-            <h1 className='page__title'><a href='/' title='Visit homepage'>
-              <img src='/assets/graphics/layout/logo.svg' alt='OpenAQ logotype' height='48' />
-              <span>OpenAQ</span>
-            </a></h1>
-          </div>
-          <nav className='page__prime-nav'>
-            <h2 className='page__prime-nav-title'><a href='#nav-block-browse' onClick={this.offcanvasMenuClick}><span>Menu</span></a></h2>
-            <div className='nav-block' id='nav-block-browse'>
-              <ul className='browse-menu'>
-                <li><IndexLink to='/' title='Go to OpenAQ homepage' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Home</span></IndexLink></li>
+        <h1 className='page__title'>OpenAQ</h1>
 
-                <li className={c('sub-nav-block-wrapper', {'sub-revealed': this.state.dataMenu})} ref='navData'>
-                  <a href='#' title='Show data sections' className={c('browse-menu__item', {'browse-menu__item--active': activeData})} onClick={this.dataMenuClick}><span>Data</span></a>
-                  <div className='sub-nav-block' id='sub-nav-block-data'>
-                    <ul className='browse-menu browse-menu--sub'>
-                      <li><Link to='/locations' title='Visit locations page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Locations</span></Link></li>
-                      <li><Link to='/countries' title='Visit Countries page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.dataMenuItemClick}><span>Countries</span></Link></li>
-                      <li><a href='https://docs.openaq.org/' title='View OpenAQ API documentation' className='browse-menu__item' onClick={this.dataMenuItemClick} target='_blank'><span>API</span></a></li>
-                    </ul>
-                  </div>
-                </li>
-
-                <li><Link to='/map' title='Visit Map page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Map</span></Link></li>
-                <li><Link to='/community' title='Visit community page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>Community</span></Link></li>
-                <li><a href='https://medium.com/@openaq' title='Visit OpenAQ blog on medium' className='browse-menu__item' target='_blank' onClick={this.onRootMenuClick}><span>Blog</span></a></li>
-                <li><a href='https://github.com/openaq/openaq-info/blob/master/FAQ.md' title='See Frequently Asked Questions' className='browse-menu__item' target='_blank' onClick={this.onRootMenuClick}><span>FAQ</span></a></li>
-                <li><Link to='/about' title='Visit about page' className='browse-menu__item' activeClassName='browse-menu__item--active' onClick={this.onRootMenuClick}><span>About</span></Link></li>
-
-              </ul>
+        <nav className='page__prime-nav nav' id='page-prime-nav'>
+          <div className='nav__group nav__group--main'>
+            <div className='inner'>
+              <IndexLink
+                to='/'
+                title='Visit homepage'
+                className='nav__home-link'
+                onClick={this.onLinkNavigate}
+              >
+                <img
+                  src='/assets/graphics/layout/oaq-logo-col-pos.svg'
+                  alt='OpenAQ logotype'
+                  width='72'
+                  height='40'
+                />
+                <span>Home</span>
+              </IndexLink>
+              <Link
+                to='/community'
+                title='View page'
+                className='nav__action-link'
+                onClick={this.onLinkNavigate}
+              >
+                <span>Get involved</span>
+              </Link>
+              <Breakpoint>
+                {({ largeUp }) =>
+                  largeUp ? (
+                    this.renderGlobalMenu()
+                  ) : (
+                    <a
+                      href='#nav-group-global'
+                      title='Jump to main menu'
+                      className={c('nav__burguer-link', {
+                        'nav__burguer-link--alt': this.state.openMobileMenu
+                      })}
+                      onClick={this.onMobileMenuClick}
+                    >
+                      <span>Jump to main menu</span>
+                    </a>
+                  )
+                }
+              </Breakpoint>
             </div>
-          </nav>
-        </div>
+          </div>
+
+          <Breakpoint>
+            {({ largeDown }) =>
+              largeDown && (
+                <div
+                  className={c('nav__group nav__group--sub', {
+                    'nav__group--active':
+                      this.state.openMobileMenu && !this.state.openSubMenu
+                  })}
+                  id='nav-group-global'
+                >
+                  <div className='inner'>
+                    <h3 className='nav__title visually-hidden'>Main</h3>
+                    {this.renderGlobalMenu()}
+                  </div>
+                </div>
+              )
+            }
+          </Breakpoint>
+
+          {subMenus.map(group => (
+            <div
+              key={group.id}
+              className={c('nav__group nav__group--sub', {
+                'nav__group--active': this.state.openSubMenu === group.id
+              })}
+              id={`nav-group-${group.id}`}
+            >
+              <div className='inner'>
+                <h3 className='nav__title nav__title--sub'>
+                  <a
+                    href='#nav-group-global'
+                    title='Jump to main menu'
+                    onClick={this.onMenuClick.bind(this, null)}
+                  >
+                    <span>{group.title}</span>
+                  </a>
+                </h3>
+                <ul className='sub-menu'>
+                  {group.items.map(item => (
+                    <li key={item.title}>
+                      <SmartLink
+                        to={item.url}
+                        title='View page'
+                        className={c('sub-menu__link', item.className)}
+                        onClick={this.onLinkNavigate}
+                     >
+                        <h5>{item.title}</h5>
+                        {item.description && (<p>{item.description}</p>)}
+                      </SmartLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+
+        </nav>
       </header>
     );
   }
-});
+}
+
+PageHeader.propTypes = {
+  routes: React.PropTypes.array
+};
 
 module.exports = PageHeader;
