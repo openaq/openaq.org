@@ -182,7 +182,7 @@ class Home extends React.Component {
             <div className='inpage__headline'>
               <h1 className='inpage__title'>Fighting air inequality through open data and community.</h1>
               <div className='inpage__introduction'>
-                <p>OpenAQ is a non-profit organization on a mission to empower communities to clean their air by harmonizing, sharing, and using open air quality data from around the globe.</p>
+                <p>OpenAQ is a non-profit organization empowering communities around the globe to clean their air by harmonizing, sharing, and using open air quality data.</p>
               </div>
             </div>
             <div className='home-rand-meas'>

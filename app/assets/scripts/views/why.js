@@ -74,7 +74,7 @@ var Why = React.createClass({
                 <h1 className='fold__subtitle'>A lack of data access</h1>
                 <h2 className='fold__title'>Communities lack access to open air quality data</h2>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>Air quality data in many places are often only shared in human-readable or temporary ways. Even in countries that provide data openly, the data are shared in disparate formats. This lack of harmonized data access prevents many sectors, from science to policy to media, to fully utilize these data for impact.</p>
+                  <p>Air quality data in many places are often only shared in human-readable or temporary ways. Even in countries that provide data openly, the data are shared in disparate formats. This lack of harmonized data access prevents many sectors from fully utilizing these data for impact.</p>
                 </div>
               </header>
               <figure className='fold__media'>
