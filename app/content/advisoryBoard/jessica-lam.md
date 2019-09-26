@@ -1,6 +1,6 @@
 ---
 name: Jess Lam
 order: 2
-affiliation: Climateworks Foundation
+affiliation: ClimateWorks Foundation
 image: team/avatar--jessica-lam.jpg
 ---
