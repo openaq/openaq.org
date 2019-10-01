@@ -65,7 +65,7 @@ var ConnectFold = React.createClass({
                 <div className='card__contents'>
                   <header className='card__header'>
                     <div className='card__headline'>
-                      <a href='https://twitter.com/open_aq' target='_blank' title='Follow us' className='link-wrapper'>
+                      <a href='https://twitter.com/openaq' target='_blank' title='Follow us' className='link-wrapper'>
                         <h1 className='card__title'>Twitter</h1>
                       </a>
                     </div>
@@ -76,7 +76,7 @@ var ConnectFold = React.createClass({
                     </div>
                   </div>
                   <footer className='card__footer'>
-                    <a href='https://twitter.com/open_aq' target='_blank' className='card__go-link' title='Follow us'><span>Follow us</span></a>
+                    <a href='https://twitter.com/openaq' target='_blank' className='card__go-link' title='Follow us'><span>Follow us</span></a>
                   </footer>
                 </div>
               </article>
