@@ -13,7 +13,11 @@ var WorkshopFold = React.createClass({
             <h1 className='workshop-fold__title'>Hold a Workshop</h1>
             <div className='prose prose--responsive'>
               <p>Interested in convening various members of your community around open air quality data? We can help!</p>
-              <p><Link to='/community' className='workshop-go-button' title='Learn more'><span>Learn how</span></Link></p>
+              <p>
+                <a href='mailto:info@openaq.org' className='workshop-go-button'>
+                  <span>Contact Us</span>
+                </a>
+              </p>
             </div>
           </header>
 
