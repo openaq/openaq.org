@@ -147,7 +147,7 @@ class CommunityWorkshops extends React.Component {
               <h1 className='inpage__title'>OpenAQ Workshops</h1>
               <div className='inpage__introduction'>
                 <p>{widont('We hold workshops to help people in various sectors find the most impactful ways they can fight air inequality in their local community.')}</p>
-                <p>{widont('Contact us, if you are interested in holding a workshop in your community.')}</p>
+                <p><a href="mailto:info@openaq.org">Contact us</a>{widont(', if you are interested in holding a workshop in your community.')}</p>
               </div>
             </div>
           </div>
