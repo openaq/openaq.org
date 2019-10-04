@@ -57,7 +57,7 @@ var PageFooter = React.createClass({
               <h2 className='contact__title'>Community</h2>
               <ul className='foot-menu'>
                 <li><Link to='/community' title='View page'>About the community</Link></li>
-                <li><Link to='/community' title='View page'>Data tools</Link></li>
+                <li><Link to='/community/projects?type=Developer+tools' title='View page'>Data tools</Link></li>
                 <li><Link to='/community/projects' title='View page'>Community impact</Link></li>
                 <li><Link to='/community/workshops' title='View page'>Workshops</Link></li>
               </ul>
