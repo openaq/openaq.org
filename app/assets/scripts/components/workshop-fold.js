@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import { Link } from 'react-router';
 
 var WorkshopFold = React.createClass({
   displayName: 'WorkshopFold',
