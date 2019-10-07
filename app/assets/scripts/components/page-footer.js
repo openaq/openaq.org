@@ -9,6 +9,7 @@ var PageFooter = React.createClass({
   propTypes: {
     measurements: React.PropTypes.number
   },
+
   render: function () {
     let copyright = this.props.measurements !== null
       ? `${formatThousands(this.props.measurements)} measurements captured`
@@ -77,13 +78,15 @@ var PageFooter = React.createClass({
           <div className='foot-info'>
             <div className='foot-newsletter'>
               <h2>Subscribe to our newsletter</h2>
-              <form ref='newsletterForm' action='//openaq.us10.list-manage.com/subscribe/post?u=ca93b2911fff40db15f6e7203&amp;id=e65a8618a1' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' target='_blank' noValidate>
+              <form ref='newsletterForm' action='//openaq.us10.list-manage.com/subscribe/post' method='POST' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' target='_blank' noValidate>
+                <input type="hidden" name="u" value="ca93b2911fff40db15f6e7203" />
+                <input type="hidden" name="id" value="e65a8618a1" />
                 <div className='form__input-group'>
-                  <input type='email' name='EMAIL' id='mce-EMAIL' placeholder='your@email.com' className='form__control form__control--medium' required/>
-                  <span className='form__input-group-button'><button className='button--subscribe' type='submit' onClick={() => this.refs.newsletterForm.reset()}><span>Subscribe</span></button></span>
+                  <input type='email' name='EMAIL' placeholder='your@email.com' className='form__control form__control--medium' required />
+                  <span className='form__input-group-button'><button className='button--subscribe' type='submit'><span>Subscribe</span></button></span>
                 </div>
                 {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */}
-                <div style={{position: 'absolute', left: '-5000px'}} aria-hidden='true'>
+                <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden='true'>
                   <input type='text' name='b_ca93b2911fff40db15f6e7203_e65a8618a1' tabIndex='-1' value='' />
                 </div>
               </form>
