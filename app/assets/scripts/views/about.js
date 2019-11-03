@@ -17,7 +17,11 @@ const teamData = {
   governingBoard: _(content.governingBoard)
     .values()
     .sortBy(['order'])
-    .value()
+    .value(),
+  team: _(content.team)
+  .values()
+  .sortBy(['order'])
+  .value(),
 };
 
 var About = React.createClass({
@@ -147,9 +151,23 @@ var About = React.createClass({
           <section className='fold fold--stacked' id='about-fold-main-board'>
             <div className='inner'>
               <header className='fold__header'>
+                <h1 className='fold__title'>Our Team</h1>
+                <div className='fold__teaser prose prose--responsive'>
+                  <p>...</p>
+                </div>
+              </header>
+
+              <TeamList items={teamData.team} />
+
+            </div>
+          </section>
+
+          <section className='fold fold--stacked' id='about-fold-main-board'>
+            <div className='inner'>
+              <header className='fold__header'>
                 <h1 className='fold__title'>Our Board</h1>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>The Board oversees the legal and financial operations of OpenAQ. If you would like to make an inquiry to the board, please reach out to <a href='mailto:info@openaq.org'>info@openaq.org</a>.</p>
+                  <p>The Governing Board oversees the legal and financial operations of OpenAQ. If you would like to make an inquiry to the board, please reach out to <a href='mailto:info@openaq.org'>info@openaq.org</a>.</p>
                 </div>
               </header>
 
