@@ -153,7 +153,7 @@ var About = React.createClass({
               <header className='fold__header'>
                 <h1 className='fold__title'>Our Team</h1>
                 <div className='fold__teaser prose prose--responsive'>
-                  <p>...</p>
+                  <p>Our team is passionate about fighting air inequality with open data. If you would like to make an inquiry to the team, please reach out to <a href='mailto:info@openaq.org'>info@openaq.org</p>
                 </div>
               </header>
 
