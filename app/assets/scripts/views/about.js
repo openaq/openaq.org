@@ -19,9 +19,9 @@ const teamData = {
     .sortBy(['order'])
     .value(),
   team: _(content.team)
-  .values()
-  .sortBy(['order'])
-  .value(),
+    .values()
+    .sortBy(['order'])
+    .value()
 };
 
 var About = React.createClass({
