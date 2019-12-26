@@ -119,7 +119,7 @@ var CommunityHub = React.createClass({
                   <article className='card card--participate'>
                     <div className='card__contents'>
                       <figure className='card__media'>
-                        <Link to='/' className='link-wrapper' title='View more'>
+                        <Link to='/community/projects?type=Developer+tools' className='link-wrapper' title='View more'>
                           <div className='card__cover'>
                             <img src='/assets/graphics/content/view--community-hub/card-participate--tools.jpg' width='1080' height='720' alt='Card cover' />
                           </div>
@@ -127,7 +127,7 @@ var CommunityHub = React.createClass({
                       </figure>
                       <header className='card__header'>
                         <div className='card__headline'>
-                          <Link to='/' className='link-wrapper' title='View more'>
+                          <Link to='/community/projects?type=Developer+tools' className='link-wrapper' title='View more'>
                             <h1 className='card__title'>Find Community tools</h1>
                           </Link>
                         </div>
@@ -148,17 +148,17 @@ var CommunityHub = React.createClass({
                   <article className='card card--participate'>
                     <div className='card__contents'>
                       <figure className='card__media'>
-                        <Link to='/' className='link-wrapper' title='View more'>
+                        <a href='https://medium.com/@openaq/how-can-a-government-source-add-data-to-openaq-50b5d83ef13f' target='_blank' className='link-wrapper' title='View more'>
                           <div className='card__cover'>
                             <img src='/assets/graphics/content/view--community-hub/card-participate--data-sources.jpg' width='1080' height='720' alt='Card cover' />
                           </div>
-                        </Link>
+                        </a>
                       </figure>
                       <header className='card__header'>
                         <div className='card__headline'>
-                          <Link to='/' className='link-wrapper' title='View more'>
+                          <a href='https://medium.com/@openaq/how-can-a-government-source-add-data-to-openaq-50b5d83ef13f' target='_blank' className='link-wrapper' title='View more'>
                             <h1 className='card__title'>Data sources</h1>
-                          </Link>
+                          </a>
                         </div>
                       </header>
                       <div className='card__body'>
