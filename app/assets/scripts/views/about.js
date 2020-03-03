@@ -209,7 +209,7 @@ var About = React.createClass({
                 <div className='fold__teaser prose prose--responsive'>
                   <p>We value transparency so all our records are publicly available.</p>
                   <p className='fold__main-action'>
-                    <a href='/assets/files/openaq-990-2018.pdf' target='_blank' className='button-book-download' title='Download'><span>Download 2018 Form 990</span></a>
+                    <a href='/assets/files/openaq-990-2019.pdf' target='_blank' className='button-book-download' title='Download'><span>Download 2019 Form 990</span></a>
                   </p>
                 </div>
               </header>
