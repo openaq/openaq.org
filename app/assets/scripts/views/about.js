@@ -215,10 +215,10 @@ var About = React.createClass({
               </header>
               <figure className='fold__media'>
                 <article className='card card--book'>
-                  <a href='/assets/files/openaq-990-2018.pdf' target='_blank' className='card__contents' title='Download'>
+                  <a href='/assets/files/openaq-990-2019.pdf' target='_blank' className='card__contents' title='Download'>
                     <header className='card__header'>
                       <div className='card__headline'>
-                        <p className='card__subtitle'>2018</p>
+                        <p className='card__subtitle'>2019</p>
                         <h1 className='card__title'>Form 990</h1>
                       </div>
                     </header>
