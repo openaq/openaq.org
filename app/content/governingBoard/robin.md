@@ -1,6 +1,7 @@
 ---
 name: Robin Wilson
-order: 9
-affiliation: Fairfax County Government
+order: 5
+role: At Large
 image: team/avatar--robin-wilson.jpg
+contact: robin@openaq.org
 ---
