@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Landscape: Table
+   ========================================================================== */
+
+.landscape-table {
+  grid-column: 1 / -1;
+
+  th {
+    @extend .heading-alt;
+  }
+
+  td, th {
+    padding: 1rem;
+    box-shadow: inset 0 -1px 0 0 tint($base-color, 80%);
+  }
+
+  tbody tr:nth-of-type(even) {
+    background: tint($base-color, 96%);
+  }
+
+  .name {
+    font-weight: $base-font-bold;
+    text-align: left;
+  }
+
+  .indicator,
+  .view-more {
+    text-align: center;
+    width: 8rem;
+  }
+
+  td span {
+    @extend .visually-hidden;
+  }
+
+  td.view-more {
+    &::before {
+      @extend %openaq-ds-icon;
+      content: "\F106";
+    }
+  }
+
+  td.indicator {
+    .yes {
+      &::before {
+        @extend %openaq-ds-icon-tick;
+        color: $primary-color;
+      }
+    }
+
+    .unclear {
+      &::before {
+        content: "?";
+      }
+    }
+
+    .no {
+      &::before {
+        @extend %openaq-ds-icon-xmark;
+        color: tint($base-color, 84%);
+      }
+    }
+  }
+}

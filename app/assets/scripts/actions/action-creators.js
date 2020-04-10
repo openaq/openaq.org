@@ -2,6 +2,7 @@ import * as baseData from './base-data';
 import * as baseStats from './base-stats';
 import * as compare from './compare';
 import * as geolocation from './geolocation';
+import * as landscape from './landscape';
 import * as latestMeasurements from './latest-measurements';
 import * as location from './location';
 import * as locations from './locations';
@@ -16,6 +17,7 @@ module.exports = Object.assign({},
   baseStats,
   compare,
   geolocation,
+  landscape,
   latestMeasurements,
   location,
   locations,

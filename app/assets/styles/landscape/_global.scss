@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Landscape: Global
+   ========================================================================== */
+
+#landscape-nodata {
+  .fold__header,
+  .fold__body {
+    grid-row: 1;
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0 2rem;
+
+    @include media(medium-up) {
+      grid-template-columns: repeat(8, 1fr);
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(12, 1fr);
+    }
+  }
+
+  .fold__title {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+
+  .fold__teaser {
+    grid-row: 3;
+    grid-column: 1 / -1;
+  }
+
+  .fold__body {
+    grid-row: 4;
+
+    p {
+      font-size: 1rem;
+      grid-column: 1 / -1;
+    }
+  }
+}
