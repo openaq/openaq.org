@@ -2,6 +2,21 @@
    Landscape: Global
    ========================================================================== */
 
+.filters--landscape {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0 2rem;
+
+  .filters__title {
+    grid-column: 1 / -1;
+  }
+}
+
+.results-summary {
+  grid-column: 1 / -1;
+}
+
 #landscape-nodata {
   .fold__header,
   .fold__body {
