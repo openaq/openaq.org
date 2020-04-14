@@ -57,7 +57,8 @@ export function fetchLandscape (coords) {
         return json;
       })
       .then(json => {
-        const parsedJson = json.map(c => {
+        const parsedJson = json.map((c, i) => {
+          c.id = i;
           c.physicalData = parseResponse(c.physicalData);
           c.highresSpatial = parseResponse(c.highresSpatial);
           c.highresTemporal = parseResponse(c.highresTemporal);

@@ -23,7 +23,8 @@ class Landscape extends React.Component {
     this.clearFilters = this.clearFilters.bind(this);
 
     this.state = {
-      activeFilters: [ ]
+      activeFilters: [ ],
+      expandedCountry: null
     };
   }
 
@@ -49,6 +50,10 @@ class Landscape extends React.Component {
 
   clearFilters () {
     this.setState({ activeFilters: [] });
+  }
+
+  onViewMore (country, value) {
+    this.setState({ expandedCountry: value ? country : null });
   }
 
   //
@@ -84,35 +89,50 @@ class Landscape extends React.Component {
   renderCheckMark (answer) {
     return (
       <strong className={answer}>
-        <span>{answer}</span>
+        <span className='hidden'>{answer}</span>
       </strong>
     );
   }
 
   renderTable (cWithData) {
     return (
-      <table className='landscape-table'>
-        <thead>
-          <tr>
-            <th className='name'>Country</th>
-            {attributes.map(attr => (
-              <th className='indicator' key={`header-${attr.key}`}>{attr.label}</th>
-            ))}
-            <th className='view-more' title='View More'>View more</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cWithData.map((o, i) => (
-            <tr key={i}>
-              <td className='name'>{o.country}</td>
-              {attributes.map(attr => (
-                <td className='indicator' key={`value-${i}-${attr.key}`}>{this.renderCheckMark(o[attr.key])}</td>
-              ))}
-              <td className='view-more'><span>View more</span></td>
-            </tr>
+      <section className='landscape-overview'>
+        <header className='landscape-overview__header'>
+          <span className='name'>Country</span>
+          {attributes.map(attr => (
+            <span className='indicator' key={`header-${attr.key}`}>{attr.label}</span>
           ))}
-        </tbody>
-      </table>
+          <span className='view-more' title='View More'>View more</span>
+        </header>
+        <div className='landscape-overview__body'>
+          {cWithData.map((o, i) => {
+            const expanded = this.state.expandedCountry === o.id;
+            const status = expanded ? 'country expanded' : 'country collapsed';
+
+            return (
+              <div className={status} key={i} onClick={this.onViewMore.bind(this, o.id, !expanded)}>
+                <div className='country__summary'>
+                  <span className='name'>{o.country}</span>
+                  {attributes.map(attr => (
+                    <span className='indicator' key={`value-${i}-${attr.key}`}>{this.renderCheckMark(o[attr.key])}</span>
+                  ))}
+                  <a className='view-more'><span className='hidden'>View more</span></a>
+                </div>
+                <div className='country__details'>
+                  <dl>
+                    <dt>Citation for AQ data</dt>
+                    <dd>{o.citationAqData}</dd>
+                    <dt>Sources</dt>
+                    <dd>{o.sources}</dd>
+                    <dt>Notes</dt>
+                    <dd>{o.notes}</dd>
+                  </dl>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </section>
     );
   }
 
