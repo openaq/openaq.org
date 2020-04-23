@@ -98,5 +98,10 @@
     "name": "Clean Air Fund",
     "url": "https://www.cleanairfund.org/",
     "logo": "sponsors/CleanAirFund.jpg"
+  },
+  {
+    "name": "Environmental Defense Fund",
+    "url": "https://www.edf.org/",
+    "logo": "sponsors/EDF.jpg"
   }
 ]
