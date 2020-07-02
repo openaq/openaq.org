@@ -1,7 +1,6 @@
 ---
 name: Olaf Veerman
-order: 4
-role: At Large
+order: 13
+affiliation: Development Seed
 image: team/avatar--olaf-veerman.jpg
-contact: olaf.veerman@gmail.com
 ---
