@@ -1,6 +1,6 @@
 ---
-name: Olaf Veerman
-order: 4
+name: Olaf Veermand
+order: 13
+affiliation: Development Seed
 image: team/avatar--olaf-veerman.jpg
-contact: olaf.veerman@gmail.com
 ---
