@@ -1,6 +1,6 @@
 ---
 name: Arvind Jairam
 order: 2
-affiliation: Paul Hastings
+affiliation: Paul Hastings LLP
 image:
 ---
