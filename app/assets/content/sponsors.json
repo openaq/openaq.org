@@ -2,7 +2,7 @@
   {
     "name": "Climateworks",
     "url": "https://www.climateworks.org/",
-    "logo": "sponsors/climateworks.jpg"
+    "logo": "sponsors/climateworks.png"
   },
   {
     "name": "Development Seed",
@@ -93,5 +93,20 @@
     "name": "Radiant Earth",
     "url": "https://www.radiant.earth/",
     "logo": "sponsors/radiantearth.png"
-  }
+  },
+  {
+    "name": "Clean Air Fund",
+    "url": "https://www.cleanairfund.org/",
+    "logo": "sponsors/CleanAirFund.jpg"
+  },
+  {
+    "name": "Environmental Defense Fund",
+    "url": "https://www.edf.org/",
+    "logo": "sponsors/EDF.jpg"
+  },
+  {
+    "name": "Bloomberg Philanthropies",
+    "url": "https://www.bloomberg.org/",
+    "logo": "sponsors/BloombergPhil.jpg"
+  } 
 ]

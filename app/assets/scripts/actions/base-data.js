@@ -55,6 +55,7 @@ export function fetchBaseData () {
             json.results.forEach((c) => {
               data.totalMeasurements += c.count;
             });
+            data[what] = data[what].filter(country => country.name);
           }
 
           // Check if we're done with the requests.
