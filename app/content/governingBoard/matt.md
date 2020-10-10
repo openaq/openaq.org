@@ -1,5 +1,5 @@
 ---
 name: Matthew Higgins
-order: 2
+order: 3
 role: Treasurer
 ---
