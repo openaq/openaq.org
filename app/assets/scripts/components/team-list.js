@@ -26,12 +26,11 @@ class TeamList extends Component {
       <li key={name}>
         <article className='team-member'>
           <figure className='team-member__avatar'>
-            {contact ?
-              <a href={'mailto:' + contact}>
-                <img src={img} width='320' height='320' alt='Team avatar' />
-              </a>
-              :
-              <img src={img} width='320' height='320' alt='Team avatar' />
+            {contact
+              ? <a href={'mailto:' + contact}>
+                  <img src={img} width='320' height='320' alt='Team avatar' />
+                </a>
+              : <img src={img} width='320' height='320' alt='Team avatar' />
             }
           </figure>
           <h1 className='team-member__title'>{name}</h1>
