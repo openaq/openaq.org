@@ -1,6 +1,6 @@
 ---
 name: Heidi Yoon
-order: 3
+order: 2
 role: Chair
 image: team/avatar--heidi-yoon.jpg
 contact: heidi@openaq.org
