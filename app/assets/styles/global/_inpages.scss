@@ -187,15 +187,11 @@ $page-header-y: $global-spacing * 5;
   grid-column: 1 / -1;
 
   @include media(medium-up) {
-    grid-row: 1;
-    grid-column: 4 / span 5;
-    box-shadow: -1px 0 0 0 $base-semi-alpha-color;
-    padding-left: 2rem;
+  }
+  @include media(large-up) {
   }
 
-  @include media(large-up) {
-    grid-column: 4 / span 9;
-  }
+
 
   > *:last-child {
     margin-bottom: 0;

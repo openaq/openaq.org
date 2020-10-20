@@ -18,7 +18,7 @@
   }
 }
 
-.filters__title,
+/*.filters__title,
 .filters-summary-title {
   @include heading(1rem);
 }
@@ -31,7 +31,7 @@
   margin-bottom: 1rem;
 }
 
-.filters {
+*//*.filters {
   margin-bottom: 2rem;
 
   &__group {
@@ -63,6 +63,11 @@
       @include col(6/12, $cycle: 2);
     }
   }
+}*/
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(10rem, 1fr));
 }
 
 .button--filter-pill {

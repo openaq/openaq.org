@@ -131,6 +131,59 @@ var LocationsHub = React.createClass({
   // Start render methods
   //
 
+  renderFilters: function () {
+    const { countries, parameters, sources} = this.props;
+
+    const types = ['Mobile', 'Stationary'];
+    const measurands = ['One', 'Two'];
+    const source_type = ['lcs', 'gov'];
+
+    let queryCountries = this.getQueryCountries();
+    let queryParameters = this.getQueryParameters();
+
+    return (<div className='filters'>
+      <select className='form__filters' id='filters__country' onChange={(e) => {
+        this.onFilterSelect('countries', e.target.value);
+      }} defaultValue='default'>
+
+        <option value={'default'} name='form-option' disabled>Select country</option>
+
+
+          {_.sortBy(this.props.countries, 'name').map(o => {
+            let checked = queryCountries.indexOf(o.code) !== -1;
+            return (
+              <option key={o.code} value={o.code} id={o.name} name='form-option' >
+                {o.name}
+            </option>
+            );
+          })}
+      </select>
+
+      <select className='form__filters' id='filters__parameters'
+        onChange={(e) => {
+          this.onFilterSelect('parameters', e.target.value);
+        }} defaultValue='default'
+      >
+
+        <option value={'default'} name='form-option' disabled>Select param</option>
+        {this.props.parameters.map(o => {
+          let checked = queryParameters.indexOf(o.id) !== -1;
+          return (
+            <option key={o.id} value={o.id} id={o.id} name='form-option' >
+              {o.name}
+            </option>
+          );
+        })}
+
+      </select>
+      <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}>
+        <small> (Clear Filters)</small>
+      </button>
+    </div>
+
+    );
+  },
+
   renderCountries: function () {
     let queryCountries = this.getQueryCountries();
     return (
@@ -336,8 +389,8 @@ var LocationsHub = React.createClass({
         </header>
 
         <div className='inpage__body'>
-          <div className='inpage__diptych inner'>
-            <aside className='inpage__aside'>
+          <div className='inner'>
+            {/* <aside className='inpage__aside'>
               <h2 className='content-prime-title'>Filter Locations</h2>
 
               <div className='filters filters--country'>
@@ -349,16 +402,16 @@ var LocationsHub = React.createClass({
                 <h3 className='filters__title'>Values</h3>
                 {this.renderParameters()}
               </div>
-            </aside>
+            </aside> */}
 
             <div className='inpage__content'>
+              {this.renderFilters()}
               <div className='content__meta'>
-
                 <div className="content__header">
                   {this.renderSort()}
-
                   <div className='content__heading'>
-                    <h2 className='content-prime-title'>Results <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear Filters)</small></button></h2>
+                    <h2 className='content-prime-title'>Results 
+                    </h2>
                     {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
                   </div>
                 </div>
