@@ -108,6 +108,10 @@
 }
 
 .inpage__results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2rem;
+
   .card {
     margin-bottom: 2rem;
   }
