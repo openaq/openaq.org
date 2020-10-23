@@ -15,6 +15,8 @@ import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 
+import { Dropdown } from 'openaq-design-system';
+
 var LocationsHub = React.createClass({
   displayName: 'LocationsHub',
 
@@ -142,6 +144,35 @@ var LocationsHub = React.createClass({
     let queryParameters = this.getQueryParameters();
 
     return (<div className='filters'>
+      <Dropdown
+        triggerElement='a'
+        triggerTitle='test'
+        triggerText='text'
+        direction='up'
+      >
+        <ul role='menu' className='drop__menu drop__menu--select'>
+          {
+            _.sortBy(this.props.countries).map(o => {
+              return (
+                  <li key={o.code}>
+                    <div
+                      className={'drop__menu-item'}
+                      data-hook='dropdown:close'
+                      onClick={(e) => {
+                        this.onFilterSelect('countries', o.code);
+                      }}
+                    >
+                      <span>{o.name}</span>
+                    </div>
+
+                  </li>
+              );
+            }
+            )
+          }
+        </ul>
+
+      </Dropdown>
 
       <select className='form__filters' id='filters__country' onChange={(e) => {
         this.onFilterSelect('countries', e.target.value);
@@ -407,7 +438,7 @@ var LocationsHub = React.createClass({
                 <div className="content__header">
                   {this.renderSort()}
                   <div className='content__heading'>
-                    <h2 className='content-prime-title'>Results 
+                    <h2 className='content-prime-title'>Results
                     </h2>
                     {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
                   </div>
