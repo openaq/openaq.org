@@ -142,13 +142,12 @@ var LocationsHub = React.createClass({
     let queryParameters = this.getQueryParameters();
 
     return (<div className='filters'>
+
       <select className='form__filters' id='filters__country' onChange={(e) => {
         this.onFilterSelect('countries', e.target.value);
       }} defaultValue='default'>
 
         <option value={'default'} name='form-option' disabled>Select country</option>
-
-
           {_.sortBy(this.props.countries, 'name').map(o => {
             let checked = queryCountries.indexOf(o.code) !== -1;
             return (
@@ -164,7 +163,6 @@ var LocationsHub = React.createClass({
           this.onFilterSelect('parameters', e.target.value);
         }} defaultValue='default'
       >
-
         <option value={'default'} name='form-option' disabled>Select param</option>
         {this.props.parameters.map(o => {
           let checked = queryParameters.indexOf(o.id) !== -1;
@@ -174,7 +172,6 @@ var LocationsHub = React.createClass({
             </option>
           );
         })}
-
       </select>
       <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}>
         <small> (Clear Filters)</small>

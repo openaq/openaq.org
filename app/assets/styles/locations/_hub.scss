@@ -67,7 +67,9 @@
 
 .filters {
   display: grid;
+  grid-gap: $global-spacing;
   grid-template-columns: repeat(7, minmax(10rem, 1fr));
+  padding: $global-spacing 0;
 }
 
 .button--filter-pill {

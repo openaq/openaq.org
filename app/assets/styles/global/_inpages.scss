@@ -154,14 +154,14 @@ $page-header-y: $global-spacing * 5;
 
 .inpage__aside,
 .inpage__content {
-  padding: ($global-spacing * 4) 0;
+  padding: 0 0 ($global-spacing * 4) 0;
 
   @include media(medium-up) {
-    padding: ($global-spacing * 6) 0;
+    padding: 0 0 ($global-spacing * 6) 0;
   }
 
   @include media(large-up) {
-    padding: ($global-spacing * 8) 0;
+    padding: 0 0 ($global-spacing * 8) 0;
   }
 }
 
