@@ -1,9 +1,10 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollArea } from 'openaq-design-system';
+import { ScrollArea, Dropdown } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
 import ReactPaginate from 'react-paginate';
+import c from 'classnames';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -14,8 +15,6 @@ import { fetchLocations, openDownloadModal } from '../actions/action-creators';
 import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
-
-import { Dropdown } from 'openaq-design-system';
 
 var LocationsHub = React.createClass({
   displayName: 'LocationsHub',
@@ -63,6 +62,13 @@ var LocationsHub = React.createClass({
     return [];
   },
 
+  getQuerySources: function () {
+    if (this.props.location.query.sources) {
+      return this.props.location.query.sources.split(',');
+    }
+    return [];
+  },
+
   shouldFetchData: function (prevProps) {
     let {countries: prevC, parameters: prevP} = prevProps.location.query;
     let {countries: currC, parameters: currP} = this.props.location.query;
@@ -75,8 +81,10 @@ var LocationsHub = React.createClass({
   fetchData: function (page) {
     let filters = {
       country: this.getQueryCountries(),
-      parameter: this.getQueryParameters()
+      parameter: this.getQueryParameters(),
+      source: this.getQuerySources()
     };
+
     this.props._fetchLocations(page, filters, this.perPage);
   },
 
@@ -97,11 +105,18 @@ var LocationsHub = React.createClass({
         query.parameters = toggleValue(parameters, value);
         !query.parameters.length && delete query.parameters;
         break;
+      case 'sources':
+        let sources = this.getQuerySources();
+        query.sources = toggleValue(sources, value);
+        !query.sources.length && delete query.sources;
+        break;
       case 'clear':
         delete query.countries;
         delete query.parameters;
+        delete query.sources;
         break;
     }
+    console.log(query);
 
     hashHistory.push(`/locations?${buildQS(query)}`);
   },
@@ -134,29 +149,25 @@ var LocationsHub = React.createClass({
   //
 
   renderFilters: function () {
-    const { countries, parameters, sources} = this.props;
-
-    const types = ['Mobile', 'Stationary'];
-    const measurands = ['One', 'Two'];
-    const source_type = ['lcs', 'gov'];
-
+    const { countries, parameters, sources } = this.props;
     let queryCountries = this.getQueryCountries();
     let queryParameters = this.getQueryParameters();
+    let querySources = this.getQuerySources();
 
     return (<div className='filters'>
       <Dropdown
         triggerElement='a'
-        triggerTitle='test'
-        triggerText='text'
-        direction='up'
+        triggerTitle='country__filter'
+        triggerText='Country'
+        triggerClassName='drop-trigger'
       >
-        <ul role='menu' className='drop__menu drop__menu--select'>
+        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
           {
-            _.sortBy(this.props.countries).map(o => {
+            _.sortBy(countries).map(o => {
               return (
                   <li key={o.code}>
                     <div
-                      className={'drop__menu-item'}
+                      className={c('drop__menu-item', {'drop__menu-item--active': queryCountries.includes(o.code)})}
                       data-hook='dropdown:close'
                       onClick={(e) => {
                         this.onFilterSelect('countries', o.code);
@@ -174,36 +185,62 @@ var LocationsHub = React.createClass({
 
       </Dropdown>
 
-      <select className='form__filters' id='filters__country' onChange={(e) => {
-        this.onFilterSelect('countries', e.target.value);
-      }} defaultValue='default'>
-
-        <option value={'default'} name='form-option' disabled>Select country</option>
-          {_.sortBy(this.props.countries, 'name').map(o => {
-            let checked = queryCountries.indexOf(o.code) !== -1;
-            return (
-              <option key={o.code} value={o.code} id={o.name} name='form-option' >
-                {o.name}
-            </option>
-            );
-          })}
-      </select>
-
-      <select className='form__filters' id='filters__parameters'
-        onChange={(e) => {
-          this.onFilterSelect('parameters', e.target.value);
-        }} defaultValue='default'
+      <Dropdown
+        triggerElement='a'
+        triggerTitle='type__filter'
+        triggerText='Data Type'
       >
-        <option value={'default'} name='form-option' disabled>Select param</option>
-        {this.props.parameters.map(o => {
-          let checked = queryParameters.indexOf(o.id) !== -1;
-          return (
-            <option key={o.id} value={o.id} id={o.id} name='form-option' >
-              {o.name}
-            </option>
-          );
-        })}
-      </select>
+        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
+          {
+            _.sortBy(parameters).map(o => {
+              return (
+                  <li key={o.id}>
+                    <div
+                      className={c('drop__menu-item', {'drop__menu-item--active': queryParameters.includes(o.code)})}
+                      data-hook='dropdown:close'
+                      onClick={(e) => {
+                        this.onFilterSelect('parameters', o.id);
+                      }}
+                    >
+                      <span>{o.name}</span>
+                    </div>
+
+                  </li>
+              );
+            }
+            )
+          }
+        </ul>
+      </Dropdown>
+
+      <Dropdown
+        triggerElement='a'
+        triggerTitle='source__filter'
+        triggerText='Data Source'
+      >
+        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
+          {
+            _.sortBy(sources).map(o => {
+              return (
+                  <li key={o.name}>
+                    <div
+                      className={c('drop__menu-item', {'drop__menu-item--active': querySources.includes(o.code)})}
+
+                      data-hook='dropdown:close'
+                      onClick={(e) => {
+                        this.onFilterSelect('sources', o.name);
+                      }}
+                    >
+                      <span>{o.name}</span>
+                    </div>
+
+                  </li>
+              );
+            }
+            )
+          }
+        </ul>
+      </Dropdown>
       <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}>
         <small> (Clear Filters)</small>
       </button>
@@ -266,9 +303,10 @@ var LocationsHub = React.createClass({
   renderFilterSummary: function () {
     let countries = this.getQueryCountries();
     let parameters = this.getQueryParameters();
+    let sources = this.getQuerySources();
 
     // If there are no filters selected remove the whole block.
-    if (countries.length + parameters.length === 0) {
+    if (countries.length + parameters.length + sources.length === 0) {
       return null;
     }
 
@@ -286,6 +324,13 @@ var LocationsHub = React.createClass({
             ? <button type='button' className='button--filter-pill' key={o.id} onClick={onClick}><span>{o.name}</span></button>
             : null;
         })}
+        {this.props.sources.map(o => {
+          let onClick = this.onFilterSelect.bind(null, 'sources', o.name);
+          return sources.indexOf(o.name) !== -1
+            ? <button type='button' className='button--filter-pill' key={o.name} onClick={onClick}><span>{o.name}</span></button>
+            : null;
+        })}
+
       </div>
     );
   },

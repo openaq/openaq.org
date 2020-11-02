@@ -71,6 +71,35 @@
   grid-template-columns: repeat(7, minmax(10rem, 1fr));
   padding: $global-spacing 0;
 }
+.drop__menu.scrollable {
+   height: 10rem;
+   overflow-y: scroll;
+}
+
+
+.filters .drop__toggle {
+  border: 0.5px solid rgba($base-color, 0.5);
+  padding: $global-spacing * 0.5;
+  border-radius: $base-border-radius;
+  color: $base-color;
+  display: flex;
+  justify-content: space-between;
+
+  &::after {
+    @extend %openaq-ds-icon-oaq-32-arrow-right;
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    color: $primary-color;
+
+    @include media(large-up) {
+      content: "\F106";
+      font-size: 1rem;
+      margin-left: 0.25rem;
+      transform: none;
+    }
+  }
+
+}
 
 .button--filter-pill {
   @extend .button, .button--small;
