@@ -240,9 +240,6 @@ var LocationsHub = React.createClass({
           }
         </ul>
       </Dropdown>
-      <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}>
-        <small> (Clear Filters)</small>
-      </button>
     </div>
 
     );
@@ -329,6 +326,10 @@ var LocationsHub = React.createClass({
             ? <button type='button' className='button--filter-pill' key={o.name} onClick={onClick}><span>{o.name}</span></button>
             : null;
         })}
+
+        <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}>
+          <small> (Clear Filters)</small>
+        </button>
 
       </div>
     );
