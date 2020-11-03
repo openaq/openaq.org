@@ -68,11 +68,21 @@
 .filters {
   display: grid;
   grid-gap: $global-spacing;
-  grid-template-columns: repeat(7, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   padding: $global-spacing 0;
 }
+.filters .fold__nav {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filters .fold__nav h2 {
+  width: auto;
+}
 .drop__menu.scrollable {
-   height: 10rem;
+   max-height: 10rem;
    overflow-y: scroll;
 }
 
@@ -84,6 +94,7 @@
   color: $base-color;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 
   &::after {
     @extend %openaq-ds-icon-oaq-32-arrow-right;
@@ -98,7 +109,11 @@
       transform: none;
     }
   }
+}
 
+.filters .drop__toggle.sort-order {
+  grid-column-end: -1;
+  border-radius: $base-border-radius * 10;
 }
 
 .button--filter-pill {
@@ -111,6 +126,11 @@
   &::after {
     @extend %openaq-ds-icon-xmark--small;
   }
+}
+.button--filter-pill.orderBy {
+  background-color: tint($primary-color, 64%);
+  color: $primary-color;
+
 }
 
 .content {
