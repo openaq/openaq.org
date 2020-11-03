@@ -142,7 +142,15 @@
     }
   }
 }
-
+.page {
+  overflow-x: unset;
+}
+.inpage__content__header {
+  top: 0rem;
+  position: sticky;
+  z-index: 2;
+  background: tint($base-color, 100%);
+}
 .inpage__results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

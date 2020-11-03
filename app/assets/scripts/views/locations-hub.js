@@ -81,8 +81,7 @@ var LocationsHub = React.createClass({
   fetchData: function (page) {
     let filters = {
       country: this.getQueryCountries(),
-      parameter: this.getQueryParameters(),
-      source: this.getQuerySources()
+      parameter: this.getQueryParameters()
     };
 
     this.props._fetchLocations(page, filters, this.perPage);
@@ -478,19 +477,21 @@ var LocationsHub = React.createClass({
             </aside> */}
 
             <div className='inpage__content'>
-              {this.renderFilters()}
-              <div className='content__meta'>
-                <div className="content__header">
-                  {this.renderSort()}
-                  <div className='content__heading'>
-                    <h2 className='content-prime-title'>Results
-                    </h2>
-                    {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
-                  </div>
-                </div>
-
+              <div className='inpage__content__header'>
+                {this.renderFilters()}
                 {this.renderFilterSummary()}
               </div>
+                <div className='content__meta'>
+                  <div className="content__header">
+                    {this.renderSort()}
+                    <div className='content__heading'>
+                      <h2 className='content-prime-title'>Results
+                      </h2>
+                      {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
+                    </div>
+                  </div>
+
+                </div>
 
               <div className='inpage__results'>
                 {this.renderContent()}
