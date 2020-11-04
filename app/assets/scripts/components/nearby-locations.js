@@ -1,33 +1,35 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import _ from 'lodash';
 import { Link } from 'react-router';
+import createReactClass from 'create-react-class';
 
 import LocationCard from './location-card';
 import InfoMessage from './info-message';
 import LoadingMessage from './loading-message';
 import { formatThousands } from '../utils/format';
 
-var NearbyLocations = React.createClass({
+var NearbyLocations = createReactClass({
   displayName: 'NearbyLocations',
 
   propTypes: {
-    _geolocateUser: React.PropTypes.func,
-    _fetchNearbyLocations: React.PropTypes.func,
-    _openDownloadModal: React.PropTypes.func,
-    geolocationRequesting: React.PropTypes.bool,
-    geolocationRequested: React.PropTypes.bool,
-    geolocationError: React.PropTypes.string,
-    geolocationCoords: React.PropTypes.object,
+    _geolocateUser: T.func,
+    _fetchNearbyLocations: T.func,
+    _openDownloadModal: T.func,
+    geolocationRequesting: T.bool,
+    geolocationRequested: T.bool,
+    geolocationError: T.string,
+    geolocationCoords: T.object,
 
-    locFetching: React.PropTypes.bool,
-    locFetched: React.PropTypes.bool,
-    locError: React.PropTypes.string,
-    locations: React.PropTypes.array,
+    locFetching: T.bool,
+    locFetched: T.bool,
+    locError: T.string,
+    locations: T.array,
 
-    countries: React.PropTypes.array,
-    sources: React.PropTypes.array,
-    parameters: React.PropTypes.array
+    countries: T.array,
+    sources: T.array,
+    parameters: T.array
   },
 
   //

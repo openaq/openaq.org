@@ -1,5 +1,6 @@
 'use strict';
-import React, { PropTypes as T } from 'react';
+import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import widont from '../utils/widont';
 import _ from 'lodash';

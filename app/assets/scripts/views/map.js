@@ -1,11 +1,13 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import mapboxgl from 'mapbox-gl';
 import c from 'classnames';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
+import createReactClass from 'create-react-class';
 
 import MapComponent from '../components/map';
 import HeaderMessage from '../components/header-message';
@@ -14,23 +16,23 @@ import { generateLegendStops } from '../utils/colors';
 import config from '../config';
 mapboxgl.accessToken = config.mapbox.token;
 
-var Map = React.createClass({
+var Map = createReactClass({
   displayName: 'Map',
 
   propTypes: {
-    location: React.PropTypes.object,
+    location: T.object,
 
-    _invalidateAllLocationData: React.PropTypes.func,
-    _fetchLatestMeasurements: React.PropTypes.func,
+    _invalidateAllLocationData: T.func,
+    _fetchLatestMeasurements: T.func,
 
-    parameters: React.PropTypes.array,
-    sources: React.PropTypes.array,
+    parameters: T.array,
+    sources: T.array,
 
-    latestMeasurements: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    latestMeasurements: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     })
   },
 

@@ -1,21 +1,23 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import createReactClass from 'create-react-class';
 
 const CHART_DEBUG = false;
 
-var ChartMeasurement = React.createClass({
+var ChartMeasurement = createReactClass({
   displayName: 'ChartMeasurement',
 
   propTypes: {
-    className: React.PropTypes.string,
-    data: React.PropTypes.array,
+    className: T.string,
+    data: T.array,
 
-    xRange: React.PropTypes.array,
-    yRange: React.PropTypes.array,
-    yLabel: React.PropTypes.string,
-    compressed: React.PropTypes.bool
+    xRange: T.array,
+    yRange: T.array,
+    yLabel: T.string,
+    compressed: T.bool
   },
 
   chart: null,

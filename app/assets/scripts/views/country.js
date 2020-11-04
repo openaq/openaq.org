@@ -1,7 +1,9 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import createReactClass from 'create-react-class';
 
 import config from '../config';
 import { formatThousands } from '../utils/format';
@@ -13,33 +15,33 @@ import LoadingMessage from '../components/loading-message';
 import LocationCard from '../components/location-card';
 import MapComponent from '../components/map';
 
-var Country = React.createClass({
+var Country = createReactClass({
   displayName: 'Country',
 
   propTypes: {
-    params: React.PropTypes.object,
+    params: T.object,
 
-    _invalidateAllLocationData: React.PropTypes.func,
-    _fetchLocations: React.PropTypes.func,
-    _fetchLatestMeasurements: React.PropTypes.func,
-    _openDownloadModal: React.PropTypes.func,
+    _invalidateAllLocationData: T.func,
+    _fetchLocations: T.func,
+    _fetchLatestMeasurements: T.func,
+    _openDownloadModal: T.func,
 
-    countries: React.PropTypes.array,
-    sources: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    sources: T.array,
+    parameters: T.array,
 
-    latestMeasurements: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    latestMeasurements: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     }),
 
-    locations: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    locations: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     })
   },
 

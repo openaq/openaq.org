@@ -1,24 +1,26 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
 import { Link } from 'react-router';
+import createReactClass from 'create-react-class';
 
 import { formatThousands } from '../utils/format';
 
-var LocationCard = React.createClass({
+var LocationCard = createReactClass({
   displayName: 'LocationCard',
 
   propTypes: {
-    onDownloadClick: React.PropTypes.func,
-    compact: React.PropTypes.bool,
-    name: React.PropTypes.string,
-    city: React.PropTypes.string,
-    countryData: React.PropTypes.object,
-    sourcesData: React.PropTypes.array,
-    totalMeasurements: React.PropTypes.number,
-    parametersList: React.PropTypes.array,
-    lastUpdate: React.PropTypes.string,
-    collectionStart: React.PropTypes.string
+    onDownloadClick: T.func,
+    compact: T.bool,
+    name: T.string,
+    city: T.string,
+    countryData: T.object,
+    sourcesData: T.array,
+    totalMeasurements: T.number,
+    parametersList: T.array,
+    lastUpdate: T.string,
+    collectionStart: T.string
   },
 
   onDownloadClick: function (e) {

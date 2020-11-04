@@ -1,10 +1,12 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import createReactClass from 'create-react-class';
+
 import widont from '../utils/widont';
 import JoinFold from '../components/join-fold';
 
-var Why = React.createClass({
+var Why = createReactClass({
   displayName: 'Why open air quality?',
 
   propTypes: {

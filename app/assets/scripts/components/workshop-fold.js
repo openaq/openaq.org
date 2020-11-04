@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
+import createReactClass from 'create-react-class';
 
-var WorkshopFold = React.createClass({
+var WorkshopFold = createReactClass({
   displayName: 'WorkshopFold',
 
   render: function () {

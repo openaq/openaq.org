@@ -1,8 +1,10 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import c from 'classnames';
+import createReactClass from 'create-react-class';
 
 import { closeDownloadModal } from '../actions/action-creators';
 import PageHeader from '../components/page-header';
@@ -10,17 +12,17 @@ import PageFooter from '../components/page-footer';
 import HeaderMessage from '../components/header-message';
 import ModalDownload from '../components/modal-download';
 
-var App = React.createClass({
+var App = createReactClass({
   displayName: 'App',
 
   propTypes: {
-    routes: React.PropTypes.array,
-    baseDataReady: React.PropTypes.bool,
-    baseDataError: React.PropTypes.string,
-    measurements: React.PropTypes.number,
-    downloadModal: React.PropTypes.object,
-    _closeDownloadModal: React.PropTypes.func,
-    children: React.PropTypes.object
+    routes: T.array,
+    baseDataReady: T.bool,
+    baseDataError: T.string,
+    measurements: T.number,
+    downloadModal: T.object,
+    _closeDownloadModal: T.func,
+    children: T.object
   },
 
   onModalClose: function () {

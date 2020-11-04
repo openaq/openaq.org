@@ -1,10 +1,12 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { render } from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 import _ from 'lodash';
 import moment from 'moment';
 import distance from 'turf-distance';
+import createReactClass from 'create-react-class';
 
 import { convertParamIfNeeded, circleOpacity, circleBlur,
          coloredCircleRadius, borderCircleRadius, selectCircleRadius, selectShadowCircleRadius, locationShadowCircleRadius } from '../utils/map-settings';
@@ -15,19 +17,19 @@ import { round } from '../utils/format';
 import config from '../config';
 mapboxgl.accessToken = config.mapbox.token;
 
-const MapComponent = React.createClass({
+const MapComponent = createReactClass({
   displayName: 'MapComponent',
 
   propTypes: {
-    measurements: React.PropTypes.array,
-    highlightLoc: React.PropTypes.string,
-    parameter: React.PropTypes.object,
-    center: React.PropTypes.array,
-    bbox: React.PropTypes.array,
-    zoom: React.PropTypes.number,
-    disableScrollZoom: React.PropTypes.bool,
-    sources: React.PropTypes.array,
-    children: React.PropTypes.object
+    measurements: T.array,
+    highlightLoc: T.string,
+    parameter: T.object,
+    center: T.array,
+    bbox: T.array,
+    zoom: T.number,
+    disableScrollZoom: T.bool,
+    sources: T.array,
+    children: T.object
   },
 
   nearbyKm: 10,
@@ -431,17 +433,17 @@ const MapComponent = React.createClass({
 
 module.exports = MapComponent;
 
-const MapPopover = React.createClass({
+const MapPopover = createReactClass({
   displayName: 'MapPopover',
 
   propTypes: {
-    location: React.PropTypes.string,
-    measurement: React.PropTypes.object,
-    parameter: React.PropTypes.object,
-    sourceData: React.PropTypes.object,
-    nearbyKm: React.PropTypes.number,
-    nearby: React.PropTypes.array,
-    nearbyClick: React.PropTypes.func
+    location: T.string,
+    measurement: T.object,
+    parameter: T.object,
+    sourceData: T.object,
+    nearbyKm: T.number,
+    nearby: T.array,
+    nearbyClick: T.func
   },
 
   renderNearby: function () {

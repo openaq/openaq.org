@@ -1,11 +1,13 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
+import createReactClass from 'create-react-class';
 
-var HeaderMessage = React.createClass({
+var HeaderMessage = createReactClass({
   displayName: 'HeaderMessage',
 
   propTypes: {
-    children: React.PropTypes.array
+    children: T.array
   },
 
   render: function () {

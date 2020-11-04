@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, hashHistory } from 'react-router';
 import c from 'classnames';
@@ -7,6 +8,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
 import * as d3 from 'd3';
+import createReactClass from 'create-react-class';
 
 import {
   fetchCompareLocationIfNeeded,
@@ -26,33 +28,33 @@ import InfoMessage from '../components/info-message';
 import ChartBrush from '../components/chart-brush';
 import { convertParamIfNeeded } from '../utils/map-settings';
 
-var Compare = React.createClass({
+var Compare = createReactClass({
   displayName: 'Compare',
 
   propTypes: {
-    _fetchCompareLocationIfNeeded: React.PropTypes.func,
-    _removeCompareLocation: React.PropTypes.func,
-    _selectCompareOptions: React.PropTypes.func,
-    _cancelCompareOptions: React.PropTypes.func,
-    _selectCompareCountry: React.PropTypes.func,
-    _selectCompareArea: React.PropTypes.func,
-    _selectCompareLocation: React.PropTypes.func,
-    _fetchLocationsByCountry: React.PropTypes.func,
-    _invalidateLocationsByCountry: React.PropTypes.func,
-    _invalidateCompare: React.PropTypes.func,
-    _fetchCompareLocationMeasurements: React.PropTypes.func,
+    _fetchCompareLocationIfNeeded: T.func,
+    _removeCompareLocation: T.func,
+    _selectCompareOptions: T.func,
+    _cancelCompareOptions: T.func,
+    _selectCompareCountry: T.func,
+    _selectCompareArea: T.func,
+    _selectCompareLocation: T.func,
+    _fetchLocationsByCountry: T.func,
+    _invalidateLocationsByCountry: T.func,
+    _invalidateCompare: T.func,
+    _fetchCompareLocationMeasurements: T.func,
 
-    params: React.PropTypes.object,
-    location: React.PropTypes.object,
+    params: T.object,
+    location: T.object,
 
-    countries: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    parameters: T.array,
 
-    compareLoc: React.PropTypes.array,
-    compareMeasurements: React.PropTypes.array,
-    compareSelectOpts: React.PropTypes.object,
+    compareLoc: T.array,
+    compareMeasurements: T.array,
+    compareSelectOpts: T.object,
 
-    locationsByCountry: React.PropTypes.object
+    locationsByCountry: T.object
   },
 
   getActiveParameterData: function () {

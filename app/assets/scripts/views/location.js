@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
@@ -8,6 +9,7 @@ import { Link, hashHistory } from 'react-router';
 import * as d3 from 'd3';
 import { Dropdown } from 'openaq-design-system';
 import { schemas } from 'openaq-data-format';
+import createReactClass from 'create-react-class';
 
 import config from '../config';
 import { formatThousands } from '../utils/format';
@@ -27,44 +29,44 @@ import ChartMeasurement from '../components/chart-measurement';
 
 const locationSchema = schemas.location;
 
-var Location = React.createClass({
+var Location = createReactClass({
   displayName: 'Location',
 
   propTypes: {
-    params: React.PropTypes.object,
-    location: React.PropTypes.object,
-    _fetchLocationIfNeeded: React.PropTypes.func,
-    _fetchLocations: React.PropTypes.func,
-    _fetchLatestMeasurements: React.PropTypes.func,
-    _fetchMeasurements: React.PropTypes.func,
-    _invalidateAllLocationData: React.PropTypes.func,
-    _openDownloadModal: React.PropTypes.func,
+    params: T.object,
+    location: T.object,
+    _fetchLocationIfNeeded: T.func,
+    _fetchLocations: T.func,
+    _fetchLatestMeasurements: T.func,
+    _fetchMeasurements: T.func,
+    _invalidateAllLocationData: T.func,
+    _openDownloadModal: T.func,
 
-    countries: React.PropTypes.array,
-    sources: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    sources: T.array,
+    parameters: T.array,
 
-    countryData: React.PropTypes.object,
+    countryData: T.object,
 
-    loc: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    loc: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     }),
 
-    latestMeasurements: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    latestMeasurements: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     }),
 
-    measurements: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    measurements: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     })
   },
 

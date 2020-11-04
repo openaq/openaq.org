@@ -1,7 +1,9 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import createReactClass from 'create-react-class';
 
 const CHART_DEBUG = false;
 
@@ -11,16 +13,16 @@ const CHART_DEBUG = false;
 // D3 Advanced Brush Style - Part 5
 //  http://bl.ocks.org/jisaacks/5678983
 
-var BrushChart = React.createClass({
+var BrushChart = createReactClass({
   displayName: 'BrushChart',
 
   propTypes: {
-    className: React.PropTypes.string,
-    data: React.PropTypes.array,
+    className: T.string,
+    data: T.array,
 
-    xRange: React.PropTypes.array,
-    yRange: React.PropTypes.array,
-    yLabel: React.PropTypes.string
+    xRange: T.array,
+    yRange: T.array,
+    yLabel: T.string
   },
 
   chart: null,

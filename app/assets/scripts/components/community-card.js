@@ -1,19 +1,21 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
+import createReactClass from 'create-react-class';
 
-var CommunityCard = React.createClass({
+var CommunityCard = createReactClass({
   displayName: 'CommunityCard',
 
   propTypes: {
-    title: React.PropTypes.string,
-    type: React.PropTypes.string,
-    location: React.PropTypes.string,
-    linkTitle: React.PropTypes.string,
-    url: React.PropTypes.string,
-    imageNode: React.PropTypes.node,
-    logo: React.PropTypes.string,
-    horizontal: React.PropTypes.bool,
-    children: React.PropTypes.object
+    title: T.string,
+    type: T.string,
+    location: T.string,
+    linkTitle: T.string,
+    url: T.string,
+    imageNode: T.node,
+    logo: T.string,
+    horizontal: T.bool,
+    children: T.object
   },
 
   getDefaultProps: function () {

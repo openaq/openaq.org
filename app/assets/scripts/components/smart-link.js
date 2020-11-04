@@ -1,5 +1,7 @@
 'use strict';
-import React, { PropTypes as T } from 'react';
+import React from 'react';
+import { PropTypes as T } from 'prop-types';
+
 import { Link } from 'react-router';
 import _ from 'lodash';
 

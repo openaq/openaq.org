@@ -1,13 +1,15 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import c from 'classnames';
+import createReactClass from 'create-react-class';
 
-var LoadingMessage = React.createClass({
+var LoadingMessage = createReactClass({
   displayName: 'LoadingMessage',
 
   propTypes: {
-    type: React.PropTypes.string,
-    children: React.PropTypes.object
+    type: T.string,
+    children: T.object
   },
 
   getClasses: function () {

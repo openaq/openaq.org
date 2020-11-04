@@ -2,13 +2,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import createReactClass from 'create-react-class';
 
 import testimonials from '../../content/testimonials.json';
 import widont from '../utils/widont';
 import ConnectFold from '../components/connect-fold';
 import Testimonials from '../components/testimonials.js';
 
-var CommunityHub = React.createClass({
+var CommunityHub = createReactClass({
   displayName: 'About the Community',
 
   propTypes: {

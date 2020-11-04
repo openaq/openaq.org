@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { IndexLink, Link } from 'react-router';
 import c from 'classnames';
 
@@ -320,7 +321,7 @@ class PageHeader extends React.Component {
 }
 
 PageHeader.propTypes = {
-  routes: React.PropTypes.array
+  routes: T.array
 };
 
 module.exports = PageHeader;

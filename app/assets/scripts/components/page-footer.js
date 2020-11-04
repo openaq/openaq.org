@@ -1,13 +1,15 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { IndexLink, Link } from 'react-router';
 import { formatThousands } from '../utils/format';
+import createReactClass from 'create-react-class';
 
-var PageFooter = React.createClass({
+var PageFooter = createReactClass({
   displayName: 'PageFooter',
 
   propTypes: {
-    measurements: React.PropTypes.number
+    measurements: T.number
   },
   render: function () {
     let copyright = this.props.measurements !== null

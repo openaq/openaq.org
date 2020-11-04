@@ -1,11 +1,13 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import { ScrollArea } from 'openaq-design-system';
 import { hashHistory } from 'react-router';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
 import moment from 'moment';
+import createReactClass from 'create-react-class';
 
 import config from '../config';
 import { toggleValue } from '../utils/array';
@@ -15,23 +17,23 @@ import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 
-var LocationsHub = React.createClass({
+var LocationsHub = createReactClass({
   displayName: 'LocationsHub',
 
   propTypes: {
-    location: React.PropTypes.object,
-    _fetchLocations: React.PropTypes.func,
-    _openDownloadModal: React.PropTypes.func,
+    location: T.object,
+    _fetchLocations: T.func,
+    _openDownloadModal: T.func,
 
-    countries: React.PropTypes.array,
-    sources: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    sources: T.array,
+    parameters: T.array,
 
-    locFetching: React.PropTypes.bool,
-    locFetched: React.PropTypes.bool,
-    locError: React.PropTypes.string,
-    locations: React.PropTypes.array,
-    locPagination: React.PropTypes.object
+    locFetching: T.bool,
+    locFetched: T.bool,
+    locError: T.string,
+    locations: T.array,
+    locPagination: T.object
   },
 
   perPage: 15,
@@ -373,7 +375,7 @@ var LocationsHub = React.createClass({
               {this.renderPagination()}
 
               <div className='disclaimers'>
-                <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution. </p>
+                <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution.</p>
                 <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
               </div>
             </div>

@@ -1,10 +1,10 @@
-'use strict';
-import 'babel-polyfill';
+// 'use strict';
+// import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory, applyRouterMiddleware } from 'react-router';
-import { useScroll } from 'react-router-scroll';
+// import { useScroll } from 'react-router-scroll';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -40,14 +40,14 @@ const history = syncHistoryWithStore(hashHistory, store);
 store.dispatch(fetchBaseData());
 store.dispatch(fetchBaseStats());
 
-const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
-  return prevRouterProps &&
-    decodeURIComponent(currRouterProps.location.pathname) !== decodeURIComponent(prevRouterProps.location.pathname);
-});
+// const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
+//   return prevRouterProps &&
+//     decodeURIComponent(currRouterProps.location.pathname) !== decodeURIComponent(prevRouterProps.location.pathname);
+// });
 
 render((
   <Provider store={store}>
-    <Router history={history} render={applyRouterMiddleware(scrollerMiddleware)}>
+    <Router history={history} /* render={applyRouterMiddleware(scrollerMiddleware)} */>
       <Route path='/' component={App}>
         <Route name='why' path='why' component={Why} pageClass='page--why page--dark' />
         <Route name='about' path='about' component={About} pageClass='page--about page--dark' />
