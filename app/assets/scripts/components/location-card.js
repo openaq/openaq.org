@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import createReactClass from 'create-react-class';
 
 import { formatThousands } from '../utils/format';

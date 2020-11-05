@@ -2,8 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { ScrollArea } from 'openaq-design-system';
-import { hashHistory } from 'react-router';
+import { hashHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
 import moment from 'moment';
@@ -136,13 +135,7 @@ var LocationsHub = createReactClass({
   renderCountries: function () {
     let queryCountries = this.getQueryCountries();
     return (
-      <ScrollArea
-        speed={0.8}
-        className='filters__group'
-        contentClassName='filters__group-inner'
-        smoothScrolling={true}
-        horizontal={false} >
-
+      <div>
         {_.sortBy(this.props.countries, 'name').map(o => {
           let checked = queryCountries.indexOf(o.code) !== -1;
           let onChange = this.onFilterSelect.bind(null, 'countries', o.code);
@@ -155,7 +148,7 @@ var LocationsHub = createReactClass({
           );
         })}
 
-      </ScrollArea>
+      </div>
     );
   },
 

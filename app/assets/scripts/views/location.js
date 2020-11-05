@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
 import c from 'classnames';
-import { Link, hashHistory } from 'react-router';
+import { Link, hashHistory } from 'react-router-dom';
 import * as d3 from 'd3';
 import { Dropdown } from 'openaq-design-system';
 import { schemas } from 'openaq-data-format';

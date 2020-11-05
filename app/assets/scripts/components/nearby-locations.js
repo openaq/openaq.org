@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import _ from 'lodash';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import createReactClass from 'create-react-class';
 
 import LocationCard from './location-card';

@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import { withRouter } from 'react-router-dom';
 import c from 'classnames';
 import createReactClass from 'create-react-class';
 
@@ -16,7 +16,7 @@ var App = createReactClass({
   displayName: 'App',
 
   propTypes: {
-    routes: T.array,
+    location: T.object,
     baseDataReady: T.bool,
     baseDataError: T.string,
     measurements: T.number,
@@ -30,12 +30,14 @@ var App = createReactClass({
   },
 
   render: function () {
-    let pageClass = _.get(_.last(this.props.routes), 'pageClass', '');
+    let pageClass = this.props.children.props.children.find(
+      (child) => child.props.path === this.props.location.pathname
+    ).props.pageClass;
 
     let content = (
       <HeaderMessage>
         <h1>Take a deep breath.</h1>
-        <div className='prose prose--responsive'>
+        <div className="prose prose--responsive">
           <p>Air quality awesomeness is loading...</p>
         </div>
       </HeaderMessage>
@@ -49,9 +51,16 @@ var App = createReactClass({
       content = (
         <HeaderMessage>
           <h1>Uhoh, something went wrong</h1>
-          <div className='prose prose--responsive'>
-            <p>There was a problem getting the data. If the problem persists, please let us know.</p>
-            <p><a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a></p>
+          <div className="prose prose--responsive">
+            <p>
+              There was a problem getting the data. If the problem persists,
+              please let us know.
+            </p>
+            <p>
+              <a href="mailto:info@openaq.org" title="Send us an email">
+                Send us an Email
+              </a>
+            </p>
           </div>
         </HeaderMessage>
       );
@@ -59,8 +68,8 @@ var App = createReactClass({
 
     return (
       <div className={c('page', pageClass)}>
-        <PageHeader routes={this.props.routes} />
-        <main className='page__body' role='main'>
+        <PageHeader />
+        <main className="page__body" role="main">
           {content}
         </main>
         {this.props.downloadModal.open ? (
@@ -68,7 +77,8 @@ var App = createReactClass({
             country={this.props.downloadModal.country}
             area={this.props.downloadModal.area}
             location={this.props.downloadModal.location}
-            onModalClose={this.onModalClose} />
+            onModalClose={this.onModalClose}
+          />
         ) : null}
         <PageFooter measurements={this.props.measurements} />
       </div>
@@ -96,6 +106,6 @@ function dispatcher (dispatch) {
   };
 }
 
-module.exports = connect(selector, dispatcher)(App);
+module.exports = connect(selector, dispatcher)(withRouter(App));
 
 // module.exports = App;

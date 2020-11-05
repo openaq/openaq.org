@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router';
+import { Link, hashHistory } from 'react-router-dom';
 import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';

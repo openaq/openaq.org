@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
 import baseData from './base-data';
 import locations from './locations';
 import location from './location';
@@ -14,7 +13,6 @@ import downloadModal from './download-modal';
 import voteModal from './vote-modal';
 
 export default combineReducers({
-  routing: routerReducer,
   baseData,
   locations,
   location,

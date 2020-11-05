@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 /**
