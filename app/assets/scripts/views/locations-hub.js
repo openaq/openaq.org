@@ -155,13 +155,7 @@ var LocationsHub = createReactClass({
   renderParameters: function () {
     let queryParameters = this.getQueryParameters();
     return (
-      <ScrollArea
-        speed={0.8}
-        className='filters__group'
-        contentClassName='filters__group-inner'
-        smoothScrolling={true}
-        horizontal={false} >
-
+      <div>
         {this.props.parameters.map(o => {
           let checked = queryParameters.indexOf(o.id) !== -1;
           let onChange = this.onFilterSelect.bind(null, 'parameters', o.id);
@@ -173,7 +167,7 @@ var LocationsHub = createReactClass({
             </label>
           );
         })}
-      </ScrollArea>
+      </div>
     );
   },
 

@@ -1,12 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import createLogger from 'redux-logger';
@@ -31,34 +27,98 @@ const logger = createLogger({
   level: 'info',
   collapsed: true,
   predicate: (getState, action) => {
-    return (process.env.NODE_ENV !== 'production');
+    return process.env.NODE_ENV !== 'production';
   }
 });
-const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
+
+const composeEnhancers =
+  process.env.NODE_ENV !== 'production'
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    : compose;
+
+const middlewares = applyMiddleware(thunkMiddleware, logger);
+
+const store = createStore(reducer, {}, composeEnhancers(middlewares));
+
 const history = createBrowserHistory();
 // Base data.
 store.dispatch(fetchBaseData());
 store.dispatch(fetchBaseStats());
 
-render((
+render(
   <Provider store={store}>
     <Router history={history}>
       <App>
         <Switch>
-          <Route name='why' path='/why' component={Why} pageClass='page--why page--dark' />
-          <Route name='about' path='/about' component={About} pageClass='page--about page--dark' />
-          <Route name='communityHub' path='/community' component={CommunityHub} pageClass='page--community-hub page--dark' />
-          <Route name='communityProjects' path='/community/projects' component={CommunityProjects} pageClass='page--community-projects' />
-          <Route name='communityWorkshops' path='/community/workshops' component={CommunityWorkshops} pageClass='page--community-workshops' />
-          <Route name='map' path='/map' component={Map} pageClass='page--map' />
-          <Route name='locationsHub' path='/locations' component={LocationsHub} pageClass='page--locations-hub page--dark' />
-          <Route name='location' path='/location/:name' component={LocationItem} pageClass='page--locations-single page--dark' />
-          <Route name='countriesHub' path='/countries' component={CountriesHub} pageClass='page--countries-hub page--dark' />
-          <Route name='country' path='/countries/:name' component={Country} pageClass='page--countries-single page--dark' />
-          <Route name='country' path='/compare(/:loc1)(/:loc2)(/:loc3)' component={Compare} pageClass='page--compare' />
-          <Route path="/" component={Home} pageClass='page--homepage page--dark'></Route>
+          <Route
+            name="why"
+            path="/why"
+            component={Why}
+            pageClass="page--why page--dark"
+          />
+          <Route
+            name="about"
+            path="/about"
+            component={About}
+            pageClass="page--about page--dark"
+          />
+          <Route
+            name="communityHub"
+            path="/community"
+            component={CommunityHub}
+            pageClass="page--community-hub page--dark"
+          />
+          <Route
+            name="communityProjects"
+            path="/community/projects"
+            component={CommunityProjects}
+            pageClass="page--community-projects"
+          />
+          <Route
+            name="communityWorkshops"
+            path="/community/workshops"
+            component={CommunityWorkshops}
+            pageClass="page--community-workshops"
+          />
+          <Route name="map" path="/map" component={Map} pageClass="page--map" />
+          <Route
+            name="locationsHub"
+            path="/locations"
+            component={LocationsHub}
+            pageClass="page--locations-hub page--dark"
+          />
+          <Route
+            name="location"
+            path="/location/:name"
+            component={LocationItem}
+            pageClass="page--locations-single page--dark"
+          />
+          <Route
+            name="countriesHub"
+            path="/countries"
+            component={CountriesHub}
+            pageClass="page--countries-hub page--dark"
+          />
+          <Route
+            name="country"
+            path="/countries/:name"
+            component={Country}
+            pageClass="page--countries-single page--dark"
+          />
+          <Route
+            name="country"
+            path="/compare(/:loc1)(/:loc2)(/:loc3)"
+            component={Compare}
+            pageClass="page--compare"
+          />
+          <Route
+            path="/"
+            component={Home}
+            pageClass="page--homepage page--dark"
+          ></Route>
         </Switch>
       </App>
     </Router>
-  </Provider>
-), document.querySelector('#app-container'));
+  </Provider>,
+  document.querySelector('#app-container')
+);
