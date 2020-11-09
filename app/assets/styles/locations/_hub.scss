@@ -77,6 +77,17 @@
   }
 }
 
+.filter-pill {
+  @extend .button, .button--small;
+  background-color: rbga($base-color, 0);
+  color: $secondary-color;
+  border: 0.5px solid $secondary-color;
+  width: min-content;
+
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .content {
   &__header,
   &__meta {
@@ -108,9 +119,22 @@
 }
 
 .inpage__results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2rem;
+
   .card {
     margin-bottom: 2rem;
   }
+
+  .card__header {
+    display: grid;
+    grid-gap: 0.5rem;
+    .card__tags {
+      display: grid;
+    }
+  }
+
 }
 
 .disclaimers {
@@ -125,4 +149,43 @@
   @include media(large-up) {
     @include col(8/12);
   }
+}
+
+
+
+.pagination .pages__wrapper .pages__page,
+.pagination .previous a,
+.pagination .next a,  
+.pagination .break .pages__page {
+  width: 3rem;
+  height: 3rem;
+  border-radius: unset;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pagination .previous a::before,
+.pagination .next a::before {
+  margin-right: 0;
+}
+
+
+.pagination .pages__wrapper .pages__page,
+.pagination .break .pages__page {
+  box-shadow: none;
+  border: 0.5px solid rgba($base-color, 0.2); 
+}
+
+.pagination .break .pages__page {
+  background: none;
+  border: none;
+}
+
+
+.pagination {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(3.5rem, 1fr));
+  grid-template-rows: 1fr;
 }
