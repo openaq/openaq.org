@@ -274,6 +274,7 @@ var LocationsHub = React.createClass({
               key={o.location}
               name={o.location}
               city={o.city}
+              sourceType={o.sourceType}
               countryData={countryData}
               sourcesData={sourcesData}
               totalMeasurements={o.count}
