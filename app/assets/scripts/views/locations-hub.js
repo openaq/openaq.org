@@ -459,6 +459,7 @@ var LocationsHub = React.createClass({
               key={o.location}
               name={o.location}
               city={o.city}
+              sourceType={o.sourceType}
               countryData={countryData}
               sourcesData={sourcesData}
               totalMeasurements={o.count}
@@ -522,20 +523,6 @@ var LocationsHub = React.createClass({
 
         <div className='inpage__body'>
           <div className='inner'>
-            {/* <aside className='inpage__aside'>
-              <h2 className='content-prime-title'>Filter Locations</h2>
-
-              <div className='filters filters--country'>
-                <h3 className='filters__title'>Countries</h3>
-                {this.renderCountries()}
-              </div>
-
-              <div className='filters filters--values'>
-                <h3 className='filters__title'>Values</h3>
-                {this.renderParameters()}
-              </div>
-            </aside> */}
-
             <div className='inpage__content'>
               <div className='inpage__content__header'>
                 {this.renderFilters()}

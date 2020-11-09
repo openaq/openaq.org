@@ -187,11 +187,12 @@ $page-header-y: $global-spacing * 5;
   grid-column: 1 / -1;
 
   @include media(medium-up) {
+    grid-row: 1;
+    padding-left: 2rem;
   }
+
   @include media(large-up) {
   }
-
-
 
   > *:last-child {
     margin-bottom: 0;

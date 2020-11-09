@@ -18,7 +18,7 @@
   }
 }
 
-/*.filters__title,
+.filters__title,
 .filters-summary-title {
   @include heading(1rem);
 }
@@ -31,7 +31,7 @@
   margin-bottom: 1rem;
 }
 
-*//*.filters {
+.filters {
   margin-bottom: 2rem;
 
   &__group {
@@ -63,7 +63,7 @@
       @include col(6/12, $cycle: 2);
     }
   }
-}*/
+}
 
 .filters {
   display: grid;
@@ -133,6 +133,17 @@
 
 }
 
+.filter-pill {
+  @extend .button, .button--small;
+  background-color: rbga($base-color, 0);
+  color: $secondary-color;
+  border: 0.5px solid $secondary-color;
+  width: min-content;
+
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .content {
   &__header,
   &__meta {
@@ -179,6 +190,15 @@
   .card {
     margin-bottom: 2rem;
   }
+
+  .card__header {
+    display: grid;
+    grid-gap: 0.5rem;
+    .card__tags {
+      display: grid;
+    }
+  }
+
 }
 
 .disclaimers {
