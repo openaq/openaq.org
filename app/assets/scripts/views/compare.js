@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';
@@ -94,7 +94,7 @@ var Compare = createReactClass({
       .map(encodeURIComponent)
       .join('/');
 
-    hashHistory.push(`/compare/${locsUrl}?parameter=${parameter}`);
+    this.props.history.push(`/compare/${locsUrl}?parameter=${parameter}`);
   },
 
   removeLocClick: function (index, e) {
@@ -104,7 +104,7 @@ var Compare = createReactClass({
       .map(encodeURIComponent)
       .join('/');
 
-    hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
+    this.props.history.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
   },
 
   onCompareOptSelect: function (key, e) {
@@ -133,7 +133,7 @@ var Compare = createReactClass({
       .map(encodeURIComponent)
       .join('/');
 
-    hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
+    this.props.history.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
   },
 
   //

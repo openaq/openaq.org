@@ -6,7 +6,6 @@ import mapboxgl from 'mapbox-gl';
 import c from 'classnames';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
-import { hashHistory } from 'react-router-dom';
 import createReactClass from 'create-react-class';
 
 import MapComponent from '../components/map';
@@ -41,7 +40,7 @@ var Map = createReactClass({
 
   onFilterSelect: function (parameter, e) {
     e.preventDefault();
-    hashHistory.push(`map?parameter=${parameter}`);
+    this.props.history.push(`map?parameter=${parameter}`);
   },
 
   getActiveParameterData: function () {

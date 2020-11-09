@@ -2,7 +2,6 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
 import moment from 'moment';
@@ -101,8 +100,7 @@ var LocationsHub = createReactClass({
         delete query.parameters;
         break;
     }
-
-    hashHistory.push(`/locations?${buildQS(query)}`);
+    this.props.history.push(`/locations?${buildQS(query)}`);
   },
 
   clearFilters: function (e) {
@@ -113,7 +111,7 @@ var LocationsHub = createReactClass({
   handlePageClick: function (d) {
     let query = _.clone(this.props.location.query);
     query.page = d.selected + 1;
-    hashHistory.push(`/locations?${buildQS(query)}`);
+    this.props.history.push(`/locations?${buildQS(query)}`);
   },
 
   //

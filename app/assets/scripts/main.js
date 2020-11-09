@@ -1,10 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { createBrowserHistory } from 'history';
 import createLogger from 'redux-logger';
 import reducer from './reducers/index';
 import { fetchBaseData, fetchBaseStats } from './actions/action-creators';
@@ -40,14 +39,13 @@ const middlewares = applyMiddleware(thunkMiddleware, logger);
 
 const store = createStore(reducer, {}, composeEnhancers(middlewares));
 
-const history = createBrowserHistory();
 // Base data.
 store.dispatch(fetchBaseData());
 store.dispatch(fetchBaseStats());
 
 render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router>
       <App>
         <Switch>
           <Route
