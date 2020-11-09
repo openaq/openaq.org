@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';
+import qs from 'qs';
 import { Dropdown } from 'openaq-design-system';
 import * as d3 from 'd3';
 import createReactClass from 'create-react-class';
@@ -58,8 +59,8 @@ var Compare = createReactClass({
   },
 
   getActiveParameterData: function () {
-    let parameter = this.props.location.query.parameter;
-    let parameterData = _.find(this.props.parameters, {id: parameter});
+    const query = qs.parse(this.props.location.search);
+    let parameterData = _.find(this.props.parameters, {id: query.parameter});
     return parameterData || _.find(this.props.parameters, {id: 'pm25'});
   },
 

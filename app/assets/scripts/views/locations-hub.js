@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import _ from 'lodash';
 import moment from 'moment';
+import qs from 'qs';
 import createReactClass from 'create-react-class';
 
 import config from '../config';
@@ -37,9 +38,12 @@ var LocationsHub = createReactClass({
   perPage: 15,
 
   getPage: function () {
-    let page = this.props.location.query.page;
-    page = isNaN(page) || page < 1 ? 1 : +page;
-    return page;
+    const query = qs.parse(this.props.location.search);
+    if (query && query.page) {
+      let page = query.page;
+      page = isNaN(page) || page < 1 ? 1 : +page;
+      return page;
+    }
   },
 
   getTotalPages: function () {
@@ -48,26 +52,32 @@ var LocationsHub = createReactClass({
   },
 
   getQueryCountries: function () {
-    if (this.props.location.query.countries) {
-      return this.props.location.query.countries.split(',');
+    const query = qs.parse(this.props.location.search);
+    if (query && query.countries) {
+      return query.countries.split(',');
     }
     return [];
   },
 
   getQueryParameters: function () {
-    if (this.props.location.query.parameters) {
-      return this.props.location.query.parameters.split(',');
+    const query = qs.parse(this.props.location.search);
+    if (query && query.parameters) {
+      return query.parameters.split(',');
     }
     return [];
   },
 
   shouldFetchData: function (prevProps) {
-    let {countries: prevC, parameters: prevP} = prevProps.location.query;
-    let {countries: currC, parameters: currP} = this.props.location.query;
-    let prevPage = prevProps.location.query.page;
-    let currPage = this.props.location.query.page;
+    const prevQuery = qs.parse(prevProps.location.search);
+    const query = qs.parse(this.props.location.search);
+    if (query && query.page) {
+      let {countries: prevC, parameters: prevP} = prevQuery;
+      let {countries: currC, parameters: currP} = query;
+      let prevPage = prevQuery.page;
+      let currPage = query.page;
 
-    return prevC !== currC || prevP !== currP || prevPage !== currPage;
+      return prevC !== currC || prevP !== currP || prevPage !== currPage;
+    }
   },
 
   fetchData: function (page) {
@@ -83,7 +93,7 @@ var LocationsHub = createReactClass({
   //
 
   onFilterSelect: function (what, value) {
-    let query = _.clone(this.props.location.query);
+    let query = qs.parse(this.props.location.search);
     switch (what) {
       case 'countries':
         let countries = this.getQueryCountries();
@@ -109,7 +119,7 @@ var LocationsHub = createReactClass({
   },
 
   handlePageClick: function (d) {
-    let query = _.clone(this.props.location.query);
+    let query = qs.parse(this.props.location.search);
     query.page = d.selected + 1;
     this.props.history.push(`/locations?${buildQS(query)}`);
   },
