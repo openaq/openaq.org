@@ -166,6 +166,7 @@ var LocationsHub = React.createClass({
     let queryCountries = this.getQueryCountries();
     let queryParameters = this.getQueryParameters();
     let querySources = this.getQuerySources();
+    let queryOrderBy = this.getQueryOrderBy();
 
     let sortOptions = [
       'location', 'country', 'city', 'count'
@@ -211,7 +212,7 @@ var LocationsHub = React.createClass({
       <Dropdown
         triggerElement='a'
         triggerTitle='type__filter'
-        triggerText='Data Type'
+        triggerText='Pollutant'
       >
         <ul role='menu' className='drop__menu drop__menu--select scrollable'>
           {
@@ -277,7 +278,7 @@ var LocationsHub = React.createClass({
               return (
                   <li key={o}>
                     <div
-                      className={'drop__menu-item'}
+                      className={c('drop__menu-item', { 'drop__menu-item--active': queryOrderBy.includes(o) })}
                       data-hook='dropdown:close'
                       onClick={(e) => {
                         this.onFilterSelect('orderBy', o);
