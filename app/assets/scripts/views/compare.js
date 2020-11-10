@@ -143,14 +143,14 @@ var Compare = createReactClass({
 
   componentDidMount: function () {
     this.props._invalidateCompare();
-    let {loc1, loc2, loc3} = this.props.params;
+    let {loc1, loc2, loc3} = this.props.match.params;
     loc1 && this.fetchLocationData(0, loc1);
     loc2 && this.fetchLocationData(1, loc2);
     loc3 && this.fetchLocationData(2, loc3);
   },
 
   componentWillReceiveProps: function (nextProps) {
-    let {loc1: prevLoc1, loc2: prevLoc2, loc3: prevLoc3} = this.props.params;
+    let {loc1: prevLoc1, loc2: prevLoc2, loc3: prevLoc3} = this.props.match.params;
     let {loc1: currLoc1, loc2: currLoc2, loc3: currLoc3} = nextProps.params;
 
     if (prevLoc1 !== currLoc1) {
@@ -204,8 +204,8 @@ var Compare = createReactClass({
             .filter(o => {
               // Has to belong to the correct area and can't have been selected before.
               return o.city === this.props.compareSelectOpts.area &&
-                o.location !== this.props.params.loc1 &&
-                o.location !== this.props.params.loc2;
+                o.location !== this.props.match.params.loc1 &&
+                o.location !== this.props.match.params.loc2;
             })
             .uniqBy('location')
             .sortBy('location')

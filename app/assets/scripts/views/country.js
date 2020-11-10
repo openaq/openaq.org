@@ -46,17 +46,17 @@ var Country = createReactClass({
   },
 
   shouldFetchData: function (prevProps) {
-    let prevCountry = prevProps.params.name;
-    let currCountry = this.props.params.name;
+    let prevCountry = prevProps.match.params.name;
+    let currCountry = this.props.match.params.name;
 
     return prevCountry !== currCountry;
   },
 
   fetchData: function () {
     this.props._fetchLocations(1, {
-      country: this.props.params.name
+      country: this.props.match.params.name
     }, 1000);
-    this.props._fetchLatestMeasurements({country: this.props.params.name, has_geo: 'true'});
+    this.props._fetchLatestMeasurements({country: this.props.match.params.name, has_geo: 'true'});
   },
 
   onDownloadClick: function (data, e) {
@@ -108,7 +108,7 @@ var Country = createReactClass({
 
     let countriesList = _.map(groupped, (locations, k) => {
       let dlClick = this.onDownloadClick.bind(null, {
-        country: this.props.params.name,
+        country: this.props.match.params.name,
         area: k
       });
       return (
@@ -180,7 +180,7 @@ var Country = createReactClass({
 
     const scaleStops = generateLegendStops('pm25');
     const colorWidth = 100 / scaleStops.length;
-    const bbox = getCountryBbox(this.props.params.name);
+    const bbox = getCountryBbox(this.props.match.params.name);
 
     return (
       <section className='fold' id='country-fold-map'>
@@ -207,8 +207,8 @@ var Country = createReactClass({
   },
 
   render: function () {
-    let countryData = _.find(this.props.countries, {code: this.props.params.name});
-    let sourcesData = _.filter(this.props.sources, {country: this.props.params.name});
+    let countryData = _.find(this.props.countries, {code: this.props.match.params.name});
+    let sourcesData = _.filter(this.props.sources, {country: this.props.match.params.name});
 
     return (
       <section className='inpage'>
@@ -227,7 +227,7 @@ var Country = createReactClass({
 
               <ul className='ipha'>
                 <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
-                <li><a href='#' className='ipha-download ipha-main' title={`Download ${countryData.name} data`} onClick={this.onDownloadClick.bind(null, {country: this.props.params.name})}>Download</a></li>
+                <li><a href='#' className='ipha-download ipha-main' title={`Download ${countryData.name} data`} onClick={this.onDownloadClick.bind(null, {country: this.props.match.params.name})}>Download</a></li>
               </ul>
             </div>
           </div>

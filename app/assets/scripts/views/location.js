@@ -78,8 +78,8 @@ var Location = createReactClass({
   },
 
   shouldFetchData: function (prevProps) {
-    let prevLoc = prevProps.params.name;
-    let currLoc = this.props.params.name;
+    let prevLoc = prevProps.match.params.name;
+    let currLoc = this.props.match.params.name;
 
     return prevLoc !== currLoc;
   },
@@ -97,7 +97,7 @@ var Location = createReactClass({
   onFilterSelect: function (parameter, e) {
     e.preventDefault();
 
-    this.props.history.push(`/location/${encodeURIComponent(this.props.params.name)}?parameter=${parameter}`);
+    this.props.history.push(`/location/${encodeURIComponent(this.props.match.params.name)}?parameter=${parameter}`);
   },
 
   onDownloadClick: function () {
@@ -118,7 +118,7 @@ var Location = createReactClass({
     // This is needed otherwise the system thinks there's data and
     // throws errors.
     this.props._invalidateAllLocationData();
-    this.props._fetchLocationIfNeeded(this.props.params.name);
+    this.props._fetchLocationIfNeeded(this.props.match.params.name);
   },
 
   componentDidUpdate: function (prevProps) {
@@ -127,7 +127,7 @@ var Location = createReactClass({
       // This is needed otherwise the system thinks there's data and
       // throws errors.
       this.props._invalidateAllLocationData();
-      this.props._fetchLocationIfNeeded(this.props.params.name);
+      this.props._fetchLocationIfNeeded(this.props.match.params.name);
       return;
     }
 
