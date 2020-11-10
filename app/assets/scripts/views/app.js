@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, matchPath } from 'react-router-dom';
 import c from 'classnames';
 import createReactClass from 'create-react-class';
 
@@ -31,7 +31,10 @@ var App = createReactClass({
 
   render: function () {
     let pageClass = this.props.children.props.children.find(
-      (child) => child.props.path === this.props.location.pathname
+      (child) => {
+        const match = matchPath(this.props.location.pathname, { path: child.props.path });
+        return match && match.isExact;
+      }
     ).props.pageClass;
 
     let content = (

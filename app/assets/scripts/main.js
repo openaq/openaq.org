@@ -61,12 +61,6 @@ render(
             pageClass="page--about page--dark"
           />
           <Route
-            name="communityHub"
-            path="/community"
-            component={CommunityHub}
-            pageClass="page--community-hub page--dark"
-          />
-          <Route
             name="communityProjects"
             path="/community/projects"
             component={CommunityProjects}
@@ -78,13 +72,13 @@ render(
             component={CommunityWorkshops}
             pageClass="page--community-workshops"
           />
-          <Route name="map" path="/map" component={Map} pageClass="page--map" />
           <Route
-            name="locationsHub"
-            path="/locations"
-            component={LocationsHub}
-            pageClass="page--locations-hub page--dark"
+            name="communityHub"
+            path="/community"
+            component={CommunityHub}
+            pageClass="page--community-hub page--dark"
           />
+          <Route name="map" path="/map" component={Map} pageClass="page--map" />
           <Route
             name="location"
             path="/location/:name"
@@ -92,16 +86,22 @@ render(
             pageClass="page--locations-single page--dark"
           />
           <Route
-            name="countriesHub"
-            path="/countries"
-            component={CountriesHub}
-            pageClass="page--countries-hub page--dark"
+            name="locationsHub"
+            path="/locations"
+            component={LocationsHub}
+            pageClass="page--locations-hub page--dark"
           />
           <Route
             name="country"
             path="/countries/:name"
             component={Country}
             pageClass="page--countries-single page--dark"
+          />
+          <Route
+            name="countriesHub"
+            path="/countries"
+            component={CountriesHub}
+            pageClass="page--countries-hub page--dark"
           />
           <Route
             name="country"
