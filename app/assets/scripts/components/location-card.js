@@ -17,6 +17,7 @@ var LocationCard = createReactClass({
     city: T.string,
     countryData: T.object,
     sourcesData: T.array,
+    sourceType: T.string,
     totalMeasurements: T.number,
     parametersList: T.array,
     lastUpdate: T.string,
@@ -58,6 +59,10 @@ var LocationCard = createReactClass({
               <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
               <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
             </div>
+            <div className='card__tags'>
+              <div className='filter-pill'>{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(1)}`}</div>
+            </div>
+
           </header>
           <div className='card__body'>
             <dl className='card__meta-details'>
