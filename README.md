@@ -35,3 +35,25 @@ Compile the sass files, javascript... Use this instead of ```npm run serve``` if
 ```
 $ npm run build
 ```
+
+## Developing and building with Docker
+
+Build the image first:
+```
+$ docker build -t openaq-website .
+```
+
+To serve the app, while tracking local `app` directory changes:
+```
+$ docker run -v $(pwd)/app:/src/app -p 3000:3000 openaq-website
+```
+
+To build static output for hosting:
+```
+$ docker run -v $(pwd)/dist:/src/dist -p 3000:3000 openaq-website build
+```
+
+### Todo
+
+- Cut down on image size
+- Push the image to a registry
