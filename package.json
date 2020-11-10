@@ -88,7 +88,7 @@
     "gulp-uglify-es": "^1.0.4",
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.20",
     "mapbox-gl": "^0.50.0",
     "moment": "^2.14.1",
     "openaq-data-format": "github:openaq/openaq-data-format#master",
