@@ -9,7 +9,6 @@
   }
 }
 
-
 .card__meta-details {
   display: grid;
   grid-template-columns: repeat(2, fit-content(50%));
@@ -31,6 +30,7 @@
     text-transform: uppercase;
   }
 }
+
 
 .card__go-link {
   @extend .button, .button--primary, .button--large, .button--capsule;
