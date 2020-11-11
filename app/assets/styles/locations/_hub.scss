@@ -65,6 +65,57 @@
   }
 }
 
+.filters {
+  display: grid;
+  grid-gap: $global-spacing;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  padding: $global-spacing 0;
+}
+.filters .fold__nav {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filters .fold__nav h2 {
+  width: auto;
+}
+.drop__menu.scrollable {
+   max-height: 10rem;
+   overflow-y: scroll;
+}
+
+
+.filters .drop__toggle {
+  border: 0.5px solid rgba($base-color, 0.5);
+  padding: $global-spacing * 0.5;
+  border-radius: $base-border-radius;
+  color: $base-color;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  &::after {
+    @extend %openaq-ds-icon-oaq-32-arrow-right;
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    color: $primary-color;
+
+    @include media(large-up) {
+      content: "\F106";
+      font-size: 1rem;
+      margin-left: 0.25rem;
+      transform: none;
+    }
+  }
+}
+
+.filters .drop__toggle.sort-order {
+  grid-column-end: -1;
+  border-radius: $base-border-radius * 10;
+}
+
 .button--filter-pill {
   @extend .button, .button--small;
   background-color: tint($secondary-color, 64%);
@@ -75,6 +126,11 @@
   &::after {
     @extend %openaq-ds-icon-xmark--small;
   }
+}
+.button--filter-pill.orderBy {
+  background-color: tint($primary-color, 64%);
+  color: $primary-color;
+
 }
 
 .filter-pill {
@@ -117,7 +173,15 @@
     }
   }
 }
-
+.page {
+  overflow-x: unset;
+}
+.inpage__content__header {
+  top: 0rem;
+  position: sticky;
+  z-index: 2;
+  background: tint($base-color, 100%);
+}
 .inpage__results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
