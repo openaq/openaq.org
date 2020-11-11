@@ -60,7 +60,7 @@ var LocationCard = createReactClass({
               <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
             </div>
             <div className='card__tags'>
-              <div className='filter-pill'>{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(1)}`}</div>
+              {this.props.sourceType && <div className='filter-pill'>{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(1)}`}</div>}
             </div>
 
           </header>

@@ -2,7 +2,9 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
+import { Dropdown } from 'openaq-design-system';
 import ReactPaginate from 'react-paginate';
+import c from 'classnames';
 import _ from 'lodash';
 import moment from 'moment';
 import qs from 'qs';
@@ -15,6 +17,8 @@ import { fetchLocations, openDownloadModal } from '../actions/action-creators';
 import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
+
+const qsParse = search => qs.parse(search.split('?')[1]);
 
 var LocationsHub = createReactClass({
   displayName: 'LocationsHub',
@@ -38,7 +42,7 @@ var LocationsHub = createReactClass({
   perPage: 15,
 
   getPage: function () {
-    const query = qs.parse(this.props.location.search);
+    const query = qsParse(this.props.location.search);
     if (query && query.page) {
       let page = query.page;
       page = isNaN(page) || page < 1 ? 1 : +page;
@@ -52,7 +56,7 @@ var LocationsHub = createReactClass({
   },
 
   getQueryCountries: function () {
-    const query = qs.parse(this.props.location.search);
+    const query = qsParse(this.props.location.search);
     if (query && query.countries) {
       return query.countries.split(',');
     }
@@ -60,31 +64,49 @@ var LocationsHub = createReactClass({
   },
 
   getQueryParameters: function () {
-    const query = qs.parse(this.props.location.search);
+    const query = qsParse(this.props.location.search);
     if (query && query.parameters) {
       return query.parameters.split(',');
     }
     return [];
   },
 
+  getQuerySources: function () {
+    const query = qsParse(this.props.location.search);
+    if (query && query.sources) {
+      return query.sources.split(',');
+    }
+    return [];
+  },
+
+  getQueryOrderBy: function () {
+    const query = qsParse(this.props.location.search);
+    if (query && query.orderBy) {
+      return query.orderBy.split(',');
+    }
+    return [];
+  },
+
   shouldFetchData: function (prevProps) {
-    const prevQuery = qs.parse(prevProps.location.search);
-    const query = qs.parse(this.props.location.search);
-    if (query && query.page) {
-      let {countries: prevC, parameters: prevP} = prevQuery;
-      let {countries: currC, parameters: currP} = query;
+    const prevQuery = qsParse(prevProps.location.search);
+    const query = qsParse(this.props.location.search);
+    if (query) {
+      let { countries: prevC, parameters: prevP, sources: prevS, orderBy: prevO } = prevQuery;
+      let { countries: currC, parameters: currP, sources: currS, orderBy: currO } = query;
       let prevPage = prevQuery.page;
       let currPage = query.page;
 
-      return prevC !== currC || prevP !== currP || prevPage !== currPage;
+      return prevC !== currC || prevP !== currP || prevS !== currS || prevO !== currO || prevPage !== currPage;
     }
   },
 
   fetchData: function (page) {
     let filters = {
       country: this.getQueryCountries(),
-      parameter: this.getQueryParameters()
+      parameter: this.getQueryParameters(),
+      order_by: this.getQueryOrderBy()
     };
+
     this.props._fetchLocations(page, filters, this.perPage);
   },
 
@@ -93,7 +115,7 @@ var LocationsHub = createReactClass({
   //
 
   onFilterSelect: function (what, value) {
-    let query = qs.parse(this.props.location.search);
+    let query = qsParse(this.props.location.search);
     switch (what) {
       case 'countries':
         let countries = this.getQueryCountries();
@@ -105,11 +127,25 @@ var LocationsHub = createReactClass({
         query.parameters = toggleValue(parameters, value);
         !query.parameters.length && delete query.parameters;
         break;
+      case 'sources':
+        let sources = this.getQuerySources();
+        query.sources = toggleValue(sources, value);
+        !query.sources.length && delete query.sources;
+        break;
+      case 'orderBy':
+        let orderBy = this.getQueryOrderBy();
+        query.orderBy = toggleValue(orderBy, value);
+        !query.orderBy.length && delete query.orderBy;
+        break;
+
       case 'clear':
         delete query.countries;
         delete query.parameters;
+        delete query.sources;
+        delete query.orderBy;
         break;
     }
+
     this.props.history.push(`/locations?${buildQS(query)}`);
   },
 
@@ -119,8 +155,9 @@ var LocationsHub = createReactClass({
   },
 
   handlePageClick: function (d) {
-    let query = qs.parse(this.props.location.search);
+    let query = qsParse(this.props.location.search);
     query.page = d.selected + 1;
+    console.log(query);
     this.props.history.push(`/locations?${buildQS(query)}`);
   },
 
@@ -139,6 +176,145 @@ var LocationsHub = createReactClass({
   //
   // Start render methods
   //
+
+  renderFilters: function () {
+    const { countries, parameters, sources } = this.props;
+    let queryCountries = this.getQueryCountries();
+    let queryParameters = this.getQueryParameters();
+    let querySources = this.getQuerySources();
+    let queryOrderBy = this.getQueryOrderBy();
+
+    let sortOptions = [
+      'location', 'country', 'city', 'count'
+    ];
+
+    return (
+    <div className='filters'>
+      <nav className='fold__nav'>
+        <h2>Filter by</h2>
+        <h2>Order by</h2>
+      </nav>
+
+      <Dropdown
+        triggerElement='a'
+        triggerTitle='country__filter'
+        triggerText='Country'
+        triggerClassName='drop-trigger'
+      >
+        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
+          {
+            _.sortBy(countries).map(o => {
+              return (
+                  <li key={o.code}>
+                    <div
+                      className={c('drop__menu-item', {'drop__menu-item--active': queryCountries.includes(o.code)})}
+                      data-hook='dropdown:close'
+                      onClick={(e) => {
+                        this.onFilterSelect('countries', o.code);
+                      }}
+                    >
+                      <span>{o.name}</span>
+                    </div>
+
+                  </li>
+              );
+            }
+            )
+          }
+        </ul>
+
+      </Dropdown>
+
+      <Dropdown
+        triggerElement='a'
+        triggerTitle='type__filter'
+        triggerText='Pollutant'
+      >
+        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
+          {
+            _.sortBy(parameters).map(o => {
+              return (
+                  <li key={o.id}>
+                    <div
+                      className={c('drop__menu-item', {'drop__menu-item--active': queryParameters.includes(o.code)})}
+                      data-hook='dropdown:close'
+                      onClick={(e) => {
+                        this.onFilterSelect('parameters', o.id);
+                      }}
+                    >
+                      <span>{o.name}</span>
+                    </div>
+
+                  </li>
+              );
+            }
+            )
+          }
+        </ul>
+      </Dropdown>
+
+      <Dropdown
+        triggerElement='a'
+        triggerTitle='source__filter'
+        triggerText='Data Source'
+      >
+        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
+          {
+            _.sortBy(sources).map(o => {
+              return (
+                  <li key={o.name}>
+                    <div
+                      className={c('drop__menu-item', {'drop__menu-item--active': querySources.includes(o.code)})}
+
+                      data-hook='dropdown:close'
+                      onClick={(e) => {
+                        this.onFilterSelect('sources', o.name);
+                      }}
+                    >
+                      <span>{o.name}</span>
+                    </div>
+
+                  </li>
+              );
+            }
+            )
+          }
+        </ul>
+      </Dropdown>
+
+      <Dropdown
+        triggerElement='a'
+        triggerTitle='sort__filter'
+        triggerText='Order By'
+        triggerClassName='sort-order'
+      >
+        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
+          {
+            _.sortBy(sortOptions).map(o => {
+              return (
+                  <li key={o}>
+                    <div
+                      className={c('drop__menu-item', { 'drop__menu-item--active': queryOrderBy.includes(o) })}
+                      data-hook='dropdown:close'
+                      onClick={(e) => {
+                        this.onFilterSelect('orderBy', o);
+                      }}
+                    >
+                      <span>{`${o[0].toUpperCase()}${o.slice(1)}`}</span>
+                    </div>
+                  </li>
+              );
+            }
+            )
+          }
+        </ul>
+
+      </Dropdown>
+
+    </div>
+
+    );
+  },
 
   renderCountries: function () {
     let queryCountries = this.getQueryCountries();
@@ -182,9 +358,11 @@ var LocationsHub = createReactClass({
   renderFilterSummary: function () {
     let countries = this.getQueryCountries();
     let parameters = this.getQueryParameters();
+    let sources = this.getQuerySources();
+    let orderBy = this.getQueryOrderBy();
 
     // If there are no filters selected remove the whole block.
-    if (countries.length + parameters.length === 0) {
+    if (countries.length + parameters.length + sources.length + orderBy.length === 0) {
       return null;
     }
 
@@ -202,6 +380,21 @@ var LocationsHub = createReactClass({
             ? <button type='button' className='button--filter-pill' key={o.id} onClick={onClick}><span>{o.name}</span></button>
             : null;
         })}
+        {this.props.sources.map(o => {
+          let onClick = this.onFilterSelect.bind(null, 'sources', o.name);
+          return sources.indexOf(o.name) !== -1
+            ? <button type='button' className='button--filter-pill' key={o.name} onClick={onClick}><span>{o.name}</span></button>
+            : null;
+        })}
+        {orderBy.map(o => {
+          let onClick = this.onFilterSelect.bind(null, 'orderBy', o);
+          return <button type='button' className='button--filter-pill orderBy' key={o} onClick={onClick}><span>{o}</span></button>;
+        })}
+
+        <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}>
+          <small> (Clear Filters)</small>
+        </button>
+
       </div>
     );
   },
@@ -296,7 +489,7 @@ var LocationsHub = createReactClass({
         forceSelected={this.getPage() - 1}
         marginPagesDisplayed={2}
         pageRangeDisplayed={4}
-        clickCallback={this.handlePageClick}
+        onPageChange={this.handlePageClick}
         containerClassName={'pagination'}
         subContainerClassName={'pages'}
         pageClassName={'pages__wrapper'}
@@ -334,35 +527,23 @@ var LocationsHub = createReactClass({
         </header>
 
         <div className='inpage__body'>
-          <div className='inpage__diptych inner'>
-            <aside className='inpage__aside'>
-              <h2 className='content-prime-title'>Filter Locations</h2>
-
-              <div className='filters filters--country'>
-                <h3 className='filters__title'>Countries</h3>
-                {this.renderCountries()}
-              </div>
-
-              <div className='filters filters--values'>
-                <h3 className='filters__title'>Values</h3>
-                {this.renderParameters()}
-              </div>
-            </aside>
-
+          <div className='inner'>
             <div className='inpage__content'>
-              <div className='content__meta'>
-
-                <div className="content__header">
-                  {this.renderSort()}
-
-                  <div className='content__heading'>
-                    <h2 className='content-prime-title'>Results <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}><small>(Clear Filters)</small></button></h2>
-                    {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
-                  </div>
-                </div>
-
+              <div className='inpage__content__header'>
+                {this.renderFilters()}
                 {this.renderFilterSummary()}
               </div>
+                <div className='content__meta'>
+                  <div className="content__header">
+                    {this.renderSort()}
+                    <div className='content__heading'>
+                      <h2 className='content-prime-title'>Results
+                      </h2>
+                      {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
+                    </div>
+                  </div>
+
+                </div>
 
               <div className='inpage__results'>
                 {this.renderContent()}
