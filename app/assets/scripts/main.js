@@ -8,6 +8,7 @@ import createLogger from 'redux-logger';
 import reducer from './reducers/index';
 import { fetchBaseData, fetchBaseStats } from './actions/action-creators';
 
+import ScrollToTop from './components/scroll-to-top';
 import App from './views/app';
 import Home from './views/home';
 import Why from './views/why';
@@ -46,6 +47,7 @@ store.dispatch(fetchBaseStats());
 render(
   <Provider store={store}>
     <Router>
+      <ScrollToTop />
       <App>
         <Switch>
           <Route
