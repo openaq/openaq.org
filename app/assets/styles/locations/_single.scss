@@ -2,6 +2,18 @@
    Locations: Single
    ========================================================================== */
 
+.card__highlight-text {
+  color: $primary-color;
+}
+.card__title {
+  font-weight: $base-font-bold;
+  font-size: 1.25rem;
+}
+.card__meta-details {
+  color: $base-color;
+  display: flex;
+}
+
 .page--locations-single {
   .inpage__headline {
     @include media(large-up) {

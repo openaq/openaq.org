@@ -27,6 +27,8 @@ import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 import MapComponent from '../components/map';
 import ChartMeasurement from '../components/chart-measurement';
+import CardList from '../components/card-list';
+import Card, { HighlightText, CardSubtitle } from '../components/card';
 
 const locationSchema = schemas.location;
 
@@ -158,6 +160,52 @@ var Location = createReactClass({
   //
   // Start render methods.
   //
+
+  // TODO this temp function to test generic card
+  renderDashboard: function () {
+    return (
+      <CardList>
+        <Card
+          title='Details'
+          gridColumn='1 / 2'
+          renderBody={() => {
+            return (
+              <div className='card__body'>
+                <HighlightText
+                  className='card__highlight-text'
+                  size={'large'}
+                >
+                  77
+                  :xa
+                </HighlightText>
+                <CardSubtitle className='card__subtitle'>
+                  Measurements
+                </CardSubtitle>
+              </div>
+            );
+          }}
+          renderFooter={() => {
+            return (
+              <div className='card__footer'>
+            <dl className='card__meta-details'>
+              <dt>Collection start</dt>
+            </dl>
+
+              </div>
+            );
+          }}
+        />
+        <Card
+          subtitle='Latest Measurements'
+          gridColumn='2 / 4'
+        />
+        <Card
+          subtitle='Sources'
+          gridColumn='4 / -1'
+        />
+      </CardList>
+    );
+  },
 
   renderStatsInfo: function () {
     const {fetched: lastMFetched, fetching: lastMFetching, error: lastMError, data: {results: lastMeasurements}} = this.props.latestMeasurements;
@@ -631,6 +679,7 @@ var Location = createReactClass({
           </figure>
         </header>
         <div className='inpage__body'>
+          {this.renderDashboard()}
           {this.renderStatsInfo()}
           {this.renderMetadata()}
           {this.renderSourceInfo()}
