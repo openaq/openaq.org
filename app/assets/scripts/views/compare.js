@@ -1,12 +1,15 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import c from 'classnames';
 import moment from 'moment';
 import _ from 'lodash';
+import qs from 'qs';
 import { Dropdown } from 'openaq-design-system';
 import * as d3 from 'd3';
+import createReactClass from 'create-react-class';
 
 import {
   fetchCompareLocationIfNeeded,
@@ -26,38 +29,38 @@ import InfoMessage from '../components/info-message';
 import ChartBrush from '../components/chart-brush';
 import { convertParamIfNeeded } from '../utils/map-settings';
 
-var Compare = React.createClass({
+var Compare = createReactClass({
   displayName: 'Compare',
 
   propTypes: {
-    _fetchCompareLocationIfNeeded: React.PropTypes.func,
-    _removeCompareLocation: React.PropTypes.func,
-    _selectCompareOptions: React.PropTypes.func,
-    _cancelCompareOptions: React.PropTypes.func,
-    _selectCompareCountry: React.PropTypes.func,
-    _selectCompareArea: React.PropTypes.func,
-    _selectCompareLocation: React.PropTypes.func,
-    _fetchLocationsByCountry: React.PropTypes.func,
-    _invalidateLocationsByCountry: React.PropTypes.func,
-    _invalidateCompare: React.PropTypes.func,
-    _fetchCompareLocationMeasurements: React.PropTypes.func,
+    _fetchCompareLocationIfNeeded: T.func,
+    _removeCompareLocation: T.func,
+    _selectCompareOptions: T.func,
+    _cancelCompareOptions: T.func,
+    _selectCompareCountry: T.func,
+    _selectCompareArea: T.func,
+    _selectCompareLocation: T.func,
+    _fetchLocationsByCountry: T.func,
+    _invalidateLocationsByCountry: T.func,
+    _invalidateCompare: T.func,
+    _fetchCompareLocationMeasurements: T.func,
 
-    params: React.PropTypes.object,
-    location: React.PropTypes.object,
+    params: T.object,
+    location: T.object,
 
-    countries: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    parameters: T.array,
 
-    compareLoc: React.PropTypes.array,
-    compareMeasurements: React.PropTypes.array,
-    compareSelectOpts: React.PropTypes.object,
+    compareLoc: T.array,
+    compareMeasurements: T.array,
+    compareSelectOpts: T.object,
 
-    locationsByCountry: React.PropTypes.object
+    locationsByCountry: T.object
   },
 
   getActiveParameterData: function () {
-    let parameter = this.props.location.query.parameter;
-    let parameterData = _.find(this.props.parameters, {id: parameter});
+    const query = qs.parse(this.props.location.search);
+    let parameterData = _.find(this.props.parameters, {id: query.parameter});
     return parameterData || _.find(this.props.parameters, {id: 'pm25'});
   },
 
@@ -92,7 +95,7 @@ var Compare = React.createClass({
       .map(encodeURIComponent)
       .join('/');
 
-    hashHistory.push(`/compare/${locsUrl}?parameter=${parameter}`);
+    this.props.history.push(`/compare/${locsUrl}?parameter=${parameter}`);
   },
 
   removeLocClick: function (index, e) {
@@ -102,7 +105,7 @@ var Compare = React.createClass({
       .map(encodeURIComponent)
       .join('/');
 
-    hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
+    this.props.history.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
   },
 
   onCompareOptSelect: function (key, e) {
@@ -131,7 +134,7 @@ var Compare = React.createClass({
       .map(encodeURIComponent)
       .join('/');
 
-    hashHistory.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
+    this.props.history.push(`/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`);
   },
 
   //
@@ -140,14 +143,14 @@ var Compare = React.createClass({
 
   componentDidMount: function () {
     this.props._invalidateCompare();
-    let {loc1, loc2, loc3} = this.props.params;
+    let {loc1, loc2, loc3} = this.props.match.params;
     loc1 && this.fetchLocationData(0, loc1);
     loc2 && this.fetchLocationData(1, loc2);
     loc3 && this.fetchLocationData(2, loc3);
   },
 
   componentWillReceiveProps: function (nextProps) {
-    let {loc1: prevLoc1, loc2: prevLoc2, loc3: prevLoc3} = this.props.params;
+    let {loc1: prevLoc1, loc2: prevLoc2, loc3: prevLoc3} = this.props.match.params;
     let {loc1: currLoc1, loc2: currLoc2, loc3: currLoc3} = nextProps.params;
 
     if (prevLoc1 !== currLoc1) {
@@ -201,8 +204,8 @@ var Compare = React.createClass({
             .filter(o => {
               // Has to belong to the correct area and can't have been selected before.
               return o.city === this.props.compareSelectOpts.area &&
-                o.location !== this.props.params.loc1 &&
-                o.location !== this.props.params.loc2;
+                o.location !== this.props.match.params.loc1 &&
+                o.location !== this.props.match.params.loc2;
             })
             .uniqBy('location')
             .sortBy('location')

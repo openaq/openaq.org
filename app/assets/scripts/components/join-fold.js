@@ -1,8 +1,9 @@
 'use strict';
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+import createReactClass from 'create-react-class';
 
-var JoinFold = React.createClass({
+var JoinFold = createReactClass({
   displayName: 'JoinFold',
 
   render: function () {

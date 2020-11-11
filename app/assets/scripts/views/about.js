@@ -2,6 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import createReactClass from 'create-react-class';
+
 import JoinFold from '../components/join-fold';
 import SponsorList from '../components/sponsor-list';
 import TeamList from '../components/team-list';
@@ -24,7 +26,7 @@ const teamData = {
     .value()
 };
 
-var About = React.createClass({
+var About = createReactClass({
   displayName: 'About',
 
   propTypes: {

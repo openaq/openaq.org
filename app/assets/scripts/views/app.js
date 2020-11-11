@@ -1,8 +1,10 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import { withRouter, matchPath } from 'react-router-dom';
 import c from 'classnames';
+import createReactClass from 'create-react-class';
 
 import { closeDownloadModal } from '../actions/action-creators';
 import PageHeader from '../components/page-header';
@@ -10,17 +12,17 @@ import PageFooter from '../components/page-footer';
 import HeaderMessage from '../components/header-message';
 import ModalDownload from '../components/modal-download';
 
-var App = React.createClass({
+var App = createReactClass({
   displayName: 'App',
 
   propTypes: {
-    routes: React.PropTypes.array,
-    baseDataReady: React.PropTypes.bool,
-    baseDataError: React.PropTypes.string,
-    measurements: React.PropTypes.number,
-    downloadModal: React.PropTypes.object,
-    _closeDownloadModal: React.PropTypes.func,
-    children: React.PropTypes.object
+    location: T.object,
+    baseDataReady: T.bool,
+    baseDataError: T.string,
+    measurements: T.number,
+    downloadModal: T.object,
+    _closeDownloadModal: T.func,
+    children: T.object
   },
 
   onModalClose: function () {
@@ -28,12 +30,17 @@ var App = React.createClass({
   },
 
   render: function () {
-    let pageClass = _.get(_.last(this.props.routes), 'pageClass', '');
+    let pageClass = this.props.children.props.children.find(
+      (child) => {
+        const match = matchPath(this.props.location.pathname, { path: child.props.path });
+        return match && match.isExact;
+      }
+    ).props.pageClass;
 
     let content = (
       <HeaderMessage>
         <h1>Take a deep breath.</h1>
-        <div className='prose prose--responsive'>
+        <div className="prose prose--responsive">
           <p>Air quality awesomeness is loading...</p>
         </div>
       </HeaderMessage>
@@ -47,9 +54,16 @@ var App = React.createClass({
       content = (
         <HeaderMessage>
           <h1>Uhoh, something went wrong</h1>
-          <div className='prose prose--responsive'>
-            <p>There was a problem getting the data. If the problem persists, please let us know.</p>
-            <p><a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a></p>
+          <div className="prose prose--responsive">
+            <p>
+              There was a problem getting the data. If the problem persists,
+              please let us know.
+            </p>
+            <p>
+              <a href="mailto:info@openaq.org" title="Send us an email">
+                Send us an Email
+              </a>
+            </p>
           </div>
         </HeaderMessage>
       );
@@ -57,8 +71,8 @@ var App = React.createClass({
 
     return (
       <div className={c('page', pageClass)}>
-        <PageHeader routes={this.props.routes} />
-        <main className='page__body' role='main'>
+        <PageHeader />
+        <main className="page__body" role="main">
           {content}
         </main>
         {this.props.downloadModal.open ? (
@@ -66,7 +80,8 @@ var App = React.createClass({
             country={this.props.downloadModal.country}
             area={this.props.downloadModal.area}
             location={this.props.downloadModal.location}
-            onModalClose={this.onModalClose} />
+            onModalClose={this.onModalClose}
+          />
         ) : null}
         <PageFooter measurements={this.props.measurements} />
       </div>
@@ -94,6 +109,6 @@ function dispatcher (dispatch) {
   };
 }
 
-module.exports = connect(selector, dispatcher)(App);
+module.exports = connect(selector, dispatcher)(withRouter(App));
 
 // module.exports = App;

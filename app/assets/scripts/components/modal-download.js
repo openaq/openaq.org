@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
@@ -9,6 +10,7 @@ import moment from 'moment';
 import { stringify as buildAPIQS } from 'qs';
 import OpenAQ from 'openaq-design-system';
 const { Modal, ModalHeader, ModalBody } = OpenAQ.Modal;
+import createReactClass from 'create-react-class';
 
 import { toggleValue } from '../utils/array';
 import {
@@ -18,23 +20,23 @@ import {
 import config from '../config';
 import { formatThousands } from '../utils/format';
 
-var ModalDownload = React.createClass({
+var ModalDownload = createReactClass({
   displayName: 'ModalDownload',
 
   propTypes: {
-    _fetchLocationsByCountry: React.PropTypes.func,
-    _invalidateLocationsByCountry: React.PropTypes.func,
-    onModalClose: React.PropTypes.func,
+    _fetchLocationsByCountry: T.func,
+    _invalidateLocationsByCountry: T.func,
+    onModalClose: T.func,
 
-    countries: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    parameters: T.array,
 
-    locationsByCountry: React.PropTypes.object,
+    locationsByCountry: T.object,
 
     // Preselect
-    country: React.PropTypes.string,
-    area: React.PropTypes.string,
-    location: React.PropTypes.string
+    country: T.string,
+    area: T.string,
+    location: T.string
   },
 
   apiLimit: 65536,

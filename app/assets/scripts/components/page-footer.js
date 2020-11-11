@@ -1,13 +1,15 @@
 'use strict';
 import React from 'react';
-import { IndexLink, Link } from 'react-router';
+import { PropTypes as T } from 'prop-types';
+import { Link } from 'react-router-dom';
 import { formatThousands } from '../utils/format';
+import createReactClass from 'create-react-class';
 
-var PageFooter = React.createClass({
+var PageFooter = createReactClass({
   displayName: 'PageFooter',
 
   propTypes: {
-    measurements: React.PropTypes.number
+    measurements: T.number
   },
   render: function () {
     let copyright = this.props.measurements !== null
@@ -20,10 +22,10 @@ var PageFooter = React.createClass({
           <nav className='page__foot-nav'>
             <div className='foot-nav-block'>
               <h1 className='page__foot-title'>
-                <IndexLink to='/' title='Visit homepage'>
+                <Link to='/' title='Visit homepage'>
                   <img src='/assets/graphics/layout/oaq-logo-col-pos.svg' alt='OpenAQ logotype' width='72' height='40' />
                   <span>OpenAQ</span>
-                </IndexLink>
+                </Link>
               </h1>
               <h2 className='contact__title'>Connect with us</h2>
               <ul className='connect-menu'>

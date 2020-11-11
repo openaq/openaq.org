@@ -1,13 +1,16 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
 import c from 'classnames';
-import { Link, hashHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+import qs from 'qs';
 import * as d3 from 'd3';
 import { Dropdown } from 'openaq-design-system';
 import { schemas } from 'openaq-data-format';
+import createReactClass from 'create-react-class';
 
 import config from '../config';
 import { formatThousands } from '../utils/format';
@@ -27,44 +30,44 @@ import ChartMeasurement from '../components/chart-measurement';
 
 const locationSchema = schemas.location;
 
-var Location = React.createClass({
+var Location = createReactClass({
   displayName: 'Location',
 
   propTypes: {
-    params: React.PropTypes.object,
-    location: React.PropTypes.object,
-    _fetchLocationIfNeeded: React.PropTypes.func,
-    _fetchLocations: React.PropTypes.func,
-    _fetchLatestMeasurements: React.PropTypes.func,
-    _fetchMeasurements: React.PropTypes.func,
-    _invalidateAllLocationData: React.PropTypes.func,
-    _openDownloadModal: React.PropTypes.func,
+    params: T.object,
+    location: T.object,
+    _fetchLocationIfNeeded: T.func,
+    _fetchLocations: T.func,
+    _fetchLatestMeasurements: T.func,
+    _fetchMeasurements: T.func,
+    _invalidateAllLocationData: T.func,
+    _openDownloadModal: T.func,
 
-    countries: React.PropTypes.array,
-    sources: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    sources: T.array,
+    parameters: T.array,
 
-    countryData: React.PropTypes.object,
+    countryData: T.object,
 
-    loc: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    loc: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     }),
 
-    latestMeasurements: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    latestMeasurements: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     }),
 
-    measurements: React.PropTypes.shape({
-      fetching: React.PropTypes.bool,
-      fetched: React.PropTypes.bool,
-      error: React.PropTypes.string,
-      data: React.PropTypes.object
+    measurements: T.shape({
+      fetching: T.bool,
+      fetched: T.bool,
+      error: T.string,
+      data: T.object
     })
   },
 
@@ -75,15 +78,15 @@ var Location = React.createClass({
   },
 
   shouldFetchData: function (prevProps) {
-    let prevLoc = prevProps.params.name;
-    let currLoc = this.props.params.name;
+    let prevLoc = prevProps.match.params.name;
+    let currLoc = this.props.match.params.name;
 
     return prevLoc !== currLoc;
   },
 
   getActiveParameterData: function () {
-    let parameter = this.props.location.query.parameter;
-    let parameterData = _.find(this.props.parameters, {id: parameter});
+    const query = qs.parse(this.props.location.search);
+    let parameterData = _.find(this.props.parameters, {id: query.parameter});
     return parameterData || _.find(this.props.parameters, {id: 'pm25'});
   },
 
@@ -94,7 +97,7 @@ var Location = React.createClass({
   onFilterSelect: function (parameter, e) {
     e.preventDefault();
 
-    hashHistory.push(`/location/${encodeURIComponent(this.props.params.name)}?parameter=${parameter}`);
+    this.props.history.push(`/location/${encodeURIComponent(this.props.match.params.name)}?parameter=${parameter}`);
   },
 
   onDownloadClick: function () {
@@ -115,7 +118,7 @@ var Location = React.createClass({
     // This is needed otherwise the system thinks there's data and
     // throws errors.
     this.props._invalidateAllLocationData();
-    this.props._fetchLocationIfNeeded(this.props.params.name);
+    this.props._fetchLocationIfNeeded(this.props.match.params.name);
   },
 
   componentDidUpdate: function (prevProps) {
@@ -124,7 +127,7 @@ var Location = React.createClass({
       // This is needed otherwise the system thinks there's data and
       // throws errors.
       this.props._invalidateAllLocationData();
-      this.props._fetchLocationIfNeeded(this.props.params.name);
+      this.props._fetchLocationIfNeeded(this.props.match.params.name);
       return;
     }
 

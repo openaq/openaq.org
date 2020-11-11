@@ -1,11 +1,13 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
+import createReactClass from 'create-react-class';
 
-var InfoMessage = React.createClass({
+var InfoMessage = createReactClass({
   displayName: 'InfoMessage',
 
   propTypes: {
-    children: React.PropTypes.array
+    children: T.array
   },
 
   render: function () {

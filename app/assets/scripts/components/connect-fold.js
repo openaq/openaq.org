@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
+import createReactClass from 'create-react-class';
 
-var ConnectFold = React.createClass({
+var ConnectFold = createReactClass({
   displayName: 'ConnectFold',
 
   render: function () {

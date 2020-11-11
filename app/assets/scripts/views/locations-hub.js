@@ -1,12 +1,14 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { ScrollArea, Dropdown } from 'openaq-design-system';
-import { hashHistory } from 'react-router';
+import { Dropdown } from 'openaq-design-system';
 import ReactPaginate from 'react-paginate';
 import c from 'classnames';
 import _ from 'lodash';
 import moment from 'moment';
+import qs from 'qs';
+import createReactClass from 'create-react-class';
 
 import config from '../config';
 import { toggleValue } from '../utils/array';
@@ -16,31 +18,36 @@ import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 
-var LocationsHub = React.createClass({
+const qsParse = search => qs.parse(search.split('?')[1]);
+
+var LocationsHub = createReactClass({
   displayName: 'LocationsHub',
 
   propTypes: {
-    location: React.PropTypes.object,
-    _fetchLocations: React.PropTypes.func,
-    _openDownloadModal: React.PropTypes.func,
+    location: T.object,
+    _fetchLocations: T.func,
+    _openDownloadModal: T.func,
 
-    countries: React.PropTypes.array,
-    sources: React.PropTypes.array,
-    parameters: React.PropTypes.array,
+    countries: T.array,
+    sources: T.array,
+    parameters: T.array,
 
-    locFetching: React.PropTypes.bool,
-    locFetched: React.PropTypes.bool,
-    locError: React.PropTypes.string,
-    locations: React.PropTypes.array,
-    locPagination: React.PropTypes.object
+    locFetching: T.bool,
+    locFetched: T.bool,
+    locError: T.string,
+    locations: T.array,
+    locPagination: T.object
   },
 
   perPage: 15,
 
   getPage: function () {
-    let page = this.props.location.query.page;
-    page = isNaN(page) || page < 1 ? 1 : +page;
-    return page;
+    const query = qsParse(this.props.location.search);
+    if (query && query.page) {
+      let page = query.page;
+      page = isNaN(page) || page < 1 ? 1 : +page;
+      return page;
+    }
   },
 
   getTotalPages: function () {
@@ -49,40 +56,48 @@ var LocationsHub = React.createClass({
   },
 
   getQueryCountries: function () {
-    if (this.props.location.query.countries) {
-      return this.props.location.query.countries.split(',');
+    const query = qsParse(this.props.location.search);
+    if (query && query.countries) {
+      return query.countries.split(',');
     }
     return [];
   },
 
   getQueryParameters: function () {
-    if (this.props.location.query.parameters) {
-      return this.props.location.query.parameters.split(',');
+    const query = qsParse(this.props.location.search);
+    if (query && query.parameters) {
+      return query.parameters.split(',');
     }
     return [];
   },
 
   getQuerySources: function () {
-    if (this.props.location.query.sources) {
-      return this.props.location.query.sources.split(',');
+    const query = qsParse(this.props.location.search);
+    if (query && query.sources) {
+      return query.sources.split(',');
     }
     return [];
   },
 
   getQueryOrderBy: function () {
-    if (this.props.location.query.orderBy) {
-      return this.props.location.query.orderBy.split(',');
+    const query = qsParse(this.props.location.search);
+    if (query && query.orderBy) {
+      return query.orderBy.split(',');
     }
     return [];
   },
 
   shouldFetchData: function (prevProps) {
-    let { countries: prevC, parameters: prevP, sources: prevS, orderBy: prevO } = prevProps.location.query;
-    let { countries: currC, parameters: currP, sources: currS, orderBy: currO } = this.props.location.query;
-    let prevPage = prevProps.location.query.page;
-    let currPage = this.props.location.query.page;
+    const prevQuery = qsParse(prevProps.location.search);
+    const query = qsParse(this.props.location.search);
+    if (query) {
+      let { countries: prevC, parameters: prevP, sources: prevS, orderBy: prevO } = prevQuery;
+      let { countries: currC, parameters: currP, sources: currS, orderBy: currO } = query;
+      let prevPage = prevQuery.page;
+      let currPage = query.page;
 
-    return prevC !== currC || prevP !== currP || prevS !== currS || prevO !== currO || prevPage !== currPage;
+      return prevC !== currC || prevP !== currP || prevS !== currS || prevO !== currO || prevPage !== currPage;
+    }
   },
 
   fetchData: function (page) {
@@ -100,7 +115,7 @@ var LocationsHub = React.createClass({
   //
 
   onFilterSelect: function (what, value) {
-    let query = _.clone(this.props.location.query);
+    let query = qsParse(this.props.location.search);
     switch (what) {
       case 'countries':
         let countries = this.getQueryCountries();
@@ -131,7 +146,7 @@ var LocationsHub = React.createClass({
         break;
     }
 
-    hashHistory.push(`/locations?${buildQS(query)}`);
+    this.props.history.push(`/locations?${buildQS(query)}`);
   },
 
   clearFilters: function (e) {
@@ -140,9 +155,10 @@ var LocationsHub = React.createClass({
   },
 
   handlePageClick: function (d) {
-    let query = _.clone(this.props.location.query);
+    let query = qsParse(this.props.location.search);
     query.page = d.selected + 1;
-    hashHistory.push(`/locations?${buildQS(query)}`);
+    console.log(query);
+    this.props.history.push(`/locations?${buildQS(query)}`);
   },
 
   //
@@ -303,13 +319,7 @@ var LocationsHub = React.createClass({
   renderCountries: function () {
     let queryCountries = this.getQueryCountries();
     return (
-      <ScrollArea
-        speed={0.8}
-        className='filters__group'
-        contentClassName='filters__group-inner'
-        smoothScrolling={true}
-        horizontal={false} >
-
+      <div>
         {_.sortBy(this.props.countries, 'name').map(o => {
           let checked = queryCountries.indexOf(o.code) !== -1;
           let onChange = this.onFilterSelect.bind(null, 'countries', o.code);
@@ -322,20 +332,14 @@ var LocationsHub = React.createClass({
           );
         })}
 
-      </ScrollArea>
+      </div>
     );
   },
 
   renderParameters: function () {
     let queryParameters = this.getQueryParameters();
     return (
-      <ScrollArea
-        speed={0.8}
-        className='filters__group'
-        contentClassName='filters__group-inner'
-        smoothScrolling={true}
-        horizontal={false} >
-
+      <div>
         {this.props.parameters.map(o => {
           let checked = queryParameters.indexOf(o.id) !== -1;
           let onChange = this.onFilterSelect.bind(null, 'parameters', o.id);
@@ -347,7 +351,7 @@ var LocationsHub = React.createClass({
             </label>
           );
         })}
-      </ScrollArea>
+      </div>
     );
   },
 
@@ -485,7 +489,7 @@ var LocationsHub = React.createClass({
         forceSelected={this.getPage() - 1}
         marginPagesDisplayed={2}
         pageRangeDisplayed={4}
-        clickCallback={this.handlePageClick}
+        onPageChange={this.handlePageClick}
         containerClassName={'pagination'}
         subContainerClassName={'pages'}
         pageClassName={'pages__wrapper'}
@@ -548,7 +552,7 @@ var LocationsHub = React.createClass({
               {this.renderPagination()}
 
               <div className='disclaimers'>
-                <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution. </p>
+                <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution.</p>
                 <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
               </div>
             </div>

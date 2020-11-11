@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import { IndexLink, Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import c from 'classnames';
 
 import Breakpoint from './breakpoint';
@@ -214,7 +214,7 @@ class PageHeader extends React.Component {
         <nav className='page__prime-nav nav' id='page-prime-nav'>
           <div className='nav__group nav__group--main'>
             <div className='inner'>
-              <IndexLink
+              <Link
                 to='/'
                 title='Visit homepage'
                 className='nav__home-link'
@@ -227,7 +227,7 @@ class PageHeader extends React.Component {
                   height='40'
                 />
                 <span>Home</span>
-              </IndexLink>
+              </Link>
               <Link
                 to='/community'
                 title='View page'
@@ -318,9 +318,5 @@ class PageHeader extends React.Component {
     );
   }
 }
-
-PageHeader.propTypes = {
-  routes: React.PropTypes.array
-};
 
 module.exports = PageHeader;

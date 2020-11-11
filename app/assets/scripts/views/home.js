@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import _ from 'lodash';
 import * as d3 from 'd3';
@@ -292,35 +293,35 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  _geolocateUser: React.PropTypes.func,
-  _fetchNearbyLocations: React.PropTypes.func,
-  _fetchCompareLocationIfNeeded: React.PropTypes.func,
-  _fetchCompareLocationMeasurements: React.PropTypes.func,
-  _invalidateCompare: React.PropTypes.func,
-  _openDownloadModal: React.PropTypes.func,
+  _geolocateUser: T.func,
+  _fetchNearbyLocations: T.func,
+  _fetchCompareLocationIfNeeded: T.func,
+  _fetchCompareLocationMeasurements: T.func,
+  _invalidateCompare: T.func,
+  _openDownloadModal: T.func,
 
-  statsCounts: React.PropTypes.object,
-  statsCountsFetching: React.PropTypes.bool,
-  statsCountsFetched: React.PropTypes.bool,
+  statsCounts: T.object,
+  statsCountsFetching: T.bool,
+  statsCountsFetched: T.bool,
 
-  geolocationRequesting: React.PropTypes.bool,
-  geolocationRequested: React.PropTypes.bool,
-  geolocationError: React.PropTypes.string,
-  geolocationCoords: React.PropTypes.object,
+  geolocationRequesting: T.bool,
+  geolocationRequested: T.bool,
+  geolocationError: T.string,
+  geolocationCoords: T.object,
 
-  locFetching: React.PropTypes.bool,
-  locFetched: React.PropTypes.bool,
-  locError: React.PropTypes.string,
-  locations: React.PropTypes.array,
-  locPagination: React.PropTypes.object,
+  locFetching: T.bool,
+  locFetched: T.bool,
+  locError: T.string,
+  locations: T.array,
+  locPagination: T.object,
 
-  countries: React.PropTypes.array,
-  sources: React.PropTypes.array,
-  parameters: React.PropTypes.array,
-  totalMeasurements: React.PropTypes.number,
+  countries: T.array,
+  sources: T.array,
+  parameters: T.array,
+  totalMeasurements: T.number,
 
-  compareLoc: React.PropTypes.array,
-  compareMeasurements: React.PropTypes.array
+  compareLoc: T.array,
+  compareMeasurements: T.array
 };
 
 // /////////////////////////////////////////////////////////////////// //
@@ -494,7 +495,7 @@ class CompareLocationCard extends React.Component {
 }
 
 CompareLocationCard.propTypes = {
-  location: React.PropTypes.object,
-  measurement: React.PropTypes.object,
-  triesExhausted: React.PropTypes.bool
+  location: T.object,
+  measurement: T.object,
+  triesExhausted: T.bool
 };

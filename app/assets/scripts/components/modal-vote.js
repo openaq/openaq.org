@@ -1,15 +1,17 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import c from 'classnames';
 import OpenAQ from 'openaq-design-system';
 const { Modal, ModalHeader, ModalBody } = OpenAQ.Modal;
+import createReactClass from 'create-react-class';
 
-var ModalVote = React.createClass({
+var ModalVote = createReactClass({
   displayName: 'ModalVote',
 
   propTypes: {
-    onModalClose: React.PropTypes.func
+    onModalClose: T.func
   },
 
   //

@@ -1,8 +1,9 @@
 'use strict';
 import React from 'react';
 import { Dropdown } from 'openaq-design-system';
+import createReactClass from 'create-react-class';
 
-var ShareBtn = React.createClass({
+var ShareBtn = createReactClass({
   displayName: 'ShareBtn',
 
   propTypes: {

@@ -1,19 +1,21 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+import createReactClass from 'create-react-class';
 
 import config from '../config';
 import { sortBy } from 'lodash';
 import { formatThousands } from '../utils/format';
 import { openDownloadModal } from '../actions/action-creators';
 
-var CountriesHub = React.createClass({
+var CountriesHub = createReactClass({
   displayName: 'CountriesHub',
 
   propTypes: {
-    _openDownloadModal: React.PropTypes.func,
-    countries: React.PropTypes.array
+    _openDownloadModal: T.func,
+    countries: T.array
   },
 
   onDownloadClick: function (country, e) {

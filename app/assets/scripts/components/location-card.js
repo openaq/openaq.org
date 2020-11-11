@@ -1,25 +1,27 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+import createReactClass from 'create-react-class';
 
 import { formatThousands } from '../utils/format';
 
-var LocationCard = React.createClass({
+var LocationCard = createReactClass({
   displayName: 'LocationCard',
 
   propTypes: {
-    onDownloadClick: React.PropTypes.func,
-    compact: React.PropTypes.bool,
-    name: React.PropTypes.string,
-    city: React.PropTypes.string,
-    countryData: React.PropTypes.object,
-    sourcesData: React.PropTypes.array,
-    sourceType: React.PropTypes.string,
-    totalMeasurements: React.PropTypes.number,
-    parametersList: React.PropTypes.array,
-    lastUpdate: React.PropTypes.string,
-    collectionStart: React.PropTypes.string
+    onDownloadClick: T.func,
+    compact: T.bool,
+    name: T.string,
+    city: T.string,
+    countryData: T.object,
+    sourcesData: T.array,
+    sourceType: T.string,
+    totalMeasurements: T.number,
+    parametersList: T.array,
+    lastUpdate: T.string,
+    collectionStart: T.string
   },
 
   onDownloadClick: function (e) {
@@ -58,7 +60,7 @@ var LocationCard = React.createClass({
               <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
             </div>
             <div className='card__tags'>
-              <div className='filter-pill'>{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(1)}`}</div>
+              {this.props.sourceType && <div className='filter-pill'>{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(1)}`}</div>}
             </div>
 
           </header>
