@@ -176,7 +176,6 @@ var Location = createReactClass({
                   size={'large'}
                 >
                   77
-                  :xa
                 </HighlightText>
                 <CardSubtitle className='card__subtitle'>
                   Measurements
