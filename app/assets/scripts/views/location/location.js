@@ -20,6 +20,13 @@ import ValuesBreakdown from './values-breakdown';
 import NearbyLoc from './nearby-loc';
 import Header from './header';
 
+import styled from 'styled-components';
+import CardList from '../../components/card-list';
+
+const Dashboard = styled(CardList)`
+  padding: 0 4rem;
+`;
+
 function Location (props) {
   const query = qs.parse(props.location.search, { ignoreQueryPrefix: true });
   const { name } = props.match.params;
@@ -126,12 +133,16 @@ function Location (props) {
         openDownloadModal={props._openDownloadModal}
       />
       <div className="inpage__body">
-        <StatsInfo
-          latestMeasurements={props.latestMeasurements}
-          measurements={props.measurements}
-          loc={props.loc}
-          parameters={props.parameters}
-        />
+        <Dashboard>
+          <StatsInfo
+            latestMeasurements={props.latestMeasurements}
+            measurements={props.measurements}
+            loc={props.loc}
+            parameters={props.parameters}
+          />
+
+        </Dashboard>
+    {/*
         <Metadata loc={props.loc} />
         <SourceInfo
           sources={props.sources}
@@ -150,7 +161,7 @@ function Location (props) {
           loc={props.loc}
           parameters={props.parameters}
           sources={props.sources}
-        />
+        />*/}
       </div>
     </section>
   );

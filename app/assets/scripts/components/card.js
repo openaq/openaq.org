@@ -43,7 +43,8 @@ export const HighlightText = styled.h1`
     }
   }};
 `;
-
+/* Generic Card component for dashboard pages
+*/
 function Card (props) {
   const {
     gridColumn,
