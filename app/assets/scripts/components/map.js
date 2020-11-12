@@ -17,6 +17,11 @@ import { round } from '../utils/format';
 import config from '../config';
 mapboxgl.accessToken = config.mapbox.token;
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 const MapComponent = createReactClass({
   displayName: 'MapComponent',
 
@@ -433,6 +438,11 @@ const MapComponent = createReactClass({
 
 module.exports = MapComponent;
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 const MapPopover = createReactClass({
   displayName: 'MapPopover',
 

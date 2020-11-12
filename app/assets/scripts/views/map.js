@@ -16,6 +16,11 @@ import { generateLegendStops } from '../utils/colors';
 import config from '../config';
 mapboxgl.accessToken = config.mapbox.token;
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var Map = createReactClass({
   displayName: 'Map',
 
@@ -45,7 +50,7 @@ var Map = createReactClass({
   },
 
   getActiveParameterData: function () {
-    const query = qs.parse(this.props.location.search);
+    const query = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
     let parameterData = _.find(this.props.parameters, {id: query.parameter});
     return parameterData || _.find(this.props.parameters, {id: 'pm25'});
   },

@@ -7,6 +7,11 @@ import OpenAQ from 'openaq-design-system';
 const { Modal, ModalHeader, ModalBody } = OpenAQ.Modal;
 import createReactClass from 'create-react-class';
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var ModalVote = createReactClass({
   displayName: 'ModalVote',
 

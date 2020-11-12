@@ -18,8 +18,13 @@ import LocationCard from '../components/location-card';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 
-const qsParse = search => qs.parse(search.split('?')[1]);
+const qsParse = search => qs.parse(search, { ignoreQueryPrefix: true });
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var LocationsHub = createReactClass({
   displayName: 'LocationsHub',
 
@@ -42,7 +47,7 @@ var LocationsHub = createReactClass({
   perPage: 15,
 
   getPage: function () {
-    const query = qsParse(this.props.location.search);
+    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
     if (query && query.page) {
       let page = query.page;
       page = isNaN(page) || page < 1 ? 1 : +page;
@@ -56,7 +61,7 @@ var LocationsHub = createReactClass({
   },
 
   getQueryCountries: function () {
-    const query = qsParse(this.props.location.search);
+    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
     if (query && query.countries) {
       return query.countries.split(',');
     }
@@ -64,7 +69,7 @@ var LocationsHub = createReactClass({
   },
 
   getQueryParameters: function () {
-    const query = qsParse(this.props.location.search);
+    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
     if (query && query.parameters) {
       return query.parameters.split(',');
     }
@@ -72,7 +77,7 @@ var LocationsHub = createReactClass({
   },
 
   getQuerySources: function () {
-    const query = qsParse(this.props.location.search);
+    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
     if (query && query.sources) {
       return query.sources.split(',');
     }
@@ -80,7 +85,7 @@ var LocationsHub = createReactClass({
   },
 
   getQueryOrderBy: function () {
-    const query = qsParse(this.props.location.search);
+    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
     if (query && query.orderBy) {
       return query.orderBy.split(',');
     }
@@ -88,8 +93,8 @@ var LocationsHub = createReactClass({
   },
 
   shouldFetchData: function (prevProps) {
-    const prevQuery = qsParse(prevProps.location.search);
-    const query = qsParse(this.props.location.search);
+    const prevQuery = qsParse(prevProps.location.search, { ignoreQueryPrefix: true });
+    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
     if (query) {
       let { countries: prevC, parameters: prevP, sources: prevS, orderBy: prevO } = prevQuery;
       let { countries: currC, parameters: currP, sources: currS, orderBy: currO } = query;
@@ -563,7 +568,7 @@ var LocationsHub = createReactClass({
   }
 });
 
-// /////////////////////////////////////////////////////////////////// //
+// /////////////////////////////////////////////////////////////////////
 // Connect functions
 
 function selector (state) {

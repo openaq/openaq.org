@@ -13,6 +13,11 @@ const CHART_DEBUG = false;
 // D3 Advanced Brush Style - Part 5
 //  http://bl.ocks.org/jisaacks/5678983
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var BrushChart = createReactClass({
   displayName: 'BrushChart',
 
