@@ -44,7 +44,6 @@ export default function StatsInfo ({latestMeasurements, measurements, loc, param
   return (
     <Card
       title='Details'
-      gridColumn={ '1 / 2'}
       gridRow={'1 / 2'}
       renderBody={() => {
         return (
