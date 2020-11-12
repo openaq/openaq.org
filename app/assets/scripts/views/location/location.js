@@ -13,7 +13,9 @@ import {
   openDownloadModal
 } from '../../actions/action-creators';
 import HeaderMessage from '../../components/header-message';
-import StatsInfo from './stats-info';
+import StatsInfoCard from './stats-info';
+import MeasurementsCard from './measurements-card';
+
 import Metadata from './metadata';
 import SourceInfo from './source-info';
 import ValuesBreakdown from './values-breakdown';
@@ -133,14 +135,21 @@ function Location (props) {
         openDownloadModal={props._openDownloadModal}
       />
       <div className="inpage__body">
-        <Dashboard>
-          <StatsInfo
+        <Dashboard
+          gridTemplateRows={'repeat(4, 20rem)'}
+        >
+          <StatsInfoCard
             latestMeasurements={props.latestMeasurements}
             measurements={props.measurements}
             loc={props.loc}
             parameters={props.parameters}
           />
-
+          <MeasurementsCard
+            latestMeasurements={props.latestMeasurements}
+            measurements={props.measurements}
+            loc={props.loc}
+            parameters={props.parameters}
+          />
         </Dashboard>
     {/*
         <Metadata loc={props.loc} />
