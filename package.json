@@ -20,7 +20,9 @@
     "serve": "cross-env DS_ENV=development gulp serve",
     "build": "cross-env NODE_ENV=production gulp",
     "lint": "eslint app/assets/scripts/ --ext .js",
-    "test": "echo \"No tests\" && exit 0"
+    "test": "echo \"No tests\" && exit 0",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "browserify": {
     "transform": [
@@ -45,10 +47,12 @@
     "browser-sync": "^2.13.0",
     "browserify": "^16.5.2",
     "cross-env": "^5.1.4",
+    "cypress": "^5.6.0",
     "del": "^2.2.1",
     "envify": "^3.4.1",
     "eslint": "^3.0.1",
     "eslint-config-standard": "^6.0.0-beta",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-react": "^5.2.2",
     "eslint-plugin-standard": "^2.0.0",
