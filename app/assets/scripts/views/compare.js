@@ -29,6 +29,11 @@ import InfoMessage from '../components/info-message';
 import ChartBrush from '../components/chart-brush';
 import { convertParamIfNeeded } from '../utils/map-settings';
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var Compare = createReactClass({
   displayName: 'Compare',
 

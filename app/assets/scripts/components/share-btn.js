@@ -3,6 +3,11 @@ import React from 'react';
 import { Dropdown } from 'openaq-design-system';
 import createReactClass from 'create-react-class';
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var ShareBtn = createReactClass({
   displayName: 'ShareBtn',
 

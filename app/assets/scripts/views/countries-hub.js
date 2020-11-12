@@ -10,6 +10,11 @@ import { sortBy } from 'lodash';
 import { formatThousands } from '../utils/format';
 import { openDownloadModal } from '../actions/action-creators';
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var CountriesHub = createReactClass({
   displayName: 'CountriesHub',
 

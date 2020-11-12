@@ -10,6 +10,11 @@ import InfoMessage from './info-message';
 import LoadingMessage from './loading-message';
 import { formatThousands } from '../utils/format';
 
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
 var NearbyLocations = createReactClass({
   displayName: 'NearbyLocations',
 
