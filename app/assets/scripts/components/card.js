@@ -56,7 +56,7 @@ function Card (props) {
   } = props;
   return (
     <CardWrapper
-      className='card' i
+      className='card'
       gridColumn={gridColumn}
       gridRow={gridRow}
     >
