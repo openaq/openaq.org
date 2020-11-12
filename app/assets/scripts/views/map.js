@@ -50,7 +50,7 @@ var Map = createReactClass({
   },
 
   getActiveParameterData: function () {
-    const query = qs.parse(this.props.location.search);
+    const query = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
     let parameterData = _.find(this.props.parameters, {id: query.parameter});
     return parameterData || _.find(this.props.parameters, {id: 'pm25'});
   },

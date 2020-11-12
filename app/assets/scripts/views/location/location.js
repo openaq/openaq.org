@@ -21,7 +21,7 @@ import NearbyLoc from './nearby-loc';
 import Header from './header';
 
 function Location (props) {
-  const query = qs.parse(props.location.search);
+  const query = qs.parse(props.location.search, { ignoreQueryPrefix: true });
   const { name } = props.match.params;
 
   useEffect(() => {
