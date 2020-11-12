@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import qs from 'qs';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 
-import config from '../../config';
 import {
   fetchLocationIfNeeded,
   fetchLatestMeasurements,
@@ -20,6 +18,7 @@ import Metadata from './metadata';
 import SourceInfo from './source-info';
 import ValuesBreakdown from './values-breakdown';
 import NearbyLoc from './nearby-loc';
+import Header from './header';
 
 function Location (props) {
   const query = qs.parse(props.location.search);
@@ -81,22 +80,11 @@ function Location (props) {
     );
   }
 
-  function onDownloadClick () {
-    let d = props.loc.data;
-    props._openDownloadModal({
-      country: d.country,
-      area: d.city,
-      location: d.location
-    });
-  }
-
   const { countryData } = props;
   let { fetched, fetching, error, data } = props.loc;
   if (!fetched && !fetching) {
     return null;
   }
-
-  const country = countryData || {};
 
   if (fetching) {
     return (
@@ -130,60 +118,13 @@ function Location (props) {
 
   return (
     <section className="inpage">
-      <header className="inpage__header">
-        <div className="inner">
-          <div className="inpage__headline">
-            <p className="inpage__subtitle">location</p>
-            <h1 className="inpage__title">
-              {data.location}{' '}
-              <small>
-                in {data.city}, {country.name}
-              </small>
-            </h1>
-            <ul className="ipha">
-              <li>
-                <a
-                  href={`${config.api}/locations?location=${data.location}`}
-                  title="View in API documentation"
-                  className="ipha-api"
-                  target="_blank"
-                >
-                  View API
-                </a>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  title="Download data for this location"
-                  className="ipha-download"
-                  onClick={onDownloadClick}
-                >
-                  Download
-                </button>
-              </li>
-              <li>
-                <Link
-                  to={`/compare/${encodeURIComponent(data.location)}`}
-                  title="Compare location with another"
-                  className="ipha-compare ipha-main"
-                >
-                  <span>Compare</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <figure className="inpage__media inpage__media--cover media">
-          <div className="media__item">
-            <img
-              src="/assets/graphics/content/view--home/cover--home.jpg"
-              alt="Cover image"
-              width="1440"
-              height="712"
-            />
-          </div>
-        </figure>
-      </header>
+      <Header
+        location={data.location}
+        area={data.city}
+        countryCode={data.country}
+        country={countryData.name}
+        openDownloadModal={props._openDownloadModal}
+      />
       <div className="inpage__body">
         <StatsInfo
           latestMeasurements={props.latestMeasurements}
@@ -218,6 +159,7 @@ function Location (props) {
 Location.propTypes = {
   match: T.object,
   location: T.object,
+  history: T.object,
 
   _fetchLocationIfNeeded: T.func,
   _fetchLocations: T.func,
