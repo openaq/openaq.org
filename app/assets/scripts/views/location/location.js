@@ -40,6 +40,7 @@ function Location (props) {
     if (
       props.loc.fetched &&
       !props.loc.fetching &&
+      props.loc.data &&
       !props.latestMeasurements.fetched &&
       !props.latestMeasurements.fetching &&
       !props.measurements.fetched &&
@@ -80,7 +81,6 @@ function Location (props) {
     );
   }
 
-  const { countryData } = props;
   let { fetched, fetching, error, data } = props.loc;
   if (!fetched && !fetching) {
     return null;
@@ -97,7 +97,7 @@ function Location (props) {
     );
   }
 
-  if (error) {
+  if (error || !data) {
     return (
       <HeaderMessage>
         <h1>Uh oh, something went wrong.</h1>
@@ -122,7 +122,7 @@ function Location (props) {
         location={data.location}
         area={data.city}
         countryCode={data.country}
-        country={countryData.name}
+        country={props.countryData.name}
         openDownloadModal={props._openDownloadModal}
       />
       <div className="inpage__body">
