@@ -150,14 +150,15 @@ function Location (props) {
             loc={props.loc}
             parameters={props.parameters}
           />
+          <SourceInfo
+            sources={props.sources}
+            measurements={props.measurements}
+            loc={props.loc}
+          />
+
         </Dashboard>
     {/*
         <Metadata loc={props.loc} />
-        <SourceInfo
-          sources={props.sources}
-          measurements={props.measurements}
-          loc={props.loc}
-        />
         <ValuesBreakdown
           measurements={props.measurements}
           parameters={props.parameters}

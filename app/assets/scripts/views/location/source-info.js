@@ -1,6 +1,18 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import _ from 'lodash';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Card, { CardBody } from '../../components/card';
+
+const SourceList = styled(CardBody)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+const Source = styled(Link)`
+`;
 
 export default function SourceInfo ({measurements, loc, sources: allSources}) {
   const {data} = measurements;
@@ -14,40 +26,36 @@ export default function SourceInfo ({measurements, loc, sources: allSources}) {
     let added = data.attribution.filter((src, index) => index !== 0);
     sources = [...sources, ...added];
   }
-
   return (
-      <section className='fold' id='location-fold-source'>
-        <div className='inner'>
-          <header className=''>
-            <h1 className='fold__title'>Sources</h1>
-          </header>
-          <div className='fold__body'>
-            <div className='col-main'>
-            <ul className='sources__list'>
-              {sources.map(source =>
-                <li key={source.name}>
-                  <p>
-                    {source.sourceURL || source.url
-                      ? <a href={source.sourceURL || source.url}
-                         title='View source information'>
-                         {source.name} </a>
-                      : source.name}
-                  </p>
-                </li>
-              )}
-            </ul>
-            </div>
+    <Card
+      title='Sources'
+      gridColumn={ '1 / 2'}
+      gridRow={'1 / 2'}
+      renderBody={() => (
+        <SourceList className='card__body'>
+          {sources.map(source => (
+            <Source
+              to={source.sourceURL || source.url}
+              disabled={!(source.sourceURL || source.url)}
+            key={source.name}>
+              {source.name}
+            </Source>
+          ))}
+        </SourceList>
+      )}
+      renderFooter={() => (
+        <footer className='card__footer'>
             {
               sources[0] && (
-                <div className='col-sec'>
-                  {sources[0].description ? <p>{sources[0].description}</p> : null}
+                <div>
                   For more information contact <a href={`mailto:${sources[0].contacts[0]}`} title={sources[0].contacts[0]}>{sources[0].contacts[0]}</a>.
                 </div>
               )
             }
-          </div>
-        </div>
-      </section>
+
+        </footer>
+      )}
+    />
   );
 }
 

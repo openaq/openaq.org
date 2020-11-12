@@ -15,7 +15,9 @@ const CardContents = styled.a`
 const CardHeader = styled.header`
 `;
 
-const CardBody = styled.div`
+export const CardBody = styled.div`
+`;
+export const Test = styled.div`
 `;
 
 const CardFooter = styled.footer`
