@@ -116,6 +116,7 @@
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
+    "styled-components": "^5.2.1",
     "turf-distance": "^3.0.12"
   }
 }
