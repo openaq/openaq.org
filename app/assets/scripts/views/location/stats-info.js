@@ -41,9 +41,9 @@ export default function StatsInfo({
   } else if (error) {
     intro = (
       <div className="fold__introduction prose prose--responsive">
-        <p>We couldn't get stats. Please try again later.</p>
+        <p>We couldn&apos;t get stats. Please try again later.</p>
         <p>
-          If you think there's a problem, please{' '}
+          If you think there&apos;s a problem, please{' '}
           <a href="mailto:info@openaq.org" title="Contact openaq">
             contact us.
           </a>

@@ -54,8 +54,8 @@ var ModalVote = createReactClass({
               >
                 Open Science Prize
               </a>{' '}
-              competition that we're a finalist in, along with several other
-              awesome open science projects.
+              competition that we&apos;re a finalist in, along with several
+              other awesome open science projects.
             </p>
             <p className="modal__description">
               Your vote supports open data, open science and open-source work.
@@ -78,7 +78,7 @@ var ModalVote = createReactClass({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  I'll Vote!
+                  I&apos;ll Vote!
                 </a>
               </div>
             </form>

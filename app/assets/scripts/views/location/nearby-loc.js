@@ -32,12 +32,12 @@ export default function NearbyLoc({
   if (fetching) {
     intro = <LoadingMessage />;
   } else if (error) {
-    intro = <p>We couldn't get any nearby locations.</p>;
+    intro = <p>We couldn&apos;t get any nearby locations.</p>;
     content = (
       <InfoMessage>
         <p>Please try again later.</p>
         <p>
-          If you think there's a problem, please{' '}
+          If you think there&apos;s a problem, please{' '}
           <a href="mailto:info@openaq.org" title="Contact openaq">
             contact us.
           </a>

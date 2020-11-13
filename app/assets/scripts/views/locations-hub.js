@@ -518,9 +518,9 @@ var LocationsHub = createReactClass({
     if (this.props.locError) {
       return (
         <InfoMessage>
-          <p>We coudn't get the data. Please try again later.</p>
+          <p>We coudn&apos;t get the data. Please try again later.</p>
           <p>
-            If you think there's a problem, please{' '}
+            If you think there&apos;s a problem, please{' '}
             <a href="mailto:info@openaq.org" title="Contact openaq">
               contact us.
             </a>
@@ -534,7 +534,7 @@ var LocationsHub = createReactClass({
         <InfoMessage>
           <p>No data was found for your criteria.</p>
           <p>
-            Maybe you'd like to suggest a{' '}
+            Maybe you&apos;d like to suggest a{' '}
             <a
               href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
               title="Suggest a new source"
@@ -545,7 +545,7 @@ var LocationsHub = createReactClass({
             <a href="mailto:info@openaq.org" title="Contact openaq">
               let us know
             </a>{' '}
-            what location you'd like to see data for.
+            what location you&apos;d like to see data for.
           </p>
         </InfoMessage>
       );
@@ -663,7 +663,7 @@ var LocationsHub = createReactClass({
                     className="ipha-download ipha-main"
                     title="Yesterday's data in csv format"
                   >
-                    Download Yesterday's Data
+                    Download Yesterday&apos;s Data
                   </a>
                 </li>
                 <li>

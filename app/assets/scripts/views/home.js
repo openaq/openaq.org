@@ -268,7 +268,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="home-rand-meas">
-              <h2>Here's how two random locations compare</h2>
+              <h2>Here&apos;s how two random locations compare</h2>
               <CompareLocationCard
                 location={l1}
                 measurement={m1}
