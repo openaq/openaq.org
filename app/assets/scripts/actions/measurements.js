@@ -6,22 +6,22 @@ import config from '../config';
 //                         MEASUREMENTS                          //
 // ////////////////////////////////////////////////////////////////
 
-function requestMeasurements () {
+function requestMeasurements() {
   return {
-    type: actions.REQUEST_MEASUREMENTS
+    type: actions.REQUEST_MEASUREMENTS,
   };
 }
 
-function receiveMeasurements (json, error = null) {
+function receiveMeasurements(json, error = null) {
   return {
     type: actions.RECEIVE_MEASUREMENTS,
     json: json,
     error,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   };
 }
 
-export function fetchMeasurements (location, startDate, endDate) {
+export function fetchMeasurements(location, startDate, endDate) {
   return function (dispatch) {
     dispatch(requestMeasurements());
 
@@ -34,21 +34,29 @@ export function fetchMeasurements (location, startDate, endDate) {
     // the actual requests for measurements.
     let totalMeasurements = 0;
     let attribution;
-    fetch(`${config.api}/measurements?location=${encodeURIComponent(location)}&include_fields=attribution&limit=1`)
+    fetch(
+      `${config.api}/measurements?location=${encodeURIComponent(
+        location
+      )}&include_fields=attribution&limit=1`
+    )
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
         }
         return response.json();
       })
-      .then(json => {
-        totalMeasurements = json.meta.found;
-        attribution = json.results.length > 0 ? json.results[0].attribution : null;
-        fetcher(1);
-      }, e => {
-        console.log('e', e);
-        return dispatch(receiveMeasurements(null, 'Data not available'));
-      });
+      .then(
+        json => {
+          totalMeasurements = json.meta.found;
+          attribution =
+            json.results.length > 0 ? json.results[0].attribution : null;
+          fetcher(1);
+        },
+        e => {
+          console.log('e', e);
+          return dispatch(receiveMeasurements(null, 'Data not available'));
+        }
+      );
 
     const fetcher = function (page) {
       let qs = buildAPIQS({
@@ -56,7 +64,7 @@ export function fetchMeasurements (location, startDate, endDate) {
         page,
         limit,
         date_from: startDate,
-        date_to: endDate
+        date_to: endDate,
       });
 
       // console.log('fetchMeasurements url', `${config.api}/measurements?${qs}`);
@@ -68,23 +76,26 @@ export function fetchMeasurements (location, startDate, endDate) {
           }
           return response.json();
         })
-        .then(json => {
-          if (data === null) {
-            data = json;
-          } else {
-            data.results = data.results.concat(json.results);
+        .then(
+          json => {
+            if (data === null) {
+              data = json;
+            } else {
+              data.results = data.results.concat(json.results);
+            }
+            if (page * limit < json.meta.found) {
+              return fetcher(++page);
+            } else {
+              data.meta.totalMeasurements = totalMeasurements;
+              data.attribution = attribution;
+              return dispatch(receiveMeasurements(data));
+            }
+          },
+          e => {
+            console.log('e', e);
+            return dispatch(receiveMeasurements(null, 'Data not available'));
           }
-          if (page * limit < json.meta.found) {
-            return fetcher(++page);
-          } else {
-            data.meta.totalMeasurements = totalMeasurements;
-            data.attribution = attribution;
-            return dispatch(receiveMeasurements(data));
-          }
-        }, e => {
-          console.log('e', e);
-          return dispatch(receiveMeasurements(null, 'Data not available'));
-        });
+        );
     };
   };
 }

@@ -30,6 +30,8 @@ var LocationsHub = createReactClass({
 
   propTypes: {
     location: T.object,
+    history: T.object,
+
     _fetchLocations: T.func,
     _openDownloadModal: T.func,
 
@@ -41,13 +43,15 @@ var LocationsHub = createReactClass({
     locFetched: T.bool,
     locError: T.string,
     locations: T.array,
-    locPagination: T.object
+    locPagination: T.object,
   },
 
   perPage: 15,
 
   getPage: function () {
-    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
+    const query = qsParse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    });
     if (query && query.page) {
       let page = query.page;
       page = isNaN(page) || page < 1 ? 1 : +page;
@@ -56,12 +60,14 @@ var LocationsHub = createReactClass({
   },
 
   getTotalPages: function () {
-    let {found, limit} = this.props.locPagination;
+    let { found, limit } = this.props.locPagination;
     return Math.ceil(found / limit);
   },
 
   getQueryCountries: function () {
-    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
+    const query = qsParse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    });
     if (query && query.countries) {
       return query.countries.split(',');
     }
@@ -69,7 +75,9 @@ var LocationsHub = createReactClass({
   },
 
   getQueryParameters: function () {
-    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
+    const query = qsParse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    });
     if (query && query.parameters) {
       return query.parameters.split(',');
     }
@@ -77,7 +85,9 @@ var LocationsHub = createReactClass({
   },
 
   getQuerySources: function () {
-    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
+    const query = qsParse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    });
     if (query && query.sources) {
       return query.sources.split(',');
     }
@@ -85,7 +95,9 @@ var LocationsHub = createReactClass({
   },
 
   getQueryOrderBy: function () {
-    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
+    const query = qsParse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    });
     if (query && query.orderBy) {
       return query.orderBy.split(',');
     }
@@ -93,15 +105,35 @@ var LocationsHub = createReactClass({
   },
 
   shouldFetchData: function (prevProps) {
-    const prevQuery = qsParse(prevProps.location.search, { ignoreQueryPrefix: true });
-    const query = qsParse(this.props.location.search, { ignoreQueryPrefix: true });
+    const prevQuery = qsParse(prevProps.location.search, {
+      ignoreQueryPrefix: true,
+    });
+    const query = qsParse(this.props.location.search, {
+      ignoreQueryPrefix: true,
+    });
     if (query) {
-      let { countries: prevC, parameters: prevP, sources: prevS, orderBy: prevO } = prevQuery;
-      let { countries: currC, parameters: currP, sources: currS, orderBy: currO } = query;
+      let {
+        countries: prevC,
+        parameters: prevP,
+        sources: prevS,
+        orderBy: prevO,
+      } = prevQuery;
+      let {
+        countries: currC,
+        parameters: currP,
+        sources: currS,
+        orderBy: currO,
+      } = query;
       let prevPage = prevQuery.page;
       let currPage = query.page;
 
-      return prevC !== currC || prevP !== currP || prevS !== currS || prevO !== currO || prevPage !== currPage;
+      return (
+        prevC !== currC ||
+        prevP !== currP ||
+        prevS !== currS ||
+        prevO !== currO ||
+        prevPage !== currPage
+      );
     }
   },
 
@@ -109,7 +141,7 @@ var LocationsHub = createReactClass({
     let filters = {
       country: this.getQueryCountries(),
       parameter: this.getQueryParameters(),
-      order_by: this.getQueryOrderBy()
+      order_by: this.getQueryOrderBy(),
     };
 
     this.props._fetchLocations(page, filters, this.perPage);
@@ -122,26 +154,30 @@ var LocationsHub = createReactClass({
   onFilterSelect: function (what, value) {
     let query = qsParse(this.props.location.search);
     switch (what) {
-      case 'countries':
+      case 'countries': {
         let countries = this.getQueryCountries();
         query.countries = toggleValue(countries, value);
         !query.countries.length && delete query.countries;
         break;
-      case 'parameters':
+      }
+      case 'parameters': {
         let parameters = this.getQueryParameters();
         query.parameters = toggleValue(parameters, value);
         !query.parameters.length && delete query.parameters;
         break;
-      case 'sources':
+      }
+      case 'sources': {
         let sources = this.getQuerySources();
         query.sources = toggleValue(sources, value);
         !query.sources.length && delete query.sources;
         break;
-      case 'orderBy':
+      }
+      case 'orderBy': {
         let orderBy = this.getQueryOrderBy();
         query.orderBy = toggleValue(orderBy, value);
         !query.orderBy.length && delete query.orderBy;
         break;
+      }
 
       case 'clear':
         delete query.countries;
@@ -189,135 +225,125 @@ var LocationsHub = createReactClass({
     let querySources = this.getQuerySources();
     let queryOrderBy = this.getQueryOrderBy();
 
-    let sortOptions = [
-      'location', 'country', 'city', 'count'
-    ];
+    let sortOptions = ['location', 'country', 'city', 'count'];
 
     return (
-    <div className='filters'>
-      <nav className='fold__nav'>
-        <h2>Filter by</h2>
-        <h2>Order by</h2>
-      </nav>
+      <div className="filters">
+        <nav className="fold__nav">
+          <h2>Filter by</h2>
+          <h2>Order by</h2>
+        </nav>
 
-      <Dropdown
-        triggerElement='a'
-        triggerTitle='country__filter'
-        triggerText='Country'
-        triggerClassName='drop-trigger'
-      >
-        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
-          {
-            _.sortBy(countries).map(o => {
+        <Dropdown
+          triggerElement="a"
+          triggerTitle="country__filter"
+          triggerText="Country"
+          triggerClassName="drop-trigger"
+        >
+          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+            {_.sortBy(countries).map(o => {
               return (
-                  <li key={o.code}>
-                    <div
-                      className={c('drop__menu-item', {'drop__menu-item--active': queryCountries.includes(o.code)})}
-                      data-hook='dropdown:close'
-                      onClick={(e) => {
-                        this.onFilterSelect('countries', o.code);
-                      }}
-                    >
-                      <span>{o.name}</span>
-                    </div>
-
-                  </li>
+                <li key={o.code}>
+                  <div
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': queryCountries.includes(
+                        o.code
+                      ),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      this.onFilterSelect('countries', o.code);
+                    }}
+                  >
+                    <span>{o.name}</span>
+                  </div>
+                </li>
               );
-            }
-            )
-          }
-        </ul>
+            })}
+          </ul>
+        </Dropdown>
 
-      </Dropdown>
-
-      <Dropdown
-        triggerElement='a'
-        triggerTitle='type__filter'
-        triggerText='Pollutant'
-      >
-        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
-          {
-            _.sortBy(parameters).map(o => {
+        <Dropdown
+          triggerElement="a"
+          triggerTitle="type__filter"
+          triggerText="Pollutant"
+        >
+          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+            {_.sortBy(parameters).map(o => {
               return (
-                  <li key={o.id}>
-                    <div
-                      className={c('drop__menu-item', {'drop__menu-item--active': queryParameters.includes(o.code)})}
-                      data-hook='dropdown:close'
-                      onClick={(e) => {
-                        this.onFilterSelect('parameters', o.id);
-                      }}
-                    >
-                      <span>{o.name}</span>
-                    </div>
-
-                  </li>
+                <li key={o.id}>
+                  <div
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': queryParameters.includes(
+                        o.code
+                      ),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      this.onFilterSelect('parameters', o.id);
+                    }}
+                  >
+                    <span>{o.name}</span>
+                  </div>
+                </li>
               );
-            }
-            )
-          }
-        </ul>
-      </Dropdown>
+            })}
+          </ul>
+        </Dropdown>
 
-      <Dropdown
-        triggerElement='a'
-        triggerTitle='source__filter'
-        triggerText='Data Source'
-      >
-        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
-          {
-            _.sortBy(sources).map(o => {
+        <Dropdown
+          triggerElement="a"
+          triggerTitle="source__filter"
+          triggerText="Data Source"
+        >
+          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+            {_.sortBy(sources).map(o => {
               return (
-                  <li key={o.name}>
-                    <div
-                      className={c('drop__menu-item', {'drop__menu-item--active': querySources.includes(o.code)})}
-
-                      data-hook='dropdown:close'
-                      onClick={(e) => {
-                        this.onFilterSelect('sources', o.name);
-                      }}
-                    >
-                      <span>{o.name}</span>
-                    </div>
-
-                  </li>
+                <li key={o.name}>
+                  <div
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': querySources.includes(o.code),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      this.onFilterSelect('sources', o.name);
+                    }}
+                  >
+                    <span>{o.name}</span>
+                  </div>
+                </li>
               );
-            }
-            )
-          }
-        </ul>
-      </Dropdown>
+            })}
+          </ul>
+        </Dropdown>
 
-      <Dropdown
-        triggerElement='a'
-        triggerTitle='sort__filter'
-        triggerText='Order By'
-        triggerClassName='sort-order'
-      >
-        <ul role='menu' className='drop__menu drop__menu--select scrollable'>
-          {
-            _.sortBy(sortOptions).map(o => {
+        <Dropdown
+          triggerElement="a"
+          triggerTitle="sort__filter"
+          triggerText="Order By"
+          triggerClassName="sort-order"
+        >
+          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+            {_.sortBy(sortOptions).map(o => {
               return (
-                  <li key={o}>
-                    <div
-                      className={c('drop__menu-item', { 'drop__menu-item--active': queryOrderBy.includes(o) })}
-                      data-hook='dropdown:close'
-                      onClick={(e) => {
-                        this.onFilterSelect('orderBy', o);
-                      }}
-                    >
-                      <span>{`${o[0].toUpperCase()}${o.slice(1)}`}</span>
-                    </div>
-                  </li>
+                <li key={o}>
+                  <div
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': queryOrderBy.includes(o),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      this.onFilterSelect('orderBy', o);
+                    }}
+                  >
+                    <span>{`${o[0].toUpperCase()}${o.slice(1)}`}</span>
+                  </div>
+                </li>
               );
-            }
-            )
-          }
-        </ul>
-
-      </Dropdown>
-
-    </div>
-
+            })}
+          </ul>
+        </Dropdown>
+      </div>
     );
   },
 
@@ -329,14 +355,24 @@ var LocationsHub = createReactClass({
           let checked = queryCountries.indexOf(o.code) !== -1;
           let onChange = this.onFilterSelect.bind(null, 'countries', o.code);
           return (
-            <label className='form__option form__option--custom-checkbox' htmlFor={o.name} key={o.code}>
-              <input type='checkbox' value={o.code} id={o.name} name='form-checkbox' onChange={onChange} checked={checked} />
-              <span className='form__option__text'>{o.name}</span>
-              <span className='form__option__ui'></span>
+            <label
+              className="form__option form__option--custom-checkbox"
+              htmlFor={o.name}
+              key={o.code}
+            >
+              <input
+                type="checkbox"
+                value={o.code}
+                id={o.name}
+                name="form-checkbox"
+                onChange={onChange}
+                checked={checked}
+              />
+              <span className="form__option__text">{o.name}</span>
+              <span className="form__option__ui"></span>
             </label>
           );
         })}
-
       </div>
     );
   },
@@ -349,10 +385,21 @@ var LocationsHub = createReactClass({
           let checked = queryParameters.indexOf(o.id) !== -1;
           let onChange = this.onFilterSelect.bind(null, 'parameters', o.id);
           return (
-            <label className='form__option form__option--custom-checkbox' htmlFor={o.id} key={o.id}>
-              <input type='checkbox' value={o.id} id={o.id} name='form-checkbox' onChange={onChange} checked={checked} />
-              <span className='form__option__text'>{o.name}</span>
-              <span className='form__option__ui'></span>
+            <label
+              className="form__option form__option--custom-checkbox"
+              htmlFor={o.id}
+              key={o.id}
+            >
+              <input
+                type="checkbox"
+                value={o.id}
+                id={o.id}
+                name="form-checkbox"
+                onChange={onChange}
+                checked={checked}
+              />
+              <span className="form__option__text">{o.name}</span>
+              <span className="form__option__ui"></span>
             </label>
           );
         })}
@@ -367,39 +414,76 @@ var LocationsHub = createReactClass({
     let orderBy = this.getQueryOrderBy();
 
     // If there are no filters selected remove the whole block.
-    if (countries.length + parameters.length + sources.length + orderBy.length === 0) {
+    if (
+      countries.length + parameters.length + sources.length + orderBy.length ===
+      0
+    ) {
       return null;
     }
 
     return (
-      <div className='filters-summary'>
+      <div className="filters-summary">
         {this.props.countries.map(o => {
           let onClick = this.onFilterSelect.bind(null, 'countries', o.code);
-          return countries.indexOf(o.code) !== -1
-            ? <button type='button' className='button--filter-pill' key={o.code} onClick={onClick}><span>{o.name}</span></button>
-            : null;
+          return countries.indexOf(o.code) !== -1 ? (
+            <button
+              type="button"
+              className="button--filter-pill"
+              key={o.code}
+              onClick={onClick}
+            >
+              <span>{o.name}</span>
+            </button>
+          ) : null;
         })}
         {this.props.parameters.map(o => {
           let onClick = this.onFilterSelect.bind(null, 'parameters', o.id);
-          return parameters.indexOf(o.id) !== -1
-            ? <button type='button' className='button--filter-pill' key={o.id} onClick={onClick}><span>{o.name}</span></button>
-            : null;
+          return parameters.indexOf(o.id) !== -1 ? (
+            <button
+              type="button"
+              className="button--filter-pill"
+              key={o.id}
+              onClick={onClick}
+            >
+              <span>{o.name}</span>
+            </button>
+          ) : null;
         })}
         {this.props.sources.map(o => {
           let onClick = this.onFilterSelect.bind(null, 'sources', o.name);
-          return sources.indexOf(o.name) !== -1
-            ? <button type='button' className='button--filter-pill' key={o.name} onClick={onClick}><span>{o.name}</span></button>
-            : null;
+          return sources.indexOf(o.name) !== -1 ? (
+            <button
+              type="button"
+              className="button--filter-pill"
+              key={o.name}
+              onClick={onClick}
+            >
+              <span>{o.name}</span>
+            </button>
+          ) : null;
         })}
         {orderBy.map(o => {
           let onClick = this.onFilterSelect.bind(null, 'orderBy', o);
-          return <button type='button' className='button--filter-pill orderBy' key={o} onClick={onClick}><span>{o}</span></button>;
+          return (
+            <button
+              type="button"
+              className="button--filter-pill orderBy"
+              key={o}
+              onClick={onClick}
+            >
+              <span>{o}</span>
+            </button>
+          );
         })}
 
-        <button type='button' className='button button--small button--primary-unbounded' title='Clear all selected filters' onClick={this.clearFilters}>
+        <button
+          type="button"
+          className="button button--small button--primary-unbounded"
+          title="Clear all selected filters"
+          onClick={this.clearFilters}
+        >
           <small> (Clear Filters)</small>
         </button>
-
       </div>
     );
   },
@@ -438,8 +522,13 @@ var LocationsHub = createReactClass({
     if (this.props.locError) {
       return (
         <InfoMessage>
-          <p>We coudn't get the data. Please try again later.</p>
-          <p>If you think there's a problem, please <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
+          <p>We coudn&apos;t get the data. Please try again later.</p>
+          <p>
+            If you think there&apos;s a problem, please{' '}
+            <a href="mailto:info@openaq.org" title="Contact openaq">
+              contact us.
+            </a>
+          </p>
         </InfoMessage>
       );
     }
@@ -448,40 +537,62 @@ var LocationsHub = createReactClass({
       return (
         <InfoMessage>
           <p>No data was found for your criteria.</p>
-          <p>Maybe you'd like to suggest a <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>new source</a> or <a href='mailto:info@openaq.org' title='Contact openaq'>let us know</a> what location you'd like to see data for.</p>
+          <p>
+            Maybe you&apos;d like to suggest a{' '}
+            <a
+              href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
+              title="Suggest a new source"
+            >
+              new source
+            </a>{' '}
+            or{' '}
+            <a href="mailto:info@openaq.org" title="Contact openaq">
+              let us know
+            </a>{' '}
+            what location you&apos;d like to see data for.
+          </p>
         </InfoMessage>
       );
     }
 
     return this.props.locations.map(o => {
-      let countryData = _.find(this.props.countries, {code: o.country});
+      let countryData = _.find(this.props.countries, { code: o.country });
       let sourcesData = o.sourceNames
-        .map(s => _.find(this.props.sources, {name: s}))
+        .map(s => _.find(this.props.sources, { name: s }))
         .filter(s => s);
-      let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
-      let openModal = () => this.props._openDownloadModal({
-        country: o.country,
-        area: o.city,
-        location: o.location
-      });
-      return <LocationCard
-              onDownloadClick={openModal}
-              key={o.location}
-              name={o.location}
-              city={o.city}
-              sourceType={o.sourceType}
-              countryData={countryData}
-              sourcesData={sourcesData}
-              totalMeasurements={o.count}
-              parametersList={params}
-              lastUpdate={o.lastUpdated}
-              collectionStart={o.firstUpdated}
-            />;
+      let params = o.parameters.map(o =>
+        _.find(this.props.parameters, { id: o })
+      );
+      let openModal = () =>
+        this.props._openDownloadModal({
+          country: o.country,
+          area: o.city,
+          location: o.location,
+        });
+      return (
+        <LocationCard
+          onDownloadClick={openModal}
+          key={o.location}
+          name={o.location}
+          city={o.city}
+          sourceType={o.sourceType}
+          countryData={countryData}
+          sourcesData={sourcesData}
+          totalMeasurements={o.count}
+          parametersList={params}
+          lastUpdate={o.lastUpdated}
+          collectionStart={o.firstUpdated}
+        />
+      );
     });
   },
 
   renderPagination: function () {
-    if (!this.props.locFetched || this.props.locError || !this.props.locations.length) {
+    if (
+      !this.props.locFetched ||
+      this.props.locError ||
+      !this.props.locations.length
+    ) {
       return null;
     }
 
@@ -489,7 +600,7 @@ var LocationsHub = createReactClass({
       <ReactPaginate
         previousLabel={<span>previous</span>}
         nextLabel={<span>next</span>}
-        breakLabel={<span className='pages__page'>...</span>}
+        breakLabel={<span className="pages__page">...</span>}
         pageNum={this.getTotalPages()}
         forceSelected={this.getPage() - 1}
         marginPagesDisplayed={2}
@@ -499,7 +610,8 @@ var LocationsHub = createReactClass({
         subContainerClassName={'pages'}
         pageClassName={'pages__wrapper'}
         pageLinkClassName={'pages__page'}
-        activeClassName={'active'} />
+        activeClassName={'active'}
+      />
     );
   },
 
@@ -508,70 +620,134 @@ var LocationsHub = createReactClass({
     let yesterdayDataUrl = `https://openaq-data.s3.amazonaws.com/${yesterday}.csv`;
 
     return (
-      <section className='inpage'>
-        <header className='inpage__header'>
-          <div className='inner'>
-            <div className='inpage__headline'>
-              <h1 className='inpage__title'>Air Quality Data</h1>
-              <div className='inpage__introduction'>
-                <p>We are currently collecting data in {this.props.countries.length} different countries and always seeking to add more. We aggregate PM2.5, PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and black carbon (BC) from real-time government and research grade sources. If you cannot find the location you are looking for, please <a href='https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform' title='Suggest a new source'>suggest a source</a> and <a href='mailto:info@openaq.org' title='Contact openaq'>send us an email</a>. The last 2 years of data are accessible here. Learn how to access older data <a href='https://medium.com/@openaq/how-in-the-world-do-you-access-air-quality-data-older-than-90-days-on-the-openaq-platform-8562df519ecd'title='Access older data'>here</a>.</p>
-                <small className='disclaimer'><a href='https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85'>Data Disclaimer and More Information</a></small>
+      <section className="inpage">
+        <header className="inpage__header">
+          <div className="inner">
+            <div className="inpage__headline">
+              <h1 className="inpage__title">Air Quality Data</h1>
+              <div className="inpage__introduction">
+                <p>
+                  We are currently collecting data in{' '}
+                  {this.props.countries.length} different countries and always
+                  seeking to add more. We aggregate PM2.5, PM10, ozone (O3),
+                  sulfur dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide
+                  (CO), and black carbon (BC) from real-time government and
+                  research grade sources. If you cannot find the location you
+                  are looking for, please{' '}
+                  <a
+                    href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
+                    title="Suggest a new source"
+                  >
+                    suggest a source
+                  </a>{' '}
+                  and{' '}
+                  <a href="mailto:info@openaq.org" title="Contact openaq">
+                    send us an email
+                  </a>
+                  . The last 2 years of data are accessible here. Learn how to
+                  access older data{' '}
+                  <a
+                    href="https://medium.com/@openaq/how-in-the-world-do-you-access-air-quality-data-older-than-90-days-on-the-openaq-platform-8562df519ecd"
+                    title="Access older data"
+                  >
+                    here
+                  </a>
+                  .
+                </p>
+                <small className="disclaimer">
+                  <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
+                    Data Disclaimer and More Information
+                  </a>
+                </small>
               </div>
-              <ul className='ipha'>
-                <li><a href={yesterdayDataUrl} className='ipha-download ipha-main' title="Yesterday's data in csv format" >Download Yesterday's Data</a></li>
-                <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
+              <ul className="ipha">
+                <li>
+                  <a
+                    href={yesterdayDataUrl}
+                    className="ipha-download ipha-main"
+                    title="Yesterday's data in csv format"
+                  >
+                    Download Yesterday&apos;s Data
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={config.apiDocs}
+                    title="View API documentation"
+                    className="ipha-api"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View API Docs
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
-          <figure className='inpage__media inpage__media--cover media'>
-            <div className='media__item'>
-              <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
+          <figure className="inpage__media inpage__media--cover media">
+            <div className="media__item">
+              <img
+                src="/assets/graphics/content/view--home/cover--home.jpg"
+                alt="Cover image"
+                width="1440"
+                height="712"
+              />
             </div>
           </figure>
         </header>
 
-        <div className='inpage__body'>
-          <div className='inner'>
-            <div className='inpage__content'>
-              <div className='inpage__content__header'>
+        <div className="inpage__body">
+          <div className="inner">
+            <div className="inpage__content">
+              <div className="inpage__content__header">
                 {this.renderFilters()}
                 {this.renderFilterSummary()}
               </div>
-                <div className='content__meta'>
-                  <div className="content__header">
-                    {this.renderSort()}
-                    <div className='content__heading'>
-                      <h2 className='content-prime-title'>Results
-                      </h2>
-                      {this.props.locPagination.found ? <p className='results-summary'>A total of <strong>{this.props.locPagination.found}</strong> locations were found</p> : null}
-                    </div>
+              <div className="content__meta">
+                <div className="content__header">
+                  {this.renderSort()}
+                  <div className="content__heading">
+                    <h2 className="content-prime-title">Results</h2>
+                    {this.props.locPagination.found ? (
+                      <p className="results-summary">
+                        A total of{' '}
+                        <strong>{this.props.locPagination.found}</strong>{' '}
+                        locations were found
+                      </p>
+                    ) : null}
                   </div>
-
                 </div>
-
-              <div className='inpage__results'>
-                {this.renderContent()}
               </div>
+
+              <div className="inpage__results">{this.renderContent()}</div>
 
               {this.renderPagination()}
 
-              <div className='disclaimers'>
-                <p>It is our intent to attribute all data to their originating sources. Please contact us if you notice any errors or have questions about attribution.</p>
-                <p>Note: We do not guarantee the accuracy of any data aggregated to the platform. Please see originating sites for more information.</p>
+              <div className="disclaimers">
+                <p>
+                  It is our intent to attribute all data to their originating
+                  sources. Please contact us if you notice any errors or have
+                  questions about attribution.
+                </p>
+                <p>
+                  Note: We do not guarantee the accuracy of any data aggregated
+                  to the platform. Please see originating sites for more
+                  information.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
     );
-  }
+  },
 });
 
 // /////////////////////////////////////////////////////////////////////
 // Connect functions
 
-function selector (state) {
+function selector(state) {
   return {
     countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
@@ -581,14 +757,14 @@ function selector (state) {
     locFetched: state.locations.fetched,
     locError: state.locations.error,
     locations: state.locations.data.results,
-    locPagination: state.locations.data.meta
+    locPagination: state.locations.data.meta,
   };
 }
 
-function dispatcher (dispatch) {
+function dispatcher(dispatch) {
   return {
     _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
-    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
   };
 }
 

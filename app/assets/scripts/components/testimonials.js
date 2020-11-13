@@ -4,13 +4,13 @@ import { PropTypes as T } from 'prop-types';
 import { environment } from '../config';
 
 class Testimonials extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.renderListItem = this.renderListItem.bind(this);
   }
 
-  renderListItem (testimonial) {
+  renderListItem(testimonial) {
     const {
       image,
       short_quote: shortQuote,
@@ -18,14 +18,10 @@ class Testimonials extends Component {
       name,
       title,
       affiliation,
-      location
+      location,
     } = testimonial;
 
-    const details = [
-      title,
-      affiliation,
-      location
-    ].filter(Boolean).join(' / ');
+    const details = [title, affiliation, location].filter(Boolean).join(' / ');
 
     const img = image
       ? `/assets/graphics/content/${image}`
@@ -33,15 +29,15 @@ class Testimonials extends Component {
 
     return (
       <li key={testimonial}>
-        <blockquote className='testimonial'>
-          <div className='testimonial__media'>
-            <img src={img} width='960' height='960' alt='Image placeholder' />
+        <blockquote className="testimonial">
+          <div className="testimonial__media">
+            <img src={img} width="960" height="960" alt="Image placeholder" />
           </div>
-          <div className='testimonial__copy'>
-            <div className='testimonial__quote'>
+          <div className="testimonial__copy">
+            <div className="testimonial__quote">
               <p>{shortQuote || longQuote}</p>
             </div>
-            <footer className='testimonial__footer'>
+            <footer className="testimonial__footer">
               <strong>{name}</strong>
               <small>{details}</small>
             </footer>
@@ -51,24 +47,23 @@ class Testimonials extends Component {
     );
   }
 
-  render () {
+  render() {
     return (
-      <section className='testimonials'>
-        <div className='inner'>
-          <h1 className='testimonials__title'>Testimonials</h1>
-          <ol className='testimonials-list'>
+      <section className="testimonials">
+        <div className="inner">
+          <h1 className="testimonials__title">Testimonials</h1>
+          <ol className="testimonials-list">
             {this.props.items.map(this.renderListItem)}
           </ol>
         </div>
       </section>
-
     );
   }
 }
 
 if (environment !== 'production') {
   Testimonials.propTypes = {
-    items: T.array
+    items: T.array,
   };
 }
 

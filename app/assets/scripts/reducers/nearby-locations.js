@@ -8,10 +8,10 @@ const defaultState = {
     meta: {
       page: null,
       limit: null,
-      found: null
+      found: null,
     },
-    results: []
-  }
+    results: [],
+  },
 };
 
 export default function (state = defaultState, action) {

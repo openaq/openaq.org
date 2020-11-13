@@ -5,7 +5,7 @@ const defaultState = {
   open: false,
   country: null,
   area: null,
-  location: null
+  location: null,
 };
 
 export default function (state = defaultState, action) {

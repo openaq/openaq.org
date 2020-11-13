@@ -1,5 +1,5 @@
 ---
-title: "UNEPLive Map"
+title: 'UNEPLive Map'
 url: http://uneplive.unep.org/theme/index/2#maps
 image: assets/graphics/content/view--community-projects/projects/covers/unep.jpg
 logo: assets/graphics/content/view--community-projects/projects/logos/environment-live.png

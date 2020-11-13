@@ -3,12 +3,18 @@ import { PropTypes as T } from 'prop-types';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 
-export default function Header ({ location, area, country, countryCode, openDownloadModal }) {
-  function onDownloadClick () {
+export default function Header({
+  location,
+  area,
+  country,
+  countryCode,
+  openDownloadModal,
+}) {
+  function onDownloadClick() {
     openDownloadModal({
       country: countryCode,
       area,
-      location
+      location,
     });
   }
 
@@ -30,6 +36,7 @@ export default function Header ({ location, area, country, countryCode, openDown
                 title="View in API documentation"
                 className="ipha-api"
                 target="_blank"
+                rel="noreferrer"
               >
                 View API
               </a>
@@ -75,5 +82,5 @@ Header.propTypes = {
   area: T.string,
   countryCode: T.string,
   country: T.string,
-  openDownloadModal: T.func
+  openDownloadModal: T.func,
 };
