@@ -195,6 +195,7 @@ var PageFooter = createReactClass({
                 </li>
                 <li>
                   <a
+                    // eslint-disable-next-line inclusive-language/use-inclusive-words
                     href="https://github.com/openaq/openaq-info/blob/master/FAQ.md"
                     title="View FAQs"
                   >

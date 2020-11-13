@@ -77,6 +77,7 @@ const subMenus = [
         title: 'Frequently Asked Questions',
         description: 'What, why and who.',
         className: null,
+        // eslint-disable-next-line inclusive-language/use-inclusive-words
         url: 'https://github.com/openaq/openaq-info/blob/master/FAQ.md',
       },
     ],
