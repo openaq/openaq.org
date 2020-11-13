@@ -29,6 +29,7 @@ var Map = createReactClass({
 
   propTypes: {
     location: T.object,
+    history: T.object,
 
     _invalidateAllLocationData: T.func,
     _fetchLatestMeasurements: T.func,

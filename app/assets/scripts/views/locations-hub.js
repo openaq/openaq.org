@@ -30,6 +30,8 @@ var LocationsHub = createReactClass({
 
   propTypes: {
     location: T.object,
+    history: T.object,
+
     _fetchLocations: T.func,
     _openDownloadModal: T.func,
 

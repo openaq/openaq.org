@@ -29,7 +29,7 @@ var Country = createReactClass({
   displayName: 'Country',
 
   propTypes: {
-    params: T.object,
+    match: T.object,
 
     _invalidateAllLocationData: T.func,
     _fetchLocations: T.func,

@@ -50,9 +50,11 @@ var Compare = createReactClass({
     _invalidateCompare: T.func,
     _fetchCompareLocationMeasurements: T.func,
 
-    params: T.object,
+    match: T.object,
     location: T.object,
+    history: T.object,
 
+    params: T.object,
     countries: T.array,
     parameters: T.array,
 
