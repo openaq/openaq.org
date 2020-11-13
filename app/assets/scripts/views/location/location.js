@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import qs from 'qs';
 import moment from 'moment';
 
 import {
@@ -136,7 +135,10 @@ function Location(props) {
         openDownloadModal={props._openDownloadModal}
       />
       <div className="inpage__body">
-        <Dashboard gridTemplateRows={'repeat(4, 20rem)'}>
+        <Dashboard 
+          gridTemplateRows={'repeat(4, 20rem)'}
+          gridTemplateColumns={'repeat(12, 1fr)'}
+        >
           <StatsInfoCard
             latestMeasurements={props.latestMeasurements}
             measurements={props.measurements}

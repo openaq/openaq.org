@@ -29,7 +29,7 @@ export default function SourceInfo({ measurements, loc, sources: allSources }) {
     <Card
       title="Sources"
       //gridRow={'1 / 2'}
-      gridColumn={'4'}
+      gridColumn={'11 / -1'}
       renderBody={() => (
         <SourceList className="card__body">
           {sources.map(source => (

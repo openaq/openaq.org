@@ -7,7 +7,7 @@ import LoadingMessage from '../../components/loading-message';
 import Card, { HighlightText, CardSubtitle } from '../../components/card';
 
 const ErrorMessage = styled.div`
-  grid-column: 2 / 4;
+  grid-column: 1 / span 3;
 `;
 
 export default function StatsInfo({ latestMeasurements, measurements, loc }) {
@@ -60,7 +60,7 @@ export default function StatsInfo({ latestMeasurements, measurements, loc }) {
   return (
     <Card
       title="Details"
-      gridColumn={'1'}
+      gridColumn={'1 / span 3'}
       renderBody={() => {
         return (
           <div className="card__body">

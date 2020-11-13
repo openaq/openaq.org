@@ -7,10 +7,10 @@ import LoadingMessage from '../../components/loading-message';
 import Card, { HighlightText, CardSubtitle } from '../../components/card';
 
 const StyledLoading = styled(LoadingMessage)`
-  grid-column: 2 / 4;
+  grid-column: 4 / 11;
 `;
 const ErrorMessage = styled.div`
-  grid-column: 2 / 4;
+  grid-column: 4 / 11;
 `;
 
 const MeasurementsCont = styled.dl`
@@ -77,7 +77,7 @@ export default function Measurements({
   return (
     <Card
       title="Latest Measurements"
-      gridColumn={'2 / 4'}
+      gridColumn={'4 / 11'}
       // gridRow={'1 / span 2'}
       renderBody={() => {
         return (
