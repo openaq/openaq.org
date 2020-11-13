@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import * as d3 from 'd3';
@@ -70,7 +69,7 @@ var BrushChart = createReactClass({
       .xRange(this.props.xRange)
       .yRange(this.props.yRange);
 
-    d3.select(this.refs.container).call(this.chart);
+    d3.select(this.containerRef).call(this.chart);
   },
 
   componentWillUnmount: function () {
@@ -98,7 +97,12 @@ var BrushChart = createReactClass({
   },
 
   render: function () {
-    return <div className={this.props.className} ref="container"></div>;
+    return (
+      <div
+        className={this.props.className}
+        ref={x => (this.containerRef = x)}
+      ></div>
+    );
   },
 });
 

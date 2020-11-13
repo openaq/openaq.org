@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import * as d3 from 'd3';
@@ -48,7 +47,7 @@ var ChartMeasurement = createReactClass({
       this.chart.type('compressed');
     }
 
-    d3.select(this.refs.container).call(this.chart);
+    d3.select(this.containerRef).call(this.chart);
   },
 
   componentWillUnmount: function () {
@@ -79,7 +78,12 @@ var ChartMeasurement = createReactClass({
   },
 
   render: function () {
-    return <div className={this.props.className} ref="container"></div>;
+    return (
+      <div
+        className={this.props.className}
+        ref={x => (this.containerRef = x)}
+      ></div>
+    );
   },
 });
 

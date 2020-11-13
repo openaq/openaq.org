@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { render } from 'react-dom';
@@ -419,7 +418,7 @@ const MapComponent = createReactClass({
     }
 
     this.map = new mapboxgl.Map({
-      container: this.refs.map,
+      container: this.mapRef,
       center: this.props.center || [0, 0],
       zoom: this.props.zoom,
       style: config.mapbox.baseStyle,
@@ -459,7 +458,7 @@ const MapComponent = createReactClass({
   render: function () {
     return (
       <div className="map">
-        <div className="map__container" ref="map">
+        <div className="map__container" ref={x => (this.mapRef = x)}>
           {/* Map renders on componentDidMount. */}
         </div>
         <div className="map__legend">{this.props.children}</div>

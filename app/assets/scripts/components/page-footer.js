@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -210,7 +209,7 @@ var PageFooter = createReactClass({
             <div className="foot-newsletter">
               <h2>Subscribe to our newsletter</h2>
               <form
-                ref="newsletterForm"
+                ref={x => (this.newsletterFormRef = x)}
                 action="//openaq.us10.list-manage.com/subscribe/post?u=ca93b2911fff40db15f6e7203&amp;id=e65a8618a1"
                 method="post"
                 id="mc-embedded-subscribe-form"
@@ -232,7 +231,7 @@ var PageFooter = createReactClass({
                     <button
                       className="button--subscribe"
                       type="submit"
-                      onClick={() => this.refs.newsletterForm.reset()}
+                      onClick={() => this.newsletterFormRef.reset()}
                     >
                       <span>Subscribe</span>
                     </button>
