@@ -163,7 +163,7 @@ var Compare = createReactClass({
     loc3 && this.fetchLocationData(2, loc3);
   },
 
-  componentWillReceiveProps: function (nextProps) {
+  UNSAFE_componentWillReceiveProps: function (nextProps) {
     let {
       loc1: prevLoc1,
       loc2: prevLoc2,

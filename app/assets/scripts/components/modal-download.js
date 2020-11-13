@@ -191,7 +191,7 @@ var ModalDownload = createReactClass({
     }
   },
 
-  componentWillUpdate: function (nextProps, nextState) {
+  UNSAFE_componentWillUpdate: function (nextProps, nextState) {
     let prevUrl = this.computeApiUrl(this.state, { limit: 1 });
     let nextUrl = this.computeApiUrl(nextState, { limit: 1 });
     prevUrl !== nextUrl && this.checkSelectionCount(nextUrl);
