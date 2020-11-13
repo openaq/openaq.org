@@ -169,7 +169,11 @@ var Compare = createReactClass({
       loc2: prevLoc2,
       loc3: prevLoc3,
     } = this.props.match.params;
-    let { loc1: currLoc1, loc2: currLoc2, loc3: currLoc3 } = nextProps.params;
+    let {
+      loc1: currLoc1,
+      loc2: currLoc2,
+      loc3: currLoc3,
+    } = nextProps.match.params;
 
     if (prevLoc1 !== currLoc1) {
       currLoc1
