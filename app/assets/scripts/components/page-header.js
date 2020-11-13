@@ -15,27 +15,27 @@ const subMenus = [
         title: 'Locations',
         description: 'An overview of locations in the dataset.',
         className: 'sub-menu__link--locations',
-        url: '/locations'
+        url: '/locations',
       },
       {
         title: 'Countries',
         description: 'Air quality data by country.',
         className: 'sub-menu__link--countries',
-        url: '/countries'
+        url: '/countries',
       },
       {
         title: 'World map',
         description: 'See the latest measurements on a map.',
         className: 'sub-menu__link--map',
-        url: '/map'
+        url: '/map',
       },
       {
         title: 'Use API',
         description: 'Access the data through our API.',
         className: 'sub-menu__link--api',
-        url: 'https://docs.openaq.org/'
-      }
-    ]
+        url: 'https://docs.openaq.org/',
+      },
+    ],
   },
   {
     id: 'community',
@@ -45,21 +45,23 @@ const subMenus = [
         title: 'Overview',
         description: 'Passionate about air quality data? Join our community.',
         className: null,
-        url: '/community'
+        url: '/community',
       },
       {
         title: 'Impact',
-        description: 'A community using the data to fight air inquality in the most exciting ways.',
+        description:
+          'A community using the data to fight air inquality in the most exciting ways.',
         className: null,
-        url: '/community/projects'
+        url: '/community/projects',
       },
       {
         title: 'Workshops',
-        description: 'Convene local communities to start new projects and collaborations to fight air pollution.',
+        description:
+          'Convene local communities to start new projects and collaborations to fight air pollution.',
         className: null,
-        url: '/community/workshops'
-      }
-    ]
+        url: '/community/workshops',
+      },
+    ],
   },
   {
     id: 'about',
@@ -69,19 +71,19 @@ const subMenus = [
         title: 'Our organization',
         description: 'Our mission is to fight air inequality.',
         className: null,
-        url: '/about'
+        url: '/about',
       },
       {
         title: 'Frequently Asked Questions',
         description: 'What, why and who.',
         className: null,
-        url: 'https://github.com/openaq/openaq-info/blob/master/FAQ.md'
-      }
-    ]
-  }
+        url: 'https://github.com/openaq/openaq-info/blob/master/FAQ.md',
+      },
+    ],
+  },
 ];
 
-function isDescendant (parent, child) {
+function isDescendant(parent, child) {
   var node = child.parentNode;
   while (node !== null) {
     if (node === parent) {
@@ -93,12 +95,12 @@ function isDescendant (parent, child) {
 }
 
 class PageHeader extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
       openMobileMenu: false,
-      openSubMenu: null
+      openSubMenu: null,
     };
 
     this.onMobileMenuClick = this.onMobileMenuClick.bind(this);
@@ -106,71 +108,82 @@ class PageHeader extends React.Component {
     this.onLinkNavigate = this.onLinkNavigate.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     document.addEventListener('click', this.onBodyClick);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     document.removeEventListener('click', this.onBodyClick);
   }
 
-  onBodyClick (e) {
-    const descendant = isDescendant(document.querySelector('#page-prime-nav'), e.target);
+  onBodyClick(e) {
+    const descendant = isDescendant(
+      document.querySelector('#page-prime-nav'),
+      e.target
+    );
     if (!descendant) {
       this.setState({
         openMobileMenu: null,
-        openSubMenu: null
+        openSubMenu: null,
       });
     }
   }
 
-  onMenuClick (what, e) {
+  onMenuClick(what, e) {
     e.preventDefault();
     this.setState({
-      openSubMenu: this.state.openSubMenu === what
-        ? null
-        : what
+      openSubMenu: this.state.openSubMenu === what ? null : what,
     });
   }
 
-  onLinkNavigate () {
+  onLinkNavigate() {
     // When navigating reset menu.
     this.setState({
       openMobileMenu: null,
-      openSubMenu: null
+      openSubMenu: null,
     });
   }
 
-  onMobileMenuClick (e) {
+  onMobileMenuClick(e) {
     e.preventDefault();
     this.setState({
       openMobileMenu: !this.state.openMobileMenu,
-      openSubMenu: null
+      openSubMenu: null,
     });
   }
 
-  renderGlobalMenu () {
+  renderGlobalMenu() {
     const altClass = name =>
       c('global-menu__link global-menu__link--alt', {
-        'global-menu__link--active': this.state.openSubMenu === name
+        'global-menu__link--active': this.state.openSubMenu === name,
       });
 
     return (
-      <ul className='global-menu'>
+      <ul className="global-menu">
         <li>
-          <Link to='/' title='View page' className='global-menu__link' onClick={this.onLinkNavigate}>
+          <Link
+            to="/"
+            title="View page"
+            className="global-menu__link"
+            onClick={this.onLinkNavigate}
+          >
             <span>Home</span>
           </Link>
         </li>
         <li>
-          <Link to='/why' title='View page' className='global-menu__link' onClick={this.onLinkNavigate}>
+          <Link
+            to="/why"
+            title="View page"
+            className="global-menu__link"
+            onClick={this.onLinkNavigate}
+          >
             <span>Why open air quality?</span>
           </Link>
         </li>
         <li>
           <a
-            href='#nav-group-open-data'
-            title='View menu'
+            href="#nav-group-open-data"
+            title="View menu"
             className={altClass('open-data')}
             onClick={this.onMenuClick.bind(this, 'open-data')}
           >
@@ -179,8 +192,8 @@ class PageHeader extends React.Component {
         </li>
         <li>
           <a
-            href='#nav-group-community'
-            title='View menu'
+            href="#nav-group-community"
+            title="View menu"
             className={altClass('community')}
             onClick={this.onMenuClick.bind(this, 'community')}
           >
@@ -188,14 +201,20 @@ class PageHeader extends React.Component {
           </a>
         </li>
         <li>
-          <a href='https://medium.com/@openaq' title='View blog' className='global-menu__link' target='_blank' onClick={this.onLinkNavigate}>
+          <a
+            href="https://medium.com/@openaq"
+            title="View blog"
+            className="global-menu__link"
+            target="_blank"
+            onClick={this.onLinkNavigate}
+          >
             <span>Blog</span>
           </a>
         </li>
         <li>
           <a
-            href='#nav-group-about'
-            title='View menu'
+            href="#nav-group-about"
+            title="View menu"
             className={altClass('about')}
             onClick={this.onMenuClick.bind(this, 'about')}
           >
@@ -206,32 +225,32 @@ class PageHeader extends React.Component {
     );
   }
 
-  render () {
+  render() {
     return (
-      <header className='page__header' role='banner'>
-        <h1 className='page__title'>OpenAQ</h1>
+      <header className="page__header" role="banner">
+        <h1 className="page__title">OpenAQ</h1>
 
-        <nav className='page__prime-nav nav' id='page-prime-nav'>
-          <div className='nav__group nav__group--main'>
-            <div className='inner'>
+        <nav className="page__prime-nav nav" id="page-prime-nav">
+          <div className="nav__group nav__group--main">
+            <div className="inner">
               <Link
-                to='/'
-                title='Visit homepage'
-                className='nav__home-link'
+                to="/"
+                title="Visit homepage"
+                className="nav__home-link"
                 onClick={this.onLinkNavigate}
               >
                 <img
-                  src='/assets/graphics/layout/oaq-logo-col-pos.svg'
-                  alt='OpenAQ logotype'
-                  width='72'
-                  height='40'
+                  src="/assets/graphics/layout/oaq-logo-col-pos.svg"
+                  alt="OpenAQ logotype"
+                  width="72"
+                  height="40"
                 />
                 <span>Home</span>
               </Link>
               <Link
-                to='/community'
-                title='View page'
-                className='nav__action-link'
+                to="/community"
+                title="View page"
+                className="nav__action-link"
                 onClick={this.onLinkNavigate}
               >
                 <span>Get involved</span>
@@ -242,10 +261,10 @@ class PageHeader extends React.Component {
                     this.renderGlobalMenu()
                   ) : (
                     <a
-                      href='#nav-group-global'
-                      title='Jump to main menu'
+                      href="#nav-group-global"
+                      title="Jump to main menu"
                       className={c('nav__burguer-link', {
-                        'nav__burguer-link--alt': this.state.openMobileMenu
+                        'nav__burguer-link--alt': this.state.openMobileMenu,
                       })}
                       onClick={this.onMobileMenuClick}
                     >
@@ -263,12 +282,12 @@ class PageHeader extends React.Component {
                 <div
                   className={c('nav__group nav__group--sub', {
                     'nav__group--active':
-                      this.state.openMobileMenu && !this.state.openSubMenu
+                      this.state.openMobileMenu && !this.state.openSubMenu,
                   })}
-                  id='nav-group-global'
+                  id="nav-group-global"
                 >
-                  <div className='inner'>
-                    <h3 className='nav__title visually-hidden'>Main</h3>
+                  <div className="inner">
+                    <h3 className="nav__title visually-hidden">Main</h3>
                     {this.renderGlobalMenu()}
                   </div>
                 </div>
@@ -280,31 +299,31 @@ class PageHeader extends React.Component {
             <div
               key={group.id}
               className={c('nav__group nav__group--sub', {
-                'nav__group--active': this.state.openSubMenu === group.id
+                'nav__group--active': this.state.openSubMenu === group.id,
               })}
               id={`nav-group-${group.id}`}
             >
-              <div className='inner'>
-                <h3 className='nav__title nav__title--sub'>
+              <div className="inner">
+                <h3 className="nav__title nav__title--sub">
                   <a
-                    href='#nav-group-global'
-                    title='Jump to main menu'
+                    href="#nav-group-global"
+                    title="Jump to main menu"
                     onClick={this.onMenuClick.bind(this, null)}
                   >
                     <span>{group.title}</span>
                   </a>
                 </h3>
-                <ul className='sub-menu'>
+                <ul className="sub-menu">
                   {group.items.map(item => (
                     <li key={item.title}>
                       <SmartLink
                         to={item.url}
-                        title='View page'
+                        title="View page"
                         className={c('sub-menu__link', item.className)}
                         onClick={this.onLinkNavigate}
-                     >
+                      >
                         <h5>{item.title}</h5>
-                        {item.description && (<p>{item.description}</p>)}
+                        {item.description && <p>{item.description}</p>}
                       </SmartLink>
                     </li>
                   ))}
@@ -312,7 +331,6 @@ class PageHeader extends React.Component {
               </div>
             </div>
           ))}
-
         </nav>
       </header>
     );

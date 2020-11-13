@@ -8,8 +8,16 @@ import moment from 'moment';
 import distance from 'turf-distance';
 import createReactClass from 'create-react-class';
 
-import { convertParamIfNeeded, circleOpacity, circleBlur,
-         coloredCircleRadius, borderCircleRadius, selectCircleRadius, selectShadowCircleRadius, locationShadowCircleRadius } from '../utils/map-settings';
+import {
+  convertParamIfNeeded,
+  circleOpacity,
+  circleBlur,
+  coloredCircleRadius,
+  borderCircleRadius,
+  selectCircleRadius,
+  selectShadowCircleRadius,
+  locationShadowCircleRadius,
+} from '../utils/map-settings';
 import { generateColorStops } from '../utils/colors';
 import { round } from '../utils/format';
 // import  from '../utils/color-scale';
@@ -34,7 +42,7 @@ const MapComponent = createReactClass({
     zoom: T.number,
     disableScrollZoom: T.bool,
     sources: T.array,
-    children: T.object
+    children: T.object,
   },
 
   nearbyKm: 10,
@@ -50,7 +58,7 @@ const MapComponent = createReactClass({
 
   nearbyLocationClick: function (location, e) {
     e.preventDefault();
-    let data = _.find(this.props.measurements, {location: location});
+    let data = _.find(this.props.measurements, { location: location });
     this.map.panTo([data.coordinates.longitude, data.coordinates.latitude]);
     this.showPopover(data);
 
@@ -68,7 +76,9 @@ const MapComponent = createReactClass({
   },
 
   locationPageSetup: function () {
-    let data = _.find(this.props.measurements, {location: this.props.highlightLoc});
+    let data = _.find(this.props.measurements, {
+      location: this.props.highlightLoc,
+    });
     if (!data) return;
     this.showPopover(data);
     this.selectLocationPoint(this.generateFeature(data));
@@ -77,8 +87,10 @@ const MapComponent = createReactClass({
   setupMapEvents: function () {
     // When a click event occurs near a place, open a popup at the location of
     // the feature, with description HTML from its properties.
-    this.map.on('click', (e) => {
-      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
+    this.map.on('click', e => {
+      let features = this.map.queryRenderedFeatures(e.point, {
+        layers: ['measurements'],
+      });
 
       if (!features.length) {
         // Unselect point.
@@ -87,46 +99,48 @@ const MapComponent = createReactClass({
       }
 
       // Popover.
-      let data = _.find(this.props.measurements, {location: features[0].properties.location});
+      let data = _.find(this.props.measurements, {
+        location: features[0].properties.location,
+      });
       this.showPopover(data);
       this.selectPoint(features[0].toJSON());
     });
 
     // Use the same approach as above to indicate that the symbols are clickable
     // by changing the cursor style to 'pointer'.
-    this.map.on('mousemove', (e) => {
-      let features = this.map.queryRenderedFeatures(e.point, { layers: ['measurements'] });
-      this.map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+    this.map.on('mousemove', e => {
+      let features = this.map.queryRenderedFeatures(e.point, {
+        layers: ['measurements'],
+      });
+      this.map.getCanvas().style.cursor = features.length ? 'pointer' : '';
     });
   },
 
   showPopover: function (data) {
-    let measurement = _.find(data.measurements, {parameter: this.props.parameter.id});
-    let sourceData = _.find(this.props.sources, {name: measurement.sourceName});
+    let measurement = _.find(data.measurements, {
+      parameter: this.props.parameter.id,
+    });
+    let sourceData = _.find(this.props.sources, {
+      name: measurement.sourceName,
+    });
 
     // Find the nearby ones.
     let start = {
-      'type': 'Feature',
-      'geometry': {
-        'type': 'Point',
-        'coordinates': [
-          data.coordinates.longitude,
-          data.coordinates.latitude
-        ]
-      }
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [data.coordinates.longitude, data.coordinates.latitude],
+      },
     };
 
     let nearby = _(_.cloneDeep(this.props.measurements))
       .map(o => {
         let end = {
-          'type': 'Feature',
-          'geometry': {
-            'type': 'Point',
-            'coordinates': [
-              o.coordinates.longitude,
-              o.coordinates.latitude
-            ]
-          }
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [o.coordinates.longitude, o.coordinates.latitude],
+          },
         };
         o.distance = distance(start, end, 'kilometers');
         return o;
@@ -137,14 +151,18 @@ const MapComponent = createReactClass({
       .value();
 
     let popoverContent = document.createElement('div');
-    render(<MapPopover
-      location={data.location}
-      measurement={measurement}
-      parameter={this.props.parameter}
-      sourceData={sourceData}
-      nearbyKm={this.nearbyKm}
-      nearby={nearby}
-      nearbyClick={this.nearbyLocationClick} />, popoverContent);
+    render(
+      <MapPopover
+        location={data.location}
+        measurement={measurement}
+        parameter={this.props.parameter}
+        sourceData={sourceData}
+        nearbyKm={this.nearbyKm}
+        nearby={nearby}
+        nearbyClick={this.nearbyLocationClick}
+      />,
+      popoverContent
+    );
 
     // Populate the popup and set its coordinates
     // based on the feature found.
@@ -152,7 +170,7 @@ const MapComponent = createReactClass({
       this.popover.remove();
     }
 
-    this.popover = new mapboxgl.Popup({closeButton: false})
+    this.popover = new mapboxgl.Popup({ closeButton: false })
       .setLngLat([data.coordinates.longitude, data.coordinates.latitude])
       .setDOMContent(popoverContent)
       .addTo(this.map);
@@ -160,10 +178,14 @@ const MapComponent = createReactClass({
 
   selectPoint: function (feature) {
     if (this.map.getSource('selectedPoint')) {
-      this.map.getLayer('selectedPointShadow') && this.map.removeLayer('selectedPointShadow');
-      this.map.getLayer('selectedPointHighlight') && this.map.removeLayer('selectedPointHighlight');
-      this.map.getLayer('selectedPoint') && this.map.removeLayer('selectedPoint');
-      this.map.getSource('selectedPoint') && this.map.removeSource('selectedPoint');
+      this.map.getLayer('selectedPointShadow') &&
+        this.map.removeLayer('selectedPointShadow');
+      this.map.getLayer('selectedPointHighlight') &&
+        this.map.removeLayer('selectedPointHighlight');
+      this.map.getLayer('selectedPoint') &&
+        this.map.removeLayer('selectedPoint');
+      this.map.getSource('selectedPoint') &&
+        this.map.removeSource('selectedPoint');
     }
 
     // Passing feature: null clears selection.
@@ -172,48 +194,48 @@ const MapComponent = createReactClass({
     }
 
     this.map.addSource('selectedPoint', {
-      'type': 'geojson',
-      'data': feature
+      type: 'geojson',
+      data: feature,
     });
     // Add Shadow
     this.map.addLayer({
-      'id': 'selectedPointShadow',
-      'type': 'circle',
-      'source': 'selectedPoint',
-      'paint': {
+      id: 'selectedPointShadow',
+      type: 'circle',
+      source: 'selectedPoint',
+      paint: {
         'circle-color': '#000',
         'circle-opacity': 0.3,
         'circle-radius': selectShadowCircleRadius,
         'circle-blur': 0.5,
-        'circle-translate': [0.5, 0.5]
-      }
+        'circle-translate': [0.5, 0.5],
+      },
     });
     // Add Highlight
     this.map.addLayer({
-      'id': 'selectedPointHighlight',
-      'type': 'circle',
-      'source': 'selectedPoint',
-      'paint': {
+      id: 'selectedPointHighlight',
+      type: 'circle',
+      source: 'selectedPoint',
+      paint: {
         'circle-color': '#fff',
         'circle-opacity': 1,
         'circle-radius': selectCircleRadius,
-        'circle-blur': 0
-      }
+        'circle-blur': 0,
+      },
     });
     // Re-add fill by value
     this.map.addLayer({
-      'id': 'selectedPoint',
-      'type': 'circle',
-      'source': 'selectedPoint',
-      'paint': {
+      id: 'selectedPoint',
+      type: 'circle',
+      source: 'selectedPoint',
+      paint: {
         'circle-color': {
           property: 'value',
-          stops: generateColorStops(this.props.parameter.id)
+          stops: generateColorStops(this.props.parameter.id),
         },
         'circle-opacity': 1,
         'circle-radius': coloredCircleRadius,
-        'circle-blur': 0
-      }
+        'circle-blur': 0,
+      },
     });
   },
 
@@ -224,48 +246,48 @@ const MapComponent = createReactClass({
     }
 
     this.map.addSource('locationPoint', {
-      'type': 'geojson',
-      'data': feature
+      type: 'geojson',
+      data: feature,
     });
     // Add Shadow
     this.map.addLayer({
-      'id': 'locationPointShadow',
-      'type': 'circle',
-      'source': 'locationPoint',
-      'paint': {
+      id: 'locationPointShadow',
+      type: 'circle',
+      source: 'locationPoint',
+      paint: {
         'circle-color': '#000',
         'circle-opacity': 0.6,
         'circle-radius': locationShadowCircleRadius,
         'circle-blur': 0.5,
-        'circle-translate': [0.5, 0.5]
-      }
+        'circle-translate': [0.5, 0.5],
+      },
     });
     // Add Highlight
     this.map.addLayer({
-      'id': 'locationPointHighlight',
-      'type': 'circle',
-      'source': 'locationPoint',
-      'paint': {
+      id: 'locationPointHighlight',
+      type: 'circle',
+      source: 'locationPoint',
+      paint: {
         'circle-color': '#fff',
         'circle-opacity': 1,
         'circle-radius': selectCircleRadius,
-        'circle-blur': 0
-      }
+        'circle-blur': 0,
+      },
     });
     // Re-add fill by value
     this.map.addLayer({
-      'id': 'locationPoint',
-      'type': 'circle',
-      'source': 'locationPoint',
-      'paint': {
+      id: 'locationPoint',
+      type: 'circle',
+      source: 'locationPoint',
+      paint: {
         'circle-color': {
           property: 'value',
-          stops: generateColorStops(this.props.parameter.id)
+          stops: generateColorStops(this.props.parameter.id),
         },
         'circle-opacity': 1,
         'circle-radius': coloredCircleRadius,
-        'circle-blur': 0
-      }
+        'circle-blur': 0,
+      },
     });
   },
 
@@ -277,7 +299,9 @@ const MapComponent = createReactClass({
   dayAgo: null,
 
   generateFeature: function (locMeasurement) {
-    let param = _.find(locMeasurement.measurements, {parameter: this.props.parameter.id});
+    let param = _.find(locMeasurement.measurements, {
+      parameter: this.props.parameter.id,
+    });
     // If there's no value for the active param return null.
     // Null values will be filtered out.
     if (!param) {
@@ -302,15 +326,15 @@ const MapComponent = createReactClass({
         // Controls which color is applied to the point.
         // Needs to be the points measurement.
         value: val,
-        lastUpdated: param.lastUpdated
+        lastUpdated: param.lastUpdated,
       },
       geometry: {
         type: 'Point',
         coordinates: [
           locMeasurement.coordinates.longitude,
-          locMeasurement.coordinates.latitude
-        ]
-      }
+          locMeasurement.coordinates.latitude,
+        ],
+      },
     };
   },
 
@@ -320,11 +344,14 @@ const MapComponent = createReactClass({
     return {
       type: 'FeatureCollection',
       features: this.props.measurements
-      .map(o => this.generateFeature(o))
-      .filter(o => o !== null)
-      .sort((a, b) => {
-        return new Date(a.properties.lastUpdated) - new Date(b.properties.lastUpdated);
-      })
+        .map(o => this.generateFeature(o))
+        .filter(o => o !== null)
+        .sort((a, b) => {
+          return (
+            new Date(a.properties.lastUpdated) -
+            new Date(b.properties.lastUpdated)
+          );
+        }),
     };
   },
 
@@ -332,39 +359,39 @@ const MapComponent = createReactClass({
     const source = this.generateSourceData();
 
     this.map.addSource('measurements', {
-      'type': 'geojson',
-      'data': source
+      type: 'geojson',
+      data: source,
     });
 
     // Layer for outline
     this.map.addLayer({
-      'id': 'pointOutlines',
-      'source': 'measurements',
-      'type': 'circle',
-      'paint': {
+      id: 'pointOutlines',
+      source: 'measurements',
+      type: 'circle',
+      paint: {
         'circle-color': {
           property: 'value',
-          stops: generateColorStops(this.props.parameter.id, 'dark')
+          stops: generateColorStops(this.props.parameter.id, 'dark'),
         },
         'circle-opacity': 1,
         'circle-radius': borderCircleRadius,
-        'circle-blur': 0
-      }
+        'circle-blur': 0,
+      },
     });
 
     this.map.addLayer({
-      'id': 'measurements',
-      'source': 'measurements',
-      'type': 'circle',
-      'paint': {
+      id: 'measurements',
+      source: 'measurements',
+      type: 'circle',
+      paint: {
         'circle-color': {
           property: 'value',
-          stops: generateColorStops(this.props.parameter.id)
+          stops: generateColorStops(this.props.parameter.id),
         },
         'circle-opacity': circleOpacity,
         'circle-radius': coloredCircleRadius,
-        'circle-blur': circleBlur
-      }
+        'circle-blur': circleBlur,
+      },
     });
   },
 
@@ -375,16 +402,20 @@ const MapComponent = createReactClass({
   componentDidUpdate: function (prevProps) {
     if (this.props.parameter.id !== prevProps.parameter.id) {
       // We need to update. Delete source + layers and setup again.
-      this.map.getLayer('pointOutlines') && this.map.removeLayer('pointOutlines');
+      this.map.getLayer('pointOutlines') &&
+        this.map.removeLayer('pointOutlines');
       this.map.getLayer('measurements') && this.map.removeLayer('measurements');
-      this.map.getSource('measurements') && this.map.removeSource('measurements');
+      this.map.getSource('measurements') &&
+        this.map.removeSource('measurements');
       this.setupMapData();
     }
   },
 
   componentDidMount: function () {
     if (!this.props.center && !this.props.bbox) {
-      throw new Error('At least center or bbox has to be provided to MapComponent');
+      throw new Error(
+        'At least center or bbox has to be provided to MapComponent'
+      );
     }
 
     this.map = new mapboxgl.Map({
@@ -392,13 +423,16 @@ const MapComponent = createReactClass({
       center: this.props.center || [0, 0],
       zoom: this.props.zoom,
       style: config.mapbox.baseStyle,
-      maxBounds: [[-180, -84], [180, 84]]
+      maxBounds: [
+        [-180, -84],
+        [180, 84],
+      ],
     });
 
     if (this.props.bbox) {
       this.map.fitBounds([
         [this.props.bbox[0], this.props.bbox[1]],
-        [this.props.bbox[2], this.props.bbox[3]]
+        [this.props.bbox[2], this.props.bbox[3]],
       ]);
     }
 
@@ -424,16 +458,14 @@ const MapComponent = createReactClass({
 
   render: function () {
     return (
-      <div className='map'>
-        <div className='map__container' ref='map'>
+      <div className="map">
+        <div className="map__container" ref="map">
           {/* Map renders on componentDidMount. */}
         </div>
-        <div className='map__legend'>
-          {this.props.children}
-        </div>
+        <div className="map__legend">{this.props.children}</div>
       </div>
     );
-  }
+  },
 });
 
 module.exports = MapComponent;
@@ -453,7 +485,7 @@ const MapPopover = createReactClass({
     sourceData: T.object,
     nearbyKm: T.number,
     nearby: T.array,
-    nearbyClick: T.func
+    nearbyClick: T.func,
   },
 
   renderNearby: function () {
@@ -463,16 +495,31 @@ const MapPopover = createReactClass({
 
     return (
       <div>
-        <p>Showing <strong>{this.props.nearby.length}</strong> other locations within {this.props.nearbyKm}km</p>
-        <ul className='popover-nearby-loc'>
+        <p>
+          Showing <strong>{this.props.nearby.length}</strong> other locations
+          within {this.props.nearbyKm}km
+        </p>
+        <ul className="popover-nearby-loc">
           {this.props.nearby.map(o => {
-            let measurement = _.find(o.measurements, {parameter: this.props.parameter.id});
+            let measurement = _.find(o.measurements, {
+              parameter: this.props.parameter.id,
+            });
             return (
               <li key={o.location}>
-                {measurement
-                  ? <strong>{round(measurement.value)} {measurement.unit}</strong>
-                  : <strong>{this.props.parameter.name} N/A</strong>}
-                <a onClick={this.props.nearbyClick.bind(null, o.location)} href='' title={`Open ${o.location} popover`}>{o.location}</a>
+                {measurement ? (
+                  <strong>
+                    {round(measurement.value)} {measurement.unit}
+                  </strong>
+                ) : (
+                  <strong>{this.props.parameter.name} N/A</strong>
+                )}
+                <a
+                  onClick={this.props.nearbyClick.bind(null, o.location)}
+                  href=""
+                  title={`Open ${o.location} popover`}
+                >
+                  {o.location}
+                </a>
               </li>
             );
           })}
@@ -486,32 +533,69 @@ const MapPopover = createReactClass({
     let reading = <p>{this.props.parameter.name} N/A</p>;
     if (m) {
       let lastUp = moment.utc(m.lastUpdated).format('YYYY/MM/DD HH:mm');
-      reading = <p>Last reading <strong>{round(m.value)} {m.unit}</strong> at <strong>{lastUp}</strong></p>;
+      reading = (
+        <p>
+          Last reading{' '}
+          <strong>
+            {round(m.value)} {m.unit}
+          </strong>{' '}
+          at <strong>{lastUp}</strong>
+        </p>
+      );
     }
 
     return (
-      <article className='popover'>
-        <div className='popover__contents'>
-          <header className='popover__header'>
-            <h1 className='popover__title'><a href={`#/location/${encodeURIComponent(this.props.location)}`} title={`View ${this.props.location} page`}>{this.props.location}</a></h1>
+      <article className="popover">
+        <div className="popover__contents">
+          <header className="popover__header">
+            <h1 className="popover__title">
+              <a
+                href={`#/location/${encodeURIComponent(this.props.location)}`}
+                title={`View ${this.props.location} page`}
+              >
+                {this.props.location}
+              </a>
+            </h1>
           </header>
-          <div className='popover__body'>
+          <div className="popover__body">
             {reading}
-            <p>Source: <a href={this.props.sourceData.sourceURL} title='View source information'>{this.props.sourceData.name}</a></p>
-            <ul className='popover__actions'>
-              { /*
+            <p>
+              Source:{' '}
+              <a
+                href={this.props.sourceData.sourceURL}
+                title="View source information"
+              >
+                {this.props.sourceData.name}
+              </a>
+            </p>
+            <ul className="popover__actions">
+              {/*
                 Using `a` instead of `Link` because these are rendered outside
                 the router context and `Link` needs that context to work.
-              */ }
-              <li><a href={`#/compare/${encodeURIComponent(this.props.location)}`} className='button button--primary-bounded' title={`Compare ${this.props.location} with other locations`}>Compare</a></li>
-              <li><a href={`#/location/${encodeURIComponent(this.props.location)}`} title={`View ${this.props.location} page`}className='button button--primary-bounded'>View More</a></li>
+              */}
+              <li>
+                <a
+                  href={`#/compare/${encodeURIComponent(this.props.location)}`}
+                  className="button button--primary-bounded"
+                  title={`Compare ${this.props.location} with other locations`}
+                >
+                  Compare
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`#/location/${encodeURIComponent(this.props.location)}`}
+                  title={`View ${this.props.location} page`}
+                  className="button button--primary-bounded"
+                >
+                  View More
+                </a>
+              </li>
             </ul>
           </div>
-          <footer className='popover__footer'>
-            {this.renderNearby()}
-          </footer>
+          <footer className="popover__footer">{this.renderNearby()}</footer>
         </div>
       </article>
     );
-  }
+  },
 });

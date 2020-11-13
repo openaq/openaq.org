@@ -12,7 +12,7 @@
  *
  * &nbsp; = \u00A0
  */
-export default function widont (string, breakBefore = 12) {
+export default function widont(string, breakBefore = 12) {
   const breakPoint = Math.max(string.length - breakBefore, 0);
 
   const left = string.substring(0, breakPoint);

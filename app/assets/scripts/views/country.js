@@ -7,7 +7,12 @@ import createReactClass from 'create-react-class';
 
 import config from '../config';
 import { formatThousands } from '../utils/format';
-import { fetchLocations, invalidateAllLocationData, fetchLatestMeasurements, openDownloadModal } from '../actions/action-creators';
+import {
+  fetchLocations,
+  invalidateAllLocationData,
+  fetchLatestMeasurements,
+  openDownloadModal,
+} from '../actions/action-creators';
 import { generateLegendStops } from '../utils/colors';
 import { getCountryBbox } from '../utils/countries';
 import InfoMessage from '../components/info-message';
@@ -39,15 +44,15 @@ var Country = createReactClass({
       fetching: T.bool,
       fetched: T.bool,
       error: T.string,
-      data: T.object
+      data: T.object,
     }),
 
     locations: T.shape({
       fetching: T.bool,
       fetched: T.bool,
       error: T.string,
-      data: T.object
-    })
+      data: T.object,
+    }),
   },
 
   shouldFetchData: function (prevProps) {
@@ -58,10 +63,17 @@ var Country = createReactClass({
   },
 
   fetchData: function () {
-    this.props._fetchLocations(1, {
-      country: this.props.match.params.name
-    }, 1000);
-    this.props._fetchLatestMeasurements({country: this.props.match.params.name, has_geo: 'true'});
+    this.props._fetchLocations(
+      1,
+      {
+        country: this.props.match.params.name,
+      },
+      1000
+    );
+    this.props._fetchLatestMeasurements({
+      country: this.props.match.params.name,
+      has_geo: 'true',
+    });
   },
 
   onDownloadClick: function (data, e) {
@@ -87,7 +99,12 @@ var Country = createReactClass({
   //
 
   renderCountryList: function () {
-    let {fetched, fetching, error, data: {results}} = this.props.locations;
+    let {
+      fetched,
+      fetching,
+      error,
+      data: { results },
+    } = this.props.locations;
     if (!fetched && !fetching) {
       return null;
     }
@@ -100,54 +117,81 @@ var Country = createReactClass({
       return (
         <InfoMessage>
           <h2>Uhoh, something went wrong.</h2>
-          <p>There was a problem getting the data. If you continue to have problems, please let us know.</p>
-          <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
+          <p>
+            There was a problem getting the data. If you continue to have
+            problems, please let us know.
+          </p>
+          <a href="mailto:info@openaq.org" title="Send us an email">
+            Send us an Email
+          </a>
         </InfoMessage>
       );
     }
 
-    let groupped = _(results)
-      .sortBy('city')
-      .groupBy('city')
-      .value();
+    let groupped = _(results).sortBy('city').groupBy('city').value();
 
     let countriesList = _.map(groupped, (locations, k) => {
       let dlClick = this.onDownloadClick.bind(null, {
         country: this.props.match.params.name,
-        area: k
+        area: k,
       });
       return (
-        <section className='fold fold--locations' key={k}>
-          <div className='inner'>
-            <header className='fold__header'>
-              <h1 className='fold__title'>{k} <small>{locations.length} {locations.length > 1 ? 'locations' : 'location'}</small></h1>
-              <p className='fold__main-action'><a href='#' className='location-download-button' title={`Download ${k} data`} onClick={dlClick}>Download</a></p>
+        <section className="fold fold--locations" key={k}>
+          <div className="inner">
+            <header className="fold__header">
+              <h1 className="fold__title">
+                {k}{' '}
+                <small>
+                  {locations.length}{' '}
+                  {locations.length > 1 ? 'locations' : 'location'}
+                </small>
+              </h1>
+              <p className="fold__main-action">
+                <a
+                  href="#"
+                  className="location-download-button"
+                  title={`Download ${k} data`}
+                  onClick={dlClick}
+                >
+                  Download
+                </a>
+              </p>
             </header>
-            <div className='fold__body'>
-              <ul className='country-locations-list'>
+            <div className="fold__body">
+              <ul className="country-locations-list">
                 {locations.map(o => {
-                  let countryData = _.find(this.props.countries, {code: o.country});
-                  let sourcesData = o.sourceNames
-                    .map(s => _.find(this.props.sources, {name: s}))
-                    .filter(s => s);
-                  let params = o.parameters.map(o => _.find(this.props.parameters, {id: o}));
-                  let openModal = () => this.props._openDownloadModal({
-                    country: o.country,
-                    area: o.city,
-                    location: o.location
+                  let countryData = _.find(this.props.countries, {
+                    code: o.country,
                   });
-                  return <li><LocationCard
-                          onDownloadClick={openModal}
-                          key={o.location}
-                          name={o.location}
-                          city={o.city}
-                          countryData={countryData}
-                          sourcesData={sourcesData}
-                          totalMeasurements={o.count}
-                          parametersList={params}
-                          lastUpdate={o.lastUpdated}
-                          collectionStart={o.firstUpdated}
-                          compact /></li>;
+                  let sourcesData = o.sourceNames
+                    .map(s => _.find(this.props.sources, { name: s }))
+                    .filter(s => s);
+                  let params = o.parameters.map(o =>
+                    _.find(this.props.parameters, { id: o })
+                  );
+                  let openModal = () =>
+                    this.props._openDownloadModal({
+                      country: o.country,
+                      area: o.city,
+                      location: o.location,
+                    });
+                  return (
+                    <li>
+                      <LocationCard
+                        onDownloadClick={openModal}
+                        key={o.location}
+                        name={o.location}
+                        city={o.city}
+                        countryData={countryData}
+                        sourcesData={sourcesData}
+                        totalMeasurements={o.count}
+                        parametersList={params}
+                        lastUpdate={o.lastUpdated}
+                        collectionStart={o.firstUpdated}
+                        compact
+                      />
+                    </li>
+                  );
                 })}
               </ul>
             </div>
@@ -156,15 +200,16 @@ var Country = createReactClass({
       );
     });
 
-    return (
-      <div className='countries-list'>
-        {countriesList}
-      </div>
-    );
+    return <div className="countries-list">{countriesList}</div>;
   },
 
   renderMap: function () {
-    let {fetched, fetching, error, data: {results}} = this.props.latestMeasurements;
+    let {
+      fetched,
+      fetching,
+      error,
+      data: { results },
+    } = this.props.latestMeasurements;
     if (!fetched && !fetching) {
       return null;
     }
@@ -177,8 +222,13 @@ var Country = createReactClass({
       return (
         <InfoMessage>
           <h2>Uh oh, something went wrong.</h2>
-          <p>There was a problem getting the data. If you continue to have problems, please let us know.</p>
-          <a href='mailto:info@openaq.org' title='Send us an email'>Send us an Email</a>
+          <p>
+            There was a problem getting the data. If you continue to have
+            problems, please let us know.
+          </p>
+          <a href="mailto:info@openaq.org" title="Send us an email">
+            Send us an Email
+          </a>
         </InfoMessage>
       );
     }
@@ -188,23 +238,33 @@ var Country = createReactClass({
     const bbox = getCountryBbox(this.props.match.params.name);
 
     return (
-      <section className='fold' id='country-fold-map'>
-        <div className='fold__body'>
+      <section className="fold" id="country-fold-map">
+        <div className="fold__body">
           <MapComponent
             bbox={bbox}
             zoom={1}
             measurements={results}
-            parameter={_.find(this.props.parameters, {id: 'pm25'})}
+            parameter={_.find(this.props.parameters, { id: 'pm25' })}
             sources={this.props.sources}
-            disableScrollZoom >
-              <div>
-                <p>Showing most recent values for PM2.5</p>
-                <ul className='color-scale'>
-                  {scaleStops.map(o => (
-                    <li key={o.label} style={{'backgroundColor': o.color, width: `${colorWidth}%`}} className='color-scale__item'><span className='color-scale__value'>{o.label}</span></li>
-                  ))}
-                </ul>
-              </div>
+            disableScrollZoom
+          >
+            <div>
+              <p>Showing most recent values for PM2.5</p>
+              <ul className="color-scale">
+                {scaleStops.map(o => (
+                  <li
+                    key={o.label}
+                    style={{
+                      backgroundColor: o.color,
+                      width: `${colorWidth}%`,
+                    }}
+                    className="color-scale__item"
+                  >
+                    <span className="color-scale__value">{o.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </MapComponent>
         </div>
       </section>
@@ -212,67 +272,108 @@ var Country = createReactClass({
   },
 
   render: function () {
-    let countryData = _.find(this.props.countries, {code: this.props.match.params.name});
-    let sourcesData = _.filter(this.props.sources, {country: this.props.match.params.name});
+    let countryData = _.find(this.props.countries, {
+      code: this.props.match.params.name,
+    });
+    let sourcesData = _.filter(this.props.sources, {
+      country: this.props.match.params.name,
+    });
 
     return (
-      <section className='inpage'>
-        <header className='inpage__header'>
-          <div className='inner'>
-            <div className='inpage__headline'>
-              <p className='inpage__subtitle'>Country</p>
-              <h1 className='inpage__title'>{countryData.name}</h1>
+      <section className="inpage">
+        <header className="inpage__header">
+          <div className="inner">
+            <div className="inpage__headline">
+              <p className="inpage__subtitle">Country</p>
+              <h1 className="inpage__title">{countryData.name}</h1>
 
-              <ul className='country-stats'>
-                <li><strong>{countryData.cities}</strong> areas</li>
-                <li><strong>{countryData.locations}</strong> locations</li>
-                <li><strong>{formatThousands(countryData.count)}</strong> measurements</li>
-                <li><strong>{sourcesData.length}</strong> {sourcesData.length > 1 ? 'sources' : 'source'}</li>
+              <ul className="country-stats">
+                <li>
+                  <strong>{countryData.cities}</strong> areas
+                </li>
+                <li>
+                  <strong>{countryData.locations}</strong> locations
+                </li>
+                <li>
+                  <strong>{formatThousands(countryData.count)}</strong>{' '}
+                  measurements
+                </li>
+                <li>
+                  <strong>{sourcesData.length}</strong>{' '}
+                  {sourcesData.length > 1 ? 'sources' : 'source'}
+                </li>
               </ul>
 
-              <ul className='ipha'>
-                <li><a href={config.apiDocs} title='View API documentation' className='ipha-api' target='_blank'>View API Docs</a></li>
-                <li><a href='#' className='ipha-download ipha-main' title={`Download ${countryData.name} data`} onClick={this.onDownloadClick.bind(null, {country: this.props.match.params.name})}>Download</a></li>
+              <ul className="ipha">
+                <li>
+                  <a
+                    href={config.apiDocs}
+                    title="View API documentation"
+                    className="ipha-api"
+                    target="_blank"
+                  >
+                    View API Docs
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="ipha-download ipha-main"
+                    title={`Download ${countryData.name} data`}
+                    onClick={this.onDownloadClick.bind(null, {
+                      country: this.props.match.params.name,
+                    })}
+                  >
+                    Download
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
-          <figure className='inpage__media inpage__media--cover media'>
-            <div className='media__item'>
-              <img src='/assets/graphics/content/view--home/cover--home.jpg' alt='Cover image' width='1440' height='712' />
+          <figure className="inpage__media inpage__media--cover media">
+            <div className="media__item">
+              <img
+                src="/assets/graphics/content/view--home/cover--home.jpg"
+                alt="Cover image"
+                width="1440"
+                height="712"
+              />
             </div>
           </figure>
         </header>
 
-        <div className='inpage__body'>
+        <div className="inpage__body">
           {this.renderMap()}
           {this.renderCountryList()}
         </div>
       </section>
     );
-  }
+  },
 });
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-function selector (state) {
+function selector(state) {
   return {
     countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
 
     latestMeasurements: state.latestMeasurements,
-    locations: state.locations
+    locations: state.locations,
   };
 }
 
-function dispatcher (dispatch) {
+function dispatcher(dispatch) {
   return {
     _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
-    _fetchLatestMeasurements: (...args) => dispatch(fetchLatestMeasurements(...args)),
-    _invalidateAllLocationData: (...args) => dispatch(invalidateAllLocationData(...args)),
+    _fetchLatestMeasurements: (...args) =>
+      dispatch(fetchLatestMeasurements(...args)),
+    _invalidateAllLocationData: (...args) =>
+      dispatch(invalidateAllLocationData(...args)),
 
-    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
   };
 }
 

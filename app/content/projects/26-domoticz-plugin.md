@@ -1,5 +1,5 @@
 ---
-title: "OpenAQ Domoticz plugin"
+title: 'OpenAQ Domoticz plugin'
 url: https://github.com/Xorfor/Domoticz-OpenAQ-Plugin
 image: assets/graphics/content/view--community-projects/projects/covers/domoticz_plugin.jpg
 type: Software

@@ -28,7 +28,7 @@ const logger = createLogger({
   collapsed: true,
   predicate: (getState, action) => {
     return process.env.NODE_ENV !== 'production';
-  }
+  },
 });
 
 const composeEnhancers =

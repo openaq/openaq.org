@@ -4,7 +4,7 @@ import * as actions from '../actions/action-types';
 const defaultState = {
   fetching: false,
   fetched: false,
-  data: null
+  data: null,
 };
 
 export default function (state = defaultState, action) {

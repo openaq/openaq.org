@@ -6,9 +6,9 @@ const defaultState = {
   requested: false,
   coords: {
     latitude: null,
-    longitude: null
+    longitude: null,
   },
-  error: null
+  error: null,
 };
 
 export default function (state = defaultState, action) {

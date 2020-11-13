@@ -12,18 +12,16 @@ var InfoMessage = createReactClass({
   displayName: 'InfoMessage',
 
   propTypes: {
-    children: T.array
+    children: T.array,
   },
 
   render: function () {
     return (
-      <div className='info-msg'>
-        <div className='info-msg__contents'>
-          {this.props.children}
-        </div>
+      <div className="info-msg">
+        <div className="info-msg__contents">{this.props.children}</div>
       </div>
     );
-  }
+  },
 });
 
 module.exports = InfoMessage;

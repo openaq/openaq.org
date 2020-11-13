@@ -1,5 +1,5 @@
 ---
-title: "Open Air Quality iOS + Android App"
+title: 'Open Air Quality iOS + Android App'
 url: https://play.google.com/store/apps/details?id=com.torsmyr.airquality
 logo: assets/graphics/content/view--community-projects/projects/logos/jo_app.jpg
 type: Software

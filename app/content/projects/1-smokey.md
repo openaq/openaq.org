@@ -1,5 +1,5 @@
 ---
-title: "Smokey: Air Quality Bot"
+title: 'Smokey: Air Quality Bot'
 url: https://www.facebook.com/smokeybot/
 image: assets/graphics/content/view--community-projects/projects/covers/smokey.png
 logo: assets/graphics/content/view--community-projects/projects/covers/smokey.png

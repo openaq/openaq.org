@@ -1,4 +1,4 @@
-export function toggleValue (array, value) {
+export function toggleValue(array, value) {
   array = [...array];
   let i = array.indexOf(value);
   if (i === -1) {

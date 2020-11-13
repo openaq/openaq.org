@@ -9,5 +9,4 @@ describe('The Home Page', () => {
     cy.get('footer');
     cy.get('h1');
   });
-})
-;
+});

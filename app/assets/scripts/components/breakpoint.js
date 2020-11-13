@@ -9,18 +9,18 @@ export const RANGE_MATRIX = {
   small: [544, 767],
   medium: [768, 991],
   large: [992, 1199],
-  xlarge: [1200, Infinity]
+  xlarge: [1200, Infinity],
 };
 
 class Breakpoint extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = this.getBreakpoints();
 
     this.resizeListener = this.resizeListener.bind(this);
   }
 
-  getBreakpoints () {
+  getBreakpoints() {
     const width = document.body.offsetWidth;
     let ranges = {};
     for (const name in RANGE_MATRIX) {
@@ -34,26 +34,26 @@ class Breakpoint extends React.Component {
     return ranges;
   }
 
-  resizeListener () {
+  resizeListener() {
     this.setState(this.getBreakpoints());
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('resize', this.resizeListener);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.onWindowResize);
   }
 
-  render () {
+  render() {
     return this.props.children(this.state);
   }
 }
 
 if (environment !== 'production') {
   Breakpoint.propTypes = {
-    children: T.func.isRequired
+    children: T.func.isRequired,
   };
 }
 
