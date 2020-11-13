@@ -91,6 +91,7 @@ class CommunityProjects extends React.Component {
               })}
               href="#"
               target="_blank"
+              rel="noreferrer"
               title="Show all values"
               data-hook="dropdown:close"
               onClick={this.onFilterSelect.bind(this, what, null)}
@@ -106,6 +107,7 @@ class CommunityProjects extends React.Component {
                 })}
                 href="#"
                 target="_blank"
+                rel="noreferrer"
                 title={`Filter by ${o}`}
                 data-hook="dropdown:close"
                 onClick={this.onFilterSelect.bind(this, what, o)}

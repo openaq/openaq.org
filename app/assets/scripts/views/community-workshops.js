@@ -74,6 +74,7 @@ class CommunityWorkshops extends React.Component {
               })}
               href="#"
               target="_blank"
+              rel="noreferrer"
               title="Show all values"
               data-hook="dropdown:close"
               onClick={this.onFilterSelect.bind(this, what, null)}
@@ -89,6 +90,7 @@ class CommunityWorkshops extends React.Component {
                 })}
                 href="#"
                 target="_blank"
+                rel="noreferrer"
                 title={`Filter by ${o}`}
                 data-hook="dropdown:close"
                 onClick={this.onFilterSelect.bind(this, what, o)}
@@ -127,6 +129,7 @@ class CommunityWorkshops extends React.Component {
                 href={o.url}
                 title="View more"
                 target="_blank"
+                rel="noreferrer"
               >
                 <figure className="card__media">
                   <div className="card__cover">

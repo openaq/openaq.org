@@ -162,6 +162,7 @@ class Home extends React.Component {
                   <a
                     href="https://docs.openaq.org/"
                     target="_blank"
+                    rel="noreferrer"
                     title="View API"
                     className="od-quick-menu__api-link"
                   >
@@ -198,6 +199,7 @@ class Home extends React.Component {
                 <a
                   href="https://docs.openaq.org/"
                   target="_blank"
+                  rel="noreferrer"
                   className="button button--large button--white-bounded button--capsule"
                   title="View API"
                 >

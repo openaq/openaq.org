@@ -46,7 +46,11 @@ var ModalVote = createReactClass({
             </p>
             <p className="modal__description">
               Sorry to bother you, but please consider voting in the{' '}
-              <a href="https://www.openscienceprize.org/" target="_blank">
+              <a
+                href="https://www.openscienceprize.org/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Open Science Prize
               </a>{' '}
               competition that we're a finalist in, along with several other
@@ -71,6 +75,7 @@ var ModalVote = createReactClass({
                   onClick={this.props.onModalClose}
                   className={c('button-modal-vote', { disabled: false })}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   I'll Vote!
                 </a>

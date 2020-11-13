@@ -33,6 +33,7 @@ var ConnectFold = createReactClass({
                       <a
                         href="https://github.com/openaq/"
                         target="_blank"
+                        rel="noreferrer"
                         title="Follow us"
                         className="link-wrapper"
                       >
@@ -49,6 +50,7 @@ var ConnectFold = createReactClass({
                     <a
                       href="https://github.com/openaq/"
                       target="_blank"
+                      rel="noreferrer"
                       className="card__go-link"
                       title="Follow us"
                     >
@@ -67,6 +69,7 @@ var ConnectFold = createReactClass({
                       <a
                         href="https://openaq-slackin.herokuapp.com/"
                         target="_blank"
+                        rel="noreferrer"
                         title="Join us"
                         className="link-wrapper"
                       >
@@ -83,6 +86,7 @@ var ConnectFold = createReactClass({
                     <a
                       href="https://openaq-slackin.herokuapp.com/"
                       target="_blank"
+                      rel="noreferrer"
                       className="card__go-link"
                       title="Follow us"
                     >
@@ -101,6 +105,7 @@ var ConnectFold = createReactClass({
                       <a
                         href="https://twitter.com/openaq"
                         target="_blank"
+                        rel="noreferrer"
                         title="Follow us"
                         className="link-wrapper"
                       >
@@ -117,6 +122,7 @@ var ConnectFold = createReactClass({
                     <a
                       href="https://twitter.com/openaq"
                       target="_blank"
+                      rel="noreferrer"
                       className="card__go-link"
                       title="Follow us"
                     >

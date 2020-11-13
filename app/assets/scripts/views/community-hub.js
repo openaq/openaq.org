@@ -240,6 +240,7 @@ var CommunityHub = createReactClass({
                         <a
                           href="https://medium.com/@openaq/how-can-a-government-source-add-data-to-openaq-50b5d83ef13f"
                           target="_blank"
+                          rel="noreferrer"
                           className="link-wrapper"
                           title="View more"
                         >
@@ -258,6 +259,7 @@ var CommunityHub = createReactClass({
                           <a
                             href="https://medium.com/@openaq/how-can-a-government-source-add-data-to-openaq-50b5d83ef13f"
                             target="_blank"
+                            rel="noreferrer"
                             className="link-wrapper"
                             title="View more"
                           >
@@ -277,6 +279,7 @@ var CommunityHub = createReactClass({
                         <a
                           href="https://medium.com/@openaq/how-can-a-government-source-add-data-to-openaq-50b5d83ef13f"
                           target="_blank"
+                          rel="noreferrer"
                           className="card__go-link"
                           title="View more"
                         >

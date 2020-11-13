@@ -29,6 +29,7 @@ var ShareBtn = createReactClass({
               className="drop__menu-item share-opt-twitter"
               href={`https://twitter.com/share?url=${encodedURI}`}
               target="_blank"
+              rel="noreferrer"
               title="Share on twitter"
               data-hook="dropdown:close"
             >
@@ -40,6 +41,7 @@ var ShareBtn = createReactClass({
               className="drop__menu-item share-opt-facebook"
               href={`http://facebook.com/sharer.php?u=${encodedURI}`}
               target="_blank"
+              rel="noreferrer"
               title="Share on Facebook"
               data-hook="dropdown:close"
             >

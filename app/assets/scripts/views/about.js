@@ -274,6 +274,7 @@ var About = createReactClass({
                     <a
                       href="/assets/files/openaq-990-2019.pdf"
                       target="_blank"
+                      rel="noreferrer"
                       className="button-book-download"
                       title="Download"
                     >
@@ -287,6 +288,7 @@ var About = createReactClass({
                   <a
                     href="/assets/files/openaq-990-2019.pdf"
                     target="_blank"
+                    rel="noreferrer"
                     className="card__contents"
                     title="Download"
                   >

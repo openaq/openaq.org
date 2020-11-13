@@ -206,6 +206,7 @@ class PageHeader extends React.Component {
             title="View blog"
             className="global-menu__link"
             target="_blank"
+            rel="noreferrer"
             onClick={this.onLinkNavigate}
           >
             <span>Blog</span>

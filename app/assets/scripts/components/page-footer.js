@@ -46,6 +46,7 @@ var PageFooter = createReactClass({
                     className="connect-menu__link--github"
                     title="View Github"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <span>Github</span>
                   </a>
@@ -56,6 +57,7 @@ var PageFooter = createReactClass({
                     className="connect-menu__link--slack"
                     title="View Slack"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <span>Slack</span>
                   </a>
@@ -66,6 +68,7 @@ var PageFooter = createReactClass({
                     className="connect-menu__link--twitter"
                     title="View Twitter"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <span>Twitter</span>
                   </a>
@@ -121,6 +124,7 @@ var PageFooter = createReactClass({
                     href="https://docs.openaq.org/"
                     title="View API"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Use API
                   </a>
@@ -130,6 +134,7 @@ var PageFooter = createReactClass({
                     href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85"
                     title="View blog post"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     License and data disclaimer
                   </a>
@@ -179,6 +184,7 @@ var PageFooter = createReactClass({
                     href="https://medium.com/@openaq"
                     title="View blog"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Blog
                   </a>
@@ -210,6 +216,7 @@ var PageFooter = createReactClass({
                 id="mc-embedded-subscribe-form"
                 name="mc-embedded-subscribe-form"
                 target="_blank"
+                rel="noreferrer"
                 noValidate
               >
                 <div className="form__input-group">

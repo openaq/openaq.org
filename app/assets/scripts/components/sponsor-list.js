@@ -13,6 +13,7 @@ class SponsorList extends Component {
               title={`Visit ${name} website`}
               className="sponsor"
               target="_blank"
+              rel="noreferrer"
               href={url}
             >
               <img

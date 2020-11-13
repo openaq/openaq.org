@@ -36,6 +36,7 @@ export default function Header({
                 title="View in API documentation"
                 className="ipha-api"
                 target="_blank"
+                rel="noreferrer"
               >
                 View API
               </a>

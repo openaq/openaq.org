@@ -462,6 +462,7 @@ var ModalDownload = createReactClass({
               <a
                 href="https://openaq-fetches.s3.amazonaws.com/index.html"
                 target="_blank"
+                rel="noreferrer"
               >
                 Realtime
               </a>{' '}
@@ -469,6 +470,7 @@ var ModalDownload = createReactClass({
               <a
                 href="http://openaq-data.s3.amazonaws.com/index.html"
                 target="_blank"
+                rel="noreferrer"
               >
                 daily
               </a>{' '}
@@ -477,6 +479,7 @@ var ModalDownload = createReactClass({
               <a
                 href="https://github.com/openaq/openaq-info/blob/master/FAQ.md#90days"
                 target="_blank"
+                rel="noreferrer"
               >
                 More Info
               </a>{' '}
@@ -501,6 +504,7 @@ var ModalDownload = createReactClass({
                   href={this.computeDownloadUrl(this.state)}
                   className={c('button-modal-download', { disabled: false })}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Download Selection <small>(csv)</small>
                 </a>

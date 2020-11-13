@@ -311,6 +311,7 @@ var Country = createReactClass({
                     title="View API documentation"
                     className="ipha-api"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     View API Docs
                   </a>
