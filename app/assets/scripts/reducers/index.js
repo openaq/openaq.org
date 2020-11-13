@@ -24,5 +24,5 @@ export default combineReducers({
   compare,
   locationsByCountry,
   downloadModal,
-  voteModal
+  voteModal,
 });

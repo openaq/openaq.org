@@ -8,8 +8,8 @@ const defaultState = {
     countries: null,
     sources: null,
     parameters: null,
-    totalMeasurements: null
-  }
+    totalMeasurements: null,
+  },
 };
 
 export default function (state = defaultState, action) {

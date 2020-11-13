@@ -7,22 +7,22 @@ import config from '../config';
 //                     LATEST MEASUREMENTS                       //
 // ////////////////////////////////////////////////////////////////
 
-function requestLatestMeasurements () {
+function requestLatestMeasurements() {
   return {
-    type: actions.REQUEST_LATEST_MEASUREMENTS
+    type: actions.REQUEST_LATEST_MEASUREMENTS,
   };
 }
 
-function receiveLatestMeasurements (json, error = null) {
+function receiveLatestMeasurements(json, error = null) {
   return {
     type: actions.RECEIVE_LATEST_MEASUREMENTS,
     json: json,
     error,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   };
 }
 
-export function fetchLatestMeasurements (filters) {
+export function fetchLatestMeasurements(filters) {
   return function (dispatch) {
     dispatch(requestLatestMeasurements());
 
@@ -38,21 +38,26 @@ export function fetchLatestMeasurements (filters) {
           }
           return response.json();
         })
-        .then(json => {
-          if (data === null) {
-            data = json;
-          } else {
-            data.results = data.results.concat(json.results);
+        .then(
+          json => {
+            if (data === null) {
+              data = json;
+            } else {
+              data.results = data.results.concat(json.results);
+            }
+            if (page * limit < json.meta.found) {
+              return fetcher(++page);
+            } else {
+              return dispatch(receiveLatestMeasurements(data));
+            }
+          },
+          e => {
+            console.log('e', e);
+            return dispatch(
+              receiveLatestMeasurements(null, 'Data not available')
+            );
           }
-          if (page * limit < json.meta.found) {
-            return fetcher(++page);
-          } else {
-            return dispatch(receiveLatestMeasurements(data));
-          }
-        }, e => {
-          console.log('e', e);
-          return dispatch(receiveLatestMeasurements(null, 'Data not available'));
-        });
+        );
     };
 
     fetcher(1);

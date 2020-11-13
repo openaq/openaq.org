@@ -8,9 +8,24 @@ import LoadingMessage from '../../components/loading-message';
 
 import Card, { HighlightText, CardSubtitle } from '../../components/card';
 
-export default function StatsInfo ({latestMeasurements, measurements, loc, parameters}) {
-  const {fetched: lastMFetched, fetching: lastMFetching, error: lastMError, data: {results: lastMeasurements}} = latestMeasurements;
-  const {fetched: mFetched, fetching: mFetching, error: mError, data} = measurements;
+export default function StatsInfo({
+  latestMeasurements,
+  measurements,
+  loc,
+  parameters,
+}) {
+  const {
+    fetched: lastMFetched,
+    fetching: lastMFetching,
+    error: lastMError,
+    data: { results: lastMeasurements },
+  } = latestMeasurements;
+  const {
+    fetched: mFetched,
+    fetching: mFetching,
+    error: mError,
+    data,
+  } = measurements;
 
   const error = lastMError || mError;
   const fetched = lastMFetched || mFetched;
@@ -83,21 +98,20 @@ StatsInfo.propTypes = {
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
-    data: T.object
+    data: T.object,
   }),
 
   latestMeasurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
-    data: T.object
+    data: T.object,
   }),
 
   measurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
-    data: T.object
-  })
+    data: T.object,
+  }),
 };
-

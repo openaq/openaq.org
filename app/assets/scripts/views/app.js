@@ -27,7 +27,7 @@ var App = createReactClass({
     measurements: T.number,
     downloadModal: T.object,
     _closeDownloadModal: T.func,
-    children: T.object
+    children: T.object,
   },
 
   onModalClose: function () {
@@ -35,12 +35,12 @@ var App = createReactClass({
   },
 
   render: function () {
-    let pageClass = this.props.children.props.children.find(
-      (child) => {
-        const match = matchPath(this.props.location.pathname, { path: child.props.path });
-        return match && match.isExact;
-      }
-    ).props.pageClass;
+    let pageClass = this.props.children.props.children.find(child => {
+      const match = matchPath(this.props.location.pathname, {
+        path: child.props.path,
+      });
+      return match && match.isExact;
+    }).props.pageClass;
 
     let content = (
       <HeaderMessage>
@@ -91,26 +91,26 @@ var App = createReactClass({
         <PageFooter measurements={this.props.measurements} />
       </div>
     );
-  }
+  },
 });
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-function selector (state) {
+function selector(state) {
   return {
     baseDataReady: state.baseData.fetched && !state.baseData.fetching,
     baseDataError: state.baseData.error,
 
     measurements: state.baseData.data.totalMeasurements,
 
-    downloadModal: state.downloadModal
+    downloadModal: state.downloadModal,
   };
 }
 
-function dispatcher (dispatch) {
+function dispatcher(dispatch) {
   return {
-    _closeDownloadModal: (...args) => dispatch(closeDownloadModal(...args))
+    _closeDownloadModal: (...args) => dispatch(closeDownloadModal(...args)),
   };
 }
 

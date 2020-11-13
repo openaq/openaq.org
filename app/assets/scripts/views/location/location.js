@@ -10,7 +10,7 @@ import {
   fetchLatestMeasurements,
   fetchMeasurements,
   invalidateAllLocationData,
-  openDownloadModal
+  openDownloadModal,
 } from '../../actions/action-creators';
 import HeaderMessage from '../../components/header-message';
 import StatsInfoCard from './stats-info';
@@ -64,11 +64,11 @@ function Location (props) {
         props._fetchLatestMeasurements({
           coordinates: `${loc.coordinates.latitude},${loc.coordinates.longitude}`,
           radius: 10 * 1000, // 10 Km
-          has_geo: 'true'
+          has_geo: 'true',
         });
       } else {
         props._fetchLatestMeasurements({
-          location: loc.location
+          location: loc.location,
         });
       }
       props._fetchMeasurements(
@@ -79,12 +79,12 @@ function Location (props) {
     }
   });
 
-  function getActiveParameterData () {
+  function getActiveParameterData() {
     let parameterData = _.find(props.parameters, { id: query.parameter });
     return parameterData || _.find(props.parameters, { id: 'pm25' });
   }
 
-  function onFilterSelect (parameter) {
+  function onFilterSelect(parameter) {
     props.history.push(
       `/location/${encodeURIComponent(name)}?parameter=${parameter}`
     );
@@ -199,44 +199,44 @@ Location.propTypes = {
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
-    data: T.object
+    data: T.object,
   }),
 
   latestMeasurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
-    data: T.object
+    data: T.object,
   }),
 
   measurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
-    data: T.object
-  })
+    data: T.object,
+  }),
 };
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-function selector (state) {
+function selector(state) {
   return {
     countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
 
     countryData: _.find(state.baseData.data.countries, {
-      code: (state.location.data || {}).country
+      code: (state.location.data || {}).country,
     }),
 
     loc: state.location,
     latestMeasurements: state.latestMeasurements,
-    measurements: state.measurements
+    measurements: state.measurements,
   };
 }
 
-function dispatcher (dispatch) {
+function dispatcher(dispatch) {
   return {
     _fetchLocationIfNeeded: (...args) =>
       dispatch(fetchLocationIfNeeded(...args)),
@@ -246,7 +246,7 @@ function dispatcher (dispatch) {
     _invalidateAllLocationData: (...args) =>
       dispatch(invalidateAllLocationData(...args)),
 
-    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args))
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
   };
 }
 

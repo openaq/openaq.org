@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   display: grid;
-  ${({gridGap, gridTemplateRows, gridTemplateColumns}) => css`
+  ${({ gridGap, gridTemplateRows, gridTemplateColumns }) => css`
     grid-template-columns: ${gridTemplateColumns || 'repeat(4, 1fr)'};
     grid-template-rows: ${gridTemplateRows || 'auto'};
     grid-gap: ${gridGap || '2rem'};
@@ -24,7 +24,7 @@ function CardList (props) {
       {...{
         gridGap,
         gridTemplateColumns,
-        gridTemplateRows
+        gridTemplateRows,
       }}
     >
       {props.children}
@@ -37,7 +37,7 @@ CardList.propTypes = {
   gridTemplateRows: T.string,
   gridTemplateColumns: T.string,
   className: T.string,
-  children: T.node
+  children: T.node,
 };
 
 export default CardList;

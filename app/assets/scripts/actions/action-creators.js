@@ -11,7 +11,8 @@ import * as locationsByCountry from './locations-by-country';
 import * as downloadModal from './download-modal';
 import * as voteModal from './vote-modal';
 
-module.exports = Object.assign({},
+module.exports = Object.assign(
+  {},
   baseData,
   baseStats,
   compare,

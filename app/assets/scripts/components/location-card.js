@@ -26,7 +26,7 @@ var LocationCard = createReactClass({
     totalMeasurements: T.number,
     parametersList: T.array,
     lastUpdate: T.string,
-    collectionStart: T.string
+    collectionStart: T.string,
   },
 
   onDownloadClick: function (e) {
@@ -47,7 +47,15 @@ var LocationCard = createReactClass({
     let sources = [];
     if (sourcesData.length) {
       sourcesData.forEach((o, i) => {
-        sources.push(<a href={o.sourceURL} title={`View source for  ${this.props.name}`} key={o.name}>{o.name}</a>);
+        sources.push(
+          <a
+            href={o.sourceURL}
+            title={`View source for  ${this.props.name}`}
+            key={o.name}
+          >
+            {o.name}
+          </a>
+        );
         if (i < sourcesData.length - 1) {
           sources.push(', ');
         }
@@ -57,20 +65,35 @@ var LocationCard = createReactClass({
     const country = countryData || {};
 
     return (
-      <article className='card card--data'>
-        <div className='card__contents'>
-          <header className='card__header'>
-            <div className='card__headline'>
-              <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
-              <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
+      <article className="card card--data">
+        <div className="card__contents">
+          <header className="card__header">
+            <div className="card__headline">
+              <p className="card__subtitle">
+                Updated <strong>{updated}</strong>
+              </p>
+              <h1 className="card__title">
+                <Link
+                  to={`/location/${encodeURIComponent(this.props.name)}`}
+                  title={`View ${this.props.name} page`}
+                >
+                  {this.props.name}
+                </Link>{' '}
+                <small>
+                  in {this.props.city}, {country.name}
+                </small>
+              </h1>
             </div>
-            <div className='card__tags'>
-              {this.props.sourceType && <div className='filter-pill'>{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(1)}`}</div>}
+            <div className="card__tags">
+              {this.props.sourceType && (
+                <div className="filter-pill">{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(
+                  1
+                )}`}</div>
+              )}
             </div>
-
           </header>
-          <div className='card__body'>
-            <dl className='card__meta-details'>
+          <div className="card__body">
+            <dl className="card__meta-details">
               <dt>Collection start</dt>
               <dd>{started}</dd>
               <dt>Measurements</dt>
@@ -81,16 +104,33 @@ var LocationCard = createReactClass({
               {sources.length ? <dd>{sources}</dd> : null}
             </dl>
           </div>
-          <footer className='card__footer'>
-            <ul className='card__footer-actions'>
-              <li><a href='#' className='cfa-download' title={`Download data for ${this.props.name}`} onClick={this.onDownloadClick}>Download</a></li>
-              <li><Link to={`/location/${encodeURIComponent(this.props.name)}`} className='cfa-go' title={`View ${this.props.name} page`}>View More</Link></li>
+          <footer className="card__footer">
+            <ul className="card__footer-actions">
+              <li>
+                <a
+                  href="#"
+                  className="cfa-download"
+                  title={`Download data for ${this.props.name}`}
+                  onClick={this.onDownloadClick}
+                >
+                  Download
+                </a>
+              </li>
+              <li>
+                <Link
+                  to={`/location/${encodeURIComponent(this.props.name)}`}
+                  className="cfa-go"
+                  title={`View ${this.props.name} page`}
+                >
+                  View More
+                </Link>
+              </li>
             </ul>
           </footer>
         </div>
       </article>
     );
-  }
+  },
 });
 
 module.exports = LocationCard;

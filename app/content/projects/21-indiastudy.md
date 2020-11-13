@@ -1,5 +1,5 @@
 ---
-title: "Future scenarios over India"
+title: 'Future scenarios over India'
 url: https://www.atmos-chem-phys.net/18/103/2018/acp-18-103-2018.pdf
 image: assets/graphics/content/view--community-projects/projects/covers/pommier.jpg
 featured: true

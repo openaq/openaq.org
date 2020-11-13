@@ -9,7 +9,7 @@ import _ from 'lodash';
  * Switches between a `a` and a `Link` depending on the url.
  */
 export default class SmartLink extends React.PureComponent {
-  render () {
+  render() {
     const { to } = this.props;
     const props = _.omit(this.props, 'to');
 
@@ -22,5 +22,5 @@ export default class SmartLink extends React.PureComponent {
 }
 
 SmartLink.propTypes = {
-  to: T.string
+  to: T.string,
 };

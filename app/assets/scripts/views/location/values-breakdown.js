@@ -6,8 +6,13 @@ import InfoMessage from '../../components/info-message';
 import ParameterSelector from './parameter-selector';
 import MeasurementsChart from './measurements-chart';
 
-export default function ValuesBreakdown ({ measurements, parameters, activeParam, onFilterSelect }) {
-  const {fetched, fetching, error} = measurements;
+export default function ValuesBreakdown({
+  measurements,
+  parameters,
+  activeParam,
+  onFilterSelect,
+}) {
+  const { fetched, fetching, error } = measurements;
 
   if (!fetched && !fetching) {
     return null;
@@ -19,32 +24,44 @@ export default function ValuesBreakdown ({ measurements, parameters, activeParam
   if (fetching) {
     intro = <LoadingMessage />;
   } else if (error) {
-    intro = <p>We couldn't get any data.</p>;
+    intro = <p>We couldn&apos;t get any data.</p>;
     content = (
-        <InfoMessage>
-          <p>Please try again later.</p>
-          <p>If you think there's a problem, please <a href='mailto:info@openaq.org' title='Contact openaq'>contact us.</a></p>
-        </InfoMessage>
-      );
+      <InfoMessage>
+        <p>Please try again later.</p>
+        <p>
+          If you think there&apos;s a problem, please{' '}
+          <a href="mailto:info@openaq.org" title="Contact openaq">
+            contact us.
+          </a>
+        </p>
+      </InfoMessage>
+    );
   } else {
-    intro = <ParameterSelector parameters={parameters} activeParam={activeParam} onFilterSelect={onFilterSelect}/>;
-    content = <MeasurementsChart measurements={measurements} activeParam={activeParam}/>;
+    intro = (
+      <ParameterSelector
+        parameters={parameters}
+        activeParam={activeParam}
+        onFilterSelect={onFilterSelect}
+      />
+    );
+    content = (
+      <MeasurementsChart
+        measurements={measurements}
+        activeParam={activeParam}
+      />
+    );
   }
 
   return (
-      <section className='fold'>
-        <div className='inner'>
-          <header className='fold__header'>
-            <h1 className='fold__title'>Values breakdown</h1>
-            <div className='fold__introduction'>
-              {intro}
-            </div>
-          </header>
-          <div className='fold__body'>
-            {content}
-          </div>
-        </div>
-      </section>
+    <section className="fold">
+      <div className="inner">
+        <header className="fold__header">
+          <h1 className="fold__title">Values breakdown</h1>
+          <div className="fold__introduction">{intro}</div>
+        </header>
+        <div className="fold__body">{content}</div>
+      </div>
+    </section>
   );
 }
 
@@ -55,9 +72,9 @@ ValuesBreakdown.propTypes = {
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
-    data: T.object
+    data: T.object,
   }),
 
   activeParam: T.object,
-  onFilterSelect: T.func
+  onFilterSelect: T.func,
 };

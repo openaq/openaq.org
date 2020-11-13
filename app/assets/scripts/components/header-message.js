@@ -12,18 +12,16 @@ var HeaderMessage = createReactClass({
   displayName: 'HeaderMessage',
 
   propTypes: {
-    children: T.array
+    children: T.array,
   },
 
   render: function () {
     return (
-      <section className='general-message'>
-        <div className='inner'>
-          {this.props.children}
-        </div>
+      <section className="general-message">
+        <div className="inner">{this.props.children}</div>
       </section>
     );
-  }
+  },
 });
 
 module.exports = HeaderMessage;
