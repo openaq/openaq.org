@@ -11,13 +11,8 @@ const Wrapper = styled.div`
   `}
 `;
 
-function CardList (props) {
-  const {
-    gridGap,
-    gridTemplateColumns,
-    gridTemplateRows,
-    className
-  } = props;
+function CardList(props) {
+  const { gridGap, gridTemplateColumns, gridTemplateRows, className } = props;
   return (
     <Wrapper
       className={className}

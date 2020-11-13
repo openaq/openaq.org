@@ -16,10 +16,10 @@ import HeaderMessage from '../../components/header-message';
 import StatsInfoCard from './stats-info';
 import MeasurementsCard from './measurements-card';
 
-import Metadata from './metadata';
+// import Metadata from './metadata';
 import SourceInfo from './source-info';
-import ValuesBreakdown from './values-breakdown';
-import NearbyLoc from './nearby-loc';
+// import ValuesBreakdown from './values-breakdown';
+// import NearbyLoc from './nearby-loc';
 import Header from './header';
 
 import styled from 'styled-components';
@@ -29,8 +29,7 @@ const Dashboard = styled(CardList)`
   padding: 0 4rem;
 `;
 
-function Location (props) {
-  const query = qs.parse(props.location.search, { ignoreQueryPrefix: true });
+function Location(props) {
   const { name } = props.match.params;
 
   useEffect(() => {
@@ -79,6 +78,7 @@ function Location (props) {
     }
   });
 
+  /*
   function getActiveParameterData() {
     let parameterData = _.find(props.parameters, { id: query.parameter });
     return parameterData || _.find(props.parameters, { id: 'pm25' });
@@ -89,6 +89,7 @@ function Location (props) {
       `/location/${encodeURIComponent(name)}?parameter=${parameter}`
     );
   }
+  */
 
   let { fetched, fetching, error, data } = props.loc;
   if (!fetched && !fetching) {
@@ -135,9 +136,7 @@ function Location (props) {
         openDownloadModal={props._openDownloadModal}
       />
       <div className="inpage__body">
-        <Dashboard
-          gridTemplateRows={'repeat(4, 20rem)'}
-        >
+        <Dashboard gridTemplateRows={'repeat(4, 20rem)'}>
           <StatsInfoCard
             latestMeasurements={props.latestMeasurements}
             measurements={props.measurements}
@@ -155,9 +154,8 @@ function Location (props) {
             measurements={props.measurements}
             loc={props.loc}
           />
-
         </Dashboard>
-    {/*
+        {/*
         <Metadata loc={props.loc} />
         <ValuesBreakdown
           measurements={props.measurements}

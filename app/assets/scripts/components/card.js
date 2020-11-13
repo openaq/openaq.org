@@ -13,10 +13,8 @@ const CardContents = styled.a``;
 
 const CardHeader = styled.header``;
 
-export const CardBody = styled.div`
-`;
-export const Test = styled.div`
-`;
+export const CardBody = styled.div``;
+export const Test = styled.div``;
 
 const CardFooter = styled.footer``;
 
@@ -40,7 +38,7 @@ export const HighlightText = styled.h1`
   }};
 `;
 /* Generic Card component for dashboard pages
-*/
+ */
 
 function Card(props) {
   const {
