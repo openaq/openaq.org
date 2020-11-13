@@ -2,10 +2,13 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
 import { formatThousands } from '../../utils/format';
-
+import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
-
 import Card, { HighlightText, CardSubtitle } from '../../components/card';
+
+const ErrorMessage = styled.div`
+  grid-column: 2 / 4;
+`;
 
 export default function StatsInfo({ latestMeasurements, measurements, loc }) {
   const {
@@ -30,7 +33,7 @@ export default function StatsInfo({ latestMeasurements, measurements, loc }) {
     return <LoadingMessage />;
   } else if (error) {
     return (
-      <div className="fold__introduction prose prose--responsive">
+      <ErrorMessage className="fold__introduction prose prose--responsive">
         <p>{"We couldn't get stats. Please try again later."}</p>
         <p>
           {"If you think there's a problem, please "}
@@ -38,7 +41,7 @@ export default function StatsInfo({ latestMeasurements, measurements, loc }) {
             contact us.
           </a>
         </p>
-      </div>
+      </ErrorMessage>
     );
   }
 
@@ -57,7 +60,7 @@ export default function StatsInfo({ latestMeasurements, measurements, loc }) {
   return (
     <Card
       title="Details"
-      gridRow={'1 / 2'}
+      gridColumn={'1'}
       renderBody={() => {
         return (
           <div className="card__body">

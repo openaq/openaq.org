@@ -6,6 +6,13 @@ import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
 import Card, { HighlightText, CardSubtitle } from '../../components/card';
 
+const StyledLoading = styled(LoadingMessage)`
+  grid-column: 2 / 4;
+`;
+const ErrorMessage = styled.div`
+  grid-column: 2 / 4;
+`;
+
 const MeasurementsCont = styled.dl`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
@@ -44,10 +51,10 @@ export default function Measurements({
   if (!fetched && !fetching) {
     return null;
   } else if (fetching) {
-    return <LoadingMessage />;
+    return <StyledLoading />;
   } else if (error) {
     return (
-      <div className="fold__introduction prose prose--responsive">
+      <ErrorMessage className="fold__introduction prose prose--responsive">
         <p>{"We couldn't get stats. Please try again later."}</p>
         <p>
           {"If you think there's a problem, please "}
@@ -55,7 +62,7 @@ export default function Measurements({
             contact us.
           </a>
         </p>
-      </div>
+      </ErrorMessage>
     );
   }
 
@@ -71,7 +78,7 @@ export default function Measurements({
     <Card
       title="Latest Measurements"
       gridColumn={'2 / 4'}
-      gridRow={'1 / span 2'}
+      // gridRow={'1 / span 2'}
       renderBody={() => {
         return (
           <div className="card__body">
