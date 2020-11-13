@@ -16,7 +16,10 @@
     "node": true,
     "es6": true
   },
-  "plugins": ["react", "react-hooks", "inclusive-language"
+  "plugins": [
+    "react",
+    "react-hooks",
+    "inclusive-language"
   ],
   "parserOptions": {
     "ecmaFeatures": {
