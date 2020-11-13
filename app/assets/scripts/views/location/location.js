@@ -135,7 +135,7 @@ function Location(props) {
         openDownloadModal={props._openDownloadModal}
       />
       <div className="inpage__body">
-        <Dashboard 
+        <Dashboard
           gridTemplateRows={'repeat(4, 20rem)'}
           gridTemplateColumns={'repeat(12, 1fr)'}
         >

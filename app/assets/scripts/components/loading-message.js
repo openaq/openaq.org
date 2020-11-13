@@ -15,7 +15,7 @@ var LoadingMessage = createReactClass({
   propTypes: {
     type: T.string,
     children: T.object,
-    className: T.string
+    className: T.string,
   },
 
   getClasses: function () {
@@ -40,7 +40,7 @@ var LoadingMessage = createReactClass({
     return (
       <svg
         version="1.1"
-        className='wind-animated'
+        className="wind-animated"
         viewBox="0 0 198 100"
         style={{ enableBackground: 'new 0 0 198 100' }}
       >
