@@ -107,7 +107,7 @@ render(
           />
           <Route
             name="country"
-            path="/compare(/:loc1)(/:loc2)(/:loc3)"
+            path="/compare/:loc1?/:loc2?/:loc3?"
             component={Compare}
             pageClass="page--compare"
           />
