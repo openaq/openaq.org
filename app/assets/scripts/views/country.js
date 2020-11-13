@@ -176,7 +176,7 @@ var Country = createReactClass({
                       location: o.location,
                     });
                   return (
-                    <li>
+                    <li key={o.location}>
                       <LocationCard
                         onDownloadClick={openModal}
                         key={o.location}
