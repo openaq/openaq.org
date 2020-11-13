@@ -26,7 +26,7 @@ import Compare from './views/compare';
 const logger = createLogger({
   level: 'info',
   collapsed: true,
-  predicate: (getState, action) => {
+  predicate: () => {
     return process.env.NODE_ENV !== 'production';
   },
 });

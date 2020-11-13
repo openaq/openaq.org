@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import { connect } from 'react-redux';
 import createReactClass from 'create-react-class';
 
 import widont from '../utils/widont';
@@ -235,15 +234,4 @@ var Why = createReactClass({
   },
 });
 
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
-
-function selector(state) {
-  return {};
-}
-
-function dispatcher(dispatch) {
-  return {};
-}
-
-module.exports = connect(selector, dispatcher)(Why);
+module.exports = Why;

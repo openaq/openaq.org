@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import createReactClass from 'create-react-class';
 
 import testimonials from '../../content/testimonials.json';
@@ -302,15 +301,4 @@ var CommunityHub = createReactClass({
   },
 });
 
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
-
-function selector(state) {
-  return {};
-}
-
-function dispatcher(dispatch) {
-  return {};
-}
-
-module.exports = connect(selector, dispatcher)(CommunityHub);
+module.exports = CommunityHub;

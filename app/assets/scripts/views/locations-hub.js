@@ -245,7 +245,7 @@ var LocationsHub = createReactClass({
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={e => {
+                    onClick={() => {
                       this.onFilterSelect('countries', o.code);
                     }}
                   >
@@ -273,7 +273,7 @@ var LocationsHub = createReactClass({
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={e => {
+                    onClick={() => {
                       this.onFilterSelect('parameters', o.id);
                     }}
                   >
@@ -299,7 +299,7 @@ var LocationsHub = createReactClass({
                       'drop__menu-item--active': querySources.includes(o.code),
                     })}
                     data-hook="dropdown:close"
-                    onClick={e => {
+                    onClick={() => {
                       this.onFilterSelect('sources', o.name);
                     }}
                   >
@@ -326,7 +326,7 @@ var LocationsHub = createReactClass({
                       'drop__menu-item--active': queryOrderBy.includes(o),
                     })}
                     data-hook="dropdown:close"
-                    onClick={e => {
+                    onClick={() => {
                       this.onFilterSelect('orderBy', o);
                     }}
                   >

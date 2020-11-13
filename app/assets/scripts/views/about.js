@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import { connect } from 'react-redux';
 import _ from 'lodash';
 import createReactClass from 'create-react-class';
 
@@ -329,15 +328,4 @@ var About = createReactClass({
   },
 });
 
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
-
-function selector(state) {
-  return {};
-}
-
-function dispatcher(dispatch) {
-  return {};
-}
-
-module.exports = connect(selector, dispatcher)(About);
+module.exports = About;

@@ -108,10 +108,10 @@ var Compare = createReactClass({
     this.props.history.push(`/compare/${locsUrl}?parameter=${parameter}`);
   },
 
-  removeLocClick: function (index, e) {
+  removeLocClick: function (index) {
     // To build the url filter out the location at the given index.
     // Ensure that non loaded locations are also out.
-    let locsUrl = this.getLocNames((o, i) => i !== index)
+    let locsUrl = this.getLocNames((_o, i) => i !== index)
       .map(encodeURIComponent)
       .join('/');
 

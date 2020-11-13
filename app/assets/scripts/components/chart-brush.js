@@ -108,7 +108,7 @@ var BrushChart = createReactClass({
 
 module.exports = BrushChart;
 
-var Chart = function (options) {
+var Chart = function () {
   // Data related variables for which we have getters and setters.
   var _data = null;
   var _yLabel, _xRange, _yRange;

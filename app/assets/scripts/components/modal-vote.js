@@ -1,11 +1,12 @@
 'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
-import { connect } from 'react-redux';
 import c from 'classnames';
 import OpenAQ from 'openaq-design-system';
 const { Modal, ModalHeader, ModalBody } = OpenAQ.Modal;
 import createReactClass from 'create-react-class';
+
+// TODO: it looks like this component isn't used anywhere?
 
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
@@ -88,15 +89,4 @@ var ModalVote = createReactClass({
   },
 });
 
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
-
-function selector(state) {
-  return {};
-}
-
-function dispatcher(dispatch) {
-  return {};
-}
-
-module.exports = connect(selector, dispatcher)(ModalVote);
+module.exports = ModalVote;
