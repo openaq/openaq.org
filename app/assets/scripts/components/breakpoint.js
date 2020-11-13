@@ -24,12 +24,10 @@ class Breakpoint extends React.Component {
     const width = document.body.offsetWidth;
     let ranges = {};
     for (const name in RANGE_MATRIX) {
-      if (RANGE_MATRIX.hasOwnProperty(name)) {
-        const [min, max] = RANGE_MATRIX[name];
-        ranges[`${name}Down`] = width <= max;
-        ranges[`${name}Only`] = width >= min && width <= max;
-        ranges[`${name}Up`] = width >= min;
-      }
+      const [min, max] = RANGE_MATRIX[name];
+      ranges[`${name}Down`] = width <= max;
+      ranges[`${name}Only`] = width >= min && width <= max;
+      ranges[`${name}Up`] = width >= min;
     }
     return ranges;
   }
