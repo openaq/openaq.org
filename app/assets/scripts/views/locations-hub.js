@@ -154,26 +154,30 @@ var LocationsHub = createReactClass({
   onFilterSelect: function (what, value) {
     let query = qsParse(this.props.location.search);
     switch (what) {
-      case 'countries':
+      case 'countries': {
         let countries = this.getQueryCountries();
         query.countries = toggleValue(countries, value);
         !query.countries.length && delete query.countries;
         break;
-      case 'parameters':
+      }
+      case 'parameters': {
         let parameters = this.getQueryParameters();
         query.parameters = toggleValue(parameters, value);
         !query.parameters.length && delete query.parameters;
         break;
-      case 'sources':
+      }
+      case 'sources': {
         let sources = this.getQuerySources();
         query.sources = toggleValue(sources, value);
         !query.sources.length && delete query.sources;
         break;
-      case 'orderBy':
+      }
+      case 'orderBy': {
         let orderBy = this.getQueryOrderBy();
         query.orderBy = toggleValue(orderBy, value);
         !query.orderBy.length && delete query.orderBy;
         break;
+      }
 
       case 'clear':
         delete query.countries;
