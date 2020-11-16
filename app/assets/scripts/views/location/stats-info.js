@@ -7,7 +7,11 @@ import LoadingMessage from '../../components/loading-message';
 import Card, { HighlightText, CardSubtitle } from '../../components/card';
 
 const ErrorMessage = styled.div`
-  grid-column: 1 / span 3;
+  grid-column: 1 / 4;
+`;
+
+const StyledLoading = styled(LoadingMessage)`
+  grid-column: 1 / 4;
 `;
 
 export default function StatsInfo({ latestMeasurements, measurements, loc }) {
@@ -30,7 +34,7 @@ export default function StatsInfo({ latestMeasurements, measurements, loc }) {
   if (!fetched && !fetching) {
     return null;
   } else if (fetching) {
-    return <LoadingMessage />;
+    return <StyledLoading />;
   } else if (error) {
     return (
       <ErrorMessage className="fold__introduction prose prose--responsive">
@@ -60,7 +64,7 @@ export default function StatsInfo({ latestMeasurements, measurements, loc }) {
   return (
     <Card
       title="Details"
-      gridColumn={'1 / span 3'}
+      gridColumn={'1 / 4'}
       renderBody={() => {
         return (
           <div className="card__body">
