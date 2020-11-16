@@ -60,15 +60,13 @@ const Header = styled.th`
 `;
 const Cell = styled.td`
   padding: 0.75rem 1.5rem;
-  ${({ bold }) =>
-    bold &&
+
+  ${({ style }) =>
+    style &&
     css`
-      font-weight: 700;
-    `}
-  ${({ center }) =>
-    center &&
-    css`
-      text-align: center;
+      ${Object.entries(style)
+        .map(([key, value]) => `${key}: ${value};`)
+        .join('\n')}
     `}
 `;
 
@@ -84,13 +82,11 @@ const prepareRows = data => {
           header: key,
           value: column.values[i],
           formatCell: column.formatCell,
-          bold: column.bold,
-          center: column.center,
+          style: column.style,
         };
       })
     );
   }
-  console.log(rows);
   return rows;
 };
 function TableComponent(props) {
@@ -135,17 +131,12 @@ function TableComponent(props) {
             return 0;
           }
         })
-
         .map((row, i) => {
           return (
             <Row key={`row-${i}`} index={i}>
               {row.map(cell => {
                 return (
-                  <Cell
-                    bold={cell.bold}
-                    center={cell.center}
-                    key={`${cell.header}-${cell.value}`}
-                  >
+                  <Cell style={cell.style} key={`${cell.header}-${cell.value}`}>
                     {cell.formatCell ? cell.formatCell(cell.value) : cell.value}
                   </Cell>
                 );
