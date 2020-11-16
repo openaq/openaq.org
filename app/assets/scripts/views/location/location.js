@@ -23,6 +23,7 @@ import Header from './header';
 
 import styled from 'styled-components';
 import CardList from '../../components/card-list';
+import Averages from './averages-card';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
@@ -151,6 +152,9 @@ function Location(props) {
             sources={props.loc.data.sourceNames
               .map(o => _.find(props.sources, { name: o }))
               .filter(o => o)}
+          />
+          <Averages 
+
           />
         </Dashboard>
         {/*
