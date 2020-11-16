@@ -7,6 +7,7 @@ import moment from 'moment';
 import {
   fetchLocationIfNeeded,
   fetchLatestMeasurements,
+  fetchAverageMeasurements,
   fetchMeasurements,
   invalidateAllLocationData,
   openDownloadModal,
@@ -70,6 +71,12 @@ function Location(props) {
           location: loc.location,
         });
       }
+      console.log(loc)
+      props._fetchAverageMeasurements({
+        spatial: 'location',
+        location: loc.location
+      });
+
       props._fetchMeasurements(
         loc.location,
         fromDate.toISOString(),
@@ -153,9 +160,7 @@ function Location(props) {
               .map(o => _.find(props.sources, { name: o }))
               .filter(o => o)}
           />
-          <Averages 
-
-          />
+          <Averages />
         </Dashboard>
         {/*
         <Metadata loc={props.loc} />
@@ -232,6 +237,7 @@ function selector(state) {
 
     loc: state.location,
     latestMeasurements: state.latestMeasurements,
+    averageMeasurements: state.averageMeasurements,
     measurements: state.measurements,
   };
 }
@@ -242,6 +248,8 @@ function dispatcher(dispatch) {
       dispatch(fetchLocationIfNeeded(...args)),
     _fetchLatestMeasurements: (...args) =>
       dispatch(fetchLatestMeasurements(...args)),
+    _fetchAverageMeasurements: (...args) =>
+      dispatch(fetchAverageMeasurements(...args)),
     _fetchMeasurements: (...args) => dispatch(fetchMeasurements(...args)),
     _invalidateAllLocationData: (...args) =>
       dispatch(invalidateAllLocationData(...args)),

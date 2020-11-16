@@ -3,6 +3,7 @@ import * as baseStats from './base-stats';
 import * as compare from './compare';
 import * as geolocation from './geolocation';
 import * as latestMeasurements from './latest-measurements';
+import * as averageMeasurements from './average-measurements';
 import * as location from './location';
 import * as locations from './locations';
 import * as measurements from './measurements';
@@ -18,6 +19,7 @@ module.exports = Object.assign(
   compare,
   geolocation,
   latestMeasurements,
+  averageMeasurements,
   location,
   locations,
   measurements,
