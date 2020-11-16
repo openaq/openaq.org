@@ -82,3 +82,20 @@
     @extend %openaq-ds-icon-arrow-right;
   }
 }
+[class*=" sort_"] {
+  &::after {
+    @extend %openaq-ds-icon-arrow-right;
+    display: inline-block;
+  }
+}
+.sort_asc {
+  &::after {
+    transform: rotate(-90deg);
+  }
+}
+.sort_desc {
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+

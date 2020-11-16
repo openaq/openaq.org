@@ -23,6 +23,7 @@ import Header from './header';
 
 import styled from 'styled-components';
 import CardList from '../../components/card-list';
+import Averages from './averages-card';
 
 const Dashboard = styled(CardList)`
   padding: 0 4rem;
@@ -155,6 +156,9 @@ function Location(props) {
             sources={props.sources}
             measurements={props.measurements}
             loc={props.loc}
+          />
+          <Averages 
+
           />
         </Dashboard>
         {/*
