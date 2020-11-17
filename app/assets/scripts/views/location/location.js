@@ -25,7 +25,7 @@ import styled from 'styled-components';
 import CardList from '../../components/card-list';
 
 const Dashboard = styled(CardList)`
-  padding: 1rem 4rem;
+  padding: 2rem 4rem;
 `;
 
 function Location(props) {
@@ -138,6 +138,7 @@ function Location(props) {
         <Dashboard
           gridTemplateRows={'repeat(4, 20rem)'}
           gridTemplateColumns={'repeat(12, 1fr)'}
+          className="inner"
         >
           <StatsInfoCard measurements={props.measurements} loc={props.loc} />
           <MeasurementsCard
@@ -146,9 +147,16 @@ function Location(props) {
             parameters={props.parameters}
           />
           <SourceInfo
-            sources={props.sources}
             measurements={props.measurements}
-            loc={props.loc}
+            sources={props.loc.data.sourceNames
+              .map(o => _.find(props.sources, { name: o }))
+              .filter(o => o)}
+          />
+          <SourceInfo
+            measurements={props.measurements}
+            sources={props.loc.data.sourceNames
+              .map(o => _.find(props.sources, { name: o }))
+              .filter(o => o)}
           />
         </Dashboard>
         {/*
@@ -160,7 +168,7 @@ function Location(props) {
           onFilterSelect={onFilterSelect}
         />
         <NearbyLoc
-          countryData={props.countryData}
+          countryData={props.countryData
           latestMeasurements={props.latestMeasurements}
           loc={props.loc}
           parameters={props.parameters}

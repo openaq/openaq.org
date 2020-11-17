@@ -13,12 +13,8 @@ const SourceList = styled(CardBody)`
 
 const Source = styled(Link)``;
 
-export default function SourceInfo({ measurements, loc, sources: allSources }) {
+export default function SourceInfo({ measurements, sources }) {
   const { data } = measurements;
-
-  let sources = loc.data.sourceNames
-    .map(o => _.find(allSources, { name: o }))
-    .filter(o => o);
 
   if (data.attribution) {
     // filtering attribution[0] b/c it kept showing up with same name and url as sources[0]
@@ -28,7 +24,6 @@ export default function SourceInfo({ measurements, loc, sources: allSources }) {
   return (
     <Card
       title="Sources"
-      //gridRow={'1 / 2'}
       gridColumn={'11 / -1'}
       renderBody={() => (
         <SourceList className="card__body">
@@ -65,13 +60,6 @@ export default function SourceInfo({ measurements, loc, sources: allSources }) {
 
 SourceInfo.propTypes = {
   sources: T.array,
-
-  loc: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
 
   measurements: T.shape({
     fetching: T.bool,
