@@ -17,7 +17,6 @@ const MeasurementsCont = styled.dl`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
   grid-gap: 0.25rem;
-  height: 60%;
   overflow-y: scroll;
 `;
 const Measurement = styled.div`
