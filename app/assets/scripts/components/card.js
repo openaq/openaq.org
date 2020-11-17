@@ -87,9 +87,9 @@ Card.propTypes = {
   gridRow: T.string,
   title: T.string,
   subtitle: T.string,
-  renderBody: T.string,
-  renderHeader: T.string,
-  renderFooter: T.string,
+  renderBody: T.func,
+  renderHeader: T.func,
+  renderFooter: T.func,
 };
 
 export default Card;

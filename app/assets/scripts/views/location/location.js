@@ -25,7 +25,7 @@ import styled from 'styled-components';
 import CardList from '../../components/card-list';
 
 const Dashboard = styled(CardList)`
-  padding: 0 4rem;
+  padding: 1rem 4rem;
 `;
 
 function Location(props) {
@@ -139,16 +139,10 @@ function Location(props) {
           gridTemplateRows={'repeat(4, 20rem)'}
           gridTemplateColumns={'repeat(12, 1fr)'}
         >
-          <StatsInfoCard
-            latestMeasurements={props.latestMeasurements}
-            measurements={props.measurements}
-            loc={props.loc}
-            parameters={props.parameters}
-          />
+          <StatsInfoCard measurements={props.measurements} loc={props.loc} />
           <MeasurementsCard
             latestMeasurements={props.latestMeasurements}
-            measurements={props.measurements}
-            loc={props.loc}
+            location={props.loc.data.location}
             parameters={props.parameters}
           />
           <SourceInfo

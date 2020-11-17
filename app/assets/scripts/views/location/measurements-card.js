@@ -17,7 +17,6 @@ const MeasurementsCont = styled.dl`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
   grid-gap: 0.25rem;
-  overflow-y: scroll;
 `;
 const Measurement = styled.div`
   width: min-content;
@@ -25,8 +24,7 @@ const Measurement = styled.div`
 
 export default function Measurements({
   latestMeasurements,
-  measurements,
-  loc,
+  location,
   parameters,
 }) {
   const {
@@ -35,19 +33,10 @@ export default function Measurements({
     error: lastMError,
     data: { results: lastMeasurements },
   } = latestMeasurements;
-  const {
-    fetched: mFetched,
-    fetching: mFetching,
-    error: mError,
-  } = measurements;
 
-  const error = lastMError || mError;
-  const fetched = lastMFetched || mFetched;
-  const fetching = lastMFetching || mFetching;
-
-  if (!fetched && !fetching) {
-    return null;
-  }
+  const error = lastMError;
+  const fetched = lastMFetched;
+  const fetching = lastMFetching;
 
   if (!fetched && !fetching) {
     return null;
@@ -67,12 +56,15 @@ export default function Measurements({
     );
   }
 
-  let locData = loc.data;
-
   // Get latest measurements for this location in particular.
   let locLastMeasurement = _.find(lastMeasurements, {
-    location: locData.location,
+    location: location,
   });
+  // FIXME The current api is returning results with duplicate values.
+  locLastMeasurement.measurements = _.uniqWith(
+    locLastMeasurement.measurements,
+    _.isEqual
+  );
 
   return (
     <Card
@@ -114,22 +106,8 @@ export default function Measurements({
 
 Measurements.propTypes = {
   parameters: T.array,
-
-  loc: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
+  location: T.string,
   latestMeasurements: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
-  measurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,

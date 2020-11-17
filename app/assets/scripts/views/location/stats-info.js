@@ -14,12 +14,7 @@ const StyledLoading = styled(LoadingMessage)`
   grid-column: 1 / 4;
 `;
 
-export default function StatsInfo({ latestMeasurements, measurements, loc }) {
-  const {
-    fetched: lastMFetched,
-    fetching: lastMFetching,
-    error: lastMError,
-  } = latestMeasurements;
+export default function StatsInfo({ measurements, loc }) {
   const {
     fetched: mFetched,
     fetching: mFetching,
@@ -27,9 +22,9 @@ export default function StatsInfo({ latestMeasurements, measurements, loc }) {
     data,
   } = measurements;
 
-  const error = lastMError || mError;
-  const fetched = lastMFetched || mFetched;
-  const fetching = lastMFetching || mFetching;
+  const error = mError;
+  const fetched = mFetched;
+  const fetching = mFetching;
 
   if (!fetched && !fetching) {
     return null;
@@ -99,13 +94,6 @@ StatsInfo.propTypes = {
   parameters: T.array,
 
   loc: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
-  latestMeasurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
