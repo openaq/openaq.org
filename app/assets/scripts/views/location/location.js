@@ -152,12 +152,6 @@ function Location(props) {
               .map(o => _.find(props.sources, { name: o }))
               .filter(o => o)}
           />
-          <SourceInfo
-            measurements={props.measurements}
-            sources={props.loc.data.sourceNames
-              .map(o => _.find(props.sources, { name: o }))
-              .filter(o => o)}
-          />
         </Dashboard>
         {/*
         <Metadata loc={props.loc} />
