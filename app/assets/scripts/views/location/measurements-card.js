@@ -73,7 +73,6 @@ export default function Measurements({
   let locLastMeasurement = _.find(lastMeasurements, {
     location: locData.location,
   });
-  console.log(locLastMeasurement.measurements);
 
   return (
     <Card
