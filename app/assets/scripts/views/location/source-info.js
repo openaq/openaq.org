@@ -1,6 +1,5 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
-import _ from 'lodash';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Card, { CardBody } from '../../components/card';
