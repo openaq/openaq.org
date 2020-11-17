@@ -157,6 +157,8 @@ function TableComponent(props) {
   );
 }
 
-TableComponent.propTypes = {};
+TableComponent.propTypes = {
+  data: T.object,
+};
 
 export default TableComponent;

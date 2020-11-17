@@ -6,7 +6,6 @@ import Card from '../../components/card';
 import Table from '../../components/table';
 import { shortenLargeNumber } from '../../utils/format';
 
-
 const initData = {
   pollutant: {
     values: [],

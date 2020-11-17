@@ -189,6 +189,7 @@ Location.propTypes = {
   _fetchLocationIfNeeded: T.func,
   _fetchLocations: T.func,
   _fetchLatestMeasurements: T.func,
+  _fetchAverageMeasurements: T.func,
   _fetchMeasurements: T.func,
   _invalidateAllLocationData: T.func,
   _openDownloadModal: T.func,
@@ -200,6 +201,13 @@ Location.propTypes = {
   countryData: T.object,
 
   loc: T.shape({
+    fetching: T.bool,
+    fetched: T.bool,
+    error: T.string,
+    data: T.object,
+  }),
+
+  averageMeasurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
