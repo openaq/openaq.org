@@ -95,55 +95,64 @@ function TableComponent(props) {
   const [sortAsc, setSortAsc] = useState(true);
   return (
     <Table className="global-table">
-      <Row header>
-        {Object.entries(data).map(([key, datum]) => {
-          const { formatHeader } = datum;
-          return (
-            <Header
-              className={`sort_${sortAsc ? 'asc' : 'desc'}`}
-              key={key}
-              active={key === activeHeader}
-              onClick={() => {
-                setActiveHeader(key);
-                setSortAsc(!sortAsc);
-              }}
-            >
-              {formatHeader ? formatHeader(key) : key}
-            </Header>
-          );
-        })}
-      </Row>
-      {prepareRows(data)
-        .sort((rowA, rowB) => {
-          if (!activeHeader) {
-            return 0;
-          }
-          const valA = rowA.find(el => el.header === activeHeader).value;
-          const valB = rowB.find(el => el.header === activeHeader).value;
+      <thead>
+        <Row header>
+          {Object.entries(data).map(([key, datum]) => {
+            const { formatHeader } = datum;
+            return (
+              <Header
+                className={`sort_${sortAsc ? 'asc' : 'desc'}`}
+                key={key}
+                active={key === activeHeader}
+                onClick={() => {
+                  setActiveHeader(key);
+                  setSortAsc(!sortAsc);
+                }}
+              >
+                {formatHeader ? formatHeader(key) : key}
+              </Header>
+            );
+          })}
+        </Row>
+      </thead>
+      <tbody>
+        {prepareRows(data)
+          .sort((rowA, rowB) => {
+            if (!activeHeader) {
+              return 0;
+            }
+            const valA = rowA.find(el => el.header === activeHeader).value;
+            const valB = rowB.find(el => el.header === activeHeader).value;
 
-          const dir = sortAsc ? 1 : -1;
+            const dir = sortAsc ? 1 : -1;
 
-          if (valA > valB) {
-            return 1 * dir;
-          } else if (valA < valB) {
-            return -1 * dir;
-          } else {
-            return 0;
-          }
-        })
-        .map((row, i) => {
-          return (
-            <Row key={`row-${i}`} index={i}>
-              {row.map(cell => {
-                return (
-                  <Cell style={cell.style} key={`${cell.header}-${cell.value}`}>
-                    {cell.formatCell ? cell.formatCell(cell.value) : cell.value}
-                  </Cell>
-                );
-              })}
-            </Row>
-          );
-        })}
+            if (valA > valB) {
+              return 1 * dir;
+            } else if (valA < valB) {
+              return -1 * dir;
+            } else {
+              return 0;
+            }
+          })
+          .map((row, i) => {
+            return (
+              <Row key={`row-${i}`} index={i}>
+                {row.map(cell => {
+                  return (
+                    <Cell
+                      style={cell.style}
+                      key={`${cell.header}-${cell.value}`}
+                    >
+                      {cell.formatCell
+                        ? cell.formatCell(cell.value)
+                        : cell.value}
+                    </Cell>
+                  );
+                })}
+              </Row>
+            );
+          })}
+      </tbody>
     </Table>
   );
 }

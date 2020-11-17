@@ -71,10 +71,9 @@ function Location(props) {
           location: loc.location,
         });
       }
-      console.log(loc)
       props._fetchAverageMeasurements({
         spatial: 'location',
-        location: loc.location
+        location: loc.location,
       });
 
       props._fetchMeasurements(
@@ -160,7 +159,7 @@ function Location(props) {
               .map(o => _.find(props.sources, { name: o }))
               .filter(o => o)}
           />
-          <Averages />
+          <Averages measurements={props.averageMeasurements} />
         </Dashboard>
         {/*
         <Metadata loc={props.loc} />

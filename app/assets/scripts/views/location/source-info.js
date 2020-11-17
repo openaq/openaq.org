@@ -1,6 +1,5 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
-import _ from 'lodash';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Card, { CardBody } from '../../components/card';
@@ -43,12 +42,12 @@ export default function SourceInfo({ measurements, sources }) {
           {sources[0] && (
             <div>
               For more information contact{' '}
-              <a
-                href={`mailto:${sources[0].contacts[0]}`}
+              <Link
+                to={`mailto:${sources[0].contacts[0]}`}
                 title={sources[0].contacts[0]}
               >
                 {sources[0].contacts[0]}
-              </a>
+              </Link>
               .
             </div>
           )}

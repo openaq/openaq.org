@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 import { stringify as buildAPIQS } from 'qs';
 import * as actions from './action-types';
 import config from '../config';
+import moment from 'moment';
 
 // ////////////////////////////////////////////////////////////////
 //                     AVERAGE MEASUREMENTS                      //
@@ -29,6 +30,7 @@ export function fetchAverageMeasurements(filters) {
     let data = null;
     let limit = 1000;
     let f = buildAPIQS(filters);
+    const yDay = moment().subtract(1, 'day').format('YYYY-MM-DD')
 
     const fetcher = function (page) {
       fetch(

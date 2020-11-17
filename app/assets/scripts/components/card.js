@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import { PropTypes as T } from 'prop-types';
 import styled, { css } from 'styled-components';
 
@@ -9,7 +10,7 @@ const CardWrapper = styled.article`
   `}
 `;
 
-const CardContents = styled.a``;
+const CardContents = styled.div``;
 
 const CardHeader = styled.header``;
 
