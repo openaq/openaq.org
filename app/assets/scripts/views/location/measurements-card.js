@@ -78,7 +78,6 @@ export default function Measurements({
     <Card
       title="Latest Measurements"
       gridColumn={'4 / 11'}
-      // gridRow={'1 / span 2'}
       renderBody={() => {
         return (
           <div className="card__body">
