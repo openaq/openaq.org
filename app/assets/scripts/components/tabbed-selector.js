@@ -6,7 +6,6 @@ import c from 'classnames';
 const Tab = styled.a`
   width: min-content;
   margin: 0;
-  place-self: center;
   line-height: 3rem;
 `;
 const Wrapper = styled.div`
