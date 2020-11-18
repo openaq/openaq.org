@@ -22,6 +22,7 @@ const CardHeader = styled(BaseHeader)`
 export default function ValuesBreakdown({ measurements, parameters }) {
   const { fetched, fetching, error } = measurements;
   const [activeTab, setActiveTab] = useState(parameters[0]);
+  const [startDate, setStartDate] = useState(new Date());
 
   if (!fetched && !fetching) {
     return null;
@@ -45,7 +46,6 @@ export default function ValuesBreakdown({ measurements, parameters }) {
       </ErrorMessage>
     );
   }
-
   return (
     <Card
       gridColumn={'1  / -1'}
@@ -58,6 +58,7 @@ export default function ValuesBreakdown({ measurements, parameters }) {
               setActiveTab(t);
             }}
           />
+
           <CardTitle>Time Series Data</CardTitle>
         </CardHeader>
       )}
