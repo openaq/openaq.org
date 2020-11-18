@@ -26,7 +26,6 @@ import T from 'prop-types';
  */
 const Table = styled.table``;
 const Row = styled.tr`
-  background-color: ${({ index }) => (index % 2 === 0 ? '#ffffff' : '#f4f9fe')};
   ${({ header }) =>
     header &&
     css`
