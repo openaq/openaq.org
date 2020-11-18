@@ -6,8 +6,11 @@ import InfoMessage from '../../components/info-message';
 import MeasurementsChart from './measurements-chart';
 import Card, {
   CardHeader as BaseHeader,
+  CardSubtitle,
   CardTitle,
 } from '../../components/card';
+import { Dropdown } from 'openaq-design-system';
+
 import TabbedSelector from '../../components/tabbed-selector';
 
 const ErrorMessage = styled.div`
@@ -18,11 +21,23 @@ const CardHeader = styled(BaseHeader)`
   grid-template-rows: min-content 1fr 1fr;
   grid-gap: 0.5rem;
 `;
+const DateSelector = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 50%;
+  > p {
+    margin-right: 2rem;
+  }
+`;
 
 export default function ValuesBreakdown({ measurements, parameters }) {
   const { fetched, fetching, error } = measurements;
   const [activeTab, setActiveTab] = useState(parameters[0]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [dateRange, setDateRange] = useState({
+    end: new Date(),
+    start: new Date('1/1/2000'),
+  });
 
   if (!fetched && !fetching) {
     return null;
@@ -58,6 +73,18 @@ export default function ValuesBreakdown({ measurements, parameters }) {
               setActiveTab(t);
             }}
           />
+
+          <DateSelector>
+            <CardSubtitle className="card__subtitle">Period</CardSubtitle>
+            <Dropdown
+              triggerElement="a"
+              triggerClassName="date-picker-trigger"
+              triggerTitle="Open date picker"
+              triggerText={`${dateRange.start.toDateString()} - ${dateRange.end.toDateString()}`}
+            >
+              date picker
+            </Dropdown>
+          </DateSelector>
 
           <CardTitle>Time Series Data</CardTitle>
         </CardHeader>
