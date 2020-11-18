@@ -24,6 +24,12 @@ const subMenus = [
         url: '/countries',
       },
       {
+        title: 'Datasets',
+        description: 'Air quality data by dataset.',
+        className: 'sub-menu__link--projects',
+        url: '/projects',
+      },
+      {
         title: 'World map',
         description: 'See the latest measurements on a map.',
         className: 'sub-menu__link--map',
