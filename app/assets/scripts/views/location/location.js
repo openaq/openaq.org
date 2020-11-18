@@ -18,6 +18,7 @@ import MeasurementsCard from './measurements-card';
 // import Metadata from './metadata';
 import SourceInfo from './source-info';
 import ValuesBreakdown from './values-breakdown';
+import TemporalMeasurements from './temporal-measurements';
 // import NearbyLoc from './nearby-loc';
 import Header from './header';
 
@@ -153,6 +154,13 @@ function Location(props) {
           />
 
           <ValuesBreakdown
+            measurements={props.measurements}
+            parameters={props.parameters}
+            activeParam={getActiveParameterData()}
+            onFilterSelect={onFilterSelect}
+          />
+
+          <TemporalMeasurements
             measurements={props.measurements}
             parameters={props.parameters}
             activeParam={getActiveParameterData()}
