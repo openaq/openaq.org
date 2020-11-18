@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import qs from 'qs';
 import moment from 'moment';
 
 import {
@@ -13,15 +12,23 @@ import {
   openDownloadModal,
 } from '../../actions/action-creators';
 import HeaderMessage from '../../components/header-message';
-import StatsInfo from './stats-info';
-import Metadata from './metadata';
+import StatsInfoCard from './stats-info';
+import MeasurementsCard from './measurements-card';
+
+// import Metadata from './metadata';
 import SourceInfo from './source-info';
-import ValuesBreakdown from './values-breakdown';
-import NearbyLoc from './nearby-loc';
+// import ValuesBreakdown from './values-breakdown';
+// import NearbyLoc from './nearby-loc';
 import Header from './header';
 
+import styled from 'styled-components';
+import CardList from '../../components/card-list';
+
+const Dashboard = styled(CardList)`
+  padding: 2rem 4rem;
+`;
+
 function Location(props) {
-  const query = qs.parse(props.location.search, { ignoreQueryPrefix: true });
   const { name } = props.match.params;
 
   useEffect(() => {
@@ -70,6 +77,7 @@ function Location(props) {
     }
   });
 
+  /*
   function getActiveParameterData() {
     let parameterData = _.find(props.parameters, { id: query.parameter });
     return parameterData || _.find(props.parameters, { id: 'pm25' });
@@ -80,6 +88,7 @@ function Location(props) {
       `/location/${encodeURIComponent(name)}?parameter=${parameter}`
     );
   }
+  */
 
   let { fetched, fetching, error, data } = props.loc;
   if (!fetched && !fetching) {
@@ -126,18 +135,26 @@ function Location(props) {
         openDownloadModal={props._openDownloadModal}
       />
       <div className="inpage__body">
-        <StatsInfo
-          latestMeasurements={props.latestMeasurements}
-          measurements={props.measurements}
-          loc={props.loc}
-          parameters={props.parameters}
-        />
+        <Dashboard
+          gridTemplateRows={'repeat(4, 20rem)'}
+          gridTemplateColumns={'repeat(12, 1fr)'}
+          className="inner"
+        >
+          <StatsInfoCard measurements={props.measurements} loc={props.loc} />
+          <MeasurementsCard
+            latestMeasurements={props.latestMeasurements}
+            location={props.loc.data.location}
+            parameters={props.parameters}
+          />
+          <SourceInfo
+            measurements={props.measurements}
+            sources={props.loc.data.sourceNames
+              .map(o => _.find(props.sources, { name: o }))
+              .filter(o => o)}
+          />
+        </Dashboard>
+        {/*
         <Metadata loc={props.loc} />
-        <SourceInfo
-          sources={props.sources}
-          measurements={props.measurements}
-          loc={props.loc}
-        />
         <ValuesBreakdown
           measurements={props.measurements}
           parameters={props.parameters}
@@ -145,12 +162,12 @@ function Location(props) {
           onFilterSelect={onFilterSelect}
         />
         <NearbyLoc
-          countryData={props.countryData}
+          countryData={props.countryData
           latestMeasurements={props.latestMeasurements}
           loc={props.loc}
           parameters={props.parameters}
           sources={props.sources}
-        />
+        />*/}
       </div>
     </section>
   );

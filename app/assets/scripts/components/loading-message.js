@@ -15,6 +15,7 @@ var LoadingMessage = createReactClass({
   propTypes: {
     type: T.string,
     children: T.object,
+    className: T.string,
   },
 
   getClasses: function () {
@@ -61,7 +62,7 @@ var LoadingMessage = createReactClass({
 
   render: function () {
     return (
-      <div className={this.getClasses()}>
+      <div className={`${this.getClasses()} ${this.props.className || ''}`}>
         {this.renderSvg()}
         {this.renderMsg()}
       </div>

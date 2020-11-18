@@ -12,9 +12,10 @@ const Wrapper = styled.div`
 `;
 
 function CardList(props) {
-  const { gridGap, gridTemplateColumns, gridTemplateRows } = props;
+  const { gridGap, gridTemplateColumns, gridTemplateRows, className } = props;
   return (
     <Wrapper
+      className={className}
       {...{
         gridGap,
         gridTemplateColumns,
@@ -30,6 +31,7 @@ CardList.propTypes = {
   gridGap: T.string,
   gridTemplateRows: T.string,
   gridTemplateColumns: T.string,
+  className: T.string,
   children: T.node,
 };
 

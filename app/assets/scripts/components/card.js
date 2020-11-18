@@ -13,7 +13,8 @@ const CardContents = styled.a``;
 
 const CardHeader = styled.header``;
 
-const CardBody = styled.div``;
+export const CardBody = styled.div``;
+export const Test = styled.div``;
 
 const CardFooter = styled.footer``;
 
@@ -36,6 +37,8 @@ export const HighlightText = styled.h1`
     }
   }};
 `;
+/* Generic Card component for dashboard pages
+ */
 
 function Card(props) {
   const {
@@ -84,9 +87,9 @@ Card.propTypes = {
   gridRow: T.string,
   title: T.string,
   subtitle: T.string,
-  renderBody: T.string,
-  renderHeader: T.string,
-  renderFooter: T.string,
+  renderBody: T.func,
+  renderHeader: T.func,
+  renderFooter: T.func,
 };
 
 export default Card;
