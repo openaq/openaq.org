@@ -13,6 +13,7 @@ const initData = {
     style: {
       color: 'black',
       fontWeight: 700,
+      textAlign: 'center',
     },
   },
   avg: {

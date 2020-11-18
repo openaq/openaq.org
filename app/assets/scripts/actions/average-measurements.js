@@ -60,7 +60,7 @@ export function fetchAverageMeasurements(filters) {
             }
           },
           e => {
-            console.log('e', e);
+            console.error('Error:', e);
             return dispatch(
               receiveAverageMeasurements(null, 'Data not available')
             );
