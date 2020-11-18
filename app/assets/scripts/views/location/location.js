@@ -17,7 +17,7 @@ import MeasurementsCard from './measurements-card';
 
 // import Metadata from './metadata';
 import SourceInfo from './source-info';
-// import ValuesBreakdown from './values-breakdown';
+import ValuesBreakdown from './values-breakdown';
 // import NearbyLoc from './nearby-loc';
 import Header from './header';
 
@@ -77,9 +77,9 @@ function Location(props) {
     }
   });
 
-  /*
+  
   function getActiveParameterData() {
-    let parameterData = _.find(props.parameters, { id: query.parameter });
+    let parameterData = undefined//_.find(props.parameters, { id: props.location.query.parameter });
     return parameterData || _.find(props.parameters, { id: 'pm25' });
   }
 
@@ -88,7 +88,6 @@ function Location(props) {
       `/location/${encodeURIComponent(name)}?parameter=${parameter}`
     );
   }
-  */
 
   let { fetched, fetching, error, data } = props.loc;
   if (!fetched && !fetching) {
@@ -152,6 +151,14 @@ function Location(props) {
               .map(o => _.find(props.sources, { name: o }))
               .filter(o => o)}
           />
+
+          <ValuesBreakdown
+            measurements={props.measurements}
+            parameters={props.parameters}
+            activeParam={getActiveParameterData()}
+            onFilterSelect={onFilterSelect}
+          />
+
         </Dashboard>
         {/*
         <Metadata loc={props.loc} />

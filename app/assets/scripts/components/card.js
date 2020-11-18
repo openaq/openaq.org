@@ -11,16 +11,15 @@ const CardWrapper = styled.article`
 
 const CardContents = styled.a``;
 
-const CardHeader = styled.header``;
+export const CardHeader = styled.header``;
 
 export const CardBody = styled.div``;
-export const Test = styled.div``;
 
 const CardFooter = styled.footer``;
 
 const CardHeadline = styled.div``;
 
-const CardTitle = styled.h1``;
+export const CardTitle = styled.h1``;
 
 export const CardSubtitle = styled.p``;
 export const HighlightText = styled.h1`
