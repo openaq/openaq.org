@@ -41,7 +41,12 @@ const ErrorMessage = styled.div`
   grid-column: 1 / 7;
 `;
 
-// TODO This function currently just extracts the first data available for each pollutant
+/*  TODO This function currently just extracts the first data available for each pollutant
+ *  openAQ api returns all available dates averages, or those within a specified date range.
+ *  The desired data in this card needs some clarification. should it be the most recent day?
+ *  User specified day? date range? etc
+ */
+
 const prepareData = data => {
   const combinedData = data.reduce((accum, datum) => {
     const { parameter, measurement_count, average } = datum;
