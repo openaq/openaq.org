@@ -44,41 +44,65 @@ export default function TemporalMeasurements({ measurements, parameters }) {
     return null;
   }
 
-  const parseHour = measurements =>
-    measurements.reduce((prev, curr) => {
+  const parseHour = measurements => {
+    const hourCount = measurements.reduce((prev, curr) => {
       const hour = new Date(curr.date.local).getHours();
       prev[hour] = prev[hour] ? prev[hour] + 1 : 1;
       return prev;
     }, {});
+    const orderedHoursCount = {};
+    Object.keys(hourCount)
+      .sort()
+      .forEach(function (key) {
+        orderedHoursCount[key] = hourCount[key];
+      });
+    return orderedHoursCount;
+  };
 
-  const parseDay = measurements =>
-    measurements.reduce((prev, curr) => {
-      const daysOfWeek = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT'];
+  const parseDay = measurements => {
+    const daysOfWeek = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT'];
+    const dayCount = measurements.reduce((prev, curr) => {
       const day = daysOfWeek[new Date(curr.date.local).getDay()];
       prev[day] = prev[day] ? prev[day] + 1 : 1;
       return prev;
     }, {});
+    let sortedDayCount = {};
+    daysOfWeek.forEach(day =>
+      dayCount[day]
+        ? (sortedDayCount[day] = dayCount[day])
+        : (sortedDayCount[day] = 0)
+    );
+    return sortedDayCount;
+  };
 
-  const parseMonth = measurements =>
-    measurements.reduce((prev, curr) => {
-      const monthOfYear = [
-        'JAN',
-        'FEB',
-        'MAR',
-        'APR',
-        'MAY',
-        'JUNE',
-        'JUL',
-        'AUG',
-        'SEP',
-        'OCT',
-        'NOV',
-        'DEC',
-      ];
+  const parseMonth = measurements => {
+    const monthOfYear = [
+      'JAN',
+      'FEB',
+      'MAR',
+      'APR',
+      'MAY',
+      'JUNE',
+      'JUL',
+      'AUG',
+      'SEP',
+      'OCT',
+      'NOV',
+      'DEC',
+    ];
+    const monthCount = measurements.reduce((prev, curr) => {
       const month = monthOfYear[new Date(curr.date.local).getMonth()];
       prev[month] = prev[month] ? prev[month] + 1 : 1;
       return prev;
     }, {});
+    let sortedMonthCount = {};
+    monthOfYear.forEach(month =>
+      monthCount[month]
+        ? (sortedMonthCount[month] = monthCount[month])
+        : (sortedMonthCount[month] = 0)
+    );
+    return sortedMonthCount;
+  };
 
   if (fetching) {
     return <LoadingMessage />;
