@@ -21,7 +21,7 @@ import LocationsHub from './views/locations-hub';
 import LocationItem from './views/location';
 import CountriesHub from './views/countries-hub';
 import Country from './views/country';
-import ProjectsHub from './views/project-hub';
+import ProjectsHub from './views/projects-hub';
 import Compare from './views/compare';
 
 const logger = createLogger({
