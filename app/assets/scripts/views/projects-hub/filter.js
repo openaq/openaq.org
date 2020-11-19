@@ -8,7 +8,7 @@ export default function Filter({
   organizations,
   parameters,
   sources,
-  orderBy,
+  orderBy = [],
 }) {
   let sortOptions = ['organization'];
 

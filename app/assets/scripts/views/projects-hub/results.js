@@ -5,11 +5,24 @@ import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import ProjectCard from './project-card';
 
+const defaultProject = {
+  id: 1,
+  onDownloadClick: '',
+  lastUpdate: '',
+  name: 'Dataset name',
+  organization: 'Organization name',
+  sourceType: 'mobile',
+  collectionStart: new Date(2019, 9, 1),
+  records: 181829,
+  count: 97933,
+  parameters: ['co', 'no2', 'o3'],
+};
+
 export default function Results({
-  fetched = true,
+  fetched,
   fetching,
   error,
-  projects = [],
+  projects, // = [defaultProject],
   openDownloadModal,
 }) {
   if (!fetched && !fetching) {
@@ -56,32 +69,23 @@ export default function Results({
     );
   }
 
-  return [
-    {
-      location: '',
-      project: '',
-      city: '',
-      organization: '',
-      count: 13,
-      lastUpdated: '',
-      firstUpdated: '',
-    },
-  ].map(o => {
+  return projects.map(o => {
     let openModal = () =>
       openDownloadModal({
         project: o.project,
       });
     return (
       <ProjectCard
+        key={o.id}
         onDownloadClick={openModal}
-        key={o.location}
-        name={o.project}
-        organization={o.city}
-        sourceType={o.organization}
-        projectData={o}
-        totalMeasurements={o.count}
         lastUpdate={o.lastUpdated}
-        collectionStart={o.firstUpdated}
+        name={o.name}
+        organization={o.organization}
+        sourceType={o.sourceType}
+        collectionStart={o.collectionStart}
+        totalRecords={o.records}
+        totalMeasurements={o.count}
+        parametersList={o.parameters}
       />
     );
   });

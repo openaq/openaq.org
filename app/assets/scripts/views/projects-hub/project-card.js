@@ -8,34 +8,18 @@ import { formatThousands } from '../../utils/format';
 
 export default function ProjectCard({
   onDownloadClick,
-  name = 'Dataset name',
-  city = 'city',
-  countryData,
-  sourcesData,
-  sourceType,
-  totalMeasurements,
-  parametersList = [],
   lastUpdate,
+  name,
+  organization,
+  sourceType,
   collectionStart,
+  totalRecords,
+  totalMeasurements,
+  parametersList,
 }) {
   let updated = moment(lastUpdate).fromNow();
   let started = moment(collectionStart).format('YYYY/MM/DD');
-
-  let sources = [];
-  if (sourcesData && sourcesData.length) {
-    sourcesData.forEach((o, i) => {
-      sources.push(
-        <a href={o.sourceURL} title={`View source for  ${name}`} key={o.name}>
-          {o.name}
-        </a>
-      );
-      if (i < sourcesData.length - 1) {
-        sources.push(', ');
-      }
-    });
-  }
-
-  const country = countryData || {};
+  let ended = moment(lastUpdate).format('YYYY/MM/DD');
 
   return (
     <article className="card card--data">
@@ -47,14 +31,12 @@ export default function ProjectCard({
             </p>
             <h1 className="card__title">
               <Link
-                to={`/location/${encodeURIComponent(name)}`}
+                to={`/project/${encodeURIComponent(name)}`}
                 title={`View ${name} page`}
               >
                 {name}
               </Link>{' '}
-              <small>
-                in {city}, {country.name}
-              </small>
+              <small>{organization}</small>
             </h1>
           </div>
           <div className="card__tags">
@@ -67,14 +49,16 @@ export default function ProjectCard({
         </header>
         <div className="card__body">
           <dl className="card__meta-details">
-            <dt>Collection start</dt>
-            <dd>{started}</dd>
+            <dt>No. of records</dt>
+            <dd>{formatThousands(totalRecords)}</dd>
             <dt>Measurements</dt>
             <dd>{formatThousands(totalMeasurements)}</dd>
-            <dt>Values</dt>
-            <dd>{parametersList.map(o => o.name).join(', ')}</dd>
-            {sources.length ? <dt>Source</dt> : null}
-            {sources.length ? <dd>{sources}</dd> : null}
+            <dt>Collection dates</dt>
+            <dd>
+              {started} - {ended}
+            </dd>
+            <dt>Measurands</dt>
+            <dd>{parametersList.join(', ')}</dd>
           </dl>
         </div>
         <footer className="card__footer">
@@ -91,7 +75,7 @@ export default function ProjectCard({
             </li>
             <li>
               <Link
-                to={`/location/${encodeURIComponent(name)}`}
+                to={`/project/${encodeURIComponent(name)}`}
                 className="cfa-go"
                 title={`View ${name} page`}
               >
@@ -107,14 +91,12 @@ export default function ProjectCard({
 
 ProjectCard.propTypes = {
   onDownloadClick: T.func,
-  compact: T.bool,
+  lastUpdate: T.instanceOf(Date),
   name: T.string,
-  city: T.string,
-  countryData: T.object,
-  sourcesData: T.array,
+  organization: T.string,
   sourceType: T.string,
+  collectionStart: T.instanceOf(Date),
+  totalRecords: T.number,
   totalMeasurements: T.number,
   parametersList: T.array,
-  lastUpdate: T.string,
-  collectionStart: T.string,
 };
