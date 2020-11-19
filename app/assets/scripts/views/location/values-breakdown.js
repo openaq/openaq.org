@@ -6,8 +6,11 @@ import InfoMessage from '../../components/info-message';
 import MeasurementsChart from './measurements-chart';
 import Card, {
   CardHeader as BaseHeader,
+  CardSubtitle,
   CardTitle,
 } from '../../components/card';
+import DatePicker from 'react-datepicker';
+
 import TabbedSelector from '../../components/tabbed-selector';
 
 const ErrorMessage = styled.div`
@@ -18,10 +21,25 @@ const CardHeader = styled(BaseHeader)`
   grid-template-rows: min-content 1fr 1fr;
   grid-gap: 0.5rem;
 `;
+const DateSelector = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+  > p {
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+`;
 
 export default function ValuesBreakdown({ measurements, parameters }) {
   const { fetched, fetching, error } = measurements;
   const [activeTab, setActiveTab] = useState(parameters[0]);
+  const [dateRange, setDateRange] = useState({
+    end: null,
+    start: new Date('1/1/2020'),
+  });
 
   if (!fetched && !fetching) {
     return null;
@@ -45,7 +63,6 @@ export default function ValuesBreakdown({ measurements, parameters }) {
       </ErrorMessage>
     );
   }
-
   return (
     <Card
       gridColumn={'1  / -1'}
@@ -58,6 +75,22 @@ export default function ValuesBreakdown({ measurements, parameters }) {
               setActiveTab(t);
             }}
           />
+
+          <DateSelector>
+            <CardSubtitle className="card__subtitle">Period</CardSubtitle>
+
+            <DatePicker
+              selected={dateRange.start}
+              onChange={([start, end]) => {
+                setDateRange({ start, end });
+              }}
+              startDate={dateRange.start}
+              endDate={dateRange.end}
+              shouldCloseOnSelect
+              selectsRange
+            />
+          </DateSelector>
+
           <CardTitle>Time Series Data</CardTitle>
         </CardHeader>
       )}

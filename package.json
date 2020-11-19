@@ -38,9 +38,12 @@
         }
       ],
       "require-globify",
-      "envify"
+      "envify",
+      "browserify-css"
     ]
   },
+
+
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
@@ -110,6 +113,7 @@
     "react-addons-create-fragment": "^15.2.1",
     "react-addons-css-transition-group": "^15.0.0",
     "react-chartjs-2": "^2.11.1",
+    "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
     "react-paginate": "^6.5.0",
     "react-redux": "^4.4.5",

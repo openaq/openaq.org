@@ -78,9 +78,8 @@ function Location(props) {
     }
   });
 
-  
   function getActiveParameterData() {
-    let parameterData = undefined//_.find(props.parameters, { id: props.location.query.parameter });
+    let parameterData = undefined; //_.find(props.parameters, { id: props.location.query.parameter });
     return parameterData || _.find(props.parameters, { id: 'pm25' });
   }
 
@@ -166,7 +165,6 @@ function Location(props) {
             activeParam={getActiveParameterData()}
             onFilterSelect={onFilterSelect}
           />
-
         </Dashboard>
         {/*
         <Metadata loc={props.loc} />
