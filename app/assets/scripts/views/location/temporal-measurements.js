@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
@@ -22,12 +22,51 @@ const CardHeader = styled(BaseHeader)`
 export default function TemporalMeasurements({ measurements, parameters }) {
   const { fetched, fetching, error } = measurements;
   const [activeTab, setActiveTab] = useState(parameters[0]);
+  const [activeTabMeasurements, setActiveTabMeasurements] = useState([]);
+  const [hourCoverage, setHourCoverage] = useState([]);
+  const [dayCoverage, setDayCoverage] = useState([]);
+  const [monthCoverage, setMonthCoverage] = useState([]);
+
+  useEffect(() => {
+    if(fetched) {
+      const tabMeasurements = measurements.data.results.filter(f => f.parameter === activeTab.id)
+      setActiveTabMeasurements(tabMeasurements)
+      setHourCoverage(parseHour(tabMeasurements))
+      setDayCoverage(parseDay(tabMeasurements))
+      setMonthCoverage(parseMonth(tabMeasurements))
+    }
+  }, [fetched, activeTab]);
 
   if (!fetched && !fetching) {
     return null;
   }
-console.log('measurements', measurements)
-console.log('parameters', parameters)
+
+const parseHour = (measurements) => (
+  measurements.reduce((prev, curr) => {
+      const hour = new Date(curr.date.local).getHours()
+    prev[hour] = prev[hour] ? prev[hour] + 1 : 1
+      return prev
+    }, {})
+)
+
+const parseDay = (measurements) => (
+  measurements.reduce((prev, curr) => {
+      const daysOfWeek = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT']
+      const day = daysOfWeek[new Date(curr.date.local).getDay()]
+    prev[day] = prev[day] ? prev[day] + 1 : 1
+      return prev
+    }, {})
+)
+
+const parseMonth = (measurements) => (
+  measurements.reduce((prev, curr) => {
+      const monthOfYear = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUNE', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+      const month = monthOfYear[new Date(curr.date.local).getMonth()]
+    prev[month] = prev[month] ? prev[month] + 1 : 1
+      return prev
+    }, {})
+)
+
   if (fetching) {
     return <LoadingMessage />;
   } else if (error) {
@@ -65,9 +104,21 @@ console.log('parameters', parameters)
       renderBody={() => (
         <div className="card__body">
           <TemporalChart
-            frequency="hour"
-            data={[40, 10, 50, 30, 20, 50, 10]}
-            activeParam={activeTab}
+            title="Hour of the Day"
+            frequency={Object.values(hourCoverage)}
+            xAxisLabels={Object.keys(hourCoverage)}
+          />
+
+          <TemporalChart
+            title="Day of the Week"
+            frequency={Object.values(dayCoverage)}
+            xAxisLabels={Object.keys(dayCoverage)}
+          />
+
+          <TemporalChart
+            title="Month of the Year"
+            frequency={Object.values(monthCoverage)}
+            xAxisLabels={Object.keys(monthCoverage)}
           />
         </div>
       )}
