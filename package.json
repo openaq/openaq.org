@@ -82,7 +82,7 @@
     "node-bourbon": "^4.2.8",
     "node-notifier": "^4.6.0",
     "node-sass": "^5.0.0",
-    "prettier": "^2.1.2",
+    "prettier": "2.1.2",
     "require-globify": "^1.4.0",
     "run-sequence": "^2.2.1",
     "vinyl-buffer": "^1.0.0",

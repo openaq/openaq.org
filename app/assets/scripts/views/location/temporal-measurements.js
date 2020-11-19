@@ -9,6 +9,7 @@ import Card, {
   CardTitle,
 } from '../../components/card';
 import TabbedSelector from '../../components/tabbed-selector';
+import CardList from '../../components/card-list';
 
 const ErrorMessage = styled.div`
   grid-column: 1 / -1;
@@ -22,18 +23,20 @@ const CardHeader = styled(BaseHeader)`
 export default function TemporalMeasurements({ measurements, parameters }) {
   const { fetched, fetching, error } = measurements;
   const [activeTab, setActiveTab] = useState(parameters[0]);
-  const [activeTabMeasurements, setActiveTabMeasurements] = useState([]);
+  const [activeTabMeasurments, setActiveTabMeasurments] = useState([]);
   const [hourCoverage, setHourCoverage] = useState([]);
   const [dayCoverage, setDayCoverage] = useState([]);
   const [monthCoverage, setMonthCoverage] = useState([]);
 
   useEffect(() => {
-    if(fetched) {
-      const tabMeasurements = measurements.data.results.filter(f => f.parameter === activeTab.id)
-      setActiveTabMeasurements(tabMeasurements)
-      setHourCoverage(parseHour(tabMeasurements))
-      setDayCoverage(parseDay(tabMeasurements))
-      setMonthCoverage(parseMonth(tabMeasurements))
+    if (fetched) {
+      const tabMeasurements = measurements.data.results.filter(
+        f => f.parameter === activeTab.id
+      );
+      setActiveTabMeasurments(tabMeasurements);
+      setHourCoverage(parseHour(tabMeasurements));
+      setDayCoverage(parseDay(tabMeasurements));
+      setMonthCoverage(parseMonth(tabMeasurements));
     }
   }, [fetched, activeTab]);
 
@@ -41,31 +44,41 @@ export default function TemporalMeasurements({ measurements, parameters }) {
     return null;
   }
 
-const parseHour = (measurements) => (
-  measurements.reduce((prev, curr) => {
-      const hour = new Date(curr.date.local).getHours()
-    prev[hour] = prev[hour] ? prev[hour] + 1 : 1
-      return prev
-    }, {})
-)
+  const parseHour = measurements =>
+    measurements.reduce((prev, curr) => {
+      const hour = new Date(curr.date.local).getHours();
+      prev[hour] = prev[hour] ? prev[hour] + 1 : 1;
+      return prev;
+    }, {});
 
-const parseDay = (measurements) => (
-  measurements.reduce((prev, curr) => {
-      const daysOfWeek = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT']
-      const day = daysOfWeek[new Date(curr.date.local).getDay()]
-    prev[day] = prev[day] ? prev[day] + 1 : 1
-      return prev
-    }, {})
-)
+  const parseDay = measurements =>
+    measurements.reduce((prev, curr) => {
+      const daysOfWeek = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT'];
+      const day = daysOfWeek[new Date(curr.date.local).getDay()];
+      prev[day] = prev[day] ? prev[day] + 1 : 1;
+      return prev;
+    }, {});
 
-const parseMonth = (measurements) => (
-  measurements.reduce((prev, curr) => {
-      const monthOfYear = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUNE', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-      const month = monthOfYear[new Date(curr.date.local).getMonth()]
-    prev[month] = prev[month] ? prev[month] + 1 : 1
-      return prev
-    }, {})
-)
+  const parseMonth = measurements =>
+    measurements.reduce((prev, curr) => {
+      const monthOfYear = [
+        'JAN',
+        'FEB',
+        'MAR',
+        'APR',
+        'MAY',
+        'JUNE',
+        'JUL',
+        'AUG',
+        'SEP',
+        'OCT',
+        'NOV',
+        'DEC',
+      ];
+      const month = monthOfYear[new Date(curr.date.local).getMonth()];
+      prev[month] = prev[month] ? prev[month] + 1 : 1;
+      return prev;
+    }, {});
 
   if (fetching) {
     return <LoadingMessage />;
@@ -103,23 +116,60 @@ const parseMonth = (measurements) => (
       )}
       renderBody={() => (
         <div className="card__body">
-          <TemporalChart
-            title="Hour of the Day"
-            frequency={Object.values(hourCoverage)}
-            xAxisLabels={Object.keys(hourCoverage)}
-          />
-
-          <TemporalChart
-            title="Day of the Week"
-            frequency={Object.values(dayCoverage)}
-            xAxisLabels={Object.keys(dayCoverage)}
-          />
-
-          <TemporalChart
-            title="Month of the Year"
-            frequency={Object.values(monthCoverage)}
-            xAxisLabels={Object.keys(monthCoverage)}
-          />
+          {activeTabMeasurments.length ? (
+            <CardList gridTemplateColumns={'repeat(3, 1fr)'} className="inner">
+              <Card
+                renderBody={() => (
+                  <div className="card__body">
+                    <TemporalChart
+                      title="Hour of the Day"
+                      frequency={Object.values(hourCoverage)}
+                      xAxisLabels={Object.keys(hourCoverage)}
+                    />
+                  </div>
+                )}
+                renderFooter={() => null}
+              />
+              <Card
+                renderBody={() => (
+                  <div className="card__body">
+                    <TemporalChart
+                      title="Day of the Week"
+                      frequency={Object.values(dayCoverage)}
+                      xAxisLabels={Object.keys(dayCoverage)}
+                    />
+                  </div>
+                )}
+                renderFooter={() => null}
+              />
+              <Card
+                renderBody={() => (
+                  <div className="card__body">
+                    <TemporalChart
+                      title="Month of the Year"
+                      frequency={Object.values(monthCoverage)}
+                      xAxisLabels={Object.keys(monthCoverage)}
+                    />
+                  </div>
+                )}
+                renderFooter={() => null}
+              />
+            </CardList>
+          ) : (
+            <InfoMessage>
+              <p>There are no data for the selected parameter.</p>
+              <p>
+                Maybe you&apos;d like to suggest a{' '}
+                <a
+                  href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
+                  title="Suggest a new source"
+                >
+                  new source
+                </a>
+                .
+              </p>
+            </InfoMessage>
+          )}
         </div>
       )}
       renderFooter={() => null}
