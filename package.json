@@ -38,8 +38,7 @@
         }
       ],
       "require-globify",
-      "envify",
-      "browserify-css"
+      "envify"
     ]
   },
 
