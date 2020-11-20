@@ -82,3 +82,30 @@
     @extend %openaq-ds-icon-arrow-right;
   }
 }
+[class*=" sort_"] {
+  &::after {
+    @extend %openaq-ds-icon-arrow-right;
+    display: inline-block;
+  }
+}
+.sort_asc {
+  &::after {
+    transform: rotate(-90deg);
+  }
+}
+.sort_desc {
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+
+.card {
+  tbody {
+    tr:nth-child(odd) {
+      background-color: rgba($base-color, 0);
+    }
+    tr:nth-child(even) { 
+      background-color: tint($primary-color, 90% );
+    }
+  }
+}

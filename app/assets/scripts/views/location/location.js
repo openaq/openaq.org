@@ -7,6 +7,7 @@ import moment from 'moment';
 import {
   fetchLocationIfNeeded,
   fetchLatestMeasurements,
+  fetchAverageMeasurements,
   fetchMeasurements,
   invalidateAllLocationData,
   openDownloadModal,
@@ -23,6 +24,7 @@ import Header from './header';
 
 import styled from 'styled-components';
 import CardList from '../../components/card-list';
+import Averages from './averages-card';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
@@ -69,6 +71,11 @@ function Location(props) {
           location: loc.location,
         });
       }
+      props._fetchAverageMeasurements({
+        spatial: 'location',
+        location: loc.location,
+      });
+
       props._fetchMeasurements(
         loc.location,
         fromDate.toISOString(),
@@ -152,6 +159,7 @@ function Location(props) {
               .map(o => _.find(props.sources, { name: o }))
               .filter(o => o)}
           />
+          <Averages measurements={props.averageMeasurements} />
         </Dashboard>
         {/*
         <Metadata loc={props.loc} />
@@ -181,6 +189,7 @@ Location.propTypes = {
   _fetchLocationIfNeeded: T.func,
   _fetchLocations: T.func,
   _fetchLatestMeasurements: T.func,
+  _fetchAverageMeasurements: T.func,
   _fetchMeasurements: T.func,
   _invalidateAllLocationData: T.func,
   _openDownloadModal: T.func,
@@ -192,6 +201,13 @@ Location.propTypes = {
   countryData: T.object,
 
   loc: T.shape({
+    fetching: T.bool,
+    fetched: T.bool,
+    error: T.string,
+    data: T.object,
+  }),
+
+  averageMeasurements: T.shape({
     fetching: T.bool,
     fetched: T.bool,
     error: T.string,
@@ -228,6 +244,7 @@ function selector(state) {
 
     loc: state.location,
     latestMeasurements: state.latestMeasurements,
+    averageMeasurements: state.averageMeasurements,
     measurements: state.measurements,
   };
 }
@@ -238,6 +255,8 @@ function dispatcher(dispatch) {
       dispatch(fetchLocationIfNeeded(...args)),
     _fetchLatestMeasurements: (...args) =>
       dispatch(fetchLatestMeasurements(...args)),
+    _fetchAverageMeasurements: (...args) =>
+      dispatch(fetchAverageMeasurements(...args)),
     _fetchMeasurements: (...args) => dispatch(fetchMeasurements(...args)),
     _invalidateAllLocationData: (...args) =>
       dispatch(invalidateAllLocationData(...args)),
