@@ -109,6 +109,7 @@ export default function Averages({ measurements }) {
       renderBody={() => {
         return <Table data={prepareData(data.results)} />;
       }}
+      noBodyStyle
       renderFooter={() => null}
     />
   );

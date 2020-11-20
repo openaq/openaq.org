@@ -15,7 +15,10 @@ const CardContents = styled.div``;
 
 const CardHeader = styled.header``;
 
-const CardBody = styled.div``;
+const CardBody = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export const Test = styled.div``;
 
 const CardFooter = styled.footer``;
