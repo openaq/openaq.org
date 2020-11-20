@@ -70,6 +70,7 @@ export default function ProjectsHub({
                 sources={sources}
               />
             </div>
+
             <div className="content__meta">
               <div className="content__header">
                 <div className="content__heading">

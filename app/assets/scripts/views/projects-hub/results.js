@@ -5,24 +5,11 @@ import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import ProjectCard from './project-card';
 
-const defaultProject = {
-  id: 1,
-  onDownloadClick: '',
-  lastUpdate: '',
-  name: 'Dataset name',
-  organization: 'Organization name',
-  sourceType: 'mobile',
-  collectionStart: new Date(2019, 9, 1),
-  records: 181829,
-  count: 97933,
-  parameters: ['co', 'no2', 'o3'],
-};
-
 export default function Results({
   fetched,
   fetching,
   error,
-  projects, // = [defaultProject],
+  projects,
   openDownloadModal,
 }) {
   if (!fetched && !fetching) {
