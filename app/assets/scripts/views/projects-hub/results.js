@@ -56,23 +56,23 @@ export default function Results({
     );
   }
 
-  return projects.map(o => {
+  return projects.map((project, i) => {
     let openModal = () =>
       openDownloadModal({
-        project: o.project,
+        project: project,
       });
     return (
       <ProjectCard
-        key={o.id}
+        key={i}
         onDownloadClick={openModal}
-        lastUpdate={o.lastUpdated}
-        name={o.name}
-        organization={o.organization}
-        sourceType={o.sourceType}
-        collectionStart={o.collectionStart}
-        totalRecords={o.records}
-        totalMeasurements={o.count}
-        parametersList={o.parameters}
+        lastUpdate={project.lastUpdated}
+        name={project.name}
+        organization={project.organization}
+        sourceType={project.sourceType}
+        collectionStart={project.collectionStart}
+        totalRecords={project.records}
+        totalMeasurements={project.count}
+        parametersList={project.parameters}
       />
     );
   });

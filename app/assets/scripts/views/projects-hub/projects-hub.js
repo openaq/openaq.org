@@ -111,6 +111,12 @@ ProjectsHub.propTypes = {
   error: T.object,
   results: T.array,
   meta: T.object,
+
+  location: T.object,
+
+  fetchLocations: T.func,
+  invalidateLocations: T.func,
+  openDownloadModal: T.func,
 };
 
 // /////////////////////////////////////////////////////////////////////

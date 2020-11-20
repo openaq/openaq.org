@@ -62,28 +62,26 @@ export default function StatsInfo({ measurements, loc }) {
       gridColumn={'1 / 4'}
       renderBody={() => {
         return (
-          <div className="card__body">
+          <>
             <HighlightText className="card__highlight-text" size={'large'}>
               {formatThousands(data.meta.totalMeasurements)}
             </HighlightText>
             <CardSubtitle className="card__subtitle">Measurements</CardSubtitle>
-          </div>
+          </>
         );
       }}
       renderFooter={() => {
         return (
-          <div className="card__footer">
-            <dl className="global-details-list">
-              <dt>Collection Dates</dt>
-              <dd>
-                {sDate} - {eDate}
-              </dd>
-              <dt>Coordinates</dt>
-              <dd>
-                N{lat}, E{lng}
-              </dd>
-            </dl>
-          </div>
+          <dl className="global-details-list">
+            <dt>Collection Dates</dt>
+            <dd>
+              {sDate} - {eDate}
+            </dd>
+            <dt>Coordinates</dt>
+            <dd>
+              N{lat}, E{lng}
+            </dd>
+          </dl>
         );
       }}
     />

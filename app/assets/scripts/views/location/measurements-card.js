@@ -71,32 +71,25 @@ export default function Measurements({
       title="Latest Measurements"
       gridColumn={'4 / 11'}
       renderBody={() => {
-        return (
-          <div className="card__body">
-            {locLastMeasurement ? (
-              <MeasurementsCont>
-                {locLastMeasurement.measurements.reduce((acc, o) => {
-                  let param = _.find(parameters, { id: o.parameter });
-                  return acc.concat([
-                    <Measurement key={o.parameter}>
-                      <CardSubtitle>{param.name}</CardSubtitle>
-                      <HighlightText
-                        className="card__highlight-text"
-                        size="medium"
-                      >
-                        {o.value}
-                      </HighlightText>
+        return locLastMeasurement ? (
+          <MeasurementsCont>
+            {locLastMeasurement.measurements.reduce((acc, o) => {
+              let param = _.find(parameters, { id: o.parameter });
+              return acc.concat([
+                <Measurement key={o.parameter}>
+                  <CardSubtitle>{param.name}</CardSubtitle>
+                  <HighlightText className="card__highlight-text" size="medium">
+                    {o.value}
+                  </HighlightText>
 
-                      <strong>{o.unit}</strong>
-                      <p>{moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</p>
-                    </Measurement>,
-                  ]);
-                }, [])}
-              </MeasurementsCont>
-            ) : (
-              <p>N/A</p>
-            )}
-          </div>
+                  <strong>{o.unit}</strong>
+                  <p>{moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</p>
+                </Measurement>,
+              ]);
+            }, [])}
+          </MeasurementsCont>
+        ) : (
+          <p>N/A</p>
         );
       }}
       renderFooter={() => null}
