@@ -9,7 +9,7 @@ const CardWrapper = styled.article`
   `}
 `;
 
-const CardContents = styled.a``;
+const CardContents = styled.div``;
 
 const CardHeader = styled.header``;
 
