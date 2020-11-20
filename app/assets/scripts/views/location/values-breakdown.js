@@ -37,7 +37,7 @@ export default function ValuesBreakdown({ measurements, parameters }) {
   const { fetched, fetching, error } = measurements;
   const [activeTab, setActiveTab] = useState(parameters[0]);
   const [dateRange, setDateRange] = useState({
-    end: null,
+    end: new Date(),
     start: new Date('1/1/2020'),
   });
 
@@ -88,6 +88,11 @@ export default function ValuesBreakdown({ measurements, parameters }) {
               endDate={dateRange.end}
               shouldCloseOnSelect
               selectsRange
+              customInput={
+                <a>
+                  {`${dateRange.start.toDateString()} - ${dateRange.end && dateRange.end.toDateString()}`}
+                </a>
+              }
             />
           </DateSelector>
 
