@@ -103,3 +103,11 @@
     margin-bottom: 1rem;
   }
 }
+
+.global-table th {
+    font-family: $heading-font-family;
+    line-height: 1rem;
+    letter-spacing: 0.125em;
+    text-transform: uppercase;
+    color: $base-color;
+}
