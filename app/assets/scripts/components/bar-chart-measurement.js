@@ -25,6 +25,7 @@ export default function BarChart({ title, frequency, xAxisLabels }) {
         {
           ticks: {
             beginAtZero: true,
+            maxTicksLimit: 5
           },
         },
       ],
