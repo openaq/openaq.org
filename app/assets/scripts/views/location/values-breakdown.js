@@ -90,7 +90,9 @@ export default function ValuesBreakdown({ measurements, parameters }) {
               selectsRange
               customInput={
                 <a>
-                  {`${dateRange.start.toDateString()} - ${dateRange.end && dateRange.end.toDateString()}`}
+                  {`${dateRange.start.toDateString()} - ${
+                    dateRange.end && dateRange.end.toDateString()
+                  }`}
                 </a>
               }
             />

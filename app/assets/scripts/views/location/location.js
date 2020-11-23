@@ -85,17 +85,6 @@ function Location(props) {
     }
   });
 
-  function getActiveParameterData() {
-    let parameterData = undefined; //_.find(props.parameters, { id: props.location.query.parameter });
-    return parameterData || _.find(props.parameters, { id: 'pm25' });
-  }
-
-  function onFilterSelect(parameter) {
-    props.history.push(
-      `/location/${encodeURIComponent(name)}?parameter=${parameter}`
-    );
-  }
-
   let { fetched, fetching, error, data } = props.loc;
   if (!fetched && !fetching) {
     return null;
@@ -162,8 +151,6 @@ function Location(props) {
           <ValuesBreakdown
             measurements={props.measurements}
             parameters={props.parameters}
-            activeParam={getActiveParameterData()}
-            onFilterSelect={onFilterSelect}
           />
 
           <TemporalMeasurements

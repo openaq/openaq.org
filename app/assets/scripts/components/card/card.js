@@ -52,6 +52,7 @@ export default function Card({
   title,
   subtitle,
   tags,
+  renderHeader,
   renderBody,
   renderFooter,
   noBodyStyle,
@@ -59,20 +60,26 @@ export default function Card({
   return (
     <CardWrapper className="card" gridColumn={gridColumn} gridRow={gridRow}>
       <CardContents className="card__contents">
-        <CardHeader className="card__header">
-          <CardHeadline className="card__headline">
-            {subtitle && (
-              <CardSubtitle className="card__subtitle">{subtitle}</CardSubtitle>
-            )}
-            {title && <CardTitle className="card__title">{title}</CardTitle>}
-          </CardHeadline>
+        {renderHeader ? (
+          renderHeader()
+        ) : (
+          <CardHeader className="card__header">
+            <CardHeadline className="card__headline">
+              {subtitle && (
+                <CardSubtitle className="card__subtitle">
+                  {subtitle}
+                </CardSubtitle>
+              )}
+              {title && <CardTitle className="card__title">{title}</CardTitle>}
+            </CardHeadline>
 
-          {tags && typeof tags === 'string' ? (
-            <CardTag label={tags} />
-          ) : (
-            tags && tags.map((tag, i) => <CardTag key={i} label={tag} />)
-          )}
-        </CardHeader>
+            {tags && typeof tags === 'string' ? (
+              <CardTag label={tags} />
+            ) : (
+              tags && tags.map((tag, i) => <CardTag key={i} label={tag} />)
+            )}
+          </CardHeader>
+        )}
         <CardBody className={noBodyStyle ? '' : 'card__body'}>
           {renderBody && renderBody()}
         </CardBody>
@@ -90,6 +97,7 @@ Card.propTypes = {
   title: T.oneOfType([T.string, T.element]),
   subtitle: T.oneOfType([T.string, T.element]),
   tags: T.oneOfType([T.string, T.arrayOf(T.string)]),
+  renderHeader: T.func,
   renderBody: T.func,
   renderFooter: T.func,
   noBodyStyle: T.bool,
