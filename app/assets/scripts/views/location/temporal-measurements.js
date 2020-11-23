@@ -9,15 +9,19 @@ import Card, {
   CardTitle,
 } from '../../components/card';
 import TabbedSelector from '../../components/tabbed-selector';
-import CardList from '../../components/card-list';
 
 const ErrorMessage = styled.div`
   grid-column: 1 / -1;
 `;
 const CardHeader = styled(BaseHeader)`
   display: grid;
-  grid-template-rows: min-content 1fr 1fr;
+  grid-template-rows: min-content 1fr;
   grid-gap: 0.5rem;
+`;
+
+const ChartContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 export default function TemporalMeasurements({ measurements, parameters }) {
@@ -141,44 +145,23 @@ export default function TemporalMeasurements({ measurements, parameters }) {
       renderBody={() => (
         <div className="card__body">
           {activeTabMeasurments.length ? (
-            <CardList gridTemplateColumns={'repeat(3, 1fr)'} className="inner">
-              <Card
-                renderBody={() => (
-                  <div className="card__body">
-                    <TemporalChart
-                      title="Hour of the Day"
-                      frequency={Object.values(hourCoverage)}
-                      xAxisLabels={Object.keys(hourCoverage)}
-                    />
-                  </div>
-                )}
-                renderFooter={() => null}
+            <ChartContainer>
+              <TemporalChart
+                title="Hour of the Day"
+                frequency={Object.values(hourCoverage)}
+                xAxisLabels={Object.keys(hourCoverage)}
               />
-              <Card
-                renderBody={() => (
-                  <div className="card__body">
-                    <TemporalChart
-                      title="Day of the Week"
-                      frequency={Object.values(dayCoverage)}
-                      xAxisLabels={Object.keys(dayCoverage)}
-                    />
-                  </div>
-                )}
-                renderFooter={() => null}
+              <TemporalChart
+                title="Day of the Week"
+                frequency={Object.values(dayCoverage)}
+                xAxisLabels={Object.keys(dayCoverage)}
               />
-              <Card
-                renderBody={() => (
-                  <div className="card__body">
-                    <TemporalChart
-                      title="Month of the Year"
-                      frequency={Object.values(monthCoverage)}
-                      xAxisLabels={Object.keys(monthCoverage)}
-                    />
-                  </div>
-                )}
-                renderFooter={() => null}
+              <TemporalChart
+                title="Month of the Year"
+                frequency={Object.values(monthCoverage)}
+                xAxisLabels={Object.keys(monthCoverage)}
               />
-            </CardList>
+            </ChartContainer>
           ) : (
             <InfoMessage>
               <p>There are no data for the selected parameter.</p>
