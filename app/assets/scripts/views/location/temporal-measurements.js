@@ -10,9 +10,14 @@ import Card, {
 } from '../../components/card';
 import TabbedSelector from '../../components/tabbed-selector';
 
+const StyledLoading = styled(LoadingMessage)`
+  grid-column: 1 / -1;
+`;
+
 const ErrorMessage = styled.div`
   grid-column: 1 / -1;
 `;
+
 const CardHeader = styled(BaseHeader)`
   display: grid;
   grid-template-rows: min-content 1fr;
@@ -109,7 +114,7 @@ export default function TemporalMeasurements({ measurements, parameters }) {
   }
 
   if (fetching) {
-    return <LoadingMessage />;
+    return <StyledLoading />;
   } else if (error) {
     return (
       <ErrorMessage>
