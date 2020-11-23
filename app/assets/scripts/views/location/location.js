@@ -162,8 +162,6 @@ function Location(props) {
           <TemporalMeasurements
             measurements={props.measurements}
             parameters={props.parameters}
-            activeParam={getActiveParameterData()}
-            onFilterSelect={onFilterSelect}
           />
         </Dashboard>
         {/*
