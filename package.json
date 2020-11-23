@@ -41,8 +41,6 @@
       "envify"
     ]
   },
-
-
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
@@ -84,7 +82,7 @@
     "node-bourbon": "^4.2.8",
     "node-notifier": "^4.6.0",
     "node-sass": "^3.13.1",
-    "prettier": "^2.1.2",
+    "prettier": "2.1.2",
     "require-globify": "^1.4.0",
     "run-sequence": "^2.2.1",
     "vinyl-buffer": "^1.0.0",
@@ -93,6 +91,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
+    "chart.js": "^2.9.4",
     "chroma-js": "^1.2.1",
     "classnames": "^2.2.5",
     "create-react-class": "^15.7.0",
@@ -110,6 +109,7 @@
     "react": "^17.0.1",
     "react-addons-create-fragment": "^15.2.1",
     "react-addons-css-transition-group": "^15.0.0",
+    "react-chartjs-2": "^2.11.1",
     "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
     "react-paginate": "^6.5.0",
