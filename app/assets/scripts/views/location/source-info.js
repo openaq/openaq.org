@@ -2,9 +2,9 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Card, { CardBody } from '../../components/card';
+import Card from '../../components/card';
 
-const SourceList = styled(CardBody)`
+const SourceList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -25,7 +25,7 @@ export default function SourceInfo({ measurements, sources }) {
       title="Sources"
       gridColumn={'11 / -1'}
       renderBody={() => (
-        <SourceList className="card__body">
+        <SourceList>
           {sources.map(source => (
             <Source
               to={source.sourceURL || source.url}
@@ -37,22 +37,20 @@ export default function SourceInfo({ measurements, sources }) {
           ))}
         </SourceList>
       )}
-      renderFooter={() => (
-        <footer className="card__footer">
-          {sources[0] && (
-            <div>
-              For more information contact{' '}
-              <Link
-                to={`mailto:${sources[0].contacts[0]}`}
-                title={sources[0].contacts[0]}
-              >
-                {sources[0].contacts[0]}
-              </Link>
-              .
-            </div>
-          )}
-        </footer>
-      )}
+      renderFooter={() =>
+        sources[0] && (
+          <div>
+            For more information contact{' '}
+            <Link
+              to={`mailto:${sources[0].contacts[0]}`}
+              title={sources[0].contacts[0]}
+            >
+              {sources[0].contacts[0]}
+            </Link>
+            .
+          </div>
+        )
+      }
     />
   );
 }
