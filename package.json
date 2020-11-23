@@ -38,12 +38,9 @@
         }
       ],
       "require-globify",
-      "envify",
-      "browserify-css"
+      "envify"
     ]
   },
-
-
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
@@ -84,7 +81,7 @@
     "marked": "^0.6.2",
     "node-bourbon": "^4.2.8",
     "node-notifier": "^4.6.0",
-    "node-sass": "^5.0.0",
+    "node-sass": "^3.13.1",
     "prettier": "2.1.2",
     "require-globify": "^1.4.0",
     "run-sequence": "^2.2.1",
