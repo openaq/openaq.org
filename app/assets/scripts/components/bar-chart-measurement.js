@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 
@@ -7,7 +7,7 @@ export default function BarChart({ title, frequency, xAxisLabels }) {
     labels: xAxisLabels,
     datasets: [
       {
-        label: 'measurments',
+        label: 'Measurements',
         data: frequency,
         backgroundColor: '#198CFF',
       },
@@ -15,6 +15,11 @@ export default function BarChart({ title, frequency, xAxisLabels }) {
   };
 
   const options = {
+    defaultFontFamily:
+      "'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+    legend: {
+      display: false,
+    },
     scales: {
       yAxes: [
         {
@@ -23,15 +28,26 @@ export default function BarChart({ title, frequency, xAxisLabels }) {
           },
         },
       ],
+      xAxes: [
+        {
+          gridLines: { display: false },
+        },
+      ],
     },
   };
 
   return (
     <div style={{ width: `300px` }}>
       <div className="header">
-        <h1 className="title">{title}</h1>
+        <h3 className="title">{title}</h3>
       </div>
       <Bar data={data} options={options} />
     </div>
   );
 }
+
+BarChart.propTypes = {
+  title: PropTypes.string,
+  frequency: PropTypes.array,
+  xAxisLabels: PropTypes.array,
+};

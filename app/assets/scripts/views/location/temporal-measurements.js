@@ -3,7 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
-import TemporalChart from '../../components/bar-chart-measurment';
+import TemporalChart from '../../components/bar-chart-measurement';
 import Card, {
   CardHeader as BaseHeader,
   CardTitle,
