@@ -56,21 +56,22 @@ export default function Results({
     );
   }
 
-  return projects.map((project, i) => {
+  return projects.map(project => {
     let openModal = () =>
       openDownloadModal({
         project: project,
       });
     return (
       <ProjectCard
-        key={i}
+        key={project.projectId}
+        id={project.projectId}
         onDownloadClick={openModal}
         lastUpdate={project.lastUpdated}
-        name={project.name}
-        organization={project.organization}
+        name={project.projectName}
+        subtitle={project.subtitle}
         sourceType={project.sourceType}
         collectionStart={project.collectionStart}
-        totalRecords={project.records}
+        totalLocations={project.locations}
         totalMeasurements={project.count}
         parametersList={project.parameters}
       />

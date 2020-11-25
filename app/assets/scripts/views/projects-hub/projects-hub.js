@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import qs from 'qs';
 
 import {
-  fetchLocations as fetchLocationsAction,
-  invalidateLocations as invalidateLocationsAction,
+  fetchProjects as fetchProjectsAction,
+  invalidateProjects as invalidateProjectsAction,
   openDownloadModal as openDownloadModalAction,
 } from '../../actions/action-creators';
 
@@ -27,8 +27,8 @@ function getPage(location) {
 }
 
 export default function ProjectsHub({
-  fetchLocations,
-  invalidateLocations,
+  fetchProjects,
+  invalidateProjects,
   openDownloadModal,
 
   organizations,
@@ -47,9 +47,9 @@ export default function ProjectsHub({
   const filters = {};
 
   useEffect(() => {
-    fetchLocations(page, filters, PER_PAGE);
+    fetchProjects(page, filters, PER_PAGE);
     return () => {
-      invalidateLocations();
+      invalidateProjects();
     };
   }, []);
 
@@ -114,8 +114,8 @@ ProjectsHub.propTypes = {
 
   location: T.object,
 
-  fetchLocations: T.func,
-  invalidateLocations: T.func,
+  fetchProjects: T.func,
+  invalidateProjects: T.func,
   openDownloadModal: T.func,
 };
 
@@ -128,19 +128,19 @@ function selector(state) {
     sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
 
-    fetching: state.locations.fetching,
-    fetched: state.locations.fetched,
-    error: state.locations.error,
-    results: state.locations.data.results,
-    meta: state.locations.data.meta,
+    fetching: state.projects.fetching,
+    fetched: state.projects.fetched,
+    error: state.projects.error,
+    results: state.projects.data.results,
+    meta: state.projects.data.meta,
   };
 }
 
 function dispatcher(dispatch) {
   return {
-    fetchLocations: (...args) => dispatch(fetchLocationsAction(...args)),
-    invalidateLocations: (...args) =>
-      dispatch(invalidateLocationsAction(...args)),
+    fetchProjects: (...args) => dispatch(fetchProjectsAction(...args)),
+    invalidateProjects: (...args) =>
+      dispatch(invalidateProjectsAction(...args)),
     openDownloadModal: (...args) => dispatch(openDownloadModalAction(...args)),
   };
 }

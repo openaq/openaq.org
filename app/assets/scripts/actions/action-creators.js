@@ -4,6 +4,7 @@ import * as compare from './compare';
 import * as geolocation from './geolocation';
 import * as latestMeasurements from './latest-measurements';
 import * as averageMeasurements from './average-measurements';
+import * as projects from './projects';
 import * as location from './location';
 import * as locations from './locations';
 import * as measurements from './measurements';
@@ -20,6 +21,7 @@ module.exports = Object.assign(
   geolocation,
   latestMeasurements,
   averageMeasurements,
+  projects,
   location,
   locations,
   measurements,
