@@ -28,7 +28,7 @@ var PageFooter = React.createClass({
               <h2 className='contact__title'>Connect with us</h2>
               <ul className='connect-menu'>
                 <li><a href='https://github.com/openaq/' className='connect-menu__link--github' title='View Github' target='_blank'><span>Github</span></a></li>
-                <li><a href='https://openaq-slackin.herokuapp.com/' className='connect-menu__link--slack' title='View Slack' target='_blank'><span>Slack</span></a></li>
+                <li><a href='https://join.slack.com/t/openaq/shared_invite/zt-gq14aew7-CVdp131g7TR7o9iiXIVDLw' className='connect-menu__link--slack' title='View Slack' target='_blank'><span>Slack</span></a></li>
                 <li><a href='https://twitter.com/openaq' className='connect-menu__link--twitter' title='View Twitter' target='_blank'><span>Twitter</span></a></li>
                 <li><a href='mailto:info@openaq.org' className='connect-menu__link--email' title='View Email'><span>Email</span></a></li>
               </ul>

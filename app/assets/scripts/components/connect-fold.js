@@ -43,7 +43,7 @@ var ConnectFold = React.createClass({
                 <div className='card__contents'>
                   <header className='card__header'>
                     <div className='card__headline'>
-                      <a href='https://openaq-slackin.herokuapp.com/' target='_blank' title='Join us' className='link-wrapper'>
+                      <a href='https://join.slack.com/t/openaq/shared_invite/zt-gq14aew7-CVdp131g7TR7o9iiXIVDLw' target='_blank' title='Join us' className='link-wrapper'>
                         <h1 className='card__title'>Slack</h1>
                       </a>
                     </div>
@@ -54,7 +54,7 @@ var ConnectFold = React.createClass({
                     </div>
                   </div>
                   <footer className='card__footer'>
-                    <a href='https://openaq-slackin.herokuapp.com/' target='_blank' className='card__go-link' title='Follow us'><span>Join us</span></a>
+                    <a href='https://join.slack.com/t/openaq/shared_invite/zt-gq14aew7-CVdp131g7TR7o9iiXIVDLw' target='_blank' className='card__go-link' title='Follow us'><span>Join us</span></a>
                   </footer>
                 </div>
               </article>
