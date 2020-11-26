@@ -5,6 +5,6 @@
 
 module.exports = {
   environment: 'staging',
-  api: 'https://api.openaq-staging.org/v1',
+  api: 'https://ytr9800fbk.execute-api.us-east-1.amazonaws.com',
   metadata: 'https://metadata.openaq-staging.org',
 };
