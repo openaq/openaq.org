@@ -38,7 +38,7 @@ export function fetchAverageMeasurements(filters) {
       fetch(
         `${
           config.api.split('/v1')[0]
-        }/beta/averages?page=${page}&limit=${limit}&${f}`
+        }/averages?page=${page}&limit=${limit}&${f}`
       )
         .then(response => {
           if (response.status >= 400) {
