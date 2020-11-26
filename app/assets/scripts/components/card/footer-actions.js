@@ -25,14 +25,24 @@ export default function FooterActions({ what, onDownloadClick, viewMorePath }) {
         </a>
       </li>
       <li>
-        <DisabledLink
-          disabled
-          to={viewMorePath}
-          className="cfa-go"
-          title={`View ${what} page`}
-        >
-          View More
-        </DisabledLink>
+        {what === 'US' ? (
+          <Link
+            to={viewMorePath}
+            className="cfa-go"
+            title={`View ${what} page`}
+          >
+            View More
+          </Link>
+        ) : (
+          <DisabledLink
+            disabled
+            to={viewMorePath}
+            className="cfa-go"
+            title={`View ${what} page`}
+          >
+            View More
+          </DisabledLink>
+        )}
       </li>
     </ul>
   );

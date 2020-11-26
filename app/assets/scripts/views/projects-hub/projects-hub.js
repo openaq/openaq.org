@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import qs from 'qs';
@@ -8,7 +8,7 @@ import {
   invalidateProjects as invalidateProjectsAction,
   openDownloadModal as openDownloadModalAction,
 } from '../../actions/action-creators';
-
+import { buildQS } from '../../utils/url';
 import Header from './header';
 import Filter from './filter';
 import Results from './results';
@@ -24,6 +24,7 @@ function getPage(location) {
     page = isNaN(page) || page < 1 ? 1 : +page;
     return page;
   }
+  return 1;
 }
 
 export default function ProjectsHub({
@@ -42,16 +43,30 @@ export default function ProjectsHub({
   meta,
 
   location,
+  history,
 }) {
-  const page = getPage(location);
   const filters = {};
+  const [page, setPage] = useState(() => getPage(location));
+
+  useEffect(() => {
+    setPage(() => getPage(location));
+  }, [location]);
 
   useEffect(() => {
     fetchProjects(page, filters, PER_PAGE);
     return () => {
       invalidateProjects();
     };
-  }, []);
+  }, [page]);
+
+  function handlePageClick(d) {
+    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+    query.page = d.selected + 1;
+
+    history.push(`/projects?${buildQS(query)}`);
+  }
+
+  const totalPages = Math.ceil(meta.found / PER_PAGE);
 
   return (
     <section className="inpage">
@@ -85,15 +100,16 @@ export default function ProjectsHub({
               </div>
             </div>
 
-            <div className="inpage__results">
-              <Results
-                fetched={fetched}
-                fetching={fetching}
-                error={error}
-                projects={results}
-                openDownloadModal={openDownloadModal}
-              />
-            </div>
+            <Results
+              fetched={fetched}
+              fetching={fetching}
+              error={error}
+              projects={results}
+              totalPages={totalPages}
+              page={page}
+              openDownloadModal={openDownloadModal}
+              handlePageClick={handlePageClick}
+            />
           </div>
         </div>
       </div>
@@ -113,6 +129,7 @@ ProjectsHub.propTypes = {
   meta: T.object,
 
   location: T.object,
+  history: T.object,
 
   fetchProjects: T.func,
   invalidateProjects: T.func,
