@@ -4,8 +4,8 @@ import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 
-import Card, { HighlightText, CardSubtitle } from './card';
-import { round } from '../utils/format';
+import Card, { HighlightText, CardSubtitle } from '../card';
+import { round } from '../../utils/format';
 
 const Container = styled.dl`
   display: grid;

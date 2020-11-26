@@ -3,7 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 
 import LoadingMessage from '../../components/loading-message';
-import MeasureandsCard from '../../components/measurands-card';
+import MeasureandsCard from '../../components/dashboard/measurands-card';
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 1 / 7;

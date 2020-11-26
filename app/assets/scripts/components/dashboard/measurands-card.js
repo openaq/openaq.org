@@ -1,9 +1,9 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 
-import Card from './card';
-import Table from './table';
-import { shortenLargeNumber } from '../utils/format';
+import Card from '../card';
+import Table from '../table';
+import { shortenLargeNumber } from '../../utils/format';
 
 const initData = {
   pollutant: {

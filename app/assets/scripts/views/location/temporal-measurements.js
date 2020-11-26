@@ -3,7 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
-import TemporalChart from '../../components/bar-chart-measurement';
+import BarChart from '../../components/bar-chart';
 import Card, {
   CardHeader as BaseHeader,
   CardTitle,
@@ -103,6 +103,7 @@ export default function TemporalMeasurements({ measurements, parameters }) {
         f => f.parameter === activeTab.id
       );
       setActiveTabMeasurments(tabMeasurements);
+      // TODO: we should get the data parsed directly from the api
       setHourCoverage(parseHour(tabMeasurements));
       setDayCoverage(parseDay(tabMeasurements));
       setMonthCoverage(parseMonth(tabMeasurements));
@@ -151,21 +152,33 @@ export default function TemporalMeasurements({ measurements, parameters }) {
         <div className="card__body">
           {activeTabMeasurments.length ? (
             <ChartContainer>
-              <TemporalChart
-                title="Hour of the Day"
-                frequency={Object.values(hourCoverage)}
-                xAxisLabels={Object.keys(hourCoverage)}
-              />
-              <TemporalChart
-                title="Day of the Week"
-                frequency={Object.values(dayCoverage)}
-                xAxisLabels={Object.keys(dayCoverage)}
-              />
-              <TemporalChart
-                title="Month of the Year"
-                frequency={Object.values(monthCoverage)}
-                xAxisLabels={Object.keys(monthCoverage)}
-              />
+              <div>
+                <div className="header">
+                  <h3 className="title">Hour of the Day</h3>
+                </div>
+                <BarChart
+                  data={Object.values(hourCoverage)}
+                  xAxisLabels={Object.keys(hourCoverage)}
+                />
+              </div>
+              <div>
+                <div className="header">
+                  <h3 className="title">Day of the Week</h3>
+                </div>
+                <BarChart
+                  data={Object.values(dayCoverage)}
+                  xAxisLabels={Object.keys(dayCoverage)}
+                />
+              </div>
+              <div>
+                <div className="header">
+                  <h3 className="title">Month of the Year</h3>
+                </div>
+                <BarChart
+                  data={Object.values(monthCoverage)}
+                  xAxisLabels={Object.keys(monthCoverage)}
+                />
+              </div>
             </ChartContainer>
           ) : (
             <InfoMessage>

@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
-import InfoCard from '../../components/info-card';
+import InfoCard from '../../components/dashboard/info-card';
 
 const ErrorMessage = styled.div`
   grid-column: 1 / 4;

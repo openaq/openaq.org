@@ -2,8 +2,8 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
 
-import Card, { HighlightText, CardSubtitle } from './card';
-import { formatThousands } from '../utils/format';
+import Card, { HighlightText, CardSubtitle } from '../card';
+import { formatThousands } from '../../utils/format';
 
 export default function InfoCard({ measurements, date, coords }) {
   const startDate = date ? moment(date.start).format('YYYY/MM/DD') : null;

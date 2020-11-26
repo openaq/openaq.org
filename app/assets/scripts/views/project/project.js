@@ -7,9 +7,10 @@ import Header from '../../components/header';
 import styled from 'styled-components';
 import CardList from '../../components/card-list';
 import config from '../../config';
-import InfoCard from '../../components/info-card';
-import LatestMeasurementsCard from '../../components/lastest-measurements-card';
-import MeasureandsCard from '../../components/measurands-card';
+import InfoCard from '../../components/dashboard/info-card';
+import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
+import MeasureandsCard from '../../components/dashboard/measurands-card';
+import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 
 const defaultState = {
   fetched: false,
@@ -50,7 +51,7 @@ function Project() {
               ...state,
               fetched: true,
               fetching: false,
-              error: error,
+              error: e,
             }));
           }
         );
@@ -117,6 +118,7 @@ function Project() {
           <InfoCard measurements={data.measurements} />
           <LatestMeasurementsCard measurements={data.parameters} />
           <MeasureandsCard measurements={data.parameters} />
+          <TemporalCoverageCard parameters={data.parameters} />
         </Dashboard>
       </div>
     </section>

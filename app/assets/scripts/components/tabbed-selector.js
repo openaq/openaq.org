@@ -7,6 +7,7 @@ const Tab = styled.a`
   width: min-content;
   margin: 0;
   line-height: 3rem;
+  text-transform: uppercase;
 `;
 const Wrapper = styled.div`
   display: grid;
@@ -15,13 +16,14 @@ const Wrapper = styled.div`
 
 function TabbedSelector(props) {
   const { tabs, activeTab, onTabSelect } = props;
+
   return (
     <Wrapper>
       {tabs.map(t => (
         <Tab
           key={t.id}
           className={c('global-menu__link', {
-            'global-menu__link--active': activeTab === t,
+            'global-menu__link--active': activeTab.id === t.id,
           })}
           onClick={() => onTabSelect(t)}
         >
@@ -35,10 +37,12 @@ function TabbedSelector(props) {
 TabbedSelector.propTypes = {
   tabs: T.arrayOf(
     T.shape({
+      id: T.string.isRequired,
       name: T.string.isRequired,
     })
   ),
   activeTab: T.shape({
+    id: T.string.isRequired,
     name: T.string.isRequired,
   }),
   onTabSelect: T.func,

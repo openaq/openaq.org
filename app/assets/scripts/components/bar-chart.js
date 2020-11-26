@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 
-export default function BarChart({ title, frequency, xAxisLabels }) {
-  const data = {
+export default function BarChart({ data, xAxisLabels }) {
+  const series = {
     labels: xAxisLabels,
     datasets: [
       {
-        label: 'Measurements',
-        data: frequency,
+        label: 'in average',
+        data: data,
         backgroundColor: '#198CFF',
       },
     ],
@@ -37,18 +37,10 @@ export default function BarChart({ title, frequency, xAxisLabels }) {
     },
   };
 
-  return (
-    <div style={{ width: `300px` }}>
-      <div className="header">
-        <h3 className="title">{title}</h3>
-      </div>
-      <Bar data={data} options={options} />
-    </div>
-  );
+  return <Bar data={series} options={options} />;
 }
 
 BarChart.propTypes = {
-  title: PropTypes.string,
-  frequency: PropTypes.array,
-  xAxisLabels: PropTypes.array,
+  data: PropTypes.arrayOf(PropTypes.number).isRequired,
+  xAxisLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

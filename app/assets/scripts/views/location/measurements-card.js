@@ -3,7 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import _ from 'lodash';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
-import LatestMeasurementsCard from '../../components/lastest-measurements-card';
+import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 4 / 11;
