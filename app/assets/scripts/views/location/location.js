@@ -23,7 +23,8 @@ import MeasurementsCard from './measurements-card';
 
 // import Metadata from './metadata';
 import SourceInfo from './source-info';
-// import ValuesBreakdown from './values-breakdown';
+import ValuesBreakdown from './values-breakdown';
+import TemporalMeasurements from './temporal-measurements';
 // import NearbyLoc from './nearby-loc';
 
 import Averages from './averages-card';
@@ -85,19 +86,6 @@ function Location(props) {
       );
     }
   });
-
-  /*
-  function getActiveParameterData() {
-    let parameterData = _.find(props.parameters, { id: query.parameter });
-    return parameterData || _.find(props.parameters, { id: 'pm25' });
-  }
-
-  function onFilterSelect(parameter) {
-    props.history.push(
-      `/location/${encodeURIComponent(name)}?parameter=${parameter}`
-    );
-  }
-  */
 
   let { fetched, fetching, error, data } = props.loc;
   if (!fetched && !fetching) {
@@ -171,6 +159,16 @@ function Location(props) {
             sources={props.loc.data.sourceNames
               .map(o => _.find(props.sources, { name: o }))
               .filter(o => o)}
+          />
+
+          <ValuesBreakdown
+            measurements={props.measurements}
+            parameters={props.parameters}
+          />
+
+          <TemporalMeasurements
+            measurements={props.measurements}
+            parameters={props.parameters}
           />
           <Averages measurements={props.averageMeasurements} />
         </Dashboard>
