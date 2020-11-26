@@ -1,10 +1,8 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
-import moment from 'moment';
-import { formatThousands } from '../../utils/format';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
-import Card, { HighlightText, CardSubtitle } from '../../components/card';
+import InfoCard from '../../components/info-card';
 
 const ErrorMessage = styled.div`
   grid-column: 1 / 4;
@@ -46,9 +44,6 @@ export default function StatsInfo({ measurements, loc }) {
 
   let locData = loc.data;
 
-  let sDate = moment(locData.firstUpdated).format('YYYY/MM/DD');
-  let eDate = moment(locData.lastUpdated).format('YYYY/MM/DD');
-
   let lng = ' --';
   let lat = ' --';
   if (locData.coordinates) {
@@ -57,33 +52,10 @@ export default function StatsInfo({ measurements, loc }) {
   }
 
   return (
-    <Card
-      title="Details"
-      gridColumn={'1 / 4'}
-      renderBody={() => {
-        return (
-          <>
-            <HighlightText className="card__highlight-text" size={'large'}>
-              {formatThousands(data.meta.totalMeasurements)}
-            </HighlightText>
-            <CardSubtitle className="card__subtitle">Measurements</CardSubtitle>
-          </>
-        );
-      }}
-      renderFooter={() => {
-        return (
-          <dl className="global-details-list">
-            <dt>Collection Dates</dt>
-            <dd>
-              {sDate} - {eDate}
-            </dd>
-            <dt>Coordinates</dt>
-            <dd>
-              N{lat}, E{lng}
-            </dd>
-          </dl>
-        );
-      }}
+    <InfoCard
+      measurements={data.meta.totalMeasurements}
+      date={{ start: locData.firstUpdated, end: locData.lastUpdated }}
+      coords={{ lat, lng }}
     />
   );
 }

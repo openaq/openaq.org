@@ -44,6 +44,8 @@ export function shortenLargeNumber(value, decimals = 2) {
     value = round(value / 1e6, decimals) + 'M';
   } else if (value / 1e3 >= 1) {
     value = round(value / 1e3, decimals) + 'k';
+  } else if (value < 1) {
+    value = round(value, decimals);
   }
   return value;
 }

@@ -3,11 +3,14 @@ import fetch from 'isomorphic-fetch';
 
 import HeaderMessage from '../../components/header-message';
 
-import Header from '../location/header';
+import Header from '../../components/header';
 
 import styled from 'styled-components';
 import CardList from '../../components/card-list';
 import config from '../../config';
+import InfoCard from '../../components/info-card';
+import LatestMeasurementsCard from '../../components/lastest-measurements-card';
+import MeasureandsCard from '../../components/measurands-card';
 
 const defaultState = {
   fetched: false,
@@ -26,7 +29,7 @@ function Project() {
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
-      fetch(`${config.api}/projects/US&metadata=true`)
+      fetch(`${config.api}/projects/US`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -39,7 +42,7 @@ function Project() {
               ...state,
               fetched: true,
               fetching: false,
-              data: json.results,
+              data: json.results[0],
             }));
           },
           e => {
@@ -94,21 +97,20 @@ function Project() {
       </HeaderMessage>
     );
   }
+  console.log(data);
   return (
     <section className="inpage">
-      <Header
-        location={data.location}
-        area={data.city}
-        countryCode={data.country}
-        country={'test'}
-        openDownloadModal={() => {}}
-      />
+      <Header title={data.projectName} description={data.subtitle} />
       <div className="inpage__body">
         <Dashboard
           gridTemplateRows={'repeat(4, 20rem)'}
           gridTemplateColumns={'repeat(12, 1fr)'}
           className="inner"
-        ></Dashboard>
+        >
+          <InfoCard measurements={data.measurements} />
+          <LatestMeasurementsCard measurements={data.parameters} />
+          <MeasureandsCard measurements={data.parameters} />
+        </Dashboard>
       </div>
     </section>
   );

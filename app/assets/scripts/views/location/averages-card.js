@@ -1,38 +1,9 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
-import LoadingMessage from '../../components/loading-message';
-import Card from '../../components/card';
-import Table from '../../components/table';
-import { shortenLargeNumber } from '../../utils/format';
 
-const initData = {
-  pollutant: {
-    values: [],
-    formatHeader: v => v.toUpperCase(),
-    style: {
-      color: 'black',
-      fontWeight: 700,
-      textAlign: 'center',
-    },
-  },
-  avg: {
-    values: [],
-    formatHeader: v => v.toUpperCase(),
-    formatCell: shortenLargeNumber,
-    style: {
-      textAlign: 'center',
-    },
-  },
-  count: {
-    values: [],
-    formatHeader: v => v.toUpperCase(),
-    formatCell: shortenLargeNumber,
-    style: {
-      textAlign: 'center',
-    },
-  },
-};
+import LoadingMessage from '../../components/loading-message';
+import MeasureandsCard from '../../components/measurands-card';
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 1 / 7;
@@ -41,46 +12,6 @@ const ErrorMessage = styled.div`
   grid-column: 1 / 7;
 `;
 
-/*  TODO This function currently just extracts the first data available for each pollutant
- *  openAQ api returns all available dates averages, or those within a specified date range.
- *  The desired data in this card needs some clarification. should it be the most recent day?
- *  User specified day? date range? etc
- */
-
-const prepareData = data => {
-  const combinedData = data.reduce((accum, datum) => {
-    const { parameter, measurement_count, average } = datum;
-    if (!accum[parameter]) {
-      accum[parameter] = {
-        count: measurement_count,
-        value: average,
-      };
-    }
-    return accum;
-  }, {});
-
-  const preparedData = Object.entries(combinedData).reduce(
-    (acc, [pollutant, stats]) => {
-      acc = {
-        pollutant: {
-          ...acc.pollutant,
-          values: [...acc.pollutant.values, pollutant],
-        },
-        avg: {
-          ...acc.avg,
-          values: [...acc.count.values, stats.value],
-        },
-        count: {
-          ...acc.count,
-          values: [...acc.count.values, stats.count],
-        },
-      };
-      return acc;
-    },
-    initData
-  );
-  return preparedData;
-};
 export default function Averages({ measurements }) {
   const { fetched, fetching, error, data } = measurements;
 
@@ -102,17 +33,7 @@ export default function Averages({ measurements }) {
     );
   }
 
-  return (
-    <Card
-      gridColumn={'1 / 7'}
-      title="Measurands"
-      renderBody={() => {
-        return <Table data={prepareData(data.results)} />;
-      }}
-      noBodyStyle
-      renderFooter={() => null}
-    />
-  );
+  return <MeasureandsCard measurements={data.results} />;
 }
 Averages.propTypes = {
   measurements: T.shape({

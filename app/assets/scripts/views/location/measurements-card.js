@@ -1,25 +1,15 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import _ from 'lodash';
-import moment from 'moment';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
-import Card, { HighlightText, CardSubtitle } from '../../components/card';
+import LatestMeasurementsCard from '../../components/lastest-measurements-card';
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 4 / 11;
 `;
 const ErrorMessage = styled.div`
   grid-column: 4 / 11;
-`;
-
-const MeasurementsCont = styled.dl`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-  grid-gap: 0.25rem;
-`;
-const Measurement = styled.div`
-  width: min-content;
 `;
 
 export default function Measurements({
@@ -66,35 +56,17 @@ export default function Measurements({
     _.isEqual
   );
 
-  return (
-    <Card
-      title="Latest Measurements"
-      gridColumn={'4 / 11'}
-      renderBody={() => {
-        return locLastMeasurement ? (
-          <MeasurementsCont>
-            {locLastMeasurement.measurements.reduce((acc, o) => {
-              let param = _.find(parameters, { id: o.parameter });
-              return acc.concat([
-                <Measurement key={o.parameter}>
-                  <CardSubtitle>{param.name}</CardSubtitle>
-                  <HighlightText className="card__highlight-text" size="medium">
-                    {o.value}
-                  </HighlightText>
+  const measurements = locLastMeasurement.measurements.reduce((acc, o) => {
+    let param = _.find(parameters, { id: o.parameter });
+    return acc.concat({
+      measurand: param.name,
+      last_value: o.value,
+      unit: o.unit,
+      lastUpdated: o.lastUpdated,
+    });
+  }, []);
 
-                  <strong>{o.unit}</strong>
-                  <p>{moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</p>
-                </Measurement>,
-              ]);
-            }, [])}
-          </MeasurementsCont>
-        ) : (
-          <p>N/A</p>
-        );
-      }}
-      renderFooter={() => null}
-    />
-  );
+  return <LatestMeasurementsCard measurements={measurements} />;
 }
 
 Measurements.propTypes = {

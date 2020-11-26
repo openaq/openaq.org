@@ -76,9 +76,9 @@ export default function Card({
         <CardBody className={noBodyStyle ? '' : 'card__body'}>
           {renderBody && renderBody()}
         </CardBody>
-        <CardFooter className="card__footer">
-          {renderFooter && renderFooter()}
-        </CardFooter>
+        {renderFooter && (
+          <CardFooter className="card__footer">{renderFooter()}</CardFooter>
+        )}
       </CardContents>
     </CardWrapper>
   );
