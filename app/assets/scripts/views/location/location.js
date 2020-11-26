@@ -3,6 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
+import styled from 'styled-components';
 
 import {
   fetchLocationIfNeeded,
@@ -12,7 +13,11 @@ import {
   invalidateAllLocationData,
   openDownloadModal,
 } from '../../actions/action-creators';
+import config from '../../config';
 import HeaderMessage from '../../components/header-message';
+import Header from '../../components/header';
+import CardList from '../../components/card-list';
+
 import StatsInfoCard from './stats-info';
 import MeasurementsCard from './measurements-card';
 
@@ -20,10 +25,7 @@ import MeasurementsCard from './measurements-card';
 import SourceInfo from './source-info';
 // import ValuesBreakdown from './values-breakdown';
 // import NearbyLoc from './nearby-loc';
-import Header from './header';
 
-import styled from 'styled-components';
-import CardList from '../../components/card-list';
 import Averages from './averages-card';
 
 const Dashboard = styled(CardList)`
@@ -132,14 +134,25 @@ function Location(props) {
     );
   }
 
+  function onDownloadClick() {
+    props._openDownloadModal({
+      country: data.country,
+      area: data.city,
+      location: data.location,
+    });
+  }
+
   return (
     <section className="inpage">
       <Header
-        location={data.location}
-        area={data.city}
-        countryCode={data.country}
-        country={props.countryData.name}
-        openDownloadModal={props._openDownloadModal}
+        tagline="Location"
+        title={data.location}
+        subtitle={`in ${data.city}, ${data.country}`}
+        action={{
+          api: `${config.api}/locations?location=${data.location}`,
+          download: onDownloadClick,
+          compare: `/compare/${encodeURIComponent(data.location)}`,
+        }}
       />
       <div className="inpage__body">
         <Dashboard

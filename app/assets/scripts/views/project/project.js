@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import fetch from 'isomorphic-fetch';
 
 import HeaderMessage from '../../components/header-message';
-
 import Header from '../../components/header';
 
 import styled from 'styled-components';
@@ -97,10 +96,18 @@ function Project() {
       </HeaderMessage>
     );
   }
-  console.log(data);
+
   return (
     <section className="inpage">
-      <Header title={data.projectName} description={data.subtitle} />
+      <Header
+        tagline="Datasets"
+        title={data.projectName}
+        subtitle={data.subtitle}
+        action={{
+          api: `${config.api}/projects/${data.projectName}`,
+          download: () => {},
+        }}
+      />
       <div className="inpage__body">
         <Dashboard
           gridTemplateRows={'repeat(4, 20rem)'}
