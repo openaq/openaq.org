@@ -17,7 +17,7 @@ const Measurement = styled.div`
   width: min-content;
 `;
 
-export default function LatestMeasurementsCard({ measurements }) {
+export default function LatestMeasurementsCard({ parameters }) {
   return (
     <Card
       title="Latest Measurements"
@@ -25,7 +25,7 @@ export default function LatestMeasurementsCard({ measurements }) {
       renderBody={() => {
         return (
           <Container>
-            {measurements.map(o => (
+            {parameters.map(o => (
               <Measurement key={o.measurand}>
                 <CardSubtitle className="card__subtitle">
                   {o.measurand}
@@ -34,7 +34,7 @@ export default function LatestMeasurementsCard({ measurements }) {
                   {round(o.last_value, 1)}
                 </HighlightText>
 
-                <strong>{o.unit}</strong>
+                <strong>{o.units}</strong>
                 <p>{moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</p>
               </Measurement>
             ))}
@@ -47,12 +47,12 @@ export default function LatestMeasurementsCard({ measurements }) {
 }
 
 LatestMeasurementsCard.propTypes = {
-  measurements: T.arrayOf(
+  parameters: T.arrayOf(
     T.shape({
       measurand: T.string.isRequired,
       last_value: T.number.isRequired,
-      unit: T.string.isRequired,
-      lastUpdated: T.instanceOf(Date).isRequired,
+      units: T.string.isRequired,
+      lastUpdated: T.string.isRequired,
     })
   ),
 };

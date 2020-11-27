@@ -103,10 +103,10 @@ function Project() {
     <section className="inpage">
       <Header
         tagline="Datasets"
-        title={data.projectName}
+        title={data.name}
         subtitle={data.subtitle}
         action={{
-          api: `${config.api}/projects/${data.projectName}`,
+          api: `${config.api}/projects/${data.id}`,
           download: () => {},
         }}
       />
@@ -117,13 +117,13 @@ function Project() {
           className="inner"
         >
           <DetailsCard measurements={data.measurements} />
-          <LatestMeasurementsCard measurements={data.parameters} />
+          <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
-          <MeasureandsCard measurements={data.parameters} />
+          <MeasureandsCard parameters={data.parameters} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="project"
-            id={data.projectName}
+            id={data.name}
           />
         </Dashboard>
       </div>

@@ -82,7 +82,7 @@ SourceInfo.propTypes = {
       name: T.string,
       sourceURL: T.string,
       url: T.string,
-      contacts: T.string,
+      contacts: T.array,
     })
   ),
 };

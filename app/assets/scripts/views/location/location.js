@@ -147,13 +147,13 @@ function Location(props) {
           className="inner"
         >
           <DetailsCard measurements={data.count} />
-          <LatestMeasurementsCard measurements={data.parameters} />
+          <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={[...sources, ...added]} />
           <TimeSeriesCard
             locationId={data.location}
             parameters={data.parameters}
           />
-          <MeasureandsCard measurements={data.parameters} />
+          <MeasureandsCard parameters={data.parameters} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"

@@ -74,13 +74,13 @@ const prepareData = data => {
   return preparedData;
 };
 
-export default function MeasureandsCard({ measurements }) {
+export default function MeasureandsCard({ parameters }) {
   return (
     <Card
       gridColumn={'1 / 5'}
       title="Measurands"
       renderBody={() => {
-        return <Table data={prepareData(measurements)} />;
+        return <Table data={prepareData(parameters)} />;
       }}
       noBodyStyle
     />
@@ -88,7 +88,7 @@ export default function MeasureandsCard({ measurements }) {
 }
 
 MeasureandsCard.propTypes = {
-  measurements: T.arrayOf(
+  parameters: T.arrayOf(
     T.shape({
       measurand: T.string.isRequired,
       count: T.number.isRequired,
