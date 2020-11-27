@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import styled from 'styled-components';
 
 import { openDownloadModal } from '../../actions/action-creators';

@@ -98,7 +98,7 @@ function Project() {
       </HeaderMessage>
     );
   }
-
+  console.log(data);
   return (
     <section className="inpage">
       <Header
