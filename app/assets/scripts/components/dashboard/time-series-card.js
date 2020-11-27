@@ -184,7 +184,6 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
           )}
         </ChartContainer>
       )}
-      renderFooter={() => null}
     />
   );
 }
