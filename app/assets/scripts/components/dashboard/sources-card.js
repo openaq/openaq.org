@@ -1,8 +1,8 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
+import SmartLink from '../smart-link';
 import Card from '../card';
 
 const SourceList = styled.div`
@@ -17,7 +17,7 @@ const InfoMessage = styled.div`
   text-align: center;
 `;
 
-const Source = styled(Link)``;
+const Source = styled(SmartLink)``;
 
 export default function SourceInfo({ sources }) {
   return (
@@ -30,9 +30,9 @@ export default function SourceInfo({ sources }) {
             <SourceList>
               {sources.map(source => (
                 <Source
-                  to={source.sourceURL || source.url}
-                  disabled={!(source.sourceURL || source.url)}
                   key={source.name}
+                  to={source.sourceURL || source.url}
+                  title={source.name}
                 >
                   {source.name}
                 </Source>
@@ -45,12 +45,12 @@ export default function SourceInfo({ sources }) {
             <p>There are no sources listed.</p>
             <p>
               Maybe you&apos;d like to suggest a{' '}
-              <a
-                href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
+              <SmartLink
+                to="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
                 title="Suggest a new source"
               >
                 new source
-              </a>
+              </SmartLink>
               .
             </p>
           </InfoMessage>
@@ -61,12 +61,12 @@ export default function SourceInfo({ sources }) {
           ? () => (
               <div>
                 For more information contact{' '}
-                <Link
+                <SmartLink
                   to={`mailto:${sources[0].contacts[0]}`}
                   title={sources[0].contacts[0]}
                 >
                   {sources[0].contacts[0]}
-                </Link>
+                </SmartLink>
                 .
               </div>
             )

@@ -118,16 +118,6 @@ function Location(props) {
     });
   }
 
-  const sources = data.sourceNames
-    .map(o => _.find(props.sources, { name: o }))
-    .filter(o => o);
-  let added = [];
-  if (props.measurements.data.attribution) {
-    // filtering attribution[0] b/c it kept showing up with same name and url as sources[0]
-    added = data.attribution.filter((src, index) => index !== 0);
-  }
-
-  console.log(JSON.stringify(data));
   return (
     <section className="inpage">
       <Header
@@ -158,7 +148,7 @@ function Location(props) {
             }}
           />
           <LatestMeasurementsCard parameters={data.parameters} />
-          <SourcesCard sources={[...sources, ...added]} />
+          <SourcesCard sources={data.sources} />
           <TimeSeriesCard
             locationId={data.location}
             parameters={data.parameters}
