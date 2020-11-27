@@ -146,7 +146,17 @@ function Location(props) {
           gridTemplateColumns={'repeat(12, 1fr)'}
           className="inner"
         >
-          <DetailsCard measurements={data.count} />
+          <DetailsCard
+            measurements={data.count}
+            coords={{
+              lat: data.coordinates.latitude,
+              lng: data.coordinates.longitude,
+            }}
+            date={{
+              start: data.firstUpdated,
+              end: data.lastUpdated,
+            }}
+          />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={[...sources, ...added]} />
           <TimeSeriesCard

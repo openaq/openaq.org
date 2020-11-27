@@ -26,19 +26,19 @@ export default function DetailsCard({ measurements, date, coords }) {
       renderFooter={() => {
         return (
           <dl className="global-details-list">
-            {date && (
-              <>
-                <dt>Collection Dates</dt>
-                <dd>
-                  {startDate} - {endDate}
-                </dd>
-              </>
-            )}
             {coords && (
               <>
                 <dt>Coordinates</dt>
                 <dd>
                   N{coords.lat}, E{coords.lng}
+                </dd>
+              </>
+            )}
+            {date && (
+              <>
+                <dt>Collection Dates</dt>
+                <dd>
+                  {startDate} - {endDate}
                 </dd>
               </>
             )}
