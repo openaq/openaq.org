@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import LoadingMessage from '../../components/loading-message';
-import InfoCard from '../../components/dashboard/info-card';
+import DetailsCard from '../../components/dashboard/details-card';
 
 const ErrorMessage = styled.div`
   grid-column: 1 / 4;
@@ -52,7 +52,7 @@ export default function StatsInfo({ measurements, loc }) {
   }
 
   return (
-    <InfoCard
+    <DetailsCard
       measurements={data.meta.totalMeasurements}
       date={{ start: locData.firstUpdated, end: locData.lastUpdated }}
       coords={{ lat, lng }}

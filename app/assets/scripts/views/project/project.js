@@ -7,8 +7,9 @@ import Header from '../../components/header';
 import styled from 'styled-components';
 import CardList from '../../components/card-list';
 import config from '../../config';
-import InfoCard from '../../components/dashboard/info-card';
+import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
+import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 
@@ -115,8 +116,9 @@ function Project() {
           gridTemplateColumns={'repeat(12, 1fr)'}
           className="inner"
         >
-          <InfoCard measurements={data.measurements} />
+          <DetailsCard measurements={data.measurements} />
           <LatestMeasurementsCard measurements={data.parameters} />
+          <SourcesCard sources={''} />
           <MeasureandsCard measurements={data.parameters} />
           <TemporalCoverageCard parameters={data.parameters} />
         </Dashboard>

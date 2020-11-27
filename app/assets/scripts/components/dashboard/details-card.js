@@ -5,7 +5,7 @@ import moment from 'moment';
 import Card, { HighlightText, CardSubtitle } from '../card';
 import { formatThousands } from '../../utils/format';
 
-export default function InfoCard({ measurements, date, coords }) {
+export default function DetailsCard({ measurements, date, coords }) {
   const startDate = date ? moment(date.start).format('YYYY/MM/DD') : null;
   const endDate = date ? moment(date.end).format('YYYY/MM/DD') : null;
 
@@ -49,7 +49,7 @@ export default function InfoCard({ measurements, date, coords }) {
   );
 }
 
-InfoCard.propTypes = {
+DetailsCard.propTypes = {
   measurements: T.number.isRequired,
   date: T.shape({
     start: T.instanceOf(Date).isRequired,

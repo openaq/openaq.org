@@ -22,7 +22,7 @@ import StatsInfoCard from './stats-info';
 import MeasurementsCard from './measurements-card';
 
 // import Metadata from './metadata';
-import SourceInfo from './source-info';
+import SourcesCard from '../../components/dashboard/sources-card';
 import ValuesBreakdown from './values-breakdown';
 import TemporalMeasurements from './temporal-measurements';
 // import NearbyLoc from './nearby-loc';
@@ -78,7 +78,6 @@ function Location(props) {
         spatial: 'location',
         location: loc.location,
       });
-
       props._fetchMeasurements(
         loc.location,
         fromDate.toISOString(),
@@ -130,6 +129,15 @@ function Location(props) {
     });
   }
 
+  const sources = props.loc.data.sourceNames
+    .map(o => _.find(props.sources, { name: o }))
+    .filter(o => o);
+  let added = [];
+  if (props.measurements.data.attribution) {
+    // filtering attribution[0] b/c it kept showing up with same name and url as sources[0]
+    added = data.attribution.filter((src, index) => index !== 0);
+  }
+
   return (
     <section className="inpage">
       <Header
@@ -154,12 +162,7 @@ function Location(props) {
             location={props.loc.data.location}
             parameters={props.parameters}
           />
-          <SourceInfo
-            measurements={props.measurements}
-            sources={props.loc.data.sourceNames
-              .map(o => _.find(props.sources, { name: o }))
-              .filter(o => o)}
-          />
+          <SourcesCard sources={[...sources, ...added]} />
 
           <ValuesBreakdown
             measurements={props.measurements}
