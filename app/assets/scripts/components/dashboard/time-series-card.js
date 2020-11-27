@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
-import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
 import config from '../../config';
@@ -60,7 +59,7 @@ const defaultState = {
   data: null,
 };
 
-export default function TimeSeriesCard({ locationId, parameters }) {
+export default function TimeSeriesCard({ locationId, projectId, parameters }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   const [activeTab, setActiveTab] = useState({
@@ -78,12 +77,17 @@ export default function TimeSeriesCard({ locationId, parameters }) {
       setState(state => ({ ...state, fetching: true, error: null }));
 
       let query = {
-        location: locationId,
         parameter: activeTab.id,
         temporal,
         date_from: dateRange.start,
         date_to: dateRange.end,
       };
+      if (locationId) {
+        query = { ...query, location: locationId };
+      }
+      if (projectId) {
+        query = { ...query, project: projectId, spatial: 'project' };
+      }
 
       fetch(
         `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
@@ -126,7 +130,6 @@ export default function TimeSeriesCard({ locationId, parameters }) {
     return null;
   }
 
-  console.log(data ? data.map(m => ({ x: m[temporal], y: m.average })) : null);
   return (
     <Card
       gridColumn={'1  / -1'}
@@ -174,8 +177,7 @@ export default function TimeSeriesCard({ locationId, parameters }) {
             <LoadingMessage />
           ) : data ? (
             <ScatterChart
-              data={data.map(m => ({ x: moment(m[temporal]), y: m.average }))}
-              xAxisLabels={data.map(m => moment(m[temporal]).format('MMM'))}
+              data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
             />
           ) : (
             <ErrorMessage />

@@ -12,6 +12,7 @@ import LatestMeasurementsCard from '../../components/dashboard/lastest-measureme
 import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
+import TimeSeriesCard from '../../components/dashboard/time-series-card';
 
 const defaultState = {
   fetched: false,
@@ -119,6 +120,7 @@ function Project() {
           <DetailsCard measurements={data.measurements} />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
+          <TimeSeriesCard projectId={data.id} parameters={data.parameters} />
           <MeasureandsCard parameters={data.parameters} />
           <TemporalCoverageCard
             parameters={data.parameters}

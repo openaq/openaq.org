@@ -148,15 +148,12 @@ function Location(props) {
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
-          <TimeSeriesCard
-            locationId={data.location}
-            parameters={data.parameters}
-          />
+          <TimeSeriesCard locationId={data.id} parameters={data.parameters} />
           <MeasureandsCard parameters={data.parameters} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
-            id={data.location}
+            id={data.id}
           />
         </Dashboard>
       </div>
