@@ -191,5 +191,10 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
 
 TimeSeriesCard.propTypes = {
   locationId: T.string,
-  parameters: T.array,
+  projectId: T.string,
+  parameters: T.arrayOf(
+    T.shape({
+      measurand: T.string.isRequired,
+    })
+  ),
 };
