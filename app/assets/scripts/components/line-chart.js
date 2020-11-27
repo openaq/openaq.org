@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Scatter } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
-export default function ScatterChart({ data }) {
+export default function LineChart({ data }) {
   const series = {
     datasets: [
       {
         label: 'average',
         data: data,
-        backgroundColor: '#198CFF',
+        borderColor: '#198CFF',
+        fill: false,
       },
     ],
   };
@@ -41,12 +42,13 @@ export default function ScatterChart({ data }) {
         },
       ],
     },
+    maintainAspectRatio: false,
   };
 
-  return <Scatter data={series} options={options} />;
+  return <Line data={series} options={options} />;
 }
 
-ScatterChart.propTypes = {
+LineChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       x: PropTypes.instanceOf(Date).isRequired,

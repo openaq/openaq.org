@@ -13,10 +13,10 @@ import Card, {
   CardTitle,
 } from '../card';
 import TabbedSelector from '../tabbed-selector';
-import ScatterChart from '../scatter-chart';
+import LineChart from '../line-chart';
 
-const ErrorContainer = styled.div`
-  grid-column: 1 / -1;
+const ChartContainer = styled.div`
+  max-height: 24rem;
 `;
 
 const CardHeader = styled(BaseHeader)`
@@ -38,7 +38,7 @@ const DateSelector = styled.div`
 `;
 
 const ErrorMessage = () => (
-  <ErrorContainer>
+  <div>
     <p>We couldn&apos;t get any data.</p>
     <InfoMessage>
       <p>Please try again later.</p>
@@ -49,7 +49,7 @@ const ErrorMessage = () => (
         </a>
       </p>
     </InfoMessage>
-  </ErrorContainer>
+  </div>
 );
 
 const defaultState = {
@@ -172,17 +172,17 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
         </CardHeader>
       )}
       renderBody={() => (
-        <div className="card__body">
+        <ChartContainer className="card__body">
           {fetching ? (
             <LoadingMessage />
           ) : data ? (
-            <ScatterChart
+            <LineChart
               data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
             />
           ) : (
             <ErrorMessage />
           )}
-        </div>
+        </ChartContainer>
       )}
       renderFooter={() => null}
     />
