@@ -13,6 +13,7 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import MapCard from '../../components/dashboard/map-card';
 
 const defaultState = {
   fetched: false,
@@ -99,7 +100,7 @@ function Project() {
       </HeaderMessage>
     );
   }
-  console.log(data);
+
   return (
     <section className="inpage">
       <Header
@@ -122,6 +123,7 @@ function Project() {
           <SourcesCard sources={data.sources} />
           <TimeSeriesCard projectId={data.id} parameters={data.parameters} />
           <MeasureandsCard parameters={data.parameters} />
+          <MapCard parameters={data.parameters} points={data.points} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="project"
