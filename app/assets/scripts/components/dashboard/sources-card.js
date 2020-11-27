@@ -22,10 +22,10 @@ const Source = styled(Link)``;
 export default function SourceInfo({ sources }) {
   return (
     <Card
-      title={sources.length > 1 ? 'Sources' : 'Source'}
+      title={sources && sources.length > 1 ? 'Sources' : 'Source'}
       gridColumn={'11 / -1'}
       renderBody={() => {
-        if (sources.length > 0) {
+        if (sources) {
           return (
             <SourceList>
               {sources.map(source => (
@@ -57,7 +57,7 @@ export default function SourceInfo({ sources }) {
         );
       }}
       renderFooter={
-        sources[0]
+        sources && sources[0]
           ? () => (
               <div>
                 For more information contact{' '}
@@ -77,5 +77,12 @@ export default function SourceInfo({ sources }) {
 }
 
 SourceInfo.propTypes = {
-  sources: T.array,
+  sources: T.arrayOf(
+    T.shape({
+      name: T.string,
+      sourceURL: T.string,
+      url: T.string,
+      contacts: T.string,
+    })
+  ),
 };

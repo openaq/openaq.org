@@ -118,7 +118,7 @@ function Project() {
         >
           <DetailsCard measurements={data.measurements} />
           <LatestMeasurementsCard measurements={data.parameters} />
-          <SourcesCard sources={''} />
+          <SourcesCard sources={data.sources} />
           <MeasureandsCard measurements={data.parameters} />
           <TemporalCoverageCard parameters={data.parameters} />
         </Dashboard>
