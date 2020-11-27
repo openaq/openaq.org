@@ -9,6 +9,7 @@ import {
   openDownloadModal as openDownloadModalAction,
 } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
+
 import Header from '../../components/header';
 import Filter from './filter';
 import Results from './results';
