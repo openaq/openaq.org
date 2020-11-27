@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Scatter } from 'react-chartjs-2';
 
-export default function ScatterChart({ data, xAxisLabels }) {
+export default function ScatterChart({ data }) {
   const series = {
-    labels: xAxisLabels,
     datasets: [
       {
         label: 'average',
@@ -31,6 +30,13 @@ export default function ScatterChart({ data, xAxisLabels }) {
       ],
       xAxes: [
         {
+          type: 'time',
+          time: {
+            unit: 'month',
+            displayFormats: {
+              quarter: 'MMM',
+            },
+          },
           gridLines: { display: false },
         },
       ],
@@ -43,9 +49,8 @@ export default function ScatterChart({ data, xAxisLabels }) {
 ScatterChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      x: PropTypes.number.isRequired,
+      x: PropTypes.instanceOf(Date).isRequired,
       y: PropTypes.number.isRequired,
     })
   ).isRequired,
-  xAxisLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
