@@ -120,7 +120,11 @@ function Project() {
           <LatestMeasurementsCard measurements={data.parameters} />
           <SourcesCard sources={data.sources} />
           <MeasureandsCard measurements={data.parameters} />
-          <TemporalCoverageCard parameters={data.parameters} />
+          <TemporalCoverageCard
+            parameters={data.parameters}
+            spatial="project"
+            id={data.projectName}
+          />
         </Dashboard>
       </div>
     </section>

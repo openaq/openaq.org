@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 
+import { round } from '../utils/format';
+
 export default function BarChart({ data, xAxisLabels }) {
   const series = {
     labels: xAxisLabels,
     datasets: [
       {
-        label: 'in average',
-        data: data,
+        label: 'average',
+        data: data.map(d => round(d)),
         backgroundColor: '#198CFF',
       },
     ],

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
+import qs from 'qs';
 
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
@@ -64,10 +65,10 @@ const ErrorMessage = () => (
   </div>
 );
 
-export default function TemporalCoverageCard({ parameters }) {
+export default function TemporalCoverageCard({ parameters, spatial, id }) {
   const [activeTab, setActiveTab] = useState({
-    id: parameters[0].measurand,
-    name: parameters[0].measurand,
+    id: parameters[0].measurand || parameters[0],
+    name: parameters[0].measurand || parameters[0],
   });
 
   const [state, setState] = useState(defaultState);
@@ -79,13 +80,27 @@ export default function TemporalCoverageCard({ parameters }) {
         [temporal]: { ...state[temporal], fetching: true, error: null },
       }));
 
-      // TODO: hit api depending on page and id (project or location)
+      let query = {
+        temporal,
+        parameter: activeTab.id,
+        date_from: temporal === 'dow' ? '2020-10-01' : null,
+      };
+
+      if (spatial === 'project') {
+        query = {
+          ...query,
+          spatial: 'project',
+          project: id,
+        };
+      } else {
+        query = {
+          ...query,
+          location: id,
+        };
+      }
+
       fetch(
-        `${
-          config.api
-        }/averages?temporal=${temporal}&spatial=project&project=US&parameter=${
-          activeTab.id
-        }${temporal === 'dow' ? '&date_from=2020-10-01' : ''}`
+        `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
       )
         .then(response => {
           if (response.status >= 400) {
@@ -154,7 +169,10 @@ export default function TemporalCoverageCard({ parameters }) {
       renderHeader={() => (
         <CardHeader className="card__header">
           <TabbedSelector
-            tabs={parameters.map(x => ({ id: x.measurand, name: x.measurand }))}
+            tabs={parameters.map(x => ({
+              id: x.measurand || x,
+              name: x.measurand || x,
+            }))}
             activeTab={activeTab}
             onTabSelect={t => {
               setActiveTab(t);
@@ -213,6 +231,8 @@ TemporalCoverageCard.propTypes = {
       average: T.number.isRequired,
     })
   ),
+  spatial: T.oneOf(['project', 'location']).isRequired,
+  id: T.string.isRequired,
 };
 
 function Chart({ title, temporal, data, fetching }) {
@@ -226,6 +246,7 @@ function Chart({ title, temporal, data, fetching }) {
       ) : data ? (
         <BarChart
           data={data.map(m => m.average)}
+          // data={data.map(m => m.measurement_count)}
           xAxisLabels={data.map(m => m[temporal])}
         />
       ) : (

@@ -1,92 +1,81 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import moment from 'moment';
 import styled from 'styled-components';
 
-import {
-  fetchLocationIfNeeded,
-  fetchLatestMeasurements,
-  fetchAverageMeasurements,
-  fetchMeasurements,
-  invalidateAllLocationData,
-  openDownloadModal,
-} from '../../actions/action-creators';
+import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
 import HeaderMessage from '../../components/header-message';
 import Header from '../../components/header';
 import CardList from '../../components/card-list';
 
-import StatsInfoCard from './stats-info';
-import MeasurementsCard from './measurements-card';
-
-// import Metadata from './metadata';
+import DetailsCard from '../../components/dashboard/details-card';
+import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
-import ValuesBreakdown from './values-breakdown';
-import TemporalMeasurements from './temporal-measurements';
-// import NearbyLoc from './nearby-loc';
-
-import Averages from './averages-card';
+import MeasureandsCard from '../../components/dashboard/measurands-card';
+import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
+import TimeSeriesCard from '../../components/dashboard/time-series-card';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
 `;
 
+const defaultState = {
+  fetched: false,
+  fetching: false,
+  error: null,
+  data: null,
+};
+
 function Location(props) {
   const { name } = props.match.params;
 
+  const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
+
   useEffect(() => {
-    // Invalidate all the data related to the location page.
-    // This is needed otherwise the system thinks there's data and
-    // throws errors.
-    props._invalidateAllLocationData();
-    props._fetchLocationIfNeeded(name);
-    return () => {
-      props._invalidateAllLocationData();
+    const fetchData = name => {
+      setState(state => ({ ...state, fetching: true, error: null }));
+
+      fetch(
+        `${config.api}/locations?location=${encodeURIComponent(
+          name
+        )}&metadata=true`
+      )
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(
+          json => {
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              data: json.results[0],
+            }));
+          },
+          e => {
+            console.log('e', e);
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              error: e,
+            }));
+          }
+        );
     };
-  }, [name]);
 
-  useEffect(() => {
-    // TODO: this needs more refactoring!
-    if (
-      props.loc.fetched &&
-      !props.loc.fetching &&
-      props.loc.data &&
-      !props.latestMeasurements.fetched &&
-      !props.latestMeasurements.fetching &&
-      !props.measurements.fetched &&
-      !props.measurements.fetching
-    ) {
-      let loc = props.loc.data;
-      // Get the measurements.
-      let toDate = moment.utc();
-      let fromDate = toDate.clone().subtract(8, 'days');
-      // props._fetchLatestMeasurements({city: loc.city, has_geo: 'true'});
-      if (loc.coordinates) {
-        props._fetchLatestMeasurements({
-          coordinates: `${loc.coordinates.latitude},${loc.coordinates.longitude}`,
-          radius: 10 * 1000, // 10 Km
-          has_geo: 'true',
-        });
-      } else {
-        props._fetchLatestMeasurements({
-          location: loc.location,
-        });
-      }
-      props._fetchAverageMeasurements({
-        spatial: 'location',
-        location: loc.location,
-      });
-      props._fetchMeasurements(
-        loc.location,
-        fromDate.toISOString(),
-        toDate.toISOString()
-      );
-    }
-  });
+    fetchData(name);
 
-  let { fetched, fetching, error, data } = props.loc;
+    return () => {
+      setState(defaultState);
+    };
+  }, []);
+
   if (!fetched && !fetching) {
     return null;
   }
@@ -129,7 +118,7 @@ function Location(props) {
     });
   }
 
-  const sources = props.loc.data.sourceNames
+  const sources = data.sourceNames
     .map(o => _.find(props.sources, { name: o }))
     .filter(o => o);
   let added = [];
@@ -138,6 +127,7 @@ function Location(props) {
     added = data.attribution.filter((src, index) => index !== 0);
   }
 
+  console.log(JSON.stringify(data));
   return (
     <section className="inpage">
       <Header
@@ -156,40 +146,20 @@ function Location(props) {
           gridTemplateColumns={'repeat(12, 1fr)'}
           className="inner"
         >
-          <StatsInfoCard measurements={props.measurements} loc={props.loc} />
-          <MeasurementsCard
-            latestMeasurements={props.latestMeasurements}
-            location={props.loc.data.location}
-            parameters={props.parameters}
-          />
+          <DetailsCard measurements={data.count} />
+          <LatestMeasurementsCard measurements={data.parameters} />
           <SourcesCard sources={[...sources, ...added]} />
-
-          <ValuesBreakdown
-            measurements={props.measurements}
-            parameters={props.parameters}
+          <TimeSeriesCard
+            locationId={data.location}
+            parameters={data.parameters}
           />
-
-          <TemporalMeasurements
-            measurements={props.measurements}
-            parameters={props.parameters}
+          <MeasureandsCard measurements={data.parameters} />
+          <TemporalCoverageCard
+            parameters={data.parameters}
+            spatial="location"
+            id={data.location}
           />
-          <Averages measurements={props.averageMeasurements} />
         </Dashboard>
-        {/*
-        <Metadata loc={props.loc} />
-        <ValuesBreakdown
-          measurements={props.measurements}
-          parameters={props.parameters}
-          activeParam={getActiveParameterData()}
-          onFilterSelect={onFilterSelect}
-        />
-        <NearbyLoc
-          countryData={props.countryData
-          latestMeasurements={props.latestMeasurements}
-          loc={props.loc}
-          parameters={props.parameters}
-          sources={props.sources}
-        />*/}
       </div>
     </section>
   );
@@ -197,50 +167,9 @@ function Location(props) {
 
 Location.propTypes = {
   match: T.object,
-  location: T.object,
-  history: T.object,
-
-  _fetchLocationIfNeeded: T.func,
-  _fetchLocations: T.func,
-  _fetchLatestMeasurements: T.func,
-  _fetchAverageMeasurements: T.func,
-  _fetchMeasurements: T.func,
-  _invalidateAllLocationData: T.func,
   _openDownloadModal: T.func,
-
-  countries: T.array,
   sources: T.array,
-  parameters: T.array,
-
-  countryData: T.object,
-
-  loc: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
-  averageMeasurements: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
-  latestMeasurements: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
-  measurements: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
+  measurements: T.array,
 };
 
 // /////////////////////////////////////////////////////////////////// //
@@ -248,33 +177,14 @@ Location.propTypes = {
 
 function selector(state) {
   return {
-    countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
-    parameters: state.baseData.data.parameters,
-
-    countryData: _.find(state.baseData.data.countries, {
-      code: (state.location.data || {}).country,
-    }),
-
-    loc: state.location,
-    latestMeasurements: state.latestMeasurements,
-    averageMeasurements: state.averageMeasurements,
     measurements: state.measurements,
+    latestMeasurements: state.latestMeasurements,
   };
 }
 
 function dispatcher(dispatch) {
   return {
-    _fetchLocationIfNeeded: (...args) =>
-      dispatch(fetchLocationIfNeeded(...args)),
-    _fetchLatestMeasurements: (...args) =>
-      dispatch(fetchLatestMeasurements(...args)),
-    _fetchAverageMeasurements: (...args) =>
-      dispatch(fetchAverageMeasurements(...args)),
-    _fetchMeasurements: (...args) => dispatch(fetchMeasurements(...args)),
-    _invalidateAllLocationData: (...args) =>
-      dispatch(invalidateAllLocationData(...args)),
-
     _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
   };
 }
