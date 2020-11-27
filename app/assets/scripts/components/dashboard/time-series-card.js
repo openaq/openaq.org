@@ -17,11 +17,12 @@ import LineChart from '../line-chart';
 
 const ChartContainer = styled.div`
   max-height: 24rem;
+  padding: 0;
 `;
 
 const CardHeader = styled(BaseHeader)`
   display: grid;
-  grid-template-rows: min-content 1fr 1fr;
+  grid-template-rows: min-content 1fr;
   grid-gap: 0.5rem;
 `;
 
