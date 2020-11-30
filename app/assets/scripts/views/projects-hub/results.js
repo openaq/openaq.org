@@ -70,11 +70,11 @@ export default function Results({
             });
           return (
             <ProjectCard
-              key={project.projectId}
-              id={project.projectId}
+              key={project.id}
+              id={project.id}
               onDownloadClick={openModal}
               lastUpdate={project.lastUpdated}
-              name={project.projectName}
+              name={project.name}
               subtitle={project.subtitle}
               sourceType={project.sourceType}
               collectionStart={project.collectionStart}
