@@ -61,12 +61,14 @@ const defaultState = {
 };
 
 export default function TimeSeriesCard({ locationId, projectId, parameters }) {
+  // eslint-disable-next-line no-unused-vars
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   const [activeTab, setActiveTab] = useState({
     id: parameters[0].measurand || parameters[0],
     name: parameters[0].measurand || parameters[0],
   });
+  // eslint-disable-next-line no-unused-vars
   const [temporal, setTemporal] = useState('month');
   const [dateRange, setDateRange] = useState({
     start: new Date('11/21/2019'),

@@ -118,12 +118,12 @@ function Location(props) {
     <section className="inpage">
       <Header
         tagline="Location"
-        title={data.location}
+        title={data.name}
         subtitle={`in ${data.city}, ${data.country}`}
         action={{
-          api: `${config.api}/locations?location=${data.location}`,
+          api: `${config.api}/locations?location=${data.id}`,
           download: onDownloadClick,
-          compare: `/compare/${encodeURIComponent(data.location)}`,
+          compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
       />
       <div className="inpage__body">
@@ -133,7 +133,7 @@ function Location(props) {
           className="inner"
         >
           <DetailsCard
-            measurements={data.count}
+            measurements={data.measurements}
             coords={{
               lat: data.coordinates.latitude,
               lng: data.coordinates.longitude,

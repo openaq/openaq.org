@@ -16,10 +16,7 @@ import Results from './results';
 
 const PER_PAGE = 15;
 
-function getPage(location) {
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
+function getPage(query) {
   if (query && query.page) {
     let page = query.page;
     page = isNaN(page) || page < 1 ? 1 : +page;
@@ -33,8 +30,6 @@ export default function ProjectsHub({
   invalidateProjects,
   openDownloadModal,
 
-  organizations,
-  sources,
   parameters,
 
   fetching,
@@ -46,11 +41,16 @@ export default function ProjectsHub({
   location,
   history,
 }) {
-  const filters = {};
-  const [page, setPage] = useState(() => getPage(location));
+  const [filters, setFilters] = useState({});
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    setPage(() => getPage(location));
+    // on url change
+    let query = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    setPage(() => getPage(query));
+    setFilters({ order_by: query.order_by, parameters: query.parameters });
   }, [location]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function ProjectsHub({
     return () => {
       invalidateProjects();
     };
-  }, [page]);
+  }, [page, filters]);
 
   function handlePageClick(d) {
     let query = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -80,11 +80,7 @@ export default function ProjectsHub({
         <div className="inner">
           <div className="inpage__content">
             <div className="inpage__content__header">
-              <Filter
-                organizations={organizations}
-                parameters={parameters}
-                sources={sources}
-              />
+              <Filter parameters={parameters} />
             </div>
 
             <div className="content__meta">
@@ -119,8 +115,6 @@ export default function ProjectsHub({
 }
 
 ProjectsHub.propTypes = {
-  organizations: T.array,
-  sources: T.array,
   parameters: T.array,
 
   fetching: T.bool,
@@ -142,8 +136,6 @@ ProjectsHub.propTypes = {
 
 function selector(state) {
   return {
-    organizations: state.baseData.data.countries,
-    sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
 
     fetching: state.projects.fetching,
