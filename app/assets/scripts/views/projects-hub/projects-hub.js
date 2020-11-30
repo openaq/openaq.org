@@ -9,7 +9,6 @@ import {
   openDownloadModal as openDownloadModalAction,
 } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
-import { toggleValue } from '../../utils/array';
 
 import Header from '../../components/header';
 import Filter from './filter';
@@ -31,8 +30,6 @@ export default function ProjectsHub({
   invalidateProjects,
   openDownloadModal,
 
-  organizations,
-  sources,
   parameters,
 
   fetching,
@@ -53,7 +50,7 @@ export default function ProjectsHub({
       ignoreQueryPrefix: true,
     });
     setPage(() => getPage(query));
-    setFilters({ orderBy: query.orderBy });
+    setFilters({ order_by: query.order_by, parameters: query.parameters });
   }, [location]);
 
   useEffect(() => {
@@ -62,29 +59,6 @@ export default function ProjectsHub({
       invalidateProjects();
     };
   }, [page, filters]);
-
-  function onFilterSelect(what, value) {
-    let query = qs.parse(location.search, {
-      ignoreQueryPrefix: true,
-    });
-    switch (what) {
-      case 'orderBy': {
-        let orderBy = query && query.orderBy ? query.orderBy.split(',') : [];
-        query.orderBy = toggleValue(orderBy, value);
-        !query.orderBy.length && delete query.orderBy;
-        break;
-      }
-
-      case 'clear':
-        delete query.countries;
-        delete query.parameters;
-        delete query.sources;
-        delete query.orderBy;
-        break;
-    }
-    // update url
-    history.push(`/projects?${buildQS(query)}`);
-  }
 
   function handlePageClick(d) {
     let query = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -106,12 +80,7 @@ export default function ProjectsHub({
         <div className="inner">
           <div className="inpage__content">
             <div className="inpage__content__header">
-              <Filter
-                onFilterSelect={onFilterSelect}
-                organizations={organizations}
-                parameters={parameters}
-                sources={sources}
-              />
+              <Filter parameters={parameters} />
             </div>
 
             <div className="content__meta">
@@ -146,8 +115,6 @@ export default function ProjectsHub({
 }
 
 ProjectsHub.propTypes = {
-  organizations: T.array,
-  sources: T.array,
   parameters: T.array,
 
   fetching: T.bool,
@@ -169,8 +136,6 @@ ProjectsHub.propTypes = {
 
 function selector(state) {
   return {
-    organizations: state.baseData.data.countries,
-    sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
 
     fetching: state.projects.fetching,

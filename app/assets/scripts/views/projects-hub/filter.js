@@ -1,22 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PropTypes as T } from 'prop-types';
-import { Dropdown } from 'openaq-design-system';
+import { useHistory, useLocation } from 'react-router-dom';
+import qs from 'qs';
 import c from 'classnames';
 import _ from 'lodash';
+import { Dropdown } from 'openaq-design-system';
 
-export default function Filter({
-  onFilterSelect,
-  organizations,
-  parameters,
-  sources,
-  orderBy = [],
-}) {
-  let sortOptions = ['projectName'];
+import { buildQS } from '../../utils/url';
+import { toggleValue } from '../../utils/array';
 
-  let queryOrganizations = [];
-  let queryParameters = [];
-  let querySources = [];
-  let queryOrderBy = [];
+export default function Filter({ parameters }) {
+  let history = useHistory();
+  let location = useLocation();
+
+  let sortOptions = ['count'];
+
+  const [selected, setSelected] = useState({
+    parameters: [],
+    order_by: [],
+  });
+
+  function onFilterSelect(what, value) {
+    setSelected(prev => ({ ...prev, [what]: toggleValue(prev[what], value) }));
+
+    let query = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+
+    switch (what) {
+      case 'order_by': {
+        const order_by =
+          query && query.order_by ? query.order_by.split(',') : [];
+        query.order_by = toggleValue(order_by, value);
+        !query.order_by.length && delete query.order_by;
+        break;
+      }
+
+      case 'parameters': {
+        const parameters =
+          query && query.parameters ? query.parameters.split(',') : [];
+        query.parameters = toggleValue(parameters, value);
+        !query.parameters.length && delete query.parameters;
+        break;
+      }
+
+      case 'clear':
+        delete query.countries;
+        delete query.parameters;
+        delete query.sources;
+        delete query.order_by;
+        break;
+    }
+
+    // update url
+    history.push(`/projects?${buildQS(query)}`);
+  }
 
   return (
     <>
@@ -25,33 +63,6 @@ export default function Filter({
           <h2>Filter by</h2>
           <h2>Order by</h2>
         </nav>
-
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="country__filter"
-          triggerText="Organization"
-          triggerClassName="drop-trigger"
-        >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
-            {_.sortBy(organizations).map(o => {
-              return (
-                <li key={o.id}>
-                  <div
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': queryOrganizations.includes(
-                        o.id
-                      ),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => {}}
-                  >
-                    <span>{o.name}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
 
         <Dropdown
           triggerElement="a"
@@ -64,36 +75,12 @@ export default function Filter({
                 <li key={o.id}>
                   <div
                     className={c('drop__menu-item', {
-                      'drop__menu-item--active': queryParameters.includes(
-                        o.code
+                      'drop__menu-item--active': selected.parameters.includes(
+                        o.id
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => {}}
-                  >
-                    <span>{o.name}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
-
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="source__filter"
-          triggerText="Data Source"
-        >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
-            {_.sortBy(sources).map(o => {
-              return (
-                <li key={o.name}>
-                  <div
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': querySources.includes(o.code),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => {}}
+                    onClick={() => onFilterSelect('parameters', o.id)}
                   >
                     <span>{o.name}</span>
                   </div>
@@ -115,12 +102,10 @@ export default function Filter({
                 <li key={o}>
                   <div
                     className={c('drop__menu-item', {
-                      'drop__menu-item--active': queryOrderBy.includes(o),
+                      'drop__menu-item--active': selected.order_by.includes(o),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => {
-                      onFilterSelect('orderBy', o);
-                    }}
+                    onClick={() => onFilterSelect('order_by', o)}
                   >
                     <span>{`${o[0].toUpperCase()}${o.slice(1)}`}</span>
                   </div>
@@ -131,77 +116,47 @@ export default function Filter({
         </Dropdown>
       </div>
 
-      {organizations &&
-        !(
-          organizations.length +
-            parameters.length +
-            sources.length +
-            orderBy.length ===
-          0
-        ) && (
-          <div className="filters-summary">
-            {organizations.map(o => {
-              return organizations.indexOf(o.code) !== -1 ? (
-                <button
-                  type="button"
-                  className="button--filter-pill"
-                  key={o.code}
-                  onClick={() => {}}
-                >
-                  <span>{o.name}</span>
-                </button>
-              ) : null;
-            })}
-            {parameters.map(o => {
-              return parameters.indexOf(o.id) !== -1 ? (
-                <button
-                  type="button"
-                  className="button--filter-pill"
-                  key={o.id}
-                  onClick={() => {}}
-                >
-                  <span>{o.name}</span>
-                </button>
-              ) : null;
-            })}
-            {sources.map(o => {
-              return sources.indexOf(o.name) !== -1 ? (
-                <button
-                  type="button"
-                  className="button--filter-pill"
-                  key={o.name}
-                  onClick={() => {}}
-                >
-                  <span>{o.name}</span>
-                </button>
-              ) : null;
-            })}
-            {orderBy.map(o => {
-              return (
-                <button
-                  type="button"
-                  className="button--filter-pill orderBy"
-                  key={o}
-                  onClick={() => {}}
-                >
-                  <span>{o}</span>
-                </button>
-              );
-            })}
+      {!(selected.parameters.length + selected.order_by.length === 0) && (
+        <div className="filters-summary">
+          {selected.parameters.map(o => {
+            const parameter = parameters.find(x => x.id === o);
+            return (
+              <button
+                type="button"
+                className="button--filter-pill"
+                key={parameter.id}
+                onClick={() => {}}
+              >
+                <span>{parameter.name}</span>
+              </button>
+            );
+          })}
+          {selected.order_by.map(o => {
+            return (
+              <button
+                type="button"
+                className="button--filter-pill orderBy"
+                key={o}
+                onClick={() => {}}
+              >
+                <span>{o}</span>
+              </button>
+            );
+          })}
 
-            <button
-              type="button"
-              className="button button--small button--primary-unbounded"
-              title="Clear all selected filters"
-              onClick={e => {
-                e.preventDefault();
-                this.onFilterSelect('clear');
-              }}
-            >
-              <small> (Clear Filters)</small>
-            </button>
-          </div>
-        )}
+          <button
+            type="button"
+            className="button button--small button--primary-unbounded"
+            title="Clear all selected filters"
+            onClick={e => {
+              e.preventDefault();
+              this.onFilterSelect('clear');
+            }}
+          >
+            <small> (Clear Filters)</small>
+          </button>
+        </div>
+      )}
     </>
   );
 }
@@ -210,5 +165,5 @@ Filter.propTypes = {
   organizations: T.array,
   parameters: T.array,
   sources: T.array,
-  orderBy: T.array,
+  order_by: T.array,
 };
