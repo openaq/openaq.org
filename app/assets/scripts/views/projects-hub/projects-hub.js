@@ -9,6 +9,7 @@ import {
   openDownloadModal as openDownloadModalAction,
 } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
+import { toggleValue } from '../../utils/array';
 
 import Header from '../../components/header';
 import Filter from './filter';
@@ -16,10 +17,7 @@ import Results from './results';
 
 const PER_PAGE = 15;
 
-function getPage(location) {
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
+function getPage(query) {
   if (query && query.page) {
     let page = query.page;
     page = isNaN(page) || page < 1 ? 1 : +page;
@@ -46,11 +44,16 @@ export default function ProjectsHub({
   location,
   history,
 }) {
-  const filters = {};
-  const [page, setPage] = useState(() => getPage(location));
+  const [filters, setFilters] = useState({});
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    setPage(() => getPage(location));
+    // on url change
+    let query = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    setPage(() => getPage(query));
+    setFilters({ orderBy: query.orderBy });
   }, [location]);
 
   useEffect(() => {
@@ -58,7 +61,30 @@ export default function ProjectsHub({
     return () => {
       invalidateProjects();
     };
-  }, [page]);
+  }, [page, filters]);
+
+  function onFilterSelect(what, value) {
+    let query = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    switch (what) {
+      case 'orderBy': {
+        let orderBy = query && query.orderBy ? query.orderBy.split(',') : [];
+        query.orderBy = toggleValue(orderBy, value);
+        !query.orderBy.length && delete query.orderBy;
+        break;
+      }
+
+      case 'clear':
+        delete query.countries;
+        delete query.parameters;
+        delete query.sources;
+        delete query.orderBy;
+        break;
+    }
+    // update url
+    history.push(`/projects?${buildQS(query)}`);
+  }
 
   function handlePageClick(d) {
     let query = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -81,6 +107,7 @@ export default function ProjectsHub({
           <div className="inpage__content">
             <div className="inpage__content__header">
               <Filter
+                onFilterSelect={onFilterSelect}
                 organizations={organizations}
                 parameters={parameters}
                 sources={sources}

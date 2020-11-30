@@ -5,12 +5,13 @@ import c from 'classnames';
 import _ from 'lodash';
 
 export default function Filter({
+  onFilterSelect,
   organizations,
   parameters,
   sources,
   orderBy = [],
 }) {
-  let sortOptions = ['organization'];
+  let sortOptions = ['projectName'];
 
   let queryOrganizations = [];
   let queryParameters = [];
@@ -117,7 +118,9 @@ export default function Filter({
                       'drop__menu-item--active': queryOrderBy.includes(o),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => {}}
+                    onClick={() => {
+                      onFilterSelect('orderBy', o);
+                    }}
                   >
                     <span>{`${o[0].toUpperCase()}${o.slice(1)}`}</span>
                   </div>
