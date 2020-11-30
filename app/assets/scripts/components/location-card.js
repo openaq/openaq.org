@@ -18,6 +18,7 @@ var LocationCard = createReactClass({
   propTypes: {
     onDownloadClick: T.func,
     compact: T.bool,
+    id: T.string,
     name: T.string,
     city: T.string,
     countryData: T.object,
