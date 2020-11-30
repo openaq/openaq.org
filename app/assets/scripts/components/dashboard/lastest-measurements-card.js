@@ -31,7 +31,7 @@ export default function LatestMeasurementsCard({ parameters }) {
                   {o.measurand}
                 </CardSubtitle>
                 <HighlightText className="card__highlight-text" size="medium">
-                  {round(o.lastvalue, 1)}
+                  {round(o.lastValue, 1)}
                 </HighlightText>
 
                 <strong>{o.unit}</strong>
@@ -50,7 +50,7 @@ LatestMeasurementsCard.propTypes = {
   parameters: T.arrayOf(
     T.shape({
       measurand: T.string.isRequired,
-      lastvalue: T.number.isRequired,
+      lastValue: T.number.isRequired,
       unit: T.string.isRequired,
       lastUpdated: T.string.isRequired,
     })
