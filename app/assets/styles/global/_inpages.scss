@@ -154,14 +154,14 @@ $page-header-y: $global-spacing * 5;
 
 .inpage__aside,
 .inpage__content {
-  padding: ($global-spacing * 4) 0;
+  padding: 0 0 ($global-spacing * 4) 0;
 
   @include media(medium-up) {
-    padding: ($global-spacing * 6) 0;
+    padding: 0 0 ($global-spacing * 6) 0;
   }
 
   @include media(large-up) {
-    padding: ($global-spacing * 8) 0;
+    padding: 0 0 ($global-spacing * 8) 0;
   }
 }
 
@@ -188,13 +188,10 @@ $page-header-y: $global-spacing * 5;
 
   @include media(medium-up) {
     grid-row: 1;
-    grid-column: 4 / span 5;
-    box-shadow: -1px 0 0 0 $base-semi-alpha-color;
     padding-left: 2rem;
   }
 
   @include media(large-up) {
-    grid-column: 4 / span 9;
   }
 
   > *:last-child {

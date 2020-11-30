@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export function buildQS (qParams, valSep = ',', separator = '&') {
+export function buildQS(qParams, valSep = ',', separator = '&') {
   let stringified = [];
 
   _.forEach(qParams, (v, k) => {

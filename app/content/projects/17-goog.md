@@ -1,5 +1,5 @@
 ---
-title: "Google BigQuery"
+title: 'Google BigQuery'
 url: https://cloud.google.com/bigquery/public-data/openaq
 image: assets/graphics/content/view--community-projects/projects/covers/google.jpg
 logo: assets/graphics/content/view--community-projects/projects/logos/cloud-logo.png

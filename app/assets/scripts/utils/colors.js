@@ -13,7 +13,7 @@ const mapColors = [
   { label: '50', color: '#f6e19e' },
   { label: '60', color: '#faad5b' },
   { label: '70', color: '#f36d3c' },
-  { label: '80', color: '#d93127' }
+  { label: '80', color: '#d93127' },
 ];
 
 // Colors for the stations without recent values
@@ -21,7 +21,7 @@ export const unusedColor = '#ddd';
 export const unusedBorderColor = '#555';
 
 // Generate an array of darker colors for the point borders
-export function darkenColors () {
+export function darkenColors() {
   const darkerColors = JSON.parse(JSON.stringify(mapColors));
 
   for (var i = 0; i < darkerColors.length; i++) {
@@ -31,22 +31,28 @@ export function darkenColors () {
   return darkerColors;
 }
 
-export function getMapColorsHex () {
+export function getMapColorsHex() {
   return mapColors.map(o => o.color);
 }
 
-export function getDarkenedColorsHex () {
+export function getDarkenedColorsHex() {
   return darkenColors().map(o => o.color);
 }
 
-export function getMapColorsLabels () {
+export function getMapColorsLabels() {
   return mapColors.map(o => o.label);
 }
 
-export function generateColorStops (parameter, colors) {
-  const colorScale = generateColorScale(parameterMax[parameter], getMapColorsHex());
-  const darkColorScale = generateColorScale(parameterMax[parameter], getDarkenedColorsHex());
-  let stops = getMapColorsHex().map((c) => {
+export function generateColorStops(parameter, colors) {
+  const colorScale = generateColorScale(
+    parameterMax[parameter],
+    getMapColorsHex()
+  );
+  const darkColorScale = generateColorScale(
+    parameterMax[parameter],
+    getDarkenedColorsHex()
+  );
+  let stops = getMapColorsHex().map(c => {
     return [colorScale.invertExtent(c)[0], c];
   });
 
@@ -54,7 +60,7 @@ export function generateColorStops (parameter, colors) {
   stops.unshift([-1, unusedColor]);
 
   if (colors === 'dark') {
-    stops = getDarkenedColorsHex().map((e) => {
+    stops = getDarkenedColorsHex().map(e => {
       return [darkColorScale.invertExtent(e)[0], e];
     });
 
@@ -64,12 +70,15 @@ export function generateColorStops (parameter, colors) {
   return stops;
 }
 
-export function generateColorScale (parameterMax, colorsHex) {
-  const colorScale = d3.scaleQuantize().domain([0, parameterMax]).range(colorsHex);
+export function generateColorScale(parameterMax, colorsHex) {
+  const colorScale = d3
+    .scaleQuantize()
+    .domain([0, parameterMax])
+    .range(colorsHex);
   return colorScale;
 }
 
-export function generateLegendStops (parameter) {
+export function generateLegendStops(parameter) {
   let stops = generateColorStops(parameter);
   // Remove the "unused" color.
   stops.shift();
@@ -83,7 +92,7 @@ export function generateLegendStops (parameter) {
   }
   stops = stops.map(o => ({
     label: round(o[0], decimals),
-    color: o[1]
+    color: o[1],
   }));
 
   // Customize first and last labels.

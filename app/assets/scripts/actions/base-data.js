@@ -8,22 +8,22 @@ import config from '../config';
 // Base data needed for the operations.
 // Countries, Sources, Parameters.
 
-function requestBaseData () {
+function requestBaseData() {
   return {
-    type: actions.REQUEST_BASE_DATA
+    type: actions.REQUEST_BASE_DATA,
   };
 }
 
-function receiveBaseData (json, error = null) {
+function receiveBaseData(json, error = null) {
   return {
     type: actions.RECEIVE_BASE_DATA,
     json: json,
     error,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   };
 }
 
-export function fetchBaseData () {
+export function fetchBaseData() {
   return function (dispatch) {
     dispatch(requestBaseData());
     // We have to make 3 separate request.
@@ -33,11 +33,11 @@ export function fetchBaseData () {
       countries: [],
       sources: [],
       parameters: [],
-      totalMeasurements: 0
+      totalMeasurements: 0,
     };
 
     // Data fetcher.
-    const fetcher = (what) => {
+    const fetcher = what => {
       fetch(`${config.api}/${what}?limit=1000`)
         .then(response => {
           if (response.status >= 400) {
@@ -45,33 +45,36 @@ export function fetchBaseData () {
           }
           return response.json();
         })
-        .then(json => {
-          data[what] = json.results;
+        .then(
+          json => {
+            data[what] = json.results;
 
-          // Special case to grab all measurements
-          // from the /countries endpoint instead
-          // of using the more limited /measurements
-          if (what === 'countries') {
-            json.results.forEach((c) => {
-              data.totalMeasurements += c.count;
-            });
-            data[what] = data[what].filter(country => country.name);
-          }
+            // Special case to grab all measurements
+            // from the /countries endpoint instead
+            // of using the more limited /measurements
+            if (what === 'countries') {
+              json.results.forEach(c => {
+                data.totalMeasurements += c.count;
+              });
+              data[what] = data[what].filter(country => country.name);
+            }
 
-          // Check if we're done with the requests.
-          if (complete === -1 || ++complete < 3) {
-            return;
+            // Check if we're done with the requests.
+            if (complete === -1 || ++complete < 3) {
+              return;
+            }
+            dispatch(receiveBaseData(data));
+          },
+          e => {
+            // Throw error only once.
+            if (complete === -1) {
+              return;
+            }
+            complete = -1;
+            console.log('e', e);
+            return dispatch(receiveBaseData(null, 'Data not available'));
           }
-          dispatch(receiveBaseData(data));
-        }, e => {
-          // Throw error only once.
-          if (complete === -1) {
-            return;
-          }
-          complete = -1;
-          console.log('e', e);
-          return dispatch(receiveBaseData(null, 'Data not available'));
-        });
+        );
     };
 
     fetcher('countries');

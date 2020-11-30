@@ -1,21 +1,27 @@
-'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import createReactClass from 'create-react-class';
 
 const CHART_DEBUG = false;
 
-var ChartMeasurement = React.createClass({
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
+var ChartMeasurement = createReactClass({
   displayName: 'ChartMeasurement',
 
   propTypes: {
-    className: React.PropTypes.string,
-    data: React.PropTypes.array,
+    className: T.string,
+    data: T.array,
 
-    xRange: React.PropTypes.array,
-    yRange: React.PropTypes.array,
-    yLabel: React.PropTypes.string,
-    compressed: React.PropTypes.bool
+    xRange: T.array,
+    yRange: T.array,
+    yLabel: T.string,
+    compressed: T.bool,
   },
 
   chart: null,
@@ -41,7 +47,7 @@ var ChartMeasurement = React.createClass({
       this.chart.type('compressed');
     }
 
-    d3.select(this.refs.container).call(this.chart);
+    d3.select(this.containerRef).call(this.chart);
   },
 
   componentWillUnmount: function () {
@@ -50,7 +56,7 @@ var ChartMeasurement = React.createClass({
     this.chart.destroy();
   },
 
-  componentDidUpdate: function (prevProps/* prevState */) {
+  componentDidUpdate: function (prevProps /* prevState */) {
     // console.log('ChartMeasurement componentDidUpdate');
     this.chart.pauseUpdate();
     if (prevProps.data !== this.props.data) {
@@ -73,14 +79,17 @@ var ChartMeasurement = React.createClass({
 
   render: function () {
     return (
-      <div className={this.props.className} ref='container'></div>
+      <div
+        className={this.props.className}
+        ref={x => (this.containerRef = x)}
+      ></div>
     );
-  }
+  },
 });
 
 module.exports = ChartMeasurement;
 
-var Chart = function (options) {
+var Chart = function () {
   // Data related variables for which we have getters and setters.
   var _data = null;
   var _yLabel, _xRange, _yRange;
@@ -91,7 +100,7 @@ var Chart = function (options) {
   // Containers
   var $el, $svg;
   // Var declaration.
-  let margin = {top: 16, right: 32, bottom: 32, left: 48};
+  let margin = { top: 16, right: 32, bottom: 32, left: 48 };
 
   // Colors suffix
   const indexSuffix = ['st', 'nd', 'rd'];
@@ -112,44 +121,42 @@ var Chart = function (options) {
   var y = d3.scaleLinear();
 
   // Define xAxis function.
-  var xAxis = d3.axisBottom(x)
+  var xAxis = d3
+    .axisBottom(x)
     .tickPadding(8)
     .tickSize(0)
     .tickFormat(d3.timeFormat('%a %d'));
   // Define xAxis function.
-  var yAxis = d3.axisLeft(y)
-    .tickPadding(8)
-    .ticks(5)
-    .tickSize(0);
+  var yAxis = d3.axisLeft(y).tickPadding(8).ticks(5).tickSize(0);
 
-  function _calcSize () {
+  function _calcSize() {
     _width = parseInt($el.style('width'), 10) - margin.left - margin.right;
     _height = parseInt($el.style('height'), 10) - margin.top - margin.bottom;
   }
 
-  function chartFn (selection) {
+  function chartFn(selection) {
     $el = selection;
 
     var layers = {
       // Where the data is actually displayed.
       focusRegion: function () {
         // Append Focus Region.
-        let focusR = $dataCanvas.selectAll('g.focus')
-          .data([0]);
+        let focusR = $dataCanvas.selectAll('g.focus').data([0]);
 
-        let enter = focusR.enter().append('g')
-          .attr('class', 'focus');
+        let enter = focusR.enter().append('g').attr('class', 'focus');
 
         if (CHART_DEBUG) {
           // Debug rectangle
-          enter.append('rect')
+          enter
+            .append('rect')
             .attr('class', 'debug')
             .attr('x', 0)
             .attr('y', 0)
             .attr('fill', 'red')
             .attr('opacity', 0.2);
 
-          focusR.select('rect.debug')
+          focusR
+            .select('rect.debug')
             .attr('width', _width)
             .attr('height', _height);
         }
@@ -160,37 +167,41 @@ var Chart = function (options) {
 
         if (!_data) return;
 
-        let focusDataGroups = $focus.selectAll('g.location-data')
-          .data(_data);
+        let focusDataGroups = $focus.selectAll('g.location-data').data(_data);
 
         focusDataGroups.exit().remove();
 
-        let circles = focusDataGroups.enter().append('g')
+        let circles = focusDataGroups
+          .enter()
+          .append('g')
           .merge(focusDataGroups)
-            .attr('class', (o, i) => `location-data location-data--${indexSuffix[i]}`)
-            .selectAll('circle')
-              .data(o => o);
+          .attr(
+            'class',
+            (o, i) => `location-data location-data--${indexSuffix[i]}`
+          )
+          .selectAll('circle')
+          .data(o => o);
 
         circles.exit().remove();
 
-        circles.enter()
+        circles
+          .enter()
           .append('circle')
           .attr('r', _type === 'compressed' ? 2 : 4)
           .merge(circles)
-            // `localNoTZ` is the measurement local date converted
-            // directly to user local.
-            .attr('cx', o => x(o.date.localNoTZ))
-            .attr('cy', o => y(o.value));
+          // `localNoTZ` is the measurement local date converted
+          // directly to user local.
+          .attr('cx', o => x(o.date.localNoTZ))
+          .attr('cy', o => y(o.value));
       },
 
       xAxis: function () {
         // Append Axis.
         // X axis.
-        let xAx = $svg.selectAll('.x.axis')
-          .data([0]);
+        let xAx = $svg.selectAll('.x.axis').data([0]);
 
         // Break the xAxis lables
-        function brk (text) {
+        function brk(text) {
           text.each(function () {
             const text = d3.select(this);
             const words = text.text().split(/\s+/);
@@ -199,7 +210,8 @@ var Chart = function (options) {
             const lineHeight = 1.3;
             text.text(null);
             words.forEach((word, i) => {
-              text.append('tspan')
+              text
+                .append('tspan')
                 .text(word)
                 .attr('x', 0)
                 .attr('y', y)
@@ -208,31 +220,32 @@ var Chart = function (options) {
           });
         }
 
-        xAx.enter().append('g')
+        xAx
+          .enter()
+          .append('g')
           .attr('class', 'x axis')
           .append('text')
           .attr('class', 'label')
           .attr('text-anchor', 'start');
 
         xAx
-          .attr('transform', `translate(${margin.left},${_height + margin.top + 8})`)
+          .attr(
+            'transform',
+            `translate(${margin.left},${_height + margin.top + 8})`
+          )
           .call(xAxis);
 
         if (_type === 'compressed') {
-          xAx
-            .selectAll('.tick text')
-            .call(brk);
+          xAx.selectAll('.tick text').call(brk);
         }
       },
 
       yAxis: function () {
         // Append yAxis.
         // Y axis.
-        let yAx = $svg.selectAll('.y.axis')
-          .data([0]);
+        let yAx = $svg.selectAll('.y.axis').data([0]);
 
-        yAx.enter().append('g')
-          .attr('class', 'y axis');
+        yAx.enter().append('g').attr('class', 'y axis');
 
         yAx
           .attr('transform', `translate(${margin.left},${margin.top})`)
@@ -249,14 +262,15 @@ var Chart = function (options) {
           // all the additional units before adding new ones.
           yAx.selectAll('.tick .unit').remove();
 
-          lastTick.append('text')
+          lastTick
+            .append('text')
             .attr('class', 'unit')
             .text(_yLabel)
             .attr('x', lastTickVal.attr('x'))
             .attr('y', lastTickVal.attr('y'))
             .attr('dy', '1.5em');
         }
-      }
+      },
     };
 
     updateSize = function () {
@@ -264,9 +278,7 @@ var Chart = function (options) {
         .attr('width', _width + margin.left + margin.right)
         .attr('height', _height + margin.top + margin.bottom);
 
-      $dataCanvas
-        .attr('width', _width)
-        .attr('height', _height);
+      $dataCanvas.attr('width', _width).attr('height', _height);
 
       // Update Axis.
       if (_width <= 544) {
@@ -312,14 +324,16 @@ var Chart = function (options) {
 
     // -----------------------------------------------------------------
     // INIT.
-    $svg = $el.append('svg')
+    $svg = $el
+      .append('svg')
       .attr('class', 'chart')
       .attr('width', 0)
       .attr('height', 0)
       .style('display', 'block');
 
     // Datacanvas
-    var $dataCanvas = $svg.append('g')
+    var $dataCanvas = $svg
+      .append('g')
       .attr('class', 'data-canvas')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
@@ -384,7 +398,7 @@ var Chart = function (options) {
     if (_type === 'compressed') {
       margin = Object.assign({}, margin, {
         left: 16,
-        bottom: 48
+        bottom: 48,
       });
     }
     if (typeof updateSize === 'function') updateSize();

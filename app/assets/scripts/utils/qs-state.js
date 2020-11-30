@@ -35,7 +35,7 @@ import { set, get } from 'lodash';
  *
  */
 export default class QsState {
-  constructor (definition) {
+  constructor(definition) {
     // {
     //   field: {
     //     accessor: 'filters.field',
@@ -56,7 +56,7 @@ export default class QsState {
    * @param {bool} force If true the definition will be replaced, otherwise
    *                     merged. Default false
    */
-  setDefinition (opt, definition, force = false) {
+  setDefinition(opt, definition, force = false) {
     this.definition[opt] = force
       ? definition
       : Object.assign({}, this.definition[opt], definition);
@@ -71,7 +71,7 @@ export default class QsState {
    *
    * @returns {object} The new state
    */
-  getState (qString) {
+  getState(qString) {
     const parsedQS = qs.parse(qString);
     const validOptions = Object.keys(this.definition);
 
@@ -103,7 +103,7 @@ export default class QsState {
    *
    * @returns {object} The query object ready to be stringified
    */
-  getQueryObject (state) {
+  getQueryObject(state) {
     const validOptions = Object.keys(this.definition);
     return validOptions.reduce((acc, opt) => {
       const optDef = this.definition[opt];
@@ -114,7 +114,7 @@ export default class QsState {
 
       if (value !== optDef.default) {
         return Object.assign({}, acc, {
-          [opt]: value
+          [opt]: value,
         });
       }
 
@@ -129,7 +129,7 @@ export default class QsState {
    *
    * @returns {string} The new search string
    */
-  getQs (state) {
+  getQs(state) {
     return qs.stringify(this.getQueryObject(state));
   }
 }

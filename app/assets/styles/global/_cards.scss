@@ -9,7 +9,6 @@
   }
 }
 
-
 .card__meta-details {
   display: grid;
   grid-template-columns: repeat(2, fit-content(50%));
@@ -31,6 +30,7 @@
     text-transform: uppercase;
   }
 }
+
 
 .card__go-link {
   @extend .button, .button--primary, .button--large, .button--capsule;
@@ -80,5 +80,32 @@
 .cfa-go {
   &::after {
     @extend %openaq-ds-icon-arrow-right;
+  }
+}
+[class*=" sort_"] {
+  &::after {
+    @extend %openaq-ds-icon-arrow-right;
+    display: inline-block;
+  }
+}
+.sort_asc {
+  &::after {
+    transform: rotate(-90deg);
+  }
+}
+.sort_desc {
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+
+.card {
+  tbody {
+    tr:nth-child(odd) {
+      background-color: rgba($base-color, 0);
+    }
+    tr:nth-child(even) { 
+      background-color: tint($primary-color, 90% );
+    }
   }
 }

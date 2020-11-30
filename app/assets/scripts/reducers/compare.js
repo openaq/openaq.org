@@ -7,42 +7,42 @@ const defaultState = {
     status: 'none',
     country: '--',
     area: '--',
-    location: '--'
+    location: '--',
   },
   locations: [
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
-    }
+      data: null,
+    },
   ],
   measurements: [
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
-    }
-  ]
+      data: null,
+    },
+  ],
 };
 
 export default function (state = defaultState, action) {
@@ -65,7 +65,9 @@ export default function (state = defaultState, action) {
     case actions.REMOVE_COMPARE_LOCATION:
       state = _.cloneDeep(state);
       state.locations[action.index] = _.cloneDeep(defaultState.locations[0]);
-      state.measurements[action.index] = _.cloneDeep(defaultState.measurements[0]);
+      state.measurements[action.index] = _.cloneDeep(
+        defaultState.measurements[0]
+      );
       break;
 
     case actions.SELECT_COMPARE_OPTIONS:

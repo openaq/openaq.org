@@ -4,13 +4,22 @@ import { PropTypes as T } from 'prop-types';
 import { environment } from '../config';
 
 class SponsorList extends Component {
-  render () {
+  render() {
     return (
-      <ul className='sponsor-list'>
+      <ul className="sponsor-list">
         {this.props.items.map(({ name, logo, url }) => (
-          <li key={url} className='sponsor-list__item'>
-            <a title={`Visit ${name} website`} className='sponsor' target='_blank' href={url}>
-              <img src={`/assets/graphics/content/${logo}`} alt={`${name} logo`} />
+          <li key={url} className="sponsor-list__item">
+            <a
+              title={`Visit ${name} website`}
+              className="sponsor"
+              target="_blank"
+              rel="noreferrer"
+              href={url}
+            >
+              <img
+                src={`/assets/graphics/content/${logo}`}
+                alt={`${name} logo`}
+              />
               <span>{name}</span>
             </a>
           </li>
@@ -22,7 +31,7 @@ class SponsorList extends Component {
 
 if (environment !== 'production') {
   SponsorList.propTypes = {
-    items: T.array
+    items: T.array,
   };
 }
 

@@ -1,25 +1,33 @@
 'use strict';
 import React from 'react';
+import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+import createReactClass from 'create-react-class';
 
 import { formatThousands } from '../utils/format';
 
-var LocationCard = React.createClass({
+/*
+ * create-react-class provides a drop-in replacement for the outdated React.createClass,
+ * see https://reactjs.org/docs/react-without-es6.html
+ * Please modernize this code using functional components and hooks!
+ */
+var LocationCard = createReactClass({
   displayName: 'LocationCard',
 
   propTypes: {
-    onDownloadClick: React.PropTypes.func,
-    compact: React.PropTypes.bool,
-    name: React.PropTypes.string,
-    city: React.PropTypes.string,
-    countryData: React.PropTypes.object,
-    sourcesData: React.PropTypes.array,
-    sourceType: React.PropTypes.string,
-    totalMeasurements: React.PropTypes.number,
-    parametersList: React.PropTypes.array,
-    lastUpdate: React.PropTypes.string,
-    collectionStart: React.PropTypes.string
+    onDownloadClick: T.func,
+    compact: T.bool,
+    id: T.string,
+    name: T.string,
+    city: T.string,
+    countryData: T.object,
+    sourcesData: T.array,
+    sourceType: T.string,
+    totalMeasurements: T.number,
+    parametersList: T.array,
+    lastUpdate: T.string,
+    collectionStart: T.string,
   },
 
   onDownloadClick: function (e) {
@@ -40,7 +48,15 @@ var LocationCard = React.createClass({
     let sources = [];
     if (sourcesData.length) {
       sourcesData.forEach((o, i) => {
-        sources.push(<a href={o.sourceURL} title={`View source for  ${this.props.name}`} key={o.name}>{o.name}</a>);
+        sources.push(
+          <a
+            href={o.sourceURL}
+            title={`View source for  ${this.props.name}`}
+            key={o.name}
+          >
+            {o.name}
+          </a>
+        );
         if (i < sourcesData.length - 1) {
           sources.push(', ');
         }
@@ -50,20 +66,35 @@ var LocationCard = React.createClass({
     const country = countryData || {};
 
     return (
-      <article className='card card--data'>
-        <div className='card__contents'>
-          <header className='card__header'>
-            <div className='card__headline'>
-              <p className='card__subtitle'>Updated <strong>{updated}</strong></p>
-              <h1 className='card__title'><Link to={`/location/${encodeURIComponent(this.props.name)}`} title={`View ${this.props.name} page`}>{this.props.name}</Link> <small>in {this.props.city}, {country.name}</small></h1>
+      <article className="card card--data">
+        <div className="card__contents">
+          <header className="card__header">
+            <div className="card__headline">
+              <p className="card__subtitle">
+                Updated <strong>{updated}</strong>
+              </p>
+              <h1 className="card__title">
+                <Link
+                  to={`/location/${encodeURIComponent(this.props.name)}`}
+                  title={`View ${this.props.name} page`}
+                >
+                  {this.props.name}
+                </Link>{' '}
+                <small>
+                  in {this.props.city}, {country.name}
+                </small>
+              </h1>
             </div>
-            <div className='card__tags'>
-              <div className='filter-pill'>{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(1)}`}</div>
+            <div className="card__tags">
+              {this.props.sourceType && (
+                <div className="filter-pill">{`${this.props.sourceType[0].toUpperCase()}${this.props.sourceType.slice(
+                  1
+                )}`}</div>
+              )}
             </div>
-
           </header>
-          <div className='card__body'>
-            <dl className='card__meta-details'>
+          <div className="card__body">
+            <dl className="card__meta-details">
               <dt>Collection start</dt>
               <dd>{started}</dd>
               <dt>Measurements</dt>
@@ -74,16 +105,33 @@ var LocationCard = React.createClass({
               {sources.length ? <dd>{sources}</dd> : null}
             </dl>
           </div>
-          <footer className='card__footer'>
-            <ul className='card__footer-actions'>
-              <li><a href='#' className='cfa-download' title={`Download data for ${this.props.name}`} onClick={this.onDownloadClick}>Download</a></li>
-              <li><Link to={`/location/${encodeURIComponent(this.props.name)}`} className='cfa-go' title={`View ${this.props.name} page`}>View More</Link></li>
+          <footer className="card__footer">
+            <ul className="card__footer-actions">
+              <li>
+                <a
+                  href="#"
+                  className="cfa-download"
+                  title={`Download data for ${this.props.name}`}
+                  onClick={this.onDownloadClick}
+                >
+                  Download
+                </a>
+              </li>
+              <li>
+                <Link
+                  to={`/location/${encodeURIComponent(this.props.id)}`}
+                  className="cfa-go"
+                  title={`View ${this.props.name} page`}
+                >
+                  View More
+                </Link>
+              </li>
             </ul>
           </footer>
         </div>
       </article>
     );
-  }
+  },
 });
 
 module.exports = LocationCard;
