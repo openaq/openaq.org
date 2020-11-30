@@ -246,6 +246,8 @@ function Chart({ title, temporal, data, fetching }) {
         <BarChart
           data={data.map(m => m.average)}
           // data={data.map(m => m.measurement_count)}
+          yAxisLabel="average"
+          // yAxisLabel="count"
           xAxisLabels={data.map(m => m[temporal])}
         />
       ) : (

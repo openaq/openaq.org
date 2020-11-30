@@ -4,12 +4,12 @@ import { Bar } from 'react-chartjs-2';
 
 import { round } from '../utils/format';
 
-export default function BarChart({ data, xAxisLabels }) {
+export default function BarChart({ data, yAxisLabel, xAxisLabels }) {
   const series = {
     labels: xAxisLabels,
     datasets: [
       {
-        label: 'average',
+        label: yAxisLabel,
         data: data.map(d => round(d)),
         backgroundColor: '#198CFF',
       },
@@ -44,5 +44,6 @@ export default function BarChart({ data, xAxisLabels }) {
 
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.number).isRequired,
+  yAxisLabel: PropTypes.string.isRequired,
   xAxisLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
