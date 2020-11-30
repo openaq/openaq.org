@@ -601,8 +601,8 @@ var LocationsHub = createReactClass({
         previousLabel={<span>previous</span>}
         nextLabel={<span>next</span>}
         breakLabel={<span className="pages__page">...</span>}
-        pageNum={this.getTotalPages()}
-        forceSelected={this.getPage() - 1}
+        pageCount={this.getTotalPages()}
+        forcePage={this.getPage() - 1}
         marginPagesDisplayed={2}
         pageRangeDisplayed={4}
         onPageChange={this.handlePageClick}

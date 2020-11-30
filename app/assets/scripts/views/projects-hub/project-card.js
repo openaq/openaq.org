@@ -8,11 +8,11 @@ import Card, { CardDetails, FooterActions } from '../../components/card';
 export default function ProjectCard({
   onDownloadClick,
   lastUpdate,
-  name = 'Dataset',
-  organization = 'Organization',
+  name,
+  subtitle,
   sourceType,
   collectionStart,
-  totalRecords,
+  totalLocations,
   totalMeasurements,
   parametersList,
 }) {
@@ -24,7 +24,7 @@ export default function ProjectCard({
     <Card
       title={
         <>
-          {name} <small>{organization}</small>
+          {name} <small>{subtitle}</small>
         </>
       }
       subtitle={
@@ -36,7 +36,7 @@ export default function ProjectCard({
       renderBody={() => (
         <CardDetails
           list={[
-            { label: 'No. of records', value: formatThousands(totalRecords) },
+            { label: 'Locations', value: formatThousands(totalLocations) },
             {
               label: 'Measurements',
               value: formatThousands(totalMeasurements),
@@ -61,10 +61,10 @@ ProjectCard.propTypes = {
   onDownloadClick: T.func,
   lastUpdate: T.string,
   name: T.string,
-  organization: T.string,
+  subtitle: T.string,
   sourceType: T.oneOfType([T.array, T.string]),
   collectionStart: T.instanceOf(Date),
-  totalRecords: T.number,
+  totalLocations: T.number,
   totalMeasurements: T.number,
   parametersList: T.array,
 };

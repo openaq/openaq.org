@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import qs from 'qs';
 
 import {
-  fetchLocations as fetchLocationsAction,
-  invalidateLocations as invalidateLocationsAction,
+  fetchProjects as fetchProjectsAction,
+  invalidateProjects as invalidateProjectsAction,
   openDownloadModal as openDownloadModalAction,
 } from '../../actions/action-creators';
-
+import { buildQS } from '../../utils/url';
 import Header from './header';
 import Filter from './filter';
 import Results from './results';
@@ -24,11 +24,12 @@ function getPage(location) {
     page = isNaN(page) || page < 1 ? 1 : +page;
     return page;
   }
+  return 1;
 }
 
 export default function ProjectsHub({
-  fetchLocations,
-  invalidateLocations,
+  fetchProjects,
+  invalidateProjects,
   openDownloadModal,
 
   organizations,
@@ -42,16 +43,30 @@ export default function ProjectsHub({
   meta,
 
   location,
+  history,
 }) {
-  const page = getPage(location);
   const filters = {};
+  const [page, setPage] = useState(() => getPage(location));
 
   useEffect(() => {
-    fetchLocations(page, filters, PER_PAGE);
+    setPage(() => getPage(location));
+  }, [location]);
+
+  useEffect(() => {
+    fetchProjects(page, filters, PER_PAGE);
     return () => {
-      invalidateLocations();
+      invalidateProjects();
     };
-  }, []);
+  }, [page]);
+
+  function handlePageClick(d) {
+    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+    query.page = d.selected + 1;
+
+    history.push(`/projects?${buildQS(query)}`);
+  }
+
+  const totalPages = Math.ceil(meta.found / PER_PAGE);
 
   return (
     <section className="inpage">
@@ -85,15 +100,16 @@ export default function ProjectsHub({
               </div>
             </div>
 
-            <div className="inpage__results">
-              <Results
-                fetched={fetched}
-                fetching={fetching}
-                error={error}
-                projects={results}
-                openDownloadModal={openDownloadModal}
-              />
-            </div>
+            <Results
+              fetched={fetched}
+              fetching={fetching}
+              error={error}
+              projects={results}
+              totalPages={totalPages}
+              page={page}
+              openDownloadModal={openDownloadModal}
+              handlePageClick={handlePageClick}
+            />
           </div>
         </div>
       </div>
@@ -113,9 +129,10 @@ ProjectsHub.propTypes = {
   meta: T.object,
 
   location: T.object,
+  history: T.object,
 
-  fetchLocations: T.func,
-  invalidateLocations: T.func,
+  fetchProjects: T.func,
+  invalidateProjects: T.func,
   openDownloadModal: T.func,
 };
 
@@ -128,19 +145,19 @@ function selector(state) {
     sources: state.baseData.data.sources,
     parameters: state.baseData.data.parameters,
 
-    fetching: state.locations.fetching,
-    fetched: state.locations.fetched,
-    error: state.locations.error,
-    results: state.locations.data.results,
-    meta: state.locations.data.meta,
+    fetching: state.projects.fetching,
+    fetched: state.projects.fetched,
+    error: state.projects.error,
+    results: state.projects.data.results,
+    meta: state.projects.data.meta,
   };
 }
 
 function dispatcher(dispatch) {
   return {
-    fetchLocations: (...args) => dispatch(fetchLocationsAction(...args)),
-    invalidateLocations: (...args) =>
-      dispatch(invalidateLocationsAction(...args)),
+    fetchProjects: (...args) => dispatch(fetchProjectsAction(...args)),
+    invalidateProjects: (...args) =>
+      dispatch(invalidateProjectsAction(...args)),
     openDownloadModal: (...args) => dispatch(openDownloadModalAction(...args)),
   };
 }

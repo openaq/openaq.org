@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
+import ReactPaginate from 'react-paginate';
 
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
@@ -10,7 +11,10 @@ export default function Results({
   fetching,
   error,
   projects,
+  totalPages,
+  page,
   openDownloadModal,
+  handlePageClick,
 }) {
   if (!fetched && !fetching) {
     return null;
@@ -56,32 +60,60 @@ export default function Results({
     );
   }
 
-  return projects.map((project, i) => {
-    let openModal = () =>
-      openDownloadModal({
-        project: project,
-      });
-    return (
-      <ProjectCard
-        key={i}
-        onDownloadClick={openModal}
-        lastUpdate={project.lastUpdated}
-        name={project.name}
-        organization={project.organization}
-        sourceType={project.sourceType}
-        collectionStart={project.collectionStart}
-        totalRecords={project.records}
-        totalMeasurements={project.count}
-        parametersList={project.parameters}
-      />
-    );
-  });
+  return (
+    <>
+      <div className="inpage__results">
+        {projects.map(project => {
+          let openModal = () =>
+            openDownloadModal({
+              project: project,
+            });
+          return (
+            <ProjectCard
+              key={project.projectId}
+              id={project.projectId}
+              onDownloadClick={openModal}
+              lastUpdate={project.lastUpdated}
+              name={project.projectName}
+              subtitle={project.subtitle}
+              sourceType={project.sourceType}
+              collectionStart={project.collectionStart}
+              totalLocations={project.locations}
+              totalMeasurements={project.count}
+              parametersList={project.parameters}
+            />
+          );
+        })}
+      </div>
+      {!(!fetched || error || !projects.length) && (
+        <ReactPaginate
+          previousLabel={<span>previous</span>}
+          nextLabel={<span>next</span>}
+          breakLabel={<span className="pages__page">...</span>}
+          pageCount={totalPages}
+          forcePage={page - 1}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={4}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages'}
+          pageClassName={'pages__wrapper'}
+          pageLinkClassName={'pages__page'}
+          activeClassName={'active'}
+        />
+      )}
+    </>
+  );
 }
 
 Results.propTypes = {
   fetched: T.bool,
   fetching: T.bool,
   error: T.bool,
-  project: T.array,
+  projects: T.array,
+  totalPages: T.number,
+  page: T.number,
   openDownloadModal: T.func,
+  handlePageClick: T.func,
+  history: T.object,
 };

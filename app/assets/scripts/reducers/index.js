@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import baseData from './base-data';
+import projects from './projects';
 import locations from './locations';
 import location from './location';
 import nearbyLocations from './nearby-locations';
@@ -15,6 +16,7 @@ import voteModal from './vote-modal';
 
 export default combineReducers({
   baseData,
+  projects,
   locations,
   location,
   nearbyLocations,
