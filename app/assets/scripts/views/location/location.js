@@ -37,11 +37,7 @@ function Location(props) {
     const fetchData = name => {
       setState(state => ({ ...state, fetching: true, error: null }));
 
-      fetch(
-        `${config.api}/locations?location=${encodeURIComponent(
-          name
-        )}&metadata=true`
-      )
+      fetch(`${config.api}/locations/${encodeURIComponent(name)}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');

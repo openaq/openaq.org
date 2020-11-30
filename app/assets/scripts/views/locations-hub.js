@@ -571,6 +571,7 @@ var LocationsHub = createReactClass({
         });
       return (
         <LocationCard
+          id={o.id}
           onDownloadClick={openModal}
           key={o.location}
           name={o.location}

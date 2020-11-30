@@ -35,7 +35,7 @@ function Project(props) {
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
-      fetch(`${config.api}/projects/${name}`)
+      fetch(`${config.api}/projects/${encodeURIComponent(name)}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');

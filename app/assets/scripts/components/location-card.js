@@ -118,7 +118,7 @@ var LocationCard = createReactClass({
               </li>
               <li>
                 <Link
-                  to={`/location/${encodeURIComponent(this.props.name)}`}
+                  to={`/location/${encodeURIComponent(this.props.id)}`}
                   className="cfa-go"
                   title={`View ${this.props.name} page`}
                 >
