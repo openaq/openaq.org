@@ -73,11 +73,11 @@ export default function Results({
               key={project.id}
               id={project.id}
               onDownloadClick={openModal}
-              lastUpdate={project.lastUpdated}
+              lastUpdated={project.lastUpdated}
               name={project.name}
               subtitle={project.subtitle}
               sourceType={project.sourceType}
-              collectionStart={project.collectionStart}
+              firstUpdated={project.firstUpdated}
               totalLocations={project.locations}
               totalMeasurements={project.count}
               parametersList={project.parameters}
