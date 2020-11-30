@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 
 import HeaderMessage from '../../components/header-message';
@@ -26,13 +27,15 @@ const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
 `;
 
-function Project() {
+function Project(props) {
+  const { name } = props.match.params;
+
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
-      fetch(`${config.api}/projects/US`)
+      fetch(`${config.api}/projects/${name}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -135,6 +138,8 @@ function Project() {
   );
 }
 
-Project.propTypes = {};
+Project.propTypes = {
+  match: T.object, // from react-router
+};
 
 export default Project;

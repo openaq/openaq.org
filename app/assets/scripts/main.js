@@ -115,7 +115,7 @@ render(
           />
           <Route
             name="projectsHub"
-            path="/projects/:name"
+            path="/project/:name"
             component={Project}
             pageClass="page--projects-single page--dark"
           />
