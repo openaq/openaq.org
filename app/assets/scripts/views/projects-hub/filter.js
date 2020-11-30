@@ -9,46 +9,58 @@ import { Dropdown } from 'openaq-design-system';
 import { buildQS } from '../../utils/url';
 import { toggleValue } from '../../utils/array';
 
+const defaultSelected = {
+  parameters: [],
+  order_by: [],
+};
+
+const sortOptions = ['name', 'count'];
+
 export default function Filter({ parameters }) {
   let history = useHistory();
   let location = useLocation();
 
-  let sortOptions = ['count'];
-
-  const [selected, setSelected] = useState({
-    parameters: [],
-    order_by: [],
-  });
+  const [selected, setSelected] = useState(defaultSelected);
 
   function onFilterSelect(what, value) {
-    setSelected(prev => ({ ...prev, [what]: toggleValue(prev[what], value) }));
-
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
 
     switch (what) {
       case 'order_by': {
-        const order_by =
-          query && query.order_by ? query.order_by.split(',') : [];
-        query.order_by = toggleValue(order_by, value);
-        !query.order_by.length && delete query.order_by;
+        if (query.order_by && query.order_by.includes(value)) {
+          query.order_by = [];
+          setSelected(prev => ({
+            ...prev,
+            ['order_by']: [],
+          }));
+        } else {
+          query.order_by = [value];
+          setSelected(prev => ({
+            ...prev,
+            ['order_by']: [value],
+          }));
+        }
         break;
       }
 
       case 'parameters': {
         const parameters =
           query && query.parameters ? query.parameters.split(',') : [];
+
         query.parameters = toggleValue(parameters, value);
-        !query.parameters.length && delete query.parameters;
+
+        setSelected(prev => ({
+          ...prev,
+          ['parameters']: toggleValue(prev['parameters'], value),
+        }));
         break;
       }
 
       case 'clear':
-        delete query.countries;
-        delete query.parameters;
-        delete query.sources;
-        delete query.order_by;
+        query = null;
+        setSelected(defaultSelected);
         break;
     }
 
@@ -125,7 +137,7 @@ export default function Filter({ parameters }) {
                 type="button"
                 className="button--filter-pill"
                 key={parameter.id}
-                onClick={() => {}}
+                onClick={() => onFilterSelect('parameters', parameter.id)}
               >
                 <span>{parameter.name}</span>
               </button>
@@ -137,7 +149,7 @@ export default function Filter({ parameters }) {
                 type="button"
                 className="button--filter-pill orderBy"
                 key={o}
-                onClick={() => {}}
+                onClick={() => onFilterSelect('order_by', o)}
               >
                 <span>{o}</span>
               </button>
@@ -150,7 +162,7 @@ export default function Filter({ parameters }) {
             title="Clear all selected filters"
             onClick={e => {
               e.preventDefault();
-              this.onFilterSelect('clear');
+              onFilterSelect('clear');
             }}
           >
             <small> (Clear Filters)</small>
