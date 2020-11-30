@@ -7,18 +7,18 @@ import Card, { CardDetails, FooterActions } from '../../components/card';
 
 export default function ProjectCard({
   onDownloadClick,
-  lastUpdate,
+  lastUpdated,
   name,
   subtitle,
   sourceType,
-  collectionStart,
+  firstUpdated,
   totalLocations,
   totalMeasurements,
   parametersList,
 }) {
-  let updated = moment(lastUpdate).fromNow();
-  let started = moment(collectionStart).format('YYYY/MM/DD');
-  let ended = moment(lastUpdate).format('YYYY/MM/DD');
+  let updated = moment(lastUpdated).fromNow();
+  let started = moment(firstUpdated).format('YYYY/MM/DD');
+  let ended = moment(lastUpdated).format('YYYY/MM/DD');
 
   return (
     <Card
@@ -59,11 +59,11 @@ export default function ProjectCard({
 
 ProjectCard.propTypes = {
   onDownloadClick: T.func,
-  lastUpdate: T.string,
+  lastUpdated: T.string,
   name: T.string,
   subtitle: T.string,
   sourceType: T.oneOfType([T.array, T.string]),
-  collectionStart: T.instanceOf(Date),
+  firstUpdated: T.string,
   totalLocations: T.number,
   totalMeasurements: T.number,
   parametersList: T.array,

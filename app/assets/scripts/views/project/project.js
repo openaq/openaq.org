@@ -121,7 +121,13 @@ function Project(props) {
           gridTemplateColumns={'repeat(12, 1fr)'}
           className="inner"
         >
-          <DetailsCard measurements={data.measurements} />
+          <DetailsCard
+            measurements={data.measurements}
+            date={{
+              start: data.firstUpdated,
+              end: data.lastUpdated,
+            }}
+          />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
           <TimeSeriesCard projectId={data.id} parameters={data.parameters} />
