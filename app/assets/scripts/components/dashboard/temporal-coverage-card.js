@@ -83,12 +83,12 @@ export default function TemporalCoverageCard({ parameters, spatial, id }) {
       let query = {
         temporal,
         parameter: activeTab.id,
+        spatial,
       };
 
       if (spatial === 'project') {
         query = {
           ...query,
-          spatial: 'project',
           project: id,
         };
       } else {
