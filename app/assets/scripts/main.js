@@ -22,6 +22,7 @@ import LocationItem from './views/location';
 import CountriesHub from './views/countries-hub';
 import Country from './views/country';
 import ProjectsHub from './views/projects-hub';
+import Project from './views/project';
 import Compare from './views/compare';
 
 const logger = createLogger({
@@ -111,6 +112,12 @@ render(
             path="/compare/:loc1?/:loc2?/:loc3?"
             component={Compare}
             pageClass="page--compare"
+          />
+          <Route
+            name="projectsHub"
+            path="/project/:name"
+            component={Project}
+            pageClass="page--projects-single page--dark"
           />
           <Route
             name="projectsHub"

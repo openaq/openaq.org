@@ -1,9 +1,8 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
-import styled from 'styled-components';
-import LoadingMessage from '../../components/loading-message';
-import Card from '../../components/card';
-import Table from '../../components/table';
+
+import Card from '../card';
+import Table from '../table';
 import { shortenLargeNumber } from '../../utils/format';
 
 const initData = {
@@ -13,7 +12,7 @@ const initData = {
     style: {
       color: 'black',
       fontWeight: 700,
-      textAlign: 'center',
+      textAlign: 'left',
     },
   },
   avg: {
@@ -34,13 +33,6 @@ const initData = {
   },
 };
 
-const StyledLoading = styled(LoadingMessage)`
-  grid-column: 1 / 7;
-`;
-const ErrorMessage = styled.div`
-  grid-column: 1 / 7;
-`;
-
 /*  TODO This function currently just extracts the first data available for each pollutant
  *  openAQ api returns all available dates averages, or those within a specified date range.
  *  The desired data in this card needs some clarification. should it be the most recent day?
@@ -49,10 +41,10 @@ const ErrorMessage = styled.div`
 
 const prepareData = data => {
   const combinedData = data.reduce((accum, datum) => {
-    const { parameter, measurement_count, average } = datum;
-    if (!accum[parameter]) {
-      accum[parameter] = {
-        count: measurement_count,
+    const { measurand, count, average } = datum;
+    if (!accum[measurand]) {
+      accum[measurand] = {
+        count: count,
         value: average,
       };
     }
@@ -81,44 +73,26 @@ const prepareData = data => {
   );
   return preparedData;
 };
-export default function Averages({ measurements }) {
-  const { fetched, fetching, error, data } = measurements;
 
-  if (!fetched && !fetching) {
-    return null;
-  } else if (fetching) {
-    return <StyledLoading />;
-  } else if (error) {
-    return (
-      <ErrorMessage className="fold__introduction prose prose--responsive">
-        <p>{"We couldn't get stats. Please try again later."}</p>
-        <p>
-          {"If you think there's a problem, please "}
-          <a href="mailto:info@openaq.org" title="Contact openaq">
-            contact us.
-          </a>
-        </p>
-      </ErrorMessage>
-    );
-  }
-
+export default function MeasureandsCard({ parameters }) {
   return (
     <Card
-      gridColumn={'1 / 7'}
+      gridColumn={'1 / 5'}
       title="Measurands"
       renderBody={() => {
-        return <Table data={prepareData(data.results)} />;
+        return <Table data={prepareData(parameters)} />;
       }}
       noBodyStyle
-      renderFooter={() => null}
     />
   );
 }
-Averages.propTypes = {
-  measurements: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
+
+MeasureandsCard.propTypes = {
+  parameters: T.arrayOf(
+    T.shape({
+      measurand: T.string.isRequired,
+      count: T.number.isRequired,
+      average: T.number.isRequired,
+    })
+  ),
 };

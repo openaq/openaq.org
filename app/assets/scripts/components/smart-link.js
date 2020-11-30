@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 
@@ -8,17 +7,15 @@ import _ from 'lodash';
 /**
  * Switches between a `a` and a `Link` depending on the url.
  */
-export default class SmartLink extends React.PureComponent {
-  render() {
-    const { to } = this.props;
-    const props = _.omit(this.props, 'to');
+export default function SmartLink(props) {
+  const { to } = props;
+  const forwardProps = _.omit(props, 'to');
 
-    return /^https?:\/\//.test(to) ? (
-      <a href={to} {...props} target="_blank" rel="noopener noreferrer" />
-    ) : (
-      <Link to={to} {...props} />
-    );
-  }
+  return /^https?:\/\//.test(to) || /^mailto:/.test(to) ? (
+    <a href={to} {...forwardProps} target="_blank" rel="noopener noreferrer" />
+  ) : (
+    <Link to={to} {...forwardProps} />
+  );
 }
 
 SmartLink.propTypes = {

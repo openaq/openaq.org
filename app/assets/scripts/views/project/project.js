@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
+import fetch from 'isomorphic-fetch';
 
-import { openDownloadModal } from '../../actions/action-creators';
-import config from '../../config';
 import HeaderMessage from '../../components/header-message';
 import Header from '../../components/header';
-import CardList from '../../components/card-list';
 
+import styled from 'styled-components';
+import CardList from '../../components/card-list';
+import config from '../../config';
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
@@ -17,10 +16,6 @@ import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-c
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 import MapCard from '../../components/dashboard/map-card';
 
-const Dashboard = styled(CardList)`
-  padding: 2rem 4rem;
-`;
-
 const defaultState = {
   fetched: false,
   fetching: false,
@@ -28,16 +23,19 @@ const defaultState = {
   data: null,
 };
 
-function Location(props) {
+const Dashboard = styled(CardList)`
+  padding: 2rem 4rem;
+`;
+
+function Project(props) {
   const { name } = props.match.params;
 
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
-    const fetchData = name => {
+    const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
-
-      fetch(`${config.api}/locations/${encodeURIComponent(name)}`)
+      fetch(`${config.api}/projects/${encodeURIComponent(name)}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -65,7 +63,7 @@ function Location(props) {
         );
     };
 
-    fetchData(name);
+    fetchData();
 
     return () => {
       setState(defaultState);
@@ -106,24 +104,15 @@ function Location(props) {
     );
   }
 
-  function onDownloadClick() {
-    props._openDownloadModal({
-      country: data.country,
-      area: data.city,
-      location: data.location,
-    });
-  }
-
   return (
     <section className="inpage">
       <Header
-        tagline="Location"
-        title={data.location}
-        subtitle={`in ${data.city}, ${data.country}`}
+        tagline="Datasets"
+        title={data.name}
+        subtitle={data.subtitle}
         action={{
-          api: `${config.api}/locations?location=${data.location}`,
-          download: onDownloadClick,
-          compare: `/compare/${encodeURIComponent(data.location)}`,
+          api: `${config.api}/projects/${data.id}`,
+          download: () => {},
         }}
       />
       <div className="inpage__body">
@@ -132,26 +121,16 @@ function Location(props) {
           gridTemplateColumns={'repeat(12, 1fr)'}
           className="inner"
         >
-          <DetailsCard
-            measurements={data.count}
-            coords={{
-              lat: data.coordinates.latitude,
-              lng: data.coordinates.longitude,
-            }}
-            date={{
-              start: data.firstUpdated,
-              end: data.lastUpdated,
-            }}
-          />
+          <DetailsCard measurements={data.measurements} />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
-          <TimeSeriesCard locationId={data.id} parameters={data.parameters} />
+          <TimeSeriesCard projectId={data.id} parameters={data.parameters} />
           <MeasureandsCard parameters={data.parameters} />
           <MapCard parameters={data.parameters} points={data.points} />
           <TemporalCoverageCard
             parameters={data.parameters}
-            spatial="location"
-            id={data.id}
+            spatial="project"
+            id={data.name}
           />
         </Dashboard>
       </div>
@@ -159,28 +138,8 @@ function Location(props) {
   );
 }
 
-Location.propTypes = {
-  match: T.object,
-  _openDownloadModal: T.func,
-  sources: T.array,
-  measurements: T.array,
+Project.propTypes = {
+  match: T.object, // from react-router
 };
 
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
-
-function selector(state) {
-  return {
-    sources: state.baseData.data.sources,
-    measurements: state.measurements,
-    latestMeasurements: state.latestMeasurements,
-  };
-}
-
-function dispatcher(dispatch) {
-  return {
-    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
-  };
-}
-
-export default connect(selector, dispatcher)(Location);
+export default Project;
