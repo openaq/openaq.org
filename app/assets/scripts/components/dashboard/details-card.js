@@ -52,8 +52,8 @@ export default function DetailsCard({ measurements, date, coords }) {
 DetailsCard.propTypes = {
   measurements: T.number.isRequired,
   date: T.shape({
-    start: T.instanceOf(Date).isRequired,
-    end: T.instanceOf(Date).isRequired,
+    start: T.string.isRequired,
+    end: T.string.isRequired,
   }),
   coords: T.shape({
     lat: T.number.isRequired,
