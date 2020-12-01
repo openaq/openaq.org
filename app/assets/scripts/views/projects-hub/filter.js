@@ -15,12 +15,20 @@ const defaultSelected = {
 };
 
 const sortOptions = ['name', 'count'];
+const initFromLocation = ({ parameters, order_by }) => {
+  return {
+    parameters: parameters ? parameters.split(',') : [],
+    order_by: order_by ? order_by.split(',') : [],
+  };
+};
 
 export default function Filter({ parameters }) {
   let history = useHistory();
   let location = useLocation();
 
-  const [selected, setSelected] = useState(defaultSelected);
+  const [selected, setSelected] = useState(
+    initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
+  );
 
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
