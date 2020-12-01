@@ -34,7 +34,6 @@ export function fetchLocations(page = 1, filters, limit = 15) {
       `${config.api}/locations?page=${page}&limit=${limit}&metadata=true&${f}`
     )
       .then(response => {
-
         if (response.status >= 400) {
           throw new Error('Bad response');
         }
@@ -42,7 +41,6 @@ export function fetchLocations(page = 1, filters, limit = 15) {
       })
       .then(
         json => {
-
           // setTimeout(() => {
           //   dispatch(receiveLocations(json));
           // }, 2000);

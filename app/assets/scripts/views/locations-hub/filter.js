@@ -18,11 +18,22 @@ const defaultSelected = {
 
 const sortOptions = ['location', 'country', 'city', 'count'];
 
+const initFromLocation = ({ countries, parameters, sources, order_by }) => {
+  return {
+    parameters: parameters ? parameters.split(',') : [],
+    countries: countries ? countries.split(',') : [],
+    sources: sources ? sources.split(',') : [],
+    order_by: order_by ? order_by.split(',') : [],
+  };
+};
 export default function Filter({ countries, parameters, sources }) {
   let history = useHistory();
   let location = useLocation();
 
-  const [selected, setSelected] = useState(defaultSelected);
+  const [selected, setSelected] = useState(
+    initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
+  );
+  console.log(selected);
 
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
@@ -68,7 +79,7 @@ export default function Filter({ countries, parameters, sources }) {
 
         setSelected(prev => ({
           ...prev,
-          'countries': toggleValue(prev['countries'], value),
+          countries: toggleValue(prev['countries'], value),
         }));
         break;
       }

@@ -12,19 +12,15 @@ export default function LocationCard({
   subtitle,
   sourceType,
   firstUpdated,
-  totalLocations,
   totalMeasurements,
   parametersList,
   id,
   city,
   countryData,
   sourcesData,
-  lastUpdate,
-  collectionStart,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
-  let ended = moment(lastUpdated).format('YYYY/MM/DD');
 
   const country = countryData || {};
   let sources = [];
@@ -65,7 +61,10 @@ export default function LocationCard({
               label: 'Measurements',
               value: formatThousands(totalMeasurements),
             },
-            { label: 'Values', value: parametersList.map(p => p.name).join(', ') },
+            {
+              label: 'Values',
+              value: parametersList.map(p => p.name).join(', '),
+            },
             ...(sources.length ? [{ label: 'Sources', value: sources }] : []),
           ]}
         />

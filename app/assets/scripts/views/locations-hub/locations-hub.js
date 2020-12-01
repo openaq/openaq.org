@@ -29,7 +29,6 @@ export default function LocationsHub({
   fetchLocations,
   invalidateLocations,
   openDownloadModal,
-
   parameters,
   countries,
   sources,
@@ -135,12 +134,14 @@ LocationsHub.propTypes = {
   error: T.object,
   results: T.array,
   meta: T.object,
+  countries: T.array,
+  sources: T.array,
 
   location: T.object,
   history: T.object,
 
-  fetchProjects: T.func,
-  invalidateProjects: T.func,
+  fetchLocations: T.func,
+  invalidateLocations: T.func,
   openDownloadModal: T.func,
 };
 
