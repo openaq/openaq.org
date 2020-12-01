@@ -33,7 +33,6 @@ export default function Filter({ countries, parameters, sources }) {
   const [selected, setSelected] = useState(
     initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
   );
-  console.log(selected);
 
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
