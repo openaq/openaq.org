@@ -57,3 +57,15 @@ export function fetchLocationIfNeeded(location) {
       );
   };
 }
+
+export function invalidateLocations() {
+  return {
+    type: actions.INVALIDATE_LOCATIONS,
+  };
+}
+
+export function invalidateAllLocationData() {
+  return {
+    type: actions.INVALIDATE_ALL_LOCATION_DATA,
+  };
+}
