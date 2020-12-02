@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
-import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 import config from '../../config';
 import LoadingMessage from '../loading-message';
@@ -24,18 +24,6 @@ const CardHeader = styled(BaseHeader)`
   display: grid;
   grid-template-rows: min-content 1fr;
   grid-gap: 0.5rem;
-`;
-
-const DateSelector = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 50%;
-  > p {
-    margin-right: 2rem;
-    margin-bottom: 0;
-  }
 `;
 
 const ErrorMessage = () => (
@@ -69,11 +57,7 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
     name: parameters[0].measurand || parameters[0],
   });
   // eslint-disable-next-line no-unused-vars
-  const [temporal, setTemporal] = useState('month');
-  const [dateRange, setDateRange] = useState({
-    start: new Date('11/21/2019'),
-    end: new Date(),
-  });
+  const [temporal, setTemporal] = useState('hour');
 
   useEffect(() => {
     const fetchData = () => {
@@ -82,13 +66,12 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
       let query = {
         parameter: activeTab.id,
         temporal,
-        date_from: dateRange.start,
-        date_to: dateRange.end,
+        date_to: moment().format('YYYY-MM-DD'),
+        date_from: moment().subtract(7, 'd').format('YYYY-MM-DD'),
       };
       if (locationId) {
-        query = { ...query, location: locationId };
-      }
-      if (projectId) {
+        query = { ...query, location: locationId, spatial: 'location' };
+      } else if (projectId) {
         query = { ...query, project: projectId, spatial: 'project' };
       }
 
@@ -127,7 +110,7 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
     return () => {
       setState(defaultState);
     };
-  }, [activeTab, dateRange, temporal]);
+  }, [activeTab, temporal]);
 
   if (!fetched && !fetching) {
     return null;
@@ -148,30 +131,7 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
               setActiveTab(t);
             }}
           />
-
           <CardTitle>Time Series Data</CardTitle>
-
-          <DateSelector>
-            <CardSubtitle className="card__subtitle">Period</CardSubtitle>
-
-            <DatePicker
-              selected={dateRange.start}
-              onChange={([start, end]) => {
-                setDateRange({ start, end });
-              }}
-              startDate={dateRange.start}
-              endDate={dateRange.end}
-              shouldCloseOnSelect
-              selectsRange
-              customInput={
-                <a>
-                  {`${dateRange.start.toDateString()} - ${
-                    dateRange.end && dateRange.end.toDateString()
-                  }`}
-                </a>
-              }
-            />
-          </DateSelector>
         </CardHeader>
       )}
       renderBody={() => (
@@ -192,7 +152,7 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
 }
 
 TimeSeriesCard.propTypes = {
-  locationId: T.string,
+  locationId: T.oneOfType([T.string, T.number]),
   projectId: T.string,
   parameters: T.arrayOf(
     T.shape({

@@ -130,7 +130,11 @@ function Project(props) {
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
-          <TimeSeriesCard projectId={data.id} parameters={data.parameters} />
+          <TimeSeriesCard
+            projectId={data.id}
+            parameters={data.parameters}
+            xUnit="day"
+          />
           <MeasureandsCard parameters={data.parameters} />
           <MapCard parameters={data.parameters} points={data.points} />
           <TemporalCoverageCard

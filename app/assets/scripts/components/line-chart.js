@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 
-export default function LineChart({ data }) {
+export default function LineChart({ data, xUnit }) {
   const series = {
     datasets: [
       {
@@ -27,18 +27,25 @@ export default function LineChart({ data }) {
             beginAtZero: true,
             maxTicksLimit: 5,
           },
+          gridLines: {
+            drawOnChartArea: false,
+          },
         },
       ],
+
       xAxes: [
         {
           type: 'time',
           time: {
-            unit: 'month',
-            displayFormats: {
-              quarter: 'MMM',
-            },
+            unit: xUnit || 'day',
           },
-          gridLines: { display: false },
+          gridLines: {
+            drawOnChartArea: false,
+          },
+          ticks: {
+            beginAtZero: true,
+            maxTicksLimit: 15,
+          },
         },
       ],
     },
