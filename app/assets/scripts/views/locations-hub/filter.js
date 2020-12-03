@@ -11,18 +11,22 @@ import { toggleValue } from '../../utils/array';
 
 const defaultSelected = {
   parameters: [],
+  countries: [],
+  sources: [],
   order_by: [],
 };
 
-const sortOptions = ['name', 'count'];
-const initFromLocation = ({ parameters, order_by }) => {
+const sortOptions = ['location', 'country', 'city', 'count'];
+
+const initFromLocation = ({ countries, parameters, sources, order_by }) => {
   return {
     parameters: parameters ? parameters.split(',') : [],
+    countries: countries ? countries.split(',') : [],
+    sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
   };
 };
-
-export default function Filter({ parameters }) {
+export default function Filter({ countries, parameters, sources }) {
   let history = useHistory();
   let location = useLocation();
 
@@ -66,6 +70,30 @@ export default function Filter({ parameters }) {
         break;
       }
 
+      case 'countries': {
+        const countries =
+          query && query.countries ? query.countries.split(',') : [];
+
+        query.countries = toggleValue(countries, value);
+
+        setSelected(prev => ({
+          ...prev,
+          countries: toggleValue(prev['countries'], value),
+        }));
+        break;
+      }
+      case 'sources': {
+        const sources = query && query.sources ? query.sources.split(',') : [];
+
+        query.sources = toggleValue(sources, value);
+
+        setSelected(prev => ({
+          ...prev,
+          ['sources']: toggleValue(prev['sources'], value),
+        }));
+        break;
+      }
+
       case 'clear':
         query = null;
         setSelected(defaultSelected);
@@ -73,7 +101,7 @@ export default function Filter({ parameters }) {
     }
 
     // update url
-    history.push(`/projects?${buildQS(query)}`);
+    history.push(`/locations?${buildQS(query)}`);
   }
 
   return (
@@ -83,6 +111,35 @@ export default function Filter({ parameters }) {
           <h2>Filter by</h2>
           <h2>Order by</h2>
         </nav>
+
+        <Dropdown
+          triggerElement="a"
+          triggerTitle="country__filter"
+          triggerText="Country"
+          triggerClassName="drop-trigger"
+        >
+          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+            {_.sortBy(countries).map(o => {
+              return (
+                <li key={o.code}>
+                  <div
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': selected.countries.includes(
+                        o.code
+                      ),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      onFilterSelect('countries', o.code);
+                    }}
+                  >
+                    <span>{o.name}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Dropdown>
 
         <Dropdown
           triggerElement="a"
@@ -101,6 +158,34 @@ export default function Filter({ parameters }) {
                     })}
                     data-hook="dropdown:close"
                     onClick={() => onFilterSelect('parameters', o.id)}
+                  >
+                    <span>{o.name}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Dropdown>
+
+        <Dropdown
+          triggerElement="a"
+          triggerTitle="source__filter"
+          triggerText="Data Source"
+        >
+          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+            {_.sortBy(sources).map(o => {
+              return (
+                <li key={o.name}>
+                  <div
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': selected.sources.includes(
+                        o.code
+                      ),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      onFilterSelect('sources', o.name);
+                    }}
                   >
                     <span>{o.name}</span>
                   </div>
@@ -136,8 +221,22 @@ export default function Filter({ parameters }) {
         </Dropdown>
       </div>
 
-      {!(selected.parameters.length + selected.order_by.length === 0) && (
+      {Object.values(selected).find(o => o.length > 0) && (
         <div className="filters-summary">
+          {selected.countries.map(o => {
+            const country = countries.find(x => x.code === o);
+            return (
+              <button
+                type="button"
+                className="button--filter-pill"
+                key={country.code}
+                onClick={() => onFilterSelect('countries', country.code)}
+              >
+                <span>{country.name}</span>
+              </button>
+            );
+          })}
+
           {selected.parameters.map(o => {
             const parameter = parameters.find(x => x.id === o);
             return (
@@ -151,6 +250,21 @@ export default function Filter({ parameters }) {
               </button>
             );
           })}
+
+          {selected.sources.map(o => {
+            const source = sources.find(x => x.name === o);
+            return (
+              <button
+                type="button"
+                className="button--filter-pill"
+                key={source.name}
+                onClick={() => onFilterSelect('sources', source.name)}
+              >
+                <span>{source.name}</span>
+              </button>
+            );
+          })}
+
           {selected.order_by.map(o => {
             return (
               <button
@@ -184,6 +298,7 @@ export default function Filter({ parameters }) {
 Filter.propTypes = {
   organizations: T.array,
   parameters: T.array,
+  countries: T.array,
   sources: T.array,
   order_by: T.array,
 };

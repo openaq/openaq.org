@@ -231,7 +231,7 @@ TemporalCoverageCard.propTypes = {
     })
   ),
   spatial: T.oneOf(['project', 'location']).isRequired,
-  id: T.string.isRequired,
+  id: T.oneOfType([T.string, T.number]).isRequired,
 };
 
 function Chart({ title, temporal, data, fetching }) {

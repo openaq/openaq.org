@@ -44,7 +44,7 @@ export function fetchLocations(page = 1, filters, limit = 15) {
           // setTimeout(() => {
           //   dispatch(receiveLocations(json));
           // }, 2000);
-          dispatch(receiveLocations(json));
+          return dispatch(receiveLocations(json));
         },
         e => {
           console.log('e', e);
