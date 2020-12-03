@@ -7,11 +7,7 @@ import moment from 'moment';
 import config from '../../config';
 import LoadingMessage from '../loading-message';
 import InfoMessage from '../info-message';
-import Card, {
-  CardHeader as BaseHeader,
-  CardSubtitle,
-  CardTitle,
-} from '../card';
+import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
 import TabbedSelector from '../tabbed-selector';
 import LineChart from '../line-chart';
 

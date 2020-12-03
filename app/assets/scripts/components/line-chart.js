@@ -62,4 +62,5 @@ LineChart.propTypes = {
       y: PropTypes.number.isRequired,
     })
   ).isRequired,
+  xUnit: PropTypes.string,
 };
