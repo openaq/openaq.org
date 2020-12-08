@@ -50,7 +50,7 @@
     "browser-sync": "^2.13.0",
     "browserify": "^16.5.2",
     "cross-env": "^5.1.4",
-    "cypress": "^5.6.0",
+    "cypress": "^6.1.0",
     "del": "^2.2.1",
     "envify": "^3.4.1",
     "eslint": "^7.13.0",
