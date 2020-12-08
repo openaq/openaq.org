@@ -1,0 +1,47 @@
+name: QA
+
+on:
+  push:
+  pull_request:
+    types: [opened]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 10
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+
+      - name: Install
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 10
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+
+      - name: Install
+        run: npm install
+
+      - name: Test End-to-end
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run serve
+          wait-on: 'http://localhost:3000'
