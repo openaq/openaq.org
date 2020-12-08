@@ -1,6 +1,6 @@
 // / <reference types="Cypress" />
 
-describe('The Project Hub', () => {
+describe('The Projects Hub', () => {
   it('successfully loads', () => {
     cy.visit('/#/projects');
 

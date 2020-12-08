@@ -1,6 +1,6 @@
 // / <reference types="Cypress" />
 
-describe('The Project Hub', () => {
+describe('The Project Page', () => {
   it('successfully loads', () => {
     cy.visit('/#/project/AirNow');
 

@@ -1,6 +1,6 @@
 // / <reference types="Cypress" />
 
-describe('The Locations Hub', () => {
+describe('The Location Page', () => {
   it('successfully loads', () => {
     cy.visit('/#/location/2');
 

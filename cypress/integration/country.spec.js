@@ -1,6 +1,6 @@
 // / <reference types="Cypress" />
 
-describe('The Countries Hub', () => {
+describe('The Country Page', () => {
   it('successfully loads', () => {
     cy.visit('/#/countries/CY');
 
