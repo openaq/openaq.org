@@ -164,11 +164,11 @@ var Country = createReactClass({
                     code: o.country,
                   });
                   let sourcesData = o.sourceNames
-                    .map(s => _.find(this.props.sources, { name: s }))
-                    .filter(s => s);
-                  let params = o.parameters.map(o =>
-                    _.find(this.props.parameters, { id: o })
-                  );
+                    ? o.sourceNames
+                        .map(s => _.find(this.props.sources, { name: s }))
+                        .filter(s => s)
+                    : [];
+                  let params = o.parameters;
                   let openModal = () =>
                     this.props._openDownloadModal({
                       country: o.country,
@@ -176,11 +176,11 @@ var Country = createReactClass({
                       location: o.location,
                     });
                   return (
-                    <li key={o.location}>
+                    <li key={o.id}>
                       <LocationCard
                         onDownloadClick={openModal}
-                        key={o.location}
-                        name={o.location}
+                        key={o.id}
+                        name={o.location || o.name}
                         city={o.city}
                         countryData={countryData}
                         sourcesData={sourcesData}
