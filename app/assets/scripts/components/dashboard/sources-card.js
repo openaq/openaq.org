@@ -20,15 +20,16 @@ const InfoMessage = styled.div`
 const Source = styled(SmartLink)``;
 
 export default function SourceInfo({ sources }) {
+  const sourceArr = typeof sources === 'object' ? [sources] : sources;
   return (
     <Card
-      title={sources && sources.length > 1 ? 'Sources' : 'Source'}
+      title={sourceArr && sourceArr.length > 1 ? 'Sources' : 'Source'}
       gridColumn={'11 / -1'}
       renderBody={() => {
-        if (sources) {
+        if (sourceArr) {
           return (
             <SourceList>
-              {sources.map(source => (
+              {sourceArr.map(source => (
                 <Source
                   key={source.name}
                   to={source.sourceURL || source.url}
@@ -77,12 +78,20 @@ export default function SourceInfo({ sources }) {
 }
 
 SourceInfo.propTypes = {
-  sources: T.arrayOf(
+  sources: PropTypes.oneOfType([
+    T.arrayOf(
+      T.shape({
+        name: T.string,
+        sourceURL: T.string,
+        url: T.string,
+        contacts: T.array,
+      })
+    ),
     T.shape({
       name: T.string,
       sourceURL: T.string,
       url: T.string,
       contacts: T.array,
-    })
-  ),
+    }),
+  ]),
 };
