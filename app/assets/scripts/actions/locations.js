@@ -28,10 +28,6 @@ export function fetchLocations(page = 1, filters, limit = 15) {
 
     let f = buildAPIQS(filters, { arrayFormat: 'repeat' });
 
-    // console.log('url', `${config.api}/locations?page=${page}&limit=${limit}&${f}`);
-
-    console.log(config);
-
     fetch(
       `${config.apiv2}/locations?page=${page}&limit=${limit}&metadata=true&${f}`
     )

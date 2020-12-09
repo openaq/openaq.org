@@ -174,7 +174,6 @@ Location.propTypes = {
 // Connect functions
 
 function selector(state) {
-  console.log(state);
   return {
     sources: state.baseData.data.sources,
     measurements: state.measurements,
