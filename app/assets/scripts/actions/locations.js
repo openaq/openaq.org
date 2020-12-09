@@ -30,8 +30,10 @@ export function fetchLocations(page = 1, filters, limit = 15) {
 
     // console.log('url', `${config.api}/locations?page=${page}&limit=${limit}&${f}`);
 
+    console.log(config);
+
     fetch(
-      `${config.api}/locations?page=${page}&limit=${limit}&metadata=true&${f}`
+      `${config.apiv2}/locations?page=${page}&limit=${limit}&metadata=true&${f}`
     )
       .then(response => {
         if (response.status >= 400) {

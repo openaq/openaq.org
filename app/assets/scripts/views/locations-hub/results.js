@@ -13,8 +13,6 @@ export default function Results({
   error,
   locations,
   countries,
-  sources,
-  parameters,
   totalPages,
   page,
   openDownloadModal,
@@ -69,10 +67,7 @@ export default function Results({
       <div className="inpage__results">
         {locations.map(loc => {
           let countryData = _.find(countries, { code: loc.country });
-          let sourcesData = loc.sourceNames
-            .map(s => _.find(sources, { name: s }))
-            .filter(s => s);
-          let params = loc.parameters.map(o => _.find(parameters, { id: o }));
+          let sourcesData = [loc.sources];
 
           let openModal = () =>
             openDownloadModal({
@@ -84,14 +79,14 @@ export default function Results({
             <LocationCard
               id={loc.id}
               onDownloadClick={openModal}
-              key={loc.location}
-              name={loc.location}
+              key={loc.id}
+              name={loc.name}
               city={loc.city}
               sourceType={loc.sourceType}
               countryData={countryData}
               sourcesData={sourcesData}
-              totalMeasurements={loc.count}
-              parametersList={params}
+              totalMeasurements={loc.measurements}
+              parametersList={loc.parameters}
               lastUpdate={loc.lastUpdated}
               collectionStart={loc.firstUpdated}
             />
