@@ -113,7 +113,7 @@ export default function CountriesHub({ _openDownloadModal, countries }) {
                     renderFooter={() => (
                       <FooterActions
                         what={name}
-                        onDownloadClick={onDownloadClick(null, o.code)}
+                        onDownloadClick={e => onDownloadClick(e, o.code)}
                         viewMorePath={`/countries/${o.code}`}
                       />
                     )}
@@ -128,7 +128,7 @@ export default function CountriesHub({ _openDownloadModal, countries }) {
   );
 }
 
-CountriesHub.PropTypes = {
+CountriesHub.propTypes = {
   _openDownloadModal: T.func,
   countries: T.array,
 };
