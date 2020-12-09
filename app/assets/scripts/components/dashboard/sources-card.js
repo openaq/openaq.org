@@ -78,7 +78,7 @@ export default function SourceInfo({ sources }) {
 }
 
 SourceInfo.propTypes = {
-  sources: PropTypes.oneOfType([
+  sources: T.oneOfType([
     T.arrayOf(
       T.shape({
         name: T.string,
