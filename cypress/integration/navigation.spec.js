@@ -48,7 +48,7 @@ context('Navigation', () => {
   it("going back or forward in the browser's history is possible", () => {
     // https://on.cypress.io/go
 
-    cy.get('nav').contains('Why').click();
+    cy.get('nav').contains('Why').click({ force: true });
     cy.location('hash').should('contain', 'why');
 
     cy.go('back');
@@ -69,7 +69,7 @@ context('Navigation', () => {
   it('reloading the page maintains the url', () => {
     // https://on.cypress.io/reload
 
-    cy.get('nav').contains('Why').click();
+    cy.get('nav').contains('Why').click({ force: true });
     cy.location('hash').should('contain', 'why');
 
     cy.reload();
