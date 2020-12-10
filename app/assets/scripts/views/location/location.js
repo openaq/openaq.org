@@ -144,7 +144,7 @@ function Location(props) {
             }}
           />
           <LatestMeasurementsCard parameters={data.parameters} />
-          <SourcesCard sources={data.sources} />
+          <SourcesCard sources={[data.sources]} />
           <TimeSeriesCard
             locationId={data.id}
             parameters={data.parameters}

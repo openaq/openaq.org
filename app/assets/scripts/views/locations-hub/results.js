@@ -12,9 +12,6 @@ export default function Results({
   fetching,
   error,
   locations,
-  countries,
-  sources,
-  parameters,
   totalPages,
   page,
   openDownloadModal,
@@ -68,12 +65,6 @@ export default function Results({
     <>
       <div className="inpage__results">
         {locations.map(loc => {
-          let countryData = _.find(countries, { code: loc.country });
-          let sourcesData = loc.sourceNames
-            .map(s => _.find(sources, { name: s }))
-            .filter(s => s);
-          let params = loc.parameters.map(o => _.find(parameters, { id: o }));
-
           let openModal = () =>
             openDownloadModal({
               country: loc.country,
@@ -85,13 +76,13 @@ export default function Results({
               id={loc.id}
               onDownloadClick={openModal}
               key={loc.location}
-              name={loc.location}
+              name={loc.name}
               city={loc.city}
               sourceType={loc.sourceType}
-              countryData={countryData}
-              sourcesData={sourcesData}
-              totalMeasurements={loc.count}
-              parametersList={params}
+              country={loc.country}
+              sources={loc.sources}
+              totalMeasurements={loc.measurements}
+              parametersList={loc.parameters}
               lastUpdate={loc.lastUpdated}
               collectionStart={loc.firstUpdated}
             />
@@ -124,9 +115,6 @@ Results.propTypes = {
   fetching: T.bool,
   error: T.bool,
   locations: T.array,
-  countries: T.array,
-  sources: T.array,
-  parameters: T.array,
   totalPages: T.number,
   page: T.number,
   openDownloadModal: T.func,

@@ -110,9 +110,6 @@ export default function LocationsHub({
               fetched={fetched}
               fetching={fetching}
               error={error}
-              countries={countries}
-              sources={sources}
-              parameters={parameters}
               locations={results}
               totalPages={totalPages}
               page={page}

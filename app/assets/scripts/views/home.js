@@ -91,8 +91,9 @@ class Home extends React.Component {
   componentDidMount() {
     this.props._invalidateCompare();
 
-    this.fetchValidLocation(0);
-    this.fetchValidLocation(1);
+    // TODO: refactor
+    // this.fetchValidLocation(0);
+    // this.fetchValidLocation(1);
   }
 
   componentWillUnmount() {

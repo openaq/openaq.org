@@ -99,8 +99,8 @@ var App = createReactClass({
 
 function selector(state) {
   return {
-    baseDataReady: state.baseData.fetched && !state.baseData.fetching,
-    baseDataError: state.baseData.error,
+    baseDataReady: true,
+    baseDataError: false,
 
     measurements: state.baseData.data.totalMeasurements,
 

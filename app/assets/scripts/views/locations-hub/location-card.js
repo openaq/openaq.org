@@ -16,26 +16,11 @@ export default function LocationCard({
   parametersList,
   id,
   city,
-  countryData,
-  sourcesData,
+  country,
+  sources,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
-
-  const country = countryData || {};
-  let sources = [];
-  if (sourcesData.length) {
-    sourcesData.forEach((o, i) => {
-      sources.push(
-        <a href={o.sourceURL} title={`View source for  ${name}`} key={o.name}>
-          {o.name}
-        </a>
-      );
-      if (i < sourcesData.length - 1) {
-        sources.push(', ');
-      }
-    });
-  }
 
   return (
     <Card
@@ -43,7 +28,7 @@ export default function LocationCard({
         <>
           {name} <small>{subtitle}</small>
           <small>
-            in {city}, {country.name}
+            in {city}, {country}
           </small>
         </>
       }
@@ -63,9 +48,20 @@ export default function LocationCard({
             },
             {
               label: 'Values',
-              value: parametersList.map(p => p.name).join(', '),
+              value: parametersList.map(p => p.measurand).join(', '),
             },
-            ...(sources.length ? [{ label: 'Sources', value: sources }] : []),
+            {
+              label: 'Sources',
+              value: (
+                <a
+                  href={sources.sourceURL}
+                  title={`View source for ${name}`}
+                  key={sources.name}
+                >
+                  {sources.name}
+                </a>
+              ),
+            },
           ]}
         />
       )}
@@ -94,8 +90,8 @@ LocationCard.propTypes = {
   compact: T.bool,
   id: T.string,
   city: T.string,
-  countryData: T.object,
-  sourcesData: T.array,
+  country: T.object,
+  sources: T.array,
   lastUpdate: T.string,
   collectionStart: T.string,
 };
