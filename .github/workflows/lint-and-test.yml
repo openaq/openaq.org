@@ -69,3 +69,5 @@ jobs:
         with:
           start: npm run serve
           wait-on: 'http://localhost:3000'
+        env:
+          DS_ENV: staging
