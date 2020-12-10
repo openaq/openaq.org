@@ -50,7 +50,11 @@ export default function ProjectsHub({
       ignoreQueryPrefix: true,
     });
     setPage(() => getPage(query));
-    setFilters({ order_by: query.order_by, parameters: query.parameters });
+    setFilters({
+      order_by: query.order_by,
+      sort: 'asc',
+      parameters: query.parameters,
+    });
   }, [location]);
 
   useEffect(() => {
