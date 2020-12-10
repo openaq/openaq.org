@@ -18,7 +18,7 @@ CardDetails.propTypes = {
   list: T.arrayOf(
     T.shape({
       label: T.string.isRequired,
-      value: T.string.isRequired,
+      value: T.oneOfType([T.string, T.node]).isRequired,
     })
   ).isRequired,
 };

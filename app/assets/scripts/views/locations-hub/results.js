@@ -80,7 +80,7 @@ export default function Results({
               city={loc.city}
               sourceType={loc.sourceType}
               country={loc.country}
-              sources={loc.sources}
+              sources={[loc.sources]}
               totalMeasurements={loc.measurements}
               parametersList={loc.parameters}
               lastUpdate={loc.lastUpdated}

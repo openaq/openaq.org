@@ -51,14 +51,14 @@ export default function LocationCard({
               value: parametersList.map(p => p.measurand).join(', '),
             },
             {
-              label: 'Sources',
+              label: 'Source',
               value: (
                 <a
-                  href={sources.sourceURL}
+                  href={sources[0].sourceURL}
                   title={`View source for ${name}`}
-                  key={sources.name}
+                  key={sources[0].name}
                 >
-                  {sources.name}
+                  {sources[0].name}
                 </a>
               ),
             },
@@ -88,9 +88,9 @@ LocationCard.propTypes = {
   parametersList: T.array,
 
   compact: T.bool,
-  id: T.string,
+  id: T.number,
   city: T.string,
-  country: T.object,
+  country: T.string,
   sources: T.array,
   lastUpdate: T.string,
   collectionStart: T.string,
