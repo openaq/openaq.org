@@ -75,7 +75,7 @@ export default function Results({
             <LocationCard
               id={loc.id}
               onDownloadClick={openModal}
-              key={loc.location}
+              key={loc.id}
               name={loc.name}
               city={loc.city}
               sourceType={loc.sourceType}
