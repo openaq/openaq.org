@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import createReactClass from 'create-react-class';
 
 import { formatThousands } from '../utils/format';
-
+// TODO: replace use of this card with standard <Card /> and remove this component
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
  * see https://reactjs.org/docs/react-without-es6.html
@@ -18,7 +18,7 @@ var LocationCard = createReactClass({
   propTypes: {
     onDownloadClick: T.func,
     compact: T.bool,
-    id: T.string,
+    id: T.number,
     name: T.string,
     city: T.string,
     countryData: T.object,
