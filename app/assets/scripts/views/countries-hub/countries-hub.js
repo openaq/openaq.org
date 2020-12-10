@@ -7,7 +7,7 @@ import config from '../../config';
 import { sortBy } from 'lodash';
 import { formatThousands } from '../../utils/format';
 import { openDownloadModal } from '../../actions/action-creators';
-import Card, { CardDetails, FooterActions } from '../../components/card/index';
+import Card, { CardDetails, FooterActions } from '../../components/card';
 import Header from '../../components/header';
 
 export default function CountriesHub({ _openDownloadModal, countries }) {
