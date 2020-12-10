@@ -6,18 +6,17 @@ import { formatThousands } from '../../utils/format';
 import Card, { CardDetails, FooterActions } from '../../components/card';
 
 export default function LocationCard({
-  onDownloadClick,
-  lastUpdated,
-  name,
-  subtitle,
-  sourceType,
-  firstUpdated,
-  totalMeasurements,
-  parametersList,
-  id,
   city,
   country,
+  firstUpdated,
+  id,
+  lastUpdated,
+  name,
+  onDownloadClick,
+  parametersList,
   sources,
+  sourceType,
+  totalMeasurements,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
@@ -26,7 +25,7 @@ export default function LocationCard({
     <Card
       title={
         <>
-          {name} <small>{subtitle}</small>
+          {name}{' '}
           <small>
             in {city}, {country}
           </small>
@@ -77,21 +76,20 @@ export default function LocationCard({
 }
 
 LocationCard.propTypes = {
-  onDownloadClick: T.func,
-  lastUpdated: T.string,
-  name: T.string,
-  subtitle: T.string,
-  sourceType: T.oneOfType([T.array, T.string]),
-  firstUpdated: T.string,
-  totalLocations: T.number,
-  totalMeasurements: T.number,
-  parametersList: T.array,
-
-  compact: T.bool,
-  id: T.number,
-  city: T.string,
-  country: T.string,
-  sources: T.array,
-  lastUpdate: T.string,
-  collectionStart: T.string,
+  city: T.string.isRequired,
+  country: T.string.isRequired,
+  firstUpdated: T.string.isRequired,
+  id: T.number.isRequired,
+  lastUpdated: T.string.isRequired,
+  name: T.string.isRequired,
+  onDownloadClick: T.func.isRequired,
+  parametersList: T.array.isRequired,
+  sources: T.arrayOf(
+    T.shape({
+      name: T.string.isRequired,
+      sourceURL: T.string.isRequired,
+    })
+  ).isRequired,
+  sourceType: T.string.isRequired,
+  totalMeasurements: T.number.isRequired,
 };

@@ -72,18 +72,18 @@ export default function Results({
             });
           return (
             <LocationCard
-              id={loc.id}
-              onDownloadClick={openModal}
               key={loc.id}
-              name={loc.name}
               city={loc.city}
-              sourceType={loc.sourceType}
               country={loc.country}
-              sources={[loc.sources]}
-              totalMeasurements={loc.measurements}
-              parametersList={loc.parameters}
-              lastUpdated={loc.lastUpdated}
               firstUpdated={loc.firstUpdated}
+              id={loc.id}
+              lastUpdated={loc.lastUpdated}
+              name={loc.name}
+              onDownloadClick={openModal}
+              parametersList={loc.parameters}
+              sources={loc.sources}
+              sourceType={loc.sourceType}
+              totalMeasurements={loc.measurements}
             />
           );
         })}
