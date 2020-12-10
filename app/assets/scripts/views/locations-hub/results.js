@@ -82,7 +82,7 @@ export default function Results({
               sources={[loc.sources]}
               totalMeasurements={loc.measurements}
               parametersList={loc.parameters}
-              lastUpdate={loc.lastUpdated}
+              lastUpdated={loc.lastUpdated}
               collectionStart={loc.firstUpdated}
             />
           );
