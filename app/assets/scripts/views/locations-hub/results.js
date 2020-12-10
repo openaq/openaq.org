@@ -83,7 +83,7 @@ export default function Results({
               totalMeasurements={loc.measurements}
               parametersList={loc.parameters}
               lastUpdated={loc.lastUpdated}
-              collectionStart={loc.firstUpdated}
+              firstUpdated={loc.firstUpdated}
             />
           );
         })}
