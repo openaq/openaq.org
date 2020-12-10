@@ -1,7 +1,6 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import ReactPaginate from 'react-paginate';
-import _ from 'lodash';
 
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
