@@ -34,6 +34,13 @@ export default function Filter({ countries, parameters, sources }) {
     initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
   );
 
+  // alphabetizes filter names
+  const sortList = list => list.sort((a, b) => a.name.localeCompare(b.name));
+
+  sortList(countries);
+  sortList(parameters);
+  sortList(sources);
+
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
