@@ -1,7 +1,6 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import ReactPaginate from 'react-paginate';
-import _ from 'lodash';
 
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
@@ -12,9 +11,6 @@ export default function Results({
   fetching,
   error,
   locations,
-  countries,
-  sources,
-  parameters,
   totalPages,
   page,
   openDownloadModal,
@@ -68,12 +64,6 @@ export default function Results({
     <>
       <div className="inpage__results">
         {locations.map(loc => {
-          let countryData = _.find(countries, { code: loc.country });
-          let sourcesData = loc.sourceNames
-            .map(s => _.find(sources, { name: s }))
-            .filter(s => s);
-          let params = loc.parameters.map(o => _.find(parameters, { id: o }));
-
           let openModal = () =>
             openDownloadModal({
               country: loc.country,
@@ -82,18 +72,18 @@ export default function Results({
             });
           return (
             <LocationCard
-              id={loc.id}
-              onDownloadClick={openModal}
-              key={loc.location}
-              name={loc.location}
+              key={loc.id}
               city={loc.city}
+              country={loc.country}
+              firstUpdated={loc.firstUpdated}
+              id={loc.id}
+              lastUpdated={loc.lastUpdated}
+              name={loc.name}
+              onDownloadClick={openModal}
+              parametersList={loc.parameters}
+              sources={loc.sources}
               sourceType={loc.sourceType}
-              countryData={countryData}
-              sourcesData={sourcesData}
-              totalMeasurements={loc.count}
-              parametersList={params}
-              lastUpdate={loc.lastUpdated}
-              collectionStart={loc.firstUpdated}
+              totalMeasurements={loc.measurements}
             />
           );
         })}
@@ -124,9 +114,6 @@ Results.propTypes = {
   fetching: T.bool,
   error: T.bool,
   locations: T.array,
-  countries: T.array,
-  sources: T.array,
-  parameters: T.array,
   totalPages: T.number,
   page: T.number,
   openDownloadModal: T.func,

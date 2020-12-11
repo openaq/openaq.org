@@ -8,6 +8,7 @@ import Card, { CardDetails, FooterActions } from '../../components/card';
 export default function ProjectCard({
   onDownloadClick,
   lastUpdated,
+  id,
   name,
   subtitle,
   sourceType,
@@ -50,7 +51,7 @@ export default function ProjectCard({
         <FooterActions
           what={name}
           onDownloadClick={onDownloadClick}
-          viewMorePath={`/project/${encodeURIComponent(name)}`}
+          viewMorePath={`/project/${encodeURIComponent(id)}`}
         />
       )}
     />
@@ -61,6 +62,7 @@ ProjectCard.propTypes = {
   onDownloadClick: T.func,
   lastUpdated: T.string,
   name: T.string,
+  id: T.string,
   subtitle: T.string,
   sourceType: T.oneOfType([T.array, T.string]),
   firstUpdated: T.string,

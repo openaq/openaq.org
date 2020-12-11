@@ -6,44 +6,28 @@ import { formatThousands } from '../../utils/format';
 import Card, { CardDetails, FooterActions } from '../../components/card';
 
 export default function LocationCard({
-  onDownloadClick,
+  city,
+  country,
+  firstUpdated,
+  id,
   lastUpdated,
   name,
-  subtitle,
-  sourceType,
-  firstUpdated,
-  totalMeasurements,
+  onDownloadClick,
   parametersList,
-  id,
-  city,
-  countryData,
-  sourcesData,
+  sources,
+  sourceType,
+  totalMeasurements,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
-
-  const country = countryData || {};
-  let sources = [];
-  if (sourcesData.length) {
-    sourcesData.forEach((o, i) => {
-      sources.push(
-        <a href={o.sourceURL} title={`View source for  ${name}`} key={o.name}>
-          {o.name}
-        </a>
-      );
-      if (i < sourcesData.length - 1) {
-        sources.push(', ');
-      }
-    });
-  }
 
   return (
     <Card
       title={
         <>
-          {name} <small>{subtitle}</small>
+          {name}{' '}
           <small>
-            in {city}, {country.name}
+            in {city}, {country}
           </small>
         </>
       }
@@ -63,9 +47,20 @@ export default function LocationCard({
             },
             {
               label: 'Values',
-              value: parametersList.map(p => p.name).join(', '),
+              value: parametersList.map(p => p.measurand).join(', '),
             },
-            ...(sources.length ? [{ label: 'Sources', value: sources }] : []),
+            {
+              label: 'Source',
+              value: (
+                <a
+                  href={sources[0].sourceURL}
+                  title={`View source for ${name}`}
+                  key={sources[0].name}
+                >
+                  {sources[0].name}
+                </a>
+              ),
+            },
           ]}
         />
       )}
@@ -81,21 +76,20 @@ export default function LocationCard({
 }
 
 LocationCard.propTypes = {
-  onDownloadClick: T.func,
-  lastUpdated: T.string,
-  name: T.string,
-  subtitle: T.string,
-  sourceType: T.oneOfType([T.array, T.string]),
-  firstUpdated: T.string,
-  totalLocations: T.number,
-  totalMeasurements: T.number,
-  parametersList: T.array,
-
-  compact: T.bool,
-  id: T.string,
-  city: T.string,
-  countryData: T.object,
-  sourcesData: T.array,
-  lastUpdate: T.string,
-  collectionStart: T.string,
+  city: T.string.isRequired,
+  country: T.string.isRequired,
+  firstUpdated: T.string.isRequired,
+  id: T.number.isRequired,
+  lastUpdated: T.string.isRequired,
+  name: T.string.isRequired,
+  onDownloadClick: T.func.isRequired,
+  parametersList: T.array.isRequired,
+  sources: T.arrayOf(
+    T.shape({
+      name: T.string.isRequired,
+      sourceURL: T.string.isRequired,
+    })
+  ).isRequired,
+  sourceType: T.string.isRequired,
+  totalMeasurements: T.number.isRequired,
 };

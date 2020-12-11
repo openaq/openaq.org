@@ -29,15 +29,15 @@ const defaultState = {
 };
 
 function Location(props) {
-  const { name } = props.match.params;
+  const { id } = props.match.params;
 
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
-    const fetchData = name => {
+    const fetchData = id => {
       setState(state => ({ ...state, fetching: true, error: null }));
 
-      fetch(`${config.api}/locations/${encodeURIComponent(name)}`)
+      fetch(`${config.api}/locations/${encodeURIComponent(id)}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -65,7 +65,7 @@ function Location(props) {
         );
     };
 
-    fetchData(name);
+    fetchData(id);
 
     return () => {
       setState(defaultState);
