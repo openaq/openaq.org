@@ -99,7 +99,7 @@ export default function LocationsHub({
                   <h2 className="content-prime-title">Results</h2>
                   {meta.found ? (
                     <p className="results-summary">
-                      A total of <strong>{meta.found}</strong> datasets were
+                      A total of <strong>{meta.found}</strong> locations were
                       found
                     </p>
                   ) : null}
