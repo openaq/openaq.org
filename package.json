@@ -18,6 +18,7 @@
   "scripts": {
     "postinstall": "[ -f app/assets/scripts/config/local.js ] || echo 'module.exports = {};' > app/assets/scripts/config/local.js",
     "serve": "cross-env DS_ENV=development gulp serve",
+    "serve:testing": "cross-env DS_ENV=testing gulp serve",
     "build": "cross-env NODE_ENV=production gulp",
     "lint": "eslint --ignore-path .gitignore \"**/*.{js,jsx}\"",
     "lint:fix": "eslint --ignore-path .gitignore \"**/*.{js,jsx}\" --fix",
