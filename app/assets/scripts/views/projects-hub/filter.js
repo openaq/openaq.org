@@ -30,6 +30,8 @@ export default function Filter({ parameters }) {
     initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
   );
 
+  parameters.sort((a, b) => a.name.localeCompare(b.name));
+
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
