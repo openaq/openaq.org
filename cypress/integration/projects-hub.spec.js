@@ -21,10 +21,9 @@ describe('The Projects Hub', () => {
   });
 
   it('has a results section with a list of project cards', () => {
-    cy.get('.results-summary').should(
-      'have.text',
-      'A total of 141 datasets were found'
-    );
+    cy.get('.results-summary')
+      .invoke('text')
+      .should('match', /A total of \d+ datasets were found/);
 
     cy.get('.card').should('have.length', 15);
     cy.get('.pagination').should('exist');

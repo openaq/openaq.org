@@ -21,10 +21,9 @@ describe('The Locations Hub', () => {
   });
 
   it('has a results section with a list of location cards', () => {
-    cy.get('.results-summary').should(
-      'have.text',
-      'A total of 12005 locations were found'
-    );
+    cy.get('.results-summary')
+      .invoke('text')
+      .should('match', /A total of \d+ locations were found/);
 
     cy.get('.card').should('have.length', 15);
     cy.get('.pagination').should('exist');
