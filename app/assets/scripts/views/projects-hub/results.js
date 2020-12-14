@@ -74,8 +74,7 @@ export default function Results({
               id={project.id}
               onDownloadClick={openModal}
               lastUpdated={project.lastUpdated}
-              name={project.name}
-              subtitle={project.subtitle}
+              name={project.subtitle}
               sourceType={project.sourceType}
               firstUpdated={project.firstUpdated}
               totalLocations={project.locations}
