@@ -43,6 +43,12 @@ export const HighlightText = styled.h1`
   }};
 `;
 
+const TagWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 2rem));
+  grid-gap: 0.5rem;
+`;
+
 /*
  * Generic Card component for dashboard pages
  */
@@ -72,11 +78,14 @@ export default function Card({
               )}
               {title && <CardTitle className="card__title">{title}</CardTitle>}
             </CardHeadline>
-
-            {tags && typeof tags === 'string' ? (
-              <CardTag label={tags} />
-            ) : (
-              tags && tags.map((tag, i) => <CardTag key={i} label={tag} />)
+            {tags && (
+              <TagWrapper>
+                {typeof tags === 'string' ? (
+                  <CardTag label={tags} />
+                ) : (
+                  tags.map((tag, i) => <CardTag key={i} label={tag} />)
+                )}
+              </TagWrapper>
             )}
           </CardHeader>
         )}
