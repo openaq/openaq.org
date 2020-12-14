@@ -93,5 +93,5 @@ LocationCard.propTypes = {
   ).isRequired,
   sourceType: T.string.isRequired,
   totalMeasurements: T.number.isRequired,
-  mobile: T.bool.isRequired
+  mobile: T.bool.isRequired,
 };
