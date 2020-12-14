@@ -41,6 +41,8 @@ export default function Filter({ countries, parameters, sources }) {
   sortList(parameters);
   sortList(sources);
 
+  const parameterIds = [...new Set(parameters.map(p => p.id))];
+
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
@@ -67,7 +69,6 @@ export default function Filter({ countries, parameters, sources }) {
       case 'parameters': {
         const parameters =
           query && query.parameters ? query.parameters.split(',') : [];
-
         query.parameters = toggleValue(parameters, value);
 
         setSelected(prev => ({
@@ -154,19 +155,21 @@ export default function Filter({ countries, parameters, sources }) {
           triggerText="Pollutant"
         >
           <ul role="menu" className="drop__menu drop__menu--select scrollable">
-            {_.sortBy(parameters).map(o => {
+            {/* references list of unique ids to avoid duplicate list items while allowing 
+            selection of parameters with different units and shared id */}
+            {_.sortBy(parameterIds).map(id => {
               return (
-                <li key={o.id}>
+                <li key={id}>
                   <div
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.parameters.includes(
-                        o.id
+                        id
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => onFilterSelect('parameters', o.id)}
+                    onClick={() => onFilterSelect('parameters', id)}
                   >
-                    <span>{o.name}</span>
+                    <span>{parameters.find(p => p.id === id).name}</span>
                   </div>
                 </li>
               );
