@@ -126,11 +126,16 @@ export default function Filter({ countries, parameters, sources }) {
           triggerText="Country"
           triggerClassName="drop-trigger"
         >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+          <ul
+            role="menu"
+            data-cy="filter-countries"
+            className="drop__menu drop__menu--select scrollable"
+          >
             {_.sortBy(countries).map(o => {
               return (
                 <li key={o.code}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.countries.includes(
                         o.code
@@ -154,13 +159,18 @@ export default function Filter({ countries, parameters, sources }) {
           triggerTitle="type__filter"
           triggerText="Pollutant"
         >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+          <ul
+            role="menu"
+            data-cy="filter-parameters"
+            className="drop__menu drop__menu--select scrollable"
+          >
             {/* references list of unique ids to avoid duplicate list items while allowing 
             selection of parameters with different units and shared id */}
             {_.sortBy(parameterIds).map(id => {
               return (
                 <li key={id}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.parameters.includes(
                         id
@@ -182,11 +192,16 @@ export default function Filter({ countries, parameters, sources }) {
           triggerTitle="source__filter"
           triggerText="Data Source"
         >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+          <ul
+            role="menu"
+            data-cy="filter-sources"
+            className="drop__menu drop__menu--select scrollable"
+          >
             {_.sortBy(sources).map(o => {
               return (
                 <li key={o.name}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.sources.includes(
                         o.code
@@ -216,6 +231,7 @@ export default function Filter({ countries, parameters, sources }) {
               return (
                 <li key={o}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.order_by.includes(o),
                     })}
@@ -239,6 +255,7 @@ export default function Filter({ countries, parameters, sources }) {
               <button
                 type="button"
                 className="button--filter-pill"
+                data-cy="filter-pill"
                 key={country.code}
                 onClick={() => onFilterSelect('countries', country.code)}
               >
@@ -253,6 +270,7 @@ export default function Filter({ countries, parameters, sources }) {
               <button
                 type="button"
                 className="button--filter-pill"
+                data-cy="filter-pill"
                 key={parameter.id}
                 onClick={() => onFilterSelect('parameters', parameter.id)}
               >
@@ -267,6 +285,7 @@ export default function Filter({ countries, parameters, sources }) {
               <button
                 type="button"
                 className="button--filter-pill"
+                data-cy="filter-pill"
                 key={source.name}
                 onClick={() => onFilterSelect('sources', source.name)}
               >
@@ -292,6 +311,7 @@ export default function Filter({ countries, parameters, sources }) {
             type="button"
             className="button button--small button--primary-unbounded"
             title="Clear all selected filters"
+            data-cy="filter-clear"
             onClick={e => {
               e.preventDefault();
               onFilterSelect('clear');
