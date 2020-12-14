@@ -39,10 +39,10 @@ describe('The Locations Hub', () => {
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
 
-    cy.get('.button--filter-pill').should('exist');
+    cy.get('[data-cy=filter-pill]').should('exist');
 
-    cy.get('button').contains('Clear Filters').should('exist');
-    cy.get('button').contains('Clear Filters').click();
+    cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
+    cy.get('[data-cy=filter-clear]').click();
 
     // parameter filter
     cy.get('[title="type__filter"]').click();
@@ -51,10 +51,10 @@ describe('The Locations Hub', () => {
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
 
-    cy.get('.button--filter-pill').should('exist');
+    cy.get('[data-cy=filter-pill]').should('exist');
 
-    cy.get('button').contains('Clear Filters').should('exist');
-    cy.get('button').contains('Clear Filters').click();
+    cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
+    cy.get('[data-cy=filter-clear]').click();
 
     // source filter
     cy.get('[title="source__filter"]').click();
