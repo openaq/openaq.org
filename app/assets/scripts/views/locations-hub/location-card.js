@@ -51,7 +51,7 @@ export default function LocationCard({
             },
             {
               label: 'Source',
-              value: (
+              value: sources && (
                 <a
                   href={sources[0].sourceURL}
                   title={`View source for ${name}`}
