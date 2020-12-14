@@ -17,6 +17,7 @@ export default function LocationCard({
   sources,
   sourceType,
   totalMeasurements,
+  mobile,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
@@ -36,7 +37,7 @@ export default function LocationCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={sourceType}
+      tags={[sourceType, mobile ? 'Mobile' : 'Stationary']}
       renderBody={() => (
         <CardDetails
           list={[
@@ -92,4 +93,5 @@ LocationCard.propTypes = {
   ).isRequired,
   sourceType: T.string.isRequired,
   totalMeasurements: T.number.isRequired,
+  mobile: T.bool.isRequired
 };

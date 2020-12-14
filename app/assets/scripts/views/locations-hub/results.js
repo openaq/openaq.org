@@ -72,6 +72,7 @@ export default function Results({
             });
           return (
             <LocationCard
+              mobile={loc.isMobile}
               key={loc.id}
               city={loc.city}
               country={loc.country}
