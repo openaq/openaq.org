@@ -30,13 +30,15 @@ describe('The Projects Hub', () => {
   });
 
   it('has some filters with dropdown menus', () => {
-    cy.get('.filters').should('exist');
-
     cy.get('[title="type__filter"]').click();
-    cy.get('.drop__menu-item').first().click();
+    cy.get('[data-cy=filter-parameters]')
+      .contains('li', 'BC')
+      .should('length', 1);
+    cy.get('[data-cy=filter-menu-item]').first().click();
 
-    cy.get('.button--filter-pill').should('exist');
+    cy.get('[data-cy=filter-pill]').should('exist');
 
-    cy.get('button').contains('Clear Filters').should('exist');
+    cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
+    cy.get('[data-cy=filter-clear]').click();
   });
 });

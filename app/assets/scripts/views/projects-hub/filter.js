@@ -31,6 +31,7 @@ export default function Filter({ parameters }) {
   );
 
   parameters.sort((a, b) => a.name.localeCompare(b.name));
+  const parameterIds = [...new Set(parameters.map(p => p.id))];
 
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
@@ -91,20 +92,25 @@ export default function Filter({ parameters }) {
           triggerTitle="type__filter"
           triggerText="Pollutant"
         >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
-            {_.sortBy(parameters).map(o => {
+          <ul
+            role="menu"
+            data-cy="filter-parameters"
+            className="drop__menu drop__menu--select scrollable"
+          >
+            {_.sortBy(parameterIds).map(id => {
               return (
-                <li key={o.id}>
+                <li key={id}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.parameters.includes(
-                        o.id
+                        id
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => onFilterSelect('parameters', o.id)}
+                    onClick={() => onFilterSelect('parameters', id)}
                   >
-                    <span>{o.name}</span>
+                    <span>{parameters.find(p => p.id === id).name}</span>
                   </div>
                 </li>
               );
@@ -146,6 +152,7 @@ export default function Filter({ parameters }) {
               <button
                 type="button"
                 className="button--filter-pill"
+                data-cy="filter-pill"
                 key={parameter.id}
                 onClick={() => onFilterSelect('parameters', parameter.id)}
               >
@@ -170,6 +177,7 @@ export default function Filter({ parameters }) {
             type="button"
             className="button button--small button--primary-unbounded"
             title="Clear all selected filters"
+            data-cy="filter-clear"
             onClick={e => {
               e.preventDefault();
               onFilterSelect('clear');
