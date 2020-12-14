@@ -43,7 +43,12 @@ export default function ProjectCard({
               value: formatThousands(totalMeasurements),
             },
             { label: 'Collection dates', value: `${started} - ${ended}` },
-            { label: 'Measurands', value: parametersList.join(', ') },
+            {
+              label: 'Measurands',
+              value: parametersList
+                .map(p => p.measurand.toUpperCase())
+                .join(', '),
+            },
           ]}
         />
       )}
