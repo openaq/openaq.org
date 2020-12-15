@@ -251,7 +251,7 @@ export default function Filter({ countries, parameters, sources }) {
                 type="button"
                 className="button--filter-pill"
                 key={parameter.id}
-                onClick={() => onFilterSelect('parameters', parameter.id)}
+                onClick={() => onFilterSelect('parameters', parameter.name)}
               >
                 <span>{parameter.name}</span>
               </button>
