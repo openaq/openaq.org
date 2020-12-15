@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
-import config from '../config';
+import config from '../../config';
 import {
   circleOpacity,
   circleBlur,
   coloredCircleRadius,
   borderCircleRadius,
-} from '../utils/map-settings';
-import { generateColorStops } from '../utils/colors';
+} from '../../utils/map-settings';
+import { generateColorStops } from '../../utils/colors';
 
 const defaultState = {
   fetched: false,

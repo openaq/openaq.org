@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
 import TabbedSelector from '../tabbed-selector';
-import Map from '../mini-map';
+import Map from '../map';
 
 const CardHeader = styled(BaseHeader)`
   display: grid;
@@ -37,7 +37,7 @@ export default function MapCard({ parameters }) {
           <CardTitle>Total Count of Measurements</CardTitle>
         </CardHeader>
       )}
-      renderBody={() => <Map style={{ height: `100%`, minHeight: `20rem` }} />}
+      renderBody={() => <Map />}
     />
   );
 }

@@ -19,6 +19,7 @@ import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 import LocationCard from '../components/location-card';
 import MapComponent from '../components/map';
+import Legend from '../components/map/legend';
 
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
@@ -233,38 +234,16 @@ var Country = createReactClass({
       );
     }
 
-    const scaleStops = generateLegendStops('pm25');
-    const colorWidth = 100 / scaleStops.length;
     const bbox = getCountryBbox(this.props.match.params.name);
 
     return (
       <section className="fold" id="country-fold-map">
         <div className="fold__body">
-          <MapComponent
-            bbox={bbox}
-            zoom={1}
-            measurements={results}
-            parameter={_.find(this.props.parameters, { id: 'pm25' })}
-            sources={this.props.sources}
-            disableScrollZoom
-          >
-            <div>
-              <p>Showing most recent values for PM2.5</p>
-              <ul className="color-scale">
-                {scaleStops.map(o => (
-                  <li
-                    key={o.label}
-                    style={{
-                      backgroundColor: o.color,
-                      width: `${colorWidth}%`,
-                    }}
-                    className="color-scale__item"
-                  >
-                    <span className="color-scale__value">{o.label}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <MapComponent bbox={bbox}>
+            <Legend
+              parameters={this.props.parameters}
+              activeParameter={{ id: 'pm25', name: 'pm25' }}
+            />
           </MapComponent>
         </div>
       </section>

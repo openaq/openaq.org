@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Dropdown } from 'openaq-design-system';
 import c from 'classnames';
 
-import { generateLegendStops } from '../utils/colors';
+import { generateLegendStops } from '../../utils/colors';
 
 export default function Legend({ parameters, activeParameter, history }) {
   function onFilterSelect(parameter, e) {

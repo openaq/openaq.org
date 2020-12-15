@@ -5,8 +5,8 @@ import _ from 'lodash';
 import qs from 'qs';
 
 import MapComponent from '../components/map';
-import MeasurementsLayer from '../components/measurements-layer';
-import Legend from '../components/legend';
+import MeasurementsLayer from '../components/map/measurements-layer';
+import Legend from '../components/map/legend';
 
 function WorldMap({ parameters, location }) {
   const query = qs.parse(location.search, {
