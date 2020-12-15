@@ -160,11 +160,11 @@ export default function Filter({ countries, parameters, sources }) {
                   <div
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.parameters.includes(
-                        o.id
+                        o.name
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => onFilterSelect('parameters', o.id)}
+                    onClick={() => onFilterSelect('parameters', o.name)}
                   >
                     <span>{o.name}</span>
                   </div>
@@ -245,13 +245,13 @@ export default function Filter({ countries, parameters, sources }) {
           })}
 
           {selected.parameters.map(o => {
-            const parameter = parameters.find(x => x.id === o);
+            const parameter = parameters.find(x => x.name === o);
             return (
               <button
                 type="button"
                 className="button--filter-pill"
                 key={parameter.id}
-                onClick={() => onFilterSelect('parameters', parameter.id)}
+                onClick={() => onFilterSelect('parameters', parameter.name)}
               >
                 <span>{parameter.name}</span>
               </button>

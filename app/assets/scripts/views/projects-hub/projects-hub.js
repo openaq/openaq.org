@@ -53,7 +53,7 @@ export default function ProjectsHub({
     setFilters({
       order_by: query.order_by,
       sort: 'asc',
-      parameters: query.parameters,
+      parameter: query.parameters,
     });
   }, [location]);
 
