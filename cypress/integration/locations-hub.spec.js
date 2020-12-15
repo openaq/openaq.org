@@ -36,7 +36,9 @@ describe('The Locations Hub', () => {
     cy.get('.drop__menu-item').first().click();
 
     cy.get('.button--filter-pill').should('exist');
-
     cy.get('button').contains('Clear Filters').should('exist');
+
+    cy.get('.button--filter-pill').click();
+    cy.get('.button--filter-pill').should('not.exist');
   });
 });
