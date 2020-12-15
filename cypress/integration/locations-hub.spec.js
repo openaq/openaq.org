@@ -34,8 +34,8 @@ describe('The Locations Hub', () => {
 
     cy.get('[title="type__filter"]').click();
     cy.get('.drop__menu-item').first().click();
-    cy.wait(1000)
-    cy.get('.button--filter-pill').should('exist');
+
+    cy.get('.button--filter-pill').should('exist').and('be.visible');
     cy.get('button').contains('Clear Filters').should('exist');
 
     cy.get('.button--filter-pill').click();
