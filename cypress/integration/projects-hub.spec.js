@@ -21,7 +21,6 @@ describe('The Projects Hub', () => {
   });
 
   it('has a results section with a list of project cards', () => {
-    // TODO: figure out why this breaks on CI
     cy.get('[data-cy=results-summary]')
       .invoke('text')
       .should('match', /A total of \d+ datasets were found/);
@@ -38,10 +37,12 @@ describe('The Projects Hub', () => {
         .should('length', 1);
     });
     cy.get('[data-cy=filter-menu-item]').first().click();
+    cy.wait(1000);
 
     cy.get('[data-cy=filter-pill]').should('exist');
 
     cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
     cy.get('[data-cy=filter-clear]').click();
+    cy.get('[data-cy=filter-clear]').should('not.exist');
   });
 });
