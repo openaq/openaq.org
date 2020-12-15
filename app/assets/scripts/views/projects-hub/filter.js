@@ -110,7 +110,9 @@ export default function Filter({ parameters }) {
                     data-hook="dropdown:close"
                     onClick={() => onFilterSelect('parameters', id)}
                   >
-                    <span>{parameters.find(p => p.id === id).name}</span>
+                    <span data-cy={`${parameters.find(p => p.id === id).name}`}>
+                      {parameters.find(p => p.id === id).name}
+                    </span>
                   </div>
                 </li>
               );

@@ -32,9 +32,11 @@ describe('The Projects Hub', () => {
 
   it('has some filters with dropdown menus', () => {
     cy.get('[title="type__filter"]').click();
-    cy.get('[data-cy=filter-parameters]')
-      .contains('li', 'BC')
-      .should('length', 1);
+    ['O3', 'CO', 'NO2', 'CO2', 'SO2', 'BC'].forEach(parameter => {
+      cy.get('[data-cy=filter-parameters]')
+        .find(`[data-cy=${parameter}]`)
+        .should('length', 1);
+    });
     cy.get('[data-cy=filter-menu-item]').first().click();
 
     cy.get('[data-cy=filter-pill]').should('exist');
