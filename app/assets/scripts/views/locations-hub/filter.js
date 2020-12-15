@@ -146,7 +146,7 @@ export default function Filter({ countries, parameters, sources }) {
                       onFilterSelect('countries', o.code);
                     }}
                   >
-                    <span>{o.name}</span>
+                    <span data-cy={o.name}>{o.name}</span>
                   </div>
                 </li>
               );
@@ -179,7 +179,9 @@ export default function Filter({ countries, parameters, sources }) {
                     data-hook="dropdown:close"
                     onClick={() => onFilterSelect('parameters', id)}
                   >
-                    <span>{parameters.find(p => p.id === id).name}</span>
+                    <span data-cy={`${parameters.find(p => p.id === id).name}`}>
+                      {parameters.find(p => p.id === id).name}
+                    </span>
                   </div>
                 </li>
               );
@@ -212,7 +214,7 @@ export default function Filter({ countries, parameters, sources }) {
                       onFilterSelect('sources', o.name);
                     }}
                   >
-                    <span>{o.name}</span>
+                    <span data-cy={o.name}>{o.name}</span>
                   </div>
                 </li>
               );

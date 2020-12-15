@@ -35,7 +35,7 @@ describe('The Locations Hub', () => {
     // country filter
     cy.get('[title="country__filter"]').click();
     cy.get('[data-cy=filter-countries]')
-      .contains('li', 'Australia')
+      .find('[data-cy=Australia]')
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
 
@@ -46,9 +46,11 @@ describe('The Locations Hub', () => {
 
     // parameter filter
     cy.get('[title="type__filter"]').click();
-    cy.get('[data-cy=filter-parameters]')
-      .contains('li', 'BC')
-      .should('length', 1);
+    ['O3', 'CO', 'NO2', 'CO2', 'SO2', 'BC'].forEach(parameter => {
+      cy.get('[data-cy=filter-parameters]')
+        .find(`[data-cy=${parameter}]`)
+        .should('length', 1);
+    });
     cy.get('[data-cy=filter-menu-item]').first().click();
 
     cy.get('[data-cy=filter-pill]').should('exist');
@@ -59,7 +61,7 @@ describe('The Locations Hub', () => {
     // source filter
     cy.get('[title="source__filter"]').click();
     cy.get('[data-cy=filter-sources]')
-      .contains('li', 'AirNow')
+      .find('[data-cy=AirNow]')
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
 
