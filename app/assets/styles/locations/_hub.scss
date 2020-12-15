@@ -196,6 +196,7 @@
     grid-gap: 0.5rem;
     .card__tags {
       display: grid;
+      width: min-content;
     }
   }
 

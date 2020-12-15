@@ -43,7 +43,12 @@ export default function ProjectCard({
               value: formatThousands(totalMeasurements),
             },
             { label: 'Collection dates', value: `${started} - ${ended}` },
-            { label: 'Measurands', value: parametersList.join(', ') },
+            {
+              label: 'Measurands',
+              value: parametersList
+                .map(p => p.measurand.toUpperCase())
+                .join(', '),
+            },
           ]}
         />
       )}
@@ -62,7 +67,7 @@ ProjectCard.propTypes = {
   onDownloadClick: T.func,
   lastUpdated: T.string,
   name: T.string,
-  id: T.string,
+  id: T.oneOfType([T.string, T.number]),
   subtitle: T.string,
   sourceType: T.oneOfType([T.array, T.string]),
   firstUpdated: T.string,

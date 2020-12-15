@@ -60,7 +60,7 @@ const prepareData = data => {
         },
         avg: {
           ...acc.avg,
-          values: [...acc.count.values, stats.value],
+          values: [...acc.avg.values, stats.value],
         },
         count: {
           ...acc.count,

@@ -38,11 +38,13 @@ describe('The Locations Hub', () => {
       .find('[data-cy=Australia]')
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
+    cy.wait(1000);
 
     cy.get('[data-cy=filter-pill]').should('exist');
 
     cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
     cy.get('[data-cy=filter-clear]').click();
+    cy.get('[data-cy=filter-clear]').should('not.exist');
 
     // parameter filter
     cy.get('[title="type__filter"]').click();
@@ -52,11 +54,12 @@ describe('The Locations Hub', () => {
         .should('length', 1);
     });
     cy.get('[data-cy=filter-menu-item]').first().click();
-
+    cy.wait(1000);
     cy.get('[data-cy=filter-pill]').should('exist');
 
     cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
     cy.get('[data-cy=filter-clear]').click();
+    cy.get('[data-cy=filter-clear]').should('not.exist');
 
     // source filter
     cy.get('[title="source__filter"]').click();
@@ -64,10 +67,12 @@ describe('The Locations Hub', () => {
       .find('[data-cy=AirNow]')
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
+    cy.wait(1000);
 
     cy.get('[data-cy=filter-pill]').should('exist');
 
     cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
     cy.get('[data-cy=filter-clear]').click();
+    cy.get('[data-cy=filter-clear]').should('not.exist');
   });
 });
