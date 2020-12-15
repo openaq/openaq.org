@@ -37,7 +37,6 @@ describe('The Projects Hub', () => {
         .should('length', 1);
     });
     cy.get('[data-cy=filter-menu-item]').first().click();
-    cy.wait(1000);
 
     cy.get('[data-cy=filter-pill]').should('exist');
 

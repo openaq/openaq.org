@@ -38,7 +38,6 @@ describe('The Locations Hub', () => {
       .find('[data-cy=Australia]')
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
-    cy.wait(1000);
 
     cy.get('[data-cy=filter-pill]').should('exist');
 
@@ -54,7 +53,7 @@ describe('The Locations Hub', () => {
         .should('length', 1);
     });
     cy.get('[data-cy=filter-menu-item]').first().click();
-    cy.wait(1000);
+
     cy.get('[data-cy=filter-pill]').should('exist');
 
     cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
@@ -67,7 +66,6 @@ describe('The Locations Hub', () => {
       .find('[data-cy=AirNow]')
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
-    cy.wait(1000);
 
     cy.get('[data-cy=filter-pill]').should('exist');
 
