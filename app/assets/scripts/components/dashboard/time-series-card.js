@@ -44,7 +44,12 @@ const defaultState = {
   data: null,
 };
 
-export default function TimeSeriesCard({ locationId, projectId, parameters }) {
+export default function TimeSeriesCard({
+  locationId,
+  projectId,
+  parameters,
+  dateRange,
+}) {
   // eslint-disable-next-line no-unused-vars
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
@@ -52,8 +57,11 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
     id: parameters[0].measurand || parameters[0],
     name: parameters[0].measurand || parameters[0],
   });
+
+  const [year, month, day] = dateRange ? dateRange.split('/') : [];
+
   // eslint-disable-next-line no-unused-vars
-  const [temporal, setTemporal] = useState('hour');
+  const [temporal, setTemporal] = useState(day ? 'hour' : 'day');
 
   useEffect(() => {
     const fetchData = () => {
@@ -62,9 +70,16 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
       let query = {
         parameter: activeTab.id,
         temporal,
-        date_to: moment().format('YYYY-MM-DD'),
-        date_from: moment().subtract(7, 'd').format('YYYY-MM-DD'),
+        ...(dateRange
+          ? {
+              date_from: new Date(year, month - 1, day || 1),
+              date_to: day
+                ? new Date(year, month - 1, day)
+                : new Date(year, month, 0),
+            }
+          : {}),
       };
+
       if (locationId) {
         query = { ...query, location: locationId, spatial: 'location' };
       } else if (projectId) {
@@ -106,7 +121,7 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
     return () => {
       setState(defaultState);
     };
-  }, [activeTab, temporal]);
+  }, [activeTab, temporal, dateRange]);
 
   if (!fetched && !fetching) {
     return null;

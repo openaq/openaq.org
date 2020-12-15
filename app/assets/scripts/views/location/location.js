@@ -169,6 +169,7 @@ function Location(props) {
             locationId={data.id}
             parameters={data.parameters}
             xUnit="day"
+            dateRange={dateRange}
           />
           <MeasureandsCard parameters={data.parameters} />
           <MapCard parameters={data.parameters} points={data.points} />
