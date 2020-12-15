@@ -13,12 +13,12 @@ import {
   fetchLatestMeasurements,
   openDownloadModal,
 } from '../actions/action-creators';
-import { generateLegendStops } from '../utils/colors';
 import { getCountryBbox } from '../utils/countries';
 import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 import LocationCard from '../components/location-card';
 import MapComponent from '../components/map';
+import MeasurementsLayer from '../components/map/measurements-layer';
 import Legend from '../components/map/legend';
 
 /*
@@ -240,6 +240,7 @@ var Country = createReactClass({
       <section className="fold" id="country-fold-map">
         <div className="fold__body">
           <MapComponent bbox={bbox}>
+            <MeasurementsLayer activeParameter={{ id: 'pm25', name: 'pm25' }} />
             <Legend
               parameters={this.props.parameters}
               activeParameter={{ id: 'pm25', name: 'pm25' }}

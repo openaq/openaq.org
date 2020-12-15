@@ -16,6 +16,7 @@ import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 import MapCard from '../../components/dashboard/map-card';
+import NearbyLocations from '../../components/nearby-locations';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
@@ -158,6 +159,11 @@ function Location(props) {
             id={data.id}
           />
         </Dashboard>
+        <NearbyLocations
+          city={data.city}
+          country={data.country}
+          parameters={data.parameters}
+        />
       </div>
     </section>
   );
