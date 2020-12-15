@@ -136,7 +136,11 @@ var Country = createReactClass({
         area: k,
       });
       return (
-        <section className="fold fold--locations" key={k}>
+        <section
+          className="fold fold--locations"
+          key={k}
+          data-cy="country-list"
+        >
           <div className="inner">
             <header className="fold__header">
               <h1 className="fold__title">
@@ -236,9 +240,13 @@ var Country = createReactClass({
     const scaleStops = generateLegendStops('pm25');
     const colorWidth = 100 / scaleStops.length;
     const bbox = getCountryBbox(this.props.match.params.name);
+    console.log(
+      'props',
+      results.filter(r => r.country === 'CY')
+    );
 
     return (
-      <section className="fold" id="country-fold-map">
+      <section className="fold" id="country-fold-map" data-cy="country-map">
         <div className="fold__body">
           <MapComponent
             bbox={bbox}
@@ -280,25 +288,29 @@ var Country = createReactClass({
     });
 
     return (
-      <section className="inpage">
+      <section className="inpage" data-cy="country-header">
         <header className="inpage__header">
           <div className="inner">
             <div className="inpage__headline">
-              <p className="inpage__subtitle">Country</p>
-              <h1 className="inpage__title">{countryData.name}</h1>
+              <p className="inpage__subtitle" data-cy="country-header-subtitle">
+                Country
+              </p>
+              <h1 className="inpage__title" data-cy="country-header-title">
+                {countryData.name}
+              </h1>
 
-              <ul className="country-stats">
-                <li>
+              <ul className="country-stats" data-cy="country-stats">
+                <li data-cy="country-stats-areas">
                   <strong>{countryData.cities}</strong> areas
                 </li>
-                <li>
+                <li data-cy="country-stats-locations">
                   <strong>{countryData.locations}</strong> locations
                 </li>
-                <li>
+                <li data-cy="country-stats-measurements">
                   <strong>{formatThousands(countryData.count)}</strong>{' '}
                   measurements
                 </li>
-                <li>
+                <li data-cy="country-stats-sources">
                   <strong>{sourcesData.length}</strong>{' '}
                   {sourcesData.length > 1 ? 'sources' : 'source'}
                 </li>
@@ -307,6 +319,7 @@ var Country = createReactClass({
               <ul className="ipha">
                 <li>
                   <a
+                    data-cy="header-apidocs-btn"
                     href={config.apiDocs}
                     title="View API documentation"
                     className="ipha-api"
@@ -318,6 +331,7 @@ var Country = createReactClass({
                 </li>
                 <li>
                   <a
+                    data-cy="header-download-btn"
                     href="#"
                     className="ipha-download ipha-main"
                     title={`Download ${countryData.name} data`}
@@ -331,7 +345,10 @@ var Country = createReactClass({
               </ul>
             </div>
           </div>
-          <figure className="inpage__media inpage__media--cover media">
+          <figure
+            className="inpage__media inpage__media--cover media"
+            data-cy="header-cover-img"
+          >
             <div className="media__item">
               <img
                 src="/assets/graphics/content/view--home/cover--home.jpg"
