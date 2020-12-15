@@ -205,12 +205,7 @@ var Country = createReactClass({
   },
 
   renderMap: function () {
-    let {
-      fetched,
-      fetching,
-      error,
-      data: { results },
-    } = this.props.latestMeasurements;
+    let { fetched, fetching, error } = this.props.latestMeasurements;
     if (!fetched && !fetching) {
       return null;
     }
