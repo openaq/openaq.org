@@ -235,10 +235,10 @@ var Country = createReactClass({
       <section className="fold" id="country-fold-map">
         <div className="fold__body">
           <MapComponent bbox={bbox}>
-            <MeasurementsLayer activeParameter={{ id: 'pm25', name: 'pm25' }} />
+            <MeasurementsLayer activeParameter={'pm25'} />
             <Legend
               parameters={this.props.parameters}
-              activeParameter={{ id: 'pm25', name: 'pm25' }}
+              activeParameter={'pm25'}
             />
           </MapComponent>
         </div>

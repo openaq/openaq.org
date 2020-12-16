@@ -16,14 +16,14 @@ export default function Legend({ parameters, activeParameter, history }) {
       triggerElement="button"
       triggerClassName="button button--primary-unbounded drop__toggle--caret"
       triggerTitle="Show/hide parameter options"
-      triggerText={activeParameter.name}
+      triggerText={activeParameter}
     >
       <ul role="menu" className="drop__menu drop__menu--select">
         {parameters.map((o, i) => (
           <li key={`${o.id}-${i}`}>
             <a
               className={c('drop__menu-item', {
-                'drop__menu-item--active': activeParameter.id === o.id,
+                'drop__menu-item--active': activeParameter === o.id,
               })}
               href="#"
               title={`Show values for ${o.name}`}
@@ -38,7 +38,7 @@ export default function Legend({ parameters, activeParameter, history }) {
     </Dropdown>
   );
 
-  const scaleStops = generateLegendStops(activeParameter.id);
+  const scaleStops = generateLegendStops(activeParameter);
   const colorWidth = 100 / scaleStops.length;
 
   return (
@@ -67,7 +67,7 @@ export default function Legend({ parameters, activeParameter, history }) {
 }
 
 Legend.propTypes = {
-  parameters: PropTypes.array,
-  activeParameter: PropTypes.object,
-  history: PropTypes.object,
+  parameters: PropTypes.array.isRequired,
+  activeParameter: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
 };

@@ -26,8 +26,11 @@ function WorldMap({ parameters, location }) {
       </header>
       <div className="inpage__body">
         <MapComponent>
-          <MeasurementsLayer activeParameter={activeParam} />
-          <Legend parameters={parameters} activeParameter={activeParam} />
+          <MeasurementsLayer activeParameter={activeParam.name.toLowerCase()} />
+          <Legend
+            parameters={parameters}
+            activeParameter={activeParam.name.toLowerCase()}
+          />
         </MapComponent>
       </div>
     </section>

@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { PropTypes as T } from 'prop-types';
 import mapbox from 'mapbox-gl';
 
 import config from '../../config';
+import {
+  circleOpacity,
+  circleBlur,
+  coloredCircleRadius,
+  borderCircleRadius,
+} from '../../utils/map-settings';
+import { generateColorStops } from '../../utils/colors';
 import Popover from './popover';
 
 export default function MeasurementsLayer({ activeParameter, map }) {
@@ -11,7 +19,9 @@ export default function MeasurementsLayer({ activeParameter, map }) {
   useEffect(() => {
     let s = map.addSource('measurements-source', {
       type: 'vector',
-      tiles: [`${config.api}/locations/tiles/{z}/{x}/{y}.pbf`],
+      tiles: [
+        `${config.api}/locations/tiles/{z}/{x}/{y}.pbf?parameter=${activeParameter}`,
+      ],
       minzoom: 0,
       maxzoom: 24,
       bounds: [-180, -90, 180, 90],
@@ -28,8 +38,12 @@ export default function MeasurementsLayer({ activeParameter, map }) {
         'source-layer': 'default',
         type: 'circle',
         paint: {
-          'circle-color': 'black',
+          'circle-color': {
+            property: 'lastValue',
+            stops: generateColorStops(activeParameter, 'dark'),
+          },
           'circle-opacity': 1,
+          'circle-radius': borderCircleRadius,
           'circle-blur': 0,
         },
       });
@@ -40,7 +54,13 @@ export default function MeasurementsLayer({ activeParameter, map }) {
         'source-layer': 'default',
         type: 'circle',
         paint: {
-          'circle-color': 'teal',
+          'circle-color': {
+            property: 'lastValue',
+            stops: generateColorStops(activeParameter),
+          },
+          'circle-opacity': circleOpacity,
+          'circle-radius': coloredCircleRadius,
+          'circle-blur': circleBlur,
         },
       });
 
@@ -58,7 +78,7 @@ export default function MeasurementsLayer({ activeParameter, map }) {
         ReactDOM.render(
           <Popover
             activeParameter={activeParameter}
-            locationId={e.features[0].properties.location_id}
+            locationId={e.features[0].properties.locationId}
           />,
           popoverElement
         );
@@ -90,3 +110,8 @@ export default function MeasurementsLayer({ activeParameter, map }) {
 
   return null;
 }
+
+MeasurementsLayer.propTypes = {
+  activeParameter: T.string.isRequired,
+  map: T.object.isRequired,
+};

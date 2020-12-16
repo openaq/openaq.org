@@ -16,11 +16,8 @@ export default function NearbyLocations({ city, country, parameters }) {
         </header>
         <div className="fold__body">
           <MapComponent>
-            <MeasurementsLayer activeParameter={{ id: 'pm25', name: 'pm25' }} />
-            <Legend
-              parameters={parameters}
-              activeParameter={{ id: 'pm25', name: 'pm25' }}
-            />
+            <MeasurementsLayer activeParameter={'pm25'} />
+            <Legend parameters={parameters} activeParameter={'pm25'} />
           </MapComponent>
         </div>
       </div>
