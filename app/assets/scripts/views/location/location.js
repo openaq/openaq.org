@@ -171,12 +171,14 @@ function Location(props) {
             xUnit="day"
             dateRange={dateRange}
           />
-          <MeasureandsCard parameters={data.parameters} />
+          <MeasureandsCard parameters={data.parameters} 
+          />
           <MapCard parameters={data.parameters} points={data.points} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
             id={data.id}
+            dateRange={dateRange}
           />
         </Dashboard>
       </div>

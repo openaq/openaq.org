@@ -82,7 +82,7 @@ export default function Results({
               name={loc.name}
               onDownloadClick={openModal}
               parametersList={loc.parameters}
-              sources={loc.sources}
+              sources={loc.sources || []}
               sourceType={loc.sourceType}
               totalMeasurements={loc.measurements}
             />
