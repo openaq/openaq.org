@@ -52,15 +52,17 @@ export default function LocationCard({
             },
             {
               label: 'Source',
-              value: sources.map(source => (
-                <a
-                  href={source.sourceURL}
-                  title={`View source for ${name}`}
-                  key={source.name}
-                >
-                  {source.name}
-                </a>
-              )),
+              value:
+                sources &&
+                sources.map(source => (
+                  <a
+                    href={source.sourceURL}
+                    title={`View source for ${name}`}
+                    key={source.name}
+                  >
+                    {source.name}
+                  </a>
+                )),
             },
           ]}
         />
