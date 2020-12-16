@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
+
 import _ from 'lodash';
-import { buildAPIQS } from 'qs';
 
 import { formatThousands } from '../../utils/format';
 import config from '../../config';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
+import LoadingMessage from '../../components/loading-message';
+import InfoMessage from '../../components/info-message';
+import CountryMap from './map';
 
 const defaultLocations = {
   locationFetched: false,
@@ -112,11 +115,6 @@ export default function Country(props) {
       setCountry(defaultCountry);
     };
   }, []);
-  console.log('data', locations, country);
-
-  // if (!locationFetched || countryFetched && !locationFetching ) {
-  //   return null;
-  // }
 
   function onDownloadClick() {
     props._openDownloadModal({
@@ -125,39 +123,59 @@ export default function Country(props) {
       location: data.location,
     });
   }
-  console.log('data', locations, country);
-  // TODO remove need for this with updated endpoint result
-  // let countryData = _.find(this.props.countries, {
-  //   code: this.props.match.params.name,
-  // });
-  // let sourcesData = _.filter(this.props.sources, {
-  //   country: this.props.match.params.name,
+
+  // gets sources from locations and uses set to create an array with no duplicates
+  const sourceList = locations
+    ? Array.from(
+        new Set(locations.map(loc => loc.sources[0]).map(JSON.stringify))
+      ).map(JSON.parse)
+    : null;
+
+  let groupped = _(locations).sortBy('city').groupBy('city').value();
+
+  // let countriesList = _.map(groupped, (locations, k) => {
+  //   //   let dlClick = onDownloadClick(null, {
+  //   //     country: this.props.match.params.name,
+  //   //     area: k,
   // });
 
+  console.log('groupped', groupped);
   return (
     <>
       {(countryError || !country) && <ErrorHeader />}
       {countryFetching && <LoadingHeader />}
-      {country && (
-        <section className="inpage">
+      {country && locations && (
+        <section className="inpage" data-cy="country-page">
           <Header
             id="country"
             tagline="Country"
             title={country.name}
             stats={[
-              { number: '1', label: 'areas' },
-              { number: country.locations, label: 'locations' },
+              { number: country.cities, label: 'areas' },
+              {
+                number: country.locations,
+                label: country.locations > 1 ? 'locations' : 'location',
+              },
               {
                 number: formatThousands(country.count),
                 label: 'measurements',
               },
-              { number: '1', label: 'source' },
+              {
+                number: sourceList.length,
+                label: sourceList.length > 1 ? 'sources' : 'source',
+              },
             ]}
             action={{
               api: `${config.api}/locations?location=${id}`,
               download: onDownloadClick,
             }}
           />
+          <div className="inpage__body">
+            <CountryMap />
+            {locationFetching && <LoadingMessage />}
+            {locationError && <InfoMessage standardMessage />}
+            <div className="countries-list"></div>
+          </div>
         </section>
       )}
     </>
@@ -167,9 +185,6 @@ export default function Country(props) {
 Country.propTypes = {
   match: T.object,
 
-  _invalidateAllLocationData: T.func,
-  _fetchLocations: T.func,
-  _fetchLatestMeasurements: T.func,
   _openDownloadModal: T.func,
 
   countries: T.array,

@@ -115,7 +115,7 @@ var Country = createReactClass({
 
     if (error) {
       return (
-        <InfoMessage>
+        <InfoMessage message="standard">
           <h2>Uhoh, something went wrong.</h2>
           <p>
             There was a problem getting the data. If you continue to have
