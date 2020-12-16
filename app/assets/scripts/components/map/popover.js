@@ -34,7 +34,7 @@ export default function Popover({ activeParameter, locationId }) {
               ...state,
               fetched: true,
               fetching: false,
-              data: json.results,
+              data: json.results[0],
             }));
           },
           e => {
@@ -69,7 +69,10 @@ export default function Popover({ activeParameter, locationId }) {
   }
 
   let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
-  const parameter = data.parameters.find(p => p.id === activeParameter.id);
+  const parameter = data.parameters.find(
+    // TODO: clean up parameter mess with id vs name
+    p => p.measurand === activeParameter.name.toLowerCase()
+  );
 
   return (
     <article className="popover">
@@ -80,25 +83,32 @@ export default function Popover({ activeParameter, locationId }) {
               href={`#/location/${encodeURIComponent(locationId)}`}
               title={`View ${data.name} page`}
             >
-              {location}
+              {data.name}
             </a>
           </h1>
         </header>
         <div className="popover__body">
-          <p>
-            Last reading{' '}
-            <strong>
-              {round(parameter.value)} {parameter.unit}
-            </strong>{' '}
-            at <strong>{lastUpdated}</strong>
-          </p>
+          {parameter && (
+            <p>
+              Last reading{' '}
+              <strong>
+                {round(parameter.lastValue)} {parameter.unit}
+              </strong>{' '}
+              at <strong>{lastUpdated}</strong>
+            </p>
+          )}
 
-          <p>
-            Source:{' '}
-            <a href={data.sources[0].sourceURL} title="View source information">
-              {data.sources[0].name}
-            </a>
-          </p>
+          {data.sources && (
+            <p>
+              Source:{' '}
+              <a
+                href={data.sources[0].sourceURL}
+                title="View source information"
+              >
+                {data.sources[0].name}
+              </a>
+            </p>
+          )}
 
           <ul className="popover__actions">
             {/*
@@ -131,6 +141,9 @@ export default function Popover({ activeParameter, locationId }) {
 }
 
 Popover.propTypes = {
-  activeParameter: T.string.isRequired,
+  activeParameter: T.shape({
+    id: T.number.isRequired,
+    name: T.string.isRequired,
+  }).isRequired,
   locationId: T.number.isRequired,
 };

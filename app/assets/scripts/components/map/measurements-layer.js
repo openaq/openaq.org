@@ -84,7 +84,7 @@ export default function MeasurementsLayer({ activeParameter, map }) {
         map.removeLayer('measurements-layer');
       if (map.getLayer('measurements-outline'))
         map.removeLayer('measurements-outline');
-      if (source) map.removeSouce('measurements-source');
+      if (source) map.removeSource('measurements-source');
     };
   }, [source]);
 

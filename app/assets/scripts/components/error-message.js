@@ -1,5 +1,5 @@
 import React from 'react';
-import InfoMessage from '../info-message';
+import InfoMessage from './info-message';
 
 export default function ErrorMessage() {
   return (
