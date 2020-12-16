@@ -116,12 +116,9 @@ export default function Country(props) {
     };
   }, []);
 
-  function onDownloadClick() {
-    props._openDownloadModal({
-      country: data.country,
-      area: data.city,
-      location: data.location,
-    });
+  function onDownloadClick(data, e) {
+    e && e.preventDefault();
+    props._openDownloadModal(data);
   }
 
   // gets sources from locations and uses set to create an array with no duplicates
@@ -131,15 +128,10 @@ export default function Country(props) {
       ).map(JSON.parse)
     : null;
 
-  let groupped = _(locations).sortBy('city').groupBy('city').value();
+  let locationGroups = _(locations).sortBy('city').groupBy('city').value();
+  console.log('locations', locations);
+  console.log('locationGroups', Object.entries(locationGroups));
 
-  // let countriesList = _.map(groupped, (locations, k) => {
-  //   //   let dlClick = onDownloadClick(null, {
-  //   //     country: this.props.match.params.name,
-  //   //     area: k,
-  // });
-
-  console.log('groupped', groupped);
   return (
     <>
       {(countryError || !country) && <ErrorHeader />}
@@ -167,14 +159,55 @@ export default function Country(props) {
             ]}
             action={{
               api: `${config.api}/locations?location=${id}`,
-              download: onDownloadClick,
+              download: () =>
+                onDownloadClick(null, {
+                  country: id,
+                }),
             }}
           />
           <div className="inpage__body">
             <CountryMap />
             {locationFetching && <LoadingMessage />}
             {locationError && <InfoMessage standardMessage />}
-            <div className="countries-list"></div>
+            <div className="countries-list">
+              {Object.entries(locationGroups).map(([city, cityLocations]) => (
+                <section
+                  className="fold fold--locations"
+                  key={city}
+                  data-cy="country-list"
+                >
+                  <div className="inner">
+                    <header className="fold__header">
+                      <h1 className="fold__title">
+                        {city}{' '}
+                        <small>
+                          {locations.length}{' '}
+                          {locations.length > 1 ? 'locations' : 'location'}
+                        </small>
+                      </h1>
+                      <p className="fold__main-action">
+                        <a
+                          href="#"
+                          className="location-download-button"
+                          title={`Download ${city} data`}
+                          onClick={() =>
+                            onDownloadClick(null, {
+                              country: id,
+                              area: city,
+                            })
+                          }
+                        >
+                          Download
+                        </a>
+                      </p>
+                    </header>
+                    <div className="fold__body">
+                      <ul className="country-locations-list"></ul>
+                    </div>
+                  </div>
+                </section>
+              ))}
+            </div>
           </div>
         </section>
       )}
