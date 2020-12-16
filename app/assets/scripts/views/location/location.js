@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
-import HeaderMessage from '../../components/header-message';
+import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
 import CardList from '../../components/card-list';
 
@@ -29,15 +29,18 @@ const defaultState = {
 };
 
 function Location(props) {
-  const { id } = props.match.params;
+  const id = props.match.params;
 
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
     const fetchData = id => {
       setState(state => ({ ...state, fetching: true, error: null }));
+      let limit = 10000;
+      filters.country = id;
+      let f = buildAPIQS(filters);
 
-      fetch(`${config.api}/locations/${encodeURIComponent(id)}`)
+      fetch(`${config.api}/locations?limit=${limit}&${f}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
