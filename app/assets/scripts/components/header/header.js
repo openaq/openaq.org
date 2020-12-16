@@ -114,7 +114,7 @@ Header.propTypes = {
   description: T.oneOfType([T.string, T.node]),
   stats: T.arrayOf(
     T.shape({
-      number: T.number,
+      number: T.oneOfType([T.string, T.number]),
       label: T.string,
     })
   ),

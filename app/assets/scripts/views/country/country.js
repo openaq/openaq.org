@@ -9,6 +9,7 @@ import config from '../../config';
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
+import LocationCard from '../../components/location-card';
 import CountryMap from './map';
 
 const defaultLocations = {
@@ -129,7 +130,7 @@ export default function Country(props) {
     : null;
 
   let locationGroups = _(locations).sortBy('city').groupBy('city').value();
-  console.log('locations', locations);
+  console.log('sourceList', sourceList);
   console.log('locationGroups', Object.entries(locationGroups));
 
   return (
@@ -158,7 +159,7 @@ export default function Country(props) {
               },
             ]}
             action={{
-              api: `${config.api}/locations?location=${id}`,
+              api: config.apiDocs,
               download: () =>
                 onDownloadClick(null, {
                   country: id,
@@ -202,7 +203,31 @@ export default function Country(props) {
                       </p>
                     </header>
                     <div className="fold__body">
-                      <ul className="country-locations-list"></ul>
+                      <ul className="country-locations-list">
+                        {cityLocations.map(loc => (
+                          <li key={loc.id}>
+                            <LocationCard
+                              onDownloadClick={() =>
+                                props._openDownloadModal({
+                                  country: id,
+                                  area: city,
+                                  location: loc.name,
+                                })
+                              }
+                              id={loc.id}
+                              name={loc.name}
+                              city={loc.city}
+                              countryData={{ name: country.name }}
+                              sourcesData={sourceList}
+                              totalMeasurements={loc.measurements}
+                              parametersList={loc.parameters}
+                              lastUpdate={loc.lastUpdated}
+                              collectionStart={loc.firstUpdated}
+                              compact
+                            />
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </section>
