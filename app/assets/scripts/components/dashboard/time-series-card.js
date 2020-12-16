@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
-import moment from 'moment';
 
 import config from '../../config';
 import LoadingMessage from '../loading-message';
@@ -170,4 +169,5 @@ TimeSeriesCard.propTypes = {
       measurand: T.string.isRequired,
     })
   ),
+  dateRange: T.string,
 };

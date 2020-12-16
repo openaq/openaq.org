@@ -3,14 +3,17 @@ import { Dropdown } from 'openaq-design-system';
 import styled from 'styled-components';
 import moment from 'moment';
 import c from 'classnames';
-import { format } from 'date-fns';
-import DatePicker from 'react-datepicker';
+import T from 'prop-types';
 import DayPicker from 'react-day-picker';
 
 const Wrapper = styled.div`
   padding: 2rem 2rem;
 `;
 
+/* Date selection component
+ * @param dateRange {string} date in format YYYY/MM/DD (day is otional)
+ * @param setDateRange {func} updater function
+ */
 function DateSelector(props) {
   const { dateRange, setDateRange } = props;
 
@@ -167,26 +170,6 @@ function DateSelector(props) {
                     canChangeMonth={false}
                   />
                 </Dropdown>
-                {/*
-                <DatePicker
-                  selected={new Date(`${year}/${month}/${day}`)}
-                  onChange={(date) => {
-                    setDay(date.getDate())
-                  }}
-                  minDate={new Date(`${year}/${month}`)}
-                  maxDate={new Date(`${year}/${Number(month) + 1}`)}
-                  shouldCloseOnSelect
-                  popperPlacement='right-end'
-                  customInput={
-                    <div
-                      className={c('drop__menu-item', {
-                        'drop__menu-item--active': day && true,
-                      })}
-                    >
-                      <span>Choose specific date</span>
-                    </div>
-                  }
-                />*/}
               </li>
             </ul>
           </Dropdown>
@@ -195,4 +178,10 @@ function DateSelector(props) {
     </Wrapper>
   );
 }
+
+DateSelector.propTypes = {
+  dateRange: T.string,
+  setDateRange: T.string,
+  maxYears: T.number,
+};
 export default DateSelector;

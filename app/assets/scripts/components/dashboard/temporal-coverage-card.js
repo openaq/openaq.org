@@ -113,7 +113,7 @@ export default function TemporalCoverageCard({
             }
           : {}),
       };
-      console.log(query)
+      console.log(query);
 
       if (spatial === 'project') {
         query = {
@@ -162,11 +162,6 @@ export default function TemporalCoverageCard({
           }
         );
     };
-
-    /*
-    ['dow', 'moy'].forEach(t => {
-      fetchData(t);
-    });*/
 
     const dateRangeType = dateRange ? dateRange.split('/').length : null;
 
@@ -269,6 +264,7 @@ TemporalCoverageCard.propTypes = {
     })
   ),
   spatial: T.oneOf(['project', 'location']).isRequired,
+  dateRange: T.string,
   id: T.oneOfType([T.string, T.number]).isRequired,
 };
 
