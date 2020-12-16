@@ -40,7 +40,10 @@ export default function Header({
           {stats && (
             <ul className="country-stats" data-cy={`${id}-header-stats`}>
               {stats.map(stat => (
-                <li data-cy={`${id}-header-stats-${label}`}>
+                <li
+                  key={stat.label}
+                  data-cy={`${id}-header-stats-${stat.label}`}
+                >
                   <strong>{stat.number}</strong> {stat.label}
                 </li>
               ))}
@@ -111,11 +114,11 @@ Header.propTypes = {
   description: T.oneOfType([T.string, T.node]),
   stats: T.arrayOf(
     T.shape({
-      number: T.string,
+      number: T.number,
       label: T.string,
     })
   ),
-  disclaimer: T.boolean,
+  disclaimer: T.func,
   action: T.shape({
     api: T.string,
     download: T.func,

@@ -146,8 +146,11 @@ export default function Country(props) {
             title={country.name}
             stats={[
               { number: '1', label: 'areas' },
-              { number: '1', label: 'locations' },
-              { number: '1', label: 'measurements' },
+              { number: country.locations, label: 'locations' },
+              {
+                number: formatThousands(country.count),
+                label: 'measurements',
+              },
               { number: '1', label: 'source' },
             ]}
             action={{
