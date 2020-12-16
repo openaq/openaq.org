@@ -77,8 +77,8 @@ export default function MeasurementsLayer({ activeParameter, map }) {
         let popoverElement = document.createElement('div');
         ReactDOM.render(
           <Popover
-            parameter={activeParameter.name}
-            properties={e.features[0].properties}
+            activeParameter={activeParameter}
+            locationId={e.features[0].properties.location_id}
           />,
           popoverElement
         );

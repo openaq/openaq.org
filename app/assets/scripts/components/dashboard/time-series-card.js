@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import config from '../../config';
 import LoadingMessage from '../loading-message';
-import InfoMessage from '../info-message';
+import ErrorMessage from '../error-message';
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
 import TabbedSelector from '../tabbed-selector';
 import LineChart from '../line-chart';
@@ -21,21 +21,6 @@ const CardHeader = styled(BaseHeader)`
   grid-template-rows: min-content 1fr;
   grid-gap: 0.5rem;
 `;
-
-const ErrorMessage = () => (
-  <div>
-    <p>We couldn&apos;t get any data.</p>
-    <InfoMessage>
-      <p>Please try again later.</p>
-      <p>
-        If you think there&apos;s a problem, please{' '}
-        <a href="mailto:info@openaq.org" title="Contact openaq">
-          contact us.
-        </a>
-      </p>
-    </InfoMessage>
-  </div>
-);
 
 const defaultState = {
   fetched: false,

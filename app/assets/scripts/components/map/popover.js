@@ -1,28 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
 
+import config from '../../config';
 import { round } from '../../utils/format';
+import LoadingMessage from '../loading-message';
+import ErrorMessage from '../error-message';
 
-export default function Popover({
-  parameter,
-  properties: { lastUpdated, value, unit, location, id, source },
-}) {
-  // TODO: fetch data from /location endpoint instead of feature props
+const defaultState = {
+  fetched: false,
+  fetching: false,
+  error: null,
+  data: null,
+};
 
-  let reading = <p>{parameter} N/A</p>;
-  if (lastUpdated) {
-    let lastUp = moment.utc(lastUpdated).format('YYYY/MM/DD HH:mm');
-    reading = (
-      <p>
-        Last reading{' '}
-        <strong>
-          {round(value)} {unit}
-        </strong>{' '}
-        at <strong>{lastUp}</strong>
-      </p>
-    );
+export default function Popover({ activeParameter, locationId }) {
+  const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
+
+  useEffect(() => {
+    const fetchData = () => {
+      setState(state => ({ ...state, fetching: true, error: null }));
+
+      fetch(`${config.api}/locations/${locationId}`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(
+          json => {
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              data: json.results,
+            }));
+          },
+          e => {
+            console.log('e', e);
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              error: e,
+            }));
+          }
+        );
+    };
+
+    fetchData();
+
+    return () => {
+      setState(defaultState);
+    };
+  }, []);
+
+  if (!fetched && !fetching) {
+    return null;
   }
+
+  if (fetching) {
+    return <LoadingMessage />;
+  }
+
+  if (error) {
+    return <ErrorMessage />;
+  }
+
+  let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
+  const parameter = data.parameters.find(p => p.id === activeParameter.id);
 
   return (
     <article className="popover">
@@ -30,23 +77,29 @@ export default function Popover({
         <header className="popover__header">
           <h1 className="popover__title">
             <a
-              href={`#/location/${encodeURIComponent(id)}`}
-              title={`View ${location} page`}
+              href={`#/location/${encodeURIComponent(locationId)}`}
+              title={`View ${data.name} page`}
             >
               {location}
             </a>
           </h1>
         </header>
         <div className="popover__body">
-          {reading}
-          {source && (
-            <p>
-              Source:{' '}
-              <a href={source.url} title="View source information">
-                {source.name}
-              </a>
-            </p>
-          )}
+          <p>
+            Last reading{' '}
+            <strong>
+              {round(parameter.value)} {parameter.unit}
+            </strong>{' '}
+            at <strong>{lastUpdated}</strong>
+          </p>
+
+          <p>
+            Source:{' '}
+            <a href={data.sources[0].sourceURL} title="View source information">
+              {data.sources[0].name}
+            </a>
+          </p>
+
           <ul className="popover__actions">
             {/*
                 Using `a` instead of `Link` because these are rendered outside
@@ -54,7 +107,7 @@ export default function Popover({
               */}
             <li>
               <a
-                href={`#/compare/${encodeURIComponent(id)}`}
+                href={`#/compare/${encodeURIComponent(locationId)}`}
                 className="button button--primary-bounded"
                 title={`Compare ${name} with other locations`}
               >
@@ -63,7 +116,7 @@ export default function Popover({
             </li>
             <li>
               <a
-                href={`#/location/${encodeURIComponent(id)}`}
+                href={`#/location/${encodeURIComponent(locationId)}`}
                 title={`View ${name} page`}
                 className="button button--primary-bounded"
               >
@@ -78,13 +131,6 @@ export default function Popover({
 }
 
 Popover.propTypes = {
-  parameter: T.string.isRequired,
-  properties: T.shape({
-    lastUpdated: T.string.isRequired,
-    value: T.number.isRequired,
-    unit: T.string.isRequired,
-    location: T.string.isRequired,
-    id: T.string.isRequired,
-    source: T.string.isRequired,
-  }).isRequired,
+  activeParameter: T.string.isRequired,
+  locationId: T.number.isRequired,
 };
