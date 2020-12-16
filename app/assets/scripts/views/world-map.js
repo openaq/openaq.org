@@ -5,6 +5,7 @@ import _ from 'lodash';
 import qs from 'qs';
 
 import MapComponent from '../components/map';
+import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
 import Legend from '../components/map/legend';
 
@@ -26,7 +27,11 @@ function WorldMap({ parameters, location }) {
       </header>
       <div className="inpage__body">
         <MapComponent>
-          <MeasurementsLayer activeParameter={activeParam.name.toLowerCase()} />
+          <LocationsSource activeParameter={activeParam.name.toLowerCase()}>
+            <MeasurementsLayer
+              activeParameter={activeParam.name.toLowerCase()}
+            />
+          </LocationsSource>
           <Legend
             parameters={parameters}
             activeParameter={activeParam.name.toLowerCase()}

@@ -160,6 +160,7 @@ function Location(props) {
           />
         </Dashboard>
         <NearbyLocations
+          locationId={data.id}
           center={[data.coordinates.longitude, data.coordinates.latitude]}
           city={data.city}
           country={data.country}

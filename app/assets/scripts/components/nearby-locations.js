@@ -1,11 +1,14 @@
 import React from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import MapComponent from './map';
+import LocationsSource from './map/locations-source';
 import MeasurementsLayer from './map/measurements-layer';
+import LocationLayer from './map/location-layer';
 import Legend from './map/legend';
 
 export default function NearbyLocations({
+  locationId,
   center,
   city,
   country,
@@ -22,7 +25,14 @@ export default function NearbyLocations({
         </header>
         <div className="fold__body">
           <MapComponent center={center}>
-            <MeasurementsLayer activeParameter={activeParameter} />
+            <LocationsSource activeParameter={activeParameter}>
+              <MeasurementsLayer activeParameter={activeParameter} />
+              <LocationLayer
+                activeParameter={activeParameter}
+                locationId={locationId}
+              />
+            </LocationsSource>
+
             <Legend parameters={parameters} activeParameter={activeParameter} />
           </MapComponent>
         </div>
@@ -32,9 +42,10 @@ export default function NearbyLocations({
 }
 
 NearbyLocations.propTypes = {
-  center: T.arrayOf(T.number),
-  parameters: T.array,
-  city: T.string,
-  country: T.string,
-  activeParameter: T.string,
+  locationId: PropTypes.number.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number),
+  parameters: PropTypes.array,
+  city: PropTypes.string,
+  country: PropTypes.string,
+  activeParameter: PropTypes.string,
 };

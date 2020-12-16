@@ -8,6 +8,7 @@ import { generateLegendStops } from '../../utils/colors';
 export default function Legend({ parameters, activeParameter, history }) {
   function onFilterSelect(parameter, e) {
     e.preventDefault();
+    // TODO: update url query parameter
     history.push(`map?parameter=${parameter}`);
   }
 
@@ -26,11 +27,11 @@ export default function Legend({ parameters, activeParameter, history }) {
                 'drop__menu-item--active': activeParameter === o.id,
               })}
               href="#"
-              title={`Show values for ${o.measurand}`}
+              title={`Show values for ${o.measurand || o.name}`}
               data-hook="dropdown:close"
               onClick={onFilterSelect.bind(null, o.id)}
             >
-              <span>{o.measurand}</span>
+              <span>{o.measurand || o.name}</span>
             </a>
           </li>
         ))}

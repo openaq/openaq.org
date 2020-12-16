@@ -18,6 +18,7 @@ import InfoMessage from '../components/info-message';
 import LoadingMessage from '../components/loading-message';
 import LocationCard from '../components/location-card';
 import MapComponent from '../components/map';
+import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
 import Legend from '../components/map/legend';
 
@@ -235,7 +236,9 @@ var Country = createReactClass({
       <section className="fold" id="country-fold-map">
         <div className="fold__body">
           <MapComponent bbox={bbox}>
-            <MeasurementsLayer activeParameter={'pm25'} />
+            <LocationsSource activeParameter={'pm25'}>
+              <MeasurementsLayer activeParameter={'pm25'} />
+            </LocationsSource>
             <Legend
               parameters={this.props.parameters}
               activeParameter={'pm25'}
