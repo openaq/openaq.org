@@ -2,13 +2,14 @@
 import country from '../fixtures/country.json';
 
 describe('The Country Page', () => {
-  it('successfully loads', () => {
+  before(() => {
+    cy.intercept(
+      'https://0jac6b9iac.execute-api.us-east-1.amazonaws.com/v2/locations?',
+      {
+        fixture: '../fixtures/country.json',
+      }
+    );
     cy.visit('/#/countries/CY');
-
-    cy.get('header');
-    cy.get('main');
-    cy.get('footer');
-    cy.get('h1');
   });
 
   it('displays header with all its content', () => {

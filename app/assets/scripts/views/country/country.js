@@ -1,71 +1,122 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
-import { connect } from 'react-redux';
 import _ from 'lodash';
+import { buildAPIQS } from 'qs';
 
 import { formatThousands } from '../../utils/format';
-import {
-  fetchLocations,
-  invalidateAllLocationData,
-  fetchLatestMeasurements,
-  openDownloadModal,
-} from '../../actions/action-creators';
+import config from '../../config';
 
-import HeaderMessage from '../../components/header-message';
-import Header from '../../components/header';
+import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 
-const defaultState = {
-  fetched: false,
-  fetching: false,
-  error: null,
-  data: null,
+const defaultLocations = {
+  locationFetched: false,
+  locationFetching: false,
+  locationError: null,
+  locations: null,
+};
+
+const defaultCountry = {
+  countryFetched: false,
+  countryFetching: false,
+  countryError: null,
+  country: null,
 };
 
 export default function Country(props) {
-  const { id } = props.match.params;
-  const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
+  const id = props.match.params.name;
+  const [
+    { locationFetched, locationFetching, locationError, locations },
+    setLocations,
+  ] = useState(defaultLocations);
+  const [
+    { countryFetched, countryFetching, countryError, country },
+    setCountry,
+  ] = useState(defaultCountry);
 
   useEffect(() => {
-    setState(state => ({ ...state, fetching: true, error: null }));
+    const fetchLocations = id => {
+      setLocations(state => ({
+        ...state,
+        locationFetching: true,
+        locationError: null,
+      }));
+      let limit = 10000;
+      fetch(`${config.api}/locations?limit=${limit}&country=${id}`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(
+          json => {
+            setLocations(state => ({
+              ...state,
+              fetched: true,
+              locationFetching: false,
+              locations: json.results,
+            }));
+          },
+          e => {
+            console.log('e', e);
+            setLocations(state => ({
+              ...state,
+              locationFetched: true,
+              locationFetching: false,
+              locationError: e,
+            }));
+          }
+        );
+    };
+
+    const fetchCountry = id => {
+      setCountry(state => ({
+        ...state,
+        countryFetching: true,
+        countryError: null,
+      }));
+      let limit = 1;
+      fetch(`${config.api}/countries?limit=${limit}&country=${id}`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(
+          json => {
+            setCountry(state => ({
+              ...state,
+              countryFetched: true,
+              countryFetching: false,
+              country: json.results[0],
+            }));
+          },
+          e => {
+            console.log('e', e);
+            setCountry(state => ({
+              ...state,
+              countryFetched: true,
+              countryFetching: false,
+              countryError: e,
+            }));
+          }
+        );
+    };
+
+    fetchLocations(id);
+    fetchCountry(id);
 
     return () => {
-      setState(defaultState);
+      setLocations(defaultLocations);
+      setCountry(defaultCountry);
     };
   }, []);
+  console.log('data', locations, country);
 
-  if (!fetched && !fetching) {
-    return null;
-  }
-
-  if (fetching) {
-    return (
-      <HeaderMessage>
-        <h1>Take a deep breath.</h1>
-        <div className="prose prose--responsive">
-          <p>Location data is loading...</p>
-        </div>
-      </HeaderMessage>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <HeaderMessage>
-        <h1>Uh oh, something went wrong.</h1>
-        <div className="prose prose--responsive">
-          <p>
-            There was a problem getting the data. If you continue to have
-            problems, please let us know.
-          </p>
-          <p>
-            <a href="mailto:info@openaq.org" title="Send us an email">
-              Send us an Email
-            </a>
-          </p>
-        </div>
-      </HeaderMessage>
-    );
-  }
+  // if (!locationFetched || countryFetched && !locationFetching ) {
+  //   return null;
+  // }
 
   function onDownloadClick() {
     props._openDownloadModal({
@@ -74,19 +125,39 @@ export default function Country(props) {
       location: data.location,
     });
   }
+  console.log('data', locations, country);
+  // TODO remove need for this with updated endpoint result
+  // let countryData = _.find(this.props.countries, {
+  //   code: this.props.match.params.name,
+  // });
+  // let sourcesData = _.filter(this.props.sources, {
+  //   country: this.props.match.params.name,
+  // });
 
   return (
-    <section className="inpage">
-      <Header
-        tagline="Country"
-        title={data.name}
-        subtitle={`in ${data.city}, ${data.country}`}
-        action={{
-          api: `${config.api}/locations?location=${data.id}`,
-          download: onDownloadClick,
-        }}
-      />
-    </section>
+    <>
+      {(countryError || !country) && <ErrorHeader />}
+      {countryFetching && <LoadingHeader />}
+      {country && (
+        <section className="inpage">
+          <Header
+            id="country"
+            tagline="Country"
+            title={country.name}
+            stats={[
+              { number: '1', label: 'areas' },
+              { number: '1', label: 'locations' },
+              { number: '1', label: 'measurements' },
+              { number: '1', label: 'source' },
+            ]}
+            action={{
+              api: `${config.api}/locations?location=${id}`,
+              download: onDownloadClick,
+            }}
+          />
+        </section>
+      )}
+    </>
   );
 }
 
@@ -116,31 +187,3 @@ Country.propTypes = {
     data: T.object,
   }),
 };
-
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
-
-function selector(state) {
-  return {
-    countries: state.baseData.data.countries,
-    sources: state.baseData.data.sources,
-    parameters: state.baseData.data.parameters,
-
-    latestMeasurements: state.latestMeasurements,
-    locations: state.locations,
-  };
-}
-
-function dispatcher(dispatch) {
-  return {
-    _fetchLocations: (...args) => dispatch(fetchLocations(...args)),
-    _fetchLatestMeasurements: (...args) =>
-      dispatch(fetchLatestMeasurements(...args)),
-    _invalidateAllLocationData: (...args) =>
-      dispatch(invalidateAllLocationData(...args)),
-
-    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
-  };
-}
-
-module.exports = connect(selector, dispatcher)(Country);

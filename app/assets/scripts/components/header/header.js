@@ -3,19 +3,25 @@ import { PropTypes as T } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function Header({
+  id,
   tagline,
   title,
   subtitle,
   description,
+  stats,
   disclaimer,
   action,
 }) {
   return (
-    <header className="inpage__header">
+    <header className="inpage__header" data-cy={`${id}-header`}>
       <div className="inner">
         <div className="inpage__headline">
-          {tagline && <p className="inpage__subtitle">{tagline}</p>}
-          <h1 className="inpage__title">
+          {tagline && (
+            <p className="inpage__subtitle" data-cy={`${id}-header-tagline`}>
+              {tagline}
+            </p>
+          )}
+          <h1 className="inpage__title" data-cy={`${id}-header-title`}>
             {title}
             {subtitle && <small>{subtitle}</small>}
           </h1>
@@ -30,6 +36,15 @@ export default function Header({
                 </small>
               )}
             </div>
+          )}
+          {stats && (
+            <ul className="country-stats" data-cy={`${id}-header-stats`}>
+              {stats.map(stat => (
+                <li data-cy={`${id}-header-stats-${label}`}>
+                  <strong>{stat.number}</strong> {stat.label}
+                </li>
+              ))}
+            </ul>
           )}
           {action && (
             <ul className="ipha">
@@ -89,10 +104,17 @@ export default function Header({
 }
 
 Header.propTypes = {
+  id: T.string,
   tagline: T.string,
   title: T.string.isRequired,
   subtitle: T.string,
   description: T.oneOfType([T.string, T.node]),
+  stats: T.arrayOf(
+    T.shape({
+      number: T.string,
+      label: T.string,
+    })
+  ),
   disclaimer: T.boolean,
   action: T.shape({
     api: T.string,
