@@ -93,7 +93,7 @@ Header.propTypes = {
   title: T.string.isRequired,
   subtitle: T.string,
   description: T.oneOfType([T.string, T.node]),
-  disclaimer: T.boolean,
+  disclaimer: T.bool,
   action: T.shape({
     api: T.string,
     download: T.func,
