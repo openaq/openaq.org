@@ -4,7 +4,7 @@ import mapbox from 'mapbox-gl';
 
 import config from '../../config';
 
-export default function Map({ children }) {
+export default function Map({ center, children }) {
   const containerRef = useRef();
 
   const [map, setMap] = useState(null);
@@ -26,6 +26,10 @@ export default function Map({ children }) {
       if (process.env.DS_ENV === 'development') {
         // makes map accessible in console for debugging
         window.map = m;
+      }
+
+      if (center) {
+        m.flyTo({ center, zoom: 15 });
       }
     });
 
@@ -52,6 +56,7 @@ export default function Map({ children }) {
 }
 
 Map.propTypes = {
+  center: PropTypes.arrayOf(PropTypes.number),
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),

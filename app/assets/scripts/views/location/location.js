@@ -160,9 +160,11 @@ function Location(props) {
           />
         </Dashboard>
         <NearbyLocations
+          center={[data.coordinates.longitude, data.coordinates.latitude]}
           city={data.city}
           country={data.country}
-          parameters={data.parameters}
+          parameters={[data.parameters[0]]}
+          activeParameter={data.parameters[0].measurand}
         />
       </div>
     </section>

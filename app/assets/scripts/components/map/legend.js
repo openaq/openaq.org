@@ -26,11 +26,11 @@ export default function Legend({ parameters, activeParameter, history }) {
                 'drop__menu-item--active': activeParameter === o.id,
               })}
               href="#"
-              title={`Show values for ${o.name}`}
+              title={`Show values for ${o.measurand}`}
               data-hook="dropdown:close"
               onClick={onFilterSelect.bind(null, o.id)}
             >
-              <span>{o.name}</span>
+              <span>{o.measurand}</span>
             </a>
           </li>
         ))}
@@ -44,7 +44,10 @@ export default function Legend({ parameters, activeParameter, history }) {
   return (
     <div className="map__legend">
       <div>
-        <p>Showing the most recent values for {drop}</p>
+        <p>
+          Showing the most recent values for{' '}
+          {parameters.length > 1 ? drop : activeParameter}
+        </p>
         <ul className="color-scale">
           {scaleStops.map(o => (
             <li
