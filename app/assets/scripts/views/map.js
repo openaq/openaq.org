@@ -58,7 +58,7 @@ var Map = createReactClass({
       ignoreQueryPrefix: true,
     });
     let parameterData = _.find(this.props.parameters, { id: query.parameter });
-    return parameterData || _.find(this.props.parameters, { id: 'pm25' });
+    return parameterData || _.find(this.props.parameters, { id: 2 });
   },
 
   componentDidMount: function () {
