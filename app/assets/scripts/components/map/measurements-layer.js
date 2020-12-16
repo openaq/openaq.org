@@ -3,13 +3,6 @@ import ReactDOM from 'react-dom';
 import mapbox from 'mapbox-gl';
 
 import config from '../../config';
-import {
-  circleOpacity,
-  circleBlur,
-  coloredCircleRadius,
-  borderCircleRadius,
-} from '../../utils/map-settings';
-import { generateColorStops } from '../../utils/colors';
 import Popover from './popover';
 
 export default function MeasurementsLayer({ activeParameter, map }) {
@@ -32,18 +25,11 @@ export default function MeasurementsLayer({ activeParameter, map }) {
       map.addLayer({
         id: 'measurements-outline',
         source: 'measurements-source',
-        'source-layer': 'locations',
+        'source-layer': 'default',
         type: 'circle',
         paint: {
-          'circle-color': {
-            property: 'value',
-            stops: generateColorStops(
-              activeParameter.name.toLowerCase(),
-              'dark'
-            ),
-          },
+          'circle-color': 'black',
           'circle-opacity': 1,
-          'circle-radius': borderCircleRadius,
           'circle-blur': 0,
         },
       });
@@ -51,16 +37,10 @@ export default function MeasurementsLayer({ activeParameter, map }) {
       map.addLayer({
         id: 'measurements-layer',
         source: 'measurements-source',
-        'source-layer': 'locations',
+        'source-layer': 'default',
         type: 'circle',
         paint: {
-          'circle-color': {
-            property: 'value',
-            stops: generateColorStops(activeParameter.name.toLowerCase()),
-          },
-          'circle-opacity': circleOpacity,
-          'circle-radius': coloredCircleRadius,
-          'circle-blur': circleBlur,
+          'circle-color': 'teal',
         },
       });
 
