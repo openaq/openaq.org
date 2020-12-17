@@ -29,18 +29,15 @@ const defaultState = {
 };
 
 function Location(props) {
-  const id = props.match.params;
+  const { id } = props.match.params;
 
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
     const fetchData = id => {
       setState(state => ({ ...state, fetching: true, error: null }));
-      let limit = 10000;
-      filters.country = id;
-      let f = buildAPIQS(filters);
 
-      fetch(`${config.api}/locations?limit=${limit}&${f}`)
+      fetch(`${config.api}/locations/${encodeURIComponent(id)}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
