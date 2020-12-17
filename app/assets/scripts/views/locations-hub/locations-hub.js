@@ -50,13 +50,21 @@ export default function LocationsHub({
       ignoreQueryPrefix: true,
     });
     setPage(() => getPage(query));
+
+    let isMobile;
+    if (query.source_type) {
+      if (query.source_type.includes('mobile')) isMobile = true;
+      else if (query.source_type.includes('stationary')) {
+        isMobile = false;
+      }
+    }
     setFilters({
       order_by: query.order_by && query.order_by.split(','),
       sort: 'asc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
       source: query.sources && query.sources.split(','),
-      //source_type: query.source_type && query.source_type.includes('mobile'
+      isMobile,
     });
   }, [location]);
 

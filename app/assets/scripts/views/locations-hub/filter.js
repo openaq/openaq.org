@@ -75,6 +75,23 @@ export default function Filter({ countries, parameters, sources }) {
         break;
       }
 
+      case 'source_type': {
+        if (query.source_type && query.source_type.includes(value)) {
+          query.source_type = [];
+          setSelected(prev => ({
+            ...prev,
+            ['source_type']: [],
+          }));
+        } else {
+          query.source_type = [value];
+          setSelected(prev => ({
+            ...prev,
+            ['source_type']: [value],
+          }));
+        }
+        break;
+      }
+
       case 'parameters': {
         const parameters =
           query && query.parameters ? query.parameters.split(',') : [];
@@ -110,16 +127,7 @@ export default function Filter({ countries, parameters, sources }) {
         }));
         break;
       }
-      case 'source_type': {
-        const sourceTypes =
-          query && query.source_type ? query.source_type.split(',') : [];
-        query.source_type = toggleValue(sourceTypes, value);
-        setSelected(prev => ({
-          ...prev,
-          ['source_type']: toggleValue(prev['source_type'], value),
-        }));
-        break;
-      }
+
       case 'clear':
         query = null;
         setSelected(defaultSelected);
@@ -349,7 +357,7 @@ export default function Filter({ countries, parameters, sources }) {
             return (
               <button
                 type="button"
-                className="button--filter-pill orderBy"
+                className="button--filter-pill"
                 key={o}
                 onClick={() => onFilterSelect('source_type', o)}
               >
