@@ -132,11 +132,11 @@ function Country(props) {
   let locationGroups = _(locations).sortBy('city').groupBy('city').value();
 
   return (
-    <>
-      {(countryError || !country) && <ErrorHeader />}
-      {countryFetching && <LoadingHeader />}
-      {country && locations && (
-        <section className="inpage" data-cy="country-page">
+    <section className="inpage" data-cy="country-page">
+      {countryFetching || locationFetching ? (
+        <LoadingHeader />
+      ) : country && locations && !countryError ? (
+        <>
           <Header
             id="country"
             tagline="Country"
@@ -166,75 +166,81 @@ function Country(props) {
           />
           <div className="inpage__body">
             <CountryMap />
-            {locationFetching && <LoadingMessage />}
-            {locationError && <InfoMessage standardMessage />}
-            <div className="countries-list">
-              {Object.entries(locationGroups).map(([city, cityLocations]) => (
-                <section
-                  className="fold fold--locations"
-                  key={city}
-                  data-cy="country-list"
-                >
-                  <div className="inner">
-                    <header className="fold__header">
-                      <h1 className="fold__title">
-                        {city}{' '}
-                        <small>
-                          {locations.length}{' '}
-                          {locations.length > 1 ? 'locations' : 'location'}
-                        </small>
-                      </h1>
-                      <p className="fold__main-action">
-                        <a
-                          href="#"
-                          className="location-download-button"
-                          title={`Download ${city} data`}
-                          onClick={() =>
-                            onDownloadClick({
-                              country: id,
-                              area: city,
-                            })
-                          }
-                        >
-                          Download
-                        </a>
-                      </p>
-                    </header>
-                    <div className="fold__body">
-                      <ul className="country-locations-list">
-                        {cityLocations.map(loc => (
-                          <li key={loc.id}>
-                            <LocationCard
-                              onDownloadClick={() =>
-                                props._openDownloadModal({
-                                  country: id,
-                                  area: city,
-                                  location: loc.name,
-                                })
-                              }
-                              id={loc.id}
-                              name={loc.name}
-                              city={loc.city}
-                              countryData={{ name: country.name }}
-                              sourcesData={sourceList}
-                              totalMeasurements={loc.measurements}
-                              parametersList={loc.parameters}
-                              lastUpdate={loc.lastUpdated}
-                              collectionStart={loc.firstUpdated}
-                              compact
-                            />
-                          </li>
-                        ))}
-                      </ul>
+            {locationFetching ? (
+              <LoadingMessage />
+            ) : !locationError ? (
+              <div className="countries-list">
+                {Object.entries(locationGroups).map(([city, cityLocations]) => (
+                  <section
+                    className="fold fold--locations"
+                    key={city}
+                    data-cy="country-list"
+                  >
+                    <div className="inner">
+                      <header className="fold__header">
+                        <h1 className="fold__title">
+                          {city}{' '}
+                          <small>
+                            {locations.length}{' '}
+                            {locations.length > 1 ? 'locations' : 'location'}
+                          </small>
+                        </h1>
+                        <p className="fold__main-action">
+                          <a
+                            href="#"
+                            className="location-download-button"
+                            title={`Download ${city} data`}
+                            onClick={() =>
+                              onDownloadClick({
+                                country: id,
+                                area: city,
+                              })
+                            }
+                          >
+                            Download
+                          </a>
+                        </p>
+                      </header>
+                      <div className="fold__body">
+                        <ul className="country-locations-list">
+                          {cityLocations.map(loc => (
+                            <li key={loc.id}>
+                              <LocationCard
+                                onDownloadClick={() =>
+                                  props._openDownloadModal({
+                                    country: id,
+                                    area: city,
+                                    location: loc.name,
+                                  })
+                                }
+                                id={loc.id}
+                                name={loc.name}
+                                city={loc.city}
+                                countryData={{ name: country.name }}
+                                sourcesData={sourceList}
+                                totalMeasurements={loc.measurements}
+                                parametersList={loc.parameters}
+                                lastUpdate={loc.lastUpdated}
+                                collectionStart={loc.firstUpdated}
+                                compact
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </section>
-              ))}
-            </div>
+                  </section>
+                ))}
+              </div>
+            ) : (
+              <InfoMessage standardMessage />
+            )}
           </div>
-        </section>
+        </>
+      ) : (
+        <ErrorHeader />
       )}
-    </>
+    </section>
   );
 }
 
