@@ -13,9 +13,8 @@ function WorldMap({ parameters, location }) {
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  let parameterData = _.find(parameters, { id: query.parameter });
-  let activeParam = parameterData || _.find(parameters, { id: 2 });
-
+  let parameterData = _.find(parameters, { name: query.parameter });
+  let activeParam = parameterData || _.find(parameters, { name: 'PM25' });
   return (
     <section className="inpage">
       <header className="inpage__header">

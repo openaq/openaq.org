@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { Dropdown } from 'openaq-design-system';
 import c from 'classnames';
 
 import { generateLegendStops } from '../../utils/colors';
 
-export default function Legend({ parameters, activeParameter, history }) {
+export default function Legend({ parameters, activeParameter }) {
+  let history = useHistory();
+
   function onFilterSelect(parameter, e) {
     e.preventDefault();
-    // TODO: update url query parameter
     history.push(`map?parameter=${parameter}`);
   }
 
@@ -29,7 +31,7 @@ export default function Legend({ parameters, activeParameter, history }) {
               href="#"
               title={`Show values for ${o.measurand || o.name}`}
               data-hook="dropdown:close"
-              onClick={onFilterSelect.bind(null, o.id)}
+              onClick={onFilterSelect.bind(null, o.name)}
             >
               <span>{o.measurand || o.name}</span>
             </a>

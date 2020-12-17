@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import config from '../../config';
 
 export default function LocationsSource({ activeParameter, map, children }) {
-  const [source, setSource] = useState(null);
+  const [sourceId, setSourceId] = useState(null);
 
   useEffect(() => {
-    let s = map.addSource('locations-source', {
+    map.addSource(`locations-source-${activeParameter}`, {
       type: 'vector',
       tiles: [
         `${config.api}/locations/tiles/{z}/{x}/{y}.pbf?parameter=${activeParameter}`,
@@ -17,20 +17,29 @@ export default function LocationsSource({ activeParameter, map, children }) {
       bounds: [-180, -90, 180, 90],
     });
 
-    setSource(s);
-  }, []);
+    setSourceId(`locations-source-${activeParameter}`);
 
-  return (
-    <>
-      {source &&
-        children &&
-        React.Children.map(children, child =>
-          React.cloneElement(child, {
-            map: map,
-          })
-        )}
-    </>
-  );
+    return () => {
+      if (map.getSource(`locations-source-${activeParameter}`)) {
+        setSourceId(null);
+        map.removeSource(`locations-source-${activeParameter}`);
+      }
+    };
+  }, [activeParameter]);
+
+  if (!map.getSource(`locations-source-${activeParameter}`)) return null;
+  else
+    return (
+      <>
+        {sourceId &&
+          React.Children.map(children, child =>
+            React.cloneElement(child, {
+              map: map,
+              sourceId: sourceId,
+            })
+          )}
+      </>
+    );
 }
 
 LocationsSource.propTypes = {
