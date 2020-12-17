@@ -80,8 +80,7 @@ function Country(props) {
         countryFetching: true,
         countryError: null,
       }));
-      let limit = 1;
-      fetch(`${config.api}/countries?limit=${limit}&country=${id}`)
+      fetch(`${config.api}/countries/${id}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
