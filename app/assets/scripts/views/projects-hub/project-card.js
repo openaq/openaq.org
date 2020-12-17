@@ -23,6 +23,7 @@ export default function ProjectCard({
 
   return (
     <Card
+      id="project"
       title={
         <>
           {name} <small>{subtitle}</small>
@@ -36,6 +37,7 @@ export default function ProjectCard({
       tags={sourceType}
       renderBody={() => (
         <CardDetails
+          id="project"
           list={[
             { label: 'Locations', value: formatThousands(totalLocations) },
             {
@@ -44,7 +46,7 @@ export default function ProjectCard({
             },
             { label: 'Collection dates', value: `${started} - ${ended}` },
             {
-              label: 'Measurands',
+              label: 'Parameters',
               value: parametersList
                 .map(p => p.measurand.toUpperCase())
                 .join(', '),
