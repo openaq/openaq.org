@@ -7,6 +7,7 @@ export default function Header({
   title,
   subtitle,
   description,
+  disclaimer,
   action,
 }) {
   return (
@@ -21,6 +22,13 @@ export default function Header({
           {description && (
             <div className="inpage__introduction">
               <p>{description}</p>
+              {disclaimer && (
+                <small className="disclaimer">
+                  <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
+                    Data Disclaimer and More Information
+                  </a>
+                </small>
+              )}
             </div>
           )}
           {action && (
@@ -34,7 +42,7 @@ export default function Header({
                     target="_blank"
                     rel="noreferrer"
                   >
-                    View API
+                    View API Docs
                   </a>
                 </li>
               )}
@@ -84,7 +92,8 @@ Header.propTypes = {
   tagline: T.string,
   title: T.string.isRequired,
   subtitle: T.string,
-  description: T.string,
+  description: T.oneOfType([T.string, T.node]),
+  disclaimer: T.boolean,
   action: T.shape({
     api: T.string,
     download: T.func,

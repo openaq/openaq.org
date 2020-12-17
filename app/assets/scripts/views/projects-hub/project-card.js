@@ -8,6 +8,7 @@ import Card, { CardDetails, FooterActions } from '../../components/card';
 export default function ProjectCard({
   onDownloadClick,
   lastUpdated,
+  id,
   name,
   subtitle,
   sourceType,
@@ -42,7 +43,12 @@ export default function ProjectCard({
               value: formatThousands(totalMeasurements),
             },
             { label: 'Collection dates', value: `${started} - ${ended}` },
-            { label: 'Measurands', value: parametersList.join(', ') },
+            {
+              label: 'Measurands',
+              value: parametersList
+                .map(p => p.measurand.toUpperCase())
+                .join(', '),
+            },
           ]}
         />
       )}
@@ -50,7 +56,7 @@ export default function ProjectCard({
         <FooterActions
           what={name}
           onDownloadClick={onDownloadClick}
-          viewMorePath={`/project/${encodeURIComponent(name)}`}
+          viewMorePath={`/project/${encodeURIComponent(id)}`}
         />
       )}
     />
@@ -61,6 +67,7 @@ ProjectCard.propTypes = {
   onDownloadClick: T.func,
   lastUpdated: T.string,
   name: T.string,
+  id: T.oneOfType([T.string, T.number]),
   subtitle: T.string,
   sourceType: T.oneOfType([T.array, T.string]),
   firstUpdated: T.string,

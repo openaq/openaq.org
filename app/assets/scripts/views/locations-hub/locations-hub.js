@@ -52,6 +52,7 @@ export default function LocationsHub({
     setPage(() => getPage(query));
     setFilters({
       order_by: query.order_by && query.order_by.split(','),
+      sort: 'asc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
       source: query.sources && query.sources.split(','),
@@ -110,9 +111,6 @@ export default function LocationsHub({
               fetched={fetched}
               fetching={fetching}
               error={error}
-              countries={countries}
-              sources={sources}
-              parameters={parameters}
               locations={results}
               totalPages={totalPages}
               page={page}

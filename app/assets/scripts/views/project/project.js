@@ -28,14 +28,14 @@ const Dashboard = styled(CardList)`
 `;
 
 function Project(props) {
-  const { name } = props.match.params;
+  const { id } = props.match.params;
 
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchData = id => {
       setState(state => ({ ...state, fetching: true, error: null }));
-      fetch(`${config.api}/projects/${encodeURIComponent(name)}`)
+      fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -63,7 +63,7 @@ function Project(props) {
         );
     };
 
-    fetchData();
+    fetchData(id);
 
     return () => {
       setState(defaultState);

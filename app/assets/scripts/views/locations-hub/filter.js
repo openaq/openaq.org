@@ -34,6 +34,15 @@ export default function Filter({ countries, parameters, sources }) {
     initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
   );
 
+  // alphabetizes filter names
+  const sortList = list => list.sort((a, b) => a.name.localeCompare(b.name));
+
+  sortList(countries);
+  sortList(parameters);
+  sortList(sources);
+
+  const parameterNames = [...new Set(parameters.map(p => p.name))];
+
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
@@ -60,7 +69,6 @@ export default function Filter({ countries, parameters, sources }) {
       case 'parameters': {
         const parameters =
           query && query.parameters ? query.parameters.split(',') : [];
-
         query.parameters = toggleValue(parameters, value);
 
         setSelected(prev => ({
@@ -118,11 +126,16 @@ export default function Filter({ countries, parameters, sources }) {
           triggerText="Country"
           triggerClassName="drop-trigger"
         >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+          <ul
+            role="menu"
+            data-cy="filter-countries"
+            className="drop__menu drop__menu--select scrollable"
+          >
             {_.sortBy(countries).map(o => {
               return (
                 <li key={o.code}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.countries.includes(
                         o.code
@@ -133,7 +146,7 @@ export default function Filter({ countries, parameters, sources }) {
                       onFilterSelect('countries', o.code);
                     }}
                   >
-                    <span>{o.name}</span>
+                    <span data-cy={o.name}>{o.name}</span>
                   </div>
                 </li>
               );
@@ -146,20 +159,27 @@ export default function Filter({ countries, parameters, sources }) {
           triggerTitle="type__filter"
           triggerText="Pollutant"
         >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
-            {_.sortBy(parameters).map(o => {
+          <ul
+            role="menu"
+            data-cy="filter-parameters"
+            className="drop__menu drop__menu--select scrollable"
+          >
+            {/* references list of unique ids to avoid duplicate list items while allowing 
+            selection of parameters with different units and shared id */}
+            {_.sortBy(parameterNames).map(paramName => {
               return (
-                <li key={o.id}>
+                <li key={paramName}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.parameters.includes(
-                        o.id
+                        paramName
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => onFilterSelect('parameters', o.id)}
+                    onClick={() => onFilterSelect('parameters', paramName)}
                   >
-                    <span>{o.name}</span>
+                    <span data-cy={paramName}>{paramName}</span>
                   </div>
                 </li>
               );
@@ -172,11 +192,16 @@ export default function Filter({ countries, parameters, sources }) {
           triggerTitle="source__filter"
           triggerText="Data Source"
         >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
+          <ul
+            role="menu"
+            data-cy="filter-sources"
+            className="drop__menu drop__menu--select scrollable"
+          >
             {_.sortBy(sources).map(o => {
               return (
                 <li key={o.name}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.sources.includes(
                         o.code
@@ -187,7 +212,7 @@ export default function Filter({ countries, parameters, sources }) {
                       onFilterSelect('sources', o.name);
                     }}
                   >
-                    <span>{o.name}</span>
+                    <span data-cy={o.name}>{o.name}</span>
                   </div>
                 </li>
               );
@@ -206,6 +231,7 @@ export default function Filter({ countries, parameters, sources }) {
               return (
                 <li key={o}>
                   <div
+                    data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.order_by.includes(o),
                     })}
@@ -229,6 +255,7 @@ export default function Filter({ countries, parameters, sources }) {
               <button
                 type="button"
                 className="button--filter-pill"
+                data-cy="filter-pill"
                 key={country.code}
                 onClick={() => onFilterSelect('countries', country.code)}
               >
@@ -238,13 +265,14 @@ export default function Filter({ countries, parameters, sources }) {
           })}
 
           {selected.parameters.map(o => {
-            const parameter = parameters.find(x => x.id === o);
+            const parameter = parameters.find(x => x.name === o);
             return (
               <button
                 type="button"
                 className="button--filter-pill"
+                data-cy="filter-pill"
                 key={parameter.id}
-                onClick={() => onFilterSelect('parameters', parameter.id)}
+                onClick={() => onFilterSelect('parameters', parameter.name)}
               >
                 <span>{parameter.name}</span>
               </button>
@@ -257,6 +285,7 @@ export default function Filter({ countries, parameters, sources }) {
               <button
                 type="button"
                 className="button--filter-pill"
+                data-cy="filter-pill"
                 key={source.name}
                 onClick={() => onFilterSelect('sources', source.name)}
               >
@@ -282,6 +311,7 @@ export default function Filter({ countries, parameters, sources }) {
             type="button"
             className="button button--small button--primary-unbounded"
             title="Clear all selected filters"
+            data-cy="filter-clear"
             onClick={e => {
               e.preventDefault();
               onFilterSelect('clear');

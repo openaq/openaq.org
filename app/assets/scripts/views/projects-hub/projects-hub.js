@@ -50,7 +50,11 @@ export default function ProjectsHub({
       ignoreQueryPrefix: true,
     });
     setPage(() => getPage(query));
-    setFilters({ order_by: query.order_by, parameters: query.parameters });
+    setFilters({
+      order_by: query.order_by,
+      sort: 'asc',
+      parameter: query.parameters,
+    });
   }, [location]);
 
   useEffect(() => {
@@ -88,7 +92,7 @@ export default function ProjectsHub({
                 <div className="content__heading">
                   <h2 className="content-prime-title">Results</h2>
                   {meta.found ? (
-                    <p className="results-summary">
+                    <p className="results-summary" data-cy="results-summary">
                       A total of <strong>{meta.found}</strong> datasets were
                       found
                     </p>

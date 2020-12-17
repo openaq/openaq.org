@@ -85,7 +85,7 @@ render(
           <Route name="map" path="/map" component={Map} pageClass="page--map" />
           <Route
             name="location"
-            path="/location/:name"
+            path="/location/:id"
             component={LocationItem}
             pageClass="page--locations-single page--dark"
           />
@@ -115,7 +115,7 @@ render(
           />
           <Route
             name="projectsHub"
-            path="/project/:name"
+            path="/project/:id"
             component={Project}
             pageClass="page--projects-single page--dark"
           />
