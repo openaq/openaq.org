@@ -114,6 +114,8 @@ function Project(props) {
           api: `${config.api}/projects/${data.id}`,
           download: () => {},
         }}
+        sourceType={data.sourceType}
+        isMobile={data.isMobile}
       />
       <div className="inpage__body">
         <Dashboard
