@@ -3,19 +3,25 @@ import { PropTypes as T } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function Header({
+  id,
   tagline,
   title,
   subtitle,
   description,
+  stats,
   disclaimer,
   action,
 }) {
   return (
-    <header className="inpage__header">
+    <header className="inpage__header" data-cy={`${id}-header`}>
       <div className="inner">
         <div className="inpage__headline">
-          {tagline && <p className="inpage__subtitle">{tagline}</p>}
-          <h1 className="inpage__title">
+          {tagline && (
+            <p className="inpage__subtitle" data-cy={`${id}-header-tagline`}>
+              {tagline}
+            </p>
+          )}
+          <h1 className="inpage__title" data-cy={`${id}-header-title`}>
             {title}
             {subtitle && <small>{subtitle}</small>}
           </h1>
@@ -31,11 +37,24 @@ export default function Header({
               )}
             </div>
           )}
+          {stats && (
+            <ul className="country-stats" data-cy={`${id}-header-stats`}>
+              {stats.map(stat => (
+                <li
+                  key={stat.label}
+                  data-cy={`${id}-header-stat-${stat.label}`}
+                >
+                  <strong>{stat.number}</strong> {stat.label}
+                </li>
+              ))}
+            </ul>
+          )}
           {action && (
             <ul className="ipha">
               {action.api && (
                 <li>
                   <a
+                    data-cy={`header-apidocs-btn`}
                     href={action.api}
                     title="View in API documentation"
                     className="ipha-api"
@@ -49,6 +68,7 @@ export default function Header({
               {action.download && (
                 <li>
                   <button
+                    data-cy={`header-download-btn`}
                     type="button"
                     title="Download data for this location"
                     className="ipha-download"
@@ -89,11 +109,18 @@ export default function Header({
 }
 
 Header.propTypes = {
+  id: T.string,
   tagline: T.string,
   title: T.string.isRequired,
   subtitle: T.string,
   description: T.oneOfType([T.string, T.node]),
-  disclaimer: T.boolean,
+  stats: T.arrayOf(
+    T.shape({
+      number: T.oneOfType([T.string, T.number]),
+      label: T.string,
+    })
+  ),
+  disclaimer: T.func,
   action: T.shape({
     api: T.string,
     download: T.func,
