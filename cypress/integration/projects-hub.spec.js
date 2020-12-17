@@ -21,7 +21,7 @@ describe('The Projects Hub', () => {
   });
 
   it('has a results section with a list of project cards', () => {
-    cy.get('.results-summary')
+    cy.get('[data-cy=results-summary]')
       .invoke('text')
       .should('match', /A total of \d+ datasets were found/);
 
@@ -30,13 +30,18 @@ describe('The Projects Hub', () => {
   });
 
   it('has some filters with dropdown menus', () => {
-    cy.get('.filters').should('exist');
-
     cy.get('[title="type__filter"]').click();
-    cy.get('.drop__menu-item').first().click();
+    ['O3', 'CO', 'NO2', 'CO2', 'SO2', 'BC'].forEach(parameter => {
+      cy.get('[data-cy=filter-parameters]')
+        .find(`[data-cy=${parameter}]`)
+        .should('length', 1);
+    });
+    cy.get('[data-cy=filter-menu-item]').first().click();
 
-    cy.get('.button--filter-pill').should('exist');
+    cy.get('[data-cy=filter-pill]').should('exist');
 
-    cy.get('button').contains('Clear Filters').should('exist');
+    cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
+    cy.get('[data-cy=filter-clear]').click();
+    cy.get('[data-cy=filter-clear]').should('not.exist');
   });
 });
