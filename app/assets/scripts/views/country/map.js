@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { PropTypes as T } from 'prop-types';
+import _ from 'lodash';
 
 import { fetchLatestMeasurements } from '../../actions/action-creators';
-
+import MapComponent from '../../components/map';
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import { getCountryBbox } from '../../utils/countries';
@@ -66,11 +68,23 @@ function Map(props) {
   );
 }
 
+Map.propTypes = {
+  match: T.object,
+  parameters: T.array,
+  latestMeasurements: T.shape({
+    fetching: T.bool,
+    fetched: T.bool,
+    error: T.string,
+    data: T.object,
+  }),
+};
+
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
 function selector(state) {
   return {
+    parameters: state.baseData.data.parameters,
     latestMeasurements: state.latestMeasurements,
   };
 }

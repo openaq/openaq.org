@@ -14,14 +14,12 @@ import LocationCard from '../../components/location-card';
 import CountryMap from './map';
 
 const defaultLocations = {
-  locationFetched: false,
   locationFetching: false,
   locationError: null,
   locations: null,
 };
 
 const defaultCountry = {
-  countryFetched: false,
   countryFetching: false,
   countryError: null,
   country: null,
@@ -30,13 +28,12 @@ const defaultCountry = {
 function Country(props) {
   const id = props.match.params.name;
   const [
-    { locationFetched, locationFetching, locationError, locations },
+    { locationFetching, locationError, locations },
     setLocations,
   ] = useState(defaultLocations);
-  const [
-    { countryFetched, countryFetching, countryError, country },
-    setCountry,
-  ] = useState(defaultCountry);
+  const [{ countryFetching, countryError, country }, setCountry] = useState(
+    defaultCountry
+  );
 
   useEffect(() => {
     const fetchLocations = id => {
@@ -66,7 +63,6 @@ function Country(props) {
             console.log('e', e);
             setLocations(state => ({
               ...state,
-              locationFetched: true,
               locationFetching: false,
               locationError: e,
             }));
@@ -91,7 +87,6 @@ function Country(props) {
           json => {
             setCountry(state => ({
               ...state,
-              countryFetched: true,
               countryFetching: false,
               country: json.results[0],
             }));
@@ -100,7 +95,6 @@ function Country(props) {
             console.log('e', e);
             setCountry(state => ({
               ...state,
-              countryFetched: true,
               countryFetching: false,
               countryError: e,
             }));
@@ -271,7 +265,7 @@ Country.propTypes = {
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-function selector(state) {
+function selector() {
   return {};
 }
 
