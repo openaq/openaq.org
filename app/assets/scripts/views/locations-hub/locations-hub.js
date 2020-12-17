@@ -56,6 +56,7 @@ export default function LocationsHub({
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
       source: query.sources && query.sources.split(','),
+      //source_type: query.source_type && query.source_type.includes('mobile'
     });
   }, [location]);
 

@@ -14,16 +14,25 @@ const defaultSelected = {
   countries: [],
   sources: [],
   order_by: [],
+  source_type: [],
 };
 
 const sortOptions = ['location', 'country', 'city', 'count'];
+const sourceTypeOptions = ['stationary', 'mobile'];
 
-const initFromLocation = ({ countries, parameters, sources, order_by }) => {
+const initFromLocation = ({
+  countries,
+  parameters,
+  sources,
+  order_by,
+  source_type,
+}) => {
   return {
     parameters: parameters ? parameters.split(',') : [],
     countries: countries ? countries.split(',') : [],
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
+    source_type: source_type ? source_type.split(',') : [],
   };
 };
 export default function Filter({ countries, parameters, sources }) {
@@ -101,7 +110,16 @@ export default function Filter({ countries, parameters, sources }) {
         }));
         break;
       }
-
+      case 'source_type': {
+        const sourceTypes =
+          query && query.source_type ? query.source_type.split(',') : [];
+        query.source_type = toggleValue(sourceTypes, value);
+        setSelected(prev => ({
+          ...prev,
+          ['source_type']: toggleValue(prev['source_type'], value),
+        }));
+        break;
+      }
       case 'clear':
         query = null;
         setSelected(defaultSelected);
@@ -219,6 +237,39 @@ export default function Filter({ countries, parameters, sources }) {
             })}
           </ul>
         </Dropdown>
+        <Dropdown
+          triggerElement="a"
+          triggerTitle="source-type__filter"
+          triggerText="Source Type"
+          triggerClassName="drop-trigger"
+        >
+          <ul
+            role="menu"
+            data-cy="filter-source-type"
+            className="drop__menu drop__menu--select scrollable"
+          >
+            {_.sortBy(sourceTypeOptions).map(o => {
+              return (
+                <li key={o}>
+                  <div
+                    data-cy="filter-menu-item"
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': selected.source_type.includes(
+                        o
+                      ),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      onFilterSelect('source_type', o);
+                    }}
+                  >
+                    <span data-cy={o}>{o}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Dropdown>
 
         <Dropdown
           triggerElement="a"
@@ -290,6 +341,19 @@ export default function Filter({ countries, parameters, sources }) {
                 onClick={() => onFilterSelect('sources', source.name)}
               >
                 <span>{source.name}</span>
+              </button>
+            );
+          })}
+
+          {selected.source_type.map(o => {
+            return (
+              <button
+                type="button"
+                className="button--filter-pill orderBy"
+                key={o}
+                onClick={() => onFilterSelect('source_type', o)}
+              >
+                <span>{o}</span>
               </button>
             );
           })}
