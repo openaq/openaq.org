@@ -6,12 +6,15 @@ import { fetchLatestMeasurements } from '../../actions/action-creators';
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import { getCountryBbox } from '../../utils/countries';
-
-// import MeasurementsLayer from '../../components/map/measurements-layer';
-// import Legend from '../../components/map/legend';
+import { generateLegendStops } from '../../utils/colors';
 
 function Map(props) {
-  let { fetched, fetching, error } = props.latestMeasurements;
+  let {
+    fetched,
+    fetching,
+    error,
+    data: { results },
+  } = props.latestMeasurements;
 
   if (!fetched && !fetching) {
     return null;
@@ -22,31 +25,42 @@ function Map(props) {
   }
 
   if (error) {
-    return (
-      <InfoMessage>
-        <h2>Uh oh, something went wrong.</h2>
-        <p>
-          There was a problem getting the data. If you continue to have
-          problems, please let us know.
-        </p>
-        <a href="mailto:info@openaq.org" title="Send us an email">
-          Send us an Email
-        </a>
-      </InfoMessage>
-    );
+    return <InfoMessage standardMessage />;
   }
 
-  const bbox = getCountryBbox(this.props.match.params.name);
+  const scaleStops = generateLegendStops('pm25');
+  const colorWidth = 100 / scaleStops.length;
+  const bbox = getCountryBbox(props.match.params.name);
 
-  console.log;
   return (
     <section className="fold" id="country-fold-map" data-cy="country-map">
       <div className="fold__body">
-        {/* <MapComponent bbox={bbox}>
-          <MeasurementsLayer activeParameter={'pm25'} />
-          <Legend parameters={this.props.parameters} activeParameter={'pm25'} />
-        </MapComponent> */}
-        <span> map</span>
+        <MapComponent
+          bbox={bbox}
+          zoom={1}
+          measurements={results}
+          parameter={_.find(props.parameters, { id: 'pm25' })}
+          sources={this.props.sources}
+          disableScrollZoom
+        >
+          <div>
+            <p>Showing most recent values for PM2.5</p>
+            <ul className="color-scale">
+              {scaleStops.map(o => (
+                <li
+                  key={o.label}
+                  style={{
+                    backgroundColor: o.color,
+                    width: `${colorWidth}%`,
+                  }}
+                  className="color-scale__item"
+                >
+                  <span className="color-scale__value">{o.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </MapComponent>
       </div>
     </section>
   );

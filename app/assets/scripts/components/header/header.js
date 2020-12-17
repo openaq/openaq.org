@@ -42,7 +42,7 @@ export default function Header({
               {stats.map(stat => (
                 <li
                   key={stat.label}
-                  data-cy={`${id}-header-stats-${stat.label}`}
+                  data-cy={`${id}-header-stat-${stat.label}`}
                 >
                   <strong>{stat.number}</strong> {stat.label}
                 </li>
@@ -54,6 +54,7 @@ export default function Header({
               {action.api && (
                 <li>
                   <a
+                    data-cy={`header-apidocs-btn`}
                     href={action.api}
                     title="View in API documentation"
                     className="ipha-api"
@@ -67,6 +68,7 @@ export default function Header({
               {action.download && (
                 <li>
                   <button
+                    data-cy={`header-download-btn`}
                     type="button"
                     title="Download data for this location"
                     className="ipha-download"
