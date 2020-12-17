@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
-
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { formatThousands } from '../../utils/format';
 import config from '../../config';
+import { openDownloadModal } from '../../actions/action-creators';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import LoadingMessage from '../../components/loading-message';
@@ -26,7 +27,7 @@ const defaultCountry = {
   country: null,
 };
 
-export default function Country(props) {
+function Country(props) {
   const id = props.match.params.name;
   const [
     { locationFetched, locationFetching, locationError, locations },
@@ -117,8 +118,8 @@ export default function Country(props) {
     };
   }, []);
 
-  function onDownloadClick(data, e) {
-    e && e.preventDefault();
+  function onDownloadClick(data) {
+    // e && e.preventDefault();
     props._openDownloadModal(data);
   }
 
@@ -130,8 +131,6 @@ export default function Country(props) {
     : null;
 
   let locationGroups = _(locations).sortBy('city').groupBy('city').value();
-  console.log('sourceList', sourceList);
-  console.log('locationGroups', Object.entries(locationGroups));
 
   return (
     <>
@@ -161,7 +160,7 @@ export default function Country(props) {
             action={{
               api: config.apiDocs,
               download: () =>
-                onDownloadClick(null, {
+                onDownloadClick({
                   country: id,
                 }),
             }}
@@ -192,7 +191,7 @@ export default function Country(props) {
                           className="location-download-button"
                           title={`Download ${city} data`}
                           onClick={() =>
-                            onDownloadClick(null, {
+                            onDownloadClick({
                               country: id,
                               area: city,
                             })
@@ -263,3 +262,18 @@ Country.propTypes = {
     data: T.object,
   }),
 };
+
+// /////////////////////////////////////////////////////////////////// //
+// Connect functions
+
+function selector(state) {
+  return {};
+}
+
+function dispatcher(dispatch) {
+  return {
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
+  };
+}
+
+export default connect(selector, dispatcher)(Country);
