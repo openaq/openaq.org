@@ -78,7 +78,7 @@ export default function MeasureandsCard({ parameters }) {
   return (
     <Card
       gridColumn={'1 / 5'}
-      title="Measurands"
+      title="Parameters"
       renderBody={() => {
         return <Table data={prepareData(parameters)} />;
       }}

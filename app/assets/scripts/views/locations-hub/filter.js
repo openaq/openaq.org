@@ -157,7 +157,7 @@ export default function Filter({ countries, parameters, sources }) {
         <Dropdown
           triggerElement="a"
           triggerTitle="type__filter"
-          triggerText="Pollutant"
+          triggerText="Parameter"
         >
           <ul
             role="menu"
