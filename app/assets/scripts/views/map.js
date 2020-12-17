@@ -10,7 +10,7 @@ import { Dropdown } from 'openaq-design-system';
 import createReactClass from 'create-react-class';
 
 import MapComponent from '../components/map';
-import HeaderMessage from '../components/header-message';
+import { HeaderMessage } from '../components/header';
 import {
   fetchLatestMeasurements,
   invalidateAllLocationData,

@@ -104,7 +104,7 @@
     "mapbox-gl": "^0.50.0",
     "moment": "^2.14.1",
     "openaq-data-format": "github:openaq/openaq-data-format#master",
-    "openaq-design-system": "github:openaq/openaq-design-system#feature/v3.1.0",
+    "openaq-design-system": "github:openaq/openaq-design-system#feature/v3.2.0",
     "prop-types": "^15.7.2",
     "qs": "^6.2.1",
     "react": "^17.0.1",

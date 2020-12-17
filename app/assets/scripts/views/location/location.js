@@ -7,7 +7,7 @@ import qs from 'qs';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
-import HeaderMessage from '../../components/header-message';
+import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
 import CardList from '../../components/card-list';
 
