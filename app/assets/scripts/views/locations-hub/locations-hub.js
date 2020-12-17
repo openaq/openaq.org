@@ -53,8 +53,9 @@ export default function LocationsHub({
 
     let isMobile;
     if (query.source_type) {
-      if (query.source_type.includes('mobile')) isMobile = true;
-      else if (query.source_type.includes('stationary')) {
+      if (query.source_type.includes('mobile')) {
+        isMobile = true;
+      } else if (query.source_type.includes('stationary')) {
         isMobile = false;
       }
     }
