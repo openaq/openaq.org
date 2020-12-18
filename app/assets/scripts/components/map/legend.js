@@ -75,5 +75,4 @@ export default function Legend({ parameters, activeParameter }) {
 Legend.propTypes = {
   parameters: PropTypes.array.isRequired,
   activeParameter: PropTypes.string.isRequired,
-  history: PropTypes.object.isRequired,
 };

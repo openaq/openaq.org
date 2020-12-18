@@ -27,19 +27,19 @@ export default function LocationsSource({ activeParameter, map, children }) {
     };
   }, [activeParameter]);
 
-  if (!map.getSource(`locations-source-${activeParameter}`)) return null;
-  else
-    return (
-      <>
-        {sourceId &&
-          React.Children.map(children, child =>
-            React.cloneElement(child, {
-              map: map,
-              sourceId: sourceId,
-            })
-          )}
-      </>
-    );
+  return (
+    <>
+      {map &&
+        sourceId &&
+        map.getSource(`locations-source-${activeParameter}`) &&
+        React.Children.map(children, child =>
+          React.cloneElement(child, {
+            map: map,
+            sourceId: sourceId,
+          })
+        )}
+    </>
+  );
 }
 
 LocationsSource.propTypes = {

@@ -14,7 +14,7 @@ const defaultState = {
   data: null,
 };
 
-export default function Popover({ activeParameter, locationId }) {
+export default function Popover({ activeParameter, locationId, currentPage }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
@@ -124,15 +124,17 @@ export default function Popover({ activeParameter, locationId }) {
                 Compare
               </a>
             </li>
-            <li>
-              <a
-                href={`#/location/${encodeURIComponent(locationId)}`}
-                title={`View ${name} page`}
-                className="button button--primary-bounded"
-              >
-                View More
-              </a>
-            </li>
+            {locationId !== currentPage && (
+              <li>
+                <a
+                  href={`#/location/${encodeURIComponent(locationId)}`}
+                  title={`View ${name} page`}
+                  className="button button--primary-bounded"
+                >
+                  View More
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -143,4 +145,5 @@ export default function Popover({ activeParameter, locationId }) {
 Popover.propTypes = {
   activeParameter: T.string.isRequired,
   locationId: T.number.isRequired,
+  currentPage: T.number.isRequired,
 };
