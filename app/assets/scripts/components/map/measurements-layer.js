@@ -12,11 +12,11 @@ import {
 import { generateColorStops } from '../../utils/colors';
 import Popover from './popover';
 
-export default function MeasurementsLayer({ activeParameter, map }) {
+export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
   useEffect(() => {
     map.addLayer({
-      id: 'measurements-outline',
-      source: 'locations-source',
+      id: `${activeParameter}-outline`,
+      source: sourceId,
       'source-layer': 'default',
       type: 'circle',
       paint: {
@@ -31,8 +31,8 @@ export default function MeasurementsLayer({ activeParameter, map }) {
     });
 
     map.addLayer({
-      id: 'measurements-layer',
-      source: 'locations-source',
+      id: `${activeParameter}-layer`,
+      source: sourceId,
       'source-layer': 'default',
       type: 'circle',
       paint: {
@@ -46,7 +46,7 @@ export default function MeasurementsLayer({ activeParameter, map }) {
       },
     });
 
-    map.on('click', 'measurements-layer', function (e) {
+    map.on('click', `${activeParameter}-layer`, function (e) {
       const coordinates = e.features[0].geometry.coordinates.slice();
 
       // Ensure that if the map is zoomed out such that multiple
@@ -71,27 +71,28 @@ export default function MeasurementsLayer({ activeParameter, map }) {
     });
 
     // Change the cursor to a pointer when the mouse is over the layer.
-    map.on('mouseenter', 'measurements-layer', function () {
+    map.on('mouseenter', `${activeParameter}-layer`, function () {
       map.getCanvas().style.cursor = 'pointer';
     });
 
     // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'measurements-layer', function () {
+    map.on('mouseleave', `${activeParameter}-layer`, function () {
       map.getCanvas().style.cursor = '';
     });
 
     return () => {
-      if (map.getLayer('measurements-layer'))
-        map.removeLayer('measurements-layer');
-      if (map.getLayer('measurements-outline'))
-        map.removeLayer('measurements-outline');
+      if (map.getLayer(`${activeParameter}-layer`))
+        map.removeLayer(`${activeParameter}-layer`);
+      if (map.getLayer(`${activeParameter}-outline`))
+        map.removeLayer(`${activeParameter}-outline`);
     };
-  }, []);
+  }, [activeParameter]);
 
   return null;
 }
 
 MeasurementsLayer.propTypes = {
   activeParameter: T.string.isRequired,
+  sourceId: T.string.isRequired,
   map: T.object.isRequired,
 };
