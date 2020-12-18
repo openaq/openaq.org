@@ -3,7 +3,7 @@ import { PropTypes as T } from 'prop-types';
 
 import Card from '../card';
 import Table from '../table';
-import { shortenLargeNumber } from '../../utils/format';
+import { shortenLargeNumber, round } from '../../utils/format';
 
 const initData = {
   pollutant: {
@@ -60,7 +60,7 @@ const prepareData = data => {
         },
         avg: {
           ...acc.avg,
-          values: [...acc.avg.values, stats.value],
+          values: [...acc.avg.values, round(stats.value, 0)],
         },
         count: {
           ...acc.count,
