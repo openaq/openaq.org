@@ -2,6 +2,15 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import styled from 'styled-components';
+
+const Tags = styled.div`
+  display: grid;
+  grid-gap: 0.5rem;
+  width: fit-content;
+  grid-template-columns: 1fr 1fr;
+`;
+
 export default function Header({
   id,
   tagline,
@@ -11,6 +20,8 @@ export default function Header({
   stats,
   disclaimer,
   action,
+  isMobile,
+  sourceType,
 }) {
   return (
     <header className="inpage__header" data-cy={`${id}-header`}>
@@ -49,6 +60,20 @@ export default function Header({
               ))}
             </ul>
           )}
+
+          <Tags>
+            {sourceType && (
+              <div className="header__pill">
+                {`${sourceType[0].toUpperCase()}${sourceType.slice(1)}`}
+              </div>
+            )}
+            {isMobile !== undefined && (
+              <div className="header__pill">
+                {isMobile ? 'Mobile' : 'Stationary'}
+              </div>
+            )}
+          </Tags>
+
           {action && (
             <ul className="ipha">
               {action.api && (
@@ -113,6 +138,8 @@ Header.propTypes = {
   tagline: T.string,
   title: T.string.isRequired,
   subtitle: T.string,
+  isMobile: T.bool,
+  sourceType: T.string,
   description: T.oneOfType([T.string, T.node]),
   stats: T.arrayOf(
     T.shape({

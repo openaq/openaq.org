@@ -53,6 +53,7 @@ const TagWrapper = styled.div`
  * Generic Card component for dashboard pages
  */
 export default function Card({
+  id,
   gridColumn,
   gridRow,
   title,
@@ -64,7 +65,12 @@ export default function Card({
   noBodyStyle,
 }) {
   return (
-    <CardWrapper className="card" gridColumn={gridColumn} gridRow={gridRow}>
+    <CardWrapper
+      data-cy={`${id}-card`}
+      className="card"
+      gridColumn={gridColumn}
+      gridRow={gridRow}
+    >
       <CardContents className="card__contents">
         {renderHeader ? (
           renderHeader()
@@ -76,7 +82,11 @@ export default function Card({
                   {subtitle}
                 </CardSubtitle>
               )}
-              {title && <CardTitle className="card__title">{title}</CardTitle>}
+              {title && (
+                <CardTitle data-cy={`${id}-card-title`} className="card__title">
+                  {title}
+                </CardTitle>
+              )}
             </CardHeadline>
             {tags && (
               <TagWrapper>
@@ -101,6 +111,7 @@ export default function Card({
 }
 
 Card.propTypes = {
+  id: T.string,
   gridColumn: T.string,
   gridRow: T.string,
   title: T.oneOfType([T.string, T.element]),

@@ -31,6 +31,7 @@ describe('The Projects Hub', () => {
 
   it('has some filters with dropdown menus', () => {
     cy.get('[title="type__filter"]').click();
+    cy.get('[title="type__filter"]').find('span').contains('Parameter');
     ['O3', 'CO', 'NO2', 'CO2', 'SO2', 'BC'].forEach(parameter => {
       cy.get('[data-cy=filter-parameters]')
         .find(`[data-cy=${parameter}]`)
@@ -43,5 +44,15 @@ describe('The Projects Hub', () => {
     cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
     cy.get('[data-cy=filter-clear]').click();
     cy.get('[data-cy=filter-clear]').should('not.exist');
+  });
+
+  it('has some project cards', () => {
+    cy.get('[data-cy=project-card]').should('exist');
+    cy.get('[data-cy=project-card-title]').should('exist');
+    cy.get('[data-cy=project-card-detail]').should('exist');
+    cy.get('[data-cy=project-card-detail-label]').contains('Locations');
+    cy.get('[data-cy=project-card-detail-label]').contains('Measurements');
+    cy.get('[data-cy=project-card-detail-label]').contains('Collection dates');
+    cy.get('[data-cy=project-card-detail-label]').contains('Parameters');
   });
 });
