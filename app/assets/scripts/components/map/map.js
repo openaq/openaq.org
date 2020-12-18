@@ -43,7 +43,7 @@ export default function Map({ center, bbox, children }) {
   }, []);
 
   return (
-    <div className="map">
+    <div className="map" style={{ minHeight: `20rem` }}>
       <div ref={containerRef} className="map__container" data-cy="mapboxgl-map">
         {map &&
           children &&

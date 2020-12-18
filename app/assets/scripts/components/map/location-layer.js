@@ -75,6 +75,6 @@ export default function LocationLayer({
 
 LocationLayer.propTypes = {
   locationId: PropTypes.number.isRequired,
-  map: PropTypes.object.isRequired,
-  sourceId: PropTypes.string.isRequired,
+  map: PropTypes.object,
+  sourceId: PropTypes.string,
 };

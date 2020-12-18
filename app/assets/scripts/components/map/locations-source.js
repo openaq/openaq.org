@@ -29,6 +29,7 @@ export default function LocationsSource({ activeParameter, map, children }) {
   return (
     <>
       {!!(map && sourceId && map.getSource(sourceId)) &&
+        children &&
         React.Children.map(children, child =>
           React.cloneElement(child, {
             map: map,
