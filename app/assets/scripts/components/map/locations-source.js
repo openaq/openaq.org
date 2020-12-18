@@ -41,7 +41,7 @@ export default function LocationsSource({ activeParameter, map, children }) {
 
 LocationsSource.propTypes = {
   activeParameter: PropTypes.string.isRequired,
-  map: PropTypes.object.isRequired,
+  map: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),

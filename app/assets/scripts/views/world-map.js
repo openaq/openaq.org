@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import qs from 'qs';
@@ -42,10 +42,10 @@ function WorldMap({ parameters, location }) {
 }
 
 WorldMap.propTypes = {
-  location: T.object,
-  history: T.object,
+  location: PropTypes.object,
+  history: PropTypes.object,
 
-  parameters: T.array,
+  parameters: PropTypes.array,
 };
 
 // /////////////////////////////////////////////////////////////////////

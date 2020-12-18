@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
-import { PropTypes as T } from 'prop-types';
 import mapbox from 'mapbox-gl';
 
 import {
@@ -96,7 +96,7 @@ export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
 }
 
 MeasurementsLayer.propTypes = {
-  activeParameter: T.string.isRequired,
-  sourceId: T.string.isRequired,
-  map: T.object.isRequired,
+  activeParameter: PropTypes.string.isRequired,
+  sourceId: PropTypes.string,
+  map: PropTypes.object,
 };
