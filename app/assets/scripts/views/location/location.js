@@ -148,40 +148,40 @@ function Location(props) {
         isMobile={data.isMobile}
       />
       <div className="inpage__body">
-        <div className='inner'>
-        <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
-        <Dashboard
-          gridTemplateRows={'repeat(4, 20rem)'}
-          gridTemplateColumns={'repeat(12, 1fr)'}
-        >
-          <DetailsCard
-            measurements={data.measurements}
-            coords={{
-              lat: data.coordinates.latitude,
-              lng: data.coordinates.longitude,
-            }}
-            date={{
-              start: data.firstUpdated,
-              end: data.lastUpdated,
-            }}
-          />
-          <LatestMeasurementsCard parameters={data.parameters} />
-          <SourcesCard sources={data.sources} />
-          <TimeSeriesCard
-            locationId={data.id}
-            parameters={data.parameters}
-            xUnit="day"
-            dateRange={dateRange}
-          />
-          <MeasureandsCard parameters={data.parameters} />
-          <MapCard parameters={data.parameters} points={data.points} />
-          <TemporalCoverageCard
-            parameters={data.parameters}
-            spatial="location"
-            id={data.id}
-            dateRange={dateRange}
-          />
-        </Dashboard>
+        <div className="inner">
+          <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
+          <Dashboard
+            gridTemplateRows={'repeat(4, 20rem)'}
+            gridTemplateColumns={'repeat(12, 1fr)'}
+          >
+            <DetailsCard
+              measurements={data.measurements}
+              coords={{
+                lat: data.coordinates.latitude,
+                lng: data.coordinates.longitude,
+              }}
+              date={{
+                start: data.firstUpdated,
+                end: data.lastUpdated,
+              }}
+            />
+            <LatestMeasurementsCard parameters={data.parameters} />
+            <SourcesCard sources={data.sources} />
+            <TimeSeriesCard
+              locationId={data.id}
+              parameters={data.parameters}
+              xUnit="day"
+              dateRange={dateRange}
+            />
+            <MeasureandsCard parameters={data.parameters} />
+            <MapCard parameters={data.parameters} points={data.points} />
+            <TemporalCoverageCard
+              parameters={data.parameters}
+              spatial="location"
+              id={data.id}
+              dateRange={dateRange}
+            />
+          </Dashboard>
         </div>
       </div>
     </section>
