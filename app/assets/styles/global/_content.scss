@@ -22,7 +22,6 @@
   }
 }
 
-
 /* Special button for inpage header
    ========================================================================== */
 
@@ -57,7 +56,8 @@
   display: flex;
   align-items: center;
 
-  a, a:visited {
+  a,
+  a:visited {
     display: inline-flex;
     color: inherit;
     background: rgba(#fff, 0.12);
@@ -84,7 +84,6 @@
   display: block;
 }
 
-
 /* Lists
    ========================================================================== */
 
@@ -105,9 +104,12 @@
 }
 
 .global-table th {
-    font-family: $heading-font-family;
-    line-height: 1rem;
-    letter-spacing: 0.125em;
-    text-transform: uppercase;
-    color: $base-color;
+  font-family: $heading-font-family;
+  font-size: x-small;
+  line-height: 1rem;
+  letter-spacing: 0.125em;
+  text-transform: uppercase;
+  color: $base-color;
+  padding: 0.5rem;
+  min-width: 6rem;
 }

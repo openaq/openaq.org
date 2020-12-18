@@ -54,7 +54,7 @@ const prepareData = data => {
   const preparedData = Object.entries(combinedData).reduce(
     (acc, [pollutant, stats]) => {
       acc = {
-        pollutant: {
+        parameter: {
           ...acc.pollutant,
           values: [...acc.pollutant.values, pollutant],
         },
