@@ -23,9 +23,6 @@ export default function LocationsSource({ activeParameter, map, children }) {
 
     return () => {
       setSourceId(null);
-      if (map.getSource(`locations-source-${activeParameter}`)) {
-        map.removeSource(`locations-source-${activeParameter}`);
-      }
     };
   }, [activeParameter]);
 
