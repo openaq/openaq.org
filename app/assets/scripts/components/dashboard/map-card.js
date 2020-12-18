@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
@@ -61,11 +61,12 @@ export default function MapCard({ parameters, isMobile, locationId, center }) {
 }
 
 MapCard.propTypes = {
-  locationId: T.number,
-  isMobile: T.bool.isRequired,
-  parameters: T.arrayOf(
-    T.shape({
-      measurand: T.string.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number),
+  locationId: PropTypes.number,
+  isMobile: PropTypes.bool.isRequired,
+  parameters: PropTypes.arrayOf(
+    PropTypes.shape({
+      measurand: PropTypes.string.isRequired,
     })
   ),
 };
