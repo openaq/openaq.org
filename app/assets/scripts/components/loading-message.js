@@ -43,6 +43,7 @@ var LoadingMessage = createReactClass({
         className="wind-animated"
         viewBox="0 0 198 100"
         style={{ enableBackground: 'new 0 0 198 100' }}
+        data-cy="loading-message"
       >
         <path
           className="wind swirl-1"

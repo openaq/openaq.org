@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 
-import HeaderMessage from '../../components/header-message';
+import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
 
 import styled from 'styled-components';

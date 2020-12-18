@@ -30,8 +30,6 @@ export function fetchLocationsByCountry(country, filters = {}) {
     filters.country = country;
     let f = buildAPIQS(filters);
 
-    // console.log('url', `${config.api}/locations?limit=${limit}&${f}`);
-
     fetch(`${config.api}/locations?limit=${limit}&${f}`)
       .then(response => {
         if (response.status >= 400) {
