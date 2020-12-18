@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { Dropdown } from 'openaq-design-system';
 import c from 'classnames';
 
 import { generateLegendStops } from '../../utils/colors';
 
 export default function Legend({ parameters, activeParameter }) {
+  let location = useLocation();
   let history = useHistory();
 
   function onFilterSelect(parameter, e) {
     e.preventDefault();
-    history.push(`map?parameter=${parameter}`);
+    history.push(`${location.pathname}?parameter=${parameter}`);
   }
 
   let drop = (
@@ -31,7 +32,7 @@ export default function Legend({ parameters, activeParameter }) {
               href="#"
               title={`Show values for ${o.measurand || o.name}`}
               data-hook="dropdown:close"
-              onClick={onFilterSelect.bind(null, o.name)}
+              onClick={e => onFilterSelect(o.measurand || o.name, e)}
             >
               <span>{o.measurand || o.name}</span>
             </a>

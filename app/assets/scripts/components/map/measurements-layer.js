@@ -90,7 +90,7 @@ export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
       if (map.getLayer(`${activeParameter}-outline`))
         map.removeLayer(`${activeParameter}-outline`);
     };
-  }, [activeParameter]);
+  }, [sourceId]);
 
   return null;
 }
