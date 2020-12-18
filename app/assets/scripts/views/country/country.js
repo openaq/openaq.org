@@ -113,7 +113,7 @@ function Country(props) {
       setLocations(defaultLocations);
       setCountry(defaultCountry);
     };
-  }, []);
+  }, [id]);
 
   function onDownloadClick(data) {
     // e && e.preventDefault();
@@ -165,7 +165,7 @@ function Country(props) {
           <div className="inpage__body">
             <section className="fold" id="country-fold-map">
               <div className="fold__body">
-                <MapComponent bbox={getCountryBbox(country.name)}>
+                <MapComponent bbox={getCountryBbox(country.code)}>
                   <LocationsSource activeParameter={'pm25'}>
                     <MeasurementsLayer activeParameter={'pm25'} />
                   </LocationsSource>

@@ -4,7 +4,7 @@ import mapbox from 'mapbox-gl';
 
 import config from '../../config';
 
-export default function Map({ center, children }) {
+export default function Map({ center, bbox, children }) {
   const containerRef = useRef();
 
   const [map, setMap] = useState(null);
@@ -30,6 +30,8 @@ export default function Map({ center, children }) {
 
       if (center) {
         m.flyTo({ center, zoom: 15 });
+      } else if (bbox) {
+        m.fitBounds(bbox);
       }
     });
 
@@ -57,6 +59,7 @@ export default function Map({ center, children }) {
 
 Map.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
+  bbox: PropTypes.arrayOf(PropTypes.number),
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
