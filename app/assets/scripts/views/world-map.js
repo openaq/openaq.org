@@ -7,6 +7,7 @@ import qs from 'qs';
 import MapComponent from '../components/map';
 import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
+import MobileLayer from '../components/map/mobile-layer';
 import Legend from '../components/map/legend';
 
 function WorldMap({ parameters, location }) {
@@ -27,6 +28,7 @@ function WorldMap({ parameters, location }) {
       <div className="inpage__body">
         <MapComponent>
           <LocationsSource activeParameter={activeParam.name.toLowerCase()}>
+            <MobileLayer />
             <MeasurementsLayer
               activeParameter={activeParam.name.toLowerCase()}
             />
