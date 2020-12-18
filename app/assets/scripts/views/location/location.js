@@ -148,11 +148,11 @@ function Location(props) {
         isMobile={data.isMobile}
       />
       <div className="inpage__body">
+        <div className='inner'>
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
         <Dashboard
           gridTemplateRows={'repeat(4, 20rem)'}
           gridTemplateColumns={'repeat(12, 1fr)'}
-          className="inner"
         >
           <DetailsCard
             measurements={data.measurements}
@@ -182,6 +182,7 @@ function Location(props) {
             dateRange={dateRange}
           />
         </Dashboard>
+        </div>
       </div>
     </section>
   );
