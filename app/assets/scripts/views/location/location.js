@@ -71,7 +71,7 @@ function Location(props) {
     return () => {
       setState(defaultState);
     };
-  }, []);
+  }, [id]);
 
   if (!fetched && !fetching) {
     return null;
