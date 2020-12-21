@@ -57,7 +57,7 @@ export default function SourceInfo({ sources }) {
         );
       }}
       renderFooter={
-        sources && sources[0]
+        sources && sources[0] && sources[0].contacts
           ? () => (
               <div>
                 For more information contact{' '}
