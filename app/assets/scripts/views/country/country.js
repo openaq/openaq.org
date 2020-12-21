@@ -175,8 +175,10 @@ function Country(props) {
                         <h1 className="fold__title">
                           {city}{' '}
                           <small>
-                            {locations.length}{' '}
-                            {locations.length > 1 ? 'locations' : 'location'}
+                            {cityLocations.length}{' '}
+                            {cityLocations.length > 1
+                              ? 'locations'
+                              : 'location'}
                           </small>
                         </h1>
                         <p className="fold__main-action">
@@ -196,7 +198,7 @@ function Country(props) {
                         </p>
                       </header>
                       <div className="inpage__results">
-                        {locations.map(loc => {
+                        {cityLocations.map(loc => {
                           let openModal = () =>
                             onDownloadClick({
                               country: loc.country,
