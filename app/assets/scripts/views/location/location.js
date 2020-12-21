@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
-import HeaderMessage from '../../components/header-message';
+import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
 import CardList from '../../components/card-list';
 
@@ -16,6 +16,7 @@ import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 import MapCard from '../../components/dashboard/map-card';
+import NearbyLocations from './nearby-locations';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
@@ -70,7 +71,7 @@ function Location(props) {
     return () => {
       setState(defaultState);
     };
-  }, []);
+  }, [id]);
 
   if (!fetched && !fetching) {
     return null;
@@ -125,6 +126,8 @@ function Location(props) {
           download: onDownloadClick,
           compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
+        sourceType={data.sourceType}
+        isMobile={data.isMobile}
       />
       <div className="inpage__body">
         <Dashboard
@@ -151,13 +154,27 @@ function Location(props) {
             xUnit="day"
           />
           <MeasureandsCard parameters={data.parameters} />
-          <MapCard parameters={data.parameters} points={data.points} />
+          <MapCard
+            parameters={data.parameters}
+            isMobile={data.isMobile}
+            locationId={data.id}
+            center={[data.coordinates.longitude, data.coordinates.latitude]}
+            points={data.points}
+          />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
             id={data.id}
           />
         </Dashboard>
+        <NearbyLocations
+          locationId={data.id}
+          center={[data.coordinates.longitude, data.coordinates.latitude]}
+          city={data.city}
+          country={data.country}
+          parameters={[data.parameters[0]]}
+          activeParameter={data.parameters[0].measurand}
+        />
       </div>
     </section>
   );

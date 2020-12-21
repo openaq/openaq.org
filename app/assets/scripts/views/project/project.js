@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 
-import HeaderMessage from '../../components/header-message';
+import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
 
 import styled from 'styled-components';
@@ -114,6 +114,8 @@ function Project(props) {
           api: `${config.api}/projects/${data.id}`,
           download: () => {},
         }}
+        sourceType={data.sourceType}
+        isMobile={data.isMobile}
       />
       <div className="inpage__body">
         <Dashboard

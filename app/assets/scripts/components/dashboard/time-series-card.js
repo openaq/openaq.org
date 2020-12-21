@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import config from '../../config';
 import LoadingMessage from '../loading-message';
-import InfoMessage from '../info-message';
+import ErrorMessage from '../error-message';
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
 import TabbedSelector from '../tabbed-selector';
 import LineChart from '../line-chart';
@@ -22,21 +22,6 @@ const CardHeader = styled(BaseHeader)`
   grid-gap: 0.5rem;
 `;
 
-const ErrorMessage = () => (
-  <div>
-    <p>We couldn&apos;t get any data.</p>
-    <InfoMessage>
-      <p>Please try again later.</p>
-      <p>
-        If you think there&apos;s a problem, please{' '}
-        <a href="mailto:info@openaq.org" title="Contact openaq">
-          contact us.
-        </a>
-      </p>
-    </InfoMessage>
-  </div>
-);
-
 const defaultState = {
   fetched: false,
   fetching: false,
@@ -49,8 +34,8 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   const [activeTab, setActiveTab] = useState({
-    id: parameters[0].measurand || parameters[0],
-    name: parameters[0].measurand || parameters[0],
+    id: parameters[0].parameter || parameters[0],
+    name: parameters[0].parameter || parameters[0],
   });
   // eslint-disable-next-line no-unused-vars
   const [temporal, setTemporal] = useState('hour');
@@ -119,8 +104,8 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
         <CardHeader className="card__header">
           <TabbedSelector
             tabs={parameters.map(x => ({
-              id: x.measurand || x,
-              name: x.measurand || x,
+              id: x.parameter || x,
+              name: x.parameter || x,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
@@ -152,7 +137,7 @@ TimeSeriesCard.propTypes = {
   projectId: T.string,
   parameters: T.arrayOf(
     T.shape({
-      measurand: T.string.isRequired,
+      parameter: T.string.isRequired,
     })
   ),
 };

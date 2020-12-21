@@ -1,12 +1,12 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 
-export default function CardDetails({ list }) {
+export default function CardDetails({ list, id }) {
   return (
-    <dl className="card__meta-details">
+    <dl data-cy={`${id}-card-detail`} className="card__meta-details">
       {list.map((d, i) => (
         <React.Fragment key={i}>
-          <dt>{d.label}</dt>
+          <dt data-cy={`${id}-card-detail-label`}>{d.label}</dt>
           <dd>{d.value}</dd>
         </React.Fragment>
       ))}
@@ -15,6 +15,7 @@ export default function CardDetails({ list }) {
 }
 
 CardDetails.propTypes = {
+  id: T.string,
   list: T.arrayOf(
     T.shape({
       label: T.string.isRequired,

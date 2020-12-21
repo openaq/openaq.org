@@ -24,6 +24,7 @@ export default function LocationCard({
 
   return (
     <Card
+      id="location"
       title={
         <>
           {name}{' '}
@@ -40,6 +41,7 @@ export default function LocationCard({
       tags={[sourceType, mobile ? 'Mobile' : 'Stationary']}
       renderBody={() => (
         <CardDetails
+          id="location"
           list={[
             { label: 'Collection started', value: started },
             {
@@ -47,8 +49,8 @@ export default function LocationCard({
               value: formatThousands(totalMeasurements),
             },
             {
-              label: 'Values',
-              value: parametersList.map(p => p.measurand).join(', '),
+              label: 'Parameters',
+              value: parametersList.map(p => p.parameter).join(', '),
             },
             {
               label: 'Source',
