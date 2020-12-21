@@ -195,34 +195,32 @@ function Country(props) {
                           </a>
                         </p>
                       </header>
-                      <div className="fold__body">
-                        <ul className="country-locations-list">
-                          {cityLocations.map(loc => (
-                            <li key={loc.id}>
-                              <LocationCard
-                                mobile={loc.isMobile}
-                                key={loc.id}
-                                city={loc.city}
-                                country={loc.country}
-                                firstUpdated={loc.firstUpdated}
-                                id={loc.id}
-                                lastUpdated={loc.lastUpdated}
-                                name={loc.name}
-                                onDownloadClick={() =>
-                                  props._openDownloadModal({
-                                    country: loc.country,
-                                    area: loc.city,
-                                    location: loc.location,
-                                  })
-                                }
-                                parametersList={loc.parameters}
-                                sources={loc.sources}
-                                sourceType={loc.sourceType}
-                                totalMeasurements={loc.measurements}
-                              />
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="inpage__results">
+                        {locations.map(loc => {
+                          let openModal = () =>
+                            onDownloadClick({
+                              country: loc.country,
+                              area: loc.city,
+                              location: loc.id,
+                            });
+                          return (
+                            <LocationCard
+                              mobile={loc.isMobile}
+                              key={loc.id}
+                              city={loc.city}
+                              country={loc.country}
+                              firstUpdated={loc.firstUpdated}
+                              id={loc.id}
+                              lastUpdated={loc.lastUpdated}
+                              name={loc.name}
+                              onDownloadClick={openModal}
+                              parametersList={loc.parameters}
+                              sources={loc.sources}
+                              sourceType={loc.sourceType}
+                              totalMeasurements={loc.measurements}
+                            />
+                          );
+                        })}
                       </div>
                     </div>
                   </section>
