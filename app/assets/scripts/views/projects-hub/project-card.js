@@ -48,7 +48,7 @@ export default function ProjectCard({
             {
               label: 'Parameters',
               value: parametersList
-                .map(p => p.measurand.toUpperCase())
+                .map(p => p.parameter.toUpperCase())
                 .join(', '),
             },
           ]}

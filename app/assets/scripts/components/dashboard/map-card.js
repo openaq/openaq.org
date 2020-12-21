@@ -14,8 +14,8 @@ const CardHeader = styled(BaseHeader)`
 
 export default function MapCard({ parameters }) {
   const [activeTab, setActiveTab] = useState({
-    id: parameters[0].measurand || parameters[0],
-    name: parameters[0].measurand || parameters[0],
+    id: parameters[0].parameter || parameters[0],
+    name: parameters[0].parameter || parameters[0],
   });
 
   return (
@@ -25,8 +25,8 @@ export default function MapCard({ parameters }) {
         <CardHeader className="card__header">
           <TabbedSelector
             tabs={parameters.map(x => ({
-              id: x.measurand || x,
-              name: x.measurand || x,
+              id: x.parameter || x,
+              name: x.parameter || x,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
@@ -47,7 +47,7 @@ MapCard.propTypes = {
   projectId: T.string,
   parameters: T.arrayOf(
     T.shape({
-      measurand: T.string.isRequired,
+      parameter: T.string.isRequired,
     })
   ),
 };

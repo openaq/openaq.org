@@ -49,8 +49,8 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   const [activeTab, setActiveTab] = useState({
-    id: parameters[0].measurand || parameters[0],
-    name: parameters[0].measurand || parameters[0],
+    id: parameters[0].parameter || parameters[0],
+    name: parameters[0].parameter || parameters[0],
   });
   // eslint-disable-next-line no-unused-vars
   const [temporal, setTemporal] = useState('hour');
@@ -119,8 +119,8 @@ export default function TimeSeriesCard({ locationId, projectId, parameters }) {
         <CardHeader className="card__header">
           <TabbedSelector
             tabs={parameters.map(x => ({
-              id: x.measurand || x,
-              name: x.measurand || x,
+              id: x.parameter || x,
+              name: x.parameter || x,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
@@ -152,7 +152,7 @@ TimeSeriesCard.propTypes = {
   projectId: T.string,
   parameters: T.arrayOf(
     T.shape({
-      measurand: T.string.isRequired,
+      parameter: T.string.isRequired,
     })
   ),
 };
