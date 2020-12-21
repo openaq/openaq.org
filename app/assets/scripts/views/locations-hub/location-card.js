@@ -50,7 +50,7 @@ export default function LocationCard({
             },
             {
               label: 'Parameters',
-              value: parametersList.map(p => p.measurand).join(', '),
+              value: parametersList.map(p => p.parameter).join(', '),
             },
             {
               label: 'Source',

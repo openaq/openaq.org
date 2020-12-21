@@ -67,8 +67,8 @@ const ErrorMessage = () => (
 
 export default function TemporalCoverageCard({ parameters, spatial, id }) {
   const [activeTab, setActiveTab] = useState({
-    id: parameters[0].measurand || parameters[0],
-    name: parameters[0].measurand || parameters[0],
+    id: parameters[0].parameter || parameters[0],
+    name: parameters[0].parameter || parameters[0],
   });
 
   const [state, setState] = useState(defaultState);
@@ -169,8 +169,8 @@ export default function TemporalCoverageCard({ parameters, spatial, id }) {
         <CardHeader className="card__header">
           <TabbedSelector
             tabs={parameters.map(x => ({
-              id: x.measurand || x,
-              name: x.measurand || x,
+              id: x.parameter || x,
+              name: x.parameter || x,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
@@ -225,7 +225,7 @@ export default function TemporalCoverageCard({ parameters, spatial, id }) {
 TemporalCoverageCard.propTypes = {
   parameters: T.arrayOf(
     T.shape({
-      measurand: T.string.isRequired,
+      parameter: T.string.isRequired,
       count: T.number.isRequired,
       average: T.number.isRequired,
     })

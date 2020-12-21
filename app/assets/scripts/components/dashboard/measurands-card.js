@@ -41,9 +41,9 @@ const initData = {
 
 const prepareData = data => {
   const combinedData = data.reduce((accum, datum) => {
-    const { measurand, count, average } = datum;
-    if (!accum[measurand]) {
-      accum[measurand] = {
+    const { parameter, count, average } = datum;
+    if (!accum[parameter]) {
+      accum[parameter] = {
         count: count,
         value: average,
       };
@@ -90,7 +90,7 @@ export default function MeasureandsCard({ parameters }) {
 MeasureandsCard.propTypes = {
   parameters: T.arrayOf(
     T.shape({
-      measurand: T.string.isRequired,
+      parameter: T.string.isRequired,
       count: T.number.isRequired,
       average: T.number.isRequired,
     })
