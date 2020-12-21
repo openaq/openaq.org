@@ -169,7 +169,7 @@ function Country(props) {
                   <LocationsSource activeParameter={'pm25'}>
                     <MeasurementsLayer activeParameter={'pm25'} />
                   </LocationsSource>
-                  <Legend parameters={['pm25']} activeParameter={'pm25'} />
+                  <Legend parameters={['PM25']} activeParameter={'PM25'} />
                 </MapComponent>
               </div>
             </section>
