@@ -3,6 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { getCountryBbox } from '../../utils/countries';
 import { formatThousands } from '../../utils/format';
 import config from '../../config';
 import { openDownloadModal } from '../../actions/action-creators';
@@ -10,8 +11,11 @@ import { openDownloadModal } from '../../actions/action-creators';
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
+import MapComponent from '../../components/map';
+import LocationsSource from '../../components/map/locations-source';
+import MeasurementsLayer from '../../components/map/measurements-layer';
+import Legend from '../../components/map/legend';
 import LocationCard from '../locations-hub/location-card';
-import CountryMap from './map';
 
 const defaultLocations = {
   locationFetching: false,
@@ -109,7 +113,7 @@ function Country(props) {
       setLocations(defaultLocations);
       setCountry(defaultCountry);
     };
-  }, []);
+  }, [id]);
 
   function onDownloadClick(data) {
     // e && e.preventDefault();
@@ -159,7 +163,16 @@ function Country(props) {
             }}
           />
           <div className="inpage__body">
-            <CountryMap />
+            <section className="fold" id="country-fold-map">
+              <div className="fold__body">
+                <MapComponent bbox={getCountryBbox(country.code)}>
+                  <LocationsSource activeParameter={'pm25'}>
+                    <MeasurementsLayer activeParameter={'pm25'} />
+                  </LocationsSource>
+                  <Legend parameters={['pm25']} activeParameter={'pm25'} />
+                </MapComponent>
+              </div>
+            </section>
             {locationFetching ? (
               <LoadingMessage />
             ) : !locationError ? (
@@ -244,32 +257,10 @@ Country.propTypes = {
   match: T.object,
 
   _openDownloadModal: T.func,
-
-  countries: T.array,
-  sources: T.array,
-  parameters: T.array,
-
-  latestMeasurements: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
-  locations: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
 };
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
-
-function selector() {
-  return {};
-}
 
 function dispatcher(dispatch) {
   return {
@@ -277,4 +268,4 @@ function dispatcher(dispatch) {
   };
 }
 
-export default connect(selector, dispatcher)(Country);
+export default connect(null, dispatcher)(Country);

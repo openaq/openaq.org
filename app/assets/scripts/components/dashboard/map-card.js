@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
 import TabbedSelector from '../tabbed-selector';
-import Map from '../mini-map';
+import Map from '../map';
+import LocationsSource from '../map/locations-source';
+import MobileLayer from '../map/mobile-layer';
+import LocationLayer from '../map/location-layer';
 
 const CardHeader = styled(BaseHeader)`
   display: grid;
@@ -12,7 +15,7 @@ const CardHeader = styled(BaseHeader)`
   grid-gap: 0.5rem;
 `;
 
-export default function MapCard({ parameters }) {
+export default function MapCard({ parameters, isMobile, locationId, center }) {
   const [activeTab, setActiveTab] = useState({
     id: parameters[0].parameter || parameters[0],
     name: parameters[0].parameter || parameters[0],
@@ -37,17 +40,33 @@ export default function MapCard({ parameters }) {
           <CardTitle>Total Count of Measurements</CardTitle>
         </CardHeader>
       )}
-      renderBody={() => <Map style={{ height: `100%`, minHeight: `20rem` }} />}
+      renderBody={() => (
+        <Map center={center}>
+          {(isMobile || locationId) && (
+            <LocationsSource activeParameter={activeTab.name}>
+              {isMobile ? (
+                <MobileLayer />
+              ) : (
+                <LocationLayer
+                  activeParameter={activeTab}
+                  locationId={locationId}
+                />
+              )}
+            </LocationsSource>
+          )}
+        </Map>
+      )}
     />
   );
 }
 
 MapCard.propTypes = {
-  locationId: T.string,
-  projectId: T.string,
-  parameters: T.arrayOf(
-    T.shape({
-      parameter: T.string.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number),
+  locationId: PropTypes.number,
+  isMobile: PropTypes.bool.isRequired,
+  parameters: PropTypes.arrayOf(
+    PropTypes.shape({
+      parameter: PropTypes.string.isRequired,
     })
   ),
 };
