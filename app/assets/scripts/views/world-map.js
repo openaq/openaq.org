@@ -33,10 +33,7 @@ function WorldMap({ parameters, location }) {
               activeParameter={activeParam.name.toLowerCase()}
             />
           </LocationsSource>
-          <Legend
-            parameters={parameters}
-            activeParameter={activeParam.name.toLowerCase()}
-          />
+          <Legend parameters={parameters} activeParameter={activeParam.name} />
         </MapComponent>
       </div>
     </section>

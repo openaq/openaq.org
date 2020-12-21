@@ -173,7 +173,7 @@ function Location(props) {
           city={data.city}
           country={data.country}
           parameters={[data.parameters[0]]}
-          activeParameter={data.parameters[0].measurand}
+          activeParameter={data.parameters[0].parameter}
         />
       </div>
     </section>
