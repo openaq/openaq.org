@@ -223,17 +223,17 @@ export default function Filter({ countries, parameters, sources }) {
           >
             {_.sortBy(sources).map(o => {
               return (
-                <li key={o.sourceId}>
+                <li key={o.sourceSlug}>
                   <div
                     data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.sources.includes(
-                        o.sourceName
+                        o.sourceSlug
                       ),
                     })}
                     data-hook="dropdown:close"
                     onClick={() => {
-                      onFilterSelect('sources', o.sourceName);
+                      onFilterSelect('sources', o.sourceSlug);
                     }}
                   >
                     <span data-cy={o.sourceName}>{o.sourceName}</span>
@@ -328,7 +328,7 @@ export default function Filter({ countries, parameters, sources }) {
                 type="button"
                 className="button--filter-pill"
                 data-cy="filter-pill"
-                key={parameter.id}
+                key={parameter.name}
                 onClick={() => onFilterSelect('parameters', parameter.name)}
               >
                 <span>{parameter.name}</span>
@@ -337,14 +337,14 @@ export default function Filter({ countries, parameters, sources }) {
           })}
 
           {selected.sources.map(o => {
-            const source = sources.find(x => x.sourceName === o);
+            const source = sources.find(x => x.sourceSlug === o);
             return (
               <button
                 type="button"
                 className="button--filter-pill"
                 data-cy="filter-pill"
-                key={source.sourceName}
-                onClick={() => onFilterSelect('sources', source.sourceName)}
+                key={source.sourceSlug}
+                onClick={() => onFilterSelect('sources', source.sourceSlug)}
               >
                 <span>{source.sourceName}</span>
               </button>

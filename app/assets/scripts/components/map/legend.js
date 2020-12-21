@@ -30,11 +30,11 @@ export default function Legend({ parameters, activeParameter }) {
                 'drop__menu-item--active': activeParameter === o.id,
               })}
               href="#"
-              title={`Show values for ${o.measurand || o.name}`}
+              title={`Show values for ${o.parameter || o.name}`}
               data-hook="dropdown:close"
-              onClick={e => onFilterSelect(o.measurand || o.name, e)}
+              onClick={e => onFilterSelect(o.parameter || o.name, e)}
             >
-              <span>{o.measurand || o.name}</span>
+              <span>{o.parameter || o.name}</span>
             </a>
           </li>
         ))}
