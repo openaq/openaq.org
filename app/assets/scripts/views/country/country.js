@@ -10,7 +10,7 @@ import { openDownloadModal } from '../../actions/action-creators';
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
-import LocationCard from '../../components/location-card';
+import LocationCard from '../locations-hub/location-card';
 import CountryMap from './map';
 
 const defaultLocations = {
@@ -200,23 +200,25 @@ function Country(props) {
                           {cityLocations.map(loc => (
                             <li key={loc.id}>
                               <LocationCard
+                                mobile={loc.isMobile}
+                                key={loc.id}
+                                city={loc.city}
+                                country={loc.country}
+                                firstUpdated={loc.firstUpdated}
+                                id={loc.id}
+                                lastUpdated={loc.lastUpdated}
+                                name={loc.name}
                                 onDownloadClick={() =>
                                   props._openDownloadModal({
-                                    country: id,
-                                    area: city,
-                                    location: loc.name,
+                                    country: loc.country,
+                                    area: loc.city,
+                                    location: loc.location,
                                   })
                                 }
-                                id={loc.id}
-                                name={loc.name}
-                                city={loc.city}
-                                countryData={{ name: country.name }}
-                                sourcesData={sourceList}
-                                totalMeasurements={loc.measurements}
                                 parametersList={loc.parameters}
-                                lastUpdate={loc.lastUpdated}
-                                collectionStart={loc.firstUpdated}
-                                compact
+                                sources={loc.sources}
+                                sourceType={loc.sourceType}
+                                totalMeasurements={loc.measurements}
                               />
                             </li>
                           ))}
