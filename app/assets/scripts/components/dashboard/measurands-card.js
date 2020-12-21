@@ -75,7 +75,6 @@ const prepareData = data => {
 };
 
 export default function MeasureandsCard({ parameters }) {
-  console.log('prepareData(parameters)', prepareData(parameters));
   return (
     <Card
       gridColumn={'1 / 5'}
