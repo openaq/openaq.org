@@ -110,7 +110,7 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
-
+  console.log('data', data);
   return (
     <Card
       gridColumn={'1  / -1'}
@@ -133,12 +133,12 @@ export default function TimeSeriesCard({
         <ChartContainer className="card__body">
           {fetching ? (
             <LoadingMessage />
-          ) : data ? (
+          ) : data && data.length ? (
             <LineChart
               data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
             />
           ) : (
-            <ErrorMessage />
+            <ErrorMessage instructions="Please try a different time" />
           )}
         </ChartContainer>
       )}
