@@ -30,8 +30,8 @@ const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
 `;
 
-function Project(props) {
-  const { id } = props.match.params;
+function Project({ match, history, location }) {
+  const { id } = match.params;
 
   const [dateRange, setDateRange] = useState(
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
@@ -133,37 +133,34 @@ function Project(props) {
         isMobile={data.isMobile}
       />
       <div className="inpage__body">
-        <div className="inner">
-          <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
-
-          <Dashboard
-            gridTemplateRows={'repeat(4, 20rem)'}
-            gridTemplateColumns={'repeat(12, 1fr)'}
-            className="inner"
-          >
-            <DetailsCard
-              measurements={data.measurements}
-              date={{
-                start: data.firstUpdated,
-                end: data.lastUpdated,
-              }}
-            />
-            <LatestMeasurementsCard parameters={data.parameters} />
-            <SourcesCard sources={data.sources} />
-            <TimeSeriesCard
-              projectId={data.id}
-              parameters={data.parameters}
-              xUnit="day"
-            />
-            <MeasureandsCard parameters={data.parameters} />
-            <MapCard parameters={data.parameters} points={data.points} />
-            <TemporalCoverageCard
-              parameters={data.parameters}
-              spatial="project"
-              id={data.name}
-            />
-          </Dashboard>
-        </div>
+        <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
+        <Dashboard
+          gridTemplateRows={'repeat(4, 20rem)'}
+          gridTemplateColumns={'repeat(12, 1fr)'}
+          className="inner"
+        >
+          <DetailsCard
+            measurements={data.measurements}
+            date={{
+              start: data.firstUpdated,
+              end: data.lastUpdated,
+            }}
+          />
+          <LatestMeasurementsCard parameters={data.parameters} />
+          <SourcesCard sources={data.sources} />
+          <TimeSeriesCard
+            projectId={data.id}
+            parameters={data.parameters}
+            xUnit="day"
+          />
+          <MeasureandsCard parameters={data.parameters} />
+          <MapCard parameters={data.parameters} points={data.points} />
+          <TemporalCoverageCard
+            parameters={data.parameters}
+            spatial="project"
+            id={data.name}
+          />
+        </Dashboard>
       </div>
     </section>
   );
