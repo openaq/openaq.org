@@ -153,19 +153,12 @@ function Location(props) {
             parameters={data.parameters}
             xUnit="day"
           />
-          <MeasureandsCard parameters={data.parameters} />
-          <MapCard
-            parameters={data.parameters}
-            isMobile={data.isMobile}
-            locationId={data.id}
-            center={[data.coordinates.longitude, data.coordinates.latitude]}
-            points={data.points}
-          />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
             id={data.id}
           />
+          <MeasureandsCard parameters={data.parameters} />
         </Dashboard>
         <NearbyLocations
           locationId={data.id}
