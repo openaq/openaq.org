@@ -16,7 +16,6 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
-import MapCard from '../../components/dashboard/map-card';
 import DateSelector from '../../components/date-selector';
 
 const defaultState = {
@@ -154,7 +153,6 @@ function Project({ match, history, location }) {
             xUnit="day"
           />
           <MeasureandsCard parameters={data.parameters} />
-          <MapCard parameters={data.parameters} points={data.points} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="project"

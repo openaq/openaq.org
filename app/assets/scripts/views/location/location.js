@@ -12,6 +12,7 @@ import Header from '../../components/header';
 import CardList from '../../components/card-list';
 
 import DetailsCard from '../../components/dashboard/details-card';
+import NearbyLocations from './nearby-locations';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
@@ -180,6 +181,14 @@ function Location(props) {
           />
           <MeasureandsCard parameters={data.parameters} />
         </Dashboard>
+        <NearbyLocations
+          locationId={data.id}
+          center={[data.coordinates.longitude, data.coordinates.latitude]}
+          city={data.city}
+          country={data.country}
+          parameters={[data.parameters[0]]}
+          activeParameter={data.parameters[0].parameter}
+        />
       </div>
     </section>
   );
