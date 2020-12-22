@@ -30,8 +30,6 @@ function DateSelector(props) {
   const [month, setMonth] = useState(initMonth || 1);
   const [day, setDay] = useState(initDay || null);
 
-  console.log(month);
-
   useEffect(() => {
     if (dateMode) {
       let date = `${year}/${month}`;
@@ -45,7 +43,14 @@ function DateSelector(props) {
   }, [dateMode, year, month, day]);
 
   return (
-    <Wrapper className={'filters'}>
+    <Wrapper
+      className={'filters, inner'}
+      style={{
+        display: `grid`,
+        gridTemplateRows: `1fr`,
+        gridTemplateColumns: `repeat(12, 1fr)`,
+      }}
+    >
       <Dropdown
         triggerElement="a"
         triggerTitle="time__type"
