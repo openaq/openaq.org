@@ -382,3 +382,11 @@ $page-header-y: $global-spacing * 5;
   grid-gap: 2rem;
   grid-template-rows: auto;
 }
+
+.header__pill {
+  @extend .button, .button--small;
+  border: 1px solid tint($base-color, 100%);
+  color: tint($base-color, 100%);
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}

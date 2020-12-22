@@ -9,7 +9,7 @@ import createReactClass from 'create-react-class';
 import { closeDownloadModal } from '../actions/action-creators';
 import PageHeader from '../components/page-header';
 import PageFooter from '../components/page-footer';
-import HeaderMessage from '../components/header-message';
+import { HeaderMessage } from '../components/header';
 import ModalDownload from '../components/modal-download';
 
 /*

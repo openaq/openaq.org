@@ -59,7 +59,8 @@
   opacity: 0;
   top: -150%;
   visibility: hidden;
-  transition: opacity 0.16s ease 0s, top 0.16s ease 0s, visibility 0.16s linear 0s;
+  transition: opacity 0.16s ease 0s, top 0.16s ease 0s,
+    visibility 0.16s linear 0s;
 
   .inner {
     padding-top: $global-spacing * 2;
@@ -161,7 +162,8 @@
     line-height: 5rem;
   }
 
-  &, &:visited {
+  &,
+  &:visited {
     color: $base-color;
   }
 
@@ -180,7 +182,7 @@
     color: $primary-color;
 
     @include media(large-up) {
-      content: "\F106";
+      content: '\F106';
       font-size: 1rem;
       margin-left: 0.25rem;
       transform: none;
@@ -220,7 +222,8 @@
   display: block;
   font-size: 0.875rem;
 
-  &, &:visited {
+  &,
+  &:visited {
     color: $base-color;
   }
 
@@ -242,7 +245,7 @@
 }
 
 .sub-menu__link--projects h5::before {
-  @extend %openaq-ds-icon-oaq-29-datasets;
+  content: url('/assets/graphics/layout/dataset.svg');
 }
 
 .sub-menu__link--map h5::before {

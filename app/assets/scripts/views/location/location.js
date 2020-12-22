@@ -7,7 +7,7 @@ import qs from 'qs';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
-import HeaderMessage from '../../components/header-message';
+import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
 import CardList from '../../components/card-list';
 
@@ -21,6 +21,7 @@ import MapCard from '../../components/dashboard/map-card';
 import { buildQS } from '../../utils/url';
 
 import DateSelector from '../../components/date-selector';
+import NearbyLocations from './nearby-locations';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
@@ -89,7 +90,7 @@ function Location(props) {
     return () => {
       setState(defaultState);
     };
-  }, []);
+  }, [id]);
 
   if (!fetched && !fetching) {
     return null;
@@ -144,6 +145,8 @@ function Location(props) {
           download: onDownloadClick,
           compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
+        sourceType={data.sourceType}
+        isMobile={data.isMobile}
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
@@ -172,7 +175,13 @@ function Location(props) {
             dateRange={dateRange}
           />
           <MeasureandsCard parameters={data.parameters} />
-          <MapCard parameters={data.parameters} points={data.points} />
+          <MapCard
+            parameters={data.parameters}
+            isMobile={data.isMobile}
+            locationId={data.id}
+            center={[data.coordinates.longitude, data.coordinates.latitude]}
+            points={data.points}
+          />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
@@ -180,6 +189,14 @@ function Location(props) {
             dateRange={dateRange}
           />
         </Dashboard>
+        <NearbyLocations
+          locationId={data.id}
+          center={[data.coordinates.longitude, data.coordinates.latitude]}
+          city={data.city}
+          country={data.country}
+          parameters={[data.parameters[0]]}
+          activeParameter={data.parameters[0].parameter}
+        />
       </div>
     </section>
   );

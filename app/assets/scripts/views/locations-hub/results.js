@@ -68,7 +68,7 @@ export default function Results({
             openDownloadModal({
               country: loc.country,
               area: loc.city,
-              location: loc.location,
+              location: loc.id,
             });
           return (
             <LocationCard

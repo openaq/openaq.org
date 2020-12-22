@@ -16,7 +16,7 @@ import About from './views/about';
 import CommunityHub from './views/community-hub';
 import CommunityProjects from './views/community-projects';
 import CommunityWorkshops from './views/community-workshops';
-import Map from './views/map';
+import WorldMap from './views/world-map';
 import LocationsHub from './views/locations-hub';
 import LocationItem from './views/location';
 import CountriesHub from './views/countries-hub';
@@ -82,7 +82,12 @@ render(
             component={CommunityHub}
             pageClass="page--community-hub page--dark"
           />
-          <Route name="map" path="/map" component={Map} pageClass="page--map" />
+          <Route
+            name="map"
+            path="/map"
+            component={WorldMap}
+            pageClass="page--map"
+          />
           <Route
             name="location"
             path="/location/:id"
