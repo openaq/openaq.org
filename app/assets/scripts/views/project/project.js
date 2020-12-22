@@ -154,7 +154,6 @@ function Project({ match, history, location }) {
             xUnit="day"
           />
           <MeasureandsCard parameters={data.parameters} />
-          <MapCard parameters={data.parameters} points={data.points} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="project"
