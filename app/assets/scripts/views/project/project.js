@@ -126,7 +126,7 @@ function Project({ match, history, location }) {
         title={data.name}
         subtitle={data.subtitle}
         action={{
-          api: `${config.api}/projects/${data.id}`,
+          api: `${config.apiDocs}`,
           download: () => {},
         }}
         sourceType={data.sourceType}

@@ -139,9 +139,9 @@ function Location(props) {
         title={data.name}
         subtitle={`in ${data.city}, ${data.country}`}
         action={{
-          api: `${config.api}/locations?location=${data.id}`,
+          api: `${config.apiDocs}`,
           download: onDownloadClick,
-          compare: `/compare/${encodeURIComponent(data.id)}`,
+          // compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
         sourceType={data.sourceType}
         isMobile={data.isMobile}
