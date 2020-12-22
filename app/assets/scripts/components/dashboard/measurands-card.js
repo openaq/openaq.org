@@ -6,13 +6,13 @@ import Table from '../table';
 import { shortenLargeNumber, round } from '../../utils/format';
 
 const initData = {
-  pollutant: {
+  parameter: {
     values: [],
     formatHeader: v => v.toUpperCase(),
     style: {
       color: 'black',
       fontWeight: 700,
-      textAlign: 'left',
+      textAlign: 'center',
     },
   },
   avg: {
@@ -50,17 +50,16 @@ const prepareData = data => {
     }
     return accum;
   }, {});
-
   const preparedData = Object.entries(combinedData).reduce(
-    (acc, [pollutant, stats]) => {
+    (acc, [parameter, stats]) => {
       acc = {
         parameter: {
-          ...acc.pollutant,
-          values: [...acc.pollutant.values, pollutant],
+          ...acc.parameter,
+          values: [...acc.parameter.values, parameter],
         },
         avg: {
           ...acc.avg,
-          values: [...acc.avg.values, round(stats.value, 0)],
+          values: [...acc.avg.values, round(stats.value, 2)],
         },
         count: {
           ...acc.count,

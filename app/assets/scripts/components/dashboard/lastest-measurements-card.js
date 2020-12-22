@@ -31,7 +31,7 @@ export default function LatestMeasurementsCard({ parameters }) {
                   {o.parameter}
                 </CardSubtitle>
                 <HighlightText className="card__highlight-text" size="medium">
-                  {round(o.lastValue, 0)}
+                  {round(o.lastValue, 2)}
                 </HighlightText>
 
                 <strong>{o.unit}</strong>

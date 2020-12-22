@@ -279,7 +279,7 @@ function Chart({ title, temporal, data, fetching }) {
         <LoadingMessage />
       ) : data ? (
         <BarChart
-          data={data.map(m => round(m.average, 0))}
+          data={data.map(m => round(m.average, 2))}
           // data={data.map(m => m.measurement_count)}
           yAxisLabel="average"
           // yAxisLabel="count"
