@@ -66,7 +66,7 @@ describe('The Locations Hub', () => {
     cy.get('[title="source__filter"]').click();
     cy.get('[title="source__filter"]').find('span').contains('Data Source');
     cy.get('[data-cy=filter-sources]')
-      .find('[data-cy=AirNow]')
+      .find('[data-cy=boston_methane]')
       .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
 

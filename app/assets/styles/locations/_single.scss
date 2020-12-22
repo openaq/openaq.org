@@ -178,3 +178,16 @@
 .update-metadata-callout {
   margin-top: 30px;
 }
+
+.drop__toggle.drop__toggle-day {
+  border: 0px;
+  display: flex;
+  padding-right: 1rem;
+ }
+
+
+
+.drop__content-day {
+  overflow: visible;
+  width: min-content;
+}

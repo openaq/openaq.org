@@ -112,6 +112,7 @@
     "react-addons-css-transition-group": "^15.0.0",
     "react-chartjs-2": "^2.11.1",
     "react-datepicker": "^3.3.0",
+    "react-day-picker": "^7.4.8",
     "react-dom": "^17.0.1",
     "react-paginate": "^6.5.0",
     "react-redux": "^4.4.5",

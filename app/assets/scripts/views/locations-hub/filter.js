@@ -236,7 +236,7 @@ export default function Filter({ countries, parameters, sources }) {
                       onFilterSelect('sources', o.sourceSlug);
                     }}
                   >
-                    <span data-cy={o.sourceName}>{o.sourceName}</span>
+                    <span data-cy={o.sourceSlug}>{o.sourceName}</span>
                   </div>
                 </li>
               );
