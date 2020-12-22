@@ -15,7 +15,6 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
-import MapCard from '../../components/dashboard/map-card';
 import NearbyLocations from './nearby-locations';
 
 const Dashboard = styled(CardList)`
