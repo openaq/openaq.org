@@ -39,18 +39,31 @@ const defaultState = {
     fetching: false,
     error: null,
     data: null,
+    // This is currently not getting requested at all
+    dateType: [],
   },
   dow: {
     fetched: false,
     fetching: false,
     error: null,
     data: null,
+    // Define date type as potential values for dateRange
+    // OR length of dateRange.split('/')
+    // In this case dateRange is null === entire project
+    // OR length 2 -> single month (YYYY/MM)
+    // Single day is not accepted
+    dateRangeType: [null, 2],
   },
   moy: {
     fetched: false,
     fetching: false,
     error: null,
     data: null,
+    // Define date type as potential values for dateRange
+    // OR length of dateRange.split('/')
+    // In this case dateRange is null === entire project
+    // Single day is not accepted, Single month not accepted
+    dateRangeType: [null],
   },
 };
 
@@ -66,10 +79,15 @@ const ErrorMessage = () => (
   </div>
 );
 
-export default function TemporalCoverageCard({ parameters, spatial, id }) {
+export default function TemporalCoverageCard({
+  parameters,
+  spatial,
+  id,
+  dateRange,
+}) {
   const [activeTab, setActiveTab] = useState({
-    id: parameters[0].measurand || parameters[0],
-    name: parameters[0].measurand || parameters[0],
+    id: parameters[0].parameter || parameters[0],
+    name: parameters[0].parameter || parameters[0],
   });
 
   const [state, setState] = useState(defaultState);
@@ -80,12 +98,23 @@ export default function TemporalCoverageCard({ parameters, spatial, id }) {
         ...state,
         [temporal]: { ...state[temporal], fetching: true, error: null },
       }));
+      const [year, month, day] = dateRange ? dateRange.split('/') : [];
 
       let query = {
         temporal,
         parameter: activeTab.id,
         spatial,
+
+        ...(dateRange
+          ? {
+              date_from: new Date(year, month - 1, day || 1),
+              date_to: day
+                ? new Date(year, month - 1, day)
+                : new Date(year, month, 0),
+            }
+          : {}),
       };
+      console.log(query);
 
       if (spatial === 'project') {
         query = {
@@ -135,13 +164,17 @@ export default function TemporalCoverageCard({ parameters, spatial, id }) {
         );
     };
 
-    ['dow', 'moy'].forEach(t => {
-      fetchData(t);
-    });
+    const dateRangeType = dateRange ? dateRange.split('/').length : null;
+
+    ['dow', 'moy']
+      .filter(temp => {
+        return state[temp].dateRangeType.includes(dateRangeType);
+      })
+      .forEach(t => fetchData(t));
     return () => {
       setState(defaultState);
     };
-  }, [activeTab]);
+  }, [activeTab, dateRange]);
 
   /** I am keeping all the data fetching in this parent component
    *  just to be able to render a generic loading or error message
@@ -170,8 +203,8 @@ export default function TemporalCoverageCard({ parameters, spatial, id }) {
         <CardHeader className="card__header">
           <TabbedSelector
             tabs={parameters.map(x => ({
-              id: x.measurand || x,
-              name: x.measurand || x,
+              id: x.parameter || x,
+              name: x.parameter || x,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
@@ -226,12 +259,13 @@ export default function TemporalCoverageCard({ parameters, spatial, id }) {
 TemporalCoverageCard.propTypes = {
   parameters: T.arrayOf(
     T.shape({
-      measurand: T.string.isRequired,
+      parameter: T.string.isRequired,
       count: T.number.isRequired,
       average: T.number.isRequired,
     })
   ),
   spatial: T.oneOf(['project', 'location']).isRequired,
+  dateRange: T.string,
   id: T.oneOfType([T.string, T.number]).isRequired,
 };
 

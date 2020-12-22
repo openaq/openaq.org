@@ -26,9 +26,9 @@ export default function LatestMeasurementsCard({ parameters }) {
         return (
           <Container>
             {parameters.map(o => (
-              <Measurement key={o.measurand}>
+              <Measurement key={o.parameter}>
                 <CardSubtitle className="card__subtitle">
-                  {o.measurand}
+                  {o.parameter}
                 </CardSubtitle>
                 <HighlightText className="card__highlight-text" size="medium">
                   {round(o.lastValue, 0)}
@@ -49,7 +49,7 @@ export default function LatestMeasurementsCard({ parameters }) {
 LatestMeasurementsCard.propTypes = {
   parameters: T.arrayOf(
     T.shape({
-      measurand: T.string.isRequired,
+      parameter: T.string.isRequired,
       lastValue: T.number.isRequired,
       unit: T.string.isRequired,
       lastUpdated: T.string.isRequired,

@@ -3,6 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { getCountryBbox } from '../../utils/countries';
 import { formatThousands } from '../../utils/format';
 import config from '../../config';
 import { openDownloadModal } from '../../actions/action-creators';
@@ -10,8 +11,11 @@ import { openDownloadModal } from '../../actions/action-creators';
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
-import LocationCard from '../../components/location-card';
-import CountryMap from './map';
+import MapComponent from '../../components/map';
+import LocationsSource from '../../components/map/locations-source';
+import MeasurementsLayer from '../../components/map/measurements-layer';
+import Legend from '../../components/map/legend';
+import LocationCard from '../locations-hub/location-card';
 
 const defaultLocations = {
   locationFetching: false,
@@ -109,7 +113,7 @@ function Country(props) {
       setLocations(defaultLocations);
       setCountry(defaultCountry);
     };
-  }, []);
+  }, [id]);
 
   function onDownloadClick(data) {
     // e && e.preventDefault();
@@ -159,7 +163,16 @@ function Country(props) {
             }}
           />
           <div className="inpage__body">
-            <CountryMap />
+            <section className="fold" id="country-fold-map">
+              <div className="fold__body">
+                <MapComponent bbox={getCountryBbox(country.code)}>
+                  <LocationsSource activeParameter={'pm25'}>
+                    <MeasurementsLayer activeParameter={'pm25'} />
+                  </LocationsSource>
+                  <Legend parameters={['PM25']} activeParameter={'PM25'} />
+                </MapComponent>
+              </div>
+            </section>
             {locationFetching ? (
               <LoadingMessage />
             ) : !locationError ? (
@@ -175,8 +188,10 @@ function Country(props) {
                         <h1 className="fold__title">
                           {city}{' '}
                           <small>
-                            {locations.length}{' '}
-                            {locations.length > 1 ? 'locations' : 'location'}
+                            {cityLocations.length}{' '}
+                            {cityLocations.length > 1
+                              ? 'locations'
+                              : 'location'}
                           </small>
                         </h1>
                         <p className="fold__main-action">
@@ -195,32 +210,32 @@ function Country(props) {
                           </a>
                         </p>
                       </header>
-                      <div className="fold__body">
-                        <ul className="country-locations-list">
-                          {cityLocations.map(loc => (
-                            <li key={loc.id}>
-                              <LocationCard
-                                onDownloadClick={() =>
-                                  props._openDownloadModal({
-                                    country: id,
-                                    area: city,
-                                    location: loc.name,
-                                  })
-                                }
-                                id={loc.id}
-                                name={loc.name}
-                                city={loc.city}
-                                countryData={{ name: country.name }}
-                                sourcesData={sourceList}
-                                totalMeasurements={loc.measurements}
-                                parametersList={loc.parameters}
-                                lastUpdate={loc.lastUpdated}
-                                collectionStart={loc.firstUpdated}
-                                compact
-                              />
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="inpage__results">
+                        {cityLocations.map(loc => {
+                          let openModal = () =>
+                            onDownloadClick({
+                              country: loc.country,
+                              area: loc.city,
+                              location: loc.id,
+                            });
+                          return (
+                            <LocationCard
+                              mobile={loc.isMobile}
+                              key={loc.id}
+                              city={loc.city}
+                              country={loc.country}
+                              firstUpdated={loc.firstUpdated}
+                              id={loc.id}
+                              lastUpdated={loc.lastUpdated}
+                              name={loc.name}
+                              onDownloadClick={openModal}
+                              parametersList={loc.parameters}
+                              sources={loc.sources}
+                              sourceType={loc.sourceType}
+                              totalMeasurements={loc.measurements}
+                            />
+                          );
+                        })}
                       </div>
                     </div>
                   </section>
@@ -242,32 +257,10 @@ Country.propTypes = {
   match: T.object,
 
   _openDownloadModal: T.func,
-
-  countries: T.array,
-  sources: T.array,
-  parameters: T.array,
-
-  latestMeasurements: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
-
-  locations: T.shape({
-    fetching: T.bool,
-    fetched: T.bool,
-    error: T.string,
-    data: T.object,
-  }),
 };
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
-
-function selector() {
-  return {};
-}
 
 function dispatcher(dispatch) {
   return {
@@ -275,4 +268,4 @@ function dispatcher(dispatch) {
   };
 }
 
-export default connect(selector, dispatcher)(Country);
+export default connect(null, dispatcher)(Country);

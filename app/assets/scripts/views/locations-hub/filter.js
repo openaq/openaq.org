@@ -45,10 +45,8 @@ export default function Filter({ countries, parameters, sources }) {
 
   // alphabetizes filter names
   const sortList = list => list.sort((a, b) => a.name.localeCompare(b.name));
-
   sortList(countries);
   sortList(parameters);
-  sortList(sources);
 
   const parameterNames = [...new Set(parameters.map(p => p.name))];
 
@@ -225,20 +223,20 @@ export default function Filter({ countries, parameters, sources }) {
           >
             {_.sortBy(sources).map(o => {
               return (
-                <li key={o.name}>
+                <li key={o.sourceSlug}>
                   <div
                     data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.sources.includes(
-                        o.code
+                        o.sourceSlug
                       ),
                     })}
                     data-hook="dropdown:close"
                     onClick={() => {
-                      onFilterSelect('sources', o.name);
+                      onFilterSelect('sources', o.sourceSlug);
                     }}
                   >
-                    <span data-cy={o.name}>{o.name}</span>
+                    <span data-cy={o.sourceSlug}>{o.sourceName}</span>
                   </div>
                 </li>
               );
@@ -330,7 +328,7 @@ export default function Filter({ countries, parameters, sources }) {
                 type="button"
                 className="button--filter-pill"
                 data-cy="filter-pill"
-                key={parameter.id}
+                key={parameter.name}
                 onClick={() => onFilterSelect('parameters', parameter.name)}
               >
                 <span>{parameter.name}</span>
@@ -339,16 +337,16 @@ export default function Filter({ countries, parameters, sources }) {
           })}
 
           {selected.sources.map(o => {
-            const source = sources.find(x => x.name === o);
+            const source = sources.find(x => x.sourceSlug === o);
             return (
               <button
                 type="button"
                 className="button--filter-pill"
                 data-cy="filter-pill"
-                key={source.name}
-                onClick={() => onFilterSelect('sources', source.name)}
+                key={source.sourceSlug}
+                onClick={() => onFilterSelect('sources', source.sourceSlug)}
               >
-                <span>{source.name}</span>
+                <span>{source.sourceName}</span>
               </button>
             );
           })}
