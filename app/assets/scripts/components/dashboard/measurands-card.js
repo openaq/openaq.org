@@ -77,7 +77,7 @@ const prepareData = data => {
 export default function MeasureandsCard({ parameters }) {
   return (
     <Card
-      gridColumn={'1 / 5'}
+      gridColumn={'1 / -1'}
       title="Parameters"
       renderBody={() => {
         return <Table data={prepareData(parameters)} />;

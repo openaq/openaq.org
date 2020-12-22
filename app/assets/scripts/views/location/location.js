@@ -17,7 +17,6 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
-import MapCard from '../../components/dashboard/map-card';
 import { buildQS } from '../../utils/url';
 
 import DateSelector from '../../components/date-selector';
@@ -140,9 +139,9 @@ function Location(props) {
         title={data.name}
         subtitle={`in ${data.city}, ${data.country}`}
         action={{
-          api: `${config.api}/locations?location=${data.id}`,
+          api: `${config.apiDocs}`,
           download: onDownloadClick,
-          compare: `/compare/${encodeURIComponent(data.id)}`,
+          // compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
         sourceType={data.sourceType}
         isMobile={data.isMobile}
@@ -173,14 +172,13 @@ function Location(props) {
             xUnit="day"
             dateRange={dateRange}
           />
-          <MeasureandsCard parameters={data.parameters} />
-          <MapCard parameters={data.parameters} points={data.points} />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
             id={data.id}
             dateRange={dateRange}
           />
+          <MeasureandsCard parameters={data.parameters} />
         </Dashboard>
       </div>
     </section>
