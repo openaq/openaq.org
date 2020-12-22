@@ -21,7 +21,6 @@ import MapCard from '../../components/dashboard/map-card';
 import { buildQS } from '../../utils/url';
 
 import DateSelector from '../../components/date-selector';
-import NearbyLocations from './nearby-locations';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;

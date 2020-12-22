@@ -168,6 +168,8 @@ function Project({ match, history, location }) {
 
 Project.propTypes = {
   match: T.object, // from react-router
+  history: T.object,
+  location: T.object,
 };
 
 export default Project;
