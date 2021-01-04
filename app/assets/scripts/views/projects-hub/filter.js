@@ -181,38 +181,40 @@ export default function Filter({ parameters, countries, sources }) {
           </ul>
         </Dropdown>
 
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="source__filter"
-          triggerText="Data Source"
-        >
-          <ul
-            role="menu"
-            data-cy="filter-sources"
-            className="drop__menu drop__menu--select scrollable"
+        {sources && (
+          <Dropdown
+            triggerElement="a"
+            triggerTitle="source__filter"
+            triggerText="Data Source"
           >
-            {_.sortBy(sources).map(o => {
-              return (
-                <li key={o.sourceSlug}>
-                  <div
-                    data-cy="filter-menu-item"
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': selected.sources.includes(
-                        o.sourceSlug
-                      ),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => {
-                      onFilterSelect('sources', o.sourceSlug);
-                    }}
-                  >
-                    <span data-cy={o.sourceSlug}>{o.sourceName}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
+            <ul
+              role="menu"
+              data-cy="filter-sources"
+              className="drop__menu drop__menu--select scrollable"
+            >
+              {_.sortBy(sources).map(o => {
+                return (
+                  <li key={o.sourceSlug}>
+                    <div
+                      data-cy="filter-menu-item"
+                      className={c('drop__menu-item', {
+                        'drop__menu-item--active': selected.sources.includes(
+                          o.sourceSlug
+                        ),
+                      })}
+                      data-hook="dropdown:close"
+                      onClick={() => {
+                        onFilterSelect('sources', o.sourceSlug);
+                      }}
+                    >
+                      <span data-cy={o.sourceSlug}>{o.sourceName}</span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </Dropdown>
+        )}
 
         <Dropdown
           triggerElement="a"

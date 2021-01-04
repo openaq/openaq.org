@@ -89,11 +89,7 @@ export default function ProjectsHub({
         <div className="inner">
           <div className="inpage__content">
             <div className="inpage__content__header">
-              <Filter
-                parameters={parameters}
-                countries={countries}
-                sources={sources}
-              />
+              <Filter parameters={parameters} countries={countries} />
             </div>
 
             <div className="content__meta">
