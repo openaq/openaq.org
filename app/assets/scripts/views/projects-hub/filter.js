@@ -289,19 +289,6 @@ export default function Filter({ parameters, countries, sources }) {
             );
           })}
 
-          {selected.source_type.map(o => {
-            return (
-              <button
-                type="button"
-                className="button--filter-pill"
-                key={o}
-                onClick={() => onFilterSelect('source_type', o)}
-              >
-                <span>{o}</span>
-              </button>
-            );
-          })}
-
           {selected.order_by.map(o => {
             return (
               <button
