@@ -29,16 +29,13 @@ export default function ProjectsHub({
   fetchProjects,
   invalidateProjects,
   openDownloadModal,
-
   parameters,
   countries,
-  sources,
   fetching,
   fetched,
   error,
   results,
   meta,
-
   location,
   history,
 }) {
