@@ -14,7 +14,7 @@ const defaultState = {
   data: null,
 };
 
-export default function Popover({ activeParameter, locationId }) {
+export default function Popover({ activeParameter, locationId, currentPage }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function Popover({ activeParameter, locationId }) {
   let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
   const parameter = data.parameters.find(
     // TODO: clean up parameter mess with id vs name
-    p => p.measurand === activeParameter.toLowerCase()
+    p => p.parameter === activeParameter.toLowerCase()
   );
 
   return (
@@ -124,15 +124,17 @@ export default function Popover({ activeParameter, locationId }) {
                 Compare
               </a>
             </li>
-            <li>
-              <a
-                href={`#/location/${encodeURIComponent(locationId)}`}
-                title={`View ${name} page`}
-                className="button button--primary-bounded"
-              >
-                View More
-              </a>
-            </li>
+            {locationId !== currentPage && (
+              <li>
+                <a
+                  href={`#/location/${encodeURIComponent(locationId)}`}
+                  title={`View ${name} page`}
+                  className="button button--primary-bounded"
+                >
+                  View More
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -143,4 +145,5 @@ export default function Popover({ activeParameter, locationId }) {
 Popover.propTypes = {
   activeParameter: T.string.isRequired,
   locationId: T.number.isRequired,
+  currentPage: T.number.isRequired,
 };

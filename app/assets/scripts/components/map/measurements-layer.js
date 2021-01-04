@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 import mapbox from 'mapbox-gl';
 
 import {
@@ -13,6 +14,8 @@ import { generateColorStops } from '../../utils/colors';
 import Popover from './popover';
 
 export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
+  let match = useRouteMatch();
+
   useEffect(() => {
     map.addLayer({
       id: `${activeParameter}-outline`,
@@ -61,6 +64,7 @@ export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
         <Popover
           activeParameter={activeParameter}
           locationId={e.features[0].properties.locationId}
+          currentPage={parseInt(match.params.id, 10)}
         />,
         popoverElement
       );
@@ -86,13 +90,13 @@ export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
       if (map.getLayer(`${activeParameter}-outline`))
         map.removeLayer(`${activeParameter}-outline`);
     };
-  }, [activeParameter]);
+  }, [sourceId]);
 
   return null;
 }
 
 MeasurementsLayer.propTypes = {
-  activeParameter: T.string.isRequired,
-  sourceId: T.string.isRequired,
-  map: T.object.isRequired,
+  activeParameter: PropTypes.string.isRequired,
+  sourceId: PropTypes.string,
+  map: PropTypes.object,
 };

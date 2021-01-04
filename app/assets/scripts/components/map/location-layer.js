@@ -8,13 +8,18 @@ import {
 } from '../../utils/map-settings';
 import { generateColorStops } from '../../utils/colors';
 
-export default function LocationLayer({ activeParameter, locationId, map }) {
+export default function LocationLayer({
+  activeParameter,
+  locationId,
+  map,
+  sourceId,
+}) {
   useEffect(() => {
     if (!map.getLayer('location-layer')) {
       // Add Shadow
       map.addLayer({
         id: 'location-shadow',
-        source: 'locations-source',
+        source: sourceId,
         'source-layer': 'default',
         filter: ['==', 'locationId', locationId],
         type: 'circle',
@@ -29,7 +34,7 @@ export default function LocationLayer({ activeParameter, locationId, map }) {
       // Add Highlight
       map.addLayer({
         id: 'location-highlight',
-        source: 'locations-source',
+        source: sourceId,
         'source-layer': 'default',
         filter: ['==', 'locationId', locationId],
         type: 'circle',
@@ -44,7 +49,7 @@ export default function LocationLayer({ activeParameter, locationId, map }) {
       // Re-add fill by value
       map.addLayer({
         id: 'location-layer',
-        source: 'locations-source',
+        source: sourceId,
         'source-layer': 'default',
         filter: ['==', 'locationId', locationId],
         type: 'circle',
@@ -70,5 +75,6 @@ export default function LocationLayer({ activeParameter, locationId, map }) {
 
 LocationLayer.propTypes = {
   locationId: PropTypes.number.isRequired,
-  map: PropTypes.object.isRequired,
+  map: PropTypes.object,
+  sourceId: PropTypes.string,
 };

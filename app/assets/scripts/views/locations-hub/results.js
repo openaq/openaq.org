@@ -68,7 +68,7 @@ export default function Results({
             openDownloadModal({
               country: loc.country,
               area: loc.city,
-              location: loc.location,
+              location: loc.id,
             });
           return (
             <LocationCard
@@ -82,7 +82,7 @@ export default function Results({
               name={loc.name}
               onDownloadClick={openModal}
               parametersList={loc.parameters}
-              sources={loc.sources}
+              sources={loc.sources || []}
               sourceType={loc.sourceType}
               totalMeasurements={loc.measurements}
             />

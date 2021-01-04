@@ -1,29 +1,74 @@
 {
-  "results":
-  [
-  {
-    "city": "Λευκωσία",
-    "coordinates": {"latitude": 35.1269753273788, "longitude": 33.3316292911412},
-    "country": "CY",
-    "location": "CY0006A",
-    "measurements": [
-      {"parameter": "no2", "value": 71.75755, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"},
-      {"parameter": "o3", "value": 14.3806, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"},
-      {"parameter": "so2", "value": 2.577444, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"},
-      {"parameter": "co", "value": 710.4139, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"}
+  "results": [
+    {
+      "city": "Λευκωσία",
+      "coordinates": {
+        "latitude": 35.1269753273788,
+        "longitude": 33.3316292911412
+      },
+      "country": "CY",
+      "location": "CY0006A",
+      "measurements": [
+        {
+          "parameter": "no2",
+          "value": 71.75755,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        },
+        {
+          "parameter": "o3",
+          "value": 14.3806,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        },
+        {
+          "parameter": "so2",
+          "value": 2.577444,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        },
+        {
+          "parameter": "co",
+          "value": 710.4139,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        }
       ]
-  },
-  {
-    "city": "unused",
-    "coordinates": {"latitude": 0.0003152635962412355, "longitude": 0.0002982656789336145},
-    "country": "CY",
-    "location": "CY0002R",
-    "measurements": [
-      {"parameter": "so2", "value": 4.122992, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"},
-      {"parameter": "co", "value": 137.6081, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"},
-      {"parameter": "no2", "value": 5.66248, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"},
-      {"parameter": "o3", "value": 24.30688, "lastUpdated": "2020-12-10T18:00:00+00:00", "unit": "µg/m³"}
-    ]
-  }
-]
+    },
+    {
+      "city": "unused",
+      "coordinates": {
+        "latitude": 0.0003152635962412355,
+        "longitude": 0.0002982656789336145
+      },
+      "country": "CY",
+      "location": "CY0002R",
+      "measurements": [
+        {
+          "parameter": "so2",
+          "value": 4.122992,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        },
+        {
+          "parameter": "co",
+          "value": 137.6081,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        },
+        {
+          "parameter": "no2",
+          "value": 5.66248,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        },
+        {
+          "parameter": "o3",
+          "value": 24.30688,
+          "lastUpdated": "2020-12-10T18:00:00+00:00",
+          "unit": "µg/m³"
+        }
+      ]
+    }
+  ]
 }

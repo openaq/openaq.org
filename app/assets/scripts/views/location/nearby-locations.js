@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MapComponent from './map';
-import LocationsSource from './map/locations-source';
-import MeasurementsLayer from './map/measurements-layer';
-import LocationLayer from './map/location-layer';
-import Legend from './map/legend';
+import MapComponent from '../../components/map';
+import LocationsSource from '../../components/map/locations-source';
+import MeasurementsLayer from '../../components/map/measurements-layer';
+import LocationLayer from '../../components/map/location-layer';
+import Legend from '../../components/map/legend';
 
 export default function NearbyLocations({
   locationId,
@@ -32,7 +32,6 @@ export default function NearbyLocations({
                 locationId={locationId}
               />
             </LocationsSource>
-
             <Legend parameters={parameters} activeParameter={activeParameter} />
           </MapComponent>
         </div>

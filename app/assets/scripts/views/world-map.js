@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import qs from 'qs';
@@ -7,6 +7,7 @@ import qs from 'qs';
 import MapComponent from '../components/map';
 import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
+import MobileLayer from '../components/map/mobile-layer';
 import Legend from '../components/map/legend';
 
 function WorldMap({ parameters, location }) {
@@ -27,14 +28,12 @@ function WorldMap({ parameters, location }) {
       <div className="inpage__body">
         <MapComponent>
           <LocationsSource activeParameter={activeParam.name.toLowerCase()}>
+            <MobileLayer />
             <MeasurementsLayer
               activeParameter={activeParam.name.toLowerCase()}
             />
           </LocationsSource>
-          <Legend
-            parameters={parameters}
-            activeParameter={activeParam.name.toLowerCase()}
-          />
+          <Legend parameters={parameters} activeParameter={activeParam.name} />
         </MapComponent>
       </div>
     </section>
@@ -42,10 +41,10 @@ function WorldMap({ parameters, location }) {
 }
 
 WorldMap.propTypes = {
-  location: T.object,
-  history: T.object,
+  location: PropTypes.object,
+  history: PropTypes.object,
 
-  parameters: T.array,
+  parameters: PropTypes.array,
 };
 
 // /////////////////////////////////////////////////////////////////////
