@@ -11,18 +11,22 @@ import { toggleValue } from '../../utils/array';
 
 const defaultSelected = {
   parameters: [],
+  countries: [],
+  sources: [],
   order_by: [],
 };
 
 const sortOptions = ['name', 'count'];
-const initFromLocation = ({ parameters, order_by }) => {
+const initFromLocation = ({ parameters, countries, sources, order_by }) => {
   return {
     parameters: parameters ? parameters.split(',') : [],
+    countries: countries ? countries.split(',') : [],
+    sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
   };
 };
 
-export default function Filter({ parameters }) {
+export default function Filter({ parameters, countries, sources }) {
   let history = useHistory();
   let location = useLocation();
 
@@ -65,6 +69,31 @@ export default function Filter({ parameters }) {
         setSelected(prev => ({
           ...prev,
           ['parameters']: toggleValue(prev['parameters'], value),
+        }));
+        break;
+      }
+
+      case 'countries': {
+        const countries =
+          query && query.countries ? query.countries.split(',') : [];
+
+        query.countries = toggleValue(countries, value);
+
+        setSelected(prev => ({
+          ...prev,
+          ['countries']: toggleValue(prev['countries'], value),
+        }));
+        break;
+      }
+
+      case 'sources': {
+        const sources = query && query.sources ? query.sources.split(',') : [];
+
+        query.sources = toggleValue(sources, value);
+
+        setSelected(prev => ({
+          ...prev,
+          ['sources']: toggleValue(prev['sources'], value),
         }));
         break;
       }
@@ -120,6 +149,75 @@ export default function Filter({ parameters }) {
 
         <Dropdown
           triggerElement="a"
+          triggerTitle="country__filter"
+          triggerText="Country"
+          triggerClassName="drop-trigger"
+        >
+          <ul
+            role="menu"
+            data-cy="filter-countries"
+            className="drop__menu drop__menu--select scrollable"
+          >
+            {_.sortBy(countries).map(o => {
+              return (
+                <li key={o.code}>
+                  <div
+                    data-cy="filter-menu-item"
+                    className={c('drop__menu-item', {
+                      'drop__menu-item--active': selected.countries.includes(
+                        o.code
+                      ),
+                    })}
+                    data-hook="dropdown:close"
+                    onClick={() => {
+                      onFilterSelect('countries', o.code);
+                    }}
+                  >
+                    <span data-cy={o.name}>{o.name}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Dropdown>
+
+        {sources && (
+          <Dropdown
+            triggerElement="a"
+            triggerTitle="source__filter"
+            triggerText="Data Source"
+          >
+            <ul
+              role="menu"
+              data-cy="filter-sources"
+              className="drop__menu drop__menu--select scrollable"
+            >
+              {_.sortBy(sources).map(o => {
+                return (
+                  <li key={o.sourceSlug}>
+                    <div
+                      data-cy="filter-menu-item"
+                      className={c('drop__menu-item', {
+                        'drop__menu-item--active': selected.sources.includes(
+                          o.sourceSlug
+                        ),
+                      })}
+                      data-hook="dropdown:close"
+                      onClick={() => {
+                        onFilterSelect('sources', o.sourceSlug);
+                      }}
+                    >
+                      <span data-cy={o.sourceSlug}>{o.sourceName}</span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </Dropdown>
+        )}
+
+        <Dropdown
+          triggerElement="a"
           triggerTitle="sort__filter"
           triggerText="Order By"
           triggerClassName="sort-order"
@@ -144,7 +242,7 @@ export default function Filter({ parameters }) {
         </Dropdown>
       </div>
 
-      {!(selected.parameters.length + selected.order_by.length === 0) && (
+      {Object.values(selected).find(o => o.length > 0) && (
         <div className="filters-summary">
           {selected.parameters.map(o => {
             const parameter = parameters.find(x => x.name === o);
@@ -153,13 +251,44 @@ export default function Filter({ parameters }) {
                 type="button"
                 className="button--filter-pill"
                 data-cy="filter-pill"
-                key={parameter.id}
+                key={parameter.name}
                 onClick={() => onFilterSelect('parameters', parameter.name)}
               >
                 <span>{parameter.name}</span>
               </button>
             );
           })}
+
+          {selected.countries.map(o => {
+            const country = countries.find(x => x.code === o);
+            return (
+              <button
+                type="button"
+                className="button--filter-pill"
+                data-cy="filter-pill"
+                key={country.code}
+                onClick={() => onFilterSelect('countries', country.code)}
+              >
+                <span>{country.name}</span>
+              </button>
+            );
+          })}
+
+          {selected.sources.map(o => {
+            const source = sources.find(x => x.sourceSlug === o);
+            return (
+              <button
+                type="button"
+                className="button--filter-pill"
+                data-cy="filter-pill"
+                key={source.sourceSlug}
+                onClick={() => onFilterSelect('sources', source.sourceSlug)}
+              >
+                <span>{source.sourceName}</span>
+              </button>
+            );
+          })}
+
           {selected.order_by.map(o => {
             return (
               <button
@@ -195,5 +324,6 @@ Filter.propTypes = {
   organizations: T.array,
   parameters: T.array,
   sources: T.array,
+  countries: T.array,
   order_by: T.array,
 };
