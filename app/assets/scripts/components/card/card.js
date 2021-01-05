@@ -23,9 +23,16 @@ export const Test = styled.div``;
 
 const CardFooter = styled.footer``;
 
-const CardHeadline = styled.div``;
+export const CardHeadline = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  width: fit-content;
+  grid-template-columns: 1fr 1fr;
+`;
 
-export const CardTitle = styled.h1``;
+export const CardTitle = styled.h1`
+  width: fit-content;
+`;
 
 export const CardSubtitle = styled.p``;
 export const HighlightText = styled.h1`
@@ -82,11 +89,13 @@ export default function Card({
                   {subtitle}
                 </CardSubtitle>
               )}
-              {title && (
-                <CardTitle data-cy={`${id}-card-title`} className="card__title">
-                  {title}
-                </CardTitle>
-              )}
+              <CardHeadline>
+                {title && (
+                  <CardTitle data-cy={`${id}-card-title`} className="card__title">
+                    {title}
+                  </CardTitle>
+                )}
+              </CardHeadline>
             </CardHeadline>
             {tags && (
               <TagWrapper>

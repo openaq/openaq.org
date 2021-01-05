@@ -6,9 +6,14 @@ import qs from 'qs';
 import config from '../../config';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
-import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
+import Card, {
+  CardHeader as BaseHeader,
+  CardTitle,
+  CardHeadline,
+} from '../card';
 import TabbedSelector from '../tabbed-selector';
 import LineChart from '../line-chart';
+import InfoButton from '../info-button';
 
 const ChartContainer = styled.div`
   max-height: 24rem;
@@ -110,7 +115,6 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
-  console.log('data', data);
   return (
     <Card
       gridColumn={'1  / -1'}
@@ -126,7 +130,10 @@ export default function TimeSeriesCard({
               setActiveTab(t);
             }}
           />
-          <CardTitle>Time Series Data</CardTitle>
+          <CardHeadline>
+            <CardTitle>Time Series Data</CardTitle>
+            <InfoButton info="info" id="test" />
+          </CardHeadline>
         </CardHeader>
       )}
       renderBody={() => (

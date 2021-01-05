@@ -110,3 +110,14 @@
   text-transform: uppercase;
   color: $base-color;
 }
+
+/* Lists
+   ========================================================================== */
+.info-button {
+  &::after {
+    @extend %openaq-ds-icon-circle-information;
+    color: tint($base-color, 45%);
+    font-weight: 400;
+  }
+}
+
