@@ -13,9 +13,7 @@ import Card, {
 } from '../../components/card';
 import TabbedSelector from '../../components/tabbed-selector';
 import config from '../../config';
-import { round } from '../../utils/format';
 import InfoButton from '../info-button';
-
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 4 / 11;
