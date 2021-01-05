@@ -3,6 +3,7 @@ import { PropTypes as T } from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import CardTag from './card-tag';
+import InfoButton from '../info-button';
 
 const CardWrapper = styled.article`
   ${({ gridColumn, gridRow }) => css`
@@ -24,10 +25,8 @@ export const Test = styled.div``;
 const CardFooter = styled.footer``;
 
 export const CardHeadline = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  width: fit-content;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  gap: 1.5rem;
 `;
 
 export const CardTitle = styled.h1`
@@ -70,6 +69,7 @@ export default function Card({
   renderBody,
   renderFooter,
   noBodyStyle,
+  titleInfo,
 }) {
   return (
     <CardWrapper
@@ -83,18 +83,20 @@ export default function Card({
           renderHeader()
         ) : (
           <CardHeader className="card__header">
+            {subtitle && (
+              <CardSubtitle className="card__subtitle">{subtitle}</CardSubtitle>
+            )}
             <CardHeadline className="card__headline">
-              {subtitle && (
-                <CardSubtitle className="card__subtitle">
-                  {subtitle}
-                </CardSubtitle>
-              )}
               <CardHeadline>
                 {title && (
-                  <CardTitle data-cy={`${id}-card-title`} className="card__title">
+                  <CardTitle
+                    data-cy={`${id}-card-title`}
+                    className="card__title"
+                  >
                     {title}
                   </CardTitle>
                 )}
+                {titleInfo && <InfoButton info={titleInfo} id={`${id}`} />}
               </CardHeadline>
             </CardHeadline>
             {tags && (
@@ -121,6 +123,7 @@ export default function Card({
 
 Card.propTypes = {
   id: T.string,
+  titleInfo: T.string,
   gridColumn: T.string,
   gridRow: T.string,
   title: T.oneOfType([T.string, T.element]),

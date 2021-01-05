@@ -38,6 +38,7 @@ export default function TimeSeriesCard({
   projectId,
   parameters,
   dateRange,
+  titleInfo,
 }) {
   // eslint-disable-next-line no-unused-vars
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
@@ -132,7 +133,7 @@ export default function TimeSeriesCard({
           />
           <CardHeadline>
             <CardTitle>Time Series Data</CardTitle>
-            <InfoButton info="info" id="test" />
+            {titleInfo && <InfoButton info={titleInfo} id="time-series-info" />}
           </CardHeadline>
         </CardHeader>
       )}
@@ -154,6 +155,7 @@ export default function TimeSeriesCard({
 }
 
 TimeSeriesCard.propTypes = {
+  titleInfo: T.string,
   locationId: T.oneOfType([T.string, T.number]),
   projectId: T.string,
   parameters: T.arrayOf(

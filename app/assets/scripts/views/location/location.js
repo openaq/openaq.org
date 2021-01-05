@@ -172,14 +172,25 @@ function Location(props) {
             parameters={data.parameters}
             xUnit="day"
             dateRange={dateRange}
+            titleInfo={
+              'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown for the most recent week of data.'
+            }
           />
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
             id={data.id}
             dateRange={dateRange}
+            titleInfo={
+              'The average number of measurements for each pollutant by hour, day, or month. In some views a window may be turned off if that view is not applicable to the selected time window.'
+            }
           />
-          <MeasureandsCard parameters={data.parameters} />
+          <MeasureandsCard
+            parameters={data.parameters}
+            titleInfo={
+              'The average of all values and total number of measurements for each pollutant during the chosen time window.'
+            }
+          />
         </Dashboard>
         <NearbyLocations
           locationId={data.id}
