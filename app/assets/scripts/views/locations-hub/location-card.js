@@ -21,7 +21,7 @@ export default function LocationCard({
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
-  console.log(parametersList)
+  console.log(parametersList);
 
   return (
     <Card
@@ -51,7 +51,9 @@ export default function LocationCard({
             },
             {
               label: 'Parameters',
-              value: parametersList.map(p => p.displayName || p.parameter).join(', '),
+              value: parametersList
+                .map(p => p.displayName || p.parameter)
+                .join(', '),
             },
             {
               label: 'Source',

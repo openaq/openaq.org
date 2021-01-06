@@ -29,11 +29,11 @@ export default function Legend({ parameters, activeParameter }) {
         className="drop__menu drop__menu--select"
         style={{ overflowY: `scroll`, maxHeight: `15rem` }}
       >
-        {parameters.map((param) => (
+        {parameters.map(param => (
           <li key={`${param.id}`}>
             <a
               className={c('drop__menu-item', {
-                'drop__menu-item--active': param.id === activeParameter.id
+                'drop__menu-item--active': param.id === activeParameter.id,
               })}
               href="#"
               title={`Show values for ${param.displayName}`}
@@ -81,5 +81,5 @@ export default function Legend({ parameters, activeParameter }) {
 
 Legend.propTypes = {
   parameters: PropTypes.array.isRequired,
-  activeParameter: PropTypes.object
+  activeParameter: PropTypes.object,
 };
