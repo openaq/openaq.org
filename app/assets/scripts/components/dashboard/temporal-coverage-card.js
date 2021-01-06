@@ -9,9 +9,11 @@ import BarChart from '../bar-chart';
 import Card, {
   CardHeader as BaseHeader,
   CardTitle,
+  CardHeadline,
 } from '../../components/card';
 import TabbedSelector from '../../components/tabbed-selector';
 import config from '../../config';
+import InfoButton from '../info-button';
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 4 / 11;
@@ -83,6 +85,7 @@ export default function TemporalCoverageCard({
   spatial,
   id,
   dateRange,
+  titleInfo,
 }) {
   const [activeTab, setActiveTab] = useState({
     id: parameters[0].parameter || parameters[0],
@@ -209,7 +212,10 @@ export default function TemporalCoverageCard({
               setActiveTab(t);
             }}
           />
-          <CardTitle>Temporal Coverage</CardTitle>
+          <CardHeadline>
+            <CardTitle>Temporal Coverage</CardTitle>
+            {titleInfo && <InfoButton info={titleInfo} id="temp-cov-info" />}
+          </CardHeadline>
         </CardHeader>
       )}
       renderBody={() =>
@@ -255,6 +261,7 @@ export default function TemporalCoverageCard({
 }
 
 TemporalCoverageCard.propTypes = {
+  titleInfo: T.string,
   parameters: T.arrayOf(
     T.shape({
       parameter: T.string.isRequired,
