@@ -15,7 +15,7 @@ function WorldMap({ parameters, location }) {
     ignoreQueryPrefix: true,
   });
   let parameterData = _.find(parameters, { name: query.parameter });
-  let activeParam = parameterData || _.find(parameters, { name: 'PM25' });
+  let activeParam = parameterData || _.find(parameters, { id: 2 });
   return (
     <section className="inpage">
       <header className="inpage__header">

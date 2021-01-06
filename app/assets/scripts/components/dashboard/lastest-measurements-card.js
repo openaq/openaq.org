@@ -28,7 +28,7 @@ export default function LatestMeasurementsCard({ parameters }) {
             {parameters.map(o => (
               <Measurement key={o.parameter}>
                 <CardSubtitle className="card__subtitle">
-                  {o.parameter}
+                  {o.displayName}
                 </CardSubtitle>
                 <HighlightText className="card__highlight-text" size="medium">
                   {round(o.lastValue, 2)}

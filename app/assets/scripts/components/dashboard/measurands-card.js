@@ -41,9 +41,9 @@ const initData = {
 
 const prepareData = data => {
   const combinedData = data.reduce((accum, datum) => {
-    const { parameter, count, average } = datum;
-    if (!accum[parameter]) {
-      accum[parameter] = {
+    const { displayName, count, average } = datum;
+    if (!accum[displayName]) {
+      accum[displayName] = {
         count: count,
         value: average,
       };
