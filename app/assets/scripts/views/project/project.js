@@ -144,6 +144,7 @@ function Project({ match, history, location }) {
               start: data.firstUpdated,
               end: data.lastUpdated,
             }}
+            sources={data.sources}
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
