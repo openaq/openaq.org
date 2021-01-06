@@ -81,9 +81,7 @@ describe('The Locations Hub', () => {
     cy.get('[data-cy=location-card]').should('exist');
     cy.get('[data-cy=location-card-title]').should('exist');
     cy.get('[data-cy=location-card-detail]').should('exist');
-    cy.get('[data-cy=location-card-detail-label]').contains(
-      'Collection started'
-    );
+    cy.get('[data-cy=location-card-detail-label]').contains('Collection dates');
     cy.get('[data-cy=location-card-detail-label]').contains('Measurements');
     cy.get('[data-cy=location-card-detail-label]').contains('Parameters');
     cy.get('[data-cy=location-card-detail-label]').contains('Source');
