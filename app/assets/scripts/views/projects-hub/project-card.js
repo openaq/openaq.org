@@ -16,6 +16,7 @@ export default function ProjectCard({
   totalLocations,
   totalMeasurements,
   parametersList,
+  sources,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
@@ -39,17 +40,31 @@ export default function ProjectCard({
         <CardDetails
           id="project"
           list={[
-            { label: 'Locations', value: formatThousands(totalLocations) },
+            { label: 'Collection dates', value: `${started} - ${ended}` },
             {
               label: 'Measurements',
               value: formatThousands(totalMeasurements),
             },
-            { label: 'Collection dates', value: `${started} - ${ended}` },
             {
               label: 'Parameters',
               value: parametersList
                 .map(p => p.parameter.toUpperCase())
                 .join(', '),
+            },
+            { label: 'Locations', value: formatThousands(totalLocations) },
+            {
+              label: 'Source',
+              value:
+                sources &&
+                sources.map(source => (
+                  <a
+                    href={source.sourceURL}
+                    title={`View source for ${name}`}
+                    key={source.name}
+                  >
+                    {source.name}
+                  </a>
+                )),
             },
           ]}
         />
@@ -72,6 +87,7 @@ ProjectCard.propTypes = {
   id: T.oneOfType([T.string, T.number]),
   subtitle: T.string,
   sourceType: T.oneOfType([T.array, T.string]),
+  sources: T.array,
   firstUpdated: T.string,
   totalLocations: T.number,
   totalMeasurements: T.number,

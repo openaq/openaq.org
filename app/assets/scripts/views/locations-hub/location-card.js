@@ -21,6 +21,7 @@ export default function LocationCard({
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
+  let ended = moment(lastUpdated).format('YYYY/MM/DD');
 
   return (
     <Card
@@ -43,14 +44,17 @@ export default function LocationCard({
         <CardDetails
           id="location"
           list={[
-            { label: 'Collection started', value: started },
+            { label: 'Collection dates', value: `${started} - ${ended}` },
+
             {
               label: 'Measurements',
               value: formatThousands(totalMeasurements),
             },
             {
               label: 'Parameters',
-              value: parametersList.map(p => p.parameter).join(', '),
+              value: parametersList
+                .map(p => p.parameter.toUpperCase())
+                .join(', '),
             },
             {
               label: 'Source',
