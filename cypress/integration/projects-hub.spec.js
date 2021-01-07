@@ -30,6 +30,7 @@ describe('The Projects Hub', () => {
   });
 
   it('has some filters with dropdown menus', () => {
+    // parameter filter
     cy.get('[title="type__filter"]').click();
     cy.get('[title="type__filter"]').find('span').contains('Parameter');
     ['O3', 'CO', 'NO2', 'CO2', 'SO2', 'BC'].forEach(parameter => {
@@ -37,6 +38,20 @@ describe('The Projects Hub', () => {
         .find(`[data-cy=${parameter}]`)
         .should('length', 1);
     });
+    cy.get('[data-cy=filter-menu-item]').first().click();
+
+    cy.get('[data-cy=filter-pill]').should('exist');
+
+    cy.get('[data-cy=filter-clear]').contains('Clear Filters').should('exist');
+    cy.get('[data-cy=filter-clear]').click();
+    cy.get('[data-cy=filter-clear]').should('not.exist');
+
+    // country filter
+    cy.get('[title="country__filter"]').click();
+    cy.get('[title="country__filter"]').find('span').contains('Country');
+    cy.get('[data-cy=filter-countries]')
+      .find('[data-cy=Australia]')
+      .should('length', 1);
     cy.get('[data-cy=filter-menu-item]').first().click();
 
     cy.get('[data-cy=filter-pill]').should('exist');

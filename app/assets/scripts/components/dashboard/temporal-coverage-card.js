@@ -12,7 +12,6 @@ import Card, {
 } from '../../components/card';
 import TabbedSelector from '../../components/tabbed-selector';
 import config from '../../config';
-import { round } from '../../utils/format';
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 4 / 11;
@@ -114,7 +113,6 @@ export default function TemporalCoverageCard({
             }
           : {}),
       };
-      console.log(query);
 
       if (spatial === 'project') {
         query = {
@@ -279,10 +277,8 @@ function Chart({ title, temporal, data, fetching }) {
         <LoadingMessage />
       ) : data ? (
         <BarChart
-          data={data.map(m => round(m.average, 2))}
-          // data={data.map(m => m.measurement_count)}
-          yAxisLabel="average"
-          // yAxisLabel="count"
+          data={data.map(m => m.measurement_count)}
+          yAxisLabel="count"
           xAxisLabels={data.map(m => m[temporal])}
         />
       ) : (
