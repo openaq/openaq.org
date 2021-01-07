@@ -48,8 +48,6 @@ export default function Filter({ countries, parameters, sources }) {
   sortList(countries);
   sortList(parameters);
 
-  //const parameterNames = [...new Set(parameters.map(p => p.name))];
-
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
@@ -190,7 +188,7 @@ export default function Filter({ countries, parameters, sources }) {
           >
             {/* references list of unique ids to avoid duplicate list items while allowing 
             selection of parameters with different units and shared id */}
-            {_.sortBy(parameters).map(param => {
+            {_.sortBy(_.uniq(parameters, 'id')).map(param => {
               return (
                 <li key={param.id}>
                   <div

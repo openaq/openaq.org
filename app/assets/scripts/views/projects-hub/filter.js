@@ -126,7 +126,7 @@ export default function Filter({ parameters, countries, sources }) {
             data-cy="filter-parameters"
             className="drop__menu drop__menu--select scrollable"
           >
-            {_.sortBy(parameters).map(param => {
+            {_.sortBy(_.uniq(parameters, 'id')).map(param => {
               return (
                 <li key={param.id}>
                   <div

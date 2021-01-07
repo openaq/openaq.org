@@ -213,6 +213,7 @@ Location.propTypes = {
   _openDownloadModal: T.func,
   sources: T.array,
   measurements: T.array,
+  parameters: T.array,
 };
 
 // /////////////////////////////////////////////////////////////////// //
