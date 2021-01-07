@@ -147,7 +147,10 @@ export default function Popover({
           ) : (
             <button
               title="Select Location"
-              className="button button--primary-bounded"
+              className={`button button--primary-bounded ${
+                selectedLocations.length >= 15 && 'disabled'
+              }`}
+              disabled={selectedLocations.length >= 15}
               onClick={() =>
                 selectedLocations.includes(locationId)
                   ? setSelectedLocations(
@@ -155,7 +158,9 @@ export default function Popover({
                         location => location !== locationId
                       )
                     )
-                  : setSelectedLocations([...selectedLocations, locationId])
+                  : selectedLocations.length < 15
+                  ? setSelectedLocations([...selectedLocations, locationId])
+                  : null
               }
             >
               <div>
