@@ -191,6 +191,21 @@ export default function TemporalCoverageCard({
     (!state.dow.data || state.dow.data < 1) &&
     (!state.moy.data || state.moy.data < 1);
 
+  const combinedDays =
+    state.dow.data &&
+    state.dow.data.reduce((prev, day) => {
+      const dow = day.dow;
+      return {
+        ...prev,
+        [dow]: {
+          dow,
+          measurement_count: prev[dow]
+            ? prev[dow].measurement_count + day.measurement_count
+            : day.measurement_count,
+        },
+      };
+    }, {});
+
   if (state.hod.fetching && state.dow.fetching && state.moy.fetching) {
     return <StyledLoading />;
   } else if (state.hod.error && state.dow.error && state.moy.error) {
@@ -244,7 +259,7 @@ export default function TemporalCoverageCard({
             <Chart
               title="Day of the Week"
               temporal="dow"
-              data={state.dow.data}
+              data={state.dow.data && Object.values(combinedDays)}
               fetching={state.dow.fetching}
             />
             <Chart
