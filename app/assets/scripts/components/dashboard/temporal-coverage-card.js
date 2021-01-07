@@ -100,7 +100,9 @@ export default function TemporalCoverageCard({
         ...state,
         [temporal]: { ...state[temporal], fetching: true, error: null },
       }));
-      const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(Number);
+      const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
+        Number
+      );
 
       let query = {
         temporal,
