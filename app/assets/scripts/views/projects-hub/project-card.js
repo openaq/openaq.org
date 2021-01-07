@@ -53,18 +53,16 @@ export default function ProjectCard({
             },
             { label: 'Locations', value: formatThousands(totalLocations) },
             {
-              label: 'Source',
-              value:
-                sources &&
-                sources.map(source => (
-                  <a
-                    href={source.sourceURL}
-                    title={`View source for ${name}`}
-                    key={source.name}
-                  >
-                    {source.name}
-                  </a>
-                )),
+              label: sources.length > 1 ? 'Sources' : 'Source',
+              value: sources.map(source => (
+                <a
+                  href={source.sourceURL}
+                  title={`View source for ${name}`}
+                  key={source.name}
+                >
+                  {source.name}
+                </a>
+              )),
             },
           ]}
         />
