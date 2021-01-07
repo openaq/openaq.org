@@ -1,5 +1,6 @@
 import Card, {
   CardHeader,
+  CardHeadline,
   CardTitle,
   CardSubtitle,
   HighlightText,
@@ -10,6 +11,7 @@ import FooterActions from './footer-actions';
 
 export {
   CardHeader,
+  CardHeadline,
   CardTitle,
   CardSubtitle,
   HighlightText,

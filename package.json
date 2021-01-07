@@ -118,6 +118,7 @@
     "react-redux": "^4.4.5",
     "react-router-dom": "^5.2.0",
     "react-tether": "^0.5.1",
+    "react-tooltip": "^4.2.11",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
