@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
-
+import moment from 'moment';
 import config from '../../config';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
@@ -48,7 +48,9 @@ export default function TimeSeriesCard({
     name: parameters[0].parameter || parameters[0],
   });
 
-  const [year, month, day] = dateRange ? dateRange.split('/') : [];
+  const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
+    Number
+  );
 
   // eslint-disable-next-line no-unused-vars
   const [temporal, setTemporal] = useState(day ? 'hour' : 'day');
@@ -62,9 +64,10 @@ export default function TimeSeriesCard({
         temporal,
         ...(dateRange
           ? {
+              // In user space, month is 1 indexed
               date_from: new Date(year, month - 1, day || 1),
               date_to: day
-                ? new Date(year, month - 1, day)
+                ? new Date(year, month - 1, day + 1)
                 : new Date(year, month, 0),
             }
           : {}),
@@ -116,6 +119,7 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
+  console.log(data);
   return (
     <Card
       gridColumn={'1  / -1'}
