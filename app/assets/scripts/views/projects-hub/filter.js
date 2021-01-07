@@ -35,7 +35,6 @@ export default function Filter({ parameters, countries, sources }) {
   );
 
   parameters.sort((a, b) => a.name.localeCompare(b.name));
-  //const parameterNames = [...new Set(parameters.map(p => p.name))];
 
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
