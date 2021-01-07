@@ -18,9 +18,10 @@ export default function MeasurementsLayer({
   isAllLocations,
   map,
   sourceId,
+  selectedLocations,
+  setSelectedLocations,
 }) {
   let match = useRouteMatch();
-
   useEffect(() => {
     map.addLayer({
       id: `${activeParameter}-outline`,
@@ -90,6 +91,8 @@ export default function MeasurementsLayer({
           isAllLocations={isAllLocations}
           locationId={e.features[0].properties.locationId}
           currentPage={parseInt(match.params.id, 10)}
+          selectedLocations={selectedLocations}
+          setSelectedLocations={setSelectedLocations}
         />,
         popoverElement
       );
@@ -98,7 +101,7 @@ export default function MeasurementsLayer({
         .setDOMContent(popoverElement)
         .addTo(map);
     });
-  }, [isAllLocations]);
+  }, [isAllLocations, selectedLocations]);
 
   return null;
 }

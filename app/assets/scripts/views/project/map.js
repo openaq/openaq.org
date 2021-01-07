@@ -17,6 +17,8 @@ export default function DatasetLocations({
   activeParameter,
   toggleAllLocations,
   isAllLocations,
+  selectedLocations,
+  setSelectedLocations,
 }) {
   return (
     <section id="location-fold-dataset">
@@ -26,6 +28,8 @@ export default function DatasetLocations({
             <MeasurementsLayer
               activeParameter={activeParameter}
               isAllLocations={isAllLocations}
+              selectedLocations={selectedLocations}
+              setSelectedLocations={setSelectedLocations}
             />
             {locationIds.map(location => (
               <LocationLayer
@@ -56,4 +60,6 @@ DatasetLocations.propTypes = {
   activeParameter: PropTypes.string,
   isAllLocations: PropTypes.bool.isRequired,
   toggleAllLocations: PropTypes.func.isRequired,
+  selectedLocations: PropTypes.array,
+  setSelectedLocations: PropTypes.func.isRequired,
 };

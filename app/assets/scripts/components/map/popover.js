@@ -6,6 +6,7 @@ import config from '../../config';
 import { round } from '../../utils/format';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
+import Pill from '../pill';
 
 const defaultState = {
   fetched: false,
@@ -19,6 +20,8 @@ export default function Popover({
   isAllLocations,
   locationId,
   currentPage,
+  selectedLocations,
+  setSelectedLocations,
 }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
@@ -145,8 +148,24 @@ export default function Popover({
             <button
               title="Select Location"
               className="button button--primary-bounded"
+              onClick={() =>
+                selectedLocations.includes(locationId)
+                  ? setSelectedLocations(
+                      selectedLocations.filter(
+                        location => location !== locationId
+                      )
+                    )
+                  : setSelectedLocations([...selectedLocations, locationId])
+              }
             >
-              Select Location
+              <div>
+                <span style={{ marginRight: `.5rem` }}>
+                  {selectedLocations.includes(locationId)
+                    ? 'Remove Location'
+                    : 'Select Location'}{' '}
+                </span>
+                <Pill title={`${selectedLocations.length}/15`} />
+              </div>
             </button>
           )}
         </div>
@@ -160,4 +179,6 @@ Popover.propTypes = {
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
   isAllLocations: T.bool.isRequired,
+  selectedLocations: T.array.isRequired,
+  setSelectedLocations: T.func.isRequired,
 };

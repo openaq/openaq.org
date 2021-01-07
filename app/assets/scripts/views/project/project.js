@@ -17,6 +17,7 @@ import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-c
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 import DatasetLocations from './map';
 import DateSelector from '../../components/date-selector';
+import Pill from '../../components/pill';
 
 const defaultState = {
   fetched: false,
@@ -36,6 +37,7 @@ function Project({ match, history, location }) {
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
   );
   const [isAllLocations, toggleAllLocations] = useState(true);
+  const [selectedLocations, setSelectedLocations] = useState([]);
 
   useEffect(() => {
     let query = qs.parse(location.search, {
@@ -96,7 +98,6 @@ function Project({ match, history, location }) {
   if (error || !data) {
     return <ErrorHeader />;
   }
-
   return (
     <section className="inpage">
       <Header
@@ -112,6 +113,11 @@ function Project({ match, history, location }) {
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
+        {!isAllLocations && (
+          <div className="inner">
+            <Pill title={`${selectedLocations.length}/15`} />
+          </div>
+        )}
         <DatasetLocations
           country={data.countries[0]}
           locationIds={data.locationIds}
@@ -119,6 +125,8 @@ function Project({ match, history, location }) {
           activeParameter={data.parameters[0].parameter}
           toggleAllLocations={toggleAllLocations}
           isAllLocations={isAllLocations}
+          selectedLocations={selectedLocations}
+          setSelectedLocations={setSelectedLocations}
         />
         <header
           className="fold__header inner"
