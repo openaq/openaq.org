@@ -15,6 +15,8 @@ const Container = styled.dl`
 
 const Measurement = styled.div`
   width: min-content;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(3rem, 1fr));
 `;
 
 export default function LatestMeasurementsCard({ parameters }) {
