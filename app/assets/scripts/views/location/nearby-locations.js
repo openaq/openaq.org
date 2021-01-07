@@ -15,7 +15,6 @@ export default function NearbyLocations({
   parameters,
   activeParameter,
 }) {
-  console.log(activeParameter);
   return (
     <section className="fold" id="location-fold-nearby">
       <div className="inner">
