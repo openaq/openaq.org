@@ -30,7 +30,7 @@ export default function DetailsCard({ measurements, date, coords, sources }) {
                   <SmartLink
                     key={s.id}
                     to={`${config.api}/${s.readme}`}
-                    title="Suggest a new source"
+                    title="Get technical details"
                   >
                     {`${s.name} Technical Readme`}
                   </SmartLink>
