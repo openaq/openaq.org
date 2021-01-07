@@ -21,7 +21,6 @@ export default function LocationCard({
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
-  console.log(parametersList);
 
   return (
     <Card
