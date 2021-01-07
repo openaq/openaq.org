@@ -1,5 +1,4 @@
-'use strict';
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,7 +8,6 @@ import _ from 'lodash';
 import qs from 'qs';
 import { Dropdown } from 'openaq-design-system';
 import * as d3 from 'd3';
-import createReactClass from 'create-react-class';
 
 import {
   fetchCompareLocationIfNeeded,
@@ -27,582 +25,247 @@ import {
 import LoadingMessage from '../components/loading-message';
 import InfoMessage from '../components/info-message';
 import ChartBrush from '../components/chart-brush';
-import { convertParamIfNeeded } from '../utils/map-settings';
 
-/*
- * create-react-class provides a drop-in replacement for the outdated React.createClass,
- * see https://reactjs.org/docs/react-without-es6.html
- * Please modernize this code using functional components and hooks!
- */
-var Compare = createReactClass({
-  displayName: 'Compare',
+import { NO_CITY } from '../utils/constants';
 
-  propTypes: {
-    _fetchCompareLocationIfNeeded: T.func,
-    _removeCompareLocation: T.func,
-    _selectCompareOptions: T.func,
-    _cancelCompareOptions: T.func,
-    _selectCompareCountry: T.func,
-    _selectCompareArea: T.func,
-    _selectCompareLocation: T.func,
-    _fetchLocationsByCountry: T.func,
-    _invalidateLocationsByCountry: T.func,
-    _invalidateCompare: T.func,
-    _fetchCompareLocationMeasurements: T.func,
+function Compare(props) {
+  const {
+    match,
+    location,
+    history,
+    compareLoc,
+    parameters,
+    countries,
+    locationsByCountry,
+    compareMeasurements,
+    compareSelectOpts,
 
-    match: T.object,
-    location: T.object,
-    history: T.object,
+    _invalidateCompare,
+    _removeCompareLocation,
+    _fetchCompareLocationIfNeeded,
+    _fetchCompareLocationMeasurements,
+    _cancelCompareOptions,
+    _invalidateLocationsByCountry,
+    _fetchLocationsByCountry,
+    _selectCompareOptions,
+    _selectCompareCountry,
+    _selectCompareArea,
+    _selectCompareLocation,
+  } = props;
 
-    params: T.object,
-    countries: T.array,
-    parameters: T.array,
+  const filteredParams = useMemo(() => _.uniqBy(parameters, 'name'), [
+    parameters,
+  ]);
 
-    compareLoc: T.array,
-    compareMeasurements: T.array,
-    compareSelectOpts: T.object,
-
-    locationsByCountry: T.object,
-  },
-
-  getActiveParameterData: function () {
-    const query = qs.parse(this.props.location.search, {
+  // Data for the active parameter or default to PM25
+  const activeParameterData = useMemo(() => {
+    const query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
-    let parameterData = _.find(this.props.parameters, { id: query.parameter });
-    return parameterData || _.find(this.props.parameters, { id: 'pm25' });
-  },
-
-  fetchLocationData: function (index, loc) {
-    this.props._fetchCompareLocationIfNeeded(index, loc);
-
-    let toDate = moment.utc();
-    let fromDate = toDate.clone().subtract(8, 'days');
-    this.props._fetchCompareLocationMeasurements(
-      index,
-      loc,
-      fromDate.toISOString(),
-      toDate.toISOString()
-    );
-  },
+    const parameterData = _.find(filteredParams, {
+      id: Number(query.parameter),
+    });
+    return parameterData || _.find(filteredParams, { name: 'pm25' });
+  }, [location.search, filteredParams]);
 
   // Returns an array with the names of the locations being compared.
   // It also accepts a filter function to further remove locations.
   // Mostly used to construct the url.
-  getLocNames: function (filter) {
-    return this.props.compareLoc
+  const getLocNames = filter =>
+    compareLoc
       .filter((o, i) => {
         if (!o.data) return false;
         if (filter) return filter(o, i);
         return true;
       })
-      .map(o => o.data.location);
-  },
+      .map(o => o.data.name);
 
-  //
-  // Start event listeners
-  //
+  const onParameterSelect = parameter => {
+    const locsUrl = getLocNames().map(encodeURIComponent).join('/');
+    history.push(`/compare/${locsUrl}?parameter=${parameter}`);
+  };
 
-  onFilterSelect: function (parameter, e) {
-    e.preventDefault();
-    let locsUrl = this.getLocNames().map(encodeURIComponent).join('/');
-
-    this.props.history.push(`/compare/${locsUrl}?parameter=${parameter}`);
-  },
-
-  removeLocClick: function (index) {
+  const onLocationRemove = index => {
     // To build the url filter out the location at the given index.
     // Ensure that non loaded locations are also out.
-    let locsUrl = this.getLocNames((_o, i) => i !== index)
+    const locsUrl = getLocNames((_o, i) => i !== index)
       .map(encodeURIComponent)
       .join('/');
 
-    this.props.history.push(
-      `/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`
-    );
-  },
+    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+  };
 
-  onCompareOptSelect: function (key, e) {
+  const onCompareOptSelect = (key, value) => {
     switch (key) {
       case 'country':
-        this.props._invalidateLocationsByCountry();
-        this.props._selectCompareCountry(e.target.value);
-        this.props._fetchLocationsByCountry(e.target.value);
+        _invalidateLocationsByCountry();
+        _selectCompareCountry(value);
+        _fetchLocationsByCountry(value);
         break;
       case 'area':
-        this.props._selectCompareArea(e.target.value);
+        _selectCompareArea(value);
         break;
       case 'location':
-        this.props._selectCompareLocation(e.target.value);
+        _selectCompareLocation(value);
         break;
     }
-  },
+  };
 
-  compareOptionsConfirmClick: function () {
-    this.props._cancelCompareOptions();
+  const onCompareOptionsConfirm = () => {
+    _cancelCompareOptions();
 
-    let locsUrl = this.getLocNames();
-    locsUrl.push(this.props.compareSelectOpts.location);
+    const locsUrl = [...getLocNames(), compareSelectOpts.location]
+      .map(encodeURIComponent)
+      .join('/');
 
-    locsUrl = locsUrl.map(encodeURIComponent).join('/');
+    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+  };
 
-    this.props.history.push(
-      `/compare/${locsUrl}?parameter=${this.getActiveParameterData().id}`
-    );
-  },
-
-  //
-  // Start life-cycle methods.
-  //
-
-  componentDidMount: function () {
-    this.props._invalidateCompare();
-    let { loc1, loc2, loc3 } = this.props.match.params;
-    loc1 && this.fetchLocationData(0, loc1);
-    loc2 && this.fetchLocationData(1, loc2);
-    loc3 && this.fetchLocationData(2, loc3);
-  },
-
-  UNSAFE_componentWillReceiveProps: function (nextProps) {
-    let {
-      loc1: prevLoc1,
-      loc2: prevLoc2,
-      loc3: prevLoc3,
-    } = this.props.match.params;
-    let {
-      loc1: currLoc1,
-      loc2: currLoc2,
-      loc3: currLoc3,
-    } = nextProps.match.params;
-
-    if (prevLoc1 !== currLoc1) {
-      currLoc1
-        ? this.fetchLocationData(0, currLoc1)
-        : this.props._removeCompareLocation(0);
-    }
-    if (prevLoc2 !== currLoc2) {
-      currLoc2
-        ? this.fetchLocationData(1, currLoc2)
-        : this.props._removeCompareLocation(1);
-    }
-    if (prevLoc3 !== currLoc3) {
-      currLoc3
-        ? this.fetchLocationData(2, currLoc3)
-        : this.props._removeCompareLocation(2);
-    }
-  },
-
-  //
-  // Start render methods.
-  //
-
-  renderCompareSelectOpts: function () {
-    if (this.props.compareSelectOpts.status === 'none') {
-      return (
-        <li
-          className="compare__location compare__location--actions"
-          key="actions"
-        >
-          <button
-            type="button"
-            className="button-compare-location"
-            onClick={this.props._selectCompareOptions}
-          >
-            Add Location
-          </button>
-        </li>
-      );
-    } else if (this.props.compareSelectOpts.status === 'selecting') {
-      let {
-        fetching: fetchingLocations,
-        fetched: fetchedLocations,
-        data: { results: locations },
-      } = this.props.locationsByCountry;
-
-      // Mental Sanity note: we use area to designate the broader region where a sensor
-      // is while the API call it city.
-      // Areas and Locations belonging to the selected country.
-      // Will be filtered from the this.props.locations;
-      let compareAreas = [];
-      let compareLocations = [];
-      let compareCountries = _.sortBy(this.props.countries, 'name');
-
-      if (locations) {
-        compareAreas = _(locations)
-          .filter(o => o.country === this.props.compareSelectOpts.country)
-          .uniqBy('city')
-          .sortBy('city')
-          .value();
-
-        if (locations && this.props.compareSelectOpts.area !== '--') {
-          compareLocations = _(locations)
-            .filter(o => {
-              // Has to belong to the correct area and can't have been selected before.
-              return (
-                o.city === this.props.compareSelectOpts.area &&
-                o.location !== this.props.match.params.loc1 &&
-                o.location !== this.props.match.params.loc2
-              );
-            })
-            .uniqBy('location')
-            .sortBy('location')
-            .value();
-        }
-      }
-
-      let compareAreasLabel = fetchingLocations
-        ? 'Loading Data'
-        : 'Select an Area';
-      let compareLocationsLabel = fetchingLocations
-        ? 'Loading Data'
-        : compareLocations.length
-        ? 'Select a Location'
-        : 'No locations available';
-
-      // Disable area while the locations are not fetched.
-      let disableArea =
-        !fetchedLocations ||
-        fetchingLocations ||
-        this.props.compareSelectOpts.country === '--';
-      // Disable locations if locations are not fetched or are not selected
-      let disableLocation =
-        disableArea ||
-        this.props.compareSelectOpts.area === '--' ||
-        !compareLocations.length;
-      // Disable confirm until everything is selected.
-      let disableConfirm =
-        disableLocation || this.props.compareSelectOpts.location === '--';
-
-      return (
-        <li
-          className="compare__location compare__location--actions"
-          key="actions-form"
-        >
-          <h2>Choose Location</h2>
-          <form>
-            <div className="form__group">
-              <label htmlFor="loc-country" className="form__label">
-                Country
-              </label>
-              <select
-                id="loc-country"
-                className="form__control form__control--small"
-                value={this.props.compareSelectOpts.country}
-                onChange={this.onCompareOptSelect.bind(null, 'country')}
-              >
-                <option value="--">Select a country</option>
-                {compareCountries.map(o => (
-                  <option key={o.code} value={o.code}>
-                    {o.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={c('form__group', { disabled: disableArea })}>
-              <label htmlFor="loc-area" className="form__label">
-                Area
-              </label>
-              <select
-                id="loc-area"
-                className="form__control form__control--small"
-                value={this.props.compareSelectOpts.area}
-                onChange={this.onCompareOptSelect.bind(null, 'area')}
-              >
-                <option value="--">{compareAreasLabel}</option>
-                {compareAreas.map(o => (
-                  <option key={o.city} value={o.city}>
-                    {o.city}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={c('form__group', { disabled: disableLocation })}>
-              <label htmlFor="loc-location" className="form__label">
-                Location
-              </label>
-              <select
-                id="loc-location"
-                className="form__control form__control--small"
-                value={this.props.compareSelectOpts.location}
-                onChange={this.onCompareOptSelect.bind(null, 'location')}
-              >
-                <option value="--">{compareLocationsLabel}</option>
-                {compareLocations.map(o => (
-                  <option key={o.location} value={o.location}>
-                    {o.location}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form__actions">
-              <button
-                type="button"
-                className="button button--small button--base"
-                onClick={this.props._cancelCompareOptions}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className={c('button button--small button--primary', {
-                  disabled: disableConfirm,
-                })}
-                onClick={this.compareOptionsConfirmClick}
-              >
-                Add
-              </button>
-            </div>
-          </form>
-        </li>
-      );
-    }
-  },
-
-  renderCompareLocations: function () {
-    let locs = this.props.compareLoc.filter(o => o.fetched || o.fetching);
-
-    let locsEl = locs.map((o, i) => {
-      if (o.fetching) {
-        return (
-          <li className="compare__location" key={i}>
-            <LoadingMessage type="minimal" />
-          </li>
+  const fetchLocationData = (index, loc) => {
+    _fetchCompareLocationIfNeeded(index, loc).then(res => {
+      if (!res.error) {
+        const toDate = moment.utc();
+        const fromDate = toDate.clone().subtract(8, 'days');
+        const locId = res.json.id;
+        _fetchCompareLocationMeasurements(
+          index,
+          locId,
+          fromDate.toISOString(),
+          toDate.toISOString()
         );
       }
-
-      let d = o.data;
-      let kl = [
-        'compare-marker--st',
-        'compare-marker--nd',
-        'compare-marker--rd',
-      ];
-      let updated = moment(d.lastUpdated).fromNow();
-      let countryData = _.find(this.props.countries, { code: d.country });
-      return (
-        <li className="compare__location" key={d.location}>
-          <p className="compare__subtitle">Updated {updated}</p>
-          <h2 className="compare__title">
-            <Link to={`/location/${encodeURIComponent(d.location)}`}>
-              <span className={c('compare-marker', kl[i])}>{d.location}</span>
-            </Link>{' '}
-            <small>
-              in {d.city}, {countryData.name}
-            </small>
-          </h2>
-          <div className="compare__actions">
-            {/* <button type='button' className='button button--small button--primary-unbounded'>Edit</button> */}
-            <button
-              type="button"
-              className="button button--small button--primary-unbounded"
-              onClick={this.removeLocClick.bind(null, i)}
-            >
-              Remove
-            </button>
-          </div>
-        </li>
-      );
     });
+  };
 
-    // When we have less than 3 cities allow for more to be added.
-    if (locs.length < 3) {
-      locsEl.push(this.renderCompareSelectOpts());
-    }
+  useEffect(() => {
+    // No mount action.
+    // On unmount cleanup the compare.
+    return () => _invalidateCompare();
+  }, []);
 
-    return locsEl;
-  },
-
-  renderParameterSelector: function () {
-    let activeParam = this.getActiveParameterData();
-    let drop = (
-      <Dropdown
-        triggerElement="button"
-        triggerClassName="button button--base-unbounded drop__toggle--caret"
-        triggerTitle="Show/hide parameter options"
-        triggerText={activeParam.name}
-      >
-        <ul role="menu" className="drop__menu drop__menu--select">
-          {this.props.parameters.map(o => (
-            <li key={o.id}>
-              <a
-                className={c('drop__menu-item', {
-                  'drop__menu-item--active': activeParam.id === o.id,
-                })}
-                href="#"
-                title={`Show values for ${o.name}`}
-                data-hook="dropdown:close"
-                onClick={this.onFilterSelect.bind(null, o.id)}
-              >
-                <span>{o.name}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </Dropdown>
-    );
-
-    return <p>Comparing {drop} values for local times</p>;
-  },
-
-  renderAvailabilityMessage: function () {
-    // Prepare data.
-    let activeParam = this.getActiveParameterData();
-    let weekAgo = moment().subtract(7, 'days').toISOString();
-    let messages = this.props.compareLoc
-      .filter(o => o.fetched && !o.fetching && o.data)
-      .map(o => {
-        if (o.data.parameters.indexOf(activeParam.id) === -1) {
-          return (
-            <p key={o.data.location}>
-              {o.data.location} does not report {activeParam.name}.
-            </p>
-          );
-        }
-
-        if (o.data.lastUpdated < weekAgo) {
-          return (
-            <p key={o.data.location}>
-              {o.data.location} has not reported values in the last week.
-            </p>
-          );
-        }
-
-        return null;
-      })
-      .filter(o => o !== null);
-
-    return <div className="compare__info-msg">{messages}</div>;
-  },
-
-  renderBrushChart: function () {
-    let activeParam = this.getActiveParameterData();
-    // All the times are local and shouldn't be converted to UTC.
-    // The values should be compared at the same time local to ensure an
-    // accurate comparison.
-    let userNow = moment().format('YYYY/MM/DD HH:mm:ss');
-    let weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
-
-    const filterFn = o => {
-      if (o.parameter !== this.getActiveParameterData().id) {
-        return false;
+  // Fetch data for all locations being compared.
+  // Locations are stored using their index, and this order never changes.
+  const { loc1, loc2, loc3 } = match.params;
+  const selectedLocations = useMemo(() => [loc1, loc2, loc3], [
+    loc1,
+    loc2,
+    loc3,
+  ]);
+  selectedLocations.forEach((l, idx) => {
+    useEffect(() => {
+      if (l) {
+        fetchLocationData(idx, l);
+      } else {
+        _removeCompareLocation(idx);
       }
-      if (o.value < 0) return false;
-      let localDate = moment
-        .parseZone(o.date.local)
-        .format('YYYY/MM/DD HH:mm:ss');
-      return localDate >= weekAgo && localDate <= userNow;
-    };
+    }, [l]);
+  });
 
-    // Prepare data.
-    let chartData = _(this.props.compareMeasurements)
-      .filter(o => o.fetched && !o.fetching && o.data)
-      .map(o => {
-        return _.cloneDeep(o.data.results)
-          .filter(filterFn)
-          .map(o => {
-            o.value = convertParamIfNeeded(o);
-            // Disregard timezone on local date.
-            let dt = o.date.local.match(
-              /^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/
-            )[0];
-            // `measurement` local date converted directly to user local.
-            // We have to use moment instead of new Date() because the behavior
-            // is not consistent across browsers.
-            // Firefox interprets the string as being in the current timezone
-            // while chrome interprets it as being utc. So:
-            // Date: 2016-08-25T14:00:00
-            // Firefox result: Thu Aug 25 2016 14:00:00 GMT-0400 (EDT)
-            // Chrome result: Thu Aug 25 2016 10:00:00 GMT-0400 (EDT)
-            o.date.localNoTZ = moment(dt).toDate();
-            return o;
-          });
-      })
-      .value();
+  const locs = compareLoc.filter(o => o.fetched || o.fetching);
 
-    let yMax = d3.max(chartData || [], r => d3.max(r, o => o.value)) || 0;
-
-    // 1 Week.
-    let xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
-
-    // Only show the "no results" message if stuff has loaded
-    let fetchedMeasurements = this.props.compareMeasurements.filter(
-      o => o.fetched && !o.fetching
-    );
-    if (fetchedMeasurements.length) {
-      let dataCount = chartData.reduce((prev, curr) => prev + curr.length, 0);
-
-      if (!dataCount) {
-        return (
-          <InfoMessage>
-            <p>There are no data for the selected parameter.</p>
-            <p>
-              Maybe you&apos;d like to suggest a{' '}
-              <a
-                href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-                title="Suggest a new source"
-              >
-                new source
-              </a>
-              .
-            </p>
-          </InfoMessage>
-        );
-      }
-    }
-
-    return (
-      <ChartBrush
-        className="brush-chart"
-        data={chartData}
-        xRange={xRange}
-        yRange={[0, yMax]}
-        yLabel={activeParam.preferredUnit}
-      />
-    );
-  },
-
-  render: function () {
-    let locs = this.props.compareLoc.filter(o => o.fetched || o.fetching);
-
-    return (
-      <section className="inpage">
-        <header className="inpage__header">
-          <div className="inner">
-            <div className="inpage__headline">
-              <h1 className="inpage__title">Compare locations</h1>
-            </div>
-
-            <div className="compare">
-              <ul className="compare__location-list">
-                {this.renderCompareLocations()}
-              </ul>
-            </div>
+  return (
+    <section className="inpage">
+      <header className="inpage__header">
+        <div className="inner">
+          <div className="inpage__headline">
+            <h1 className="inpage__title">Compare locations</h1>
           </div>
-        </header>
-        <div className="inpage__body">
-          {locs.length ? (
-            <section className="fold" id="compare-fold-measurements">
-              <div className="inner">
-                <header className="fold__header">
-                  <h1 className="fold__title">Comparing measurements</h1>
-                  <div className="fold__introduction">
-                    {this.renderParameterSelector()}
-                    {this.renderAvailabilityMessage()}
-                  </div>
-                </header>
-                <div className="fold__body">{this.renderBrushChart()}</div>
-                <small className="disclaimer">
-                  <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
-                    Data Disclaimer and More Information
-                  </a>
-                </small>
-              </div>
-            </section>
-          ) : null}
+
+          <div className="compare">
+            <ul className="compare__location-list">
+              {locs.map((o, i) => (
+                <CompareLocation
+                  locationIndex={i}
+                  countries={countries}
+                  onRemove={onLocationRemove}
+                  location={o}
+                  key={i}
+                />
+              ))}
+              {locs.length < 3 && (
+                <CompareLocationSelector
+                  status={compareSelectOpts.status}
+                  country={compareSelectOpts.country}
+                  area={compareSelectOpts.area}
+                  location={compareSelectOpts.location}
+                  locationsByCountry={locationsByCountry}
+                  selectedLocations={selectedLocations}
+                  countries={countries}
+                  onLocationAdd={_selectCompareOptions}
+                  onOptSelect={onCompareOptSelect}
+                  onConfirm={onCompareOptionsConfirm}
+                  onCancel={_cancelCompareOptions}
+                />
+              )}
+            </ul>
+          </div>
         </div>
-      </section>
-    );
-  },
-});
+      </header>
+      <div className="inpage__body">
+        {locs.length ? (
+          <section className="fold" id="compare-fold-measurements">
+            <div className="inner">
+              <header className="fold__header">
+                <h1 className="fold__title">Comparing measurements</h1>
+                <div className="fold__introduction">
+                  <ParameterSelector
+                    activeParam={activeParameterData}
+                    parameters={filteredParams}
+                    onSelect={onParameterSelect}
+                  />
+                  <AvailabilityMessage
+                    activeParam={activeParameterData}
+                    compareLocations={compareLoc}
+                  />
+                </div>
+              </header>
+              <div className="fold__body">
+                <CompareBrushChart
+                  activeParam={activeParameterData}
+                  compareMeasurements={compareMeasurements}
+                  compareLocations={compareLoc}
+                />
+              </div>
+              <small className="disclaimer">
+                <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
+                  Data Disclaimer and More Information
+                </a>
+              </small>
+            </div>
+          </section>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+Compare.propTypes = {
+  _fetchCompareLocationIfNeeded: T.func,
+  _removeCompareLocation: T.func,
+  _selectCompareOptions: T.func,
+  _cancelCompareOptions: T.func,
+  _selectCompareCountry: T.func,
+  _selectCompareArea: T.func,
+  _selectCompareLocation: T.func,
+  _fetchLocationsByCountry: T.func,
+  _invalidateLocationsByCountry: T.func,
+  _invalidateCompare: T.func,
+  _fetchCompareLocationMeasurements: T.func,
+
+  match: T.object,
+  location: T.object,
+  history: T.object,
+
+  params: T.object,
+  countries: T.array,
+  parameters: T.array,
+
+  compareLoc: T.array,
+  compareMeasurements: T.array,
+  compareSelectOpts: T.object,
+
+  locationsByCountry: T.object,
+};
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
@@ -620,31 +283,437 @@ function selector(state) {
   };
 }
 
-function dispatcher(dispatch) {
+function dispatcher(d) {
   return {
-    _selectCompareOptions: (...args) => dispatch(selectCompareOptions(...args)),
-    _cancelCompareOptions: (...args) => dispatch(cancelCompareOptions(...args)),
+    _selectCompareOptions: (...args) => d(selectCompareOptions(...args)),
+    _cancelCompareOptions: (...args) => d(cancelCompareOptions(...args)),
 
-    _selectCompareCountry: (...args) => dispatch(selectCompareCountry(...args)),
-    _selectCompareArea: (...args) => dispatch(selectCompareArea(...args)),
-    _selectCompareLocation: (...args) =>
-      dispatch(selectCompareLocation(...args)),
+    _selectCompareCountry: (...args) => d(selectCompareCountry(...args)),
+    _selectCompareArea: (...args) => d(selectCompareArea(...args)),
+    _selectCompareLocation: (...args) => d(selectCompareLocation(...args)),
 
-    _fetchLocationsByCountry: (...args) =>
-      dispatch(fetchLocationsByCountry(...args)),
+    _fetchLocationsByCountry: (...args) => d(fetchLocationsByCountry(...args)),
     _invalidateLocationsByCountry: (...args) =>
-      dispatch(invalidateLocationsByCountry(...args)),
+      d(invalidateLocationsByCountry(...args)),
 
-    _invalidateCompare: (...args) => dispatch(invalidateCompare(...args)),
+    _invalidateCompare: (...args) => d(invalidateCompare(...args)),
 
     _fetchCompareLocationIfNeeded: (...args) =>
-      dispatch(fetchCompareLocationIfNeeded(...args)),
-    _removeCompareLocation: (...args) =>
-      dispatch(removeCompareLocation(...args)),
+      d(fetchCompareLocationIfNeeded(...args)),
+    _removeCompareLocation: (...args) => d(removeCompareLocation(...args)),
 
     _fetchCompareLocationMeasurements: (...args) =>
-      dispatch(fetchCompareLocationMeasurements(...args)),
+      d(fetchCompareLocationMeasurements(...args)),
   };
 }
 
 module.exports = connect(selector, dispatcher)(Compare);
+
+// /////////////////////////////////////////////////////////////////// //
+// Helper components
+
+function CompareLocation(props) {
+  const { locationIndex, location, countries, onRemove } = props;
+
+  if (location.fetching) {
+    return (
+      <li className="compare__location">
+        <LoadingMessage type="minimal" />
+      </li>
+    );
+  }
+
+  const d = location.data;
+  const kl = ['compare-marker--st', 'compare-marker--nd', 'compare-marker--rd'];
+  const updated = moment(d.lastUpdated).fromNow();
+  const countryData = _.find(countries, { code: d.country });
+  return (
+    <li className="compare__location" key={d.id}>
+      <p className="compare__subtitle">Updated {updated}</p>
+      <h2 className="compare__title">
+        <Link to={`/location/${encodeURIComponent(d.id)}`}>
+          <span className={c('compare-marker', kl[locationIndex])}>
+            {d.name}
+          </span>
+        </Link>{' '}
+        <small>
+          in {d.city || NO_CITY}, {countryData.name}
+        </small>
+      </h2>
+      <div className="compare__actions">
+        <button
+          type="button"
+          className="button button--small button--primary-unbounded"
+          onClick={() => onRemove(locationIndex)}
+        >
+          Remove
+        </button>
+      </div>
+    </li>
+  );
+}
+
+CompareLocation.propTypes = {
+  locationIndex: T.number,
+  location: T.object,
+  countries: T.array,
+  onRemove: T.func,
+};
+
+function CompareLocationSelector(props) {
+  const {
+    status,
+    country,
+    area,
+    location,
+    locationsByCountry,
+    selectedLocations,
+    countries,
+    onLocationAdd,
+    onOptSelect,
+    onCancel,
+    onConfirm,
+  } = props;
+
+  if (status === 'none') {
+    return (
+      <li
+        className="compare__location compare__location--actions"
+        key="actions"
+      >
+        <button
+          type="button"
+          className="button-compare-location"
+          onClick={onLocationAdd}
+        >
+          Add Location
+        </button>
+      </li>
+    );
+  } else if (status === 'selecting') {
+    const {
+      fetching: fetchingLocations,
+      fetched: fetchedLocations,
+      data: { results: locations },
+    } = locationsByCountry;
+
+    // Mental Sanity note: we use area to designate the broader region where a sensor
+    // is while the API call it city.
+    // Areas and Locations belonging to the selected country.
+    // Will be filtered from the props.locations;
+    let compareAreas = [];
+    let compareLocations = [];
+    const compareCountries = _.sortBy(countries, 'name');
+
+    if (locations) {
+      // Ensure that the city is present.
+      // Default to NO_CITY when it is not.
+      const locationsCity = locations.map(o =>
+        o.city ? o : { ...o, city: NO_CITY }
+      );
+
+      compareAreas = _(locationsCity)
+        .filter(o => o.country === country)
+        .uniqBy('city')
+        .sortBy('city')
+        .value();
+
+      if (area !== '--') {
+        const [loc1, loc2] = selectedLocations;
+        compareLocations = _(locationsCity)
+          .filter(o => {
+            // Has to belong to the correct area and can't have been selected before.
+            return o.city === area && o.name !== loc1 && o.name !== loc2;
+          })
+          .uniqBy('name')
+          .sortBy('name')
+          .value();
+      }
+    }
+
+    const compareAreasLabel = fetchingLocations
+      ? 'Loading Data'
+      : 'Select an Area';
+    const compareLocationsLabel = fetchingLocations
+      ? 'Loading Data'
+      : compareLocations.length
+      ? 'Select a Location'
+      : 'No locations available';
+
+    // Disable area while the locations are not fetched.
+    const disableArea =
+      !fetchedLocations || fetchingLocations || country === '--';
+    // Disable locations if locations are not fetched or are not selected
+    const disableLocation =
+      disableArea || area === '--' || !compareLocations.length;
+    // Disable confirm until everything is selected.
+    const disableConfirm = disableLocation || location === '--';
+
+    return (
+      <li
+        className="compare__location compare__location--actions"
+        key="actions-form"
+      >
+        <h2>Choose Location</h2>
+        <form>
+          <div className="form__group">
+            <label htmlFor="loc-country" className="form__label">
+              Country
+            </label>
+            <select
+              id="loc-country"
+              className="form__control form__control--small"
+              value={country}
+              onChange={e => onOptSelect('country', e.target.value)}
+            >
+              <option value="--">Select a country</option>
+              {compareCountries.map(o => (
+                <option key={o.code} value={o.code}>
+                  {o.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={c('form__group', { disabled: disableArea })}>
+            <label htmlFor="loc-area" className="form__label">
+              Area
+            </label>
+            <select
+              id="loc-area"
+              className="form__control form__control--small"
+              value={area}
+              onChange={e => onOptSelect('area', e.target.value)}
+            >
+              <option value="--">{compareAreasLabel}</option>
+              {compareAreas.map(o => (
+                <option key={o.city} value={o.city}>
+                  {o.city}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={c('form__group', { disabled: disableLocation })}>
+            <label htmlFor="loc-location" className="form__label">
+              Location
+            </label>
+            <select
+              id="loc-location"
+              className="form__control form__control--small"
+              value={location}
+              onChange={e => onOptSelect('location', e.target.value)}
+            >
+              <option value="--">{compareLocationsLabel}</option>
+              {compareLocations.map(o => (
+                <option key={o.name} value={o.name}>
+                  {o.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form__actions">
+            <button
+              type="button"
+              className="button button--small button--base"
+              onClick={onCancel}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className={c('button button--small button--primary', {
+                disabled: disableConfirm,
+              })}
+              onClick={onConfirm}
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </li>
+    );
+  }
+}
+
+CompareLocationSelector.propTypes = {
+  status: T.string,
+  country: T.string,
+  area: T.string,
+  location: T.string,
+  locationsByCountry: T.object,
+  selectedLocations: T.array,
+  countries: T.array,
+  onLocationAdd: T.func,
+  onOptSelect: T.func,
+  onConfirm: T.func,
+  onCancel: T.func,
+};
+
+function ParameterSelector(props) {
+  const { activeParam, parameters, onSelect } = props;
+
+  const drop = (
+    <Dropdown
+      triggerElement="button"
+      triggerClassName="button button--base-unbounded drop__toggle--caret"
+      triggerTitle="Show/hide parameter options"
+      triggerText={activeParam.displayName}
+    >
+      <ul role="menu" className="drop__menu drop__menu--select scrollable">
+        {parameters.map(o => (
+          <li key={o.id}>
+            <a
+              className={c('drop__menu-item', {
+                'drop__menu-item--active': activeParam.id === o.id,
+              })}
+              href="#"
+              title={`Show values for ${o.displayName}`}
+              data-hook="dropdown:close"
+              onClick={e => {
+                e.preventDefault();
+                onSelect(o.id);
+              }}
+            >
+              <span>{o.displayName}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Dropdown>
+  );
+
+  return <p>Comparing {drop} values for local times</p>;
+}
+
+ParameterSelector.propTypes = {
+  activeParam: T.object,
+  parameters: T.array,
+  onSelect: T.func,
+};
+
+function AvailabilityMessage(props) {
+  const { activeParam, compareLocations } = props;
+  // Prepare data.
+  const weekAgo = moment().subtract(7, 'days').toISOString();
+  const messages = compareLocations
+    .filter(o => o.fetched && !o.fetching && o.data)
+    .map(o => {
+      if (!o.data.parameters.find(p => p.parameterId === activeParam.id)) {
+        return (
+          <p key={o.data.id}>
+            {o.data.name} does not report {activeParam.name}.
+          </p>
+        );
+      }
+
+      if (o.data.lastUpdated < weekAgo) {
+        return (
+          <p key={o.data.id}>
+            {o.data.name} has not reported values in the last week.
+          </p>
+        );
+      }
+
+      return null;
+    })
+    .filter(o => o !== null);
+
+  return <div className="compare__info-msg">{messages}</div>;
+}
+
+AvailabilityMessage.propTypes = {
+  activeParam: T.object,
+  compareLocations: T.array,
+};
+
+function CompareBrushChart(props) {
+  const { activeParam, compareLocations, compareMeasurements } = props;
+
+  const dateFormat = 'YYYY/MM/DD HH:mm:ss';
+  const userNow = moment().format(dateFormat);
+  const weekAgo = moment().subtract(7, 'days').format(dateFormat);
+
+  // Prepare data.
+  const chartData = useMemo(() => {
+    return _(compareMeasurements)
+      .map((o, locIdx) => {
+        if (o.fetched && !o.fetching && o.data) {
+          return o.data.results
+            .filter(res => {
+              // The result parameter has to be on the location reported
+              // parameter list and has to be the same as the active one.
+              const locParamList = compareLocations[locIdx].data.parameters;
+              const resParamInList = locParamList.find(
+                p => p.parameter === res.parameter
+              );
+              if (!resParamInList || res.parameter !== activeParam.name) {
+                return false;
+              }
+
+              if (res.average < 0) return false;
+              const measurementDate = moment(res.hour).format(dateFormat);
+              return measurementDate >= weekAgo && measurementDate <= userNow;
+            })
+            .map(o => {
+              // Map data according to chart needs.
+              return {
+                value: o.average,
+                date: {
+                  localNoTZ: new Date(o.hour),
+                },
+              };
+            });
+        } else {
+          return null;
+        }
+      })
+      .filter(Boolean)
+      .value();
+  }, [activeParam.name, compareMeasurements, compareLocations]);
+
+  const yMax = d3.max(chartData || [], r => d3.max(r, o => o.value)) || 0;
+
+  // 1 Week.
+  const xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
+
+  // Only show the "no results" message if measurements have loaded.
+  const fetchedMeasurements = compareMeasurements.filter(
+    o => o.fetched && !o.fetching
+  );
+  if (fetchedMeasurements.length) {
+    const dataCount = chartData.reduce((prev, curr) => prev + curr.length, 0);
+
+    if (!dataCount) {
+      return (
+        <InfoMessage>
+          <p>There are no data for the selected parameter.</p>
+          <p>
+            Maybe you&apos;d like to suggest a{' '}
+            <a
+              href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
+              title="Suggest a new source"
+            >
+              new source
+            </a>
+            .
+          </p>
+        </InfoMessage>
+      );
+    }
+  }
+
+  return (
+    <ChartBrush
+      className="brush-chart"
+      data={chartData}
+      xRange={xRange}
+      yRange={[0, yMax]}
+      yLabel={activeParam.preferredUnit}
+    />
+  );
+}
+
+CompareBrushChart.propTypes = {
+  activeParam: T.object,
+  compareMeasurements: T.array,
+  compareLocations: T.array,
+};

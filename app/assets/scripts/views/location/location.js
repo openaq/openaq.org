@@ -142,7 +142,7 @@ function Location(props) {
         action={{
           api: `${config.apiDocs}`,
           download: onDownloadClick,
-          // compare: `/compare/${encodeURIComponent(data.id)}`,
+          compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
         sourceType={data.sourceType}
         isMobile={data.isMobile}
