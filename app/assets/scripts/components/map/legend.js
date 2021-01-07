@@ -15,7 +15,6 @@ export default function Legend({ parameters, activeParameter }) {
     history.push(`${location.pathname}?parameter=${parameter}`);
   }
 
-
   let drop = (
     <Dropdown
       triggerElement="button"

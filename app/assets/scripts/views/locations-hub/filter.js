@@ -28,7 +28,7 @@ const initFromLocation = ({
   source_type,
 }) => {
   return {
-    parameters: parameters ? parameters.split(',') : [],
+    parameters: parameters ? parameters.split(',').map(Number) : [],
     countries: countries ? countries.split(',') : [],
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
@@ -89,8 +89,11 @@ export default function Filter({ countries, parameters, sources }) {
       }
 
       case 'parameters': {
+        // Parameters are tracked by id which is a Number so it needs to be cast
         const parameters =
-          query && query.parameters ? query.parameters.split(',') : [];
+          query && query.parameters
+            ? query.parameters.split(',').map(Number)
+            : [];
         query.parameters = toggleValue(parameters, value);
 
         setSelected(prev => ({
