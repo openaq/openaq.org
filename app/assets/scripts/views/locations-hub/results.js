@@ -6,6 +6,8 @@ import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import LocationCard from './location-card';
 
+import { NO_CITY } from '../../utils/constants';
+
 export default function Results({
   fetched,
   fetching,
@@ -74,7 +76,7 @@ export default function Results({
             <LocationCard
               mobile={loc.isMobile}
               key={loc.id}
-              city={loc.city}
+              city={loc.city || NO_CITY}
               country={loc.country}
               firstUpdated={loc.firstUpdated}
               id={loc.id}
