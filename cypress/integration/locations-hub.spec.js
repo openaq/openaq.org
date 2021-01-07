@@ -49,7 +49,7 @@ describe('The Locations Hub', () => {
     // parameter filter
     cy.get('[title="type__filter"]').click();
     cy.get('[title="type__filter"]').find('span').contains('Parameter');
-    ['O3', 'CO', 'NO2', 'CO2', 'SO2', 'BC'].forEach(parameter => {
+    ['o3', 'co', 'no2', 'co2', 'so2', 'bc'].forEach(parameter => {
       cy.get('[data-cy=filter-parameters]')
         .find(`[data-cy=${parameter}]`)
         .should('length', 1);
@@ -81,9 +81,7 @@ describe('The Locations Hub', () => {
     cy.get('[data-cy=location-card]').should('exist');
     cy.get('[data-cy=location-card-title]').should('exist');
     cy.get('[data-cy=location-card-detail]').should('exist');
-    cy.get('[data-cy=location-card-detail-label]').contains(
-      'Collection started'
-    );
+    cy.get('[data-cy=location-card-detail-label]').contains('Collection dates');
     cy.get('[data-cy=location-card-detail-label]').contains('Measurements');
     cy.get('[data-cy=location-card-detail-label]').contains('Parameters');
     cy.get('[data-cy=location-card-detail-label]').contains('Source');
