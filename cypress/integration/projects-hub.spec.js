@@ -24,8 +24,6 @@ describe('The Projects Hub', () => {
     cy.get('[data-cy=results-summary]')
       .invoke('text')
       .should('match', /A total of \d+ datasets were found/);
-
-    cy.get('.pagination').should('exist');
   });
 
   it('has some filters with dropdown menus', () => {
