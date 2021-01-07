@@ -22,6 +22,9 @@ export default function BarChart({ data, yAxisLabel, xAxisLabels }) {
     legend: {
       display: false,
     },
+    tooltips: {
+      intersect: false,
+    },
     scales: {
       yAxes: [
         {
@@ -29,11 +32,19 @@ export default function BarChart({ data, yAxisLabel, xAxisLabels }) {
             beginAtZero: true,
             maxTicksLimit: 5,
           },
+          scaleLabel: {
+            display: true,
+            labelString: yAxisLabel,
+          },
         },
       ],
       xAxes: [
         {
           gridLines: { display: false },
+          scaleLabel: {
+            display: true,
+            labelString: 'Date',
+          },
         },
       ],
     },

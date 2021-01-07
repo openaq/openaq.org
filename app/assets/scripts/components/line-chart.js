@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
 
-export default function LineChart({ data, xUnit }) {
+export default function LineChart({ data, xUnit, yLabel }) {
   const series = {
     datasets: [
       {
-        label: 'average',
+        label: 'Average',
         data: data,
         borderColor: '#198CFF',
         fill: false,
@@ -20,6 +20,9 @@ export default function LineChart({ data, xUnit }) {
     legend: {
       display: false,
     },
+    tooltips: {
+      intersect: false,
+    },
     scales: {
       yAxes: [
         {
@@ -30,6 +33,10 @@ export default function LineChart({ data, xUnit }) {
           gridLines: {
             drawOnChartArea: false,
           },
+          scaleLabel: {
+            display: !!yLabel,
+            labelString: yLabel,
+          },
         },
       ],
 
@@ -37,7 +44,11 @@ export default function LineChart({ data, xUnit }) {
         {
           type: 'time',
           time: {
+            tooltipFormat: 'MMM D, YYYY',
             unit: xUnit || 'day',
+            displayFormats: {
+              day: 'MMM D, YYYY',
+            },
           },
           gridLines: {
             drawOnChartArea: false,
@@ -45,6 +56,10 @@ export default function LineChart({ data, xUnit }) {
           ticks: {
             beginAtZero: true,
             maxTicksLimit: 15,
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Date',
           },
         },
       ],
@@ -56,6 +71,7 @@ export default function LineChart({ data, xUnit }) {
 }
 
 LineChart.propTypes = {
+  yLabel: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       x: PropTypes.instanceOf(Date).isRequired,

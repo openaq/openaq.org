@@ -300,7 +300,7 @@ function Chart({ title, temporal, data, fetching }) {
       ) : data ? (
         <BarChart
           data={data.map(m => m.measurement_count)}
-          yAxisLabel="count"
+          yAxisLabel="Total"
           xAxisLabels={data.map(m => m[temporal])}
         />
       ) : (
