@@ -15,7 +15,6 @@ export default function Legend({ parameters, activeParameter }) {
     history.push(`${location.pathname}?parameter=${parameter}`);
   }
 
-  //const parameterNames = [...new Set(parameters.map(p => p.name))];
 
   let drop = (
     <Dropdown
