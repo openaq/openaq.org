@@ -29,7 +29,7 @@ export default function DetailsCard({ measurements, date, coords, sources }) {
                 .map(s => (
                   <SmartLink
                     key={s.id}
-                    to={`${config.api}/${s.readme}`}
+                    to={`${config.api}/${s.readme.split('v2/')[1]}`}
                     title="Get technical details"
                   >
                     {`${s.name} Technical Readme`}
