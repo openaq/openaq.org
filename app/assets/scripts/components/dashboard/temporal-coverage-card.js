@@ -9,10 +9,11 @@ import BarChart from '../bar-chart';
 import Card, {
   CardHeader as BaseHeader,
   CardTitle,
+  CardHeadline,
 } from '../../components/card';
 import TabbedSelector from '../../components/tabbed-selector';
 import config from '../../config';
-import { round } from '../../utils/format';
+import InfoButton from '../info-button';
 
 const StyledLoading = styled(LoadingMessage)`
   grid-column: 4 / 11;
@@ -84,6 +85,7 @@ export default function TemporalCoverageCard({
   spatial,
   id,
   dateRange,
+  titleInfo,
 }) {
   const [activeTab, setActiveTab] = useState({
     id: parameters[0].parameter || parameters[0],
@@ -114,7 +116,6 @@ export default function TemporalCoverageCard({
             }
           : {}),
       };
-      console.log(query);
 
       if (spatial === 'project') {
         query = {
@@ -190,6 +191,21 @@ export default function TemporalCoverageCard({
     (!state.dow.data || state.dow.data < 1) &&
     (!state.moy.data || state.moy.data < 1);
 
+  const combinedDays =
+    state.dow.data &&
+    state.dow.data.reduce((prev, day) => {
+      const dow = day.dow;
+      return {
+        ...prev,
+        [dow]: {
+          dow,
+          measurement_count: prev[dow]
+            ? prev[dow].measurement_count + day.measurement_count
+            : day.measurement_count,
+        },
+      };
+    }, {});
+
   if (state.hod.fetching && state.dow.fetching && state.moy.fetching) {
     return <StyledLoading />;
   } else if (state.hod.error && state.dow.error && state.moy.error) {
@@ -211,7 +227,10 @@ export default function TemporalCoverageCard({
               setActiveTab(t);
             }}
           />
-          <CardTitle>Temporal Coverage</CardTitle>
+          <CardHeadline>
+            <CardTitle>Temporal Coverage</CardTitle>
+            {titleInfo && <InfoButton info={titleInfo} id="temp-cov-info" />}
+          </CardHeadline>
         </CardHeader>
       )}
       renderBody={() =>
@@ -240,7 +259,7 @@ export default function TemporalCoverageCard({
             <Chart
               title="Day of the Week"
               temporal="dow"
-              data={state.dow.data}
+              data={state.dow.data && Object.values(combinedDays)}
               fetching={state.dow.fetching}
             />
             <Chart
@@ -257,6 +276,7 @@ export default function TemporalCoverageCard({
 }
 
 TemporalCoverageCard.propTypes = {
+  titleInfo: T.string,
   parameters: T.arrayOf(
     T.shape({
       parameter: T.string.isRequired,
@@ -279,10 +299,8 @@ function Chart({ title, temporal, data, fetching }) {
         <LoadingMessage />
       ) : data ? (
         <BarChart
-          data={data.map(m => round(m.average, 2))}
-          // data={data.map(m => m.measurement_count)}
-          yAxisLabel="average"
-          // yAxisLabel="count"
+          data={data.map(m => m.measurement_count)}
+          yAxisLabel="count"
           xAxisLabels={data.map(m => m[temporal])}
         />
       ) : (

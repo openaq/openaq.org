@@ -73,7 +73,7 @@ const prepareData = data => {
   return preparedData;
 };
 
-export default function MeasureandsCard({ parameters }) {
+export default function MeasureandsCard({ parameters, titleInfo }) {
   return (
     <Card
       gridColumn={'1 / -1'}
@@ -82,11 +82,13 @@ export default function MeasureandsCard({ parameters }) {
         return <Table data={prepareData(parameters)} />;
       }}
       noBodyStyle
+      titleInfo={titleInfo}
     />
   );
 }
 
 MeasureandsCard.propTypes = {
+  titleInfo: T.string,
   parameters: T.arrayOf(
     T.shape({
       parameter: T.string.isRequired,

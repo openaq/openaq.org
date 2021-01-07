@@ -6,9 +6,14 @@ import qs from 'qs';
 import config from '../../config';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
-import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
+import Card, {
+  CardHeader as BaseHeader,
+  CardTitle,
+  CardHeadline,
+} from '../card';
 import TabbedSelector from '../tabbed-selector';
 import LineChart from '../line-chart';
+import InfoButton from '../info-button';
 
 const ChartContainer = styled.div`
   max-height: 24rem;
@@ -33,6 +38,7 @@ export default function TimeSeriesCard({
   projectId,
   parameters,
   dateRange,
+  titleInfo,
 }) {
   // eslint-disable-next-line no-unused-vars
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
@@ -110,7 +116,6 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
-  console.log('data', data);
   return (
     <Card
       gridColumn={'1  / -1'}
@@ -126,7 +131,10 @@ export default function TimeSeriesCard({
               setActiveTab(t);
             }}
           />
-          <CardTitle>Time Series Data</CardTitle>
+          <CardHeadline>
+            <CardTitle>Time Series Data</CardTitle>
+            {titleInfo && <InfoButton info={titleInfo} id="time-series-info" />}
+          </CardHeadline>
         </CardHeader>
       )}
       renderBody={() => (
@@ -147,6 +155,7 @@ export default function TimeSeriesCard({
 }
 
 TimeSeriesCard.propTypes = {
+  titleInfo: T.string,
   locationId: T.oneOfType([T.string, T.number]),
   projectId: T.string,
   parameters: T.arrayOf(

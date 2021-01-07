@@ -29,15 +29,13 @@ export default function ProjectsHub({
   fetchProjects,
   invalidateProjects,
   openDownloadModal,
-
   parameters,
-
+  countries,
   fetching,
   fetched,
   error,
   results,
   meta,
-
   location,
   history,
 }) {
@@ -56,6 +54,8 @@ export default function ProjectsHub({
       parameter:
         query.parameters &&
         query.parameters.split(',').map(param => param.toLowerCase()),
+      country: query.countries && query.countries.split(','),
+      source: query.sources && query.sources.split(','),
     });
   }, [location]);
 
@@ -86,7 +86,7 @@ export default function ProjectsHub({
         <div className="inner">
           <div className="inpage__content">
             <div className="inpage__content__header">
-              <Filter parameters={parameters} />
+              <Filter parameters={parameters} countries={countries} />
             </div>
 
             <div className="content__meta">
@@ -122,7 +122,8 @@ export default function ProjectsHub({
 
 ProjectsHub.propTypes = {
   parameters: T.array,
-
+  countries: T.array,
+  sources: T.array,
   fetching: T.bool,
   fetched: T.bool,
   error: T.object,
@@ -143,7 +144,8 @@ ProjectsHub.propTypes = {
 function selector(state) {
   return {
     parameters: state.baseData.data.parameters,
-
+    countries: state.baseData.data.countries,
+    sources: state.baseData.data.sources,
     fetching: state.projects.fetching,
     fetched: state.projects.fetched,
     error: state.projects.error,
