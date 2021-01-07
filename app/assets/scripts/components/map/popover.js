@@ -14,7 +14,12 @@ const defaultState = {
   data: null,
 };
 
-export default function Popover({ activeParameter, locationId, currentPage }) {
+export default function Popover({
+  activeParameter,
+  isAllLocations,
+  locationId,
+  currentPage,
+}) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
@@ -109,33 +114,41 @@ export default function Popover({ activeParameter, locationId, currentPage }) {
               </a>
             </p>
           )}
-
-          <ul className="popover__actions">
-            {/*
+          {isAllLocations ? (
+            <ul className="popover__actions">
+              {/*
                 Using `a` instead of `Link` because these are rendered outside
                 the router context and `Link` needs that context to work.
               */}
-            <li>
-              <a
-                href={`#/compare/${encodeURIComponent(locationId)}`}
-                className="button button--primary-bounded"
-                title={`Compare ${name} with other locations`}
-              >
-                Compare
-              </a>
-            </li>
-            {locationId !== currentPage && (
               <li>
                 <a
-                  href={`#/location/${encodeURIComponent(locationId)}`}
-                  title={`View ${name} page`}
+                  href={`#/compare/${encodeURIComponent(locationId)}`}
                   className="button button--primary-bounded"
+                  title={`Compare ${name} with other locations`}
                 >
-                  View More
+                  Compare
                 </a>
               </li>
-            )}
-          </ul>
+              {locationId !== currentPage && (
+                <li>
+                  <a
+                    href={`#/location/${encodeURIComponent(locationId)}`}
+                    title={`View ${name} page`}
+                    className="button button--primary-bounded"
+                  >
+                    View More
+                  </a>
+                </li>
+              )}
+            </ul>
+          ) : (
+            <button
+              title="Select Location"
+              className="button button--primary-bounded"
+            >
+              Select Location
+            </button>
+          )}
         </div>
       </div>
     </article>
@@ -146,4 +159,5 @@ Popover.propTypes = {
   activeParameter: T.string.isRequired,
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
+  isAllLocations: T.bool.isRequired,
 };

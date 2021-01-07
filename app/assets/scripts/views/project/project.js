@@ -5,13 +5,8 @@ import qs from 'qs';
 
 import Header from '../../components/header';
 import { buildQS } from '../../utils/url';
-import MapCard from '../../components/dashboard/map-card';
 import DatasetLocations from './map';
-import Header, {
-  LoadingHeader,
-  ErrorHeader,
-  HeaderMessage,
-} from '../../components/header';
+import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 
 import styled from 'styled-components';
 import CardList from '../../components/card-list';
@@ -41,6 +36,7 @@ function Project({ match, history, location }) {
   const [dateRange, setDateRange] = useState(
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
   );
+  const [isAllLocations, toggleAllLocations] = useState(true);
 
   useEffect(() => {
     let query = qs.parse(location.search, {
@@ -102,7 +98,6 @@ function Project({ match, history, location }) {
     return <ErrorHeader />;
   }
 
-  console.log('data', data);
   return (
     <section className="inpage">
       <Header
@@ -123,6 +118,8 @@ function Project({ match, history, location }) {
           coordinates={data.coordinates}
           parameters={[data.parameters[0]]}
           activeParameter={data.parameters[0].measurand}
+          toggleAllLocations={toggleAllLocations}
+          isAllLocations={isAllLocations}
         />
         <header
           className="fold__header inner"
