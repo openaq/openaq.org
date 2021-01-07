@@ -11,7 +11,7 @@ import { shortenLargeNumber } from '../utils/format';
 import {
   geolocateUser,
   fetchNearbyLocations,
-  fetchCompareLocationIfNeeded,
+  fetchRandomCompareLocs,
   fetchCompareLocationMeasurements,
   invalidateCompare,
   openDownloadModal,
@@ -19,7 +19,8 @@ import {
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
 import Testimonials from '../components/testimonials';
-import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
+import { parameterUnit } from '../utils/map-settings';
+import { NO_CITY } from '../utils/constants';
 
 import SponsorList from '../components/sponsor-list';
 import { getCountryName } from '../utils/countries';
@@ -28,61 +29,23 @@ import ChartMeasurement from '../components/chart-measurement';
 import sponsors from '../../content/sponsors.json';
 import testimonials from '../../content/testimonials.json';
 
-// We're currently showing 2 random locations in the homepage. However
-// there's no api endpoint to do this. The only way is to query for a random
-// page. For now we're hardcoding the total number of pages available but in
-// the future this should be dynamic.
-// Total pages come from this query.
-// https://api.openaq.org/v1/locations?parameter=pm25&limit=1
-const totalPages = 5024;
-
-const MAX_TRIES = 5;
-
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      // Keep count of how many tries as a safety kill switch
-      compareTries: [],
-    };
-  }
-
-  fetchValidLocation(idx) {
-    // Keep count of how many tries as a safety kill switch
-    this.setState({
-      compareTries: Object.assign([], this.state.compareTries, {
-        [idx]: (this.state.compareTries[idx] || 0) + 1,
-      }),
+  fetchCompareLocations() {
+    this.props._fetchRandomCompareLocs().then(result => {
+      if (!result.error) {
+        result.data.forEach((loc, index) => {
+          const toDate = moment.utc(loc.lastUpdated);
+          const fromDate = toDate.clone().subtract(8, 'days');
+          this.props._fetchCompareLocationMeasurements(
+            index,
+            loc.id,
+            fromDate.toISOString(),
+            toDate.toISOString(),
+            'pm25'
+          );
+        });
+      }
     });
-    if (this.state.compareTries[idx] > MAX_TRIES) return;
-
-    const now = Date.now();
-    const weekAgo = now - 8 * 86400 * 1000;
-
-    this.props
-      ._fetchCompareLocationIfNeeded(idx, null, {
-        page: Math.floor(Math.random() * totalPages) + 1,
-        parameter: 'pm25',
-        limit: 1,
-      })
-      .then(() => {
-        const loc = this.props.compareLoc[idx].data;
-        const lastUpdate = new Date(loc.lastUpdated).getTime();
-        if (lastUpdate > now || lastUpdate < weekAgo) {
-          // Try again.
-          return this.fetchValidLocation(idx);
-        }
-        // Fetch measurements after we have the location name.
-        const toDate = moment.utc(loc.lastUpdated);
-        const fromDate = toDate.clone().subtract(8, 'days');
-        return this.props._fetchCompareLocationMeasurements(
-          idx,
-          loc.location,
-          fromDate.toISOString(),
-          toDate.toISOString()
-        );
-      });
   }
 
   //
@@ -90,16 +53,7 @@ class Home extends React.Component {
   //
   componentDidMount() {
     this.props._invalidateCompare();
-
-    this.fetchValidLocation(0);
-    this.fetchValidLocation(1);
-  }
-
-  componentWillUnmount() {
-    // Void any tries to stop requests
-    this.setState({
-      compareTries: this.state.compareTries.map(() => Infinity),
-    });
+    this.fetchCompareLocations();
   }
 
   getTestimonial() {
@@ -269,16 +223,8 @@ class Home extends React.Component {
             </div>
             <div className="home-rand-meas">
               <h2>Here&apos;s how two random locations compare</h2>
-              <CompareLocationCard
-                location={l1}
-                measurement={m1}
-                triesExhausted={this.state.compareTries[0] > MAX_TRIES}
-              />
-              <CompareLocationCard
-                location={l2}
-                measurement={m2}
-                triesExhausted={this.state.compareTries[1] > MAX_TRIES}
-              />
+              <CompareLocationCard location={l1} measurement={m1} />
+              <CompareLocationCard location={l2} measurement={m2} />
             </div>
           </div>
           <figure className="inpage__media inpage__media--cover media">
@@ -431,7 +377,7 @@ class Home extends React.Component {
 Home.propTypes = {
   _geolocateUser: T.func,
   _fetchNearbyLocations: T.func,
-  _fetchCompareLocationIfNeeded: T.func,
+  _fetchRandomCompareLocs: T.func,
   _fetchCompareLocationMeasurements: T.func,
   _invalidateCompare: T.func,
   _openDownloadModal: T.func,
@@ -496,8 +442,8 @@ function dispatcher(dispatch) {
 
     _invalidateCompare: (...args) => dispatch(invalidateCompare(...args)),
 
-    _fetchCompareLocationIfNeeded: (...args) =>
-      dispatch(fetchCompareLocationIfNeeded(...args)),
+    _fetchRandomCompareLocs: (...args) =>
+      dispatch(fetchRandomCompareLocs(...args)),
     _fetchCompareLocationMeasurements: (...args) =>
       dispatch(fetchCompareLocationMeasurements(...args)),
 
@@ -514,39 +460,25 @@ class CompareLocationCard extends React.Component {
     // All the times are local and shouldn't be converted to UTC.
     // The values should be compared at the same time local to ensure an
     // accurate comparison.
-    const userNow = moment().format('YYYY/MM/DD HH:mm:ss');
-    const weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
-
-    const filterFn = o => {
-      if (o.parameter !== 'pm25') {
-        return false;
-      }
-      if (o.value < 0) return false;
-      const localDate = moment
-        .parseZone(o.date.local)
-        .format('YYYY/MM/DD HH:mm:ss');
-      return localDate >= weekAgo && localDate <= userNow;
-    };
+    const dateFormat = 'YYYY/MM/DD HH:mm:ss';
+    const userNow = moment().format(dateFormat);
+    const weekAgo = moment().subtract(7, 'days').format(dateFormat);
 
     // Prepare data.
-    const chartData = _.cloneDeep(measurement.data.results)
-      .filter(filterFn)
+    const chartData = measurement.data.results
+      .filter(res => {
+        if (res.average < 0) return false;
+        const measurementDate = moment(res.hour).format(dateFormat);
+        return measurementDate >= weekAgo && measurementDate <= userNow;
+      })
       .map(o => {
-        o.value = convertParamIfNeeded(o);
-        // Disregard timezone on local date.
-        const dt = o.date.local.match(
-          /^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/
-        )[0];
-        // `measurement` local date converted directly to user local.
-        // We have to use moment instead of new Date() because the behavior
-        // is not consistent across browsers.
-        // Firefox interprets the string as being in the current timezone
-        // while chrome interprets it as being utc. So:
-        // Date: 2016-08-25T14:00:00
-        // Firefox result: Thu Aug 25 2016 14:00:00 GMT-0400 (EDT)
-        // Chrome result: Thu Aug 25 2016 10:00:00 GMT-0400 (EDT)
-        o.date.localNoTZ = moment(dt).toDate();
-        return o;
+        // Map data according to chart needs.
+        return {
+          value: o.average,
+          date: {
+            localNoTZ: new Date(o.hour),
+          },
+        };
       });
 
     const yMax = d3.max(chartData, o => o.value) || 0;
@@ -569,9 +501,9 @@ class CompareLocationCard extends React.Component {
   }
 
   render() {
-    const { location, measurement, triesExhausted } = this.props;
+    const { location, measurement } = this.props;
 
-    if (triesExhausted) {
+    if (location.error || measurement.error) {
       return (
         <article className="card card--measurement">
           <div className="card__contents">
@@ -595,24 +527,21 @@ class CompareLocationCard extends React.Component {
       );
     }
 
-    const { city, country, location: loc } = location.data;
+    const { name, city, country, id } = location.data;
 
-    // Get all pm25 measurements.
-    const pm25measure = measurement.data.results.filter(
-      m => m.parameter === 'pm25'
-    );
-    const recentMeasure = pm25measure[0];
+    // Get recent pm25 measurement.
+    const recentMeasure = measurement.data.results[0];
 
     return (
       <article className="card card--measurement">
         <Link
-          to={`/location/${loc}`}
+          to={`/location/${id}`}
           className="card__contents"
           title="View more"
         >
           <header className="card__header">
             <div className="card__headline">
-              <h1 className="card__title">{loc}</h1>
+              <h1 className="card__title">{name}</h1>
             </div>
           </header>
           <div className="card__body">
@@ -621,13 +550,13 @@ class CompareLocationCard extends React.Component {
               {recentMeasure && <dd>PM2.5</dd>}
               {recentMeasure && (
                 <dd>
-                  <strong>{Math.round(recentMeasure.value)}</strong>{' '}
+                  <strong>{Math.round(recentMeasure.average)}</strong>{' '}
                   <sub>{recentMeasure.unit}</sub>
                 </dd>
               )}
               <dt>Location</dt>
               <dd>
-                {city}
+                {city || NO_CITY}
                 <span>, </span>
                 <small>{getCountryName(country) || 'N/A'}</small>
               </dd>
@@ -645,5 +574,4 @@ class CompareLocationCard extends React.Component {
 CompareLocationCard.propTypes = {
   location: T.object,
   measurement: T.object,
-  triesExhausted: T.bool,
 };
