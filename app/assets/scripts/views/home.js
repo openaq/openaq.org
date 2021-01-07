@@ -178,7 +178,7 @@ class Home extends React.Component {
                     Country view
                   </Link>
                 </li>
-                {/* <li>
+                <li>
                   <Link
                     to="/compare"
                     title="View page"
@@ -186,7 +186,7 @@ class Home extends React.Component {
                   >
                     Compare data
                   </Link>
-                </li> */}
+                </li>
               </ol>
               <p className="fold__main-action">
                 <Link
