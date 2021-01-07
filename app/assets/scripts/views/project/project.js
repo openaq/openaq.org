@@ -2,21 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 import qs from 'qs';
-
-import Header from '../../components/header';
-import { buildQS } from '../../utils/url';
-import DatasetLocations from './map';
-import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
-
 import styled from 'styled-components';
-import CardList from '../../components/card-list';
+
+import { buildQS } from '../../utils/url';
 import config from '../../config';
+
+import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
+import CardList from '../../components/card-list';
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import DatasetLocations from './map';
 import DateSelector from '../../components/date-selector';
 
 const defaultState = {
@@ -114,10 +113,10 @@ function Project({ match, history, location }) {
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
         <DatasetLocations
-          locationId={data.id}
-          coordinates={data.coordinates}
+          country={data.countries[0]}
+          locationIds={data.locationIds}
           parameters={[data.parameters[0]]}
-          activeParameter={data.parameters[0].measurand}
+          activeParameter={data.parameters[0].parameter}
           toggleAllLocations={toggleAllLocations}
           isAllLocations={isAllLocations}
         />

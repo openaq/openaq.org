@@ -54,31 +54,6 @@ export default function MeasurementsLayer({
       },
     });
 
-    map.on('click', `${activeParameter}-layer`, function (e) {
-      const coordinates = e.features[0].geometry.coordinates.slice();
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      let popoverElement = document.createElement('div');
-      ReactDOM.render(
-        <Popover
-          activeParameter={activeParameter}
-          locationId={e.features[0].properties.locationId}
-          currentPage={parseInt(match.params.id, 10)}
-        />,
-        popoverElement
-      );
-      new mapbox.Popup()
-        .setLngLat(coordinates)
-        .setDOMContent(popoverElement)
-        .addTo(map);
-    });
-
     // Change the cursor to a pointer when the mouse is over the layer.
     map.on('mouseenter', `${activeParameter}-layer`, function () {
       map.getCanvas().style.cursor = 'pointer';
@@ -95,35 +70,35 @@ export default function MeasurementsLayer({
       if (map.getLayer(`${activeParameter}-outline`))
         map.removeLayer(`${activeParameter}-outline`);
     };
-  }, [sourceId, isAllLocations]);
+  }, [sourceId]);
 
-  // useEffect(() => {
-  //   map.on('click', `${activeParameter}-layer`, function (e) {
-  //     const coordinates = e.features[0].geometry.coordinates.slice();
+  useEffect(() => {
+    map.on('click', `${activeParameter}-layer`, function (e) {
+      const coordinates = e.features[0].geometry.coordinates.slice();
 
-  //     // Ensure that if the map is zoomed out such that multiple
-  //     // copies of the feature are visible, the popup appears
-  //     // over the copy being pointed to.
-  //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-  //       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-  //     }
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
 
-  //     let popoverElement = document.createElement('div');
-  //     ReactDOM.render(
-  //       <Popover
-  //         activeParameter={activeParameter}
-  //         isAllLocations={isAllLocations}
-  //         locationId={e.features[0].properties.locationId}
-  //         currentPage={parseInt(match.params.id, 10)}
-  //       />,
-  //       popoverElement
-  //     );
-  //     new mapbox.Popup()
-  //       .setLngLat(coordinates)
-  //       .setDOMContent(popoverElement)
-  //       .addTo(map);
-  //   });
-  // }, [isAllLocations]);
+      let popoverElement = document.createElement('div');
+      ReactDOM.render(
+        <Popover
+          activeParameter={activeParameter}
+          isAllLocations={isAllLocations}
+          locationId={e.features[0].properties.locationId}
+          currentPage={parseInt(match.params.id, 10)}
+        />,
+        popoverElement
+      );
+      new mapbox.Popup()
+        .setLngLat(coordinates)
+        .setDOMContent(popoverElement)
+        .addTo(map);
+    });
+  }, [isAllLocations]);
 
   return null;
 }

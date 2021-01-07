@@ -19,7 +19,7 @@ export default function DatasetLocations({
   isAllLocations,
 }) {
   return (
-    <section className="fold" id="location-fold-dataset">
+    <section id="location-fold-dataset">
       <div className="fold__body">
         <MapComponent bbox={getCountryBbox(country)}>
           <LocationsSource activeParameter={activeParameter}>
@@ -34,10 +34,6 @@ export default function DatasetLocations({
                 key={location}
               />
             ))}
-            {/* <LocationLayer
-              activeParameter={activeParameter}
-              locationId={locationIds[0]}
-            /> */}
           </LocationsSource>
 
           <OptionCard

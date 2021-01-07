@@ -3,7 +3,6 @@
    ========================================================================== */
 
 .page--locations-single {
-
   .card__highlight-text {
     color: $primary-color;
   }
@@ -70,12 +69,10 @@
   }
 }
 
-
 /* Fold: Stats
    ========================================================================== */
 
 #location-fold-stats {
-
 }
 
 .measurements-list {
@@ -102,7 +99,6 @@
   }
 }
 
-
 /* Fold: Source
    ========================================================================== */
 
@@ -113,7 +109,6 @@
   grid-row: 3;
   grid-column: 1 / -1;
 }
-
 
 /* Fold: Source
    ========================================================================== */
@@ -134,7 +129,7 @@
   @include media(medium-up) {
     .col-main {
       padding-right: 1rem;
-      padding-bottom: .5rem;
+      padding-bottom: 0.5rem;
       @include col(4/12);
     }
 
@@ -147,12 +142,24 @@
     padding: 0;
     list-style: none;
 
-    li{
-      margin-bottom: .3rem;
+    li {
+      margin-bottom: 0.3rem;
     }
   }
 }
 
+/* Fold: Dataset
+   ========================================================================== */
+
+#location-fold-dataset {
+  .fold__body {
+    position: relative;
+    z-index: 1;
+    height: 30rem;
+    margin-left: calc(50% - 40vw);
+    margin-right: calc(50% - 40vw);
+  }
+}
 
 /* Fold: Nearby
    ========================================================================== */
@@ -183,9 +190,7 @@
   border: 0px;
   display: flex;
   padding-right: 1rem;
- }
-
-
+}
 
 .drop__content-day {
   overflow: visible;
