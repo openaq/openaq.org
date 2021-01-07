@@ -76,9 +76,10 @@ export default function Results({
               lastUpdated={project.lastUpdated}
               name={project.subtitle}
               sourceType={project.sourceType}
+              sources={project.sources}
               firstUpdated={project.firstUpdated}
               totalLocations={project.locations}
-              totalMeasurements={project.count}
+              totalMeasurements={project.measurements}
               parametersList={project.parameters}
             />
           );

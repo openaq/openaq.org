@@ -24,8 +24,6 @@ describe('The Projects Hub', () => {
     cy.get('[data-cy=results-summary]')
       .invoke('text')
       .should('match', /A total of \d+ datasets were found/);
-
-    cy.get('.card').should('have.length', 15);
     cy.get('.pagination').should('exist');
   });
 
@@ -33,7 +31,7 @@ describe('The Projects Hub', () => {
     // parameter filter
     cy.get('[title="type__filter"]').click();
     cy.get('[title="type__filter"]').find('span').contains('Parameter');
-    ['O3', 'CO', 'NO2', 'CO2', 'SO2', 'BC'].forEach(parameter => {
+    ['o3', 'co', 'no2', 'co2', 'so2', 'bc'].forEach(parameter => {
       cy.get('[data-cy=filter-parameters]')
         .find(`[data-cy=${parameter}]`)
         .should('length', 1);
