@@ -212,7 +212,6 @@ export default function TemporalCoverageCard({
     return <ErrorMessage />;
   }
 
-  console.log(state)
   return (
     <Card
       gridColumn={'1  / -1'}
