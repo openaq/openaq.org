@@ -32,7 +32,7 @@ describe('The Projects Hub', () => {
     // parameter filter
     cy.get('[title="type__filter"]').click();
     cy.get('[title="type__filter"]').find('span').contains('Parameter');
-    ['1','2','3','4','5','6'].forEach(parameter => {
+    ['1', '2', '3', '4', '5', '6'].forEach(parameter => {
       cy.get('[data-cy=filter-parameters]')
         .find(`[data-cy=${parameter}]`)
         .should('length', 1);
