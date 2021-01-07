@@ -600,7 +600,7 @@ function AvailabilityMessage(props) {
       if (!o.data.parameters.find(p => p.parameterId === activeParam.id)) {
         return (
           <p key={o.data.id}>
-            {o.data.name} does not report {activeParam.name}.
+            {o.data.name} does not report {activeParam.displayName}.
           </p>
         );
       }
@@ -643,9 +643,9 @@ function CompareBrushChart(props) {
               // parameter list and has to be the same as the active one.
               const locParamList = compareLocations[locIdx].data.parameters;
               const resParamInList = locParamList.find(
-                p => p.parameter === res.parameter
+                p => p.parameterId === res.parameterId
               );
-              if (!resParamInList || res.parameter !== activeParam.name) {
+              if (!resParamInList || res.parameterId !== activeParam.id) {
                 return false;
               }
 
