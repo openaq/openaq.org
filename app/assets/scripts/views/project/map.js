@@ -26,7 +26,7 @@ export default function DatasetLocations({
     <section id="location-fold-dataset">
       <div className="fold__body">
         <MapComponent bbox={bbox}>
-          <LocationsSource activeParameter={activeParameter.parameter}>
+          <LocationsSource activeParameter={activeParameter.parameterId}>
             <MeasurementsLayer
               activeParameter={activeParameter.parameter}
               isAllLocations={isAllLocations}

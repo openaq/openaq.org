@@ -68,31 +68,31 @@ export const locationShadowCircleRadius = {
 // it’d make everywhere else look good, which would not be true
 // That’s why there is some physical value above which everything is bad.
 export const parameterMax = {
-  pm25: 110,
-  pm10: 275,
-  co: 11,
-  no2: 0.65,
-  so2: 0.22,
-  o3: 0.165,
-  bc: 3,
+  2: 110,
+  1: 275,
+  8: 11,
+  7: 0.65,
+  9: 0.22,
+  10: 0.165,
+  11: 3,
 };
 
 // The units the params must be converted to to be displayed.
 export const parameterUnit = {
-  pm25: 'µg/m³',
-  pm10: 'µg/m³',
-  co: 'ppm',
-  no2: 'ppm',
-  so2: 'ppm',
-  o3: 'ppm',
-  bc: 'µg/m³',
+  2: 'µg/m³',
+  1: 'µg/m³',
+  8: 'ppm',
+  7: 'ppm',
+  9: 'ppm',
+  10: 'ppm',
+  11: 'µg/m³',
 };
 
 export const parameterConversion = {
-  co: 0.000904379,
-  no2: 0.000550492,
-  so2: 0.000395666,
-  o3: 0.000527554,
+  8: 0.000904379,
+  7: 0.000550492,
+  9: 0.000395666,
+  10: 0.000527554,
 };
 
 export function convertParamIfNeeded(parameter) {

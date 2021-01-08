@@ -16,6 +16,7 @@ import Popover from './popover';
 export default function MeasurementsLayer({
   activeParameter,
   isAllLocations,
+  country,
   map,
   sourceId,
   selectedLocations,
@@ -103,12 +104,25 @@ export default function MeasurementsLayer({
     });
   }, [isAllLocations, selectedLocations]);
 
+  useEffect(() => {
+    if (country && map.getLayer(`${activeParameter}-layer`)) {
+      map.setFilter(`${activeParameter}-outline`, ['==', 'country', country]);
+      map.setFilter(`${activeParameter}-layer`, ['==', 'country', country]);
+
+      return () => {
+        map.setFilter(`${activeParameter}-outline`, null);
+        map.setFilter(`${activeParameter}-layer`, null);
+      };
+    }
+  }, [country]);
+
   return null;
 }
 
 MeasurementsLayer.propTypes = {
   activeParameter: PropTypes.string.isRequired,
   isAllLocations: PropTypes.bool.isRequired,
+  country: PropTypes.string,
   sourceId: PropTypes.string,
   map: PropTypes.object,
 };

@@ -1,28 +1,113 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import _ from 'lodash';
 import qs from 'qs';
 import { useHistory } from 'react-router-dom';
 
+import config from '../config';
+import { HeaderMessage } from '../components/header';
 import MapComponent from '../components/map';
 import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
 import MobileLayer from '../components/map/mobile-layer';
 import Legend from '../components/map/legend';
+import { parameterMax } from '../utils/map-settings';
 
-function WorldMap({ parameters, location }) {
-  let history = useHistory();
+const defaultState = {
+  fetched: false,
+  fetching: false,
+  error: null,
+  parameters: null,
+};
 
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  let parameterData = _.find(parameters, { id: Number(query.parameter) });
-  let activeParam = parameterData || _.find(parameters, { id: 2 });
-
+function WorldMap({ location, history }) {
+  const [{ fetched, fetching, error, parameters }, setState] = useState(
+    defaultState
+  );
   const setActiveParamUrl = parameter => {
     history.push(`${location.pathname}?parameter=${parameter}`);
   };
+
+  useEffect(() => {
+    const fetchData = () => {
+      setState(state => ({ ...state, fetching: true, error: null }));
+
+      fetch(`${config.api}/parameters`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(
+          json => {
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              parameters: json.results.filter(p =>
+                Object.keys(parameterMax).includes(p.id.toString())
+              ),
+            }));
+          },
+          e => {
+            console.log('e', e);
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              error: e,
+            }));
+          }
+        );
+    };
+
+    fetchData();
+
+    return () => {
+      setState(defaultState);
+    };
+  }, []);
+
+  if (!fetched && !fetching) {
+    return null;
+  }
+
+  if (fetching) {
+    return (
+      <HeaderMessage>
+        <h1>Take a deep breath.</h1>
+        <div className="prose prose--responsive">
+          <p>Parameter data is loading...</p>
+        </div>
+      </HeaderMessage>
+    );
+  }
+
+  if (error || !parameters) {
+    return (
+      <HeaderMessage>
+        <h1>Uh oh, something went wrong.</h1>
+        <div className="prose prose--responsive">
+          <p>
+            There was a problem getting the data. If you continue to have
+            problems, please let us know.
+          </p>
+          <p>
+            <a href="mailto:info@openaq.org" title="Send us an email">
+              Send us an Email
+            </a>
+          </p>
+        </div>
+      </HeaderMessage>
+    );
+  }
+
+  const queryParameter = qs.parse(location.search, { ignoreQueryPrefix: true })
+    .parameter;
+  const activeParameter = _.find(parameters, {
+    id: Number(queryParameter) || 7,
+  });
 
   return (
     <section className="inpage">
@@ -35,15 +120,13 @@ function WorldMap({ parameters, location }) {
       </header>
       <div className="inpage__body">
         <MapComponent>
-          <LocationsSource activeParameter={activeParam.name.toLowerCase()}>
+          <LocationsSource activeParameter={activeParameter.name}>
             <MobileLayer />
-            <MeasurementsLayer
-              activeParameter={activeParam.name.toLowerCase()}
-            />
+            <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
           <Legend
             parameters={parameters}
-            activeParameter={activeParam}
+            activeParameter={activeParameter}
             onParamSelection={setActiveParamUrl}
           />
         </MapComponent>
@@ -55,17 +138,6 @@ function WorldMap({ parameters, location }) {
 WorldMap.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
-
-  parameters: PropTypes.array,
 };
 
-// /////////////////////////////////////////////////////////////////////
-// Connect functions
-
-function selector(state) {
-  return {
-    parameters: state.baseData.data.parameters,
-  };
-}
-
-export default connect(selector)(WorldMap);
+export default WorldMap;

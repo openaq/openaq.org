@@ -169,7 +169,10 @@ function Country(props) {
               <div className="fold__body">
                 <MapComponent bbox={getCountryBbox(country.code)}>
                   <LocationsSource activeParameter={'pm25'}>
-                    <MeasurementsLayer activeParameter={'pm25'} />
+                    <MeasurementsLayer
+                      activeParameter={'pm25'}
+                      country={country.code}
+                    />
                   </LocationsSource>
                   <Legend parameters={[pm25]} activeParameter={pm25} />
                 </MapComponent>
