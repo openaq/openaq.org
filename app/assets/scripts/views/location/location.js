@@ -199,8 +199,8 @@ function Location(props) {
           center={[data.coordinates.longitude, data.coordinates.latitude]}
           city={data.city}
           country={data.country}
-          parameters={[data.parameters[0]]}
-          activeParameter={_.find(props.parameters, {
+          parameters={data.parameters}
+          initialActiveParameter={_.find(props.parameters, {
             id: data.parameters[0].parameterId,
           })}
         />

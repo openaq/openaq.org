@@ -34,13 +34,11 @@ export default function DatasetLocations({
               selectedLocations={selectedLocations}
               setSelectedLocations={setSelectedLocations}
             />
-            {locationIds.map(location => (
-              <LocationLayer
-                activeParameter={activeParameter.parameter}
-                locationId={location}
-                key={location}
-              />
-            ))}
+            <LocationLayer
+              activeParameter={activeParameter.parameter}
+              locationId={locationIds[0]}
+              key={location}
+            />
           </LocationsSource>
 
           <OptionCard
