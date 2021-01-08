@@ -161,7 +161,7 @@ function Compare(props) {
 
   // Get all the parameter available in the locations for the dropdown.
   const locParamsIds = compareLoc.reduce((acc, location) => {
-    if (!location.fetched || location.fetching) return acc;
+    if (!location.fetched || location.fetching || location.error) return acc;
     return location.data.parameters.reduce(
       (_acc, p) => _acc.add(p.parameterId),
       acc
@@ -328,6 +328,14 @@ function CompareLocation(props) {
     return (
       <li className="compare__location">
         <LoadingMessage type="minimal" />
+      </li>
+    );
+  }
+
+  if (location.error) {
+    return (
+      <li className="compare__location">
+        <InfoMessage standardMessage />
       </li>
     );
   }

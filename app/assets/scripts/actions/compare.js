@@ -68,6 +68,11 @@ export function fetchCompareLocationIfNeeded(index, location, filters = {}) {
       })
       .then(
         json => {
+          if (!json.results.length) {
+            return dispatch(
+              receiveCompareLocation(index, null, 'Data not available')
+            );
+          }
           return dispatch(receiveCompareLocation(index, json.results[0]));
         },
         e => {
