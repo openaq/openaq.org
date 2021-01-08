@@ -62,6 +62,19 @@ export default function (state = defaultState, action) {
       state.locations[action.index].fetching = false;
       state.locations[action.index].fetched = true;
       break;
+    case actions.RECEIVE_MULTIPLE_COMPARE_LOCATION:
+      state = _.cloneDeep(state);
+      // Store all the locations in the correct index.
+      for (let index = 0; index < action.count; index++) {
+        if (action.error) {
+          state.locations[index].error = action.error;
+        } else {
+          state.locations[index].data = action.data[index];
+        }
+        state.locations[index].fetching = false;
+        state.locations[index].fetched = true;
+      }
+      break;
     case actions.REMOVE_COMPARE_LOCATION:
       state = _.cloneDeep(state);
       state.locations[action.index] = _.cloneDeep(defaultState.locations[0]);

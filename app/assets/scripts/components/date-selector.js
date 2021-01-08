@@ -53,11 +53,11 @@ function DateSelector(props) {
     >
       <Dropdown
         triggerElement="a"
-        triggerTitle="time__type"
+        triggerTitle="Select time window"
         triggerText={
           dateMode ? 'Specific time window' : 'Entire lifetime of project'
         }
-        triggerClassName="drop-trigger"
+        triggerClassName="button--drop-filter"
       >
         <ul role="menu" className="drop__menu drop__menu--select">
           <li>
@@ -91,7 +91,7 @@ function DateSelector(props) {
             triggerElement="a"
             triggerTitle="date__year"
             triggerText={year}
-            triggerClassName="drop-trigger"
+            triggerClassName="button--drop-filter"
           >
             <ul
               role="menu"
@@ -117,7 +117,7 @@ function DateSelector(props) {
             triggerElement="a"
             triggerTitle="date__month"
             triggerText={monthRange[month - 1]}
-            triggerClassName="drop-trigger"
+            triggerClassName="button--drop-filter"
           >
             <ul
               role="menu"
@@ -143,7 +143,7 @@ function DateSelector(props) {
             triggerElement="a"
             triggerTitle="date__day"
             triggerText={day ? day : 'Entire month'}
-            triggerClassName="drop-trigger"
+            triggerClassName="button--drop-filter"
           >
             <ul role="menu" className="drop__menu drop__menu--select ">
               <li>

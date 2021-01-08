@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { PropTypes as T } from 'prop-types';
 import * as d3 from 'd3';
 import _ from 'lodash';
-import createReactClass from 'create-react-class';
 
 const CHART_DEBUG = false;
 
@@ -12,103 +11,70 @@ const CHART_DEBUG = false;
 // D3 Advanced Brush Style - Part 5
 //  http://bl.ocks.org/jisaacks/5678983
 
-/*
- * create-react-class provides a drop-in replacement for the outdated React.createClass,
- * see https://reactjs.org/docs/react-without-es6.html
- * Please modernize this code using functional components and hooks!
- */
-var BrushChart = createReactClass({
-  displayName: 'BrushChart',
+const BrushChart = props => {
+  const { data, yLabel, xRange, yRange, className } = props;
 
-  propTypes: {
-    className: T.string,
-    data: T.array,
+  const containerRef = useRef(null);
+  const chartRef = useRef(null);
 
-    xRange: T.array,
-    yRange: T.array,
-    yLabel: T.string,
-  },
-
-  chart: null,
-
-  onWindowResize: function () {
-    this.chart.checkSize();
-  },
-
-  shouldComponentUpdate: function (nextProps) {
-    // Quickly check if the data is the same.
-    if (this.props.data.length !== nextProps.data.length) {
-      return true;
-    }
-
-    // Use location name and parameter name to compare.
-    let currentHash = this.props.data
-      .map(o => (o[0] ? o[0].location + o[0].parameter : ''))
-      .join('');
-    let nextHash = nextProps.data
-      .map(o => (o[0] ? o[0].location + o[0].parameter : ''))
-      .join('');
-
-    if (currentHash === nextHash) {
-      return false;
-    }
-
-    return true;
-  },
-
-  componentDidMount: function () {
-    // console.log('BrushChart componentDidMount');
+  useEffect(() => {
     // Debounce event.
-    this.onWindowResize = _.debounce(this.onWindowResize, 200);
+    const onWindowResize = _.debounce(() => {
+      chartRef.current.checkSize();
+    }, 200);
 
-    window.addEventListener('resize', this.onWindowResize);
-    this.chart = Chart();
-    this.chart
-      .data(this.props.data)
-      .yLabel(this.props.yLabel)
-      .xRange(this.props.xRange)
-      .yRange(this.props.yRange);
+    window.addEventListener('resize', onWindowResize);
+    chartRef.current = Chart();
 
-    d3.select(this.containerRef).call(this.chart);
-  },
+    d3.select(containerRef.current).call(chartRef.current);
 
-  componentWillUnmount: function () {
-    // console.log('BrushChart componentWillUnmount');
-    window.removeEventListener('resize', this.onWindowResize);
-    this.chart.destroy();
-  },
+    return () => {
+      window.removeEventListener('resize', onWindowResize);
+      chartRef.current.destroy();
+    };
+  }, []);
 
-  componentDidUpdate: function (prevProps /* prevState */) {
-    // console.log('BrushChart componentDidUpdate');
-    this.chart.pauseUpdate();
-    if (prevProps.data !== this.props.data) {
-      this.chart.data(this.props.data);
-    }
-    if (prevProps.yLabel !== this.props.yLabel) {
-      this.chart.yLabel(this.props.yLabel);
-    }
-    if (prevProps.xRange !== this.props.xRange) {
-      this.chart.xRange(this.props.xRange);
-    }
-    if (prevProps.yRange !== this.props.yRange) {
-      this.chart.yRange(this.props.yRange);
-    }
-    this.chart.continueUpdate();
-  },
+  // Pause chart updates.
+  useEffect(() => {
+    chartRef.current.pauseUpdate();
+  });
+  // Update all data that has to be updated.
+  // Data updates.
+  useEffect(() => {
+    chartRef.current.data(data);
+  }, [data]);
+  // yLabel updates.
+  useEffect(() => {
+    chartRef.current.yLabel(yLabel);
+  }, [yLabel]);
+  // xRange updates.
+  useEffect(() => {
+    chartRef.current.xRange(xRange);
+  }, [xRange]);
+  // yRange updates.
+  useEffect(() => {
+    chartRef.current.yRange(yRange);
+  }, [yRange]);
+  // Apply chart updates.
+  useEffect(() => {
+    chartRef.current.continueUpdate();
+  });
 
-  render: function () {
-    return (
-      <div
-        className={this.props.className}
-        ref={x => (this.containerRef = x)}
-      ></div>
-    );
-  },
-});
+  return <div className={className} ref={containerRef}></div>;
+};
+
+BrushChart.propTypes = {
+  className: T.string,
+  data: T.array,
+
+  xRange: T.array,
+  yRange: T.array,
+  yLabel: T.string,
+};
 
 module.exports = BrushChart;
 
-var Chart = function () {
+const Chart = function () {
   // Data related variables for which we have getters and setters.
   var _data = null;
   var _yLabel, _xRange, _yRange;
