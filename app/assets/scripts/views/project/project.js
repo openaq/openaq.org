@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { buildQS } from '../../utils/url';
 import config from '../../config';
+import { getCountryBbox } from '../../utils/countries';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import CardList from '../../components/card-list';
@@ -191,10 +192,9 @@ function Project({ match, history, location }) {
           </div>
         )}
         <DatasetLocations
-          country={data.countries[0]}
+          bbox={data.bbox || getCountryBbox(data.countries[0])}
           locationIds={data.locationIds}
-          parameters={[data.parameters[0]]}
-          activeParameter={data.parameters[0].parameter}
+          parameters={data.parameters}
           toggleAllLocations={toggleAllLocations}
           isAllLocations={isAllLocations}
           selectedLocations={selectedLocations}

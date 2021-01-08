@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import qs from 'qs';
+import { useHistory } from 'react-router-dom';
 
 import MapComponent from '../components/map';
 import LocationsSource from '../components/map/locations-source';
@@ -11,11 +12,18 @@ import MobileLayer from '../components/map/mobile-layer';
 import Legend from '../components/map/legend';
 
 function WorldMap({ parameters, location }) {
+  let history = useHistory();
+
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
   let parameterData = _.find(parameters, { id: Number(query.parameter) });
   let activeParam = parameterData || _.find(parameters, { id: 2 });
+
+  const setActiveParamUrl = parameter => {
+    history.push(`${location.pathname}?parameter=${parameter}`);
+  };
+
   return (
     <section className="inpage">
       <header className="inpage__header">
@@ -33,7 +41,11 @@ function WorldMap({ parameters, location }) {
               activeParameter={activeParam.name.toLowerCase()}
             />
           </LocationsSource>
-          <Legend parameters={parameters} activeParameter={activeParam} />
+          <Legend
+            parameters={parameters}
+            activeParameter={activeParam}
+            onParamSelection={setActiveParamUrl}
+          />
         </MapComponent>
       </div>
     </section>

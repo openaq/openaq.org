@@ -183,7 +183,11 @@ Popover.propTypes = {
   activeParameter: T.string.isRequired,
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
-  isAllLocations: T.bool.isRequired,
-  selectedLocations: T.array.isRequired,
-  setSelectedLocations: T.func.isRequired,
+  isAllLocations: T.bool,
+  selectedLocations: T.array,
+  setSelectedLocations: T.func,
+};
+
+Popover.defaultProps = {
+  isAllLocations: true,
 };

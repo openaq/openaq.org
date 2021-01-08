@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { getCountryBbox } from '../../utils/countries';
 
 import MapComponent from '../../components/map';
 import LocationsSource from '../../components/map/locations-source';
@@ -11,29 +9,34 @@ import Legend from '../../components/map/legend';
 import OptionCard from '../../components/map/option-card';
 
 export default function DatasetLocations({
-  country,
+  bbox,
   locationIds,
   parameters,
-  activeParameter,
   toggleAllLocations,
   isAllLocations,
   selectedLocations,
   setSelectedLocations,
 }) {
+  const [activeParameter, setActiveParameter] = useState(parameters[0]);
+
+  const onParamSelection = paramId => {
+    setActiveParameter(parameters.find(param => param.parameterId === paramId));
+  };
+
   return (
     <section id="location-fold-dataset">
       <div className="fold__body">
-        <MapComponent bbox={getCountryBbox(country)}>
-          <LocationsSource activeParameter={activeParameter}>
+        <MapComponent bbox={bbox}>
+          <LocationsSource activeParameter={activeParameter.parameter}>
             <MeasurementsLayer
-              activeParameter={activeParameter}
+              activeParameter={activeParameter.parameter}
               isAllLocations={isAllLocations}
               selectedLocations={selectedLocations}
               setSelectedLocations={setSelectedLocations}
             />
             {locationIds.map(location => (
               <LocationLayer
-                activeParameter={activeParameter}
+                activeParameter={activeParameter.parameter}
                 locationId={location}
                 key={location}
               />
@@ -44,7 +47,11 @@ export default function DatasetLocations({
             toggleAllLocations={toggleAllLocations}
             isAllLocations={isAllLocations}
           />
-          <Legend parameters={parameters} activeParameter={activeParameter} />
+          <Legend
+            parameters={parameters}
+            activeParameter={activeParameter}
+            onParamSelection={onParamSelection}
+          />
         </MapComponent>
       </div>
     </section>
@@ -56,7 +63,7 @@ DatasetLocations.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
   parameters: PropTypes.array,
   city: PropTypes.string,
-  country: PropTypes.string,
+  bbox: PropTypes.array,
   activeParameter: PropTypes.string,
   isAllLocations: PropTypes.bool.isRequired,
   toggleAllLocations: PropTypes.func.isRequired,
