@@ -4,8 +4,8 @@ import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import _ from 'lodash';
-import * as d3 from 'd3';
+// import _ from 'lodash';
+// import * as d3 from 'd3';
 
 import { shortenLargeNumber } from '../utils/format';
 import {
@@ -19,11 +19,11 @@ import {
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
 import Testimonials from '../components/testimonials';
-import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
+// import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
 
 import SponsorList from '../components/sponsor-list';
-import { getCountryName } from '../utils/countries';
-import ChartMeasurement from '../components/chart-measurement';
+// import { getCountryName } from '../utils/countries';
+// import ChartMeasurement from '../components/chart-measurement';
 
 import sponsors from '../../content/sponsors.json';
 import testimonials from '../../content/testimonials.json';
@@ -248,8 +248,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const [l1, l2] = this.props.compareLoc;
-    const [m1, m2] = this.props.compareMeasurements;
+    // const [l1, l2] = this.props.compareLoc;
+    // const [m1, m2] = this.props.compareMeasurements;
 
     return (
       <section className="inpage">
@@ -269,7 +269,7 @@ class Home extends React.Component {
             </div>
             <div className="home-rand-meas">
               <h2>Here&apos;s how two random locations compare</h2>
-              <CompareLocationCard
+              {/* <CompareLocationCard
                 location={l1}
                 measurement={m1}
                 triesExhausted={this.state.compareTries[0] > MAX_TRIES}
@@ -278,7 +278,7 @@ class Home extends React.Component {
                 location={l2}
                 measurement={m2}
                 triesExhausted={this.state.compareTries[1] > MAX_TRIES}
-              />
+              /> */}
             </div>
           </div>
           <figure className="inpage__media inpage__media--cover media">
@@ -507,143 +507,143 @@ function dispatcher(dispatch) {
 
 module.exports = connect(selector, dispatcher)(Home);
 
-class CompareLocationCard extends React.Component {
-  renderCompareChart() {
-    const { measurement } = this.props;
+// class CompareLocationCard extends React.Component {
+//   renderCompareChart() {
+//     const { measurement } = this.props;
 
-    // All the times are local and shouldn't be converted to UTC.
-    // The values should be compared at the same time local to ensure an
-    // accurate comparison.
-    const userNow = moment().format('YYYY/MM/DD HH:mm:ss');
-    const weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
+//     // All the times are local and shouldn't be converted to UTC.
+//     // The values should be compared at the same time local to ensure an
+//     // accurate comparison.
+//     const userNow = moment().format('YYYY/MM/DD HH:mm:ss');
+//     const weekAgo = moment().subtract(7, 'days').format('YYYY/MM/DD HH:mm:ss');
 
-    const filterFn = o => {
-      if (o.parameter !== 'pm25') {
-        return false;
-      }
-      if (o.value < 0) return false;
-      const localDate = moment
-        .parseZone(o.date.local)
-        .format('YYYY/MM/DD HH:mm:ss');
-      return localDate >= weekAgo && localDate <= userNow;
-    };
+//     const filterFn = o => {
+//       if (o.parameter !== 'pm25') {
+//         return false;
+//       }
+//       if (o.value < 0) return false;
+//       const localDate = moment
+//         .parseZone(o.date.local)
+//         .format('YYYY/MM/DD HH:mm:ss');
+//       return localDate >= weekAgo && localDate <= userNow;
+//     };
 
-    // Prepare data.
-    const chartData = _.cloneDeep(measurement.data.results)
-      .filter(filterFn)
-      .map(o => {
-        o.value = convertParamIfNeeded(o);
-        // Disregard timezone on local date.
-        const dt = o.date.local.match(
-          /^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/
-        )[0];
-        // `measurement` local date converted directly to user local.
-        // We have to use moment instead of new Date() because the behavior
-        // is not consistent across browsers.
-        // Firefox interprets the string as being in the current timezone
-        // while chrome interprets it as being utc. So:
-        // Date: 2016-08-25T14:00:00
-        // Firefox result: Thu Aug 25 2016 14:00:00 GMT-0400 (EDT)
-        // Chrome result: Thu Aug 25 2016 10:00:00 GMT-0400 (EDT)
-        o.date.localNoTZ = moment(dt).toDate();
-        return o;
-      });
+//     // Prepare data.
+//     const chartData = _.cloneDeep(measurement.data.results)
+//       .filter(filterFn)
+//       .map(o => {
+//         o.value = convertParamIfNeeded(o);
+//         // Disregard timezone on local date.
+//         const dt = o.date.local.match(
+//           /^[0-9]{4}(?:-[0-9]{2}){2}T[0-9]{2}(?::[0-9]{2}){2}/
+//         )[0];
+//         // `measurement` local date converted directly to user local.
+//         // We have to use moment instead of new Date() because the behavior
+//         // is not consistent across browsers.
+//         // Firefox interprets the string as being in the current timezone
+//         // while chrome interprets it as being utc. So:
+//         // Date: 2016-08-25T14:00:00
+//         // Firefox result: Thu Aug 25 2016 14:00:00 GMT-0400 (EDT)
+//         // Chrome result: Thu Aug 25 2016 10:00:00 GMT-0400 (EDT)
+//         o.date.localNoTZ = moment(dt).toDate();
+//         return o;
+//       });
 
-    const yMax = d3.max(chartData, o => o.value) || 0;
+//     const yMax = d3.max(chartData, o => o.value) || 0;
 
-    // 1 Week.
-    const xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
+//     // 1 Week.
+//     const xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
 
-    if (!chartData.length) return null;
+//     if (!chartData.length) return null;
 
-    return (
-      <ChartMeasurement
-        className="home-compare-chart"
-        data={[chartData]}
-        xRange={xRange}
-        yRange={[0, yMax]}
-        yLabel={parameterUnit['pm25']}
-        compressed
-      />
-    );
-  }
+//     return (
+//       <ChartMeasurement
+//         className="home-compare-chart"
+//         data={[chartData]}
+//         xRange={xRange}
+//         yRange={[0, yMax]}
+//         yLabel={parameterUnit['pm25']}
+//         compressed
+//       />
+//     );
+//   }
 
-  render() {
-    const { location, measurement, triesExhausted } = this.props;
+//   render() {
+//     const { location, measurement, triesExhausted } = this.props;
 
-    if (triesExhausted) {
-      return (
-        <article className="card card--measurement">
-          <div className="card__contents">
-            <div className="card__body">
-              <p>No locations with measurements were found</p>
-            </div>
-          </div>
-        </article>
-      );
-    }
+//     if (triesExhausted) {
+//       return (
+//         <article className="card card--measurement">
+//           <div className="card__contents">
+//             <div className="card__body">
+//               <p>No locations with measurements were found</p>
+//             </div>
+//           </div>
+//         </article>
+//       );
+//     }
 
-    if (!location.fetched || !measurement.fetched) {
-      return (
-        <article className="card card--measurement">
-          <div className="card__contents">
-            <div className="card__body">
-              <p>Loading data</p>
-            </div>
-          </div>
-        </article>
-      );
-    }
+//     if (!location.fetched || !measurement.fetched) {
+//       return (
+//         <article className="card card--measurement">
+//           <div className="card__contents">
+//             <div className="card__body">
+//               <p>Loading data</p>
+//             </div>
+//           </div>
+//         </article>
+//       );
+//     }
 
-    const { city, country, location: loc } = location.data;
+//     const { city, country, location: loc } = location.data;
 
-    // Get all pm25 measurements.
-    const pm25measure = measurement.data.results.filter(
-      m => m.parameter === 'pm25'
-    );
-    const recentMeasure = pm25measure[0];
+//     // Get all pm25 measurements.
+//     const pm25measure = measurement.data.results.filter(
+//       m => m.parameter === 'pm25'
+//     );
+//     const recentMeasure = pm25measure[0];
 
-    return (
-      <article className="card card--measurement">
-        <Link
-          to={`/location/${loc}`}
-          className="card__contents"
-          title="View more"
-        >
-          <header className="card__header">
-            <div className="card__headline">
-              <h1 className="card__title">{loc}</h1>
-            </div>
-          </header>
-          <div className="card__body">
-            <dl className="card--measurement__details">
-              <dt>Measurements</dt>
-              {recentMeasure && <dd>PM2.5</dd>}
-              {recentMeasure && (
-                <dd>
-                  <strong>{Math.round(recentMeasure.value)}</strong>{' '}
-                  <sub>{recentMeasure.unit}</sub>
-                </dd>
-              )}
-              <dt>Location</dt>
-              <dd>
-                {city}
-                <span>, </span>
-                <small>{getCountryName(country) || 'N/A'}</small>
-              </dd>
-            </dl>
-            <figure className="card--measurement__chart">
-              {this.renderCompareChart()}
-            </figure>
-          </div>
-        </Link>
-      </article>
-    );
-  }
-}
+//     return (
+//       <article className="card card--measurement">
+//         <Link
+//           to={`/location/${loc}`}
+//           className="card__contents"
+//           title="View more"
+//         >
+//           <header className="card__header">
+//             <div className="card__headline">
+//               <h1 className="card__title">{loc}</h1>
+//             </div>
+//           </header>
+//           <div className="card__body">
+//             <dl className="card--measurement__details">
+//               <dt>Measurements</dt>
+//               {recentMeasure && <dd>PM2.5</dd>}
+//               {recentMeasure && (
+//                 <dd>
+//                   <strong>{Math.round(recentMeasure.value)}</strong>{' '}
+//                   <sub>{recentMeasure.unit}</sub>
+//                 </dd>
+//               )}
+//               <dt>Location</dt>
+//               <dd>
+//                 {city}
+//                 <span>, </span>
+//                 <small>{getCountryName(country) || 'N/A'}</small>
+//               </dd>
+//             </dl>
+//             <figure className="card--measurement__chart">
+//               {this.renderCompareChart()}
+//             </figure>
+//           </div>
+//         </Link>
+//       </article>
+//     );
+//   }
+// }
 
-CompareLocationCard.propTypes = {
-  location: T.object,
-  measurement: T.object,
-  triesExhausted: T.bool,
-};
+// CompareLocationCard.propTypes = {
+//   location: T.object,
+//   measurement: T.object,
+//   triesExhausted: T.bool,
+// };
