@@ -89,7 +89,7 @@
     @extend .heading--small;
     position: relative;
     line-height: 1.75rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 
     small {
       display: block;
@@ -116,6 +116,10 @@
       margin-bottom: 0.5rem;
     }
   }
+}
+
+.compare-parameters {
+  font-size: 0.875rem;
 }
 
 .compare-marker {

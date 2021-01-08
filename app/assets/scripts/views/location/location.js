@@ -19,9 +19,10 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
-import { buildQS } from '../../utils/url';
-
 import DateSelector from '../../components/date-selector';
+
+import { buildQS } from '../../utils/url';
+import { NO_CITY } from '../../utils/constants';
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
@@ -139,11 +140,11 @@ function Location(props) {
       <Header
         tagline="Location"
         title={data.name}
-        subtitle={`in ${data.city}, ${data.country}`}
+        subtitle={`in ${data.city || NO_CITY}, ${data.country}`}
         action={{
           api: `${config.apiDocs}`,
           download: onDownloadClick,
-          // compare: `/compare/${encodeURIComponent(data.id)}`,
+          compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
         sourceType={data.sourceType}
         isMobile={data.isMobile}

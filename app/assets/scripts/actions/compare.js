@@ -1,8 +1,10 @@
 import fetch from 'isomorphic-fetch';
 import { stringify as buildAPIQS } from 'qs';
 import _ from 'lodash';
+
 import * as actions from './action-types';
 import config from '../config';
+import { PM25_PARAMETER_ID } from '../utils/constants';
 
 // ////////////////////////////////////////////////////////////////
 //                       COMPARE LOCATION                        //
@@ -31,13 +33,23 @@ function receiveCompareLocation(index, json, error = null) {
   };
 }
 
+function receiveMultipleCompareLocation(count, data, error = null) {
+  return {
+    type: actions.RECEIVE_MULTIPLE_COMPARE_LOCATION,
+    count,
+    data,
+    error,
+    receivedAt: Date.now(),
+  };
+}
+
 export function fetchCompareLocationIfNeeded(index, location, filters = {}) {
   return function (dispatch, getState) {
     dispatch(requestCompareLocation(index));
     if (location) {
       // Search for the location in the state.
-      let state = getState();
-      let l = _.find(state.locations.data.results, { location: location });
+      const state = getState();
+      const l = _.find(state.locations.data.results, { location: location });
       if (l) {
         return dispatch(receiveCompareLocation(index, l));
       }
@@ -45,8 +57,7 @@ export function fetchCompareLocationIfNeeded(index, location, filters = {}) {
       filters.location = location;
     }
 
-    let f = buildAPIQS(filters);
-    // console.log('fetchCompareLocationIfNeeded url', `${config.api}/locations?${f}`);
+    const f = buildAPIQS(filters);
 
     return fetch(`${config.api}/locations?${f}`)
       .then(response => {
@@ -57,15 +68,53 @@ export function fetchCompareLocationIfNeeded(index, location, filters = {}) {
       })
       .then(
         json => {
-          // setTimeout(() => {
-          //   dispatch(receiveCompareLocation(index, json.results[0]));
-          // }, 5000);
+          if (!json.results.length) {
+            return dispatch(
+              receiveCompareLocation(index, null, 'Data not available')
+            );
+          }
           return dispatch(receiveCompareLocation(index, json.results[0]));
         },
         e => {
           console.log('e', e);
           return dispatch(
             receiveCompareLocation(index, null, 'Data not available')
+          );
+        }
+      );
+  };
+}
+
+// Fetches random location and dispatches them to the compare slice of state.
+export function fetchRandomCompareLocs(limit = 2) {
+  return dispatch => {
+    // Dispatch all requests.
+    for (let index = 0; index < limit; index++) {
+      dispatch(requestCompareLocation(index));
+    }
+
+    const f = buildAPIQS({
+      order_by: 'random',
+      // pm25 has id 2.
+      parameter: PM25_PARAMETER_ID,
+      limit,
+    });
+
+    return fetch(`${config.api}/locations?${f}`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => {
+          return dispatch(receiveMultipleCompareLocation(limit, json.results));
+        },
+        e => {
+          console.log('e', e);
+          return dispatch(
+            receiveMultipleCompareLocation(limit, null, 'Data not available')
           );
         }
       );
@@ -133,25 +182,28 @@ export function fetchCompareLocationMeasurements(
   index,
   location,
   startDate,
-  endDate
+  endDate,
+  parameter
 ) {
   return function (dispatch) {
     dispatch(requestCompareLocationMeasurements(index));
 
     let data = null;
-    let limit = 10000;
-
+    let limit = 1000;
     const fetcher = function (page) {
       let qs = buildAPIQS({
+        spatial: 'location',
+        temporal: 'hour',
         location,
         page,
         limit,
+        parameter,
         date_from: startDate,
         date_to: endDate,
       });
       // console.log('fetchCompareLocationMeasurements', `${config.api}/measurements?${qs}`);
 
-      fetch(`${config.api}/measurements?${qs}`)
+      fetch(`${config.api}/averages?${qs}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
