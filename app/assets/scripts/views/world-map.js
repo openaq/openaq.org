@@ -10,6 +10,7 @@ import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
 import MobileLayer from '../components/map/mobile-layer';
 import Legend from '../components/map/legend';
+import { parameterMax } from '../utils/map-settings';
 
 const defaultState = {
   fetched: false,
@@ -22,14 +23,6 @@ function WorldMap({ location }) {
   const [{ fetched, fetching, error, parameters }, setState] = useState(
     defaultState
   );
-
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-
-  let activeParameter =
-    _.find(parameters, { id: Number(query.parameter) }) ||
-    _.find(parameters, { id: 7 });
 
   useEffect(() => {
     const fetchData = () => {
@@ -48,8 +41,10 @@ function WorldMap({ location }) {
               ...state,
               fetched: true,
               fetching: false,
-              parameters: json.results.filter(p =>
-                p.displayName.includes('conc')
+              parameters: json.results.filter(
+                p =>
+                  p.displayName.includes('conc') &&
+                  Object.keys(parameterMax).includes(p.name)
               ),
             }));
           },
@@ -105,6 +100,12 @@ function WorldMap({ location }) {
       </HeaderMessage>
     );
   }
+
+  const queryParameter = qs.parse(location.search, { ignoreQueryPrefix: true })
+    .parameter;
+  const activeParameter = _.find(parameters, {
+    id: Number(queryParameter) || 7,
+  });
 
   return (
     <section className="inpage">

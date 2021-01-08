@@ -79,5 +79,9 @@ export default function Legend({ parameters, activeParameter }) {
 
 Legend.propTypes = {
   parameters: PropTypes.array.isRequired,
-  activeParameter: PropTypes.object,
+  activeParameter: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
 };
