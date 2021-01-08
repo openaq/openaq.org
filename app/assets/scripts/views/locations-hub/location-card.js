@@ -53,7 +53,7 @@ export default function LocationCard({
             {
               label: 'Parameters',
               value: parametersList
-                .map(p => p.parameter.toUpperCase())
+                .map(p => p.displayName || p.parameter)
                 .join(', '),
             },
             {

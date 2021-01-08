@@ -13,7 +13,12 @@ import {
 import { generateColorStops } from '../../utils/colors';
 import Popover from './popover';
 
-export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
+export default function MeasurementsLayer({
+  activeParameter,
+  country,
+  map,
+  sourceId,
+}) {
   let match = useRouteMatch();
 
   useEffect(() => {
@@ -92,11 +97,24 @@ export default function MeasurementsLayer({ activeParameter, map, sourceId }) {
     };
   }, [sourceId]);
 
+  useEffect(() => {
+    if (country && map.getLayer(`${activeParameter}-layer`)) {
+      map.setFilter(`${activeParameter}-outline`, ['==', 'country', country]);
+      map.setFilter(`${activeParameter}-layer`, ['==', 'country', country]);
+
+      return () => {
+        map.setFilter(`${activeParameter}-outline`, null);
+        map.setFilter(`${activeParameter}-layer`, null);
+      };
+    }
+  }, [country]);
+
   return null;
 }
 
 MeasurementsLayer.propTypes = {
   activeParameter: PropTypes.string.isRequired,
+  country: PropTypes.string,
   sourceId: PropTypes.string,
   map: PropTypes.object,
 };

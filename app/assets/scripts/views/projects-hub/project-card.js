@@ -47,9 +47,7 @@ export default function ProjectCard({
             },
             {
               label: 'Parameters',
-              value: parametersList
-                .map(p => p.parameter.toUpperCase())
-                .join(', '),
+              value: parametersList.map(p => p.displayName).join(', '),
             },
             { label: 'Locations', value: formatThousands(totalLocations) },
             {

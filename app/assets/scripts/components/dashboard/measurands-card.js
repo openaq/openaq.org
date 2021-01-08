@@ -3,35 +3,31 @@ import { PropTypes as T } from 'prop-types';
 
 import Card from '../card';
 import Table from '../table';
-import { shortenLargeNumber, round } from '../../utils/format';
+import { shortenLargeNumber } from '../../utils/format';
 
-const initData = {
-  parameter: {
-    values: [],
-    formatHeader: v => v.toUpperCase(),
-    style: {
-      color: 'black',
-      fontWeight: 700,
-      textAlign: 'center',
+const tableHeaders = [
+  {
+    id: 'parameter',
+    value: 'Parameter',
+    sortable: true,
+  },
+  {
+    id: 'avg',
+    value: 'Average',
+    sortable: true,
+    formatCell: (value, row) => {
+      return `${shortenLargeNumber(value)} (${row.unit})`;
     },
   },
-  avg: {
-    values: [],
-    formatHeader: v => v.toUpperCase(),
-    formatCell: shortenLargeNumber,
-    style: {
-      textAlign: 'center',
+  {
+    id: 'count',
+    value: 'Count',
+    sortable: true,
+    formatCell: value => {
+      return shortenLargeNumber(value);
     },
   },
-  count: {
-    values: [],
-    formatHeader: v => v.toUpperCase(),
-    formatCell: shortenLargeNumber,
-    style: {
-      textAlign: 'center',
-    },
-  },
-};
+];
 
 /*  TODO This function currently just extracts the first data available for each pollutant
  *  openAQ api returns all available dates averages, or those within a specified date range.
@@ -39,49 +35,21 @@ const initData = {
  *  User specified day? date range? etc
  */
 
-const prepareData = data => {
-  const combinedData = data.reduce((accum, datum) => {
-    const { parameter, count, average } = datum;
-    if (!accum[parameter]) {
-      accum[parameter] = {
-        count: count,
-        value: average,
-      };
-    }
-    return accum;
-  }, {});
-  const preparedData = Object.entries(combinedData).reduce(
-    (acc, [parameter, stats]) => {
-      acc = {
-        parameter: {
-          ...acc.parameter,
-          values: [...acc.parameter.values, parameter],
-        },
-        avg: {
-          ...acc.avg,
-          values: [...acc.avg.values, round(stats.value, 2)],
-        },
-        count: {
-          ...acc.count,
-          values: [...acc.count.values, stats.count],
-        },
-      };
-      return acc;
-    },
-    initData
-  );
-  return preparedData;
-};
-
 export default function MeasureandsCard({ parameters, titleInfo }) {
+  const rows = parameters.map(p => ({
+    parameter: p.displayName,
+    avg: p.average,
+    count: p.count,
+    unit: p.unit,
+  }));
+
   return (
     <Card
       gridColumn={'1 / -1'}
       title="Parameters"
       renderBody={() => {
-        return <Table data={prepareData(parameters)} />;
+        return <Table headers={tableHeaders} rows={rows} />;
       }}
-      noBodyStyle
       titleInfo={titleInfo}
     />
   );

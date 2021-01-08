@@ -49,7 +49,7 @@ describe('The Locations Hub', () => {
     // parameter filter
     cy.get('[title="type__filter"]').click();
     cy.get('[title="type__filter"]').find('span').contains('Parameter');
-    ['o3', 'co', 'no2', 'co2', 'so2', 'bc'].forEach(parameter => {
+    ['1', '2', '3', '4', '5', '6'].forEach(parameter => {
       cy.get('[data-cy=filter-parameters]')
         .find(`[data-cy=${parameter}]`)
         .should('length', 1);

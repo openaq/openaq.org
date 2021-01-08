@@ -100,7 +100,9 @@ export default function TemporalCoverageCard({
         ...state,
         [temporal]: { ...state[temporal], fetching: true, error: null },
       }));
-      const [year, month, day] = dateRange ? dateRange.split('/') : [];
+      const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
+        Number
+      );
 
       let query = {
         temporal,
@@ -111,7 +113,7 @@ export default function TemporalCoverageCard({
           ? {
               date_from: new Date(year, month - 1, day || 1),
               date_to: day
-                ? new Date(year, month - 1, day)
+                ? new Date(year, month - 1, day + 1)
                 : new Date(year, month, 0),
             }
           : {}),
@@ -220,7 +222,7 @@ export default function TemporalCoverageCard({
           <TabbedSelector
             tabs={parameters.map(x => ({
               id: x.parameter || x,
-              name: x.parameter || x,
+              name: x.displayName || x,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
@@ -300,7 +302,7 @@ function Chart({ title, temporal, data, fetching }) {
       ) : data ? (
         <BarChart
           data={data.map(m => m.measurement_count)}
-          yAxisLabel="count"
+          yAxisLabel="Count"
           xAxisLabels={data.map(m => m[temporal])}
         />
       ) : (

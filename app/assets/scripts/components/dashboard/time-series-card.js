@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
-
 import config from '../../config';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
@@ -48,7 +47,9 @@ export default function TimeSeriesCard({
     name: parameters[0].parameter || parameters[0],
   });
 
-  const [year, month, day] = dateRange ? dateRange.split('/') : [];
+  const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
+    Number
+  );
 
   // eslint-disable-next-line no-unused-vars
   const [temporal, setTemporal] = useState(day ? 'hour' : 'day');
@@ -62,9 +63,10 @@ export default function TimeSeriesCard({
         temporal,
         ...(dateRange
           ? {
+              // In user space, month is 1 indexed
               date_from: new Date(year, month - 1, day || 1),
               date_to: day
-                ? new Date(year, month - 1, day)
+                ? new Date(year, month - 1, day + 1)
                 : new Date(year, month, 0),
             }
           : {}),
@@ -116,6 +118,7 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
+
   return (
     <Card
       gridColumn={'1  / -1'}
@@ -124,7 +127,7 @@ export default function TimeSeriesCard({
           <TabbedSelector
             tabs={parameters.map(x => ({
               id: x.parameter || x,
-              name: x.parameter || x,
+              name: x.displayName || x,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
@@ -144,6 +147,8 @@ export default function TimeSeriesCard({
           ) : data && data.length ? (
             <LineChart
               data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
+              yLabel={data && data[0].displayName}
+              yUnit={data && data[0].unit}
             />
           ) : (
             <ErrorMessage instructions="Please try a different time" />
