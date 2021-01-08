@@ -4,14 +4,15 @@ import styled from 'styled-components';
 import c from 'classnames';
 
 const Tab = styled.a`
-  width: min-content;
+  width: fit-content;
   margin: 0;
   line-height: 3rem;
   text-transform: uppercase;
 `;
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  grid-gap: 0.5rem;
 `;
 
 function TabbedSelector(props) {

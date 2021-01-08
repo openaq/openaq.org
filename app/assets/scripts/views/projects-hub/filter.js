@@ -19,7 +19,7 @@ const defaultSelected = {
 const sortOptions = ['name', 'count'];
 const initFromLocation = ({ parameters, countries, sources, order_by }) => {
   return {
-    parameters: parameters ? parameters.split(',') : [],
+    parameters: parameters ? parameters.split(',').map(Number) : [],
     countries: countries ? countries.split(',') : [],
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
@@ -35,7 +35,6 @@ export default function Filter({ parameters, countries, sources }) {
   );
 
   parameters.sort((a, b) => a.name.localeCompare(b.name));
-  const parameterNames = [...new Set(parameters.map(p => p.name))];
 
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
@@ -61,8 +60,11 @@ export default function Filter({ parameters, countries, sources }) {
       }
 
       case 'parameters': {
+        // Parameters are tracked by id which is a Number so it needs to be cast
         const parameters =
-          query && query.parameters ? query.parameters.split(',') : [];
+          query && query.parameters
+            ? query.parameters.split(',').map(Number)
+            : [];
 
         query.parameters = toggleValue(parameters, value);
 
@@ -126,20 +128,20 @@ export default function Filter({ parameters, countries, sources }) {
             data-cy="filter-parameters"
             className="drop__menu drop__menu--select scrollable"
           >
-            {_.sortBy(parameterNames).map(paramName => {
+            {_.sortBy(_.uniq(parameters, 'id')).map(param => {
               return (
-                <li key={paramName}>
+                <li key={param.id}>
                   <div
                     data-cy="filter-menu-item"
                     className={c('drop__menu-item', {
                       'drop__menu-item--active': selected.parameters.includes(
-                        paramName
+                        param.id
                       ),
                     })}
                     data-hook="dropdown:close"
-                    onClick={() => onFilterSelect('parameters', paramName)}
+                    onClick={() => onFilterSelect('parameters', param.id)}
                   >
-                    <span data-cy={paramName}>{paramName}</span>
+                    <span data-cy={param.id}>{param.displayName}</span>
                   </div>
                 </li>
               );
@@ -245,16 +247,16 @@ export default function Filter({ parameters, countries, sources }) {
       {Object.values(selected).find(o => o.length > 0) && (
         <div className="filters-summary">
           {selected.parameters.map(o => {
-            const parameter = parameters.find(x => x.name === o);
+            const parameter = parameters.find(x => x.id === o);
             return (
               <button
                 type="button"
                 className="button--filter-pill"
                 data-cy="filter-pill"
-                key={parameter.name}
-                onClick={() => onFilterSelect('parameters', parameter.name)}
+                key={parameter.id}
+                onClick={() => onFilterSelect('parameters', parameter.id)}
               >
-                <span>{parameter.name}</span>
+                <span>{parameter.displayName}</span>
               </button>
             );
           })}

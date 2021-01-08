@@ -62,9 +62,7 @@ export default function LocationsHub({
     setFilters({
       order_by: query.order_by && query.order_by.split(','),
       sort: 'desc',
-      parameter:
-        query.parameters &&
-        query.parameters.split(',').map(param => param.toLowerCase()),
+      parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
       source: query.sources && query.sources.split(','),
       isMobile,
