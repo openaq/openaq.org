@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
+import _ from 'lodash';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
@@ -165,6 +166,7 @@ function Location(props) {
               start: data.firstUpdated,
               end: data.lastUpdated,
             }}
+            sources={data.sources}
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
@@ -199,7 +201,9 @@ function Location(props) {
           city={data.city}
           country={data.country}
           parameters={[data.parameters[0]]}
-          activeParameter={data.parameters[0].parameter}
+          activeParameter={_.find(props.parameters, {
+            id: data.parameters[0].parameterId,
+          })}
         />
       </div>
     </section>
@@ -211,6 +215,7 @@ Location.propTypes = {
   _openDownloadModal: T.func,
   sources: T.array,
   measurements: T.array,
+  parameters: T.array,
 };
 
 // /////////////////////////////////////////////////////////////////// //
@@ -218,6 +223,7 @@ Location.propTypes = {
 
 function selector(state) {
   return {
+    parameters: state.baseData.data.parameters,
     sources: state.baseData.data.sources,
     measurements: state.measurements,
     latestMeasurements: state.latestMeasurements,

@@ -15,32 +15,30 @@ export default function Legend({ parameters, activeParameter }) {
     history.push(`${location.pathname}?parameter=${parameter}`);
   }
 
-  const parameterNames = [...new Set(parameters.map(p => p.name))];
-
   let drop = (
     <Dropdown
       triggerElement="button"
       triggerClassName="button button--primary-unbounded drop__toggle--caret"
       triggerTitle="Show/hide parameter options"
-      triggerText={activeParameter}
+      triggerText={activeParameter.displayName}
     >
       <ul
         role="menu"
         className="drop__menu drop__menu--select"
         style={{ overflowY: `scroll`, maxHeight: `15rem` }}
       >
-        {parameterNames.map((paramName, i) => (
-          <li key={`${paramName}-${i}`}>
+        {parameters.map(param => (
+          <li key={`${param.id}`}>
             <a
               className={c('drop__menu-item', {
-                'drop__menu-item--active': activeParameter === paramName,
+                'drop__menu-item--active': param.id === activeParameter.id,
               })}
               href="#"
-              title={`Show values for ${paramName}`}
+              title={`Show values for ${param.displayName}`}
               data-hook="dropdown:close"
-              onClick={e => onFilterSelect(paramName, e)}
+              onClick={e => onFilterSelect(param.id, e)}
             >
-              <span>{paramName}</span>
+              <span>{param.displayName}</span>
             </a>
           </li>
         ))}
@@ -48,7 +46,7 @@ export default function Legend({ parameters, activeParameter }) {
     </Dropdown>
   );
 
-  const scaleStops = generateLegendStops(activeParameter.toLowerCase());
+  const scaleStops = generateLegendStops(activeParameter.name.toLowerCase());
   const colorWidth = 100 / scaleStops.length;
 
   return (
@@ -56,7 +54,7 @@ export default function Legend({ parameters, activeParameter }) {
       <div>
         <p>
           Showing the most recent values for{' '}
-          {parameters.length > 1 ? drop : activeParameter}
+          {parameters.length > 1 ? drop : activeParameter.displayName}
         </p>
         <ul className="color-scale">
           {scaleStops.map(o => (
@@ -81,5 +79,5 @@ export default function Legend({ parameters, activeParameter }) {
 
 Legend.propTypes = {
   parameters: PropTypes.array.isRequired,
-  activeParameter: PropTypes.string.isRequired,
+  activeParameter: PropTypes.object,
 };
