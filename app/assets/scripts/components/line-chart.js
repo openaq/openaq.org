@@ -52,7 +52,7 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
             tooltipFormat: 'MMM D, YYYY',
             unit: xUnit || 'day',
             displayFormats: {
-              day: 'MMM D, YYYY',
+              day: 'YYYY/MM/DD',
             },
           },
           gridLines: {
