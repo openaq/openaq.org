@@ -36,7 +36,7 @@ export default function DatasetLocations({
             />
             <LocationLayer
               activeParameter={activeParameter.parameter}
-              locationId={locationIds[0]}
+              locationId={locationIds}
               key={location}
             />
           </LocationsSource>

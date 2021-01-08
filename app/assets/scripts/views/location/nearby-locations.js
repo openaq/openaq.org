@@ -37,7 +37,7 @@ export default function NearbyLocations({
               <MeasurementsLayer activeParameter={activeParameter} />
               <LocationLayer
                 activeParameter={activeParameter}
-                locationIds={locationId}
+                locationIds={[locationId]}
               />
             </LocationsSource>
             <Legend
