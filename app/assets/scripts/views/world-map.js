@@ -41,10 +41,8 @@ function WorldMap({ location }) {
               ...state,
               fetched: true,
               fetching: false,
-              parameters: json.results.filter(
-                p =>
-                  p.displayName.includes('conc') &&
-                  Object.keys(parameterMax).includes(p.name)
+              parameters: json.results.filter(p =>
+                Object.keys(parameterMax).includes(p.id.toString())
               ),
             }));
           },
@@ -120,7 +118,7 @@ function WorldMap({ location }) {
         <MapComponent>
           <LocationsSource activeParameter={activeParameter.name}>
             <MobileLayer />
-            <MeasurementsLayer activeParameter={activeParameter.name} />
+            <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
           <Legend parameters={parameters} activeParameter={activeParameter} />
         </MapComponent>

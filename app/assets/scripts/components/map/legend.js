@@ -46,7 +46,7 @@ export default function Legend({ parameters, activeParameter }) {
     </Dropdown>
   );
 
-  const scaleStops = generateLegendStops(activeParameter.name.toLowerCase());
+  const scaleStops = generateLegendStops(activeParameter.id);
   const colorWidth = 100 / scaleStops.length;
 
   return (
