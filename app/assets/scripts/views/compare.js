@@ -349,6 +349,9 @@ function CompareLocation(props) {
           in {d.city || NO_CITY}, {countryData.name}
         </small>
       </h2>
+      <p className="compare-parameters">
+        Reporting: {d.parameters.map(p => p.displayName).join(', ')}
+      </p>
       <div className="compare__actions">
         <button
           type="button"
