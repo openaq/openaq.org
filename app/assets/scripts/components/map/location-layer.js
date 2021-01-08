@@ -21,7 +21,7 @@ export default function LocationLayer({
         id: 'location-shadow',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['in', 'locationId', locationIds],
+        filter: ['in', 'locationId', ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': '#000',
@@ -36,7 +36,7 @@ export default function LocationLayer({
         id: 'location-highlight',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['in', 'locationId', locationIds],
+        filter: ['in', 'locationId', ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': '#fff',
@@ -51,7 +51,7 @@ export default function LocationLayer({
         id: 'location-layer',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['in', 'locationId', locationIds],
+        filter: ['in', 'locationId', ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': {

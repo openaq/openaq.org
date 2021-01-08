@@ -22,7 +22,6 @@ export default function DatasetLocations({
   const onParamSelection = paramId => {
     setActiveParameter(parameters.find(param => param.parameterId === paramId));
   };
-
   return (
     <section id="location-fold-dataset">
       <div className="fold__body">
@@ -36,7 +35,7 @@ export default function DatasetLocations({
             />
             <LocationLayer
               activeParameter={activeParameter.parameter}
-              locationId={locationIds}
+              locationIds={locationIds}
               key={location}
             />
           </LocationsSource>

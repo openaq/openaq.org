@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
-import qs, { stringify as buildAPIQS } from 'qs';
+import qs from 'qs';
 import styled from 'styled-components';
 
 import { buildQS } from '../../utils/url';
@@ -26,12 +26,6 @@ const defaultState = {
   error: null,
   data: null,
 };
-const defaultLocationData = {
-  fetchedParams: false,
-  fetchingParams: false,
-  paramError: null,
-  locationData: null,
-};
 
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
@@ -45,10 +39,6 @@ function Project({ match, history, location }) {
   );
   const [isAllLocations, toggleAllLocations] = useState(true);
   const [selectedLocations, setSelectedLocations] = useState([]);
-  const [
-    { fetchingParams, paramError, locationData },
-    setSelectedLocationData,
-  ] = useState(defaultLocationData);
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
@@ -60,42 +50,6 @@ function Project({ match, history, location }) {
   }, [dateRange]);
 
   useEffect(() => {
-    const fetchData = id => {
-      setState(state => ({ ...state, fetching: true, error: null }));
-      // let query = {
-      //   location: selectedLocations,
-      // };
-      // let f = buildAPIQS(query, { arrayFormat: 'repeat' });
-      // fetch(`${config.api}/projects/${encodeURIComponent(id)}?${f}`)
-      // TODO: replace line below with above commented out code once filter is working
-      fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
-        .then(response => {
-          if (response.status >= 400) {
-            throw new Error('Bad response');
-          }
-          return response.json();
-        })
-        .then(
-          json => {
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              data: json.results[0],
-            }));
-          },
-          e => {
-            console.log('e', e);
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              error: e,
-            }));
-          }
-        );
-    };
-
     fetchData(id);
 
     return () => {
@@ -103,20 +57,53 @@ function Project({ match, history, location }) {
     };
   }, []);
 
+  const fetchData = id => {
+    setState(state => ({ ...state, fetching: true, error: null }));
+    // let query = {
+    //   location: selectedLocations,
+    // };
+    // let f = buildAPIQS(query, { arrayFormat: 'repeat' });
+    // fetch(`${config.api}/projects/${encodeURIComponent(id)}?${f}`)
+    // TODO: replace line below with above commented out code once filter is working
+    fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => {
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            data: json.results[0],
+          }));
+        },
+        e => {
+          console.log('e', e);
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            error: e,
+          }));
+        }
+      );
+  };
+
   if (!fetched && !fetching) {
     return null;
   }
 
-  if (fetching || fetchingParams) {
+  if (fetching) {
     return <LoadingHeader />;
   }
 
-  if (error || paramError || !data) {
+  if (error || !data) {
     return <ErrorHeader />;
   }
-  const paramsToDisplay = locationData
-    ? locationData.allParameters
-    : data.parameters;
   return (
     <section className="inpage">
       <Header
@@ -182,11 +169,11 @@ function Project({ match, history, location }) {
             }}
             sources={data.sources}
           />
-          <LatestMeasurementsCard parameters={paramsToDisplay} />
+          <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
           <TimeSeriesCard
             projectId={data.id}
-            parameters={paramsToDisplay}
+            parameters={data.parameters}
             dateRange={dateRange}
             xUnit="day"
             titleInfo={
@@ -194,13 +181,13 @@ function Project({ match, history, location }) {
             }
           />
           <MeasureandsCard
-            parameters={paramsToDisplay}
+            parameters={data.parameters}
             titleInfo={
               "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
             }
           />
           <TemporalCoverageCard
-            parameters={paramsToDisplay}
+            parameters={data.parameters}
             dateRange={dateRange}
             spatial="project"
             id={data.name}
