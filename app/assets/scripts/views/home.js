@@ -4,8 +4,8 @@ import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import _ from 'lodash';
-import * as d3 from 'd3';
+// import _ from 'lodash';
+// import * as d3 from 'd3';
 
 import { shortenLargeNumber } from '../utils/format';
 import {
@@ -19,11 +19,11 @@ import {
 import LoadingMessage from '../components/loading-message';
 import JoinFold from '../components/join-fold';
 import Testimonials from '../components/testimonials';
-import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
+// import { convertParamIfNeeded, parameterUnit } from '../utils/map-settings';
 
 import SponsorList from '../components/sponsor-list';
-import { getCountryName } from '../utils/countries';
-import ChartMeasurement from '../components/chart-measurement';
+// import { getCountryName } from '../utils/countries';
+// import ChartMeasurement from '../components/chart-measurement';
 
 import sponsors from '../../content/sponsors.json';
 import testimonials from '../../content/testimonials.json';
@@ -248,8 +248,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const [l1, l2] = this.props.compareLoc;
-    const [m1, m2] = this.props.compareMeasurements;
+    // const [l1, l2] = this.props.compareLoc;
+    // const [m1, m2] = this.props.compareMeasurements;
 
     return (
       <section className="inpage">
