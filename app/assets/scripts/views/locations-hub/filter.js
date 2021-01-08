@@ -248,7 +248,7 @@ export default function Filter({ countries, parameters, sources }) {
         </Dropdown>
         <Dropdown
           triggerElement="a"
-          triggerTitle="View source options"
+          triggerTitle="View source type options"
           triggerText="Source Type"
           triggerClassName="button--drop-filter"
         >
