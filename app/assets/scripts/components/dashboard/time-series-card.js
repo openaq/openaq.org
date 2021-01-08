@@ -144,7 +144,8 @@ export default function TimeSeriesCard({
           ) : data && data.length ? (
             <LineChart
               data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
-              yLabel={data && `${data[0].displayName} (${data[0].unit})`}
+              yLabel={data && data[0].displayName}
+              yUnit={data && data[0].unit}
             />
           ) : (
             <ErrorMessage instructions="Please try a different time" />
