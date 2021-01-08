@@ -20,7 +20,7 @@ export default function NearbyLocations({
   );
 
   const onParamSelection = paramId => {
-    setActiveParameter(parameters.find(param => param.id === paramId));
+    setActiveParameter(parameters.find(param => param.parameterId === paramId));
   };
 
   return (
@@ -33,10 +33,12 @@ export default function NearbyLocations({
         </header>
         <div className="fold__body">
           <MapComponent center={center}>
-            <LocationsSource activeParameter={activeParameter}>
-              <MeasurementsLayer activeParameter={activeParameter} />
+            <LocationsSource activeParameter={activeParameter.parameterId}>
+              <MeasurementsLayer
+                activeParameter={activeParameter.parameterId}
+              />
               <LocationLayer
-                activeParameter={activeParameter}
+                activeParameter={activeParameter.parameterId}
                 locationIds={[locationId]}
               />
             </LocationsSource>

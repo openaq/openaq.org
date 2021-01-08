@@ -17,6 +17,7 @@ export default function MeasurementsLayer({
   activeParameter,
   isAllLocations,
   country,
+  locationIds,
   map,
   sourceId,
   selectedLocations,
@@ -116,13 +117,35 @@ export default function MeasurementsLayer({
     }
   }, [country]);
 
+  useEffect(() => {
+    console.log('locationIds', locationIds);
+    if (locationIds.length && map.getLayer(`${activeParameter}-layer`)) {
+      map.setFilter(`${activeParameter}-outline`, [
+        'in',
+        ['number', ['get', 'locationId']],
+        ['literal', locationIds],
+      ]);
+      map.setFilter(`${activeParameter}-layer`, [
+        'in',
+        ['number', ['get', 'locationId']],
+        ['literal', locationIds],
+      ]);
+
+      return () => {
+        map.setFilter(`${activeParameter}-outline`, null);
+        map.setFilter(`${activeParameter}-layer`, null);
+      };
+    }
+  }, [locationIds]);
+
   return null;
 }
 
 MeasurementsLayer.propTypes = {
-  activeParameter: PropTypes.string.isRequired,
+  activeParameter: PropTypes.number.isRequired,
   isAllLocations: PropTypes.bool.isRequired,
   country: PropTypes.string,
+  locationIds: PropTypes.array,
   sourceId: PropTypes.string,
   map: PropTypes.object,
 };

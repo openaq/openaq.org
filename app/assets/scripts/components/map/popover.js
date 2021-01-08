@@ -79,7 +79,9 @@ export default function Popover({
   let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
   const parameter = data.parameters.find(
     // TODO: clean up parameter mess with id vs name
-    p => p.parameter === activeParameter.toLowerCase()
+    p =>
+      p.id === activeParameter.id ||
+      p.parameterId === activeParameter.parameterId
   );
 
   return (
@@ -180,7 +182,7 @@ export default function Popover({
 }
 
 Popover.propTypes = {
-  activeParameter: T.string.isRequired,
+  activeParameter: T.number.isRequired,
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
   isAllLocations: T.bool,

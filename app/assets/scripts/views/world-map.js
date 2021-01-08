@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import qs from 'qs';
-import { useHistory } from 'react-router-dom';
 
 import config from '../config';
 import { HeaderMessage } from '../components/header';

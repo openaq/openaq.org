@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import MapComponent from '../../components/map';
 import LocationsSource from '../../components/map/locations-source';
 import MeasurementsLayer from '../../components/map/measurements-layer';
-import LocationLayer from '../../components/map/location-layer';
 import Legend from '../../components/map/legend';
 import OptionCard from '../../components/map/option-card';
 
@@ -28,15 +27,11 @@ export default function DatasetLocations({
         <MapComponent bbox={bbox}>
           <LocationsSource activeParameter={activeParameter.parameterId}>
             <MeasurementsLayer
-              activeParameter={activeParameter.parameter}
+              activeParameter={activeParameter.parameterId}
               isAllLocations={isAllLocations}
+              locationIds={locationIds}
               selectedLocations={selectedLocations}
               setSelectedLocations={setSelectedLocations}
-            />
-            <LocationLayer
-              activeParameter={activeParameter.parameter}
-              locationIds={locationIds}
-              key={location}
             />
           </LocationsSource>
 

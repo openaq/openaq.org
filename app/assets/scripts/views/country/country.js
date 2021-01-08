@@ -168,9 +168,9 @@ function Country(props) {
             <section className="fold" id="country-fold-map">
               <div className="fold__body">
                 <MapComponent bbox={getCountryBbox(country.code)}>
-                  <LocationsSource activeParameter={'pm25'}>
+                  <LocationsSource activeParameter={2}>
                     <MeasurementsLayer
-                      activeParameter={'pm25'}
+                      activeParameter={2}
                       country={country.code}
                     />
                   </LocationsSource>

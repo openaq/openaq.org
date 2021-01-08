@@ -17,7 +17,7 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
-import DatasetLocations from './map';
+import DatasetLocations from './dataset-locations';
 import DateSelector from '../../components/date-selector';
 import Pill from '../../components/pill';
 

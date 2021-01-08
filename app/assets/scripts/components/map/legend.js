@@ -27,7 +27,7 @@ export default function Legend({
         style={{ overflowY: `scroll`, maxHeight: `15rem` }}
       >
         {parameters.map(param => (
-          <li key={`${param.id || param.parameterId}`}>
+          <li key={`${param.parameterId || param.id}`}>
             <a
               className={c('drop__menu-item', {
                 'drop__menu-item--active': activeParameter.id === param.id,
@@ -35,7 +35,7 @@ export default function Legend({
               href="#"
               title={`Show values for ${param.displayName}`}
               data-hook="dropdown:close"
-              onClick={e => onFilterSelect(param.id || param.parameterId, e)}
+              onClick={e => onFilterSelect(param.parameterId || param.id, e)}
             >
               <span>{param.displayName}</span>
             </a>
@@ -46,7 +46,7 @@ export default function Legend({
   );
 
   const scaleStops = generateLegendStops(
-    activeParameter.id || activeParameter.parameterId
+    activeParameter.parameterId || activeParameter.id
   );
   const colorWidth = 100 / scaleStops.length;
 
@@ -83,6 +83,8 @@ Legend.propTypes = {
   activeParameter: PropTypes.shape({
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
+    parameterId: PropTypes.number.isRequired,
   }).isRequired,
+  onParamSelection: PropTypes.func,
 };
