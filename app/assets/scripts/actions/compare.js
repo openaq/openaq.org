@@ -1,8 +1,10 @@
 import fetch from 'isomorphic-fetch';
 import { stringify as buildAPIQS } from 'qs';
 import _ from 'lodash';
+
 import * as actions from './action-types';
 import config from '../config';
+import { PM25_PARAMETER_ID } from '../utils/constants';
 
 // ////////////////////////////////////////////////////////////////
 //                       COMPARE LOCATION                        //
@@ -88,7 +90,8 @@ export function fetchRandomCompareLocs(limit = 2) {
 
     const f = buildAPIQS({
       order_by: 'random',
-      parameter: 'pm25',
+      // pm25 has id 2.
+      parameter: PM25_PARAMETER_ID,
       limit,
     });
 

@@ -26,7 +26,7 @@ import LoadingMessage from '../components/loading-message';
 import InfoMessage from '../components/info-message';
 import ChartBrush from '../components/chart-brush';
 
-import { NO_CITY } from '../utils/constants';
+import { NO_CITY, PM25_PARAMETER_ID } from '../utils/constants';
 
 function Compare(props) {
   const {
@@ -53,20 +53,16 @@ function Compare(props) {
     _selectCompareLocation,
   } = props;
 
-  const filteredParams = useMemo(() => _.uniqBy(parameters, 'name'), [
-    parameters,
-  ]);
-
   // Data for the active parameter or default to PM25
   const activeParameterData = useMemo(() => {
     const query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
-    const parameterData = _.find(filteredParams, {
+    const parameterData = _.find(parameters, {
       id: Number(query.parameter),
     });
-    return parameterData || _.find(filteredParams, { name: 'pm25' });
-  }, [location.search, filteredParams]);
+    return parameterData || _.find(parameters, { id: PM25_PARAMETER_ID });
+  }, [location.search, parameters]);
 
   // Returns an array with the names of the locations being compared.
   // It also accepts a filter function to further remove locations.
@@ -163,6 +159,19 @@ function Compare(props) {
 
   const locs = compareLoc.filter(o => o.fetched || o.fetching);
 
+  // Get all the parameter available in the locations for the dropdown.
+  const locParamsIds = compareLoc.reduce((acc, location) => {
+    if (!location.fetched || location.fetching) return acc;
+    return location.data.parameters.reduce(
+      (_acc, p) => _acc.add(p.parameterId),
+      acc
+    );
+  }, new Set());
+
+  const locParams = Array.from(locParamsIds).map(id =>
+    parameters.find(p => p.id === id)
+  );
+
   return (
     <section className="inpage">
       <header className="inpage__header">
@@ -210,7 +219,7 @@ function Compare(props) {
                 <div className="fold__introduction">
                   <ParameterSelector
                     activeParam={activeParameterData}
-                    parameters={filteredParams}
+                    parameters={locParams}
                     onSelect={onParameterSelect}
                   />
                   <AvailabilityMessage
