@@ -62,6 +62,12 @@ function Project({ match, history, location }) {
   useEffect(() => {
     const fetchData = id => {
       setState(state => ({ ...state, fetching: true, error: null }));
+      // let query = {
+      //   location: selectedLocations,
+      // };
+      // let f = buildAPIQS(query, { arrayFormat: 'repeat' });
+      // fetch(`${config.api}/projects/${encodeURIComponent(id)}?${f}`)
+      // TODO: replace line below with above commented out code once filter is working
       fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
         .then(response => {
           if (response.status >= 400) {
@@ -96,52 +102,6 @@ function Project({ match, history, location }) {
       setState(defaultState);
     };
   }, []);
-
-  const getLocations = () => {
-    setSelectedLocationData(state => ({
-      ...state,
-      fetchingParams: true,
-      paramError: null,
-    }));
-
-    let query = {
-      location: selectedLocations,
-      parameter: data.parameters[0].id,
-    };
-    let f = buildAPIQS(query, { arrayFormat: 'repeat' });
-    console.log('request', `${config.api}/locations?${f}`);
-    fetch(`${config.api}/locations?${f}`)
-      .then(response => {
-        if (response.status >= 400) {
-          throw new Error('Bad response');
-        }
-        return response.json();
-      })
-      .then(
-        json => {
-          setSelectedLocationData(state => ({
-            ...state,
-            fetchedParams: true,
-            fetchingParams: false,
-            locationData: {
-              results: json.results,
-              allParameters: json.results
-                .map(location => location.parameters)
-                .flat(),
-            },
-          }));
-        },
-        e => {
-          console.log('e', e);
-          setSelectedLocationData(state => ({
-            ...state,
-            fetchedParams: true,
-            fetchingParams: false,
-            paramError: e,
-          }));
-        }
-      );
-  };
 
   if (!fetched && !fetching) {
     return null;
@@ -185,7 +145,10 @@ function Project({ match, history, location }) {
               <Pill title={`${selectedLocations.length}/15`} />
             </div>
             <div style={{ display: `flex`, justifyContent: `flex-end` }}>
-              <button className="nav__action-link" onClick={getLocations}>
+              <button
+                className="nav__action-link"
+                onClick={() => fetchData(id)}
+              >
                 Apply Selection
               </button>
             </div>
