@@ -76,11 +76,6 @@
   width: auto;
 }
 
-
-.filters .drop__toggle {
-  color: $base-color;
-}
-
 .filters .drop__toggle.sort-order {
   grid-column-end: -1;
   border-radius: $base-border-radius * 10;
