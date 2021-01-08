@@ -46,7 +46,7 @@ export default function Legend({ parameters, activeParameter }) {
     </Dropdown>
   );
 
-  const scaleStops = generateLegendStops(activeParameter.name.toLowerCase());
+  const scaleStops = generateLegendStops(activeParameter.id);
   const colorWidth = 100 / scaleStops.length;
 
   return (
@@ -79,5 +79,9 @@ export default function Legend({ parameters, activeParameter }) {
 
 Legend.propTypes = {
   parameters: PropTypes.array.isRequired,
-  activeParameter: PropTypes.object,
+  activeParameter: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
 };
