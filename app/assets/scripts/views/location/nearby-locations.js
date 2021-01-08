@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import MapComponent from '../../components/map';
@@ -13,8 +13,16 @@ export default function NearbyLocations({
   city,
   country,
   parameters,
-  activeParameter,
+  initialActiveParameter,
 }) {
+  const [activeParameter, setActiveParameter] = useState(
+    initialActiveParameter
+  );
+
+  const onParamSelection = paramId => {
+    setActiveParameter(parameters.find(param => param.parameterId === paramId));
+  };
+
   return (
     <section className="fold" id="location-fold-nearby">
       <div className="inner">
@@ -25,14 +33,20 @@ export default function NearbyLocations({
         </header>
         <div className="fold__body">
           <MapComponent center={center}>
-            <LocationsSource activeParameter={activeParameter}>
-              <MeasurementsLayer activeParameter={activeParameter} />
+            <LocationsSource activeParameter={activeParameter.parameterId}>
+              <MeasurementsLayer
+                activeParameter={activeParameter.parameterId}
+              />
               <LocationLayer
-                activeParameter={activeParameter}
-                locationId={locationId}
+                activeParameter={activeParameter.parameterId}
+                locationIds={[locationId]}
               />
             </LocationsSource>
-            <Legend parameters={parameters} activeParameter={activeParameter} />
+            <Legend
+              parameters={parameters}
+              activeParameter={activeParameter}
+              onParamSelection={onParamSelection}
+            />
           </MapComponent>
         </div>
       </div>
@@ -46,5 +60,5 @@ NearbyLocations.propTypes = {
   parameters: PropTypes.array,
   city: PropTypes.string,
   country: PropTypes.string,
-  activeParameter: PropTypes.string,
+  initialActiveParameter: PropTypes.string,
 };
