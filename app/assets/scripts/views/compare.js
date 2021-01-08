@@ -64,27 +64,27 @@ function Compare(props) {
     return parameterData || _.find(parameters, { id: PM25_PARAMETER_ID });
   }, [location.search, parameters]);
 
-  // Returns an array with the names of the locations being compared.
+  // Returns an array with the ids of the locations being compared.
   // It also accepts a filter function to further remove locations.
   // Mostly used to construct the url.
-  const getLocNames = filter =>
+  const getLocIds = filter =>
     compareLoc
       .filter((o, i) => {
         if (!o.data) return false;
         if (filter) return filter(o, i);
         return true;
       })
-      .map(o => o.data.name);
+      .map(o => o.data.id);
 
   const onParameterSelect = parameter => {
-    const locsUrl = getLocNames().map(encodeURIComponent).join('/');
+    const locsUrl = getLocIds().map(encodeURIComponent).join('/');
     history.push(`/compare/${locsUrl}?parameter=${parameter}`);
   };
 
   const onLocationRemove = index => {
     // To build the url filter out the location at the given index.
     // Ensure that non loaded locations are also out.
-    const locsUrl = getLocNames((_o, i) => i !== index)
+    const locsUrl = getLocIds((_o, i) => i !== index)
       .map(encodeURIComponent)
       .join('/');
 
@@ -110,7 +110,7 @@ function Compare(props) {
   const onCompareOptionsConfirm = () => {
     _cancelCompareOptions();
 
-    const locsUrl = [...getLocNames(), compareSelectOpts.location]
+    const locsUrl = [...getLocIds(), compareSelectOpts.location]
       .map(encodeURIComponent)
       .join('/');
 
@@ -520,11 +520,11 @@ function CompareLocationSelector(props) {
               id="loc-location"
               className="form__control form__control--small"
               value={location}
-              onChange={e => onOptSelect('location', e.target.value)}
+              onChange={e => onOptSelect('location', parseInt(e.target.value))}
             >
               <option value="--">{compareLocationsLabel}</option>
               {compareLocations.map(o => (
-                <option key={o.name} value={o.name}>
+                <option key={o.name} value={o.id}>
                   {o.name}
                 </option>
               ))}
@@ -558,7 +558,7 @@ CompareLocationSelector.propTypes = {
   status: T.string,
   country: T.string,
   area: T.string,
-  location: T.string,
+  location: T.oneOfType([T.string, T.number]),
   locationsByCountry: T.object,
   selectedLocations: T.array,
   countries: T.array,
