@@ -5,19 +5,6 @@ import moment from 'moment';
 import { formatThousands } from '../../utils/format';
 import Card, { CardDetails, FooterActions } from '../../components/card';
 
-// Api response sensor types are lcs and government
-// Map these to an expanded name on front end
-const mapSourceType = type => {
-  switch (type) {
-    case 'lcs':
-      return 'Low Cost Sensor';
-    case 'government':
-      return 'Reference-Grade';
-    default:
-      return null;
-  }
-};
-
 export default function ProjectCard({
   onDownloadClick,
   lastUpdated,
@@ -48,7 +35,7 @@ export default function ProjectCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={mapSourceType(sourceType)}
+      tags={sourceType}
       renderBody={() => (
         <CardDetails
           id="project"
