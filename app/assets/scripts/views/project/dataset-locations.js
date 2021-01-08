@@ -21,6 +21,9 @@ export default function DatasetLocations({
   const onParamSelection = paramId => {
     setActiveParameter(parameters.find(param => param.parameterId === paramId));
   };
+  if (!activeParameter) {
+    return null;
+  }
   return (
     <section id="location-fold-dataset">
       <div className="fold__body">
