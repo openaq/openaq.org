@@ -118,8 +118,11 @@ export default function MeasurementsLayer({
   }, [country]);
 
   useEffect(() => {
-    console.log('locationIds', locationIds);
-    if (locationIds.length && map.getLayer(`${activeParameter}-layer`)) {
+    if (
+      locationIds &&
+      locationIds.length &&
+      map.getLayer(`${activeParameter}-layer`)
+    ) {
       map.setFilter(`${activeParameter}-outline`, [
         'in',
         ['number', ['get', 'locationId']],
