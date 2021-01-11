@@ -15,12 +15,15 @@ import Popover from './popover';
 
 export default function MeasurementsLayer({
   activeParameter,
+  isAllLocations,
   country,
+  locationIds,
   map,
   sourceId,
+  selectedLocations,
+  setSelectedLocations,
 }) {
   let match = useRouteMatch();
-
   useEffect(() => {
     map.addLayer({
       id: `${activeParameter}-outline`,
@@ -54,31 +57,6 @@ export default function MeasurementsLayer({
       },
     });
 
-    map.on('click', `${activeParameter}-layer`, function (e) {
-      const coordinates = e.features[0].geometry.coordinates.slice();
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      let popoverElement = document.createElement('div');
-      ReactDOM.render(
-        <Popover
-          activeParameter={activeParameter}
-          locationId={e.features[0].properties.locationId}
-          currentPage={parseInt(match.params.id, 10)}
-        />,
-        popoverElement
-      );
-      new mapbox.Popup()
-        .setLngLat(coordinates)
-        .setDOMContent(popoverElement)
-        .addTo(map);
-    });
-
     // Change the cursor to a pointer when the mouse is over the layer.
     map.on('mouseenter', `${activeParameter}-layer`, function () {
       map.getCanvas().style.cursor = 'pointer';
@@ -98,6 +76,36 @@ export default function MeasurementsLayer({
   }, [sourceId]);
 
   useEffect(() => {
+    map.on('click', `${activeParameter}-layer`, function (e) {
+      const coordinates = e.features[0].geometry.coordinates.slice();
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      let popoverElement = document.createElement('div');
+      ReactDOM.render(
+        <Popover
+          activeParameter={activeParameter}
+          isAllLocations={isAllLocations}
+          locationId={e.features[0].properties.locationId}
+          currentPage={parseInt(match.params.id, 10)}
+          selectedLocations={selectedLocations}
+          setSelectedLocations={setSelectedLocations}
+        />,
+        popoverElement
+      );
+      new mapbox.Popup()
+        .setLngLat(coordinates)
+        .setDOMContent(popoverElement)
+        .addTo(map);
+    });
+  }, [isAllLocations, selectedLocations]);
+
+  useEffect(() => {
     if (country && map.getLayer(`${activeParameter}-layer`)) {
       map.setFilter(`${activeParameter}-outline`, ['==', 'country', country]);
       map.setFilter(`${activeParameter}-layer`, ['==', 'country', country]);
@@ -109,12 +117,38 @@ export default function MeasurementsLayer({
     }
   }, [country]);
 
+  useEffect(() => {
+    if (
+      locationIds &&
+      locationIds.length &&
+      map.getLayer(`${activeParameter}-layer`)
+    ) {
+      map.setFilter(`${activeParameter}-outline`, [
+        'in',
+        ['number', ['get', 'locationId']],
+        ['literal', locationIds],
+      ]);
+      map.setFilter(`${activeParameter}-layer`, [
+        'in',
+        ['number', ['get', 'locationId']],
+        ['literal', locationIds],
+      ]);
+
+      return () => {
+        map.setFilter(`${activeParameter}-outline`, null);
+        map.setFilter(`${activeParameter}-layer`, null);
+      };
+    }
+  }, [locationIds]);
+
   return null;
 }
 
 MeasurementsLayer.propTypes = {
-  activeParameter: PropTypes.string.isRequired,
+  activeParameter: PropTypes.number.isRequired,
+  isAllLocations: PropTypes.bool.isRequired,
   country: PropTypes.string,
+  locationIds: PropTypes.array,
   sourceId: PropTypes.string,
   map: PropTypes.object,
 };

@@ -19,10 +19,13 @@ const defaultState = {
   parameters: null,
 };
 
-function WorldMap({ location }) {
+function WorldMap({ location, history }) {
   const [{ fetched, fetching, error, parameters }, setState] = useState(
     defaultState
   );
+  const setActiveParamUrl = parameter => {
+    history.push(`${location.pathname}?parameter=${parameter}`);
+  };
 
   useEffect(() => {
     const fetchData = () => {
@@ -120,7 +123,11 @@ function WorldMap({ location }) {
             <MobileLayer />
             <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
-          <Legend parameters={parameters} activeParameter={activeParameter} />
+          <Legend
+            parameters={parameters}
+            activeParameter={activeParameter}
+            onParamSelection={setActiveParamUrl}
+          />
         </MapComponent>
       </div>
     </section>
@@ -129,6 +136,7 @@ function WorldMap({ location }) {
 
 WorldMap.propTypes = {
   location: PropTypes.object,
+  history: PropTypes.object,
 };
 
 export default WorldMap;

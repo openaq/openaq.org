@@ -49,7 +49,7 @@ export default function MapCard({ parameters, isMobile, locationId, center }) {
               ) : (
                 <LocationLayer
                   activeParameter={activeTab}
-                  locationId={locationId}
+                  locationIds={[locationId]}
                 />
               )}
             </LocationsSource>

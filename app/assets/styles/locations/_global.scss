@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .button--drop-filter {
-  @extend .button, .button--primary-bounded, .drop__toggle--caret;
+  @extend .button, .button--base-bounded, .drop__toggle--caret;
   display: flex;
 
   &::after {
