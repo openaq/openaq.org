@@ -8,21 +8,26 @@ export default function NewsBanner() {
   return isVisible ? (
     <div className="news-banner">
       <div className="inner">
-        <span className="news-banner__pill">New</span>
         <p className="news-banner__msg">
-          We have low cost sensor data! 🙌{' '}
-          <SmartLink to="/locations" title="View the locations page with data">
-            Explore the data
-          </SmartLink>{' '}
-          or{' '}
+          <span className="msg-status">New</span>
+          <span>We have low cost sensor data! 🙌</span>
+        </p>
+        <div className="news-banner__actions">
+          <SmartLink
+            className="button button--capsule button--primary"
+            to="/locations"
+            title="View the locations page with data"
+          >
+            Explore data
+          </SmartLink>
           <SmartLink
             to="https://openaq.medium.com/"
             title="Read our blog on Medium"
+            className="button button--capsule button--white-bounded"
           >
-            read our blog post
-          </SmartLink>{' '}
-          to learn more.
-        </p>
+            Read blog post
+          </SmartLink>
+        </div>
 
         <button
           className="news-banner__close"
