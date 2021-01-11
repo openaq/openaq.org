@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 import qs from 'qs';
-
-import { HeaderMessage } from '../../components/header';
-import Header from '../../components/header';
-import { buildQS } from '../../utils/url';
-
 import styled from 'styled-components';
-import CardList from '../../components/card-list';
+
+import { buildQS } from '../../utils/url';
 import config from '../../config';
+import { getCountryBbox } from '../../utils/countries';
+import { parameterMax } from '../../utils/map-settings';
+
+import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
+import CardList from '../../components/card-list';
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import DatasetLocations from './dataset-locations';
 import DateSelector from '../../components/date-selector';
+import Pill from '../../components/pill';
 
 const defaultState = {
   fetched: false,
@@ -35,6 +38,9 @@ function Project({ match, history, location }) {
   const [dateRange, setDateRange] = useState(
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
   );
+  const [isAllLocations, toggleAllLocations] = useState(true);
+  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
     let query = qs.parse(location.search, {
@@ -44,39 +50,7 @@ function Project({ match, history, location }) {
     history.push(`${location.pathname}?${buildQS(query)}`);
   }, [dateRange]);
 
-  const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
-
   useEffect(() => {
-    const fetchData = id => {
-      setState(state => ({ ...state, fetching: true, error: null }));
-      fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
-        .then(response => {
-          if (response.status >= 400) {
-            throw new Error('Bad response');
-          }
-          return response.json();
-        })
-        .then(
-          json => {
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              data: json.results[0],
-            }));
-          },
-          e => {
-            console.log('e', e);
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              error: e,
-            }));
-          }
-        );
-    };
-
     fetchData(id);
 
     return () => {
@@ -84,40 +58,53 @@ function Project({ match, history, location }) {
     };
   }, []);
 
+  const fetchData = id => {
+    setState(state => ({ ...state, fetching: true, error: null }));
+    // let query = {
+    //   location: selectedLocations,
+    // };
+    // let f = buildAPIQS(query, { arrayFormat: 'repeat' });
+    // fetch(`${config.api}/projects/${encodeURIComponent(id)}?${f}`)
+    // TODO: replace line below with above commented out code once filter is working
+    fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => {
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            data: json.results[0],
+          }));
+        },
+        e => {
+          console.log('e', e);
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            error: e,
+          }));
+        }
+      );
+  };
+
   if (!fetched && !fetching) {
     return null;
   }
 
   if (fetching) {
-    return (
-      <HeaderMessage>
-        <h1>Take a deep breath.</h1>
-        <div className="prose prose--responsive">
-          <p>Location data is loading...</p>
-        </div>
-      </HeaderMessage>
-    );
+    return <LoadingHeader />;
   }
 
   if (error || !data) {
-    return (
-      <HeaderMessage>
-        <h1>Uh oh, something went wrong.</h1>
-        <div className="prose prose--responsive">
-          <p>
-            There was a problem getting the data. If you continue to have
-            problems, please let us know.
-          </p>
-          <p>
-            <a href="mailto:info@openaq.org" title="Send us an email">
-              Send us an Email
-            </a>
-          </p>
-        </div>
-      </HeaderMessage>
-    );
+    return <ErrorHeader />;
   }
-
   return (
     <section className="inpage">
       <Header
@@ -133,6 +120,45 @@ function Project({ match, history, location }) {
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
+        {!isAllLocations && (
+          <div
+            className={'filters, inner'}
+            style={{
+              display: `grid`,
+              gridTemplateRows: `1fr`,
+              gridTemplateColumns: `repeat(2, 1fr)`,
+            }}
+          >
+            <div>
+              <Pill title={`${selectedLocations.length}/15`} />
+            </div>
+            <div style={{ display: `flex`, justifyContent: `flex-end` }}>
+              <button
+                className="nav__action-link"
+                onClick={() => fetchData(id)}
+              >
+                Apply Selection
+              </button>
+            </div>
+          </div>
+        )}
+        <DatasetLocations
+          bbox={data.bbox || getCountryBbox(data.countries[0])}
+          locationIds={data.locationIds}
+          parameters={data.parameters.filter(p =>
+            Object.keys(parameterMax).includes(p.parameterId.toString())
+          )}
+          toggleAllLocations={toggleAllLocations}
+          isAllLocations={isAllLocations}
+          selectedLocations={selectedLocations}
+          setSelectedLocations={setSelectedLocations}
+        />
+        <header
+          className="fold__header inner"
+          style={{ gridTemplateColumns: `1fr` }}
+        >
+          <h1 className="fold__title">Values for selected stations</h1>
+        </header>
         <Dashboard
           gridTemplateRows={'repeat(4, 20rem)'}
           gridTemplateColumns={'repeat(12, 1fr)'}

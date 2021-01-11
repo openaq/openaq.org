@@ -10,7 +10,7 @@ import { generateColorStops } from '../../utils/colors';
 
 export default function LocationLayer({
   activeParameter,
-  locationId,
+  locationIds,
   map,
   sourceId,
 }) {
@@ -21,7 +21,7 @@ export default function LocationLayer({
         id: 'location-shadow',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['==', 'locationId', locationId],
+        filter: ['in', 'locationId', ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': '#000',
@@ -36,7 +36,7 @@ export default function LocationLayer({
         id: 'location-highlight',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['==', 'locationId', locationId],
+        filter: ['in', 'locationId', ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': '#fff',
@@ -51,7 +51,7 @@ export default function LocationLayer({
         id: 'location-layer',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['==', 'locationId', locationId],
+        filter: ['in', 'locationId', ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': {
@@ -76,5 +76,5 @@ export default function LocationLayer({
 LocationLayer.propTypes = {
   locationId: PropTypes.number.isRequired,
   map: PropTypes.object,
-  sourceId: PropTypes.string,
+  sourceIds: PropTypes.array,
 };

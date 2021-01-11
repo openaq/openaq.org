@@ -36,7 +36,8 @@
 
   &__group {
     overflow: hidden;
-    box-shadow: 0 1px 0 0 $base-semi-alpha-color, 0 -1px 0 0 $base-semi-alpha-color;
+    box-shadow: 0 1px 0 0 $base-semi-alpha-color,
+      0 -1px 0 0 $base-semi-alpha-color;
 
     .scrollarea-inner {
       max-height: 10rem;
@@ -95,9 +96,13 @@
 .button--filter-pill.orderBy {
   background-color: tint($primary-color, 64%);
   color: $primary-color;
-
 }
 
+.button--pill {
+  @extend .button, .button--small, .button--capsule;
+  background-color: $primary-color;
+  color: white;
+}
 
 .content {
   &__header,
@@ -154,7 +159,6 @@
       width: min-content;
     }
   }
-
 }
 
 .disclaimers {
@@ -171,11 +175,9 @@
   }
 }
 
-
-
 .pagination .pages__wrapper .pages__page,
 .pagination .previous a,
-.pagination .next a,  
+.pagination .next a,
 .pagination .break .pages__page {
   width: 3rem;
   height: 3rem;
@@ -191,18 +193,16 @@
   margin-right: 0;
 }
 
-
 .pagination .pages__wrapper .pages__page,
 .pagination .break .pages__page {
   box-shadow: none;
-  border: 0.5px solid rgba($base-color, 0.2); 
+  border: 0.5px solid rgba($base-color, 0.2);
 }
 
 .pagination .break .pages__page {
   background: none;
   border: none;
 }
-
 
 .pagination {
   display: grid;

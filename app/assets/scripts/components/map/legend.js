@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useLocation, useHistory } from 'react-router-dom';
 import { Dropdown } from 'openaq-design-system';
 import c from 'classnames';
 
 import { generateLegendStops } from '../../utils/colors';
 
-export default function Legend({ parameters, activeParameter }) {
-  let location = useLocation();
-  let history = useHistory();
-
+export default function Legend({
+  parameters,
+  activeParameter,
+  onParamSelection,
+}) {
   function onFilterSelect(parameter, e) {
     e.preventDefault();
-    history.push(`${location.pathname}?parameter=${parameter}`);
+    onParamSelection(parameter);
   }
-
   let drop = (
     <Dropdown
       triggerElement="button"
@@ -28,15 +27,15 @@ export default function Legend({ parameters, activeParameter }) {
         style={{ overflowY: `scroll`, maxHeight: `15rem` }}
       >
         {parameters.map(param => (
-          <li key={`${param.id}`}>
+          <li key={`${param.parameterId || param.id}`}>
             <a
               className={c('drop__menu-item', {
-                'drop__menu-item--active': param.id === activeParameter.id,
+                'drop__menu-item--active': activeParameter.id === param.id,
               })}
               href="#"
               title={`Show values for ${param.displayName}`}
               data-hook="dropdown:close"
-              onClick={e => onFilterSelect(param.id, e)}
+              onClick={e => onFilterSelect(param.parameterId || param.id, e)}
             >
               <span>{param.displayName}</span>
             </a>
@@ -46,7 +45,9 @@ export default function Legend({ parameters, activeParameter }) {
     </Dropdown>
   );
 
-  const scaleStops = generateLegendStops(activeParameter.id);
+  const scaleStops = generateLegendStops(
+    activeParameter.parameterId || activeParameter.id
+  );
   const colorWidth = 100 / scaleStops.length;
 
   return (
@@ -81,7 +82,9 @@ Legend.propTypes = {
   parameters: PropTypes.array.isRequired,
   activeParameter: PropTypes.shape({
     displayName: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    name: PropTypes.string,
+    id: PropTypes.number,
+    parameterId: PropTypes.number.isRequired,
   }).isRequired,
+  onParamSelection: PropTypes.func,
 };

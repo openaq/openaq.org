@@ -6,6 +6,7 @@ import config from '../../config';
 import { round } from '../../utils/format';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
+import Pill from '../pill';
 
 const defaultState = {
   fetched: false,
@@ -14,7 +15,14 @@ const defaultState = {
   data: null,
 };
 
-export default function Popover({ activeParameter, locationId, currentPage }) {
+export default function Popover({
+  activeParameter,
+  isAllLocations,
+  locationId,
+  currentPage,
+  selectedLocations,
+  setSelectedLocations,
+}) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
   useEffect(() => {
@@ -71,7 +79,9 @@ export default function Popover({ activeParameter, locationId, currentPage }) {
   let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
   const parameter = data.parameters.find(
     // TODO: clean up parameter mess with id vs name
-    p => p.parameter === activeParameter.toLowerCase()
+    p =>
+      p.id === activeParameter.id ||
+      p.parameterId === activeParameter.parameterId
   );
 
   return (
@@ -109,33 +119,62 @@ export default function Popover({ activeParameter, locationId, currentPage }) {
               </a>
             </p>
           )}
-
-          <ul className="popover__actions">
-            {/*
+          {isAllLocations ? (
+            <ul className="popover__actions">
+              {/*
                 Using `a` instead of `Link` because these are rendered outside
                 the router context and `Link` needs that context to work.
               */}
-            <li>
-              <a
-                href={`#/compare/${encodeURIComponent(locationId)}`}
-                className="button button--primary-bounded"
-                title={`Compare ${name} with other locations`}
-              >
-                Compare
-              </a>
-            </li>
-            {locationId !== currentPage && (
               <li>
                 <a
-                  href={`#/location/${encodeURIComponent(locationId)}`}
-                  title={`View ${name} page`}
+                  href={`#/compare/${encodeURIComponent(locationId)}`}
                   className="button button--primary-bounded"
+                  title={`Compare ${name} with other locations`}
                 >
-                  View More
+                  Compare
                 </a>
               </li>
-            )}
-          </ul>
+              {locationId !== currentPage && (
+                <li>
+                  <a
+                    href={`#/location/${encodeURIComponent(locationId)}`}
+                    title={`View ${name} page`}
+                    className="button button--primary-bounded"
+                  >
+                    View More
+                  </a>
+                </li>
+              )}
+            </ul>
+          ) : (
+            <button
+              title="Select Location"
+              className={`button button--primary-bounded ${
+                selectedLocations.length >= 15 && 'disabled'
+              }`}
+              disabled={selectedLocations.length >= 15}
+              onClick={() =>
+                selectedLocations.includes(locationId)
+                  ? setSelectedLocations(
+                      selectedLocations.filter(
+                        location => location !== locationId
+                      )
+                    )
+                  : selectedLocations.length < 15
+                  ? setSelectedLocations([...selectedLocations, locationId])
+                  : null
+              }
+            >
+              <div>
+                <span style={{ marginRight: `.5rem` }}>
+                  {selectedLocations.includes(locationId)
+                    ? 'Remove Location'
+                    : 'Select Location'}{' '}
+                </span>
+                <Pill title={`${selectedLocations.length}/15`} />
+              </div>
+            </button>
+          )}
         </div>
       </div>
     </article>
@@ -143,7 +182,14 @@ export default function Popover({ activeParameter, locationId, currentPage }) {
 }
 
 Popover.propTypes = {
-  activeParameter: T.string.isRequired,
+  activeParameter: T.number.isRequired,
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
+  isAllLocations: T.bool,
+  selectedLocations: T.array,
+  setSelectedLocations: T.func,
+};
+
+Popover.defaultProps = {
+  isAllLocations: true,
 };

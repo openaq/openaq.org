@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
-import _ from 'lodash';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
 import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
 import CardList from '../../components/card-list';
+import { parameterMax } from '../../utils/map-settings';
 
 import DetailsCard from '../../components/dashboard/details-card';
 import NearbyLocations from './nearby-locations';
@@ -134,7 +134,9 @@ function Location(props) {
       location: data.location,
     });
   }
-
+  const filteredParams = data.parameters.filter(p =>
+    Object.keys(parameterMax).includes(p.parameterId.toString())
+  );
   return (
     <section className="inpage">
       <Header
@@ -200,10 +202,8 @@ function Location(props) {
           center={[data.coordinates.longitude, data.coordinates.latitude]}
           city={data.city}
           country={data.country}
-          parameters={[data.parameters[0]]}
-          activeParameter={_.find(props.parameters, {
-            id: data.parameters[0].parameterId,
-          })}
+          parameters={filteredParams}
+          initialActiveParameter={filteredParams[0]}
         />
       </div>
     </section>
