@@ -71,10 +71,6 @@
 
 /* Fold: Stats
    ========================================================================== */
-
-#location-fold-stats {
-}
-
 .measurements-list {
   padding: 0;
   margin: 0;
@@ -102,16 +98,10 @@
 /* Fold: Source
    ========================================================================== */
 
-#location-fold-metadata {
-}
-
 .update-metadata-callout {
   grid-row: 3;
   grid-column: 1 / -1;
 }
-
-/* Fold: Source
-   ========================================================================== */
 
 #location-fold-source {
   .fold__header {
@@ -148,8 +138,33 @@
   }
 }
 
-/* Fold: Dataset
-   ========================================================================== */
+.source__title {
+  color: $primary-color;
+  margin: 0;
+
+  &--external {
+    &::before {
+      @extend %openaq-ds-icon-share;
+      margin-right: 0.25rem;
+    }
+  }
+}
+
+.source__readme {
+  color: $base-font-color;
+  margin-bottom: 0;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
+.sources__info {
+  box-shadow: 0 -1px 0 0 $base-alpha-color;
+  padding-top: $global-spacing;
+  margin-top: -$global-spacing / 2;
+}
 
 #location-fold-dataset {
   .fold__body {
