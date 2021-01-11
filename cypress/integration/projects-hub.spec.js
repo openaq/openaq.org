@@ -28,8 +28,10 @@ describe('The Projects Hub', () => {
 
   it('has some filters with dropdown menus', () => {
     // parameter filter
-    cy.get('[title="type__filter"]').click();
-    cy.get('[title="type__filter"]').find('span').contains('Parameter');
+    cy.get('[title="View parameter options"]').click();
+    cy.get('[title="View parameter options"]')
+      .find('span')
+      .contains('Parameter');
     ['1', '2', '3', '4', '5', '6'].forEach(parameter => {
       cy.get('[data-cy=filter-parameters]')
         .find(`[data-cy=${parameter}]`)
@@ -44,8 +46,8 @@ describe('The Projects Hub', () => {
     cy.get('[data-cy=filter-clear]').should('not.exist');
 
     // country filter
-    cy.get('[title="country__filter"]').click();
-    cy.get('[title="country__filter"]').find('span').contains('Country');
+    cy.get('[title="View country options"]').click();
+    cy.get('[title="View country options"]').find('span').contains('Country');
     cy.get('[data-cy=filter-countries]')
       .find('[data-cy=Australia]')
       .should('length', 1);

@@ -147,9 +147,9 @@ export default function Filter({ countries, parameters, sources }) {
 
         <Dropdown
           triggerElement="a"
-          triggerTitle="country__filter"
+          triggerTitle="View country options"
           triggerText="Country"
-          triggerClassName="drop-trigger"
+          triggerClassName="button--drop-filter"
         >
           <ul
             role="menu"
@@ -181,8 +181,9 @@ export default function Filter({ countries, parameters, sources }) {
 
         <Dropdown
           triggerElement="a"
-          triggerTitle="type__filter"
+          triggerTitle="View filter options"
           triggerText="Parameter"
+          triggerClassName="button--drop-filter"
         >
           <ul
             role="menu"
@@ -214,8 +215,9 @@ export default function Filter({ countries, parameters, sources }) {
 
         <Dropdown
           triggerElement="a"
-          triggerTitle="source__filter"
+          triggerTitle="View source options"
           triggerText="Data Source"
+          triggerClassName="button--drop-filter"
         >
           <ul
             role="menu"
@@ -246,9 +248,9 @@ export default function Filter({ countries, parameters, sources }) {
         </Dropdown>
         <Dropdown
           triggerElement="a"
-          triggerTitle="source-type__filter"
+          triggerTitle="View source type options"
           triggerText="Source Type"
-          triggerClassName="drop-trigger"
+          triggerClassName="button--drop-filter"
         >
           <ul
             role="menu"
@@ -280,9 +282,9 @@ export default function Filter({ countries, parameters, sources }) {
 
         <Dropdown
           triggerElement="a"
-          triggerTitle="sort__filter"
+          triggerTitle="View sort options"
           triggerText="Order By"
-          triggerClassName="sort-order"
+          triggerClassName="button--drop-filter sort-order"
         >
           <ul role="menu" className="drop__menu drop__menu--select scrollable">
             {_.sortBy(sortOptions).map(o => {
