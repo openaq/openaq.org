@@ -44,6 +44,42 @@ html {
   @extend .visually-hidden;
 }
 
+.news-banner {
+  @extend .antialiased;
+  background-color: $base-color;
+  padding: $global-spacing 0;
+  color: #fff;
+
+  a {
+    color: $secondary-color;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+      @extend .constrainer;
+  }
+
+  &__msg {
+    margin: 0 0 0 $global-spacing / 2;
+  }
+
+  &__pill {
+    border: 1px solid $secondary-color;
+    border-radius: $full-border-radius;
+    color: $secondary-color;
+    padding: 0 $global-spacing / 2;
+  }
+
+  &__close {
+    @extend .button, .button--small, .button--achromic-unbounded, .button--text-hidden;
+    margin-left: auto;
+
+    &::before {
+      @extend %openaq-ds-icon-xmark--small;
+    }
+  }
+}
 
 /* Body
    ========================================================================== */
