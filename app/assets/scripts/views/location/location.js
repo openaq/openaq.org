@@ -35,19 +35,6 @@ const defaultState = {
   data: null,
 };
 
-// Api response sensor types are lcs and government
-// Map these to an expanded name on front end
-const mapSourceType = type => {
-  switch (type) {
-    case 'lcs':
-      return 'Low Cost Sensor';
-    case 'government':
-      return 'Reference-Grade';
-    default:
-      return null;
-  }
-};
-
 function Location(props) {
   let history = useHistory();
   let location = useLocation();
@@ -159,7 +146,7 @@ function Location(props) {
           download: onDownloadClick,
           compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
-        sourceType={mapSourceType(data.sourceType)}
+        sourceType={data.sources.length && data.sources[0].sensorType}
         isMobile={data.isMobile}
       />
       <div className="inpage__body">

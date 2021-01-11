@@ -104,7 +104,7 @@ export default function Card({
                 {typeof tags === 'string' ? (
                   <CardTag label={tags} />
                 ) : (
-                  tags.map((tag, i) => <CardTag key={i} label={tag} />)
+                  tags.filter(tag => tag).map((tag, i) => <CardTag key={i} label={tag} />)
                 )}
               </TagWrapper>
             )}
