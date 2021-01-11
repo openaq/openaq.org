@@ -9,6 +9,7 @@ import {
   circleBlur,
   coloredCircleRadius,
   borderCircleRadius,
+  coloredSquareSize,
 } from '../../utils/map-settings';
 import { generateColorStops } from '../../utils/colors';
 import Popover from './popover';
@@ -25,6 +26,48 @@ export default function MeasurementsLayer({
 }) {
   let match = useRouteMatch();
   useEffect(() => {
+    const square = {
+      width: 16,
+      height: 16,
+      data: new Uint8Array(16 * 16 * 4),
+      render: function () {
+        const bytesPerPixel = 4;
+        for (let x = 0; x < this.width; x++) {
+          for (let y = 0; y < this.height; y++) {
+            const offset = (y * this.width + x) * bytesPerPixel;
+            this.data[offset + 0] = 0;
+            this.data[offset + 1] = 128;
+            this.data[offset + 2] = 128;
+            this.data[offset + 3] = 255;
+          }
+        }
+
+        // not sure why this needs an initial color, it is going to be repainted anyways
+        return true;
+      },
+    };
+
+    map.addImage('square', square, { sdf: true });
+
+    map.addLayer({
+      id: `${activeParameter}-squares`,
+      source: sourceId,
+      'source-layer': 'default',
+      type: 'symbol',
+      paint: {
+        'icon-color': {
+          property: 'lastValue',
+          stops: generateColorStops(activeParameter),
+        },
+      },
+      layout: {
+        'icon-image': 'square',
+        'icon-size': coloredSquareSize,
+        'icon-allow-overlap': true,
+      },
+      filter: ['==', ['get', 'isMobile'], false],
+    });
+
     map.addLayer({
       id: `${activeParameter}-outline`,
       source: sourceId,
@@ -39,6 +82,7 @@ export default function MeasurementsLayer({
         'circle-radius': borderCircleRadius,
         'circle-blur': 0,
       },
+      filter: ['==', ['get', 'isMobile'], true],
     });
 
     map.addLayer({
@@ -55,6 +99,7 @@ export default function MeasurementsLayer({
         'circle-radius': coloredCircleRadius,
         'circle-blur': circleBlur,
       },
+      filter: ['==', ['get', 'isMobile'], true],
     });
 
     // Change the cursor to a pointer when the mouse is over the layer.

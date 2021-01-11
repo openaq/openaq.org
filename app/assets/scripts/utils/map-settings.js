@@ -26,6 +26,15 @@ export const coloredCircleRadius = {
   ],
 };
 
+// Fill Radius for all station points w/ values
+export const coloredSquareSize = {
+  stops: [
+    [0, 0.3],
+    [5, 0.5],
+    [7, 1.2],
+  ],
+};
+
 // Border Radius for all points
 export const borderCircleRadius = {
   stops: [
