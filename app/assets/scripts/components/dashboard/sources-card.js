@@ -34,6 +34,8 @@ export default function SourceInfo({ sources }) {
                     <a
                       className="source__title source__title--external"
                       href={source.url}
+                      rel="noreferrer noopener"
+                      target="_blank"
                     >
                       {source.name}
                     </a>
@@ -47,6 +49,8 @@ export default function SourceInfo({ sources }) {
                           /^\/v2\//,
                           ''
                         )}`}
+                        rel="noreferrer noopener"
+                        target="_blank"
                       >
                         Technical readme
                       </a>
