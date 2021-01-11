@@ -10,6 +10,7 @@ import {
   coloredCircleRadius,
   borderCircleRadius,
   coloredSquareSize,
+  borderSquareSize,
 } from '../../utils/map-settings';
 import { generateColorStops } from '../../utils/colors';
 import Popover from './popover';
@@ -27,9 +28,9 @@ export default function MeasurementsLayer({
   let match = useRouteMatch();
   useEffect(() => {
     const square = {
-      width: 16,
-      height: 16,
-      data: new Uint8Array(16 * 16 * 4),
+      width: 12,
+      height: 12,
+      data: new Uint8Array(12 * 12 * 4),
       render: function () {
         const bytesPerPixel = 4;
         for (let x = 0; x < this.width; x++) {
@@ -48,6 +49,25 @@ export default function MeasurementsLayer({
     };
 
     map.addImage('square', square, { sdf: true });
+
+    map.addLayer({
+      id: `${activeParameter}-square-outline`,
+      source: sourceId,
+      'source-layer': 'default',
+      type: 'symbol',
+      paint: {
+        'icon-color': {
+          property: 'lastValue',
+          stops: generateColorStops(activeParameter, 'dark'),
+        },
+      },
+      layout: {
+        'icon-image': 'square',
+        'icon-size': borderSquareSize,
+        'icon-allow-overlap': true,
+      },
+      filter: ['==', ['get', 'isMobile'], false],
+    });
 
     map.addLayer({
       id: `${activeParameter}-squares`,
@@ -69,7 +89,7 @@ export default function MeasurementsLayer({
     });
 
     map.addLayer({
-      id: `${activeParameter}-outline`,
+      id: `${activeParameter}-circle-outline`,
       source: sourceId,
       'source-layer': 'default',
       type: 'circle',
@@ -86,7 +106,7 @@ export default function MeasurementsLayer({
     });
 
     map.addLayer({
-      id: `${activeParameter}-layer`,
+      id: `${activeParameter}-circles`,
       source: sourceId,
       'source-layer': 'default',
       type: 'circle',
@@ -103,25 +123,25 @@ export default function MeasurementsLayer({
     });
 
     // Change the cursor to a pointer when the mouse is over the layer.
-    map.on('mouseenter', `${activeParameter}-layer`, function () {
+    map.on('mouseenter', `${activeParameter}-circles`, function () {
       map.getCanvas().style.cursor = 'pointer';
     });
 
     // Change it back to a pointer when it leaves.
-    map.on('mouseleave', `${activeParameter}-layer`, function () {
+    map.on('mouseleave', `${activeParameter}-circles`, function () {
       map.getCanvas().style.cursor = '';
     });
 
     return () => {
-      if (map.getLayer(`${activeParameter}-layer`))
-        map.removeLayer(`${activeParameter}-layer`);
-      if (map.getLayer(`${activeParameter}-outline`))
-        map.removeLayer(`${activeParameter}-outline`);
+      if (map.getLayer(`${activeParameter}-circles`))
+        map.removeLayer(`${activeParameter}-circles`);
+      if (map.getLayer(`${activeParameter}-circle-outline`))
+        map.removeLayer(`${activeParameter}-circle-outline`);
     };
   }, [sourceId]);
 
   useEffect(() => {
-    map.on('click', `${activeParameter}-layer`, function (e) {
+    map.on('click', `${activeParameter}-circles`, function (e) {
       const coordinates = e.features[0].geometry.coordinates.slice();
 
       // Ensure that if the map is zoomed out such that multiple
@@ -151,13 +171,17 @@ export default function MeasurementsLayer({
   }, [isAllLocations, selectedLocations]);
 
   useEffect(() => {
-    if (country && map.getLayer(`${activeParameter}-layer`)) {
-      map.setFilter(`${activeParameter}-outline`, ['==', 'country', country]);
-      map.setFilter(`${activeParameter}-layer`, ['==', 'country', country]);
+    if (country && map.getLayer(`${activeParameter}-circles`)) {
+      map.setFilter(`${activeParameter}-circle-outline`, [
+        '==',
+        'country',
+        country,
+      ]);
+      map.setFilter(`${activeParameter}-circles`, ['==', 'country', country]);
 
       return () => {
-        map.setFilter(`${activeParameter}-outline`, null);
-        map.setFilter(`${activeParameter}-layer`, null);
+        map.setFilter(`${activeParameter}-circle-outline`, null);
+        map.setFilter(`${activeParameter}-circles`, null);
       };
     }
   }, [country]);
@@ -166,22 +190,22 @@ export default function MeasurementsLayer({
     if (
       locationIds &&
       locationIds.length &&
-      map.getLayer(`${activeParameter}-layer`)
+      map.getLayer(`${activeParameter}-circles`)
     ) {
-      map.setFilter(`${activeParameter}-outline`, [
+      map.setFilter(`${activeParameter}-circle-outline`, [
         'in',
         ['number', ['get', 'locationId']],
         ['literal', locationIds],
       ]);
-      map.setFilter(`${activeParameter}-layer`, [
+      map.setFilter(`${activeParameter}-circles`, [
         'in',
         ['number', ['get', 'locationId']],
         ['literal', locationIds],
       ]);
 
       return () => {
-        map.setFilter(`${activeParameter}-outline`, null);
-        map.setFilter(`${activeParameter}-layer`, null);
+        map.setFilter(`${activeParameter}-circle-outline`, null);
+        map.setFilter(`${activeParameter}-circles`, null);
       };
     }
   }, [locationIds]);

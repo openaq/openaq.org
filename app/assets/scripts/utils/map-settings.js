@@ -45,6 +45,15 @@ export const borderCircleRadius = {
   ],
 };
 
+// Border for all squares
+export const borderSquareSize = {
+  stops: [
+    [0, 0.5],
+    [5, 0.7],
+    [7, 1.4],
+  ],
+};
+
 // Border Radius for the white outline around selected points
 export const selectCircleRadius = {
   stops: [
