@@ -5,6 +5,7 @@ import qs from 'qs';
 import c from 'classnames';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
+import SensorTypeFilter from './sensor-type-filter';
 
 import { buildQS } from '../../utils/url';
 import { toggleValue } from '../../utils/array';
@@ -249,9 +250,11 @@ export default function Filter({ countries, parameters, sources }) {
         <Dropdown
           triggerElement="a"
           triggerTitle="View source type options"
-          triggerText="Source Type"
+          triggerText="Sensor Type"
           triggerClassName="button--drop-filter"
+          className="sensor__type-filter"
         >
+          {/*
           <ul
             role="menu"
             data-cy="filter-source-type"
@@ -278,6 +281,8 @@ export default function Filter({ countries, parameters, sources }) {
               );
             })}
           </ul>
+          */}
+          <SensorTypeFilter />
         </Dropdown>
 
         <Dropdown

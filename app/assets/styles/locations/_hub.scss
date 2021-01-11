@@ -77,6 +77,13 @@
   width: auto;
 }
 
+/* OpenAQ design system defined a fixed with for dropdown content
+ * Override this here for sensor type filter on locations hub
+ */
+.sensor__type-filter.drop__content.drop__content--react {
+  width: auto;
+}
+
 .filters .drop__toggle.sort-order {
   grid-column-end: -1;
   border-radius: $base-border-radius * 10;
