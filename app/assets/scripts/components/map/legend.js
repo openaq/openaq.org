@@ -2,8 +2,59 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'openaq-design-system';
 import c from 'classnames';
+import styled from 'styled-components';
 
 import { generateLegendStops } from '../../utils/colors';
+
+const Wrapper = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 20;
+  max-width: 24rem;
+  overflow: hidden;
+
+  box-shadow: 0 0 32px 2px rgba(35, 47, 59, 0.04),
+    0 16px 48px -16px rgba(35, 47, 59, 0.12);
+  background-color: rgba(35, 47, 59, 0.04);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media only screen and (min-width: 768px) {
+    bottom: 2rem;
+    left: 2rem;
+  }
+`;
+
+const Container = styled.div`
+  padding: 1.5rem;
+  background: #fff;
+`;
+
+const Definition = styled.dl`
+  margin: 0;
+  & > dd {
+    margin: 0;
+  }
+  display: grid;
+  grid-template-columns: 15px auto;
+  gap: 0.75rem;
+  align-items: center;
+  text-transform: uppercase;
+`;
+
+const Square = styled.div`
+  width: 15px;
+  height: 15px;
+  background-color: #198cff;
+`;
+
+const Circle = styled(Square)`
+  border-radius: 50%;
+`;
 
 export default function Legend({
   parameters,
@@ -51,8 +102,21 @@ export default function Legend({
   const colorWidth = 100 / scaleStops.length;
 
   return (
-    <div className="map__legend">
-      <div>
+    <Wrapper>
+      <Container>
+        <Definition>
+          <dt>
+            <Circle />
+          </dt>
+          <dd>Reference grade sensor</dd>
+
+          <dt>
+            <Square />
+          </dt>
+          <dd>Low Cost Sensor</dd>
+        </Definition>
+      </Container>
+      <Container>
         <p>
           Showing the most recent values for{' '}
           {parameters.length > 1 ? drop : activeParameter.displayName}
@@ -73,8 +137,8 @@ export default function Legend({
             Data Disclaimer and More Information
           </a>
         </small>
-      </div>
-    </div>
+      </Container>
+    </Wrapper>
   );
 }
 
