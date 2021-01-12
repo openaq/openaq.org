@@ -80,7 +80,8 @@ function Country(props) {
         countryFetching: true,
         countryError: null,
       }));
-      fetch(`${config.api}/countries/${id}`)
+      //TODO this is a temporary fix to patch API
+      fetch(`${config.api}/countries/{country_id}?country=${id}`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
