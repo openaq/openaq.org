@@ -145,9 +145,15 @@ export default function MeasurementsLayer({
     map.on('mouseenter', `${activeParameter}-circles`, function () {
       map.getCanvas().style.cursor = 'pointer';
     });
+    map.on('mouseenter', `${activeParameter}-squares`, function () {
+      map.getCanvas().style.cursor = 'pointer';
+    });
 
     // Change it back to a pointer when it leaves.
     map.on('mouseleave', `${activeParameter}-circles`, function () {
+      map.getCanvas().style.cursor = '';
+    });
+    map.on('mouseleave', `${activeParameter}-squares`, function () {
       map.getCanvas().style.cursor = '';
     });
 
