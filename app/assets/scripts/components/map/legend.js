@@ -118,7 +118,7 @@ export default function Legend({
       </Container>
       <Container>
         <p>
-          Showing the most recent values for{' '}
+          Showing the most recent* values for{' '}
           {parameters.length > 1 ? drop : activeParameter.displayName}
         </p>
         <ul className="color-scale">
@@ -132,6 +132,7 @@ export default function Legend({
             </li>
           ))}
         </ul>
+        <p>* Locations not updated in the last week are shown in grey.</p>
         <small className="disclaimer">
           <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
             Data Disclaimer and More Information
