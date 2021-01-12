@@ -27,6 +27,7 @@ const initFromLocation = ({
   sources,
   order_by,
   grade,
+  manufacturer,
   mobility,
   entity,
 }) => {
@@ -36,6 +37,7 @@ const initFromLocation = ({
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
     grade: grade ? grade.split(',') : [],
+    manufacturer: manufacturer ? manufacturer.split(',') : [],
     mobility: mobility ? mobility.split(',') : [],
     entity: entity ? entity.split(',') : [],
   };
@@ -77,13 +79,16 @@ export default function Filter({ countries, parameters, sources, manufacturers})
       }
 
       case 'source_type': {
-        const { grade, mobility, entity } = value;
+        const { grade, manufacturer, mobility, entity } = value;
         query.grade = grade ? [grade] : [];
+        query.manufacturer = manufacturer ? [manufacturer] : [];
+
         query.mobility = mobility ? [mobility] : [];
         query.entity = entity ? [entity] : [];
         setSelected(prev => ({
           ...prev,
           grade: query.grade,
+          manufacturer: query.manufacturer,
           mobility: query.mobility,
           entity: query.entity,
         }));
@@ -284,8 +289,8 @@ export default function Filter({ countries, parameters, sources, manufacturers})
           </ul>
           */}
           <SensorTypeFilter
-            onApplyClick={(grade, mobility, entity) => {
-              onFilterSelect('source_type', { grade, mobility, entity });
+            onApplyClick={(grade, manufacturer, mobility, entity) => {
+              onFilterSelect('source_type', { grade, manufacturer, mobility, entity });
             }}
             grade={selected.grade}
             mobility={selected.mobility}
@@ -368,7 +373,7 @@ export default function Filter({ countries, parameters, sources, manufacturers})
             );
           })}
 
-          {['grade', 'mobility', 'entity'].map(key =>
+          {['grade', 'manufacturer', 'mobility', 'entity'].map(key =>
             selected[key].map(o => {
               return (
                 <button
@@ -380,6 +385,7 @@ export default function Filter({ countries, parameters, sources, manufacturers})
                       grade: (selected.grade || [])[0],
                       mobility: (selected.mobility || [])[0],
                       entity: (selected.entity || [])[0],
+                      manufacturer: (selected.manufacturer || [])[0],
                       [key]: null,
                     })
                   }

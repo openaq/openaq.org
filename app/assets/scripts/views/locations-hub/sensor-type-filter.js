@@ -64,6 +64,7 @@ function SensorTypeFilter(props) {
   const { onApplyClick, manufacturers } = props;
 
   const [selectedGrade, setSelectedGrade] = useState(null);
+  const [selectedManufacturer, setSelectedManufacturer] = useState(null);
   const [selectedMobility, setSelectedMobility] = useState(null);
   const [selectedEntity, setSelectedEntity] = useState(null);
   return (
@@ -75,7 +76,10 @@ function SensorTypeFilter(props) {
         setSelected={setSelectedGrade}
         title="Grade"
       >
-        <select className="form__control form__control--medium select--base-bounded">
+        <select className="form__control form__control--medium select--base-bounded"
+          onChange={e => setSelectedManufacturer(e.target.value)}
+          placeholder='Select manufacturer'
+        >
           {manufacturers.map(m => (
             <option value={m} key={m}>
               {m}
@@ -111,7 +115,7 @@ function SensorTypeFilter(props) {
             selectedGrade || selectedMobility || selectedEntity,
         })}
         onClick={() =>
-          onApplyClick(selectedGrade, selectedMobility, selectedEntity)
+          onApplyClick(selectedGrade, selectedManufacturer, selectedMobility, selectedEntity)
         }
       >
         Apply

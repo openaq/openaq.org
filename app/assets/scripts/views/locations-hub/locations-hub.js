@@ -38,7 +38,6 @@ export default function LocationsHub({
   error,
   results,
   meta,
-
   location,
   history,
 }) {
@@ -61,7 +60,8 @@ export default function LocationsHub({
       // The following are not lists
       isMobile: query.mobility && query.mobility === 'Mobile',
       entity: query.entity && query.entity.toLowerCase(),
-      sensorType: query.grade && query.grade.toLowerCase()
+      sensorType: query.grade && query.grade.toLowerCase(),
+      manufacturerName: query.manufacturer && query.manufacturer
     });
   }, [location]);
 
