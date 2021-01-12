@@ -2,6 +2,7 @@ var d3 = require('d3');
 var chroma = require('chroma-js');
 import { parameterMax, parameterUnit } from './map-settings';
 import { round } from '../utils/format';
+import moment from 'moment';
 
 // Colors for the legend and point fills
 const mapColors = [
@@ -100,4 +101,20 @@ export function generateLegendStops(parameter) {
   stops[stops.length - 1].label += '+';
 
   return stops;
+}
+
+const weekAgo = moment().subtract(7, 'days').toISOString();
+
+export function getFillExpression(parameter, isDark) {
+  return [
+    'case',
+    ['>', ['get', 'lastUpdated'], ['literal', weekAgo]],
+    [
+      'interpolate',
+      ['linear'],
+      ['number', ['get', 'lastValue']],
+      ...generateColorStops(parameter, isDark).flat(),
+    ],
+    isDark ? unusedBorderColor : unusedColor,
+  ];
 }
