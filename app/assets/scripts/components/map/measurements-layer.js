@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 import mapbox from 'mapbox-gl';
-import moment from 'moment';
 
 import {
   circleOpacity,
@@ -13,11 +12,7 @@ import {
   coloredSquareSize,
   borderSquareSize,
 } from '../../utils/map-settings';
-import {
-  generateColorStops,
-  unusedColor,
-  unusedBorderColor,
-} from '../../utils/colors';
+import { getFillExpression } from '../../utils/colors';
 import Popover from './popover';
 
 const square = {
@@ -66,19 +61,6 @@ export default function MeasurementsLayer({
   const circlesLocationIdFilter = ['all', locationIdFilter, circlesFilter];
   const squaresLocationIdFilter = ['all', locationIdFilter, squaresFilter];
 
-  const weekAgo = moment().subtract(7, 'days').toISOString();
-  const fillExpression = isDark => [
-    'case',
-    ['>', ['get', 'lastUpdated'], ['literal', weekAgo]],
-    [
-      'interpolate',
-      ['linear'],
-      ['number', ['get', 'lastValue']],
-      ...generateColorStops(activeParameter, isDark).flat(),
-    ],
-    isDark ? unusedBorderColor : unusedColor,
-  ];
-
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
     map.addLayer({
@@ -87,7 +69,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': fillExpression('dark'),
+        'icon-color': getFillExpression(activeParameter, 'dark'),
       },
       layout: {
         'icon-image': 'square',
@@ -103,7 +85,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': fillExpression(),
+        'icon-color': getFillExpression(activeParameter),
       },
       layout: {
         'icon-image': 'square',
@@ -119,7 +101,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'circle',
       paint: {
-        'circle-color': fillExpression('dark'),
+        'circle-color': getFillExpression(activeParameter, 'dark'),
         'circle-opacity': 1,
         'circle-radius': borderCircleRadius,
         'circle-blur': 0,
@@ -133,7 +115,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'circle',
       paint: {
-        'circle-color': fillExpression(),
+        'circle-color': getFillExpression(activeParameter),
         'circle-opacity': circleOpacity,
         'circle-radius': coloredCircleRadius,
         'circle-blur': circleBlur,

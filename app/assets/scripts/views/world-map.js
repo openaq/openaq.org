@@ -120,7 +120,7 @@ function WorldMap({ location, history }) {
       <div className="inpage__body">
         <MapComponent>
           <LocationsSource activeParameter={activeParameter.name}>
-            <MobileLayer />
+            <MobileLayer activeParameter={activeParameter.id} />
             <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
           <Legend
