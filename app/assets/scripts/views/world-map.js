@@ -105,7 +105,7 @@ function WorldMap({ location, history }) {
   const queryParameter = qs.parse(location.search, { ignoreQueryPrefix: true })
     .parameter;
   const activeParameter = _.find(parameters, {
-    id: Number(queryParameter) || 7,
+    id: Number(queryParameter) || 2,
   });
 
   return (
