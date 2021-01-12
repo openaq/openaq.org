@@ -5,7 +5,7 @@ import moment from 'moment';
 import Card, { HighlightText, CardSubtitle } from '../card';
 import { formatThousands } from '../../utils/format';
 
-export default function DetailsCard({ measurements, date, coords }) {
+export default function DetailsCard({ measurements, date, coords, lifecycle }) {
   const startDate = date ? moment(date.start).format('YYYY/MM/DD') : null;
   const endDate = date ? moment(date.end).format('YYYY/MM/DD') : null;
 
@@ -25,24 +25,32 @@ export default function DetailsCard({ measurements, date, coords }) {
       }}
       renderFooter={() => {
         return (
-          <dl className="global-details-list">
-            {coords && (
-              <>
-                <dt>Coordinates</dt>
-                <dd>
-                  N{coords.lat}, E{coords.lng}
-                </dd>
-              </>
-            )}
-            {date && (
-              <>
-                <dt>Collection Dates</dt>
-                <dd>
-                  {startDate} - {endDate}
-                </dd>
-              </>
-            )}
-          </dl>
+          (coords || date || lifecycle) && (
+            <dl className="global-details-list">
+              {lifecycle && !!lifecycle.length && (
+                <>
+                  <dt>Lifecycle stage</dt>
+                  <dd>{lifecycle.join(', ')}</dd>
+                </>
+              )}
+              {coords && (
+                <>
+                  <dt>Coordinates</dt>
+                  <dd>
+                    N{coords.lat}, E{coords.lng}
+                  </dd>
+                </>
+              )}
+              {date && (
+                <>
+                  <dt>Collection Dates</dt>
+                  <dd>
+                    {startDate} - {endDate}
+                  </dd>
+                </>
+              )}
+            </dl>
+          )
         );
       }}
     />
@@ -59,4 +67,5 @@ DetailsCard.propTypes = {
     lat: T.number.isRequired,
     lng: T.number.isRequired,
   }),
+  lifecycle: T.array,
 };
