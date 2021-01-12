@@ -6,7 +6,6 @@ import config from '../../config';
 import { round } from '../../utils/format';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
-import Pill from '../pill';
 
 const defaultState = {
   fetched: false,
@@ -171,7 +170,6 @@ export default function Popover({
                     ? 'Remove Location'
                     : 'Select Location'}{' '}
                 </span>
-                <Pill title={`${selectedLocations.length}/15`} />
               </div>
             </button>
           )}

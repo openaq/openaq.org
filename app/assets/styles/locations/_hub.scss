@@ -102,6 +102,9 @@
   @extend .button, .button--small, .button--capsule;
   background-color: $primary-color;
   color: white;
+  &::after {
+    @extend %openaq-ds-icon-xmark--small;
+  }
 }
 
 .content {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
-import qs from 'qs';
+import qs, { stringify as buildAPIQS } from 'qs';
 import styled from 'styled-components';
 
 import { buildQS } from '../../utils/url';
@@ -28,6 +28,13 @@ const defaultState = {
   data: null,
 };
 
+const defaultLocationData = {
+  fetchedParams: false,
+  fetchingParams: false,
+  paramError: null,
+  locationData: null,
+};
+
 const Dashboard = styled(CardList)`
   padding: 2rem 4rem;
 `;
@@ -41,6 +48,10 @@ function Project({ match, history, location }) {
   const [isAllLocations, toggleAllLocations] = useState(true);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
+  const [
+    { fetchingParams, paramError, locationData },
+    setSelectedLocationData,
+  ] = useState(defaultLocationData);
 
   useEffect(() => {
     let query = qs.parse(location.search, {
@@ -51,21 +62,15 @@ function Project({ match, history, location }) {
   }, [dateRange]);
 
   useEffect(() => {
-    fetchData(id);
+    fetchProjectData(id);
 
     return () => {
       setState(defaultState);
     };
   }, []);
 
-  const fetchData = id => {
+  const fetchProjectData = id => {
     setState(state => ({ ...state, fetching: true, error: null }));
-    // let query = {
-    //   location: selectedLocations,
-    // };
-    // let f = buildAPIQS(query, { arrayFormat: 'repeat' });
-    // fetch(`${config.api}/projects/${encodeURIComponent(id)}?${f}`)
-    // TODO: replace line below with above commented out code once filter is working
     fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
       .then(response => {
         if (response.status >= 400) {
@@ -94,17 +99,67 @@ function Project({ match, history, location }) {
       );
   };
 
+  const getLocations = () => {
+    setSelectedLocationData(state => ({
+      ...state,
+      fetchingParams: true,
+      paramError: null,
+    }));
+
+    let query = {
+      location: selectedLocations,
+      parameter: data.parameters[0].id,
+    };
+    let f = buildAPIQS(query, { arrayFormat: 'repeat' });
+    console.log('request', `${config.api}/locations?${f}`);
+    fetch(`${config.api}/locations?${f}`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => {
+          setSelectedLocationData(state => ({
+            ...state,
+            fetchedParams: true,
+            fetchingParams: false,
+            locationData: {
+              results: json.results,
+              allParameters: json.results
+                .map(location => location.parameters)
+                .flat(),
+            },
+          }));
+        },
+        e => {
+          console.log('e', e);
+          setSelectedLocationData(state => ({
+            ...state,
+            fetchedParams: true,
+            fetchingParams: false,
+            paramError: e,
+          }));
+        }
+      );
+  };
+
   if (!fetched && !fetching) {
     return null;
   }
 
-  if (fetching) {
+  if (fetching || fetchingParams) {
     return <LoadingHeader />;
   }
 
-  if (error || !data) {
+  if (error || paramError || !data) {
     return <ErrorHeader />;
   }
+
+  const paramsToDisplay = locationData
+    ? locationData.allParameters
+    : data.parameters;
   return (
     <section className="inpage">
       <Header
@@ -130,13 +185,13 @@ function Project({ match, history, location }) {
             }}
           >
             <div>
-              <Pill title={`${selectedLocations.length}/15`} />
+              <Pill
+                title={`${selectedLocations.length}/15`}
+                action={() => setSelectedLocations([])}
+              />
             </div>
             <div style={{ display: `flex`, justifyContent: `flex-end` }}>
-              <button
-                className="nav__action-link"
-                onClick={() => fetchData(id)}
-              >
+              <button className="nav__action-link" onClick={getLocations}>
                 Apply Selection
               </button>
             </div>
@@ -172,24 +227,25 @@ function Project({ match, history, location }) {
             }}
             sources={data.sources}
           />
-          <LatestMeasurementsCard parameters={data.parameters} />
+          {/* TODO: pass averages */}
+          <LatestMeasurementsCard parameters={paramsToDisplay} />
           <SourcesCard sources={data.sources} />
           <TimeSeriesCard
             projectId={data.id}
-            parameters={data.parameters}
+            parameters={paramsToDisplay} // TODO: pass averages as well as each location
             dateRange={dateRange}
             titleInfo={
               'The average value of a pollutant over time during the specified window at each individual node selected and the average values across all locations selected. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown. If all locations are selected only the average across all locations is shown, not the individual location values.'
             }
           />
           <MeasureandsCard
-            parameters={data.parameters}
+            parameters={paramsToDisplay} // TODO: pass averages
             titleInfo={
               "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
             }
           />
           <TemporalCoverageCard
-            parameters={data.parameters}
+            parameters={paramsToDisplay} // TODO: pass averages
             dateRange={dateRange}
             spatial="project"
             id={data.name}

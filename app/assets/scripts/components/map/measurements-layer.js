@@ -211,21 +211,30 @@ export default function MeasurementsLayer({
   }, [country]);
 
   useEffect(() => {
+    console.log(
+      'select meas',
+      map.setFilter(`${activeParameter}-square-outline`, locationIdFilter)
+    );
     if (
       locationIds &&
       locationIds.length &&
       map.getLayer(`${activeParameter}-circles`)
     ) {
-      map.setFilter(
-        `${activeParameter}-square-outline`,
-        squaresLocationIdFilter
-      );
-      map.setFilter(`${activeParameter}-squares`, squaresLocationIdFilter);
-      map.setFilter(
-        `${activeParameter}-circle-outline`,
-        circlesLocationIdFilter
-      );
-      map.setFilter(`${activeParameter}-circles`, circlesLocationIdFilter);
+      map.setFilter(`${activeParameter}-square-outline`, locationIdFilter);
+      map.setFilter(`${activeParameter}-squares`, locationIdFilter);
+      map.setFilter(`${activeParameter}-circle-outline`, locationIdFilter);
+      map.setFilter(`${activeParameter}-circles`, locationIdFilter);
+
+      // map.setFilter(
+      //   `${activeParameter}-square-outline`,
+      //   squaresLocationIdFilter
+      // );
+      // map.setFilter(`${activeParameter}-squares`, squaresLocationIdFilter);
+      // map.setFilter(
+      //   `${activeParameter}-circle-outline`,
+      //   circlesLocationIdFilter
+      // );
+      // map.setFilter(`${activeParameter}-circles`, circlesLocationIdFilter);
     }
     return () => {
       if (map.getLayer(`${activeParameter}-square-outline`))

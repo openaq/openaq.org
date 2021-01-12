@@ -186,7 +186,7 @@ function DateSelector(props) {
 
 DateSelector.propTypes = {
   dateRange: T.string,
-  setDateRange: T.string,
+  setDateRange: T.func,
   maxYears: T.number,
 };
 export default DateSelector;
