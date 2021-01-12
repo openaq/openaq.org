@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
-import TabbedSelector from '../tabbed-selector';
 import Map from '../map';
-import LocationsSource from '../map/locations-source';
-import MobileLayer from '../map/mobile-layer';
-import LocationLayer from '../map/location-layer';
+import MobileSource from '../map/mobile-source';
+import MobileBoundsLayer from '../map/mobile-bounds-layer';
+import MobilePointsLayer from '../map/mobile-points-layer';
 
 const CardHeader = styled(BaseHeader)`
   display: grid;
@@ -15,45 +14,21 @@ const CardHeader = styled(BaseHeader)`
   grid-gap: 0.5rem;
 `;
 
-export default function MapCard({ parameters, isMobile, locationId, center }) {
-  const [activeTab, setActiveTab] = useState({
-    id: parameters[0].parameter || parameters[0],
-    name: parameters[0].parameter || parameters[0],
-  });
-
+export default function MapCard({ locationId, center, dateRange }) {
   return (
     <Card
-      gridColumn={'5  / 13'}
+      gridColumn={'1 / -1'}
       renderHeader={() => (
         <CardHeader className="card__header">
-          <TabbedSelector
-            tabs={parameters.map(x => ({
-              id: x.parameter || x,
-              name: x.parameter || x,
-            }))}
-            activeTab={activeTab}
-            onTabSelect={t => {
-              setActiveTab(t);
-            }}
-          />
-
-          <CardTitle>Total Count of Measurements</CardTitle>
+          <CardTitle>Mobile data locations</CardTitle>
         </CardHeader>
       )}
       renderBody={() => (
         <Map center={center}>
-          {(isMobile || locationId) && (
-            <LocationsSource activeParameter={activeTab.name}>
-              {isMobile ? (
-                <MobileLayer />
-              ) : (
-                <LocationLayer
-                  activeParameter={activeTab}
-                  locationIds={[locationId]}
-                />
-              )}
-            </LocationsSource>
-          )}
+          <MobileSource dateRange={dateRange}>
+            <MobileBoundsLayer locationId={locationId} />
+            <MobilePointsLayer locationId={locationId} />
+          </MobileSource>
         </Map>
       )}
     />
@@ -62,11 +37,5 @@ export default function MapCard({ parameters, isMobile, locationId, center }) {
 
 MapCard.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
-  locationId: PropTypes.number,
-  isMobile: PropTypes.bool.isRequired,
-  parameters: PropTypes.arrayOf(
-    PropTypes.shape({
-      parameter: PropTypes.string.isRequired,
-    })
-  ),
+  dateRange: PropTypes.string,
 };

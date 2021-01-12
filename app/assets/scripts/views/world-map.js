@@ -8,7 +8,7 @@ import { HeaderMessage } from '../components/header';
 import MapComponent from '../components/map';
 import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
-import MobileLayer from '../components/map/mobile-layer';
+import MobileBoundsLayer from '../components/map/mobile-bounds-layer';
 import Legend from '../components/map/legend';
 import { parameterMax } from '../utils/map-settings';
 
@@ -120,7 +120,7 @@ function WorldMap({ location, history }) {
       <div className="inpage__body">
         <MapComponent>
           <LocationsSource activeParameter={activeParameter.name}>
-            <MobileLayer activeParameter={activeParameter.id} />
+            <MobileBoundsLayer activeParameter={activeParameter.id} />
             <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
           <Legend

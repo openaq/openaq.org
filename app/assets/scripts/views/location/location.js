@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
+import moment from 'moment';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
@@ -19,6 +20,7 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import MapCard from '../../components/dashboard/map-card';
 import DateSelector from '../../components/date-selector';
 
 import { buildQS } from '../../utils/url';
@@ -139,7 +141,8 @@ function Location(props) {
   );
 
   // Lifecycle stage of different sources.
-  const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+  const lifecycle =
+    data.sources && data.sources.map(s => s.lifecycle_stage).filter(Boolean);
 
   return (
     <section className="inpage">
@@ -185,6 +188,18 @@ function Location(props) {
               'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown for the most recent week of data.'
             }
           />
+          {data.isMobile && (
+            <MapCard
+              parameters={data.parameters}
+              isMobile={data.isMobile}
+              locationId={data.id}
+              center={[data.coordinates.longitude, data.coordinates.latitude]}
+              points={data.points}
+              dateRange={
+                dateRange || moment.utc(data.firstUpdated).format('YYYY/MM/DD')
+              }
+            />
+          )}
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"

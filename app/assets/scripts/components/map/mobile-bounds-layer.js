@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 
 import { unusedBorderColor } from '../../utils/colors';
 
-export default function MobileLayer({ activeParameter, map, sourceId }) {
+export default function MobileBoundsLayer({
+  locationId,
+  activeParameter,
+  map,
+  sourceId,
+}) {
   useEffect(() => {
     map.addLayer({
-      id: 'mobile-layer',
+      id: 'mobile-bounds',
       source: sourceId,
       'source-layer': 'bounds',
       type: 'line',
@@ -20,14 +25,22 @@ export default function MobileLayer({ activeParameter, map, sourceId }) {
     });
 
     return () => {
-      if (map.getLayer('mobile-layer')) map.removeLayer('mobile-layer');
+      if (map.getLayer('mobile-bounds')) map.removeLayer('mobile-bounds');
     };
   }, [activeParameter]);
+
+  useEffect(() => {
+    if (locationId && map.getLayer('mobile-bounds'))
+      map.setFilter('mobile-bounds', ['==', 'locationId', locationId]);
+    return () => {
+      map.setFilter('mobile-bounds', null);
+    };
+  }, [locationId]);
 
   return null;
 }
 
-MobileLayer.propTypes = {
+MobileBoundsLayer.propTypes = {
   activeParameter: PropTypes.string,
   map: PropTypes.object,
   sourceId: PropTypes.string,
