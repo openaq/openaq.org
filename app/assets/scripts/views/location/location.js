@@ -137,6 +137,10 @@ function Location(props) {
   const filteredParams = data.parameters.filter(p =>
     Object.keys(parameterMax).includes(p.parameterId.toString())
   );
+
+  // Lifecycle stage of different sources.
+  const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+
   return (
     <section className="inpage">
       <Header
@@ -160,6 +164,7 @@ function Location(props) {
         >
           <DetailsCard
             measurements={data.measurements}
+            lifecycle={lifecycle}
             coords={{
               lat: data.coordinates.latitude,
               lng: data.coordinates.longitude,

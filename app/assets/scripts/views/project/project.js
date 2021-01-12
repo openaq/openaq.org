@@ -105,6 +105,10 @@ function Project({ match, history, location }) {
   if (error || !data) {
     return <ErrorHeader />;
   }
+
+  // Lifecycle stage of different sources.
+  const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+
   return (
     <section className="inpage">
       <Header
@@ -166,11 +170,11 @@ function Project({ match, history, location }) {
         >
           <DetailsCard
             measurements={data.measurements}
+            lifecycle={lifecycle}
             date={{
               start: data.firstUpdated,
               end: data.lastUpdated,
             }}
-            sources={data.sources}
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
