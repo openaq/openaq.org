@@ -137,6 +137,10 @@ function Location(props) {
   const filteredParams = data.parameters.filter(p =>
     Object.keys(parameterMax).includes(p.parameterId.toString())
   );
+
+  // Lifecycle stage of different sources.
+  const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+
   return (
     <section className="inpage">
       <Header
@@ -148,7 +152,7 @@ function Location(props) {
           download: onDownloadClick,
           compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
-        sourceType={data.sourceType}
+        sourceType={data.sources.length && data.sources[0].sensorType}
         isMobile={data.isMobile}
       />
       <div className="inpage__body">
@@ -160,6 +164,7 @@ function Location(props) {
         >
           <DetailsCard
             measurements={data.measurements}
+            lifecycle={lifecycle}
             coords={{
               lat: data.coordinates.latitude,
               lng: data.coordinates.longitude,
@@ -168,7 +173,6 @@ function Location(props) {
               start: data.firstUpdated,
               end: data.lastUpdated,
             }}
-            sources={data.sources}
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />

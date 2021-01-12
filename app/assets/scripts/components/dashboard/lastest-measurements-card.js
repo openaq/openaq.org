@@ -7,28 +7,24 @@ import moment from 'moment';
 import Card, { HighlightText, CardSubtitle } from '../card';
 import { round } from '../../utils/format';
 
-const Container = styled.dl`
+const Container = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-  grid-gap: 0.25rem;
-`;
-
-const Measurement = styled.div`
-  width: min-content;
-  display: grid;
-  grid-template-rows: repeat(auto-fit, minmax(3rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  grid-gap: 1rem;
+  list-style: none;
+  padding: 0;
 `;
 
 export default function LatestMeasurementsCard({ parameters }) {
   return (
     <Card
       title="Latest Measurements"
-      gridColumn={'4 / 11'}
+      gridColumn={'4 / 10'}
       renderBody={() => {
         return (
           <Container>
             {parameters.map(o => (
-              <Measurement key={o.parameter}>
+              <li key={o.parameter}>
                 <CardSubtitle className="card__subtitle">
                   {o.displayName}
                 </CardSubtitle>
@@ -38,7 +34,7 @@ export default function LatestMeasurementsCard({ parameters }) {
 
                 <strong>{o.unit}</strong>
                 <p>{moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</p>
-              </Measurement>
+              </li>
             ))}
           </Container>
         );

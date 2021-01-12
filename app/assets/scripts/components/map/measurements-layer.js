@@ -12,7 +12,7 @@ import {
   coloredSquareSize,
   borderSquareSize,
 } from '../../utils/map-settings';
-import { generateColorStops } from '../../utils/colors';
+import { getFillExpression } from '../../utils/colors';
 import Popover from './popover';
 
 const square = {
@@ -63,17 +63,13 @@ export default function MeasurementsLayer({
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
-
     map.addLayer({
       id: `${activeParameter}-square-outline`,
       source: sourceId,
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': {
-          property: 'lastValue',
-          stops: generateColorStops(activeParameter, 'dark'),
-        },
+        'icon-color': getFillExpression(activeParameter, 'dark'),
       },
       layout: {
         'icon-image': 'square',
@@ -89,10 +85,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': {
-          property: 'lastValue',
-          stops: generateColorStops(activeParameter),
-        },
+        'icon-color': getFillExpression(activeParameter),
       },
       layout: {
         'icon-image': 'square',
@@ -108,10 +101,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'circle',
       paint: {
-        'circle-color': {
-          property: 'lastValue',
-          stops: generateColorStops(activeParameter, 'dark'),
-        },
+        'circle-color': getFillExpression(activeParameter, 'dark'),
         'circle-opacity': 1,
         'circle-radius': borderCircleRadius,
         'circle-blur': 0,
@@ -125,10 +115,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'circle',
       paint: {
-        'circle-color': {
-          property: 'lastValue',
-          stops: generateColorStops(activeParameter),
-        },
+        'circle-color': getFillExpression(activeParameter),
         'circle-opacity': circleOpacity,
         'circle-radius': coloredCircleRadius,
         'circle-blur': circleBlur,
@@ -140,9 +127,15 @@ export default function MeasurementsLayer({
     map.on('mouseenter', `${activeParameter}-circles`, function () {
       map.getCanvas().style.cursor = 'pointer';
     });
+    map.on('mouseenter', `${activeParameter}-squares`, function () {
+      map.getCanvas().style.cursor = 'pointer';
+    });
 
     // Change it back to a pointer when it leaves.
     map.on('mouseleave', `${activeParameter}-circles`, function () {
+      map.getCanvas().style.cursor = '';
+    });
+    map.on('mouseleave', `${activeParameter}-squares`, function () {
       map.getCanvas().style.cursor = '';
     });
 
@@ -159,7 +152,7 @@ export default function MeasurementsLayer({
   }, [sourceId, activeParameter]);
 
   useEffect(() => {
-    const openPopup = function (e) {
+    const openPopup = e => {
       const coordinates = e.features[0].geometry.coordinates.slice();
 
       // Ensure that if the map is zoomed out such that multiple
