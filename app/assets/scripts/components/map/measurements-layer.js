@@ -170,7 +170,7 @@ export default function MeasurementsLayer({
   }, [sourceId, activeParameter]);
 
   useEffect(() => {
-    const openPopup = function (e) {
+    const openPopup = e => {
       const coordinates = e.features[0].geometry.coordinates.slice();
 
       // Ensure that if the map is zoomed out such that multiple
