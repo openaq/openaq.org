@@ -1,13 +1,11 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
-import config from '../../config';
-import SmartLink from '../smart-link';
 
 import Card, { HighlightText, CardSubtitle } from '../card';
 import { formatThousands } from '../../utils/format';
 
-export default function DetailsCard({ measurements, date, coords, sources }) {
+export default function DetailsCard({ measurements, date, coords, lifecycle }) {
   const startDate = date ? moment(date.start).format('YYYY/MM/DD') : null;
   const endDate = date ? moment(date.end).format('YYYY/MM/DD') : null;
 
@@ -22,42 +20,37 @@ export default function DetailsCard({ measurements, date, coords, sources }) {
               {formatThousands(measurements)}
             </HighlightText>
             <CardSubtitle className="card__subtitle">Measurements</CardSubtitle>
-
-            {sources &&
-              sources
-                .filter(s => s.readme)
-                .map(s => (
-                  <SmartLink
-                    key={s.id}
-                    to={`${config.api}/${s.readme.split('v2/')[1]}`}
-                    title="Get technical details"
-                  >
-                    {`${s.name} Technical Readme`}
-                  </SmartLink>
-                ))}
           </>
         );
       }}
       renderFooter={() => {
         return (
-          <dl className="global-details-list">
-            {coords && (
-              <>
-                <dt>Coordinates</dt>
-                <dd>
-                  N{coords.lat}, E{coords.lng}
-                </dd>
-              </>
-            )}
-            {date && (
-              <>
-                <dt>Collection Dates</dt>
-                <dd>
-                  {startDate} - {endDate}
-                </dd>
-              </>
-            )}
-          </dl>
+          (coords || date || lifecycle) && (
+            <dl className="global-details-list">
+              {lifecycle && !!lifecycle.length && (
+                <>
+                  <dt>Lifecycle stage</dt>
+                  <dd>{lifecycle.join(', ')}</dd>
+                </>
+              )}
+              {coords && (
+                <>
+                  <dt>Coordinates</dt>
+                  <dd>
+                    N{coords.lat}, E{coords.lng}
+                  </dd>
+                </>
+              )}
+              {date && (
+                <>
+                  <dt>Collection Dates</dt>
+                  <dd>
+                    {startDate} - {endDate}
+                  </dd>
+                </>
+              )}
+            </dl>
+          )
         );
       }}
     />
@@ -66,7 +59,6 @@ export default function DetailsCard({ measurements, date, coords, sources }) {
 
 DetailsCard.propTypes = {
   measurements: T.number.isRequired,
-  sources: T.array,
   date: T.shape({
     start: T.string.isRequired,
     end: T.string.isRequired,
@@ -75,4 +67,5 @@ DetailsCard.propTypes = {
     lat: T.number.isRequired,
     lng: T.number.isRequired,
   }),
+  lifecycle: T.array,
 };

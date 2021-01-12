@@ -4,11 +4,15 @@ import styled from 'styled-components';
 
 import SmartLink from '../smart-link';
 import Card from '../card';
+import config from '../../config';
 
-const SourceList = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+const SourceList = styled.ul`
+  padding: 0;
+  list-style: none;
+
+  > *:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const InfoMessage = styled.div`
@@ -17,25 +21,49 @@ const InfoMessage = styled.div`
   text-align: center;
 `;
 
-const Source = styled(SmartLink)``;
-
 export default function SourceInfo({ sources }) {
   return (
     <Card
       title={sources && sources.length > 1 ? 'Sources' : 'Source'}
-      gridColumn={'11 / -1'}
+      gridColumn={'10 / -1'}
       renderBody={() => {
         if (sources) {
           return (
             <SourceList>
               {sources.map(source => (
-                <Source
-                  key={source.name}
-                  to={source.sourceURL || source.url}
-                  title={source.name}
-                >
-                  {source.name}
-                </Source>
+                <li key={source.id}>
+                  {source.url ? (
+                    <a
+                      className="source__title source__title--external"
+                      href={source.url}
+                      rel="noreferrer noopener"
+                      target="_blank"
+                      title={source.name}
+                    >
+                      {source.name}
+                    </a>
+                  ) : (
+                    <p className="source__title" title={source.name}>
+                      {source.name}
+                    </p>
+                  )}
+                  <p className="source__readme">
+                    {source.readme ? (
+                      <a
+                        href={`${config.api}/${source.readme.replace(
+                          /^\/v2\//,
+                          ''
+                        )}`}
+                        rel="noreferrer noopener"
+                        target="_blank"
+                      >
+                        Technical readme
+                      </a>
+                    ) : (
+                      'No technical readme for this source'
+                    )}
+                  </p>
+                </li>
               ))}
             </SourceList>
           );
@@ -57,15 +85,15 @@ export default function SourceInfo({ sources }) {
         );
       }}
       renderFooter={
-        sources && sources[0] && sources[0].contacts
+        sources && sources.length
           ? () => (
-              <div>
+              <div className="sources__info">
                 For more information contact{' '}
                 <SmartLink
-                  to={`mailto:${sources[0].contacts[0]}`}
-                  title={sources[0].contacts[0]}
+                  to="mailto:info@openaq.org"
+                  title="Send email to openaq"
                 >
-                  {sources[0].contacts[0]}
+                  info@openaq.org
                 </SmartLink>
                 .
               </div>

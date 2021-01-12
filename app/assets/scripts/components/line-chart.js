@@ -10,6 +10,8 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
         data: data,
         borderColor: '#198CFF',
         fill: false,
+        showLine: false,
+        pointBackgroundColor: '#198CFF',
       },
     ],
   };
@@ -29,8 +31,10 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
           ticks: {
             beginAtZero: true,
             maxTicksLimit: 5,
-            callback: function (value, index) {
-              return index === 0 && yUnit ? [value, `(${yUnit})`] : value;
+            callback: function (value, index, values) {
+              return index === values.length - 1 && yUnit
+                ? `(${yUnit}) ${value}`
+                : value;
             },
             fontSize: 14,
           },
