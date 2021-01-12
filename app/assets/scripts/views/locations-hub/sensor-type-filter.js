@@ -33,7 +33,9 @@ function Section(props) {
               'button--primary': v === selected,
               'button--primary-ghost': v !== selected,
             })}
-            onClick={() => setSelected(v)}
+            onClick={(e) => {
+              setSelected(v === selected ? null : v)
+            }}
           >
             {v}
           </button>
@@ -43,6 +45,9 @@ function Section(props) {
     </SectionWrapper>
   );
 }
+
+Section.propTypes = {
+};
 
 function SensorTypeFilter(props) {
   const { onApplyClick } = props;
@@ -85,9 +90,9 @@ function SensorTypeFilter(props) {
             selectedEntity
           ),
           'button--primary':
-            selectedGrade && selectedMobility && selectedEntity,
+            selectedGrade || selectedMobility || selectedEntity,
         })}
-        onClick={onApplyClick}
+        onClick={() => onApplyClick(selectedGrade, selectedMobility, selectedEntity)}
       >
         Apply
       </button>

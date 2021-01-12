@@ -26,14 +26,18 @@ const initFromLocation = ({
   parameters,
   sources,
   order_by,
-  source_type,
+  grade,
+  mobility,
+  entity,
 }) => {
   return {
     parameters: parameters ? parameters.split(',').map(Number) : [],
     countries: countries ? countries.split(',') : [],
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
-    source_type: source_type ? source_type.split(',') : [],
+    grade: grade ? grade.split(',') : [],
+    mobility: mobility ? mobility.split(',') : [],
+    entity: entity ? entity.split(',') : [],
   };
 };
 export default function Filter({ countries, parameters, sources }) {
@@ -73,19 +77,16 @@ export default function Filter({ countries, parameters, sources }) {
       }
 
       case 'source_type': {
-        if (query.source_type && query.source_type.includes(value)) {
-          query.source_type = [];
-          setSelected(prev => ({
-            ...prev,
-            ['source_type']: [],
-          }));
-        } else {
-          query.source_type = [value];
-          setSelected(prev => ({
-            ...prev,
-            ['source_type']: [value],
-          }));
-        }
+        const { grade, mobility, entity } = value;
+        query.grade = grade ? [grade] : [];
+        query.mobility = mobility ? [mobility] : [];
+        query.entity = entity ? [entity] : [];
+        setSelected(prev => ({
+          ...prev,
+          grade: query.grade,
+          mobility: query.mobility,
+          entity: query.entity,
+        }));
         break;
       }
 
@@ -282,7 +283,11 @@ export default function Filter({ countries, parameters, sources }) {
             })}
           </ul>
           */}
-          <SensorTypeFilter />
+          <SensorTypeFilter
+            onApplyClick={(grade, mobility, entity) => {
+              onFilterSelect('source_type', { grade, mobility, entity });
+            }}
+          />
         </Dropdown>
 
         <Dropdown
@@ -359,18 +364,27 @@ export default function Filter({ countries, parameters, sources }) {
             );
           })}
 
-          {selected.source_type.map(o => {
-            return (
-              <button
-                type="button"
-                className="button--filter-pill"
-                key={o}
-                onClick={() => onFilterSelect('source_type', o)}
-              >
-                <span>{o}</span>
-              </button>
-            );
-          })}
+          {['grade', 'mobility', 'entity'].map(key =>
+            selected[key].map(o => {
+              return (
+                <button
+                  type="button"
+                  className="button--filter-pill"
+                  key={o}
+                  onClick={() =>
+                    onFilterSelect('source_type', {
+                      grade: (selected.grade || [])[0],
+                      mobility: (selected.mobility || [])[0],
+                      entity: (selected.entity || [])[0],
+                      [key]: null,
+                    })
+                  }
+                >
+                  <span>{o}</span>
+                </button>
+              );
+            })
+          )}
 
           {selected.order_by.map(o => {
             return (
