@@ -8,7 +8,6 @@ import createReactClass from 'create-react-class';
 
 import { closeDownloadModal } from '../actions/action-creators';
 import PageHeader from '../components/page-header';
-import NewsBanner from '../components/news-banner';
 import PageFooter from '../components/page-footer';
 import { HeaderMessage } from '../components/header';
 import ModalDownload from '../components/modal-download';
@@ -78,7 +77,6 @@ var App = createReactClass({
     return (
       <div className={c('page', pageClass)}>
         <PageHeader />
-        <NewsBanner />
         <main className="page__body" role="main">
           {content}
         </main>
