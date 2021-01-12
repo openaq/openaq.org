@@ -82,7 +82,28 @@
  */
 .sensor__type-filter.drop__content.drop__content--react {
   width: auto;
+
+  .button--base-bounded {
+    box-shadow: none;
+    border: 0.5px solid $base-color;
+    border-left: none;
+
+  }
+  .button--base-bounded:first-child {
+    border-left: 0.5px solid $base-color;
+  }
+
+
+  .button--base-bounded:last-child {
+    border-right: 0.5px solid $base-color;
+
+  }
+
+
 }
+
+
+
 
 .filters .drop__toggle.sort-order {
   grid-column-end: -1;

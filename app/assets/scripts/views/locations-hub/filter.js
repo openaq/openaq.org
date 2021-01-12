@@ -40,7 +40,7 @@ const initFromLocation = ({
     entity: entity ? entity.split(',') : [],
   };
 };
-export default function Filter({ countries, parameters, sources }) {
+export default function Filter({ countries, parameters, sources, manufacturers}) {
   let history = useHistory();
   let location = useLocation();
 
@@ -287,6 +287,10 @@ export default function Filter({ countries, parameters, sources }) {
             onApplyClick={(grade, mobility, entity) => {
               onFilterSelect('source_type', { grade, mobility, entity });
             }}
+            grade={selected.grade}
+            mobility={selected.mobility}
+            entity={selected.entity}
+            manufacturers={manufacturers}
           />
         </Dropdown>
 

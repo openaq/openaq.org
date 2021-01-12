@@ -32,6 +32,7 @@ export default function LocationsHub({
   parameters,
   countries,
   sources,
+  manufacturers,
   fetching,
   fetched,
   error,
@@ -57,9 +58,10 @@ export default function LocationsHub({
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
       source: query.sources && query.sources.split(','),
-      isMobile: query.mobility && query.mobility.split(',')[0] === 'Mobile',
-      entity: query.entity && query.entity.split(',').map(e => e.toLowerCase()),
-      sensorType: query.grade && query.grade.split(',').map(e => e.toLowerCase()),
+      // The following are not lists
+      isMobile: query.mobility && query.mobility === 'Mobile',
+      entity: query.entity && query.entity.toLowerCase(),
+      sensorType: query.grade && query.grade.toLowerCase()
     });
   }, [location]);
 
@@ -94,6 +96,7 @@ export default function LocationsHub({
                 parameters={parameters}
                 countries={countries}
                 sources={sources}
+                manufacturers={manufacturers}
               />
             </div>
 
@@ -155,6 +158,7 @@ function selector(state) {
     parameters: state.baseData.data.parameters,
     countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
+    manufacturers: state.baseData.data.manufacturers,
     fetching: state.locations.fetching,
     fetched: state.locations.fetched,
     error: state.locations.error,
