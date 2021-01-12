@@ -152,7 +152,7 @@ function Location(props) {
           download: onDownloadClick,
           compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
-        sourceType={data.sourceType}
+        sourceType={data.sources.length && data.sources[0].sensorType}
         isMobile={data.isMobile}
       />
       <div className="inpage__body">
