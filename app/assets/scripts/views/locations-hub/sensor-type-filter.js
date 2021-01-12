@@ -13,6 +13,7 @@ const SectionWrapper = styled.div`
   border-bottom: 1px solid #ababab;
   display: grid;
   grid-gap: 0.5rem;
+  padding-bottom: 0.5rem;
 `;
 const SectionTitle = styled.p`
   margin: 0;
@@ -45,7 +46,7 @@ function Section(props) {
               'button--primary': v === selected,
               'button--base-bounded': v !== selected,
             })}
-            onClick={e => {
+            onClick={() => {
               setSelected(v === selected ? null : v);
             }}
           >
@@ -58,15 +59,30 @@ function Section(props) {
   );
 }
 
-Section.propTypes = {};
+Section.propTypes = {
+  title: T.string,
+  options: T.array,
+  selected: T.string,
+  setSelected: T.function,
+  children: T.node,
+};
 
 function SensorTypeFilter(props) {
-  const { onApplyClick, manufacturers } = props;
+  const {
+    onApplyClick,
+    manufacturers,
+    grade,
+    manufacturer,
+    entity,
+    mobility,
+  } = props;
 
-  const [selectedGrade, setSelectedGrade] = useState(null);
-  const [selectedManufacturer, setSelectedManufacturer] = useState(null);
-  const [selectedMobility, setSelectedMobility] = useState(null);
-  const [selectedEntity, setSelectedEntity] = useState(null);
+  const [selectedGrade, setSelectedGrade] = useState(grade);
+  const [selectedManufacturer, setSelectedManufacturer] = useState(
+    manufacturer
+  );
+  const [selectedMobility, setSelectedMobility] = useState(mobility);
+  const [selectedEntity, setSelectedEntity] = useState(entity);
   return (
     <Wrapper data-cy="filter-source-type">
       <Section
@@ -76,10 +92,15 @@ function SensorTypeFilter(props) {
         setSelected={setSelectedGrade}
         title="Grade"
       >
-        <select className="form__control form__control--medium select--base-bounded"
+        <select
+          className="form__control form__control--medium select--base-bounded"
+          id="manufacturer__name"
           onChange={e => setSelectedManufacturer(e.target.value)}
-          placeholder='Select manufacturer'
+          defaultValue={'default'}
         >
+          <option value={'default'} disabled>
+            {'Select manufacturer'}
+          </option>
           {manufacturers.map(m => (
             <option value={m} key={m}>
               {m}
@@ -105,6 +126,14 @@ function SensorTypeFilter(props) {
 
       <button
         type="button"
+        disabled={
+          !(
+            selectedGrade ||
+            selectedManufacturer ||
+            selectedMobility ||
+            selectedEntity
+          )
+        }
         className={c('button', {
           'button--base': !(
             selectedGrade &&
@@ -112,10 +141,18 @@ function SensorTypeFilter(props) {
             selectedEntity
           ),
           'button--primary':
-            selectedGrade || selectedMobility || selectedEntity,
+            selectedGrade ||
+            selectedManufacturer ||
+            selectedMobility ||
+            selectedEntity,
         })}
         onClick={() =>
-          onApplyClick(selectedGrade, selectedManufacturer, selectedMobility, selectedEntity)
+          onApplyClick(
+            selectedGrade,
+            selectedManufacturer,
+            selectedMobility,
+            selectedEntity
+          )
         }
       >
         Apply
@@ -126,5 +163,10 @@ function SensorTypeFilter(props) {
 
 SensorTypeFilter.propTypes = {
   onApplyClick: T.func,
+  manufacturers: T.array,
+  grade: T.string,
+  manufacturer: T.string,
+  entity: T.string,
+  mobility: T.string,
 };
 export default SensorTypeFilter;

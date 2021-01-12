@@ -19,7 +19,6 @@ const defaultSelected = {
 };
 
 const sortOptions = ['location', 'country', 'city', 'count'];
-const sourceTypeOptions = ['stationary', 'mobile'];
 
 const initFromLocation = ({
   countries,
@@ -37,18 +36,18 @@ const initFromLocation = ({
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
 
-    /*
-    grade: grade ? grade.split(',') : [],
-    manufacturer: manufacturer ? manufacturer.split(',') : [],
-    mobility: mobility ? mobility.split(',') : [],
-    entity: entity ? entity.split(',') : [],*/
     grade: grade,
     manufacturer: manufacturer,
-    mobility: mobility ,
-    entity: entity 
+    mobility: mobility,
+    entity: entity,
   };
 };
-export default function Filter({ countries, parameters, sources, manufacturers}) {
+export default function Filter({
+  countries,
+  parameters,
+  sources,
+  manufacturers,
+}) {
   let history = useHistory();
   let location = useLocation();
 
@@ -86,10 +85,10 @@ export default function Filter({ countries, parameters, sources, manufacturers})
 
       case 'source_type': {
         const { grade, manufacturer, mobility, entity } = value;
-        query.grade = grade 
-        query.manufacturer = manufacturer 
-        query.mobility = mobility 
-        query.entity = entity 
+        query.grade = grade;
+        query.manufacturer = manufacturer;
+        query.mobility = mobility;
+        query.entity = entity;
         setSelected(prev => ({
           ...prev,
           grade: query.grade,
@@ -295,7 +294,12 @@ export default function Filter({ countries, parameters, sources, manufacturers})
           */}
           <SensorTypeFilter
             onApplyClick={(grade, manufacturer, mobility, entity) => {
-              onFilterSelect('source_type', { grade, manufacturer, mobility, entity });
+              onFilterSelect('source_type', {
+                grade,
+                manufacturer,
+                mobility,
+                entity,
+              });
             }}
             grade={selected.grade}
             mobility={selected.mobility}
@@ -332,9 +336,8 @@ export default function Filter({ countries, parameters, sources, manufacturers})
       </div>
 
       {Object.values(selected).find(o => {
-        return  true
-      }
-      ) && (
+        return Array.isArray(o) ? o.length > 0 : o;
+      }) && (
         <div className="filters-summary">
           {selected.countries.map(o => {
             const country = countries.find(x => x.code === o);
@@ -382,35 +385,29 @@ export default function Filter({ countries, parameters, sources, manufacturers})
           })}
 
           {['grade', 'manufacturer', 'mobility', 'entity'].map(key => {
-            const o = selected[key]//.map(o => {
-              return (
-                o && <button
+            const o = selected[key];
+            return (
+              o && (
+                <button
                   type="button"
                   className="button--filter-pill"
                   key={o}
                   onClick={() =>
                     onFilterSelect('source_type', {
-                      /*
-                      grade: (selected.grade || [])[0],
-                      mobility: (selected.mobility || [])[0],
-                      entity: (selected.entity || [])[0],
-                      manufacturer: (selected.manufacturer || [])[0],*/
                       grade: selected.grade,
                       mobility: selected.mobility,
                       entity: selected.entity,
                       manufacturer: selected.manufacturer,
 
                       [key]: null,
-
                     })
                   }
                 >
                   <span>{o}</span>
                 </button>
-              );
-            })
-          //)
-          }
+              )
+            );
+          })}
 
           {selected.order_by.map(o => {
             return (
@@ -449,4 +446,5 @@ Filter.propTypes = {
   countries: T.array,
   sources: T.array,
   order_by: T.array,
+  manufacturers: T.array,
 };

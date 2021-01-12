@@ -98,8 +98,11 @@
     border-right: 0.5px solid $base-color;
 
   }
-
-
+  select#manufacturer__name {
+    box-shadow: inset 0 0 0 0.5px $base-color;
+    color: $base-color;
+    font-weight: unset;
+  }
 }
 
 

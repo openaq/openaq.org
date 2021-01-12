@@ -61,7 +61,7 @@ export default function LocationsHub({
       isMobile: query.mobility && query.mobility === 'Mobile',
       entity: query.entity && query.entity.toLowerCase(),
       sensorType: query.grade && query.grade.toLowerCase(),
-      manufacturerName: query.manufacturer && query.manufacturer
+      manufacturerName: query.manufacturer && query.manufacturer,
     });
   }, [location]);
 
@@ -141,6 +141,7 @@ LocationsHub.propTypes = {
   meta: T.object,
   countries: T.array,
   sources: T.array,
+  manufacturers: T.array,
 
   location: T.object,
   history: T.object,
