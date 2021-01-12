@@ -9,8 +9,10 @@ import config from '../../config';
 const SourceList = styled.ul`
   padding: 0;
   list-style: none;
-  display: grid;
-  grid-gap: 0.5rem;
+
+  > *:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const InfoMessage = styled.div`
@@ -23,7 +25,7 @@ export default function SourceInfo({ sources }) {
   return (
     <Card
       title={sources && sources.length > 1 ? 'Sources' : 'Source'}
-      gridColumn={'11 / -1'}
+      gridColumn={'10 / -1'}
       renderBody={() => {
         if (sources) {
           return (
@@ -36,11 +38,14 @@ export default function SourceInfo({ sources }) {
                       href={source.url}
                       rel="noreferrer noopener"
                       target="_blank"
+                      title={source.name}
                     >
                       {source.name}
                     </a>
                   ) : (
-                    <p className="source__title">{source.name}</p>
+                    <p className="source__title" title={source.name}>
+                      {source.name}
+                    </p>
                   )}
                   <p className="source__readme">
                     {source.readme ? (

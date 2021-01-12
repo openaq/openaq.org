@@ -139,10 +139,13 @@
 }
 
 .source__title {
-  color: $primary-color;
+  @extend .truncated;
+  display: block;
+  color: $base-color;
   margin: 0;
 
   &--external {
+    color: $primary-color;
     &::before {
       @extend %openaq-ds-icon-share;
       margin-right: 0.25rem;
