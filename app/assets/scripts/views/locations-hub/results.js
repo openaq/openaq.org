@@ -85,7 +85,6 @@ export default function Results({
               onDownloadClick={openModal}
               parametersList={loc.parameters}
               sources={loc.sources || []}
-              sourceType={loc.sourceType}
               totalMeasurements={loc.measurements}
             />
           );
