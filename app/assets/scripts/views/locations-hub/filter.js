@@ -36,10 +36,16 @@ const initFromLocation = ({
     countries: countries ? countries.split(',') : [],
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
+
+    /*
     grade: grade ? grade.split(',') : [],
     manufacturer: manufacturer ? manufacturer.split(',') : [],
     mobility: mobility ? mobility.split(',') : [],
-    entity: entity ? entity.split(',') : [],
+    entity: entity ? entity.split(',') : [],*/
+    grade: grade,
+    manufacturer: manufacturer,
+    mobility: mobility ,
+    entity: entity 
   };
 };
 export default function Filter({ countries, parameters, sources, manufacturers}) {
@@ -80,11 +86,10 @@ export default function Filter({ countries, parameters, sources, manufacturers})
 
       case 'source_type': {
         const { grade, manufacturer, mobility, entity } = value;
-        query.grade = grade ? [grade] : [];
-        query.manufacturer = manufacturer ? [manufacturer] : [];
-
-        query.mobility = mobility ? [mobility] : [];
-        query.entity = entity ? [entity] : [];
+        query.grade = grade 
+        query.manufacturer = manufacturer 
+        query.mobility = mobility 
+        query.entity = entity 
         setSelected(prev => ({
           ...prev,
           grade: query.grade,
@@ -326,7 +331,10 @@ export default function Filter({ countries, parameters, sources, manufacturers})
         </Dropdown>
       </div>
 
-      {Object.values(selected).find(o => o.length > 0) && (
+      {Object.values(selected).find(o => {
+        return  true
+      }
+      ) && (
         <div className="filters-summary">
           {selected.countries.map(o => {
             const country = countries.find(x => x.code === o);
@@ -373,20 +381,27 @@ export default function Filter({ countries, parameters, sources, manufacturers})
             );
           })}
 
-          {['grade', 'manufacturer', 'mobility', 'entity'].map(key =>
-            selected[key].map(o => {
+          {['grade', 'manufacturer', 'mobility', 'entity'].map(key => {
+            const o = selected[key]//.map(o => {
               return (
-                <button
+                o && <button
                   type="button"
                   className="button--filter-pill"
                   key={o}
                   onClick={() =>
                     onFilterSelect('source_type', {
+                      /*
                       grade: (selected.grade || [])[0],
                       mobility: (selected.mobility || [])[0],
                       entity: (selected.entity || [])[0],
-                      manufacturer: (selected.manufacturer || [])[0],
+                      manufacturer: (selected.manufacturer || [])[0],*/
+                      grade: selected.grade,
+                      mobility: selected.mobility,
+                      entity: selected.entity,
+                      manufacturer: selected.manufacturer,
+
                       [key]: null,
+
                     })
                   }
                 >
@@ -394,7 +409,8 @@ export default function Filter({ countries, parameters, sources, manufacturers})
                 </button>
               );
             })
-          )}
+          //)
+          }
 
           {selected.order_by.map(o => {
             return (
