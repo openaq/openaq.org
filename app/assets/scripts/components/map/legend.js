@@ -108,12 +108,12 @@ export default function Legend({
           <dt>
             <Circle />
           </dt>
-          <dd>Government Data stations</dd>
+          <dd>Reference grade sensor</dd>
 
           <dt>
             <Square />
           </dt>
-          <dd>Low Cost Sensor Stations</dd>
+          <dd>Low Cost Sensor</dd>
         </Definition>
       </Container>
       <Container>
