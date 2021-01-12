@@ -51,21 +51,15 @@ export default function LocationsHub({
     });
     setPage(() => getPage(query));
 
-    let isMobile;
-    if (query.source_type) {
-      if (query.source_type.includes('mobile')) {
-        isMobile = true;
-      } else if (query.source_type.includes('stationary')) {
-        isMobile = false;
-      }
-    }
     setFilters({
       order_by: query.order_by && query.order_by.split(','),
       sort: 'desc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
       source: query.sources && query.sources.split(','),
-      isMobile,
+      isMobile: query.mobility && query.mobility.split(',')[0] === 'Mobile',
+      entity: query.entity && query.entity.split(',').map(e => e.toLowerCase()),
+      sensorType: query.grade && query.grade.split(',').map(e => e.toLowerCase()),
     });
   }, [location]);
 

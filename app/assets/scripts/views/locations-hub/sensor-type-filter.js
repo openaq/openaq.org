@@ -58,7 +58,7 @@ function SensorTypeFilter(props) {
   return (
     <Wrapper>
       <Section
-        options={['Low Cost Sensor', 'Reference-Grade']}
+        options={['Low-Cost Sensor', 'Reference']}
         selected={selectedGrade}
         setSelected={setSelectedGrade}
         title="Grade"
