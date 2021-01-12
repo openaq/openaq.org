@@ -2,6 +2,10 @@
    Global: Cards
    ========================================================================== */
 
+.card__contents {
+  max-width: 100%;
+}
+
 .card--data {
   .card__title small {
     display: block;
