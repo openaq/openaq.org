@@ -16,6 +16,7 @@ import InfoButton from '../info-button';
 
 const ChartContainer = styled.div`
   max-height: 24rem;
+  min-height: 20rem;
   padding: 0;
 `;
 
