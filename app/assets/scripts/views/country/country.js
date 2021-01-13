@@ -169,7 +169,10 @@ function Country(props) {
           <div className="inpage__body">
             <section className="fold" id="country-fold-map">
               <div className="fold__body">
-                <MapComponent bbox={getCountryBbox(country.code)}>
+                <MapComponent
+                  bbox={getCountryBbox(country.code)}
+                  scrollZoomDisabled
+                >
                   <LocationsSource activeParameter={2}>
                     <MeasurementsLayer
                       activeParameter={2}
