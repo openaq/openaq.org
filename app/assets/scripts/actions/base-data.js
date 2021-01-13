@@ -33,6 +33,8 @@ export function fetchBaseData() {
       countries: [],
       sources: [],
       parameters: [],
+      manufacturers: [],
+      models: [],
       totalMeasurements: 0,
     };
 
@@ -80,5 +82,7 @@ export function fetchBaseData() {
     fetcher('countries');
     fetcher('sources');
     fetcher('parameters');
+    fetcher('manufacturers');
+    fetcher('models');
   };
 }

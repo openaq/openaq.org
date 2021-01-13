@@ -5,19 +5,6 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
-const categories = [
-  {
-    id: 'Core',
-    parameters: [],
-  },
-  {
-    id: 'Additional',
-    info:
-      'The following pollutants are less common than the core parameters. You may have to broaden other search filters when using these parameters to find sufficient results',
-    parameters: [],
-  },
-];
-
 const StyledTooltip = styled(ReactTooltip)`
   width: ${({ width }) => width || 'auto'};
   max-width: 20rem;
@@ -43,6 +30,19 @@ const Portal = ({ children }) => {
  */
 function ParamSelect(props) {
   const { parameters, onFilterSelect, selected } = props;
+  const categories = [
+    {
+      id: 'Core',
+      parameters: [],
+    },
+    {
+      id: 'Additional',
+      info:
+        'The following pollutants are less common than the core parameters. You may have to broaden other search filters when using these parameters to find sufficient results',
+      parameters: [],
+    },
+  ];
+
   return (
     <ul
       role="menu"
@@ -82,7 +82,7 @@ function ParamSelect(props) {
                 </Portal>
               )}
 
-              {_.sortBy(list).map(param => {
+              {_.sortBy(list, 'displayName').map(param => {
                 return (
                   <label
                     className="form__option form__option--custom-checkbox"

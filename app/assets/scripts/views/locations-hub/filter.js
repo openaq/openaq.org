@@ -6,6 +6,7 @@ import c from 'classnames';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
 import ParamSelect from '../../components/parameters-selection';
+import SensorTypeFilter from './sensor-type-filter';
 
 import { buildQS } from '../../utils/url';
 import { toggleValue } from '../../utils/array';
@@ -19,24 +20,35 @@ const defaultSelected = {
 };
 
 const sortOptions = ['location', 'country', 'city', 'count'];
-const sourceTypeOptions = ['stationary', 'mobile'];
 
 const initFromLocation = ({
   countries,
   parameters,
   sources,
   order_by,
-  source_type,
+  grade,
+  manufacturer,
+  mobility,
+  entity,
 }) => {
   return {
     parameters: parameters ? parameters.split(',').map(Number) : [],
     countries: countries ? countries.split(',') : [],
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
-    source_type: source_type ? source_type.split(',') : [],
+
+    grade: grade,
+    manufacturer: manufacturer,
+    mobility: mobility,
+    entity: entity,
   };
 };
-export default function Filter({ countries, parameters, sources }) {
+export default function Filter({
+  countries,
+  parameters,
+  sources,
+  manufacturers,
+}) {
   let history = useHistory();
   let location = useLocation();
 
@@ -73,19 +85,18 @@ export default function Filter({ countries, parameters, sources }) {
       }
 
       case 'source_type': {
-        if (query.source_type && query.source_type.includes(value)) {
-          query.source_type = [];
-          setSelected(prev => ({
-            ...prev,
-            ['source_type']: [],
-          }));
-        } else {
-          query.source_type = [value];
-          setSelected(prev => ({
-            ...prev,
-            ['source_type']: [value],
-          }));
-        }
+        const { grade, manufacturer, mobility, entity } = value;
+        query.grade = grade;
+        query.manufacturer = manufacturer;
+        query.mobility = mobility;
+        query.entity = entity;
+        setSelected(prev => ({
+          ...prev,
+          grade: query.grade,
+          manufacturer: query.manufacturer,
+          mobility: query.mobility,
+          entity: query.entity,
+        }));
         break;
       }
 
@@ -196,7 +207,7 @@ export default function Filter({ countries, parameters, sources }) {
                 triggerElement="a"
                 triggerTitle="View source options"
                 triggerText="Data Source"
-                triggerClassName="button--drop-filter filter--drop"
+                triggerClassName="button--drop-filter"
               >
                 <ul
                   role="menu"
@@ -228,35 +239,24 @@ export default function Filter({ countries, parameters, sources }) {
               <Dropdown
                 triggerElement="a"
                 triggerTitle="View source type options"
-                triggerText="Source Type"
-                triggerClassName="button--drop-filter filter--drop"
+                triggerText="Sensor Type"
+                triggerClassName="button--drop-filter"
+                className="sensor__type-filter"
               >
-                <ul
-                  role="menu"
-                  data-cy="filter-source-type"
-                  className="drop__menu drop__menu--select scrollable"
-                >
-                  {_.sortBy(sourceTypeOptions).map(o => {
-                    return (
-                      <li key={o}>
-                        <div
-                          data-cy="filter-menu-item"
-                          className={c('drop__menu-item', {
-                            'drop__menu-item--active': selected.source_type.includes(
-                              o
-                            ),
-                          })}
-                          data-hook="dropdown:close"
-                          onClick={() => {
-                            onFilterSelect('source_type', o);
-                          }}
-                        >
-                          <span data-cy={o}>{o}</span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <SensorTypeFilter
+                  onApplyClick={(grade, manufacturer, mobility, entity) => {
+                    onFilterSelect('source_type', {
+                      grade,
+                      manufacturer,
+                      mobility,
+                      entity,
+                    });
+                  }}
+                  grade={selected.grade}
+                  mobility={selected.mobility}
+                  entity={selected.entity}
+                  manufacturers={manufacturers}
+                />
               </Dropdown>
             </div>
           </div>
@@ -298,7 +298,9 @@ export default function Filter({ countries, parameters, sources }) {
         </div>
       </div>
 
-      {Object.values(selected).find(o => o.length > 0) && (
+      {Object.values(selected).find(o => {
+        return Array.isArray(o) ? o.length > 0 : o;
+      }) && (
         <div className="filters-summary">
           {selected.countries.map(o => {
             const country = countries.find(x => x.code === o);
@@ -345,16 +347,28 @@ export default function Filter({ countries, parameters, sources }) {
             );
           })}
 
-          {selected.source_type.map(o => {
+          {['grade', 'manufacturer', 'mobility', 'entity'].map(key => {
+            const o = selected[key];
             return (
-              <button
-                type="button"
-                className="button--filter-pill"
-                key={o}
-                onClick={() => onFilterSelect('source_type', o)}
-              >
-                <span>{o}</span>
-              </button>
+              o && (
+                <button
+                  type="button"
+                  className="button--filter-pill"
+                  key={o}
+                  onClick={() =>
+                    onFilterSelect('source_type', {
+                      grade: selected.grade,
+                      mobility: selected.mobility,
+                      entity: selected.entity,
+                      manufacturer: selected.manufacturer,
+
+                      [key]: null,
+                    })
+                  }
+                >
+                  <span>{o}</span>
+                </button>
+              )
             );
           })}
 
@@ -395,4 +409,5 @@ Filter.propTypes = {
   countries: T.array,
   sources: T.array,
   order_by: T.array,
+  manufacturers: T.array,
 };
