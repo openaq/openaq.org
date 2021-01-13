@@ -36,6 +36,7 @@ export default function MapCard({ locationId, center, dateRange }) {
 }
 
 MapCard.propTypes = {
-  center: PropTypes.arrayOf(PropTypes.number),
-  dateRange: PropTypes.string,
+  locationId: PropTypes.number.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  dateRange: PropTypes.string.isRequired,
 };
