@@ -5,6 +5,7 @@ import { useRouteMatch } from 'react-router-dom';
 import mapbox from 'mapbox-gl';
 
 import {
+  defaultColor,
   circleOpacity,
   circleBlur,
   coloredCircleRadius,
@@ -12,24 +13,29 @@ import {
   coloredSquareSize,
   borderSquareSize,
 } from '../../utils/map-settings';
-import { getFillExpression } from '../../utils/colors';
 import Popover from './popover';
 import { square } from './square';
 
-export default function MeasurementsLayer({
+export default function DatasetLayer({
   activeParameter,
-  country,
+  isAllLocations,
+  locationIds,
   map,
   sourceId,
+  selectedLocations,
+  setSelectedLocations,
 }) {
   let match = useRouteMatch();
 
-  const countryFilter = ['==', 'country', country];
   const circlesFilter = ['==', ['get', 'isMobile'], false];
   const squaresFilter = ['==', ['get', 'isMobile'], true];
-
-  const circlesCountryFilter = ['all', countryFilter, circlesFilter];
-  const squaresCountryFilter = ['all', countryFilter, squaresFilter];
+  const locationIdFilter = [
+    'in',
+    ['number', ['get', 'locationId']],
+    ['literal', locationIds],
+  ];
+  const circlesLocationIdFilter = ['all', locationIdFilter, circlesFilter];
+  const squaresLocationIdFilter = ['all', locationIdFilter, squaresFilter];
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
@@ -39,7 +45,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': getFillExpression(activeParameter, 'dark'),
+        'icon-color': defaultColor,
       },
       layout: {
         'icon-image': 'square',
@@ -55,7 +61,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': getFillExpression(activeParameter),
+        'icon-color': defaultColor,
       },
       layout: {
         'icon-image': 'square',
@@ -71,7 +77,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'circle',
       paint: {
-        'circle-color': getFillExpression(activeParameter, 'dark'),
+        'circle-color': defaultColor,
         'circle-opacity': 1,
         'circle-radius': borderCircleRadius,
         'circle-blur': 0,
@@ -85,7 +91,7 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'circle',
       paint: {
-        'circle-color': getFillExpression(activeParameter),
+        'circle-color': defaultColor,
         'circle-opacity': circleOpacity,
         'circle-radius': coloredCircleRadius,
         'circle-blur': circleBlur,
@@ -109,6 +115,19 @@ export default function MeasurementsLayer({
       map.getCanvas().style.cursor = '';
     });
 
+    return () => {
+      if (map.getLayer(`${activeParameter}-squares`))
+        map.removeLayer(`${activeParameter}-squares`);
+      if (map.getLayer(`${activeParameter}-square-outline`))
+        map.removeLayer(`${activeParameter}-square-outline`);
+      if (map.getLayer(`${activeParameter}-circles`))
+        map.removeLayer(`${activeParameter}-circles`);
+      if (map.getLayer(`${activeParameter}-circle-outline`))
+        map.removeLayer(`${activeParameter}-circle-outline`);
+    };
+  }, []);
+
+  useEffect(() => {
     const openPopup = e => {
       const coordinates = e.features[0].geometry.coordinates.slice();
 
@@ -118,12 +137,16 @@ export default function MeasurementsLayer({
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
+
       let popoverElement = document.createElement('div');
       ReactDOM.render(
         <Popover
           activeParameter={activeParameter}
+          isAllLocations={isAllLocations}
           locationId={e.features[0].properties.locationId}
           currentPage={parseInt(match.params.id, 10)}
+          selectedLocations={selectedLocations}
+          setSelectedLocations={setSelectedLocations}
         />,
         popoverElement
       );
@@ -135,25 +158,24 @@ export default function MeasurementsLayer({
 
     map.on('click', `${activeParameter}-circles`, openPopup);
     map.on('click', `${activeParameter}-squares`, openPopup);
-
-    return () => {
-      if (map.getLayer(`${activeParameter}-squares`))
-        map.removeLayer(`${activeParameter}-squares`);
-      if (map.getLayer(`${activeParameter}-square-outline`))
-        map.removeLayer(`${activeParameter}-square-outline`);
-      if (map.getLayer(`${activeParameter}-circles`))
-        map.removeLayer(`${activeParameter}-circles`);
-      if (map.getLayer(`${activeParameter}-circle-outline`))
-        map.removeLayer(`${activeParameter}-circle-outline`);
-    };
-  }, [sourceId, activeParameter]);
+  }, [isAllLocations, selectedLocations]);
 
   useEffect(() => {
-    if (country && map.getLayer(`${activeParameter}-circles`)) {
-      map.setFilter(`${activeParameter}-square-outline`, squaresCountryFilter);
-      map.setFilter(`${activeParameter}-squares`, squaresCountryFilter);
-      map.setFilter(`${activeParameter}-circle-outline`, circlesCountryFilter);
-      map.setFilter(`${activeParameter}-circles`, circlesCountryFilter);
+    if (
+      locationIds &&
+      locationIds.length &&
+      map.getLayer(`${activeParameter}-circles`)
+    ) {
+      map.setFilter(
+        `${activeParameter}-square-outline`,
+        squaresLocationIdFilter
+      );
+      map.setFilter(`${activeParameter}-squares`, squaresLocationIdFilter);
+      map.setFilter(
+        `${activeParameter}-circle-outline`,
+        circlesLocationIdFilter
+      );
+      map.setFilter(`${activeParameter}-circles`, circlesLocationIdFilter);
     }
     return () => {
       if (map.getLayer(`${activeParameter}-square-outline`))
@@ -165,14 +187,16 @@ export default function MeasurementsLayer({
       if (map.getLayer(`${activeParameter}-circles`))
         map.setFilter(`${activeParameter}-circles`, circlesFilter);
     };
-  }, [country]);
+  }, [locationIds, activeParameter]);
 
   return null;
 }
 
-MeasurementsLayer.propTypes = {
+DatasetLayer.propTypes = {
   activeParameter: PropTypes.number.isRequired,
+  isAllLocations: PropTypes.bool.isRequired,
   country: PropTypes.string,
+  locationIds: PropTypes.array,
   sourceId: PropTypes.string,
   map: PropTypes.object,
 };
