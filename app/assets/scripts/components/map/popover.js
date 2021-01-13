@@ -84,7 +84,9 @@ export default function Popover({
       p.id === activeParameter.id ||
       p.parameterId === activeParameter.parameterId
   );
-
+  const isDisabled =
+    !allSelectedLocations.includes(locationId) &&
+    allSelectedLocations.length >= 15;
   return (
     <article className="popover">
       <div className="popover__contents">
@@ -151,9 +153,9 @@ export default function Popover({
             <button
               title="Select Location"
               className={`button button--primary-bounded ${
-                allSelectedLocations.length >= 15 && 'disabled'
+                isDisabled && 'disabled'
               }`}
-              disabled={allSelectedLocations.length >= 15}
+              disabled={isDisabled}
               onClick={() =>
                 handleLocationSelection(activeParameter, locationId)
               }
