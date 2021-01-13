@@ -76,7 +76,8 @@ export default function Popover({
   }
 
   let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
-  const allSelectedLocations = Object.values(selectedLocations).flat();
+  const allSelectedLocations =
+    selectedLocations && Object.values(selectedLocations).flat();
   // const allSelectedParams = Object.keys(selectedLocations).flat();
   const parameter = data.parameters.find(
     // TODO: clean up parameter mess with id vs name
@@ -85,6 +86,7 @@ export default function Popover({
       p.parameterId === activeParameter.parameterId
   );
   const isDisabled =
+    selectedLocations &&
     !allSelectedLocations.includes(locationId) &&
     allSelectedLocations.length >= 15;
   return (
@@ -162,9 +164,8 @@ export default function Popover({
             >
               <div>
                 <span style={{ marginRight: `.5rem` }}>
-                  {allSelectedLocations.includes(locationId)
-                    ? // && allSelectedParams.includes(activeParameter)
-                      'Remove Location'
+                  {selectedLocations[activeParameter]?.includes(locationId)
+                    ? 'Remove Location'
                     : 'Select Location'}{' '}
                 </span>
               </div>
