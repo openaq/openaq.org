@@ -25,13 +25,7 @@ const defaultState = {
   fetched: false,
   fetching: false,
   error: null,
-  data: null,
-};
-
-const defaultLocationData = {
-  fetchedParams: false,
-  fetchingParams: false,
-  paramError: null,
+  projectData: null,
   locationData: null,
 };
 
@@ -46,12 +40,11 @@ function Project({ match, history, location }) {
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
   );
   const [isAllLocations, toggleAllLocations] = useState(true);
-  const [selectedLocations, setSelectedLocations] = useState([]);
-  const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
+  const [selectedLocations, setSelectedLocations] = useState({});
   const [
-    { fetchingParams, paramError, locationData },
-    setSelectedLocationData,
-  ] = useState(defaultLocationData);
+    { fetched, fetching, error, projectData, locationData },
+    setState,
+  ] = useState(defaultState);
 
   useEffect(() => {
     let query = qs.parse(location.search, {
@@ -62,7 +55,9 @@ function Project({ match, history, location }) {
   }, [dateRange]);
 
   useEffect(() => {
-    fetchProjectData(id);
+    if (isAllLocations) {
+      fetchProjectData(id);
+    }
 
     return () => {
       setState(defaultState);
@@ -84,7 +79,7 @@ function Project({ match, history, location }) {
             ...state,
             fetched: true,
             fetching: false,
-            data: json.results[0],
+            projectData: json.results[0],
           }));
         },
         e => {
@@ -99,19 +94,23 @@ function Project({ match, history, location }) {
       );
   };
 
-  const getLocations = () => {
-    setSelectedLocationData(state => ({
+  const getSelectedLocationData = () => {
+    const selectedParams = Object.keys(selectedLocations).flat();
+    if (!selectedParams.length) {
+      toggleAllLocations(true);
+      return;
+    }
+    setState(state => ({
       ...state,
-      fetchingParams: true,
-      paramError: null,
+      fetching: true,
+      error: null,
     }));
 
     let query = {
-      location: selectedLocations,
-      parameter: data.parameters[0].id,
+      location: Object.values(selectedLocations).flat() || [],
+      parameter: selectedParams || [],
     };
     let f = buildAPIQS(query, { arrayFormat: 'repeat' });
-    console.log('request', `${config.api}/locations?${f}`);
     fetch(`${config.api}/locations?${f}`)
       .then(response => {
         if (response.status >= 400) {
@@ -121,61 +120,100 @@ function Project({ match, history, location }) {
       })
       .then(
         json => {
-          setSelectedLocationData(state => ({
+          // combines all parameter data for the selected parameters
+          const combinedParameters = json.results
+            .map(location => location.parameters)
+            .flat()
+            .filter(f => selectedParams.includes(f.parameterId.toString()));
+
+          // removes duplicate entries
+          const cleanedParams = Array.from(
+            new Set(combinedParameters.map(param => param.id))
+          ).map(id => {
+            return combinedParameters.find(p => p.id === id);
+          });
+          setState(state => ({
             ...state,
-            fetchedParams: true,
-            fetchingParams: false,
+            fetched: true,
+            fetching: false,
             locationData: {
               results: json.results,
-              allParameters: json.results
-                .map(location => location.parameters)
-                .flat(),
+              parameters: cleanedParams,
             },
           }));
         },
         e => {
           console.log('e', e);
-          setSelectedLocationData(state => ({
+          setState(state => ({
             ...state,
-            fetchedParams: true,
-            fetchingParams: false,
-            paramError: e,
+            fetched: true,
+            fetching: false,
+            error: e,
           }));
         }
       );
+  };
+
+  const handleLocationSelection = (paramId, locationId) => {
+    selectedLocations[paramId]?.includes(locationId)
+      ? setSelectedLocations({
+          ...selectedLocations,
+          [paramId]: selectedLocations[paramId].filter(
+            location => location !== locationId
+          ),
+        })
+      : Object.values(selectedLocations).flat().length < 15
+      ? setSelectedLocations({
+          ...selectedLocations,
+          [paramId]: selectedLocations[paramId]
+            ? [...selectedLocations[paramId], locationId]
+            : [locationId],
+        })
+      : null;
   };
 
   if (!fetched && !fetching) {
     return null;
   }
 
-  if (fetching || fetchingParams) {
+  if (fetching) {
     return <LoadingHeader />;
   }
 
-  if (error || paramError || !data) {
+  if (error || !projectData) {
     return <ErrorHeader />;
   }
 
-  const paramsToDisplay = locationData
-    ? locationData.allParameters
-    : data.parameters;
+  const paramsToDisplay =
+    locationData && !isAllLocations
+      ? // this returns the first of each parameter, this should only be passed to the timeseries chart,
+        // but until we get aggregate data from the endpoint, the other items on the dashboard will consume the first location
+        Array.from(
+          new Set(locationData.parameters.map(param => param.parameterId))
+        ).map(parameterId => {
+          return locationData.parameters.find(
+            p => p.parameterId === parameterId
+          );
+        })
+      : projectData.parameters;
 
   // Lifecycle stage of different sources.
-  const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+  const lifecycle = projectData.sources
+    .map(s => s.lifecycle_stage)
+    .filter(Boolean);
 
   return (
     <section className="inpage">
       <Header
         tagline="Datasets"
-        title={data.name}
-        subtitle={data.subtitle}
+        title={projectData.name}
+        subtitle={projectData.subtitle}
         action={{
           api: `${config.apiDocs}`,
           download: () => {},
         }}
-        sourceType={data.sourceType}
-        isMobile={data.isMobile}
+        sourceType={projectData.sourceType}
+        isMobile={projectData.isMobile}
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
@@ -190,27 +228,28 @@ function Project({ match, history, location }) {
           >
             <div>
               <Pill
-                title={`${selectedLocations.length}/15`}
-                action={() => setSelectedLocations([])}
+                title={`${Object.values(selectedLocations).flat().length}/15`}
+                action={() => toggleAllLocations(true)}
               />
             </div>
             <div style={{ display: `flex`, justifyContent: `flex-end` }}>
-              <button className="nav__action-link" onClick={getLocations}>
+              <button
+                className="nav__action-link"
+                onClick={getSelectedLocationData}
+              >
                 Apply Selection
               </button>
             </div>
           </div>
         )}
         <DatasetLocations
-          bbox={data.bbox || getCountryBbox(data.countries[0])}
-          locationIds={data.locationIds}
-          parameters={data.parameters.filter(p =>
-            Object.keys(parameterMax).includes(p.parameterId.toString())
-          )}
+          bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
+          locationIds={projectData.locationIds}
+          parameters={projectData.parameters}
           toggleAllLocations={toggleAllLocations}
           isAllLocations={isAllLocations}
           selectedLocations={selectedLocations}
-          setSelectedLocations={setSelectedLocations}
+          handleLocationSelection={handleLocationSelection}
         />
         <header
           className="fold__header inner"
@@ -224,18 +263,19 @@ function Project({ match, history, location }) {
           className="inner"
         >
           <DetailsCard
-            measurements={data.measurements}
+            measurements={projectData.measurements}
             lifecycle={lifecycle}
             date={{
-              start: data.firstUpdated,
-              end: data.lastUpdated,
+              start: projectData.firstUpdated,
+              end: projectData.lastUpdated,
             }}
           />
           {/* TODO: pass averages */}
           <LatestMeasurementsCard parameters={paramsToDisplay} />
-          <SourcesCard sources={data.sources} />
+          <SourcesCard sources={projectData.sources} />
           <TimeSeriesCard
-            projectId={data.id}
+            isProject
+            projectId={projectData.id}
             parameters={paramsToDisplay} // TODO: pass averages as well as each location
             dateRange={dateRange}
             titleInfo={
@@ -252,7 +292,7 @@ function Project({ match, history, location }) {
             parameters={paramsToDisplay} // TODO: pass averages
             dateRange={dateRange}
             spatial="project"
-            id={data.name}
+            id={projectData.name}
             titleInfo={
               'The average number of measurements for each pollutant by hour, day, or month at the selected locations. In some views a window may be turned off if that view is not applicable to the selected time window.'
             }

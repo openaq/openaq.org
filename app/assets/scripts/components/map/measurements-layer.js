@@ -44,7 +44,7 @@ export default function MeasurementsLayer({
   map,
   sourceId,
   selectedLocations,
-  setSelectedLocations,
+  handleLocationSelection,
 }) {
   let match = useRouteMatch();
 
@@ -161,7 +161,6 @@ export default function MeasurementsLayer({
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
-
       let popoverElement = document.createElement('div');
       ReactDOM.render(
         <Popover
@@ -170,7 +169,7 @@ export default function MeasurementsLayer({
           locationId={e.features[0].properties.locationId}
           currentPage={parseInt(match.params.id, 10)}
           selectedLocations={selectedLocations}
-          setSelectedLocations={setSelectedLocations}
+          handleLocationSelection={handleLocationSelection}
         />,
         popoverElement
       );
@@ -182,7 +181,7 @@ export default function MeasurementsLayer({
 
     map.on('click', `${activeParameter}-circles`, openPopup);
     map.on('click', `${activeParameter}-squares`, openPopup);
-  }, [isAllLocations, selectedLocations]);
+  }, [isAllLocations, selectedLocations, activeParameter]);
 
   useEffect(() => {
     if (country && map.getLayer(`${activeParameter}-circles`)) {
@@ -204,10 +203,6 @@ export default function MeasurementsLayer({
   }, [country]);
 
   useEffect(() => {
-    console.log(
-      'select meas',
-      map.setFilter(`${activeParameter}-square-outline`, locationIdFilter)
-    );
     if (
       locationIds &&
       locationIds.length &&

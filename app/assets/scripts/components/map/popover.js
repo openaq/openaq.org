@@ -20,7 +20,7 @@ export default function Popover({
   locationId,
   currentPage,
   selectedLocations,
-  setSelectedLocations,
+  handleLocationSelection,
 }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
 
@@ -76,6 +76,8 @@ export default function Popover({
   }
 
   let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
+  const allSelectedLocations = Object.values(selectedLocations).flat();
+  // const allSelectedParams = Object.keys(selectedLocations).flat();
   const parameter = data.parameters.find(
     // TODO: clean up parameter mess with id vs name
     p =>
@@ -149,25 +151,18 @@ export default function Popover({
             <button
               title="Select Location"
               className={`button button--primary-bounded ${
-                selectedLocations.length >= 15 && 'disabled'
+                allSelectedLocations.length >= 15 && 'disabled'
               }`}
-              disabled={selectedLocations.length >= 15}
+              disabled={allSelectedLocations.length >= 15}
               onClick={() =>
-                selectedLocations.includes(locationId)
-                  ? setSelectedLocations(
-                      selectedLocations.filter(
-                        location => location !== locationId
-                      )
-                    )
-                  : selectedLocations.length < 15
-                  ? setSelectedLocations([...selectedLocations, locationId])
-                  : null
+                handleLocationSelection(activeParameter, locationId)
               }
             >
               <div>
                 <span style={{ marginRight: `.5rem` }}>
-                  {selectedLocations.includes(locationId)
-                    ? 'Remove Location'
+                  {allSelectedLocations.includes(locationId)
+                    ? // && allSelectedParams.includes(activeParameter)
+                      'Remove Location'
                     : 'Select Location'}{' '}
                 </span>
               </div>
@@ -184,7 +179,7 @@ Popover.propTypes = {
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
   isAllLocations: T.bool,
-  selectedLocations: T.array,
+  selectedLocations: T.object,
   setSelectedLocations: T.func,
 };
 

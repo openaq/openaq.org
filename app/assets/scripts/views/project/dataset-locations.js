@@ -14,7 +14,7 @@ export default function DatasetLocations({
   toggleAllLocations,
   isAllLocations,
   selectedLocations,
-  setSelectedLocations,
+  handleLocationSelection,
 }) {
   const [activeParameter, setActiveParameter] = useState(parameters[0]);
 
@@ -34,7 +34,7 @@ export default function DatasetLocations({
               isAllLocations={isAllLocations}
               locationIds={locationIds}
               selectedLocations={selectedLocations}
-              setSelectedLocations={setSelectedLocations}
+              handleLocationSelection={handleLocationSelection}
             />
           </LocationsSource>
 
@@ -63,5 +63,5 @@ DatasetLocations.propTypes = {
   isAllLocations: PropTypes.bool.isRequired,
   toggleAllLocations: PropTypes.func.isRequired,
   selectedLocations: PropTypes.array,
-  setSelectedLocations: PropTypes.func.isRequired,
+  handleLocationSelection: PropTypes.func.isRequired,
 };
