@@ -34,6 +34,16 @@ const CardHeader = styled(BaseHeader)`
   grid-gap: 0.5rem;
 `;
 
+// These formats correspond to the value of
+// length of dateRange.split('/')
+// In this case dateRange is null === entire project
+// OR length 2 -> single month (YYYY/MM)
+// OR length3 -> single day (YYYY/MM/DD)
+const LIFETIME_FORMAT = null;
+const MONTH_FORMAT = 2;
+const DAY_FORMAT = 3;
+const MOBILE_ONLY = true;
+
 const defaultState = {
   hod: {
     fetched: false,
@@ -41,7 +51,17 @@ const defaultState = {
     error: null,
     data: null,
     // This is currently not getting requested at all
-    dateType: [],
+    // Define date type as potential values for dateRange
+    // OR length of dateRange.split('/')
+    // In this case dateRange is null === entire project
+    // OR length 2 -> single month (YYYY/MM)
+    // Single day is not accepted
+    //dateRangeType: [null, 2, 3],
+    dateRangeType: [
+      //[LIFETIME_FORMAT, MOBILE_ONLY],
+      [MONTH_FORMAT, MOBILE_ONLY],
+      [DAY_FORMAT, MOBILE_ONLY],
+    ],
   },
   dow: {
     fetched: false,
@@ -53,7 +73,8 @@ const defaultState = {
     // In this case dateRange is null === entire project
     // OR length 2 -> single month (YYYY/MM)
     // Single day is not accepted
-    dateRangeType: [null, 2],
+    //dateRangeType: [null, 2],
+    dateRangeType: [[LIFETIME_FORMAT], [MONTH_FORMAT], [DAY_FORMAT]],
   },
   moy: {
     fetched: false,
@@ -64,7 +85,8 @@ const defaultState = {
     // OR length of dateRange.split('/')
     // In this case dateRange is null === entire project
     // Single day is not accepted, Single month not accepted
-    dateRangeType: [null],
+    //dateRangeType: [null],
+    dateRangeType: [[LIFETIME_FORMAT], [MONTH_FORMAT]],
   },
 };
 
@@ -86,6 +108,7 @@ export default function TemporalCoverageCard({
   id,
   dateRange,
   titleInfo,
+  isMobile,
 }) {
   const [activeTab, setActiveTab] = useState({
     id: parameters[0].parameter || parameters[0],
@@ -167,13 +190,22 @@ export default function TemporalCoverageCard({
         );
     };
 
-    const dateRangeType = dateRange ? dateRange.split('/').length : null;
+    const currentDateFormat = dateRange ? dateRange.split('/').length : null;
 
-    ['dow', 'moy']
-      .filter(temp => {
-        return state[temp].dateRangeType.includes(dateRangeType);
+    Object.keys(state)
+      .filter(temporal => {
+        return state[temporal].dateRangeType.find(([format, mobileStatus]) => {
+          return (
+            format === currentDateFormat &&
+            (mobileStatus === undefined || mobileStatus === isMobile)
+          );
+        });
+        //return state[temporal].dateRangeType.includes(dateRangeType);
       })
-      .forEach(t => fetchData(t));
+      .forEach(t => {
+        console.log(t);
+        fetchData(t);
+      });
     return () => {
       setState(defaultState);
     };
@@ -257,17 +289,20 @@ export default function TemporalCoverageCard({
               temporal="hod"
               data={state.hod.data}
               fetching={state.hod.fetching}
+              error={state.hod.error}
             />
             <Chart
               title="Day of the Week"
               temporal="dow"
               data={state.dow.data && Object.values(combinedDays)}
+              error={state.dow.error}
               fetching={state.dow.fetching}
             />
             <Chart
               title="Month of the Year"
               temporal="moy"
               data={state.moy.data}
+              error={state.moy.error}
               fetching={state.moy.fetching}
             />
           </ChartLayout>
@@ -289,9 +324,10 @@ TemporalCoverageCard.propTypes = {
   spatial: T.oneOf(['project', 'location']).isRequired,
   dateRange: T.string,
   id: T.oneOfType([T.string, T.number]).isRequired,
+  isMobile: T.bool,
 };
 
-function Chart({ title, temporal, data, fetching }) {
+function Chart({ title, temporal, data, error, fetching }) {
   return (
     <ChartContainer>
       <div className="header">
@@ -305,6 +341,8 @@ function Chart({ title, temporal, data, fetching }) {
           yAxisLabel="Count"
           xAxisLabels={data.map(m => m[temporal])}
         />
+      ) : !error ? (
+        <p>Not applicable.</p>
       ) : (
         <ErrorMessage />
       )}
@@ -323,5 +361,6 @@ Chart.propTypes = {
       moy: T.string,
     })
   ),
+  error: T.object,
   fetching: T.bool.isRequired,
 };

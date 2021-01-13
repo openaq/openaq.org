@@ -138,8 +138,11 @@ function Location(props) {
     Object.keys(parameterMax).includes(p.parameterId.toString())
   );
 
+  //
   // Lifecycle stage of different sources.
-  const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+  const lifecycle = (data.sources || [])
+    .map(s => s.lifecycle_stage)
+    .filter(Boolean);
 
   return (
     <section className="inpage">
@@ -193,6 +196,7 @@ function Location(props) {
             titleInfo={
               'The average number of measurements for each pollutant by hour, day, or month. In some views a window may be turned off if that view is not applicable to the selected time window.'
             }
+            isMobile={data.isMobile}
           />
           <MeasureandsCard
             parameters={data.parameters}
@@ -201,14 +205,16 @@ function Location(props) {
             }
           />
         </Dashboard>
-        <NearbyLocations
-          locationId={data.id}
-          center={[data.coordinates.longitude, data.coordinates.latitude]}
-          city={data.city}
-          country={data.country}
-          parameters={filteredParams}
-          initialActiveParameter={filteredParams[0]}
-        />
+        {filteredParams[0] && (
+          <NearbyLocations
+            locationId={data.id}
+            center={[data.coordinates.longitude, data.coordinates.latitude]}
+            city={data.city}
+            country={data.country}
+            parameters={filteredParams}
+            initialActiveParameter={filteredParams[0]}
+          />
+        )}
       </div>
     </section>
   );
