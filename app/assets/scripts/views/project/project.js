@@ -149,9 +149,7 @@ function Project({ match, history, location }) {
         <DatasetLocations
           bbox={data.bbox || getCountryBbox(data.countries[0])}
           locationIds={data.locationIds}
-          parameters={data.parameters.filter(p =>
-            Object.keys(parameterMax).includes(p.parameterId.toString())
-          )}
+          parameters={data.parameters}
           toggleAllLocations={toggleAllLocations}
           isAllLocations={isAllLocations}
           selectedLocations={selectedLocations}
