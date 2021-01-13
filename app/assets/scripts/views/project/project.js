@@ -233,7 +233,8 @@ function Project({ match, history, location }) {
         {!isAllLocations && locationData ? (
           <LocationsDashboard
             locationData={locationData}
-            measurements={Object.keys(selectedLocations).flat()}
+            measurements={projectData.measurements}
+            selectedParams={Object.keys(selectedLocations).flat()}
             lifecycle={lifecycle}
             dateRange={dateRange}
             selectedLocationDates={{
@@ -243,6 +244,7 @@ function Project({ match, history, location }) {
             sources={projectData.sources}
             locations={Object.values(selectedLocations).flat()}
             country={projectData.countries[0]}
+            name={projectData.name}
           />
         ) : (
           <ProjectDashboard

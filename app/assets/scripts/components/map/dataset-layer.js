@@ -36,7 +36,6 @@ export default function DatasetLayer({
   ];
   const circlesLocationIdFilter = ['all', locationIdFilter, circlesFilter];
   const squaresLocationIdFilter = ['all', locationIdFilter, squaresFilter];
-  console.log('clicking');
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
@@ -159,7 +158,7 @@ export default function DatasetLayer({
 
     map.on('click', `${activeParameter}-circles`, openPopup);
     map.on('click', `${activeParameter}-squares`, openPopup);
-  }, [isAllLocations, selectedLocations]);
+  }, [isAllLocations, selectedLocations, activeParameter]);
 
   useEffect(() => {
     if (

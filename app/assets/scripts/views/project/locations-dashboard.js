@@ -23,14 +23,15 @@ const defaultState = {
 };
 
 function LocationsDashboard({
-  locationData,
   measurements,
+  selectedParams,
   lifecycle,
   dateRange,
   selectedLocationDates,
   sources,
   locations,
   country,
+  name,
 }) {
   const [{ fetched, fetching, error, locationAverages }, setState] = useState(
     defaultState
@@ -50,10 +51,9 @@ function LocationsDashboard({
 
   const fetchLocationAverages = () => {
     setState(state => ({ ...state, fetching: true, error: null }));
-    console.log('measurements', measurements);
     let query = {
-      parameter: measurements,
-      location: locations,
+      parameter: [...new Set(selectedParams)],
+      location: [...new Set(locations)],
       ...(dateRange
         ? {
             // In user space, month is 1 indexed
@@ -80,11 +80,46 @@ function LocationsDashboard({
       })
       .then(
         json => {
+          const aggregatedLocationAvgs = json.results.reduce((prev, entry) => {
+            const paramName = entry.parameter;
+            const prevMatchingParam = { ...prev[paramName] };
+            return {
+              ...prev,
+              [paramName]: {
+                displayName: entry.displayName,
+                averageSum:
+                  prevMatchingParam?.averageSum + entry.average ||
+                  entry.average,
+                totalEntries: prevMatchingParam?.totalEntries + 1 || 1,
+                count:
+                  prevMatchingParam?.count + entry.measurement_count ||
+                  entry.measurement_count,
+                parameter: entry.parameter,
+                parameterId: entry.parameterId,
+                unit: entry.unit,
+                //   firstUpdated: entry.hour < [param].firstUpdated ? entry.hour : [param].firstUpdated,
+                lastUpdated:
+                  new Date(entry.day) > new Date(prevMatchingParam.lastUpdated)
+                    ? entry.day
+                    : prevMatchingParam.lastUpdated || entry.day,
+                lastValue:
+                  new Date(entry.day) > new Date(prevMatchingParam.lastUpdated)
+                    ? entry.average
+                    : prevMatchingParam.lastValue || entry.average,
+              },
+            };
+          }, {});
+          const calculatedAvg = Object.values(aggregatedLocationAvgs)
+            .flat()
+            .map(param => {
+              param.average = param.averageSum / param.totalEntries;
+              return param;
+            });
           setState(state => ({
             ...state,
             fetched: true,
             fetching: false,
-            locationAverages: json.results,
+            locationAverages: calculatedAvg,
           }));
         },
         e => {
@@ -110,49 +145,15 @@ function LocationsDashboard({
   if (error || !locationAverages) {
     return <ErrorHeader />;
   }
-  console.log('pre locationAverages', locationAverages);
-  // console.log(
-  //   'locationAverages',
-  //   locationAverages &&
-  //     locationAverages.reduce((prev, entry) => {
-  //       const paramName = entry.parameter;
-  //       const prevMatchingParam = prev[paramName];
-  //       // paramName: {
-  //       //   average: (calc(currAvg, entry.average)),
-  //       //   displayName: entry.displayName,
-  //       //   count: (calc(currCount + measurement_count)),
-  //       //   parameter: entry.parameter,
-  //       //   parameterId: entry.parameterId,
-  //       //   unit: entry.unit,
-  //       //   firstUpdated: entry.hour < [param].firstUpdated ? entry.hour : [param].firstUpdated,
-  //       //   lastUpdated: entry.hour > [param].lastUpdated ? entry.hour : [param].lastUpdated,
-  //       //   lastValue: entry.hour > [param].lastUpdated ? entry.average : [param].lastValue,
-  //       // }
-  //       const attempt = {
-  //         ...prev,
-  //         [paramName]: {
-  //           displayName: entry.displayName,
-  //           // count: prevMatchingParam.count ? prevMatchingParam.count + entry.measurement_count : entry.measurement_count,
-  //           parameter: entry.parameter,
-  //           parameterId: entry.parameterId,
-  //           unit: entry.unit,
-  //           //   firstUpdated: entry.hour < [param].firstUpdated ? entry.hour : [param].firstUpdated,
-  //           //   lastUpdated: entry.hour > [param].lastUpdated ? entry.hour : [param].lastUpdated,
-  //           //   lastValue: entry.hour > [param].lastUpdated ? entry.average : [param].lastValue,
-  //         },
-  //       };
-  //       console.log('reducing', prevMatchingParam, attempt);
-  //       return attempt;
-  //     }, {})
-  // );
+
   return (
     <div className="inner dashboard-cards">
       <DetailsCard
-        measurements={measurements.length}
+        measurements={measurements}
         lifecycle={lifecycle}
         date={selectedLocationDates}
       />
-      {/* <LatestMeasurementsCard parameters={paramsToDisplay} /> */}
+      <LatestMeasurementsCard parameters={locationAverages} />
       <SourcesCard sources={sources} />
       {/* <TimeSeriesCard
         projectId={projectData.id}
@@ -162,21 +163,21 @@ function LocationsDashboard({
           'The average value of a pollutant over time during the specified window at each individual node selected and the average values across all locations selected. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown. If all locations are selected only the average across all locations is shown, not the individual location values.'
         }
       /> */}
-      {/* <MeasureandsCard
-        parameters={projectData.parameters} // TODO: pass averages
+      <MeasureandsCard
+        parameters={locationAverages}
         titleInfo={
           "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
         }
-      /> */}
-      {/* <TemporalCoverageCard
-        parameters={projectData.parameters} // TODO: pass averages
+      />
+      <TemporalCoverageCard
+        parameters={locationAverages}
         dateRange={dateRange}
         spatial="project"
-        id={projectData.name}
+        id={name}
         titleInfo={
           'The average number of measurements for each pollutant by hour, day, or month at the selected locations. In some views a window may be turned off if that view is not applicable to the selected time window.'
         }
-      /> */}
+      />
     </div>
   );
 }
