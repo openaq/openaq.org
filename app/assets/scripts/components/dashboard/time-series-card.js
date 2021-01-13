@@ -35,6 +35,9 @@ const defaultState = {
 
 export default function TimeSeriesCard({
   locationId,
+  isMultipleLocations,
+  locationIds,
+  parameterIds,
   projectId,
   parameters,
   dateRange,
@@ -75,6 +78,14 @@ export default function TimeSeriesCard({
 
       if (locationId) {
         query = { ...query, location: locationId, spatial: 'location' };
+      }
+
+      if (isMultipleLocations) {
+        query = {
+          ...query,
+          location: locationIds,
+          spatial: 'location',
+        };
       } else if (projectId) {
         query = { ...query, project: projectId, spatial: 'project' };
       }
@@ -119,17 +130,24 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
-
   return (
     <Card
       gridColumn={'1  / -1'}
       renderHeader={() => (
         <CardHeader className="card__header">
           <TabbedSelector
-            tabs={parameters.map(x => ({
-              id: x.parameter || x,
-              name: x.displayName || x,
-            }))}
+            tabs={
+              isMultipleLocations
+                ? parameterIds.map(id => ({
+                    id,
+                    name: parameters.find(p => p.parameterId.toString() === id)
+                      .displayName,
+                  }))
+                : parameters.map(x => ({
+                    id: x.parameter || x,
+                    name: x.displayName || x,
+                  }))
+            }
             activeTab={activeTab}
             onTabSelect={t => {
               setActiveTab(t);
@@ -162,7 +180,10 @@ export default function TimeSeriesCard({
 
 TimeSeriesCard.propTypes = {
   titleInfo: T.string,
+  isProject: T.bool,
   locationId: T.oneOfType([T.string, T.number]),
+  locationIds: T.arrayOf(T.number),
+  parameterIds: T.arrayOf(T.strings),
   projectId: T.string,
   parameters: T.arrayOf(
     T.shape({

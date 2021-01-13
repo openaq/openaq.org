@@ -273,9 +273,15 @@ function Project({ match, history, location }) {
           <LatestMeasurementsCard parameters={paramsToDisplay} />
           <SourcesCard sources={projectData.sources} />
           <TimeSeriesCard
-            isProject
             projectId={projectData.id}
-            parameters={paramsToDisplay} // TODO: pass averages as well as each location
+            isMultipleLocations={!isAllLocations}
+            locationIds={Object.values(selectedLocations).flat()}
+            parameterIds={Object.keys(selectedLocations).flat()}
+            parameters={
+              locationData && !isAllLocations
+                ? locationData?.parameters
+                : projectData.parameters
+            }
             dateRange={dateRange}
             titleInfo={
               'The average value of a pollutant over time during the specified window at each individual node selected and the average values across all locations selected. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown. If all locations are selected only the average across all locations is shown, not the individual location values.'
