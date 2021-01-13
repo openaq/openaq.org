@@ -7,10 +7,11 @@ import {
   fetchProjects as fetchProjectsAction,
   invalidateProjects as invalidateProjectsAction,
   openDownloadModal as openDownloadModalAction,
+  fetchBaseData as fetchBaseDataAction,
 } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
 
-import Header from '../../components/header';
+import { HubHeader } from '../../components/header';
 import Filter from '../../components/filter';
 import Results from './results';
 
@@ -29,6 +30,7 @@ export default function ProjectsHub({
   fetchProjects,
   invalidateProjects,
   openDownloadModal,
+  fetchBaseData,
   fetching,
   fetched,
   error,
@@ -36,6 +38,7 @@ export default function ProjectsHub({
   meta,
   location,
   history,
+  countries,
 }) {
   const [filters, setFilters] = useState({});
   const [page, setPage] = useState(1);
@@ -69,13 +72,19 @@ export default function ProjectsHub({
     history.push(`/projects?${buildQS(query)}`);
   }
 
+  useEffect(() => {
+    fetchBaseData();
+  }, []);
+
+  const countryCount = countries ? countries.length : 'many';
+
   const totalPages = Math.ceil(meta.found / PER_PAGE);
 
   return (
     <section className="inpage">
-      <Header
-        title="Datasets"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      <HubHeader
+        title="Air Quality Data by Dataset"
+        countriesCount={countryCount.length}
       />
 
       <div className="inpage__body">
@@ -116,6 +125,7 @@ ProjectsHub.propTypes = {
   error: T.object,
   results: T.array,
   meta: T.object,
+  countries: T.array,
 
   location: T.object,
   history: T.object,
@@ -123,6 +133,7 @@ ProjectsHub.propTypes = {
   fetchProjects: T.func,
   invalidateProjects: T.func,
   openDownloadModal: T.func,
+  fetchBaseData: T.func,
 };
 
 // /////////////////////////////////////////////////////////////////////
@@ -135,6 +146,7 @@ function selector(state) {
     error: state.projects.error,
     results: state.projects.data.results,
     meta: state.projects.data.meta,
+    countries: state.baseData.countries,
   };
 }
 
@@ -144,6 +156,7 @@ function dispatcher(dispatch) {
     invalidateProjects: (...args) =>
       dispatch(invalidateProjectsAction(...args)),
     openDownloadModal: (...args) => dispatch(openDownloadModalAction(...args)),
+    fetchBaseData: (...args) => dispatch(fetchBaseDataAction(...args)),
   };
 }
 

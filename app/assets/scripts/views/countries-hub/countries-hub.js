@@ -8,7 +8,7 @@ import { sortBy } from 'lodash';
 import { formatThousands } from '../../utils/format';
 import { openDownloadModal } from '../../actions/action-creators';
 import Card, { CardDetails, FooterActions } from '../../components/card';
-import Header from '../../components/header';
+import { HubHeader } from '../../components/header';
 import ErrorMessage from '../../components/error-message';
 
 const defaultState = {
@@ -75,39 +75,9 @@ export default function CountriesHub({ _openDownloadModal }) {
 
   return (
     <section className="inpage">
-      <Header
-        title="Browse by Country"
-        description={
-          <>
-            We are currently collecting data in {countryCount} different
-            countries and are always seeking to add more. We aggregate PM2.5,
-            PM10, ozone (O3), sulfur dioxide (SO2), nitrogen dioxide (NO2),
-            carbon monoxide (CO), and black carbon (BC) from real-time
-            government and research grade sources. If you cannot find the
-            location that you are looking for, please{' '}
-            <a
-              href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-              title="Suggest a new source"
-            >
-              suggest a source
-            </a>{' '}
-            and{' '}
-            <a href="mailto:info@openaq.org" title="Contact openaq">
-              send us an email
-            </a>
-            . The last 2 years of data are accessible here. Learn how to access
-            older data{' '}
-            <a
-              href="https://medium.com/@openaq/how-in-the-world-do-you-access-air-quality-data-older-than-90-days-on-the-openaq-platform-8562df519ecd"
-              title="Access older data"
-            >
-              here
-            </a>
-            .
-          </>
-        }
-        disclaimer={true}
-        action={{ api: config.apiDocs }}
+      <HubHeader
+        title="Air Quality Data by Country"
+        countriesCount={countryCount}
       />
       <div className="inpage__body">
         <div className="fold">
