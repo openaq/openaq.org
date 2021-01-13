@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import T from 'prop-types';
 import styled from 'styled-components';
 import c from 'classnames';
@@ -31,6 +31,11 @@ const SectionButtons = styled.div`
     border-radius: 0 2px 2px 0;
   }
 `;
+
+const gradeOptions = ['Low-Cost Sensor', 'Reference'];
+const mobilityOptions = ['Mobile', 'Stationary'];
+const entityOptions = ['Community', 'Research', 'Government'];
+const LCS = gradeOptions[0];
 
 function Section(props) {
   const { title, options, selected, setSelected } = props;
@@ -83,42 +88,49 @@ function SensorTypeFilter(props) {
   );
   const [selectedMobility, setSelectedMobility] = useState(mobility);
   const [selectedEntity, setSelectedEntity] = useState(entity);
+  useEffect(() => {
+    if (selectedGrade !== 'Low-Cost Sensor') {
+      setSelectedManufacturer(null);
+    }
+  }, [selectedGrade]);
   return (
     <Wrapper data-cy="filter-source-type">
       <Section
         data-cy="filter-menu-item"
-        options={['Low-Cost Sensor', 'Reference']}
+        options={gradeOptions}
         selected={selectedGrade}
         setSelected={setSelectedGrade}
         title="Grade"
       >
-        <select
-          className="form__control form__control--medium select--base-bounded"
-          id="manufacturer__name"
-          onChange={e => setSelectedManufacturer(e.target.value)}
-          defaultValue={'default'}
-        >
-          <option value={'default'} disabled>
-            {'Select manufacturer'}
-          </option>
-          {manufacturers.map(m => (
-            <option value={m} key={m}>
-              {m}
+        {selectedGrade === LCS && (
+          <select
+            className="form__control form__control--medium select--base-bounded"
+            id="manufacturer__name"
+            onChange={e => setSelectedManufacturer(e.target.value)}
+            defaultValue={'default'}
+          >
+            <option value={'default'} disabled>
+              {'Select manufacturer'}
             </option>
-          ))}
-        </select>
+            {manufacturers.map(m => (
+              <option value={m} key={m}>
+                {m}
+              </option>
+            ))}
+          </select>
+        )}
       </Section>
 
       <Section
         data-cy="filter-source-type"
-        options={['Mobile', 'Stationary']}
+        options={mobilityOptions}
         selected={selectedMobility}
         setSelected={setSelectedMobility}
         title="Mobility"
       />
       <Section
         data-cy="filter-source-type"
-        options={['Community', 'Research', 'Government']}
+        options={entityOptions}
         selected={selectedEntity}
         setSelected={setSelectedEntity}
         title="Selected Entity"
