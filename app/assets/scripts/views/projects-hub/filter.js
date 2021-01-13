@@ -5,7 +5,7 @@ import qs from 'qs';
 import c from 'classnames';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
-
+import ParamSelect from '../../components/parameters-selection';
 import { buildQS } from '../../utils/url';
 import { toggleValue } from '../../utils/array';
 
@@ -123,30 +123,11 @@ export default function Filter({ parameters, countries, sources }) {
                 triggerText="Parameter"
                 triggerClassName="button--drop-filter filter--drop  "
               >
-                <ul
-                  role="menu"
-                  data-cy="filter-parameters"
-                  className="drop__menu drop__menu--select scrollable"
-                >
-                  {_.sortBy(_.uniq(parameters, 'id')).map(param => {
-                    return (
-                      <li key={param.id}>
-                        <div
-                          data-cy="filter-menu-item"
-                          className={c('drop__menu-item', {
-                            'drop__menu-item--active': selected.parameters.includes(
-                              param.id
-                            ),
-                          })}
-                          data-hook="dropdown:close"
-                          onClick={() => onFilterSelect('parameters', param.id)}
-                        >
-                          <span data-cy={param.id}>{param.displayName}</span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <ParamSelect
+                  parameters={parameters}
+                  onFilterSelect={onFilterSelect}
+                  selected={selected}
+                />
               </Dropdown>
 
               <Dropdown
