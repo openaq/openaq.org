@@ -57,6 +57,7 @@ const Circle = styled(Square)`
 `;
 
 export default function Legend({
+  isOnlyCoreParams,
   parameters,
   activeParameter,
   onParamSelection,
@@ -104,6 +105,12 @@ export default function Legend({
   return (
     <Wrapper>
       <Container>
+        {!isOnlyCoreParams && (
+          <p>
+            Showing values for:
+            {parameters.length > 1 ? drop : activeParameter.displayName}
+          </p>
+        )}
         <Definition>
           <dt>
             <Circle />
@@ -116,34 +123,37 @@ export default function Legend({
           <dd>Low Cost Sensor</dd>
         </Definition>
       </Container>
-      <Container>
-        <p>
-          Showing the most recent* values for{' '}
-          {parameters.length > 1 ? drop : activeParameter.displayName}
-        </p>
-        <ul className="color-scale">
-          {scaleStops.map(o => (
-            <li
-              key={o.label}
-              style={{ backgroundColor: o.color, width: `${colorWidth}%` }}
-              className="color-scale__item"
-            >
-              <span className="color-scale__value">{o.label}</span>
-            </li>
-          ))}
-        </ul>
-        <p>* Locations not updated in the last week are shown in grey.</p>
-        <small className="disclaimer">
-          <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
-            Data Disclaimer and More Information
-          </a>
-        </small>
-      </Container>
+      {isOnlyCoreParams && (
+        <Container>
+          <p>
+            Showing the most recent* values for{' '}
+            {parameters.length > 1 ? drop : activeParameter.displayName}
+          </p>
+          <ul className="color-scale">
+            {scaleStops.map(o => (
+              <li
+                key={o.label}
+                style={{ backgroundColor: o.color, width: `${colorWidth}%` }}
+                className="color-scale__item"
+              >
+                <span className="color-scale__value">{o.label}</span>
+              </li>
+            ))}
+          </ul>
+          <p>* Locations not updated in the last week are shown in grey.</p>
+          <small className="disclaimer">
+            <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
+              Data Disclaimer and More Information
+            </a>
+          </small>
+        </Container>
+      )}
     </Wrapper>
   );
 }
 
 Legend.propTypes = {
+  isOnlyCoreParams: PropTypes.bool,
   parameters: PropTypes.array.isRequired,
   activeParameter: PropTypes.shape({
     displayName: PropTypes.string.isRequired,
@@ -152,4 +162,8 @@ Legend.propTypes = {
     parameterId: PropTypes.number.isRequired,
   }).isRequired,
   onParamSelection: PropTypes.func,
+};
+
+Legend.defaultProps = {
+  isOnlyCoreParams: true,
 };
