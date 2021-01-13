@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import T from 'prop-types';
-import styled from 'Styled-Components';
+import styled from 'styled-components';
 import c from 'classnames';
 
 const Wrapper = styled.div`
