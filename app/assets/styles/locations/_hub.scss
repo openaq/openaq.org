@@ -133,27 +133,30 @@
     }
   }
 }
-.page {
-  overflow-x: unset;
-}
-.inpage__content__header {
-  top: 0rem;
-  position: sticky;
-  z-index: 2;
-  background: tint($base-color, 100%);
-}
+
 .inpage__results {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2rem;
+  grid-gap: $global-spacing;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: $global-spacing * 2;
 
   .card {
-    margin-bottom: 2rem;
+    grid-column: span 4;
+  }
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  @include media(large-up) {
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: $global-spacing * 2;
   }
 
   .card__header {
     display: grid;
     grid-gap: 0.5rem;
+
     .card__tags {
       display: grid;
       width: min-content;
