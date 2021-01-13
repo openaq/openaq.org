@@ -149,5 +149,8 @@
 .drop__menu-section-title {
   text-decoration: underline $primary-color dotted;
   text-underline-position: under;
-  
+}
+
+.__react_component_tooltip.filter-tooltip {
+  z-index: 10000;
 }

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import T from 'prop-types';
 import _ from 'lodash';
-// import ReactTooltip from 'react-tooltip';
+import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
 
 const categories = [
   {
@@ -16,6 +18,25 @@ const categories = [
   },
 ];
 
+const StyledTooltip = styled(ReactTooltip)`
+  width: ${({ width }) => width || 'auto'};
+  max-width: 20rem;
+  /* Z index set to 10000 to go over tether-element
+   * which has z-index 9999 */
+`;
+
+const Portal = ({ children }) => {
+  const mount = document.getElementsByTagName('BODY')[0];
+  const el = document.createElement('div');
+
+  useEffect(() => {
+    mount.appendChild(el);
+    return () => mount.removeChild(el);
+  }, [el, mount]);
+
+  return createPortal(children, el);
+};
+
 /*
  * Select parameters from a list using checkboxes,
  * assumes Core and Additional as categories
@@ -29,7 +50,7 @@ function ParamSelect(props) {
       className="drop__menu drop__menu--select scrollable padded"
     >
       {_.chain(parameters)
-        .uniq('id')
+        .uniqBy('id')
         .reduce(([core, additional], param) => {
           if (param.isCore) {
             core.parameters.push(param);
@@ -38,7 +59,7 @@ function ParamSelect(props) {
           }
           return [core, additional];
         }, categories)
-        .map(({ id, /* info,*/ parameters: list }) => {
+        .map(({ id, info, parameters: list }) => {
           return (
             <React.Fragment key={id}>
               <p
@@ -49,11 +70,17 @@ function ParamSelect(props) {
                 {id}
               </p>
 
-              {/*info && (
-                <ReactTooltip id={`${id}-info`} place="bottom" effect="float">
-                  {info}
-                </ReactTooltip>
-              )*/}
+              {info && (
+                <Portal>
+                  <StyledTooltip
+                    className="filter-tooltip"
+                    id={`${id}-info`}
+                    effect="float"
+                  >
+                    {info}
+                  </StyledTooltip>
+                </Portal>
+              )}
 
               {_.sortBy(list).map(param => {
                 return (
