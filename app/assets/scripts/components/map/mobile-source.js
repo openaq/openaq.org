@@ -7,12 +7,16 @@ import config from '../../config';
 export default function MobileSource({ dateRange, map, children }) {
   const [sourceId, setSourceId] = useState(null);
 
+  const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
+    Number
+  );
+
   useEffect(() => {
     if (!map.getSource('mobile-source')) {
-      const [year, month, day] = dateRange.split('/').map(Number);
       const query = {
         ...(dateRange
           ? {
+              // In user space, month is 1 indexed
               date_from: new Date(year, month - 1, day || 1),
               date_to: day
                 ? new Date(year, month - 1, day + 1)

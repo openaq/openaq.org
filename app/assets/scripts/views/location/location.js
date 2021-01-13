@@ -186,7 +186,10 @@ function Location(props) {
               bbox={data.bounds}
               points={data.points}
               dateRange={
-                dateRange || moment.utc(data.firstUpdated).format('YYYY/MM/DD')
+                dateRange ||
+                `${moment(data.firstUpdated).format('YYYY/MM/DD')},${moment(
+                  data.lastUpdated
+                ).format('YYYY/MM/DD')}`
               }
             />
           )}
