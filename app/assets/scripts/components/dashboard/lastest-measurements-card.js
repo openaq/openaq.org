@@ -19,7 +19,8 @@ export default function LatestMeasurementsCard({ parameters }) {
   return (
     <Card
       title="Latest Measurements"
-      gridColumn={'4 / 10'}
+      id="latest"
+      className="card--latest"
       renderBody={() => {
         return (
           <Container>

@@ -45,7 +45,8 @@ export default function MeasureandsCard({ parameters, titleInfo }) {
 
   return (
     <Card
-      gridColumn={'1 / -1'}
+      id="measurand"
+      className="card--measurand"
       title="Parameters"
       renderBody={() => {
         return <Table headers={tableHeaders} rows={rows} />;
