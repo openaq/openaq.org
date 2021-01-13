@@ -145,6 +145,23 @@
   }
 }
 
+.card--temporal-coverage {
+  .chart__list {
+    display: grid;
+    grid-gap: $global-spacing;
+    grid-template-columns: repeat(1, 1fr);
+
+    @include media(medium-up) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: $global-spacing * 2;
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
 /* Fold: Stats
    ========================================================================== */
 .measurements-list {

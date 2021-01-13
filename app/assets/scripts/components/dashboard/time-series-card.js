@@ -137,7 +137,7 @@ export default function TimeSeriesCard({
             }}
           />
           <CardHeadline>
-            <CardTitle>Time Series Data</CardTitle>
+            <CardTitle className="card__title">Time Series Data</CardTitle>
             {titleInfo && <InfoButton info={titleInfo} id="time-series-info" />}
           </CardHeadline>
         </CardHeader>
