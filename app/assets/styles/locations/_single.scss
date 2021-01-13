@@ -69,6 +69,99 @@
   }
 }
 
+/* Filters
+   ========================================================================== */
+
+.date-selector-filters {
+  @extend .constrainer;
+  display: grid;
+  grid-gap: $global-spacing;
+  margin-top: $global-spacing;
+  margin-bottom: $global-spacing;
+  grid-template-columns: repeat(1, 1fr);
+
+  .filter--time-window,
+  .filter--drop {
+    grid-column: 1 / -1;
+  }
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(9, 1fr);
+
+    .filter--drop {
+      grid-column: auto / span 3;
+    }
+  }
+
+  @include media(large-up) {
+    grid-template-columns: repeat(12, 1fr);
+    margin-top: $global-spacing * 2;
+    margin-bottom: $global-spacing * 2;
+
+    .filter--time-window,
+    .filter--drop {
+      grid-column: auto / span 3;
+    }
+  }
+}
+
+/* Fold: Dashboard
+  ========================================================================== */
+
+.dashboard-cards {
+  > .card {
+    grid-column: 1 / -1;
+  }
+
+  @include media(small-up) {
+    .card--details {
+      grid-column: 1 / span 2;
+    }
+    .card--sources {
+      grid-row: 1;
+      grid-column: 3 / span 2;
+    }
+  }
+
+  @include media(medium-up) {
+    .card--details {
+      grid-column-end: span 4;
+    }
+    .card--sources {
+      grid-column: 5 / span 4;
+    }
+  }
+  @include media(large-up) {
+    .card--details {
+      grid-column-end: span 3;
+    }
+    .card--sources {
+      grid-column: 10 / span 3;
+    }
+
+    .card--latest {
+      grid-column: 4 / span 6;
+    }
+  }
+}
+
+.card--temporal-coverage {
+  .chart__list {
+    display: grid;
+    grid-gap: $global-spacing;
+    grid-template-columns: repeat(1, 1fr);
+
+    @include media(medium-up) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: $global-spacing * 2;
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
 /* Fold: Stats
    ========================================================================== */
 .measurements-list {

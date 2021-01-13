@@ -120,3 +120,22 @@
     font-weight: 400;
   }
 }
+
+.tabbed-selector__link {
+  font-family: $heading-font-family;
+  display: flex;
+  align-items: center;
+  font-weight: $heading-font-bold;
+  font-size: 0.875rem;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+
+  &,
+  &:visited {
+    color: $base-color;
+  }
+
+  &--active {
+    box-shadow: inset 0 -0.25rem 0 0 $primary-color;
+  }
+}
