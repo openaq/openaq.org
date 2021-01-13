@@ -32,12 +32,12 @@ export default function LocationsHub({
   parameters,
   countries,
   sources,
+  manufacturers,
   fetching,
   fetched,
   error,
   results,
   meta,
-
   location,
   history,
 }) {
@@ -51,21 +51,17 @@ export default function LocationsHub({
     });
     setPage(() => getPage(query));
 
-    let isMobile;
-    if (query.source_type) {
-      if (query.source_type.includes('mobile')) {
-        isMobile = true;
-      } else if (query.source_type.includes('stationary')) {
-        isMobile = false;
-      }
-    }
     setFilters({
       order_by: query.order_by && query.order_by.split(','),
       sort: 'desc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
-      sourceName: query.sources && query.sources.split(','),
-      isMobile,
+      source: query.sources && query.sources.split(','),
+      // The following are not lists
+      isMobile: query.mobility && query.mobility === 'Mobile',
+      entity: query.entity && query.entity.toLowerCase(),
+      sensorType: query.grade && query.grade.toLowerCase(),
+      manufacturerName: query.manufacturer && query.manufacturer,
     });
   }, [location]);
 
@@ -97,6 +93,7 @@ export default function LocationsHub({
           parameters={parameters}
           countries={countries}
           sources={sources}
+          manufacturers={manufacturers}
         />
         <div className="constrainer">
           <div className="content__meta">
@@ -139,6 +136,7 @@ LocationsHub.propTypes = {
   meta: T.object,
   countries: T.array,
   sources: T.array,
+  manufacturers: T.array,
 
   location: T.object,
   history: T.object,
@@ -156,6 +154,7 @@ function selector(state) {
     parameters: state.baseData.data.parameters,
     countries: state.baseData.data.countries,
     sources: state.baseData.data.sources,
+    manufacturers: state.baseData.data.manufacturers,
     fetching: state.locations.fetching,
     fetched: state.locations.fetched,
     error: state.locations.error,
