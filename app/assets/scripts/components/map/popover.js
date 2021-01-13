@@ -180,7 +180,7 @@ Popover.propTypes = {
   currentPage: T.number.isRequired,
   isAllLocations: T.bool,
   selectedLocations: T.object,
-  setSelectedLocations: T.func,
+  handleLocationSelection: T.func,
 };
 
 Popover.defaultProps = {

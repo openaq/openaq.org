@@ -58,8 +58,8 @@ export default function MeasurementsLayer({
   ];
   const circlesCountryFilter = ['all', countryFilter, circlesFilter];
   const squaresCountryFilter = ['all', countryFilter, squaresFilter];
-  const circlesLocationIdFilter = ['all', locationIdFilter, circlesFilter];
-  const squaresLocationIdFilter = ['all', locationIdFilter, squaresFilter];
+  // const circlesLocationIdFilter = ['all', locationIdFilter, circlesFilter];
+  // const squaresLocationIdFilter = ['all', locationIdFilter, squaresFilter];
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
