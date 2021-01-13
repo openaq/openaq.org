@@ -61,9 +61,8 @@ function ParamSelect(props) {
                     className="form__option form__option--custom-checkbox"
                     htmlFor={param.id}
                     key={param.id}
-                      data-cy='filter-menu-item'
-                    data-hook='dropdown:close'
-
+                    data-cy="filter-menu-item"
+                    data-hook="dropdown:close"
                   >
                     <input
                       type="checkbox"
@@ -73,8 +72,7 @@ function ParamSelect(props) {
                       onChange={() => {
                         onFilterSelect('parameters', param.id);
                       }}
-                    data-cy={param.id}
-
+                      data-cy={param.id}
                       checked={selected.parameters.includes(param.id)}
                     />
                     <span className="form__option__text">
