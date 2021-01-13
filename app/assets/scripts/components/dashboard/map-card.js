@@ -37,7 +37,9 @@ export default function MapCard({ parameters, isMobile, locationId, center }) {
             }}
           />
 
-          <CardTitle>Total Count of Measurements</CardTitle>
+          <CardTitle className="card__title">
+            Total Count of Measurements
+          </CardTitle>
         </CardHeader>
       )}
       renderBody={() => (

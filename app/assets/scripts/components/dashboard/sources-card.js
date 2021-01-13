@@ -25,7 +25,8 @@ export default function SourceInfo({ sources }) {
   return (
     <Card
       title={sources && sources.length > 1 ? 'Sources' : 'Source'}
-      gridColumn={'10 / -1'}
+      id="sources"
+      className="card--sources"
       renderBody={() => {
         if (sources) {
           return (

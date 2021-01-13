@@ -23,12 +23,6 @@
 }
 
 
-.filters {
-  display: grid;
-  grid-gap: $global-spacing;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  padding: $global-spacing 0;
-}
 .drop__menu.scrollable {
    max-height: 10rem;
    overflow-y: scroll;
