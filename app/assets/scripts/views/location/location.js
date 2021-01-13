@@ -128,9 +128,6 @@ function Location(props) {
       location: data.location,
     });
   }
-  const filteredParams = data.parameters.filter(p =>
-    Object.keys(parameterMax).includes(p.parameterId.toString())
-  );
 
   // Lifecycle stage of different sources.
   const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
@@ -196,8 +193,8 @@ function Location(props) {
           center={[data.coordinates.longitude, data.coordinates.latitude]}
           city={data.city}
           country={data.country}
-          parameters={filteredParams}
-          initialActiveParameter={filteredParams[0]}
+          parameters={data.parameters}
+          initialActiveParameter={data.parameters[0]}
         />
       </div>
     </section>
