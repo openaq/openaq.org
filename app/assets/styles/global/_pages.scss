@@ -46,6 +46,8 @@ html {
 
 .news-banner {
   @extend .antialiased;
+  position: absolute;
+  width: 100%;
   background-color: $base-color;
   padding: $global-spacing 0;
   color: #fff;
