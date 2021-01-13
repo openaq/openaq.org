@@ -1,4 +1,5 @@
 // Map styling
+export const defaultColor = '#0b75a9';
 export const circleOpacity = 1;
 export const circleBlur = {
   stops: [
