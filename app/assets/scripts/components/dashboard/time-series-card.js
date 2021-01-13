@@ -122,7 +122,8 @@ export default function TimeSeriesCard({
 
   return (
     <Card
-      gridColumn={'1  / -1'}
+      id="time-series"
+      className="card--time-series"
       renderHeader={() => (
         <CardHeader className="card__header">
           <TabbedSelector

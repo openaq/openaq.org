@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 import qs from 'qs';
-import styled from 'styled-components';
 
 import { buildQS } from '../../utils/url';
 import config from '../../config';
@@ -10,7 +9,6 @@ import { getCountryBbox } from '../../utils/countries';
 import { parameterMax } from '../../utils/map-settings';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
-import CardList from '../../components/card-list';
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
@@ -27,10 +25,6 @@ const defaultState = {
   error: null,
   data: null,
 };
-
-const Dashboard = styled(CardList)`
-  padding: 2rem 4rem;
-`;
 
 function Project({ match, history, location }) {
   const { id } = match.params;
@@ -163,11 +157,7 @@ function Project({ match, history, location }) {
         >
           <h1 className="fold__title">Values for selected stations</h1>
         </header>
-        <Dashboard
-          gridTemplateRows={'repeat(4, 20rem)'}
-          gridTemplateColumns={'repeat(12, 1fr)'}
-          className="inner"
-        >
+        <div className="inner dashboard-cards">
           <DetailsCard
             measurements={data.measurements}
             lifecycle={lifecycle}
@@ -201,7 +191,7 @@ function Project({ match, history, location }) {
               'The average number of measurements for each pollutant by hour, day, or month at the selected locations. In some views a window may be turned off if that view is not applicable to the selected time window.'
             }
           />
-        </Dashboard>
+        </div>
       </div>
     </section>
   );

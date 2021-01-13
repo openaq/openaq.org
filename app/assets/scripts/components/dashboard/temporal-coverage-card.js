@@ -216,7 +216,8 @@ export default function TemporalCoverageCard({
 
   return (
     <Card
-      gridColumn={'1  / -1'}
+      id="temporal-coverage"
+      className="card--temporal-coverage"
       renderHeader={() => (
         <CardHeader className="card__header">
           <TabbedSelector

@@ -1,16 +1,10 @@
 import React from 'react';
+import c from 'classnames';
 import { PropTypes as T } from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import CardTag from './card-tag';
 import InfoButton from '../info-button';
-
-const CardWrapper = styled.article`
-  ${({ gridColumn, gridRow }) => css`
-    grid-column: ${gridColumn || 'auto'};
-    grid-row: ${gridRow || 'auto'};
-  `}
-`;
 
 const CardContents = styled.div``;
 
@@ -20,7 +14,6 @@ const CardBody = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export const Test = styled.div``;
 
 const CardFooter = styled.footer``;
 
@@ -60,8 +53,7 @@ const TagWrapper = styled.div`
  */
 export default function Card({
   id,
-  gridColumn,
-  gridRow,
+  className,
   title,
   subtitle,
   tags,
@@ -72,12 +64,7 @@ export default function Card({
   titleInfo,
 }) {
   return (
-    <CardWrapper
-      data-cy={`${id}-card`}
-      className="card"
-      gridColumn={gridColumn}
-      gridRow={gridRow}
-    >
+    <article data-cy={`${id}-card`} className={c('card', className)}>
       <CardContents className="card__contents">
         {renderHeader ? (
           renderHeader()
@@ -119,15 +106,14 @@ export default function Card({
           <CardFooter className="card__footer">{renderFooter()}</CardFooter>
         )}
       </CardContents>
-    </CardWrapper>
+    </article>
   );
 }
 
 Card.propTypes = {
   id: T.string,
   titleInfo: T.string,
-  gridColumn: T.string,
-  gridRow: T.string,
+  className: T.string,
   title: T.oneOfType([T.string, T.element]),
   subtitle: T.oneOfType([T.string, T.element]),
   tags: T.oneOfType([T.string, T.arrayOf(T.string)]),
