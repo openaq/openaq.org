@@ -5,6 +5,7 @@ import c from 'classnames';
 
 import Breakpoint from './breakpoint';
 import SmartLink from './smart-link';
+import NewsBanner from './news-banner';
 
 const subMenus = [
   {
@@ -340,6 +341,7 @@ class PageHeader extends React.Component {
             </div>
           ))}
         </nav>
+        <NewsBanner />
       </header>
     );
   }

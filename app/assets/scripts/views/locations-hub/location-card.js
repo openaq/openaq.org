@@ -15,6 +15,7 @@ export default function LocationCard({
   onDownloadClick,
   parametersList,
   sources,
+  sensorType,
   totalMeasurements,
   mobile,
 }) {
@@ -38,10 +39,7 @@ export default function LocationCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={[
-        sources.length && sources[0].sensorType,
-        mobile ? 'Mobile' : 'Stationary',
-      ]}
+      tags={[sensorType, mobile ? 'Mobile' : 'Stationary']}
       renderBody={() => (
         <CardDetails
           id="location"
@@ -100,6 +98,7 @@ LocationCard.propTypes = {
       sensorType: T.string.isRequired,
     })
   ).isRequired,
+  sensorType: T.string.isRequired,
   totalMeasurements: T.number.isRequired,
   mobile: T.bool.isRequired,
 };
