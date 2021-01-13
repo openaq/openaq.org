@@ -81,37 +81,31 @@ export default function ProjectsHub({
       />
 
       <div className="inpage__body">
-        <div className="inner">
-          <div className="inpage__content">
-            <div className="inpage__content__header">
-              <Filter parameters={parameters} countries={countries} />
-            </div>
-
-            <div className="content__meta">
-              <div className="content__header">
-                <div className="content__heading">
-                  <h2 className="content-prime-title">Results</h2>
-                  {meta.found ? (
-                    <p className="results-summary" data-cy="results-summary">
-                      A total of <strong>{meta.found}</strong> datasets were
-                      found
-                    </p>
-                  ) : null}
-                </div>
+        <Filter parameters={parameters} countries={countries} />
+        <div className="constrainer">
+          <div className="content__meta">
+            <div className="content__header">
+              <div className="content__heading">
+                <h2 className="content-prime-title">Results</h2>
+                {meta.found ? (
+                  <p className="results-summary" data-cy="results-summary">
+                    A total of <strong>{meta.found}</strong> datasets were found
+                  </p>
+                ) : null}
               </div>
             </div>
-
-            <Results
-              fetched={fetched}
-              fetching={fetching}
-              error={error}
-              projects={results}
-              totalPages={totalPages}
-              page={page}
-              openDownloadModal={openDownloadModal}
-              handlePageClick={handlePageClick}
-            />
           </div>
+
+          <Results
+            fetched={fetched}
+            fetching={fetching}
+            error={error}
+            projects={results}
+            totalPages={totalPages}
+            page={page}
+            openDownloadModal={openDownloadModal}
+            handlePageClick={handlePageClick}
+          />
         </div>
       </div>
     </section>

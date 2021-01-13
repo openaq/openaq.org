@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'openaq-design-system';
-import styled from 'styled-components';
 import moment from 'moment';
 import c from 'classnames';
 import T from 'prop-types';
 import DayPicker from 'react-day-picker';
-
-const Wrapper = styled.div`
-  padding: 2rem 2rem;
-`;
 
 /* Date selection component
  * @param dateRange {string} date in format YYYY/MM/DD (day is otional)
@@ -43,21 +38,14 @@ function DateSelector(props) {
   }, [dateMode, year, month, day]);
 
   return (
-    <Wrapper
-      className={'filters, inner'}
-      style={{
-        display: `grid`,
-        gridTemplateRows: `1fr`,
-        gridTemplateColumns: `repeat(4, 1fr)`,
-      }}
-    >
+    <div className="date-selector-filters">
       <Dropdown
         triggerElement="a"
         triggerTitle="Select time window"
         triggerText={
           dateMode ? 'Specific time window' : 'Entire lifetime of project'
         }
-        triggerClassName="button--drop-filter"
+        triggerClassName="button--drop-filter filter--drop filter--time-window"
       >
         <ul role="menu" className="drop__menu drop__menu--select">
           <li>
@@ -91,7 +79,7 @@ function DateSelector(props) {
             triggerElement="a"
             triggerTitle="date__year"
             triggerText={year}
-            triggerClassName="button--drop-filter"
+            triggerClassName="button--drop-filter filter--drop"
           >
             <ul
               role="menu"
@@ -117,7 +105,7 @@ function DateSelector(props) {
             triggerElement="a"
             triggerTitle="date__month"
             triggerText={monthRange[month - 1]}
-            triggerClassName="button--drop-filter"
+            triggerClassName="button--drop-filter filter--drop"
           >
             <ul
               role="menu"
@@ -143,7 +131,7 @@ function DateSelector(props) {
             triggerElement="a"
             triggerTitle="date__day"
             triggerText={day ? day : 'Entire month'}
-            triggerClassName="button--drop-filter"
+            triggerClassName="button--drop-filter filter--drop"
           >
             <ul role="menu" className="drop__menu drop__menu--select ">
               <li>
@@ -167,7 +155,7 @@ function DateSelector(props) {
                     'drop__menu-item--active': day && true,
                   })}
                   className="drop__content-day"
-                  alignment="right"
+                  alignment="center"
                 >
                   <DayPicker
                     month={new Date(year, Number(month) - 1)}
@@ -180,7 +168,7 @@ function DateSelector(props) {
           </Dropdown>
         </>
       )}
-    </Wrapper>
+    </div>
   );
 }
 

@@ -49,8 +49,8 @@ export default function MeasurementsLayer({
   let match = useRouteMatch();
 
   const countryFilter = ['==', 'country', country];
-  const circlesFilter = ['==', 'isMobile', false];
-  const squaresFilter = ['==', 'isMobile', true];
+  const circlesFilter = ['==', ['get', 'isMobile'], false];
+  const squaresFilter = ['==', ['get', 'isMobile'], true];
   const locationIdFilter = [
     'in',
     ['number', ['get', 'locationId']],
