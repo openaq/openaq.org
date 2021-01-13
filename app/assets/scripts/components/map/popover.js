@@ -23,7 +23,7 @@ export default function Popover({
   handleLocationSelection,
 }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
-
+  // console.log('isAllLocations', isAllLocations);
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
@@ -124,7 +124,7 @@ export default function Popover({
               </a>
             </p>
           )}
-          {isAllLocations ? (
+          {isAllLocations || !allSelectedLocations ? (
             <ul className="popover__actions">
               {/*
                 Using `a` instead of `Link` because these are rendered outside

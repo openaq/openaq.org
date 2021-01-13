@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 import qs, { stringify as buildAPIQS } from 'qs';
-import styled from 'styled-components';
 
 import { buildQS } from '../../utils/url';
 import config from '../../config';
 import { getCountryBbox } from '../../utils/countries';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
-import CardList from '../../components/card-list';
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
@@ -17,33 +15,63 @@ import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 
-const Dashboard = styled(CardList)`
-  padding: 2rem 4rem;
-`;
-
 const defaultState = {
   fetched: false,
   fetching: false,
   error: null,
-  data: null,
+  locationAverages: null,
 };
 
-function LocationsDashboard({ locationData, lifecycle, dateRange }) {
-  const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
+function LocationsDashboard({
+  locationData,
+  measurements,
+  lifecycle,
+  dateRange,
+  selectedLocationDates,
+  sources,
+  locations,
+  country,
+}) {
+  const [{ fetched, fetching, error, locationAverages }, setState] = useState(
+    defaultState
+  );
+
+  const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
+    Number
+  );
 
   useEffect(() => {
-    if (isAllLocations) {
-      fetchLocationAverages();
-    }
+    fetchLocationAverages();
 
     return () => {
       setState(defaultState);
     };
   }, []);
 
-  const fetchLocationAverages = id => {
+  const fetchLocationAverages = () => {
     setState(state => ({ ...state, fetching: true, error: null }));
-    fetch(`${config.api}/projects/${encodeURIComponent(id)}`)
+    console.log('measurements', measurements);
+    let query = {
+      parameter: measurements,
+      location: locations,
+      ...(dateRange
+        ? {
+            // In user space, month is 1 indexed
+            date_from: new Date(year, month - 1, day || 1),
+            date_to: day
+              ? new Date(year, month - 1, day + 1)
+              : new Date(year, month, 0),
+          }
+        : {}),
+      spatial: 'location',
+      temporal: 'day',
+      group: true,
+      country_id: country,
+    };
+
+    let f = buildAPIQS(query, { arrayFormat: 'repeat' });
+
+    fetch(`${config.api}/averages?${f}`)
       .then(response => {
         if (response.status >= 400) {
           throw new Error('Bad response');
@@ -56,7 +84,7 @@ function LocationsDashboard({ locationData, lifecycle, dateRange }) {
             ...state,
             fetched: true,
             fetching: false,
-            projectData: json.results[0],
+            locationAverages: json.results,
           }));
         },
         e => {
@@ -70,22 +98,62 @@ function LocationsDashboard({ locationData, lifecycle, dateRange }) {
         }
       );
   };
+
+  if (!fetched && !fetching) {
+    return null;
+  }
+
+  if (fetching) {
+    return <LoadingHeader />;
+  }
+
+  if (error || !locationAverages) {
+    return <ErrorHeader />;
+  }
+  console.log('pre locationAverages', locationAverages);
+  // console.log(
+  //   'locationAverages',
+  //   locationAverages &&
+  //     locationAverages.reduce((prev, entry) => {
+  //       const paramName = entry.parameter;
+  //       const prevMatchingParam = prev[paramName];
+  //       // paramName: {
+  //       //   average: (calc(currAvg, entry.average)),
+  //       //   displayName: entry.displayName,
+  //       //   count: (calc(currCount + measurement_count)),
+  //       //   parameter: entry.parameter,
+  //       //   parameterId: entry.parameterId,
+  //       //   unit: entry.unit,
+  //       //   firstUpdated: entry.hour < [param].firstUpdated ? entry.hour : [param].firstUpdated,
+  //       //   lastUpdated: entry.hour > [param].lastUpdated ? entry.hour : [param].lastUpdated,
+  //       //   lastValue: entry.hour > [param].lastUpdated ? entry.average : [param].lastValue,
+  //       // }
+  //       const attempt = {
+  //         ...prev,
+  //         [paramName]: {
+  //           displayName: entry.displayName,
+  //           // count: prevMatchingParam.count ? prevMatchingParam.count + entry.measurement_count : entry.measurement_count,
+  //           parameter: entry.parameter,
+  //           parameterId: entry.parameterId,
+  //           unit: entry.unit,
+  //           //   firstUpdated: entry.hour < [param].firstUpdated ? entry.hour : [param].firstUpdated,
+  //           //   lastUpdated: entry.hour > [param].lastUpdated ? entry.hour : [param].lastUpdated,
+  //           //   lastValue: entry.hour > [param].lastUpdated ? entry.average : [param].lastValue,
+  //         },
+  //       };
+  //       console.log('reducing', prevMatchingParam, attempt);
+  //       return attempt;
+  //     }, {})
+  // );
   return (
-    <Dashboard
-      gridTemplateRows={'repeat(4, 20rem)'}
-      gridTemplateColumns={'repeat(12, 1fr)'}
-      className="inner"
-    >
+    <div className="inner dashboard-cards">
       <DetailsCard
-        measurements={projectData.measurements}
+        measurements={measurements.length}
         lifecycle={lifecycle}
-        date={{
-          start: projectData.firstUpdated,
-          end: projectData.lastUpdated,
-        }}
+        date={selectedLocationDates}
       />
       {/* <LatestMeasurementsCard parameters={paramsToDisplay} /> */}
-      <SourcesCard sources={projectData.sources} />
+      <SourcesCard sources={sources} />
       {/* <TimeSeriesCard
         projectId={projectData.id}
         parameters={projectData.parameters}
@@ -109,7 +177,7 @@ function LocationsDashboard({ locationData, lifecycle, dateRange }) {
           'The average number of measurements for each pollutant by hour, day, or month at the selected locations. In some views a window may be turned off if that view is not applicable to the selected time window.'
         }
       /> */}
-    </Dashboard>
+    </div>
   );
 }
 

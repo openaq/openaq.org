@@ -171,24 +171,10 @@ function Project({ match, history, location }) {
     return <ErrorHeader />;
   }
 
-  const paramsToDisplay =
-    locationData && !isAllLocations
-      ? // this returns the first of each parameter, this should only be passed to the timeseries chart,
-        // but until we get aggregate data from the endpoint, the other items on the dashboard will consume the first location
-        Array.from(
-          new Set(locationData.parameters.map(param => param.parameterId))
-        ).map(parameterId => {
-          return locationData.parameters.find(
-            p => p.parameterId === parameterId
-          );
-        })
-      : projectData.parameters;
-
   // Lifecycle stage of different sources.
   const lifecycle = projectData.sources
     .map(s => s.lifecycle_stage)
     .filter(Boolean);
-
   return (
     <section className="inpage">
       <Header
@@ -246,19 +232,23 @@ function Project({ match, history, location }) {
         </header>
         {!isAllLocations && locationData ? (
           <LocationsDashboard
-            measurements={Object.keys(selectedLocations).flat().length}
-            lifecycle={lifecycle}
-            dateRange={dateRange}
-          />
-        ) : (
-          <ProjectDashboard
-            projectData={projectData}
+            locationData={locationData}
+            measurements={Object.keys(selectedLocations).flat()}
             lifecycle={lifecycle}
             dateRange={dateRange}
             selectedLocationDates={{
               start: projectData.firstUpdated,
               end: projectData.lastUpdated,
             }}
+            sources={projectData.sources}
+            locations={Object.values(selectedLocations).flat()}
+            country={projectData.countries[0]}
+          />
+        ) : (
+          <ProjectDashboard
+            projectData={projectData}
+            lifecycle={lifecycle}
+            dateRange={dateRange}
             sources={projectData.sources}
           />
         )}

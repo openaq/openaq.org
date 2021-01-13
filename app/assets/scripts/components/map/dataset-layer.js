@@ -23,7 +23,7 @@ export default function DatasetLayer({
   map,
   sourceId,
   selectedLocations,
-  setSelectedLocations,
+  handleLocationSelection,
 }) {
   let match = useRouteMatch();
 
@@ -36,6 +36,7 @@ export default function DatasetLayer({
   ];
   const circlesLocationIdFilter = ['all', locationIdFilter, circlesFilter];
   const squaresLocationIdFilter = ['all', locationIdFilter, squaresFilter];
+  console.log('clicking');
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
@@ -125,7 +126,7 @@ export default function DatasetLayer({
       if (map.getLayer(`${activeParameter}-circle-outline`))
         map.removeLayer(`${activeParameter}-circle-outline`);
     };
-  }, []);
+  }, [activeParameter]);
 
   useEffect(() => {
     const openPopup = e => {
@@ -146,7 +147,7 @@ export default function DatasetLayer({
           locationId={e.features[0].properties.locationId}
           currentPage={parseInt(match.params.id, 10)}
           selectedLocations={selectedLocations}
-          setSelectedLocations={setSelectedLocations}
+          handleLocationSelection={handleLocationSelection}
         />,
         popoverElement
       );
@@ -195,8 +196,9 @@ export default function DatasetLayer({
 DatasetLayer.propTypes = {
   activeParameter: PropTypes.number.isRequired,
   isAllLocations: PropTypes.bool.isRequired,
-  country: PropTypes.string,
   locationIds: PropTypes.array,
   sourceId: PropTypes.string,
   map: PropTypes.object,
+  selectedLocations: PropTypes.array,
+  handleLocationSelection: PropTypes.func,
 };
