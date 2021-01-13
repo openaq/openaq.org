@@ -5,6 +5,8 @@
 .page__prime-nav {
   @extend .antialiased;
   color: $base-font-color;
+  position: relative;
+  z-index: 10;
 }
 
 .nav__home-link {

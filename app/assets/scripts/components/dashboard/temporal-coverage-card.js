@@ -19,15 +19,6 @@ const StyledLoading = styled(LoadingMessage)`
   grid-column: 4 / 11;
 `;
 
-const ChartLayout = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-`;
-
-const ChartContainer = styled.div`
-  padding: 1rem;
-`;
-
 const CardHeader = styled(BaseHeader)`
   display: grid;
   grid-template-rows: min-content 1fr;
@@ -216,7 +207,8 @@ export default function TemporalCoverageCard({
 
   return (
     <Card
-      gridColumn={'1  / -1'}
+      id="temporal-coverage"
+      className="card--temporal-coverage"
       renderHeader={() => (
         <CardHeader className="card__header">
           <TabbedSelector
@@ -230,7 +222,7 @@ export default function TemporalCoverageCard({
             }}
           />
           <CardHeadline>
-            <CardTitle>Temporal Coverage</CardTitle>
+            <CardTitle className="card__title">Temporal Coverage</CardTitle>
             {titleInfo && <InfoButton info={titleInfo} id="temp-cov-info" />}
           </CardHeadline>
         </CardHeader>
@@ -251,7 +243,7 @@ export default function TemporalCoverageCard({
             </p>
           </InfoMessage>
         ) : (
-          <ChartLayout>
+          <div className="chart__list">
             <Chart
               title="Hour of the Day"
               temporal="hod"
@@ -270,7 +262,7 @@ export default function TemporalCoverageCard({
               data={state.moy.data}
               fetching={state.moy.fetching}
             />
-          </ChartLayout>
+          </div>
         )
       }
     />
@@ -293,7 +285,7 @@ TemporalCoverageCard.propTypes = {
 
 function Chart({ title, temporal, data, fetching }) {
   return (
-    <ChartContainer>
+    <div className="chart__item">
       <div className="header">
         <h3 className="title">{title}</h3>
       </div>
@@ -308,7 +300,7 @@ function Chart({ title, temporal, data, fetching }) {
       ) : (
         <ErrorMessage />
       )}
-    </ChartContainer>
+    </div>
   );
 }
 
