@@ -95,7 +95,7 @@ export default function LocationsHub({
   return (
     <section className="inpage">
       <HubHeader
-        title="Air Quality Data by location"
+        title="Air Quality Data by Location"
         countriesCount={countryCount}
       />
 

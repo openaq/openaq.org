@@ -12,16 +12,17 @@ export default function HubHeader(props) {
       description={
         <>
           <p>
-            Our repository of air quality data continues to grow and now low
-            cost sensor data in addition to reference-grade data. bout the data
-            types here.Explore this data through sea n the site or through the
-            API, where all real-time and historical is now accessible.
+            Our repository of air quality data continues to grow and now
+            includes low cost sensor data in addition to reference-grade data.
+            Learn more about the data types here. Explore this data through
+            search features on the site or through the API, where all real-time
+            and historical data is now accessible.
           </p>
           <p>
             We are currently collecting data in {props.countriesCount} different
             countries and primarily aggregate PM2.5, PM10, ozone (O3), sulfur
             dioxide (SO2), nitrogen dioxide (NO2), carbon monoxide (CO), and
-            black carbon (BC) measurements.In certain limited cases, additional
+            black carbon (BC) measurements. In certain limited cases, additional
             pollutants outside of those standard set of pollutants are now
             available through low cost sensor sources.
           </p>
