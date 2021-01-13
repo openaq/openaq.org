@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { buildQS } from '../../utils/url';
 import config from '../../config';
 import { getCountryBbox } from '../../utils/countries';
-import { parameterMax } from '../../utils/map-settings';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import CardList from '../../components/card-list';
