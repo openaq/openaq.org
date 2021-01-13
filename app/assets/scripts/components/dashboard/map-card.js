@@ -14,7 +14,7 @@ const CardHeader = styled(BaseHeader)`
   grid-gap: 0.5rem;
 `;
 
-export default function MapCard({ locationId, center, dateRange }) {
+export default function MapCard({ locationId, bbox, dateRange }) {
   return (
     <Card
       gridColumn={'1 / -1'}
@@ -24,7 +24,7 @@ export default function MapCard({ locationId, center, dateRange }) {
         </CardHeader>
       )}
       renderBody={() => (
-        <Map center={center}>
+        <Map bbox={bbox}>
           <MobileSource dateRange={dateRange}>
             <MobileBoundsLayer locationId={locationId} />
             <MobilePointsLayer locationId={locationId} />
@@ -37,6 +37,6 @@ export default function MapCard({ locationId, center, dateRange }) {
 
 MapCard.propTypes = {
   locationId: PropTypes.number.isRequired,
-  center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  bbox: PropTypes.arrayOf(PropTypes.number).isRequired,
   dateRange: PropTypes.string.isRequired,
 };
