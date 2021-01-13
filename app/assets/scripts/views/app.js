@@ -10,7 +10,7 @@ import { closeDownloadModal } from '../actions/action-creators';
 import PageHeader from '../components/page-header';
 import PageFooter from '../components/page-footer';
 import { HeaderMessage } from '../components/header';
-import ModalDownload from '../components/modal-download';
+import ModalDownload from '../components/modal-download/';
 
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
@@ -80,14 +80,14 @@ var App = createReactClass({
         <main className="page__body" role="main">
           {content}
         </main>
-        {this.props.downloadModal.open ? (
-          <ModalDownload
-            country={this.props.downloadModal.country}
-            area={this.props.downloadModal.area}
-            location={this.props.downloadModal.location}
-            onModalClose={this.onModalClose}
-          />
-        ) : null}
+        <ModalDownload
+          country={this.props.downloadModal.country}
+          area={this.props.downloadModal.area}
+          location={this.props.downloadModal.location}
+          onModalClose={this.onModalClose}
+          // revealed={this.props.downloadModal.open}
+          revealed
+        />
         <PageFooter measurements={this.props.measurements} />
       </div>
     );
