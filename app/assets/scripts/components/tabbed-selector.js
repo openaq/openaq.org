@@ -3,16 +3,16 @@ import T from 'prop-types';
 import styled from 'styled-components';
 import c from 'classnames';
 
-const Tab = styled.a`
-  width: fit-content;
-  margin: 0;
-  line-height: 3rem;
-  text-transform: uppercase;
-`;
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
-  grid-gap: 0.5rem;
+  // Emulated gap: https://coryrylan.com/blog/css-gap-space-with-flexbox
+  display: flex;
+  flex-flow: row wrap;
+  margin: -1rem 0 0 -1rem;
+  width: calc(100% + 1rem);
+
+  > * {
+    margin: 1rem 0 0 1rem;
+  }
 `;
 
 function TabbedSelector(props) {
@@ -21,15 +21,19 @@ function TabbedSelector(props) {
   return (
     <Wrapper>
       {tabs.map(t => (
-        <Tab
+        <a
           key={t.id}
-          className={c('global-menu__link', {
-            'global-menu__link--active': activeTab.id === t.id,
+          href="#"
+          className={c('tabbed-selector__link', {
+            'tabbed-selector__link--active': activeTab.id === t.id,
           })}
-          onClick={() => onTabSelect(t)}
+          onClick={e => {
+            e.preventDefault();
+            onTabSelect(t);
+          }}
         >
           {t.name}
-        </Tab>
+        </a>
       ))}
     </Wrapper>
   );

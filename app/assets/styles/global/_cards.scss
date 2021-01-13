@@ -6,6 +6,10 @@
   max-width: 100%;
 }
 
+.card__title {
+  flex: unset;
+}
+
 .card--data {
   .card__title small {
     display: block;

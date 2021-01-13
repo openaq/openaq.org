@@ -139,172 +139,183 @@ export default function Filter({ countries, parameters, sources }) {
 
   return (
     <>
-      <div className="filters">
-        <nav className="fold__nav">
-          <h2>Filter by</h2>
-          <h2>Order by</h2>
-        </nav>
+      <div className="hub-filters">
+        <div className="inner">
+          <div className="filters__group">
+            <h2>Filter by</h2>
+            <div className="filter__values">
+              <Dropdown
+                triggerElement="a"
+                triggerTitle="View country options"
+                triggerText="Country"
+                triggerClassName="button--drop-filter filter--drop"
+              >
+                <ul
+                  role="menu"
+                  data-cy="filter-countries"
+                  className="drop__menu drop__menu--select scrollable"
+                >
+                  {_.sortBy(countries).map(o => {
+                    return (
+                      <li key={o.code}>
+                        <div
+                          data-cy="filter-menu-item"
+                          className={c('drop__menu-item', {
+                            'drop__menu-item--active': selected.countries.includes(
+                              o.code
+                            ),
+                          })}
+                          data-hook="dropdown:close"
+                          onClick={() => {
+                            onFilterSelect('countries', o.code);
+                          }}
+                        >
+                          <span data-cy={o.name}>{o.name}</span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Dropdown>
 
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="View country options"
-          triggerText="Country"
-          triggerClassName="button--drop-filter"
-        >
-          <ul
-            role="menu"
-            data-cy="filter-countries"
-            className="drop__menu drop__menu--select scrollable"
-          >
-            {_.sortBy(countries).map(o => {
-              return (
-                <li key={o.code}>
-                  <div
-                    data-cy="filter-menu-item"
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': selected.countries.includes(
-                        o.code
-                      ),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => {
-                      onFilterSelect('countries', o.code);
-                    }}
-                  >
-                    <span data-cy={o.name}>{o.name}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
-
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="View filter options"
-          triggerText="Parameter"
-          triggerClassName="button--drop-filter"
-        >
-          <ul
-            role="menu"
-            data-cy="filter-parameters"
-            className="drop__menu drop__menu--select scrollable"
-          >
-            {/* references list of unique ids to avoid duplicate list items while allowing 
+              <Dropdown
+                triggerElement="a"
+                triggerTitle="View filter options"
+                triggerText="Parameter"
+                triggerClassName="button--drop-filter filter--drop"
+              >
+                <ul
+                  role="menu"
+                  data-cy="filter-parameters"
+                  className="drop__menu drop__menu--select scrollable"
+                >
+                  {/* references list of unique ids to avoid duplicate list items while allowing 
             selection of parameters with different units and shared id */}
-            {_.sortBy(_.uniq(parameters, 'id')).map(param => {
-              return (
-                <li key={param.id}>
-                  <div
-                    data-cy="filter-menu-item"
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': selected.parameters.includes(
-                        param.id
-                      ),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => onFilterSelect('parameters', param.id)}
-                  >
-                    <span data-cy={param.id}>{param.displayName}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
+                  {_.sortBy(_.uniq(parameters, 'id')).map(param => {
+                    return (
+                      <li key={param.id}>
+                        <div
+                          data-cy="filter-menu-item"
+                          className={c('drop__menu-item', {
+                            'drop__menu-item--active': selected.parameters.includes(
+                              param.id
+                            ),
+                          })}
+                          data-hook="dropdown:close"
+                          onClick={() => onFilterSelect('parameters', param.id)}
+                        >
+                          <span data-cy={param.id}>{param.displayName}</span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Dropdown>
 
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="View source options"
-          triggerText="Data Source"
-          triggerClassName="button--drop-filter"
-        >
-          <ul
-            role="menu"
-            data-cy="filter-sources"
-            className="drop__menu drop__menu--select scrollable"
-          >
-            {_.sortBy(sources).map(o => {
-              return (
-                <li key={o.sourceSlug}>
-                  <div
-                    data-cy="filter-menu-item"
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': selected.sources.includes(
-                        o.sourceSlug
-                      ),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => {
-                      onFilterSelect('sources', o.sourceSlug);
-                    }}
-                  >
-                    <span data-cy={o.sourceSlug}>{o.sourceName}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="View source type options"
-          triggerText="Source Type"
-          triggerClassName="button--drop-filter"
-        >
-          <ul
-            role="menu"
-            data-cy="filter-source-type"
-            className="drop__menu drop__menu--select scrollable"
-          >
-            {_.sortBy(sourceTypeOptions).map(o => {
-              return (
-                <li key={o}>
-                  <div
-                    data-cy="filter-menu-item"
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': selected.source_type.includes(
-                        o
-                      ),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => {
-                      onFilterSelect('source_type', o);
-                    }}
-                  >
-                    <span data-cy={o}>{o}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
-
-        <Dropdown
-          triggerElement="a"
-          triggerTitle="View sort options"
-          triggerText="Order By"
-          triggerClassName="button--drop-filter sort-order"
-        >
-          <ul role="menu" className="drop__menu drop__menu--select scrollable">
-            {_.sortBy(sortOptions).map(o => {
-              return (
-                <li key={o}>
-                  <div
-                    data-cy="filter-menu-item"
-                    className={c('drop__menu-item', {
-                      'drop__menu-item--active': selected.order_by.includes(o),
-                    })}
-                    data-hook="dropdown:close"
-                    onClick={() => onFilterSelect('order_by', o)}
-                  >
-                    <span>{`${o[0].toUpperCase()}${o.slice(1)}`}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </Dropdown>
+              <Dropdown
+                triggerElement="a"
+                triggerTitle="View source options"
+                triggerText="Data Source"
+                triggerClassName="button--drop-filter filter--drop"
+              >
+                <ul
+                  role="menu"
+                  data-cy="filter-sources"
+                  className="drop__menu drop__menu--select scrollable"
+                >
+                  {_.sortBy(sources).map(o => {
+                    return (
+                      <li key={o.sourceSlug}>
+                        <div
+                          data-cy="filter-menu-item"
+                          className={c('drop__menu-item', {
+                            'drop__menu-item--active': selected.sources.includes(
+                              o.sourceSlug
+                            ),
+                          })}
+                          data-hook="dropdown:close"
+                          onClick={() => {
+                            onFilterSelect('sources', o.sourceSlug);
+                          }}
+                        >
+                          <span data-cy={o.sourceSlug}>{o.sourceName}</span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Dropdown>
+              <Dropdown
+                triggerElement="a"
+                triggerTitle="View source type options"
+                triggerText="Source Type"
+                triggerClassName="button--drop-filter filter--drop"
+              >
+                <ul
+                  role="menu"
+                  data-cy="filter-source-type"
+                  className="drop__menu drop__menu--select scrollable"
+                >
+                  {_.sortBy(sourceTypeOptions).map(o => {
+                    return (
+                      <li key={o}>
+                        <div
+                          data-cy="filter-menu-item"
+                          className={c('drop__menu-item', {
+                            'drop__menu-item--active': selected.source_type.includes(
+                              o
+                            ),
+                          })}
+                          data-hook="dropdown:close"
+                          onClick={() => {
+                            onFilterSelect('source_type', o);
+                          }}
+                        >
+                          <span data-cy={o}>{o}</span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Dropdown>
+            </div>
+          </div>
+          <div className="filters__group">
+            <h2>Order by</h2>
+            <div className="filter__values">
+              <Dropdown
+                triggerElement="a"
+                triggerTitle="View sort options"
+                triggerText="Order By"
+                triggerClassName="button--drop-filter filter--drop sort-order"
+              >
+                <ul
+                  role="menu"
+                  className="drop__menu drop__menu--select scrollable"
+                >
+                  {_.sortBy(sortOptions).map(o => {
+                    return (
+                      <li key={o}>
+                        <div
+                          data-cy="filter-menu-item"
+                          className={c('drop__menu-item', {
+                            'drop__menu-item--active': selected.order_by.includes(
+                              o
+                            ),
+                          })}
+                          data-hook="dropdown:close"
+                          onClick={() => onFilterSelect('order_by', o)}
+                        >
+                          <span>{`${o[0].toUpperCase()}${o.slice(1)}`}</span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Dropdown>
+            </div>
+          </div>
+        </div>
       </div>
 
       {Object.values(selected).find(o => o.length > 0) && (

@@ -12,7 +12,8 @@ export default function DetailsCard({ measurements, date, coords, lifecycle }) {
   return (
     <Card
       title="Details"
-      gridColumn={'1 / 4'}
+      id="details"
+      className="card--details"
       renderBody={() => {
         return (
           <>

@@ -17,10 +17,9 @@ const CardHeader = styled(BaseHeader)`
 export default function MapCard({ locationId, bbox, dateRange }) {
   return (
     <Card
-      gridColumn={'1 / -1'}
       renderHeader={() => (
         <CardHeader className="card__header">
-          <CardTitle>Mobile data locations</CardTitle>
+          <CardTitle className="card__title">Mobile data locations</CardTitle>
         </CardHeader>
       )}
       renderBody={() => (

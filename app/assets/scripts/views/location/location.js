@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import moment from 'moment';
@@ -10,7 +9,6 @@ import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
 import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
-import CardList from '../../components/card-list';
 import { parameterMax } from '../../utils/map-settings';
 
 import DetailsCard from '../../components/dashboard/details-card';
@@ -25,10 +23,6 @@ import DateSelector from '../../components/date-selector';
 
 import { buildQS } from '../../utils/url';
 import { NO_CITY } from '../../utils/constants';
-
-const Dashboard = styled(CardList)`
-  padding: 2rem 4rem;
-`;
 
 const defaultState = {
   fetched: false,
@@ -160,11 +154,7 @@ function Location(props) {
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
-        <Dashboard
-          gridTemplateRows={'repeat(4, 20rem)'}
-          gridTemplateColumns={'repeat(12, 1fr)'}
-          className="inner"
-        >
+        <div className="inner dashboard-cards">
           <DetailsCard
             measurements={data.measurements}
             lifecycle={lifecycle}
@@ -215,7 +205,7 @@ function Location(props) {
               'The average of all values and total number of measurements for each pollutant during the chosen time window.'
             }
           />
-        </Dashboard>
+        </div>
         <NearbyLocations
           locationId={data.id}
           center={[data.coordinates.longitude, data.coordinates.latitude]}

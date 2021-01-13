@@ -30,7 +30,7 @@ describe('The Locations Hub', () => {
   });
 
   it('has some filters with dropdown menus', () => {
-    cy.get('.filters').should('exist');
+    cy.get('.hub-filters').should('exist');
 
     // country filter
     cy.get('[title="View country options"]').click();
