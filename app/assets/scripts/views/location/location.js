@@ -183,7 +183,7 @@ function Location(props) {
               parameters={data.parameters}
               isMobile={data.isMobile}
               locationId={data.id}
-              center={[data.coordinates.longitude, data.coordinates.latitude]}
+              bbox={data.bounds}
               points={data.points}
               dateRange={
                 dateRange || moment.utc(data.firstUpdated).format('YYYY/MM/DD')
