@@ -34,11 +34,12 @@ function ParamSelect(props) {
     {
       id: 'Core',
       parameters: [],
+      info: 'Core parameters are widely available across the OpenAQ platform.',
     },
     {
       id: 'Additional',
       info:
-        'The following pollutants are less common than the core parameters. You may have to broaden other search filters when using these parameters to find sufficient results',
+        'Additional parameters are less common than the core parameters. You may have to broaden other search filters when using these parameters to find sufficient results.',
       parameters: [],
     },
   ];
