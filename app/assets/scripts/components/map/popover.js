@@ -135,7 +135,7 @@ export default function Popover({
                     title={`View ${data.name} page`}
                     className="button button--primary-bounded"
                   >
-                    View More
+                    View Location
                   </a>
                 </li>
               )}
