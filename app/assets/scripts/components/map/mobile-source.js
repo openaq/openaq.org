@@ -1,36 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
-
+import moment from 'moment';
 import config from '../../config';
 
-export default function MobileSource({ dateRange, map, children }) {
+export default function MobileSource({
+  firstUpdated,
+  lastUpdated,
+  map,
+  children,
+}) {
   const [sourceId, setSourceId] = useState(null);
-
-  const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
-    Number
-  );
 
   useEffect(() => {
     if (!map.getSource('mobile-source')) {
       const query = {
-        ...(dateRange
-          ? {
-              // In user space, month is 1 indexed
-              date_from: new Date(year, month - 1, day || 1),
-              date_to: day
-                ? new Date(year, month - 1, day + 1)
-                : new Date(year, month, 0),
-            }
-          : {}),
+        date_from: moment(firstUpdated).subtract(1, 'd').format('YYYY-MM-DD'),
+        date_to: moment(lastUpdated).add(1, 'd').format('YYYY-MM-DD'),
       };
-
       map.addSource('mobile-source', {
         type: 'vector',
         tiles: [
-          `${config.api}/locations/tiles/{z}/{x}/{y}.pbf?${qs.stringify(query, {
-            skipNulls: true,
-          })}`,
+          `${config.api}/locations/tiles/mobile/{z}/{x}/{y}.pbf?${qs.stringify(
+            query,
+            {
+              skipNulls: true,
+            }
+          )}`,
         ],
         minzoom: 0,
         maxzoom: 24,
@@ -43,7 +39,7 @@ export default function MobileSource({ dateRange, map, children }) {
     return () => {
       setSourceId(null);
     };
-  }, [dateRange]);
+  }, []);
 
   return (
     <>
@@ -60,7 +56,8 @@ export default function MobileSource({ dateRange, map, children }) {
 }
 
 MobileSource.propTypes = {
-  dateRange: PropTypes.string.isRequired,
+  firstUpdated: PropTypes.string.isRequired,
+  lastUpdated: PropTypes.string.isRequired,
   map: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.element,

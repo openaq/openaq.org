@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { unusedBorderColor } from '../../utils/colors';
 
 export default function MobilePointsLayer({
-  locationId,
-  activeParameter,
+  // locationId,
+  // activeParameter,
   map,
   sourceId,
 }) {
@@ -27,15 +27,15 @@ export default function MobilePointsLayer({
     return () => {
       if (map.getLayer('mobile-points')) map.removeLayer('mobile-points');
     };
-  }, [activeParameter]);
+  }, []);
 
-  useEffect(() => {
-    if (locationId && map.getLayer('mobile-points'))
-      map.setFilter('mobile-points', ['==', 'locationId', locationId]);
-    return () => {
-      map.setFilter('mobile-points', null);
-    };
-  }, [locationId]);
+  // useEffect(() => {
+  //   if (locationId && map.getLayer('mobile-points'))
+  //     map.setFilter('mobile-points', ['==', 'locationId', locationId]);
+  //   return () => {
+  //     map.setFilter('mobile-points', null);
+  //   };
+  // }, [locationId]);
 
   return null;
 }

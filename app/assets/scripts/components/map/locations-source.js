@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import qs from 'qs';
 
 import config from '../../config';
 
@@ -8,10 +9,15 @@ export default function LocationsSource({ activeParameter, map, children }) {
 
   useEffect(() => {
     if (!map.getSource(`locations-source-${activeParameter}`)) {
+      const query = {
+        parameter: activeParameter,
+      };
       map.addSource(`locations-source-${activeParameter}`, {
         type: 'vector',
         tiles: [
-          `${config.api}/locations/tiles/{z}/{x}/{y}.pbf?parameter=${activeParameter}`,
+          `${config.api}/locations/tiles/{z}/{x}/{y}.pbf?${qs.stringify(query, {
+            skipNulls: true,
+          })}`,
         ],
         minzoom: 0,
         maxzoom: 24,

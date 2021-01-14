@@ -185,12 +185,8 @@ function Location(props) {
               locationId={data.id}
               bbox={data.bounds}
               points={data.points}
-              dateRange={
-                dateRange ||
-                `${moment(data.firstUpdated).format('YYYY/MM/DD')},${moment(
-                  data.lastUpdated
-                ).format('YYYY/MM/DD')}`
-              }
+              firstUpdated={data.firstUpdated}
+              lastUpdated={data.lastUpdated}
             />
           )}
           <TemporalCoverageCard

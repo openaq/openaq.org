@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
 import Map from '../map';
+import LocationsSource from '../map/locations-source';
 import MobileSource from '../map/mobile-source';
 import MobileBoundsLayer from '../map/mobile-bounds-layer';
 import MobilePointsLayer from '../map/mobile-points-layer';
@@ -14,7 +15,12 @@ const CardHeader = styled(BaseHeader)`
   grid-gap: 0.5rem;
 `;
 
-export default function MapCard({ locationId, bbox, dateRange }) {
+export default function MapCard({
+  locationId,
+  bbox,
+  firstUpdated,
+  lastUpdated,
+}) {
   return (
     <Card
       renderHeader={() => (
@@ -24,8 +30,10 @@ export default function MapCard({ locationId, bbox, dateRange }) {
       )}
       renderBody={() => (
         <Map bbox={bbox}>
-          <MobileSource dateRange={dateRange}>
+          <LocationsSource>
             <MobileBoundsLayer locationId={locationId} />
+          </LocationsSource>
+          <MobileSource firstUpdated={firstUpdated} lastUpdated={lastUpdated}>
             <MobilePointsLayer locationId={locationId} />
           </MobileSource>
         </Map>
@@ -37,5 +45,6 @@ export default function MapCard({ locationId, bbox, dateRange }) {
 MapCard.propTypes = {
   locationId: PropTypes.number.isRequired,
   bbox: PropTypes.arrayOf(PropTypes.number).isRequired,
-  dateRange: PropTypes.string.isRequired,
+  firstUpdated: PropTypes.string.isRequired,
+  lastUpdated: PropTypes.string.isRequired,
 };
