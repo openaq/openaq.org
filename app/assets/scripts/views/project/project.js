@@ -102,6 +102,7 @@ function Project({ match, history, location }) {
   // Lifecycle stage of different sources.
   const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
 
+  console.log(data)
   return (
     <section className="inpage">
       <Header

@@ -128,7 +128,7 @@ export default function TemporalCoverageCard({
               date_from: new Date(year, month - 1, day || 1),
               date_to: day
                 ? new Date(year, month - 1, day + 1)
-                : new Date(year, month, 0),
+                : new Date(year, month, 1),
             }
           : {}),
       };
