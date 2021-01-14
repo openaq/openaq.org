@@ -121,10 +121,18 @@ function Country(props) {
   }
 
   // gets sources from locations and uses set to create an array with no duplicates
+  const locationSources =
+    locations &&
+    locations
+      .map(location => location.sources)
+      .flat()
+      .filter(source => source !== undefined);
   const sourceList = locations
-    ? Array.from(
-        new Set(locations.map(loc => loc.sources[0]).map(JSON.stringify))
-      ).map(JSON.parse)
+    ? Array.from(new Set(locationSources.map(source => source.id))).map(
+        sourceId => {
+          return locationSources.find(source => source.id === sourceId);
+        }
+      )
     : null;
 
   let locationGroups = _(locations).sortBy('city').groupBy('city').value();

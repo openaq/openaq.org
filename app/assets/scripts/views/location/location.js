@@ -8,7 +8,6 @@ import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
 import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
-import { parameterMax } from '../../utils/map-settings';
 
 import DetailsCard from '../../components/dashboard/details-card';
 import NearbyLocations from './nearby-locations';
@@ -128,9 +127,6 @@ function Location(props) {
       location: data.location,
     });
   }
-  const filteredParams = data.parameters.filter(p =>
-    Object.keys(parameterMax).includes(p.parameterId.toString())
-  );
 
   //
   // Lifecycle stage of different sources.
@@ -195,16 +191,14 @@ function Location(props) {
             }
           />
         </div>
-        {filteredParams[0] && (
-          <NearbyLocations
-            locationId={data.id}
-            center={[data.coordinates.longitude, data.coordinates.latitude]}
-            city={data.city}
-            country={data.country}
-            parameters={filteredParams}
-            initialActiveParameter={filteredParams[0]}
-          />
-        )}
+        <NearbyLocations
+          locationId={data.id}
+          center={[data.coordinates.longitude, data.coordinates.latitude]}
+          city={data.city || NO_CITY}
+          country={data.country}
+          parameters={data.parameters}
+          initialActiveParameter={data.parameters[0]}
+        />
       </div>
     </section>
   );

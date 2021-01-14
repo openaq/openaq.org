@@ -103,12 +103,12 @@ export function generateLegendStops(parameter) {
   return stops;
 }
 
-const weekAgo = moment().subtract(7, 'days').toISOString();
+const ACTIVE_TIME_WINDOW = moment().subtract(2, 'days').toISOString();
 
 export function getFillExpression(parameter, isDark) {
   return [
     'case',
-    ['>', ['get', 'lastUpdated'], ['literal', weekAgo]],
+    ['>', ['get', 'lastUpdated'], ['literal', ACTIVE_TIME_WINDOW]],
     [
       'interpolate',
       ['linear'],

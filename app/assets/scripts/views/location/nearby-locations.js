@@ -60,5 +60,5 @@ NearbyLocations.propTypes = {
   parameters: PropTypes.array,
   city: PropTypes.string,
   country: PropTypes.string,
-  initialActiveParameter: PropTypes.string,
+  initialActiveParameter: PropTypes.object,
 };
