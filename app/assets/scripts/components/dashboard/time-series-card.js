@@ -82,8 +82,8 @@ export default function TimeSeriesCard({
       if (dateRange) {
         query = {
           ...query,
-          temporal: 'hour'
-        }
+          temporal: 'hour',
+        };
       }
       fetch(
         `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
@@ -126,6 +126,7 @@ export default function TimeSeriesCard({
     return null;
   }
 
+  console.log(data);
   return (
     <Card
       id="time-series"
@@ -157,6 +158,7 @@ export default function TimeSeriesCard({
               data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
               yLabel={data && data[0].displayName}
               yUnit={data && data[0].unit}
+              xUnit={temporal}
             />
           ) : (
             <ErrorMessage instructions="Please try a different time" />

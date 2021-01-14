@@ -57,6 +57,7 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
             unit: xUnit || 'day',
             displayFormats: {
               day: 'YYYY/MM/DD',
+              hour: 'hA',
             },
           },
           gridLines: {
