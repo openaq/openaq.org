@@ -16,7 +16,7 @@ import {
 import Popover from './popover';
 import { square } from './square';
 
-export default function DatasetLayer({
+export default function NodeLayer({
   activeParameter,
   isAllLocations,
   locationIds,
@@ -192,7 +192,7 @@ export default function DatasetLayer({
   return null;
 }
 
-DatasetLayer.propTypes = {
+NodeLayer.propTypes = {
   activeParameter: PropTypes.number.isRequired,
   isAllLocations: PropTypes.bool.isRequired,
   locationIds: PropTypes.array,

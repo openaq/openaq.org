@@ -9,8 +9,8 @@ import { getCountryBbox } from '../../utils/countries';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import ProjectDashboard from './project-dashboard';
-import LocationsDashboard from './locations-dashboard';
-import DatasetLocations from './dataset-locations';
+import NodesDashboard from './nodes-dashboard';
+import NodeLocations from './node-locations';
 import DateSelector from '../../components/date-selector';
 import Pill from '../../components/pill';
 
@@ -153,7 +153,7 @@ function Project({ match, history, location }) {
             </div>
           </div>
         )}
-        <DatasetLocations
+        <NodeLocations
           bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
           locationIds={projectData.locationIds}
           parameters={projectData.parameters}
@@ -169,7 +169,7 @@ function Project({ match, history, location }) {
           <h1 className="fold__title">Values for selected stations</h1>
         </header>
         {!isAllLocations ? (
-          <LocationsDashboard
+          <NodesDashboard
             measurements={projectData.measurements}
             selectedParams={Object.keys(selectedLocations)}
             lifecycle={lifecycle}

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import MapComponent from '../../components/map';
 import LocationsSource from '../../components/map/locations-source';
-import DatasetLayer from '../../components/map/dataset-layer';
+import NodeLayer from '../../components/map/node-layer';
 import Legend from '../../components/map/legend';
 import OptionCard from '../../components/map/option-card';
 
-export default function DatasetLocations({
+export default function NodeLocations({
   bbox,
   locationIds,
   parameters,
@@ -29,7 +29,7 @@ export default function DatasetLocations({
       <div className="fold__body">
         <MapComponent bbox={bbox}>
           <LocationsSource activeParameter={activeParameter.parameterId}>
-            <DatasetLayer
+            <NodeLayer
               activeParameter={activeParameter.parameterId}
               isAllLocations={isAllLocations}
               locationIds={locationIds}
@@ -54,7 +54,7 @@ export default function DatasetLocations({
   );
 }
 
-DatasetLocations.propTypes = {
+NodeLocations.propTypes = {
   locationIds: PropTypes.array.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   parameters: PropTypes.array,

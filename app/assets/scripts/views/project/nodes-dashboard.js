@@ -22,7 +22,7 @@ const defaultState = {
   averages: null,
 };
 
-function LocationsDashboard({
+function NodesDashboard({
   measurements,
   selectedParams,
   lifecycle,
@@ -193,7 +193,7 @@ function LocationsDashboard({
   );
 }
 
-LocationsDashboard.propTypes = {
+NodesDashboard.propTypes = {
   measurements: T.number,
   selectedParams: T.array,
   lifecycle: T.array,
@@ -212,4 +212,4 @@ LocationsDashboard.propTypes = {
   name: T.string,
 };
 
-export default LocationsDashboard;
+export default NodesDashboard;
