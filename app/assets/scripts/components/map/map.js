@@ -4,7 +4,7 @@ import mapbox from 'mapbox-gl';
 
 import config from '../../config';
 
-export default function Map({ center, bbox, children }) {
+export default function Map({ center, bbox, scrollZoomDisabled, children }) {
   const containerRef = useRef();
 
   const [map, setMap] = useState(null);
@@ -19,6 +19,8 @@ export default function Map({ center, bbox, children }) {
     });
 
     m.addControl(new mapbox.NavigationControl());
+
+    if (scrollZoomDisabled) m.scrollZoom.disable();
 
     m.on('load', () => {
       setMap(m);
@@ -60,6 +62,7 @@ export default function Map({ center, bbox, children }) {
 Map.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
   bbox: PropTypes.arrayOf(PropTypes.number),
+  scrollZoomDisabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
