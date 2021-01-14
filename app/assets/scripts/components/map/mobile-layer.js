@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 
 import { unusedBorderColor } from '../../utils/colors';
+import { addPopover } from './map-interaction';
 
 export default function MobileLayer({ activeParameter, map, sourceId }) {
+  let match = useRouteMatch();
+
   useEffect(() => {
     map.addLayer({
       id: 'mobile-layer',
@@ -18,6 +22,8 @@ export default function MobileLayer({ activeParameter, map, sourceId }) {
         'line-opacity': 0.6,
       },
     });
+
+    addPopover(map, 'mobile-layer', match.params.id, activeParameter);
 
     return () => {
       if (map.getLayer('mobile-layer')) map.removeLayer('mobile-layer');
