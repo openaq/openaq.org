@@ -6,7 +6,6 @@ import config from '../../config';
 import { round } from '../../utils/format';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
-import Pill from '../pill';
 
 const defaultState = {
   fetched: false,
@@ -21,10 +20,10 @@ export default function Popover({
   locationId,
   currentPage,
   selectedLocations,
-  setSelectedLocations,
+  handleLocationSelection,
 }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
-
+  // console.log('isAllLocations', isAllLocations);
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
@@ -77,10 +76,16 @@ export default function Popover({
   }
 
   let lastUpdated = moment.utc(data.lastUpdated).format('YYYY/MM/DD HH:mm');
+  const allSelectedLocations =
+    selectedLocations && Object.values(selectedLocations).flat();
+  // const allSelectedParams = Object.keys(selectedLocations).flat();
   const parameter = data.parameters.find(
     p => p.id === activeParameter || p.parameterId === activeParameter
   );
-
+  const isDisabled =
+    selectedLocations &&
+    !allSelectedLocations.includes(locationId) &&
+    allSelectedLocations.length >= 15;
   return (
     <article className="popover">
       <div className="popover__contents">
@@ -113,7 +118,7 @@ export default function Popover({
               </a>
             </p>
           )}
-          {isAllLocations ? (
+          {isAllLocations || !allSelectedLocations ? (
             <ul className="popover__actions">
               {/*
                 Using `a` instead of `Link` because these are rendered outside
@@ -144,28 +149,19 @@ export default function Popover({
             <button
               title="Select Location"
               className={`button button--primary-bounded ${
-                selectedLocations.length >= 15 && 'disabled'
+                isDisabled && 'disabled'
               }`}
-              disabled={selectedLocations.length >= 15}
+              disabled={isDisabled}
               onClick={() =>
-                selectedLocations.includes(locationId)
-                  ? setSelectedLocations(
-                      selectedLocations.filter(
-                        location => location !== locationId
-                      )
-                    )
-                  : selectedLocations.length < 15
-                  ? setSelectedLocations([...selectedLocations, locationId])
-                  : null
+                handleLocationSelection(activeParameter, locationId)
               }
             >
               <div>
                 <span style={{ marginRight: `.5rem` }}>
-                  {selectedLocations.includes(locationId)
+                  {selectedLocations[activeParameter]?.includes(locationId)
                     ? 'Remove Location'
                     : 'Select Location'}{' '}
                 </span>
-                <Pill title={`${selectedLocations.length}/15`} />
               </div>
             </button>
           )}
@@ -180,8 +176,8 @@ Popover.propTypes = {
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
   isAllLocations: T.bool,
-  selectedLocations: T.array,
-  setSelectedLocations: T.func,
+  selectedLocations: T.object,
+  handleLocationSelection: T.func,
 };
 
 Popover.defaultProps = {

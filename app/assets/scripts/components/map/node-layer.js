@@ -16,14 +16,14 @@ import {
 import Popover from './popover';
 import { square } from './square';
 
-export default function DatasetLayer({
+export default function NodeLayer({
   activeParameter,
   isAllLocations,
   locationIds,
   map,
   sourceId,
   selectedLocations,
-  setSelectedLocations,
+  handleLocationSelection,
 }) {
   let match = useRouteMatch();
 
@@ -125,7 +125,7 @@ export default function DatasetLayer({
       if (map.getLayer(`${activeParameter}-circle-outline`))
         map.removeLayer(`${activeParameter}-circle-outline`);
     };
-  }, []);
+  }, [activeParameter]);
 
   useEffect(() => {
     const openPopup = e => {
@@ -146,7 +146,7 @@ export default function DatasetLayer({
           locationId={e.features[0].properties.locationId}
           currentPage={parseInt(match.params.id, 10)}
           selectedLocations={selectedLocations}
-          setSelectedLocations={setSelectedLocations}
+          handleLocationSelection={handleLocationSelection}
         />,
         popoverElement
       );
@@ -158,7 +158,7 @@ export default function DatasetLayer({
 
     map.on('click', `${activeParameter}-circles`, openPopup);
     map.on('click', `${activeParameter}-squares`, openPopup);
-  }, [isAllLocations, selectedLocations]);
+  }, [isAllLocations, selectedLocations, activeParameter]);
 
   useEffect(() => {
     if (
@@ -192,11 +192,12 @@ export default function DatasetLayer({
   return null;
 }
 
-DatasetLayer.propTypes = {
+NodeLayer.propTypes = {
   activeParameter: PropTypes.number.isRequired,
   isAllLocations: PropTypes.bool.isRequired,
-  country: PropTypes.string,
   locationIds: PropTypes.array,
   sourceId: PropTypes.string,
   map: PropTypes.object,
+  selectedLocations: PropTypes.object,
+  handleLocationSelection: PropTypes.func,
 };
