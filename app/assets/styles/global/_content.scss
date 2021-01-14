@@ -22,6 +22,10 @@
   }
 }
 
+a.disabled {
+  color: $base-color;
+}
+
 /* Special button for inpage header
    ========================================================================== */
 
@@ -154,3 +158,4 @@
 .__react_component_tooltip.filter-tooltip {
   z-index: 10000;
 }
+
