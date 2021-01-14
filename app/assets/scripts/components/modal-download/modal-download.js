@@ -21,8 +21,10 @@ import { formatThousands } from '../../utils/format';
 import LocationSelector from './location-selector';
 import DateSelector from './date-selector';
 import Parameters from './parameters';
+import LoadingMessage from '../loading-message';
 
 const EMPTY = '--';
+const API_LIMIT = 66536;
 
 const computeApiUrl = (values, initalQS = {}) => {
   let state = _.clone(values);
@@ -33,7 +35,7 @@ const computeApiUrl = (values, initalQS = {}) => {
   });
 
   if (state.startYear && state.startMonth && state.startDay) {
-    let sDate = moment(
+    const sDate = moment(
       `${state.startYear}/${parseInt(state.startMonth) + 1}/${state.startDay}`,
       'YYYY/M/D'
     );
@@ -43,7 +45,7 @@ const computeApiUrl = (values, initalQS = {}) => {
   }
 
   if (state.endYear && state.endMonth && state.endDay) {
-    let eDate = moment(
+    const eDate = moment(
       `${state.endYear}/${parseInt(state.endMonth) + 1}/${state.endDay}`,
       'YYYY/M/D'
     );
@@ -82,10 +84,6 @@ const computeApiUrl = (values, initalQS = {}) => {
 };
 
 function ModalDownload(props) {
-  console.log(
-    '🚀 ~ file: modal-download.js ~ line 26 ~ ModalDownload ~ props',
-    props
-  );
   const {
     countries,
     revealed,
@@ -112,6 +110,10 @@ function ModalDownload(props) {
     parameters: [],
   });
 
+  const [selectionCount, setSelectionCount] = useState(null);
+
+  // Update the state when the input parameters change. This is used to open the
+  // modal in a specific location.
   useEffect(() => {
     setFormState(s => ({
       ...s,
@@ -121,6 +123,7 @@ function ModalDownload(props) {
     }));
   }, [country, area, location]);
 
+  // Fetch locations for a given country.
   useEffect(() => {
     if (country) {
       _invalidateLocationsByCountry();
@@ -128,6 +131,33 @@ function ModalDownload(props) {
     }
   }, [country]);
 
+  const checkingUrl = computeApiUrl(formState, { limit: 1 });
+  useEffect(() => {
+    // What is going on here?
+    // The api is limited to 65,536 results, but some download options
+    // combinations yield a lot more results. They could potentially
+    // return the whole database (when nothing is selected). This is not
+    // really an option, so the results are limited.
+    // Nevertheless the user has to be warned of this, so on every parameter
+    // change we query the api to know how many results would be returned, and
+    // show a message in case the number is above the limit.
+    fetch(checkingUrl)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => setSelectionCount(json.meta.found),
+        e => {
+          setSelectionCount(-1);
+          console.log('API limit check error', e);
+        }
+      );
+  }, [checkingUrl]);
+
+  // State change on option select.
   const onOptSelect = (key, e) => {
     let newState = {
       ...formState,
@@ -145,6 +175,7 @@ function ModalDownload(props) {
     setFormState(newState);
   };
 
+  // State change on parameter select.
   const onParameterSelect = value => {
     setFormState(s => ({ ...s, parameters: toggleValue(s.parameters, value) }));
   };
@@ -172,7 +203,7 @@ function ModalDownload(props) {
         </div>
       </ModalHeader>
       <ModalBody>
-        {countries && (
+        {countries ? (
           <div className="prose">
             <p className="modal__description">
               Customize the data you want to download. Currently, the last two
@@ -237,8 +268,21 @@ function ModalDownload(props) {
                 selected={formState.parameters}
                 onSelect={onParameterSelect}
               />
-              {/*
-            {this.renderResultCountMessage()} */}
+              {selectionCount === -1 && (
+                <p style={{ textAlign: 'center' }}>
+                  The API has a limit of {formatThousands(API_LIMIT)}{' '}
+                  measurements and an error occurred while validating your
+                  query. Results may be truncated.
+                </p>
+              )}
+              {selectionCount > API_LIMIT && (
+                <p style={{ textAlign: 'center' }}>
+                  The API has a limit of {formatThousands(API_LIMIT)}{' '}
+                  measurements and your query yields{' '}
+                  {formatThousands(selectionCount)}, therefore results will be
+                  limited.
+                </p>
+              )}
 
               <div className="form__actions">
                 <button
@@ -259,6 +303,8 @@ function ModalDownload(props) {
               </div>
             </form>
           </div>
+        ) : (
+          <LoadingMessage />
         )}
       </ModalBody>
     </Modal>
