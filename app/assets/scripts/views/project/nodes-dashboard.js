@@ -67,8 +67,11 @@ function NodesDashboard({
       spatial: 'location',
       temporal: 'day',
       group: true,
-      country_id: country,
     };
+
+    if (country) {
+      query.country_id = country;
+    }
 
     let f = buildAPIQS(query, { arrayFormat: 'repeat' });
 

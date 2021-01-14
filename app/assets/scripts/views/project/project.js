@@ -180,7 +180,7 @@ function Project({ match, history, location }) {
             }}
             sources={projectData.sources}
             locations={Object.values(selectedLocations).flat()}
-            country={projectData.countries[0]}
+            country={projectData.countries && projectData.countries[0]}
             name={projectData.name}
           />
         ) : (
