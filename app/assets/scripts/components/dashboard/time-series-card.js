@@ -127,7 +127,6 @@ export default function TimeSeriesCard({
     return null;
   }
 
-  console.log(data);
   return (
     <Card
       id="time-series"
