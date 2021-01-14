@@ -44,6 +44,11 @@ export default function LocationsHub({
   const [filters, setFilters] = useState({});
   const [page, setPage] = useState(1);
 
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   useEffect(() => {
     // on url change
     let query = qs.parse(location.search, {
@@ -66,11 +71,10 @@ export default function LocationsHub({
   }, [location]);
 
   useEffect(() => {
+    if (!isMounted) return;
     fetchLocations(page, filters, PER_PAGE);
-    return () => {
-      invalidateLocations();
-    };
-  }, [page, filters]);
+    return () => invalidateLocations();
+  }, [page, filters, isMounted]);
 
   function handlePageClick(d) {
     let query = qs.parse(location.search, { ignoreQueryPrefix: true });

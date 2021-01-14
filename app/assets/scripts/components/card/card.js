@@ -74,17 +74,12 @@ export default function Card({
               <CardSubtitle className="card__subtitle">{subtitle}</CardSubtitle>
             )}
             <CardHeadline className="card__headline">
-              <CardHeadline>
-                {title && (
-                  <CardTitle
-                    data-cy={`${id}-card-title`}
-                    className="card__title"
-                  >
-                    {title}
-                  </CardTitle>
-                )}
-                {titleInfo && <InfoButton info={titleInfo} id={`${id}`} />}
-              </CardHeadline>
+              {title && (
+                <CardTitle data-cy={`${id}-card-title`} className="card__title">
+                  {title}
+                </CardTitle>
+              )}
+              {titleInfo && <InfoButton info={titleInfo} id={`${id}`} />}
             </CardHeadline>
             {tags && (
               <TagWrapper>

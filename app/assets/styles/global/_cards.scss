@@ -6,12 +6,16 @@
   max-width: 100%;
 }
 
-.card__title {
-  flex: unset;
+.card__headline {
+  min-width: 0;
 }
 
-.card--data {
-  .card__title small {
+.card__title {
+  @extend .truncated;
+  flex: unset;
+  
+  small {
+    @extend .truncated;
     display: block;
     line-height: 1.25;
   }
