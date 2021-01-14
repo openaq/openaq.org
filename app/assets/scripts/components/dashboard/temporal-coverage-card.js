@@ -275,7 +275,6 @@ export default function TemporalCoverageCard({
           </InfoMessage>
         ) : (
           <div className="chart__list">
-            (
             <Chart
               title="Hour of the Day"
               temporal="hod"
