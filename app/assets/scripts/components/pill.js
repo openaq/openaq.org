@@ -1,14 +1,15 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 
-export default function Pill({ title }) {
+export default function Pill({ title, action }) {
   return (
-    <div className="button--pill" data-cy="simple-pill">
+    <button className="button--pill" onClick={action} data-cy="simple-pill">
       <span>{title}</span>
-    </div>
+    </button>
   );
 }
 
 Pill.propTypes = {
   title: T.string.isRequired,
+  action: T.func,
 };

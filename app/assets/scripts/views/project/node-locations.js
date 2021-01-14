@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 
 import MapComponent from '../../components/map';
 import LocationsSource from '../../components/map/locations-source';
-import DatasetLayer from '../../components/map/dataset-layer';
+import NodeLayer from '../../components/map/node-layer';
 import Legend from '../../components/map/legend';
 import OptionCard from '../../components/map/option-card';
 
-export default function DatasetLocations({
+export default function NodeLocations({
   bbox,
   locationIds,
   parameters,
   toggleAllLocations,
   isAllLocations,
   selectedLocations,
-  setSelectedLocations,
+  handleLocationSelection,
 }) {
   const [activeParameter, setActiveParameter] = useState(parameters[0]);
 
@@ -29,12 +29,12 @@ export default function DatasetLocations({
       <div className="fold__body">
         <MapComponent bbox={bbox}>
           <LocationsSource activeParameter={activeParameter.parameterId}>
-            <DatasetLayer
+            <NodeLayer
               activeParameter={activeParameter.parameterId}
               isAllLocations={isAllLocations}
               locationIds={locationIds}
               selectedLocations={selectedLocations}
-              setSelectedLocations={setSelectedLocations}
+              handleLocationSelection={handleLocationSelection}
             />
           </LocationsSource>
 
@@ -54,7 +54,7 @@ export default function DatasetLocations({
   );
 }
 
-DatasetLocations.propTypes = {
+NodeLocations.propTypes = {
   locationIds: PropTypes.array.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   parameters: PropTypes.array,
@@ -63,6 +63,6 @@ DatasetLocations.propTypes = {
   activeParameter: PropTypes.string,
   isAllLocations: PropTypes.bool.isRequired,
   toggleAllLocations: PropTypes.func.isRequired,
-  selectedLocations: PropTypes.array,
-  setSelectedLocations: PropTypes.func.isRequired,
+  selectedLocations: PropTypes.object,
+  handleLocationSelection: PropTypes.func.isRequired,
 };
