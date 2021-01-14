@@ -128,8 +128,11 @@ function Location(props) {
     });
   }
 
+  //
   // Lifecycle stage of different sources.
-  const lifecycle = data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+  const lifecycle = (data.sources || [])
+    .map(s => s.lifecycle_stage)
+    .filter(Boolean);
 
   return (
     <section className="inpage">
@@ -179,6 +182,7 @@ function Location(props) {
             titleInfo={
               'The average number of measurements for each pollutant by hour, day, or month. In some views a window may be turned off if that view is not applicable to the selected time window.'
             }
+            isMobile={data.isMobile}
           />
           <MeasureandsCard
             parameters={data.parameters}
