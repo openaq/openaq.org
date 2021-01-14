@@ -23,10 +23,11 @@
 }
 
 
-.drop__menu.scrollable {
+.drop__menu.drop__menu--select.scrollable {
    max-height: 10rem;
    overflow-y: scroll;
  }
-
-
+ .drop__content {
+   overflow: auto;
+ }
 
