@@ -11,11 +11,6 @@ import Card, { CardDetails, FooterActions } from '../../components/card';
 import Header from '../../components/header';
 
 export default function CountriesHub({ _openDownloadModal, countries }) {
-  const onDownloadClick = (country, e) => {
-    e.preventDefault();
-    _openDownloadModal({ country: country });
-  };
-
   return (
     <section className="inpage">
       <Header
@@ -83,8 +78,10 @@ export default function CountriesHub({ _openDownloadModal, countries }) {
                     )}
                     renderFooter={() => (
                       <FooterActions
-                        what={name}
-                        onDownloadClick={e => onDownloadClick(e, o.code)}
+                        what={o.name}
+                        onDownloadClick={() =>
+                          _openDownloadModal({ country: o.code })
+                        }
                         viewMorePath={`/countries/${o.code}`}
                       />
                     )}

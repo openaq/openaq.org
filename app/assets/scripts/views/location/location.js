@@ -123,8 +123,8 @@ function Location(props) {
   function onDownloadClick() {
     props._openDownloadModal({
       country: data.country,
-      area: data.city,
-      location: data.location,
+      area: data.city || NO_CITY,
+      location: data.id,
     });
   }
 

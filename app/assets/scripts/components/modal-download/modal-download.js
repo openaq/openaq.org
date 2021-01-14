@@ -17,6 +17,7 @@ import {
 } from '../../actions/action-creators';
 import config from '../../config';
 import { formatThousands } from '../../utils/format';
+import { NO_CITY } from '../../utils/constants';
 
 import LocationSelector from './location-selector';
 import DateSelector from './date-selector';
@@ -61,7 +62,7 @@ const computeApiUrl = (values, initalQS = {}) => {
   if (state.locLocation) {
     qs.location = state.locLocation;
   } else if (state.locArea) {
-    qs.city = state.locArea;
+    qs.city = state.locArea === NO_CITY ? '' : state.locArea;
   } else if (state.locCountry) {
     qs.country = state.locCountry;
   }

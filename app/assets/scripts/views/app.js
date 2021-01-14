@@ -85,8 +85,7 @@ var App = createReactClass({
           area={this.props.downloadModal.area}
           location={this.props.downloadModal.location}
           onModalClose={this.onModalClose}
-          // revealed={this.props.downloadModal.open}
-          revealed
+          revealed={this.props.downloadModal.open}
         />
         <PageFooter measurements={this.props.measurements} />
       </div>
