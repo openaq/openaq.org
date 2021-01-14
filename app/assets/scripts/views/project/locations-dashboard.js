@@ -48,7 +48,7 @@ function LocationsDashboard({
     return () => {
       setState(defaultState);
     };
-  }, []);
+  }, [selectedParams, locations]);
 
   const fetchLocationAverages = () => {
     setState(state => ({ ...state, fetching: true, error: null }));
