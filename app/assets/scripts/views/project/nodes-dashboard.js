@@ -155,7 +155,12 @@ function NodesDashboard({
   }
 
   if (error || !parameters.length) {
-    return <ErrorMessage instructions="Please try a different time" />;
+    return (
+      <ErrorMessage
+        isShowingDiagnosis={false}
+        instructions="Please try a different location or parameter"
+      />
+    );
   }
 
   return (
