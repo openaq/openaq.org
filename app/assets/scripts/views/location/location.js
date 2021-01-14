@@ -190,7 +190,7 @@ function Location(props) {
         <NearbyLocations
           locationId={data.id}
           center={[data.coordinates.longitude, data.coordinates.latitude]}
-          city={data.city}
+          city={data.city || NO_CITY}
           country={data.country}
           parameters={data.parameters}
           initialActiveParameter={data.parameters[0]}
