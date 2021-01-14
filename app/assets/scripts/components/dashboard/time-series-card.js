@@ -80,6 +80,7 @@ export default function TimeSeriesCard({
       }
       //If date range is not lifetime, get hourly data
       if (dateRange) {
+        setTemporal('hour');
         query = {
           ...query,
           temporal: 'hour',
@@ -120,7 +121,7 @@ export default function TimeSeriesCard({
     return () => {
       setState(defaultState);
     };
-  }, [activeTab, temporal, dateRange]);
+  }, [activeTab, dateRange]);
 
   if (!fetched && !fetching) {
     return null;
