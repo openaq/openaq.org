@@ -213,8 +213,8 @@ export default function TemporalCoverageCard({
         <CardHeader className="card__header">
           <TabbedSelector
             tabs={parameters.map(x => ({
-              id: x.parameter || x,
-              name: x.displayName || x,
+              id: x.parameter || x.id,
+              name: x.displayName || x.name,
             }))}
             activeTab={activeTab}
             onTabSelect={t => {
