@@ -26,7 +26,6 @@ describe('The Country Page', () => {
     cy.get('[data-cy=country-header-title').contains('Cyprus');
 
     cy.get('[data-cy=country-header-stats').should('exist');
-    cy.get('[data-cy=country-header-stat-areas').should('exist');
     cy.get('[data-cy=country-header-stat-locations').should('exist');
     cy.get('[data-cy=country-header-stat-measurements').should('exist');
     cy.get('[data-cy=country-header-stat-source').should('exist');
