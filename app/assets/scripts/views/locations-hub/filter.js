@@ -354,7 +354,8 @@ export default function Filter({
               );
             })}
 
-          {!!sources.length &&
+          {sources &&
+            !!sources.length &&
             selected.sources.map(o => {
               const source = sources.find(x => x.sourceSlug === o);
               return (
