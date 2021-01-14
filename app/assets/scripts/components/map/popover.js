@@ -108,10 +108,7 @@ export default function Popover({
           {data.sources && (
             <p>
               Source:{' '}
-              <a
-                href={data.sources[0].sourceURL}
-                title="View source information"
-              >
+              <a href={data.sources[0].url} title="View source information">
                 {data.sources[0].name}
               </a>
             </p>
