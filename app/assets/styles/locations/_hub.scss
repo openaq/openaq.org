@@ -77,6 +77,53 @@
   }
 }
 
+.filters .fold__nav {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filters .fold__nav h2 {
+  width: auto;
+}
+
+/* OpenAQ design system defined a fixed with for dropdown content
+ * Override this here for sensor type filter on locations hub
+ */
+.sensor__type-filter.drop__content.drop__content--react {
+  width: auto;
+
+  .button--base-bounded {
+    box-shadow: none;
+    border: 0.5px solid $base-color;
+    border-left: none;
+
+  }
+  .button--base-bounded:first-child {
+    border-left: 0.5px solid $base-color;
+  }
+
+
+  .button--base-bounded:last-child {
+    border-right: 0.5px solid $base-color;
+
+  }
+  select#manufacturer__name {
+    box-shadow: inset 0 0 0 0.5px $base-color;
+    color: $base-color;
+    font-weight: unset;
+  }
+}
+
+
+
+
+.filters .drop__toggle.sort-order {
+  grid-column-end: -1;
+  border-radius: $base-border-radius * 10;
+}
+
 .filters-summary {
   @extend .constrainer;
   margin-bottom: 1rem;

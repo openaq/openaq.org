@@ -27,6 +27,8 @@ export default function (state = defaultState, action) {
         state.data.countries = action.json.countries;
         state.data.sources = action.json.sources;
         state.data.parameters = action.json.parameters;
+        state.data.manufacturers = action.json.manufacturers;
+        state.data.models = action.json.models;
         state.data.totalMeasurements = action.json.totalMeasurements;
       }
       state.fetching = false;
