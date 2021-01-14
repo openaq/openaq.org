@@ -63,6 +63,6 @@ DatasetLocations.propTypes = {
   activeParameter: PropTypes.string,
   isAllLocations: PropTypes.bool.isRequired,
   toggleAllLocations: PropTypes.func.isRequired,
-  selectedLocations: PropTypes.array,
+  selectedLocations: PropTypes.object,
   handleLocationSelection: PropTypes.func.isRequired,
 };

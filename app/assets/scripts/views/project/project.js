@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
-import qs, { stringify as buildAPIQS } from 'qs';
+import qs from 'qs';
 
 import { buildQS } from '../../utils/url';
 import config from '../../config';
@@ -19,7 +19,6 @@ const defaultState = {
   fetching: false,
   error: null,
   projectData: null,
-  locationData: null,
 };
 
 function Project({ match, history, location }) {
@@ -30,10 +29,9 @@ function Project({ match, history, location }) {
   );
   const [isAllLocations, toggleAllLocations] = useState(true);
   const [selectedLocations, setSelectedLocations] = useState({});
-  const [
-    { fetched, fetching, error, projectData, locationData },
-    setState,
-  ] = useState(defaultState);
+  const [{ fetched, fetching, error, projectData }, setState] = useState(
+    defaultState
+  );
 
   useEffect(() => {
     let query = qs.parse(location.search, {
@@ -67,66 +65,6 @@ function Project({ match, history, location }) {
             fetched: true,
             fetching: false,
             projectData: json.results[0],
-          }));
-        },
-        e => {
-          console.log('e', e);
-          setState(state => ({
-            ...state,
-            fetched: true,
-            fetching: false,
-            error: e,
-          }));
-        }
-      );
-  };
-
-  const getSelectedLocationData = () => {
-    const selectedParams = Object.keys(selectedLocations).flat();
-    if (!selectedParams.length) {
-      toggleAllLocations(true);
-      return;
-    }
-    setState(state => ({
-      ...state,
-      fetching: true,
-      error: null,
-    }));
-
-    let query = {
-      location: Object.values(selectedLocations).flat() || [],
-      parameter: selectedParams || [],
-    };
-    let f = buildAPIQS(query, { arrayFormat: 'repeat' });
-    fetch(`${config.api}/locations?${f}`)
-      .then(response => {
-        if (response.status >= 400) {
-          throw new Error('Bad response');
-        }
-        return response.json();
-      })
-      .then(
-        json => {
-          // combines all parameter data for the selected parameters
-          const combinedParameters = json.results
-            .map(location => location.parameters)
-            .flat()
-            .filter(f => selectedParams.includes(f.parameterId.toString()));
-
-          // removes duplicate entries
-          const cleanedParams = Array.from(
-            new Set(combinedParameters.map(param => param.id))
-          ).map(id => {
-            return combinedParameters.find(p => p.id === id);
-          });
-          setState(state => ({
-            ...state,
-            fetched: true,
-            fetching: false,
-            locationData: {
-              results: json.results,
-              parameters: cleanedParams,
-            },
           }));
         },
         e => {
@@ -208,7 +146,7 @@ function Project({ match, history, location }) {
             <div style={{ display: `flex`, justifyContent: `flex-end` }}>
               <button
                 className="nav__action-link"
-                onClick={getSelectedLocationData}
+                onClick={() => toggleAllLocations(false)}
               >
                 Apply Selection
               </button>
@@ -230,9 +168,8 @@ function Project({ match, history, location }) {
         >
           <h1 className="fold__title">Values for selected stations</h1>
         </header>
-        {!isAllLocations && locationData ? (
+        {!isAllLocations ? (
           <LocationsDashboard
-            locationData={locationData}
             measurements={projectData.measurements}
             selectedParams={Object.keys(selectedLocations).flat()}
             lifecycle={lifecycle}

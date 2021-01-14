@@ -198,6 +198,6 @@ DatasetLayer.propTypes = {
   locationIds: PropTypes.array,
   sourceId: PropTypes.string,
   map: PropTypes.object,
-  selectedLocations: PropTypes.array,
+  selectedLocations: PropTypes.object,
   handleLocationSelection: PropTypes.func,
 };

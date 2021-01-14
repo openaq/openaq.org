@@ -8,7 +8,6 @@ import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
 import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
-import { parameterMax } from '../../utils/map-settings';
 
 import DetailsCard from '../../components/dashboard/details-card';
 import NearbyLocations from './nearby-locations';

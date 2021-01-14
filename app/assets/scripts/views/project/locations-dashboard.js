@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
-import qs, { stringify as buildAPIQS } from 'qs';
+import { stringify as buildAPIQS } from 'qs';
 
-import { buildQS } from '../../utils/url';
 import config from '../../config';
-import { getCountryBbox } from '../../utils/countries';
 
-import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
+import LoadingMessage from '../../components/loading-message';
+import ErrorMessage from '../../components/error-message';
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
-import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import TimeSeriesCard from '../../components/dashboard/node-time-series-card';
 
 const defaultState = {
   fetched: false,
   fetching: false,
   error: null,
-  locationAverages: null,
+  parameters: null,
+  averages: null,
 };
 
 function LocationsDashboard({
@@ -33,9 +33,10 @@ function LocationsDashboard({
   country,
   name,
 }) {
-  const [{ fetched, fetching, error, locationAverages }, setState] = useState(
-    defaultState
-  );
+  const [
+    { fetched, fetching, error, parameters, averages },
+    setState,
+  ] = useState(defaultState);
 
   const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
     Number
@@ -97,7 +98,10 @@ function LocationsDashboard({
                 parameter: entry.parameter,
                 parameterId: entry.parameterId,
                 unit: entry.unit,
-                //   firstUpdated: entry.hour < [param].firstUpdated ? entry.hour : [param].firstUpdated,
+                firstUpdated:
+                  new Date(entry.day) < new Date(prevMatchingParam.firstUpdated)
+                    ? entry.day
+                    : prevMatchingParam.firstUpdated || entry.day,
                 lastUpdated:
                   new Date(entry.day) > new Date(prevMatchingParam.lastUpdated)
                     ? entry.day
@@ -109,17 +113,25 @@ function LocationsDashboard({
               },
             };
           }, {});
-          const calculatedAvg = Object.values(aggregatedLocationAvgs)
+          const calculatedParams = Object.values(aggregatedLocationAvgs)
             .flat()
             .map(param => {
               param.average = param.averageSum / param.totalEntries;
               return param;
             });
+          const groupedAverges = json.results.reduce((prev, entry) => {
+            const paramName = entry.parameter;
+            return {
+              ...prev,
+              [paramName]: [...(prev[paramName] || []), entry],
+            };
+          }, {});
           setState(state => ({
             ...state,
             fetched: true,
             fetching: false,
-            locationAverages: calculatedAvg,
+            parameters: calculatedParams,
+            averages: groupedAverges,
           }));
         },
         e => {
@@ -139,11 +151,11 @@ function LocationsDashboard({
   }
 
   if (fetching) {
-    return <LoadingHeader />;
+    return <LoadingMessage />;
   }
 
-  if (error || !locationAverages) {
-    return <ErrorHeader />;
+  if (error || !parameters.length) {
+    return <ErrorMessage instructions="Please try a different time" />;
   }
 
   return (
@@ -153,24 +165,23 @@ function LocationsDashboard({
         lifecycle={lifecycle}
         date={selectedLocationDates}
       />
-      <LatestMeasurementsCard parameters={locationAverages} />
+      <LatestMeasurementsCard parameters={parameters} />
       <SourcesCard sources={sources} />
-      {/* <TimeSeriesCard
-        projectId={projectData.id}
-        parameters={projectData.parameters}
-        dateRange={dateRange}
+      <TimeSeriesCard
+        parameters={parameters}
+        data={averages}
         titleInfo={
           'The average value of a pollutant over time during the specified window at each individual node selected and the average values across all locations selected. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown. If all locations are selected only the average across all locations is shown, not the individual location values.'
         }
-      /> */}
+      />
       <MeasureandsCard
-        parameters={locationAverages}
+        parameters={parameters}
         titleInfo={
           "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
         }
       />
       <TemporalCoverageCard
-        parameters={locationAverages}
+        parameters={parameters}
         dateRange={dateRange}
         spatial="project"
         id={name}
@@ -183,9 +194,22 @@ function LocationsDashboard({
 }
 
 LocationsDashboard.propTypes = {
-  locationData: T.object,
+  measurements: T.number,
+  selectedParams: T.array,
   lifecycle: T.array,
   dateRange: T.string,
+  selectedLocationDates: T.object,
+  sources: T.arrayOf(
+    T.shape({
+      name: T.string,
+      sourceURL: T.string,
+      url: T.string,
+      contacts: T.array,
+    })
+  ),
+  locations: T.array,
+  country: T.string,
+  name: T.string,
 };
 
 export default LocationsDashboard;
