@@ -22,7 +22,6 @@ export default function LocationCard({
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
   let ended = moment(lastUpdated).format('YYYY/MM/DD');
-  console.log('sources', sources);
   return (
     <Card
       id="location"
