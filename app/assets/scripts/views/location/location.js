@@ -3,7 +3,6 @@ import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
-import moment from 'moment';
 
 import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
