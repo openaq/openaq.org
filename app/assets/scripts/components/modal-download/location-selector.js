@@ -4,6 +4,8 @@ import { PropTypes as T } from 'prop-types';
 import c from 'classnames';
 import _ from 'lodash';
 
+import { NO_CITY } from '../../utils/constants';
+
 export default function LocationSelector(props) {
   const {
     countries,
@@ -19,19 +21,25 @@ export default function LocationSelector(props) {
   // Mental Sanity note: we use area to designate the broader region where a sensor
   // is while the API call it city.
   // Areas and Locations belonging to the selected country.
-  // Will be filtered from the this.props.locations;
+  // Will be filtered from the props.locations;
   let compareAreas = [];
   let compareLocations = [];
 
   if (locations) {
-    compareAreas = _(locations)
+    // Ensure that the city is present.
+    // Default to NO_CITY when it is not.
+    const locationsCity = locations.map(o =>
+      o.city ? o : { ...o, city: NO_CITY }
+    );
+
+    compareAreas = _(locationsCity)
       .filter(o => o.country === locCountry)
       .uniqBy('city')
       .sortBy('city')
       .value();
 
-    if (locations && locArea !== '--') {
-      compareLocations = _(locations)
+    if (locArea !== '--') {
+      compareLocations = _(locationsCity)
         .filter(o => {
           // Has to belong to the correct area and can't have been selected before.
           return o.city === locArea;
