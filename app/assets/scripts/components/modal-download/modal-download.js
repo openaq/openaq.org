@@ -84,6 +84,22 @@ const computeApiUrl = (values, initalQS = {}) => {
   return qs;
 };
 
+const fetchVal = url =>
+  fetch(url)
+    .then(response => {
+      if (response.status >= 400) {
+        throw new Error('Bad response');
+      }
+      return response.json();
+    })
+    .then(
+      json => json.meta.found,
+      e => {
+        console.log('Error on url', url, e);
+        return -1;
+      }
+    );
+
 function ModalDownload(props) {
   const {
     countries,
@@ -112,10 +128,24 @@ function ModalDownload(props) {
   });
 
   const [selectionCount, setSelectionCount] = useState(null);
+  const [measurementCount, setMeasurementCount] = useState(null);
+
+  // Do a quick fetch on the measurements api to get the total count.
+  useEffect(() => {
+    fetchVal(`${config.api}/measurements?limit=1`).then(v =>
+      setMeasurementCount(v)
+    );
+  }, []);
+
+  const useRevealed = (fn, deps) => {
+    useEffect(() => {
+      if (revealed) return fn();
+    }, [revealed, ...deps]);
+  };
 
   // Update the state when the input parameters change. This is used to open the
   // modal in a specific location.
-  useEffect(() => {
+  useRevealed(() => {
     setFormState(s => ({
       ...s,
       locCountry: country || EMPTY,
@@ -125,7 +155,7 @@ function ModalDownload(props) {
   }, [country, area, location]);
 
   // Fetch locations for a given country.
-  useEffect(() => {
+  useRevealed(() => {
     if (country) {
       _invalidateLocationsByCountry();
       _fetchLocationsByCountry(country);
@@ -133,7 +163,7 @@ function ModalDownload(props) {
   }, [country]);
 
   const checkingUrl = computeApiUrl(formState, { limit: 1 });
-  useEffect(() => {
+  useRevealed(() => {
     // What is going on here?
     // The api is limited to 65,536 results, but some download options
     // combinations yield a lot more results. They could potentially
@@ -142,20 +172,7 @@ function ModalDownload(props) {
     // Nevertheless the user has to be warned of this, so on every parameter
     // change we query the api to know how many results would be returned, and
     // show a message in case the number is above the limit.
-    fetch(checkingUrl)
-      .then(response => {
-        if (response.status >= 400) {
-          throw new Error('Bad response');
-        }
-        return response.json();
-      })
-      .then(
-        json => setSelectionCount(json.meta.found),
-        e => {
-          setSelectionCount(-1);
-          console.log('API limit check error', e);
-        }
-      );
+    fetchVal(checkingUrl).then(v => setSelectionCount(v));
   }, [checkingUrl]);
 
   // State change on option select.
@@ -180,11 +197,6 @@ function ModalDownload(props) {
   const onParameterSelect = value => {
     setFormState(s => ({ ...s, parameters: toggleValue(s.parameters, value) }));
   };
-
-  const measurementsCount = (countries || []).reduce(
-    (p, c) => p + Number(c.count),
-    0
-  );
 
   const [coreParam, additionalParam] = useMemo(
     () => _.partition(parameters, p => p.isCore),
@@ -224,7 +236,7 @@ function ModalDownload(props) {
               >
                 daily
               </a>{' '}
-              archives of all {formatThousands(measurementsCount)} are also
+              archives of all {formatThousands(measurementCount)} are also
               available.{' '}
               <a
                 // eslint-disable-next-line inclusive-language/use-inclusive-words
