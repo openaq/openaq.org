@@ -22,7 +22,6 @@ export default function LocationCard({
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
   let ended = moment(lastUpdated).format('YYYY/MM/DD');
-
   return (
     <Card
       id="location"
@@ -57,8 +56,8 @@ export default function LocationCard({
                 .join(', '),
             },
             {
-              label: sources.length > 1 ? 'Sources' : 'Source',
-              value: sources.map(source => (
+              label: sources?.length > 1 ? 'Sources' : 'Source',
+              value: sources?.map(source => (
                 <a
                   href={source.sourceURL}
                   title={`View source for ${name}`}
