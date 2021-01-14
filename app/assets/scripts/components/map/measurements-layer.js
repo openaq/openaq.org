@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
-import mapbox from 'mapbox-gl';
 
 import {
   circleOpacity,
@@ -13,7 +11,7 @@ import {
   borderSquareSize,
 } from '../../utils/map-settings';
 import { getFillExpression } from '../../utils/colors';
-import Popover from './popover';
+import { addPopover } from './map-interaction';
 import { square } from './square';
 
 export default function MeasurementsLayer({
@@ -25,8 +23,8 @@ export default function MeasurementsLayer({
   let match = useRouteMatch();
 
   const countryFilter = ['==', ['get', 'country'], country];
-  const circlesFilter = ['==', ['get', 'isMobile'], false];
-  const squaresFilter = ['==', ['get', 'isMobile'], true];
+  const circlesFilter = ['==', ['get', 'sensorType'], 'reference'];
+  const squaresFilter = ['==', ['get', 'sensorType'], 'low-cost sensor'];
 
   const circlesCountryFilter = ['all', countryFilter, circlesFilter];
   const squaresCountryFilter = ['all', countryFilter, squaresFilter];
@@ -93,48 +91,18 @@ export default function MeasurementsLayer({
       filter: circlesFilter,
     });
 
-    // Change the cursor to a pointer when the mouse is over the layer.
-    map.on('mouseenter', `${activeParameter}-circles`, function () {
-      map.getCanvas().style.cursor = 'pointer';
-    });
-    map.on('mouseenter', `${activeParameter}-squares`, function () {
-      map.getCanvas().style.cursor = 'pointer';
-    });
-
-    // Change it back to a pointer when it leaves.
-    map.on('mouseleave', `${activeParameter}-circles`, function () {
-      map.getCanvas().style.cursor = '';
-    });
-    map.on('mouseleave', `${activeParameter}-squares`, function () {
-      map.getCanvas().style.cursor = '';
-    });
-
-    const openPopup = e => {
-      const coordinates = e.features[0].geometry.coordinates.slice();
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-      let popoverElement = document.createElement('div');
-      ReactDOM.render(
-        <Popover
-          activeParameter={activeParameter}
-          locationId={e.features[0].properties.locationId}
-          currentPage={parseInt(match.params.id, 10)}
-        />,
-        popoverElement
-      );
-      new mapbox.Popup()
-        .setLngLat(coordinates)
-        .setDOMContent(popoverElement)
-        .addTo(map);
-    };
-
-    map.on('click', `${activeParameter}-circles`, openPopup);
-    map.on('click', `${activeParameter}-squares`, openPopup);
+    addPopover(
+      map,
+      `${activeParameter}-squares`,
+      match.params.id,
+      activeParameter
+    );
+    addPopover(
+      map,
+      `${activeParameter}-circles`,
+      match.params.id,
+      activeParameter
+    );
 
     return () => {
       if (map.getLayer(`${activeParameter}-squares`))

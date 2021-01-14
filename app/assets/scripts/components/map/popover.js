@@ -80,10 +80,7 @@ export default function Popover({
     selectedLocations && Object.values(selectedLocations).flat();
   // const allSelectedParams = Object.keys(selectedLocations).flat();
   const parameter = data.parameters.find(
-    // TODO: clean up parameter mess with id vs name
-    p =>
-      p.id === activeParameter.id ||
-      p.parameterId === activeParameter.parameterId
+    p => p.id === activeParameter || p.parameterId === activeParameter
   );
   const isDisabled =
     selectedLocations &&
@@ -116,10 +113,7 @@ export default function Popover({
           {data.sources && (
             <p>
               Source:{' '}
-              <a
-                href={data.sources[0].sourceURL}
-                title="View source information"
-              >
+              <a href={data.sources[0].url} title="View source information">
                 {data.sources[0].name}
               </a>
             </p>
@@ -134,7 +128,7 @@ export default function Popover({
                 <a
                   href={`#/compare/${encodeURIComponent(locationId)}`}
                   className="button button--primary-bounded"
-                  title={`Compare ${name} with other locations`}
+                  title={`Compare ${data.name} with other locations`}
                 >
                   Compare
                 </a>
@@ -143,10 +137,10 @@ export default function Popover({
                 <li>
                   <a
                     href={`#/location/${encodeURIComponent(locationId)}`}
-                    title={`View ${name} page`}
+                    title={`View ${data.name} page`}
                     className="button button--primary-bounded"
                   >
-                    View More
+                    View Location
                   </a>
                 </li>
               )}
