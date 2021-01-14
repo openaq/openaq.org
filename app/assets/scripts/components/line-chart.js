@@ -53,7 +53,7 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
         {
           type: 'time',
           time: {
-            tooltipFormat: 'MMM D, YYYY',
+            tooltipFormat: `MMM D, YYYY ${xUnit === 'hour' ? 'hA' : ''}`,
             unit: xUnit || 'day',
             displayFormats: {
               day: 'YYYY/MM/DD',
