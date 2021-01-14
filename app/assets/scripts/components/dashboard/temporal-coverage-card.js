@@ -275,33 +275,28 @@ export default function TemporalCoverageCard({
           </InfoMessage>
         ) : (
           <div className="chart__list">
-            {state.hod.data && (
-              <Chart
-                title="Hour of the Day"
-                temporal="hod"
-                data={state.hod.data}
-                fetching={state.hod.fetching}
-                error={state.hod.error}
-              />
-            )}
-            {state.dow.data && (
-              <Chart
-                title="Day of the Week"
-                temporal="dow"
-                data={state.dow.data && Object.values(combinedDays)}
-                error={state.dow.error}
-                fetching={state.dow.fetching}
-              />
-            )}
-            {state.moy.data && (
-              <Chart
-                title="Month of the Year"
-                temporal="moy"
-                data={state.moy.data}
-                error={state.moy.error}
-                fetching={state.moy.fetching}
-              />
-            )}
+            (
+            <Chart
+              title="Hour of the Day"
+              temporal="hod"
+              data={state.hod.data}
+              fetching={state.hod.fetching}
+              error={state.hod.error}
+            />
+            <Chart
+              title="Day of the Week"
+              temporal="dow"
+              data={state.dow.data && Object.values(combinedDays)}
+              error={state.dow.error}
+              fetching={state.dow.fetching}
+            />
+            <Chart
+              title="Month of the Year"
+              temporal="moy"
+              data={state.moy.data}
+              error={state.moy.error}
+              fetching={state.moy.fetching}
+            />
           </div>
         )
       }
@@ -325,6 +320,9 @@ TemporalCoverageCard.propTypes = {
 };
 
 function Chart({ title, temporal, data, error, fetching }) {
+  if (!data && !error) {
+    return null;
+  }
   return (
     <div className="chart__item">
       <div className="header">
