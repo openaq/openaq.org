@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import qs from 'qs';
 
 import {
-  fetchBaseData as fetchBaseDataAction,
   fetchLocations as fetchLocationsAction,
   invalidateLocations as invalidateLocationsAction,
   openDownloadModal as openDownloadModalAction,
@@ -12,7 +11,7 @@ import {
 import { buildQS } from '../../utils/url';
 
 import Header from '../../components/header';
-import Filter from './filter';
+import Filter from '../../components/filter';
 import Results from './results';
 
 const PER_PAGE = 15;
@@ -27,19 +26,16 @@ function getPage(query) {
 }
 
 export default function LocationsHub({
-  fetchBaseData,
   fetchLocations,
   invalidateLocations,
   openDownloadModal,
-  parameters,
-  countries,
-  sources,
-  manufacturers,
+
   fetching,
   fetched,
   error,
   results,
   meta,
+
   location,
   history,
 }) {
@@ -74,7 +70,6 @@ export default function LocationsHub({
 
   useEffect(() => {
     if (!isMounted) return;
-    fetchBaseData();
     fetchLocations(page, filters, PER_PAGE);
     return () => invalidateLocations();
   }, [page, filters, isMounted]);
@@ -97,10 +92,8 @@ export default function LocationsHub({
 
       <div className="inpage__body">
         <Filter
-          parameters={parameters}
-          countries={countries}
-          sources={sources}
-          manufacturers={manufacturers}
+          slug="/locations"
+          by={['parameters', 'countries', 'sources', 'sensor']}
         />
         <div className="constrainer">
           <div className="content__meta">
@@ -134,16 +127,11 @@ export default function LocationsHub({
 }
 
 LocationsHub.propTypes = {
-  parameters: T.array,
-
   fetching: T.bool,
   fetched: T.bool,
   error: T.object,
   results: T.array,
   meta: T.object,
-  countries: T.array,
-  sources: T.array,
-  manufacturers: T.array,
 
   location: T.object,
   history: T.object,
@@ -159,10 +147,6 @@ LocationsHub.propTypes = {
 
 function selector(state) {
   return {
-    parameters: state.baseData.data.parameters,
-    countries: state.baseData.data.countries,
-    sources: state.baseData.data.sources,
-    manufacturers: state.baseData.data.manufacturers,
     fetching: state.locations.fetching,
     fetched: state.locations.fetched,
     error: state.locations.error,
@@ -173,7 +157,6 @@ function selector(state) {
 
 function dispatcher(dispatch) {
   return {
-    fetchBaseData: (...args) => dispatch(fetchBaseDataAction(...args)),
     fetchLocations: (...args) => dispatch(fetchLocationsAction(...args)),
     invalidateLocations: (...args) =>
       dispatch(invalidateLocationsAction(...args)),

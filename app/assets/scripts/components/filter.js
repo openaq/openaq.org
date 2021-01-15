@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { PropTypes as T } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import c from 'classnames';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
-import ParamSelect from '../../components/parameters-selection';
-import SensorTypeFilter from './sensor-type-filter';
 
-import { buildQS } from '../../utils/url';
-import { toggleValue } from '../../utils/array';
+import { fetchBaseData as fetchBaseDataAction } from '../actions/action-creators';
+import { buildQS } from '../utils/url';
+import { toggleValue } from '../utils/array';
+import ParamSelect from './parameters-selection';
+import SensorTypeFilter from './sensor-type-filter';
 
 const defaultSelected = {
   parameters: [],
@@ -44,6 +46,11 @@ const initFromLocation = ({
   };
 };
 export default function Filter({
+  slug,
+  by,
+
+  fetchBaseData,
+
   countries,
   parameters,
   sources,
@@ -55,6 +62,10 @@ export default function Filter({
   const [selected, setSelected] = useState(
     initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
   );
+
+  useEffect(() => {
+    fetchBaseData();
+  }, []);
 
   // alphabetizes filter names
   const sortList = list => list.sort((a, b) => a.name.localeCompare(b.name));
@@ -146,7 +157,7 @@ export default function Filter({
     }
 
     // update url
-    history.push(`/locations?${buildQS(query)}`);
+    history.push(`${slug}?${buildQS(query)}`);
   }
 
   return (
@@ -156,7 +167,7 @@ export default function Filter({
           <div className="filters__group">
             <h2>Filter by</h2>
             <div className="filter__values">
-              {countries && countries.length > 1 && (
+              {countries && countries.length > 1 && by.includes('countries') && (
                 <Dropdown
                   triggerElement="a"
                   triggerTitle="View country options"
@@ -192,7 +203,7 @@ export default function Filter({
                 </Dropdown>
               )}
 
-              {parameters && parameters.length > 1 && (
+              {parameters && parameters.length > 1 && by.includes('countries') && (
                 <Dropdown
                   triggerElement="a"
                   triggerTitle="View filter options"
@@ -207,7 +218,7 @@ export default function Filter({
                 </Dropdown>
               )}
 
-              {sources && sources.length > 1 && (
+              {sources && sources.length > 1 && by.includes('sources') && (
                 <Dropdown
                   triggerElement="a"
                   triggerTitle="View source options"
@@ -243,28 +254,30 @@ export default function Filter({
                 </Dropdown>
               )}
 
-              <Dropdown
-                triggerElement="a"
-                triggerTitle="View source type options"
-                triggerText="Sensor Type"
-                triggerClassName="button--drop-filter"
-                className="sensor__type-filter"
-              >
-                <SensorTypeFilter
-                  onApplyClick={(grade, manufacturer, mobility, entity) => {
-                    onFilterSelect('source_type', {
-                      grade,
-                      manufacturer,
-                      mobility,
-                      entity,
-                    });
-                  }}
-                  grade={selected.grade}
-                  mobility={selected.mobility}
-                  entity={selected.entity}
-                  manufacturers={manufacturers}
-                />
-              </Dropdown>
+              {by.includes('sensor') && (
+                <Dropdown
+                  triggerElement="a"
+                  triggerTitle="View source type options"
+                  triggerText="Sensor Type"
+                  triggerClassName="button--drop-filter"
+                  className="sensor__type-filter"
+                >
+                  <SensorTypeFilter
+                    onApplyClick={(grade, manufacturer, mobility, entity) => {
+                      onFilterSelect('source_type', {
+                        grade,
+                        manufacturer,
+                        mobility,
+                        entity,
+                      });
+                    }}
+                    grade={selected.grade}
+                    mobility={selected.mobility}
+                    entity={selected.entity}
+                    manufacturers={manufacturers}
+                  />
+                </Dropdown>
+              )}
             </div>
           </div>
           <div className="filters__group">
@@ -309,7 +322,7 @@ export default function Filter({
         return Array.isArray(o) ? o.length > 0 : o;
       }) && (
         <div className="filters-summary">
-          {!!countries.length &&
+          {!!countries?.length &&
             selected.countries.map(o => {
               const country = countries.find(x => x.code === o);
               return (
@@ -325,7 +338,7 @@ export default function Filter({
               );
             })}
 
-          {!!parameters.length &&
+          {!!parameters?.length &&
             selected.parameters.map(o => {
               const parameter = parameters.find(x => x.id === o);
               return (
@@ -342,7 +355,7 @@ export default function Filter({
             })}
 
           {sources &&
-            !!sources.length &&
+            !!sources?.length &&
             selected.sources.map(o => {
               const source = sources.find(x => x.sourceSlug === o);
               return (
@@ -415,10 +428,43 @@ export default function Filter({
 }
 
 Filter.propTypes = {
-  organizations: T.array,
-  parameters: T.array,
-  countries: T.array,
-  sources: T.array,
-  order_by: T.array,
-  manufacturers: T.array,
+  slug: PropTypes.string.isRequired,
+  by: PropTypes.arrayOf(
+    PropTypes.oneOf([
+      'organizations',
+      'parameters',
+      'countries',
+      'sources',
+      'manufacturers',
+    ])
+  ),
+
+  fetchBaseData: PropTypes.func.isRequired,
+
+  organizations: PropTypes.array,
+  parameters: PropTypes.array,
+  countries: PropTypes.array,
+  sources: PropTypes.array,
+  order_by: PropTypes.array,
+  manufacturers: PropTypes.array,
 };
+
+// /////////////////////////////////////////////////////////////////////
+// Connect functions
+
+function selector(state) {
+  return {
+    parameters: state.baseData.data.parameters,
+    countries: state.baseData.data.countries,
+    sources: state.baseData.data.sources,
+    manufacturers: state.baseData.data.manufacturers,
+  };
+}
+
+function dispatcher(dispatch) {
+  return {
+    fetchBaseData: (...args) => dispatch(fetchBaseDataAction(...args)),
+  };
+}
+
+module.exports = connect(selector, dispatcher)(Filter);

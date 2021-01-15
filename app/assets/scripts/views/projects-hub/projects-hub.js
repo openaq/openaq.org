@@ -11,7 +11,7 @@ import {
 import { buildQS } from '../../utils/url';
 
 import Header from '../../components/header';
-import Filter from './filter';
+import Filter from '../../components/filter';
 import Results from './results';
 
 const PER_PAGE = 15;
@@ -29,8 +29,6 @@ export default function ProjectsHub({
   fetchProjects,
   invalidateProjects,
   openDownloadModal,
-  parameters,
-  countries,
   fetching,
   fetched,
   error,
@@ -81,7 +79,7 @@ export default function ProjectsHub({
       />
 
       <div className="inpage__body">
-        <Filter parameters={parameters} countries={countries} />
+        <Filter slug="/projects" by={['parameters', 'countries']} />
         <div className="constrainer">
           <div className="content__meta">
             <div className="content__header">
@@ -113,9 +111,6 @@ export default function ProjectsHub({
 }
 
 ProjectsHub.propTypes = {
-  parameters: T.array,
-  countries: T.array,
-  sources: T.array,
   fetching: T.bool,
   fetched: T.bool,
   error: T.object,
@@ -135,9 +130,6 @@ ProjectsHub.propTypes = {
 
 function selector(state) {
   return {
-    parameters: state.baseData.data.parameters,
-    countries: state.baseData.data.countries,
-    sources: state.baseData.data.sources,
     fetching: state.projects.fetching,
     fetched: state.projects.fetched,
     error: state.projects.error,
