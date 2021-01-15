@@ -21,7 +21,7 @@ export default function Parameters(props) {
                 type="checkbox"
                 value={o.id}
                 id={o.id}
-                name="form-checkbox"
+                name="download-parameters"
                 onChange={onChange}
                 checked={checked}
               />

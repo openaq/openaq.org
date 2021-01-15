@@ -81,9 +81,11 @@ var App = createReactClass({
           {content}
         </main>
         <ModalDownload
+          downloadType={this.props.downloadModal.downloadType}
           country={this.props.downloadModal.country}
           area={this.props.downloadModal.area}
           location={this.props.downloadModal.location}
+          project={this.props.downloadModal.project}
           onModalClose={this.onModalClose}
           revealed={this.props.downloadModal.open}
         />

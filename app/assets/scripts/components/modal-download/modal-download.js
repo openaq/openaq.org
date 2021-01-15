@@ -23,11 +23,14 @@ import LocationSelector from './location-selector';
 import DateSelector from './date-selector';
 import Parameters from './parameters';
 import LoadingMessage from '../loading-message';
+import DownloadType, { downloadTypeDefault } from './download-type-selector';
+import ProjectSelector from './project-selector';
+import { fetchProjects } from '../../actions/projects';
 
 const EMPTY = '';
 const API_LIMIT = 66536;
 
-const computeApiUrl = (values, initalQS = {}) => {
+const computeApiUrl = (downloadType, values, initalQS = {}) => {
   let state = _.clone(values);
   _.forEach(state, (o, i) => {
     if (o === null || !o.length) {
@@ -59,13 +62,21 @@ const computeApiUrl = (values, initalQS = {}) => {
   let qs = initalQS;
   qs.limit = qs.limit || API_LIMIT;
 
-  // It's enough to have one of these.
-  if (state.locLocation) {
-    qs.location = state.locLocation;
-  } else if (state.locArea) {
-    qs.city = state.locArea === NO_CITY ? '' : state.locArea;
-  } else if (state.locCountry) {
-    qs.country = state.locCountry;
+  if (downloadType === 'locations') {
+    // It's enough to have one of these.
+    if (state.locLocation) {
+      qs.location = state.locLocation;
+    } else if (state.locArea) {
+      qs.city = state.locArea === NO_CITY ? '' : state.locArea;
+    } else if (state.locCountry) {
+      qs.country = state.locCountry;
+    }
+  } else if (downloadType === 'projects') {
+    if (state.projDataset) {
+      qs.project = state.projDataset;
+    } else if (state.projCountry) {
+      qs.country = state.projCountry;
+    }
   }
 
   if (state.sDate) {
@@ -105,14 +116,18 @@ function ModalDownload(props) {
   const {
     countries,
     revealed,
+    downloadType,
     onModalClose,
     locationsByCountry,
     country,
     area,
     location,
+    project,
     parameters,
+    datasets,
     _invalidateLocationsByCountry,
     _fetchLocationsByCountry,
+    _fetchProjects,
   } = props;
 
   const [formState, setFormState] = useState({
@@ -125,11 +140,16 @@ function ModalDownload(props) {
     endYear: EMPTY,
     endMonth: EMPTY,
     endDay: EMPTY,
+    projCountry: EMPTY,
+    projDataset: EMPTY,
     parameters: [],
   });
 
   const [selectionCount, setSelectionCount] = useState(null);
   const [measurementCount, setMeasurementCount] = useState(null);
+  const [selectedDownType, setSelectedDownType] = useState(
+    downloadType || downloadTypeDefault
+  );
 
   // Do a quick fetch on the measurements api to get the total count.
   useEffect(() => {
@@ -147,15 +167,41 @@ function ModalDownload(props) {
   // Update the state when the input parameters change. This is used to open the
   // modal in a specific location.
   useRevealed(() => {
+    console.log('[country, area, location, project]', [
+      country,
+      area,
+      location,
+      project,
+    ]);
     setFormState(s => ({
       ...s,
       locCountry: country || EMPTY,
+      projCountry: country || EMPTY,
       locArea: area || EMPTY,
       locLocation: String(location || EMPTY),
+      projDataset: String(project || EMPTY),
     }));
-  }, [country, area, location]);
+  }, [country, area, location, project]);
 
-  // Fetch locations for a given country.
+  useRevealed(() => {
+    if (downloadType) {
+      setSelectedDownType(downloadType);
+    }
+  }, [downloadType]);
+
+  // Fetch locations/datasets for a given country.
+  useRevealed(() => {
+    _invalidateLocationsByCountry();
+    if (country) {
+      if (downloadType === 'locations') {
+        _fetchLocationsByCountry(country);
+      } else if (downloadType === 'projects') {
+        _fetchProjects(1, { country }, 1000);
+      }
+    }
+  }, [country]);
+
+  // Fetch datasets for a given country.
   useRevealed(() => {
     _invalidateLocationsByCountry();
     if (country) {
@@ -163,7 +209,7 @@ function ModalDownload(props) {
     }
   }, [country]);
 
-  const checkingUrl = computeApiUrl(formState, { limit: 1 });
+  const checkingUrl = computeApiUrl(downloadType, formState, { limit: 1 });
   useRevealed(() => {
     // What is going on here?
     // The api is limited to 65,536 results, but some download options
@@ -192,6 +238,11 @@ function ModalDownload(props) {
       newState.locLocation = EMPTY;
     } else if (key === 'locArea') {
       newState.locLocation = EMPTY;
+    } else if (key === 'projCountry') {
+      if (e.target.value) {
+        _fetchProjects(1, { country: e.target.value }, 1000);
+      }
+      newState.projDataset = EMPTY;
     }
     setFormState(newState);
   };
@@ -252,16 +303,33 @@ function ModalDownload(props) {
             </p>
 
             <form className="form form--download">
-              <LocationSelector
-                countries={countries}
-                fetching={locationsByCountry.fetching}
-                fetched={locationsByCountry.fetched}
-                locations={locationsByCountry.data.results}
-                locCountry={formState.locCountry}
-                locArea={formState.locArea}
-                locLocation={formState.locLocation}
-                onOptSelect={onOptSelect}
+              <DownloadType
+                selected={selectedDownType}
+                onSelect={setSelectedDownType}
               />
+              {selectedDownType === 'locations' && (
+                <LocationSelector
+                  countries={countries}
+                  fetching={locationsByCountry.fetching}
+                  fetched={locationsByCountry.fetched}
+                  locations={locationsByCountry.data.results}
+                  locCountry={formState.locCountry}
+                  locArea={formState.locArea}
+                  locLocation={formState.locLocation}
+                  onOptSelect={onOptSelect}
+                />
+              )}
+              {selectedDownType === 'projects' && (
+                <ProjectSelector
+                  countries={countries}
+                  fetching={datasets.fetching}
+                  fetched={datasets.fetched}
+                  datasets={datasets.data.results}
+                  projCountry={formState.projCountry}
+                  projDataset={formState.projDataset}
+                  onOptSelect={onOptSelect}
+                />
+              )}
               <DateSelector
                 type="start"
                 onOptSelect={onOptSelect}
@@ -309,7 +377,9 @@ function ModalDownload(props) {
                   Cancel
                 </button>
                 <a
-                  href={computeApiUrl(formState, { format: 'csv' })}
+                  href={computeApiUrl(downloadType, formState, {
+                    format: 'csv',
+                  })}
                   className={c('button-modal-download', { disabled: false })}
                   target="_blank"
                   rel="noreferrer"
@@ -330,18 +400,22 @@ function ModalDownload(props) {
 ModalDownload.propTypes = {
   _fetchLocationsByCountry: T.func,
   _invalidateLocationsByCountry: T.func,
+  _fetchProjects: T.func,
   onModalClose: T.func,
   revealed: T.bool,
 
   countries: T.array,
   parameters: T.array,
+  datasets: T.array,
 
   locationsByCountry: T.object,
 
   // Preselect
+  downloadType: T.string,
   country: T.string,
   area: T.string,
   location: T.string,
+  project: T.string,
 };
 
 // /////////////////////////////////////////////////////////////////// //
@@ -352,6 +426,7 @@ function selector(state) {
     countries: state.baseData.data.countries,
     parameters: state.baseData.data.parameters,
 
+    datasets: state.projects,
     locationsByCountry: state.locationsByCountry,
   };
 }
@@ -362,6 +437,7 @@ function dispatcher(dispatch) {
       dispatch(invalidateLocationsByCountry(...args)),
     _fetchLocationsByCountry: (...args) =>
       dispatch(fetchLocationsByCountry(...args)),
+    _fetchProjects: (...args) => dispatch(fetchProjects(...args)),
   };
 }
 
