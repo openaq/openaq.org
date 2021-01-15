@@ -44,7 +44,8 @@ export const HighlightText = styled.h1`
 
 const TagWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min-content, 2rem));
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: row;
   grid-gap: 0.5rem;
 `;
 
