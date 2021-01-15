@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import qs from 'qs';
 
 import {
+  fetchBaseData as fetchBaseDataAction,
   fetchLocations as fetchLocationsAction,
   invalidateLocations as invalidateLocationsAction,
   openDownloadModal as openDownloadModalAction,
@@ -26,6 +27,7 @@ function getPage(query) {
 }
 
 export default function LocationsHub({
+  fetchBaseData,
   fetchLocations,
   invalidateLocations,
   openDownloadModal,
@@ -72,6 +74,7 @@ export default function LocationsHub({
 
   useEffect(() => {
     if (!isMounted) return;
+    fetchBaseData();
     fetchLocations(page, filters, PER_PAGE);
     return () => invalidateLocations();
   }, [page, filters, isMounted]);
@@ -145,6 +148,7 @@ LocationsHub.propTypes = {
   location: T.object,
   history: T.object,
 
+  fetchBaseData: T.func,
   fetchLocations: T.func,
   invalidateLocations: T.func,
   openDownloadModal: T.func,
@@ -169,6 +173,7 @@ function selector(state) {
 
 function dispatcher(dispatch) {
   return {
+    fetchBaseData: (...args) => dispatch(fetchBaseDataAction(...args)),
     fetchLocations: (...args) => dispatch(fetchLocationsAction(...args)),
     invalidateLocations: (...args) =>
       dispatch(invalidateLocationsAction(...args)),
