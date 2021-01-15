@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import Card, { HighlightText, CardSubtitle } from '../card';
-import { round, formatValueByUnit, renderUnit } from '../../utils/format';
+import { round } from '../../utils/format';
 
 const Container = styled.ul`
   display: grid;
@@ -30,16 +30,10 @@ export default function LatestMeasurementsCard({ parameters }) {
                   {o.displayName}
                 </CardSubtitle>
                 <HighlightText className="card__highlight-text" size="medium">
-                  {round(
-                    formatValueByUnit(
-                      o.lastValue,
-                      o.unit,
-                      renderUnit(o.unit)
-                    ),
-                    2
-                  )}
+                  {round(o.lastValue, 2)}
                 </HighlightText>
-                <strong>{renderUnit(o.unit)}</strong>
+
+                <strong>{o.unit}</strong>
                 <p>{moment(o.lastUpdated).format('YYYY/MM/DD HH:mm')}</p>
               </li>
             ))}
