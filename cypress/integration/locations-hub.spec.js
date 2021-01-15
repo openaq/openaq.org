@@ -47,8 +47,10 @@ describe('The Locations Hub', () => {
     cy.get('[data-cy=filter-clear]').should('not.exist');
 
     // parameter filter
-    cy.get('[title="View filter options"]').click();
-    cy.get('[title="View filter options"]').find('span').contains('Parameter');
+    cy.get('[title="View parameter options"]').click();
+    cy.get('[title="View parameter options"]')
+      .find('span')
+      .contains('Parameter');
     ['1', '2', '3', '4', '5', '6'].forEach(parameter => {
       cy.get('[data-cy=filter-parameters]')
         .find(`[data-cy=${parameter}]`)
