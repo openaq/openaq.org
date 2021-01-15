@@ -162,7 +162,7 @@ function Project({ match, history, location }) {
                   className="nav__action-link"
                   onClick={() => toggleNodeDisplay(true)}
                 >
-                  Apply Selection
+                  View Selections
                 </button>
               </div>
             )}
@@ -192,7 +192,7 @@ function Project({ match, history, location }) {
             selectedParams={Object.keys(selectedLocations)}
             lifecycle={lifecycle}
             dateRange={dateRange}
-            selectedLocationDates={{
+            projectDates={{
               start: projectData.firstUpdated,
               end: projectData.lastUpdated,
             }}
@@ -207,7 +207,7 @@ function Project({ match, history, location }) {
             projectId={projectData.id}
             projectName={projectData.name}
             lifecycle={lifecycle}
-            selectedDateRange={dateRange}
+            dateRange={dateRange}
             projectDates={{
               start: projectData.firstUpdated,
               end: projectData.lastUpdated,

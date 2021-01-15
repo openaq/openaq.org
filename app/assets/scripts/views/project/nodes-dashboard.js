@@ -24,7 +24,7 @@ function NodesDashboard({
   selectedParams,
   lifecycle,
   dateRange,
-  selectedLocationDates,
+  projectDates,
   sources,
   locations,
   country,
@@ -169,8 +169,8 @@ function NodesDashboard({
       projectId={projectId}
       projectName={projectName}
       lifecycle={lifecycle}
-      selectedDateRange={dateRange}
-      projectDates={selectedLocationDates}
+      dateRange={dateRange}
+      projectDates={projectDates}
       sources={sources}
       timeseriesAverages={averages}
     />
@@ -184,7 +184,7 @@ NodesDashboard.propTypes = {
   selectedParams: PropTypes.array,
   lifecycle: PropTypes.arrayOf(PropTypes.number),
   dateRange: PropTypes.string,
-  selectedLocationDates: PropTypes.shape({
+  projectDates: PropTypes.shape({
     start: PropTypes.string,
     end: PropTypes.string,
   }),

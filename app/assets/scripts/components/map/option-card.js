@@ -8,12 +8,12 @@ export default function OptionCard({ toggleAllLocations, isAllLocations }) {
       style={{ top: `2rem`, bottom: `unset`, maxWidth: `16rem` }}
     >
       <form
-        class="form"
+        className="form"
         onChange={e => toggleAllLocations(e.target.value === 'isAllLocations')}
       >
-        <fieldset class="form__fieldset">
-          <div class="form__group">
-            <label class="form__option form__option--inline form__option--custom-radio">
+        <fieldset className="form__fieldset">
+          <div className="form__group">
+            <label className="form__option form__option--inline form__option--custom-radio">
               <input
                 type="radio"
                 id="isAllLocations"
@@ -22,10 +22,10 @@ export default function OptionCard({ toggleAllLocations, isAllLocations }) {
                 defaultChecked={isAllLocations}
                 value="isAllLocations"
               />
-              <span class="form__option__text">All locations selected</span>
-              <span class="form__option__ui"></span>
+              <span className="form__option__text">All locations selected</span>
+              <span className="form__option__ui"></span>
             </label>
-            <label class="form__option form__option--custom-radio">
+            <label className="form__option form__option--custom-radio">
               <input
                 type="radio"
                 id="isNodeSelection"
@@ -33,8 +33,8 @@ export default function OptionCard({ toggleAllLocations, isAllLocations }) {
                 defaultChecked={!isAllLocations}
                 value="isNodeSelection"
               />
-              <span class="form__option__text">Select locations</span>
-              <span class="form__option__ui"></span>
+              <span className="form__option__text">Select locations</span>
+              <span className="form__option__ui"></span>
             </label>
           </div>
         </fieldset>
