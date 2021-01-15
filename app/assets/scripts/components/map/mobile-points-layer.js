@@ -28,7 +28,7 @@ export default function MobilePointsLayer({ locationId, map, sourceId }) {
           'circle-radius': 5,
           'circle-opacity': 0.6,
         },
-        filter: ['==', 'locationId', locationId.toString()],
+        filter: ['==', 'locationId', locationId],
       });
     }
 
@@ -43,7 +43,7 @@ export default function MobilePointsLayer({ locationId, map, sourceId }) {
 }
 
 MobilePointsLayer.propTypes = {
-  activeParameter: PropTypes.string,
+  locationId: PropTypes.number,
   map: PropTypes.object,
   sourceId: PropTypes.string,
 };

@@ -15,8 +15,8 @@ export default function MobileSource({
   useEffect(() => {
     if (!map.getSource('mobile-source')) {
       const query = {
-        date_from: moment(firstUpdated).subtract(1, 'd').format('YYYY-MM-DD'),
-        date_to: moment(lastUpdated).add(1, 'd').format('YYYY-MM-DD'),
+        dateFrom: moment(firstUpdated).subtract(1, 'd').format('YYYY-MM-DD'),
+        dateTo: moment(lastUpdated).add(1, 'd').format('YYYY-MM-DD'),
       };
       map.addSource('mobile-source', {
         type: 'vector',
