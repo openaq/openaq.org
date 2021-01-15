@@ -24,13 +24,13 @@ import DateSelector from './date-selector';
 import Parameters from './parameters';
 import LoadingMessage from '../loading-message';
 
-const EMPTY = '--';
+const EMPTY = '';
 const API_LIMIT = 66536;
 
 const computeApiUrl = (values, initalQS = {}) => {
   let state = _.clone(values);
   _.forEach(state, (o, i) => {
-    if (o === null || o === '--' || !o.length) {
+    if (o === null || !o.length) {
       delete state[i];
     }
   });
@@ -57,6 +57,7 @@ const computeApiUrl = (values, initalQS = {}) => {
 
   // Build url.
   let qs = initalQS;
+  qs.limit = qs.limit || API_LIMIT;
 
   // It's enough to have one of these.
   if (state.locLocation) {
@@ -150,14 +151,14 @@ function ModalDownload(props) {
       ...s,
       locCountry: country || EMPTY,
       locArea: area || EMPTY,
-      locLocation: location || EMPTY,
+      locLocation: String(location || EMPTY),
     }));
   }, [country, area, location]);
 
   // Fetch locations for a given country.
   useRevealed(() => {
+    _invalidateLocationsByCountry();
     if (country) {
-      _invalidateLocationsByCountry();
       _fetchLocationsByCountry(country);
     }
   }, [country]);
@@ -184,7 +185,9 @@ function ModalDownload(props) {
 
     if (key === 'locCountry') {
       _invalidateLocationsByCountry();
-      _fetchLocationsByCountry(e.target.value);
+      if (e.target.value) {
+        _fetchLocationsByCountry(e.target.value);
+      }
       newState.locArea = EMPTY;
       newState.locLocation = EMPTY;
     } else if (key === 'locArea') {

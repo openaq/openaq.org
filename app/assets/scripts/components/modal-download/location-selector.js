@@ -38,7 +38,7 @@ export default function LocationSelector(props) {
       .sortBy('city')
       .value();
 
-    if (locArea !== '--') {
+    if (locArea) {
       compareLocations = _(locationsCity)
         .filter(o => {
           // Has to belong to the correct area and can't have been selected before.
@@ -56,7 +56,7 @@ export default function LocationSelector(props) {
   // Disable area while the locations are not fetched.
   const disableArea = !fetched || fetching;
   // Disable locations if locations are not fetched or are not selected
-  const disableLocation = disableArea || locArea === '--';
+  const disableLocation = disableArea || !locArea;
 
   return (
     <fieldset className="form__fieldset form__fieldset--location">
@@ -71,7 +71,7 @@ export default function LocationSelector(props) {
           value={locCountry}
           onChange={e => onOptSelect('locCountry', e)}
         >
-          <option value="--">Select a Country</option>
+          <option value="">Select a Country</option>
           {countries.map(o => (
             <option key={o.code} value={o.code}>
               {o.name}
@@ -89,7 +89,7 @@ export default function LocationSelector(props) {
           value={locArea}
           onChange={e => onOptSelect('locArea', e)}
         >
-          <option value="--">{compareAreasLabel}</option>
+          <option value="">{compareAreasLabel}</option>
           {compareAreas.map(o => (
             <option key={o.city} value={o.city}>
               {o.city}
@@ -107,7 +107,7 @@ export default function LocationSelector(props) {
           value={locLocation}
           onChange={e => onOptSelect('locLocation', e)}
         >
-          <option value="--">{compareLocationsLabel}</option>
+          <option value="">{compareLocationsLabel}</option>
           {compareLocations.map(o => (
             <option key={o.id} value={o.id}>
               {o.name}

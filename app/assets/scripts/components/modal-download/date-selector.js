@@ -38,7 +38,7 @@ export default function DateSelector(props) {
           value={dateState[`${type}Year`]}
           onChange={e => onOptSelect(`${type}Year`, e)}
         >
-          <option value="--">Year</option>
+          <option value="">Year</option>
           {years.map(o => (
             <option key={`startyear-${o}`} value={o}>
               {o}
@@ -56,7 +56,7 @@ export default function DateSelector(props) {
           value={dateState[`${type}Month`]}
           onChange={e => onOptSelect(`${type}Month`, e)}
         >
-          <option value="--">Month</option>
+          <option value="">Month</option>
           {months.map((o, i) => (
             <option key={o} value={i}>
               {o}
@@ -74,7 +74,7 @@ export default function DateSelector(props) {
           value={dateState[`${type}Day`]}
           onChange={e => onOptSelect(`${type}Day`, e)}
         >
-          <option value="--">Day</option>
+          <option value="">Day</option>
           {days.map(o => (
             <option key={`startday-${o}`} value={o}>
               {o}
