@@ -22,6 +22,10 @@
   }
 }
 
+a.disabled {
+  color: $base-color;
+}
+
 /* Special button for inpage header
    ========================================================================== */
 
@@ -139,3 +143,19 @@
     box-shadow: inset 0 -0.25rem 0 0 $primary-color;
   }
 }
+
+/* Filters
+   ========================================================================== */
+.drop__menu--select.padded {
+  padding: 1rem;
+}
+
+.drop__menu-section-title {
+  text-decoration: underline $primary-color dotted;
+  text-underline-position: under;
+}
+
+.__react_component_tooltip.filter-tooltip {
+  z-index: 10000;
+}
+

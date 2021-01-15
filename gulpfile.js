@@ -83,6 +83,7 @@ gulp.task('serve', function () {
           routes: {
             '/node_modules': './node_modules',
           },
+          ghostMode: false,
           middleware: OPENAQ_ADDONS.graphicsMiddleware(fs),
         },
       });

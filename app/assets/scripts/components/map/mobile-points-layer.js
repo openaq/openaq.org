@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 
 import { unusedBorderColor } from '../../utils/colors';
 
-export default function MobilePointsLayer({
-  // locationId,
-  // activeParameter,
-  map,
-  sourceId,
-}) {
+export default function MobilePointsLayer({ map, sourceId }) {
   useEffect(() => {
     map.addLayer({
       id: 'mobile-points',
@@ -17,10 +12,8 @@ export default function MobilePointsLayer({
       type: 'circle',
       paint: {
         'circle-color': unusedBorderColor,
-        // to add once properties are included in vectore tiles
-        // 'circle-color': getFillExpression(activeParameter),
         'circle-radius': 5,
-        'circle-opacity': 0.6,
+        'circle-opacity': 0.3,
       },
     });
 
@@ -29,19 +22,10 @@ export default function MobilePointsLayer({
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (locationId && map.getLayer('mobile-points'))
-  //     map.setFilter('mobile-points', ['==', 'locationId', locationId]);
-  //   return () => {
-  //     map.setFilter('mobile-points', null);
-  //   };
-  // }, [locationId]);
-
   return null;
 }
 
 MobilePointsLayer.propTypes = {
-  activeParameter: PropTypes.string,
   map: PropTypes.object,
   sourceId: PropTypes.string,
 };

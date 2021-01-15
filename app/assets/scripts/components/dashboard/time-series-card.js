@@ -78,7 +78,14 @@ export default function TimeSeriesCard({
       } else if (projectId) {
         query = { ...query, project: projectId, spatial: 'project' };
       }
-
+      //If date range is not lifetime, get hourly data
+      if (dateRange) {
+        setTemporal('hour');
+        query = {
+          ...query,
+          temporal: 'hour',
+        };
+      }
       fetch(
         `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
       )
@@ -114,7 +121,7 @@ export default function TimeSeriesCard({
     return () => {
       setState(defaultState);
     };
-  }, [activeTab, temporal, dateRange]);
+  }, [activeTab, dateRange]);
 
   if (!fetched && !fetching) {
     return null;
@@ -151,6 +158,7 @@ export default function TimeSeriesCard({
               data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
               yLabel={data && data[0].displayName}
               yUnit={data && data[0].unit}
+              xUnit={temporal}
             />
           ) : (
             <ErrorMessage instructions="Please try a different time" />

@@ -10,7 +10,7 @@ module.exports = {
     token: 'pk.eyJ1IjoiZGV2c2VlZCIsImEiOiJnUi1mbkVvIn0.018aLhX0Mb0tdtaT2QNe2Q',
     baseStyle: 'mapbox://styles/devseed/ciqs29d060000clnr9222bg5x',
   },
-  api: 'https://api.openaq.org/v1',
+  api: 'https://api.openaq.org/v2',
   metadata: 'https://metadata.openaq.org',
   apiDocs: 'https://docs.openaq.org',
 };

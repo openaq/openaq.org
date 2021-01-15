@@ -2,10 +2,10 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import InfoMessage from './info-message';
 
-export default function ErrorMessage({ instructions }) {
+export default function ErrorMessage({ isShowingDiagnosis, instructions }) {
   return (
     <div>
-      <p>We couldn&apos;t get any data.</p>
+      {isShowingDiagnosis && <p>We couldn&apos;t get any data.</p>}
       <InfoMessage>
         <p>{instructions || 'Please try again later'}.</p>
         <p>
@@ -21,4 +21,8 @@ export default function ErrorMessage({ instructions }) {
 
 ErrorMessage.propTypes = {
   instructions: T.string,
+  isShowingDiagnosis: T.bool,
+};
+ErrorMessage.defaultProps = {
+  isShowingDiagnosis: true,
 };

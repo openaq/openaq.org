@@ -8,7 +8,6 @@ import { openDownloadModal } from '../../actions/action-creators';
 import config from '../../config';
 import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
-import { parameterMax } from '../../utils/map-settings';
 
 import DetailsCard from '../../components/dashboard/details-card';
 import NearbyLocations from './nearby-locations';
@@ -129,13 +128,12 @@ function Location(props) {
       location: data.location,
     });
   }
-  const filteredParams = data.parameters.filter(p =>
-    Object.keys(parameterMax).includes(p.parameterId.toString())
-  );
 
+  //
   // Lifecycle stage of different sources.
-  const lifecycle =
-    data.sources && data.sources.map(s => s.lifecycle_stage).filter(Boolean);
+  const lifecycle = (data.sources || [])
+    .map(s => s.lifecycle_stage)
+    .filter(Boolean);
 
   return (
     <section className="inpage">
@@ -196,6 +194,7 @@ function Location(props) {
             titleInfo={
               'The average number of measurements for each pollutant by hour, day, or month. In some views a window may be turned off if that view is not applicable to the selected time window.'
             }
+            isMobile={data.isMobile}
           />
           <MeasureandsCard
             parameters={data.parameters}
@@ -207,10 +206,10 @@ function Location(props) {
         <NearbyLocations
           locationId={data.id}
           center={[data.coordinates.longitude, data.coordinates.latitude]}
-          city={data.city}
+          city={data.city || NO_CITY}
           country={data.country}
-          parameters={filteredParams}
-          initialActiveParameter={filteredParams[0]}
+          parameters={data.parameters}
+          initialActiveParameter={data.parameters[0]}
         />
       </div>
     </section>
