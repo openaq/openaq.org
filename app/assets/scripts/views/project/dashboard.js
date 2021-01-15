@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
@@ -8,38 +8,47 @@ import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 
-function ProjectDashboard({ projectData, lifecycle, dateRange }) {
+function Dashboard({
+  measurements,
+  projectParams,
+  projectId,
+  projectName,
+  lifecycle,
+  selectedDateRange,
+  projectDates,
+  sources,
+  timeseriesAverages,
+}) {
+  console.log('timeseriesAverages', timeseriesAverages);
   return (
     <div className="inner dashboard-cards">
       <DetailsCard
-        measurements={projectData.measurements}
+        measurements={measurements}
         lifecycle={lifecycle}
-        date={{
-          start: projectData.firstUpdated,
-          end: projectData.lastUpdated,
-        }}
+        date={projectDates}
       />
-      <LatestMeasurementsCard parameters={projectData.parameters} />
-      <SourcesCard sources={projectData.sources} />
+      <LatestMeasurementsCard parameters={projectParams} />
+      <SourcesCard sources={sources} />
       <TimeSeriesCard
-        projectId={projectData.id}
-        parameters={projectData.parameters}
-        dateRange={dateRange}
+        projectId={projectId}
+        parameters={projectParams}
+        prefetchedData={timeseriesAverages}
+        dateRange={selectedDateRange}
         titleInfo={
           'The average value of a pollutant over time during the specified window at each individual node selected and the average values across all locations selected. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown. If all locations are selected only the average across all locations is shown, not the individual location values.'
         }
       />
       <MeasureandsCard
-        parameters={projectData.parameters}
+        parameters={projectParams}
         titleInfo={
           "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
         }
       />
       <TemporalCoverageCard
-        parameters={projectData.parameters}
-        dateRange={dateRange}
+        parameters={projectParams}
+        dateRange={selectedDateRange}
         spatial="project"
-        id={projectData.name}
+        id={projectName}
         titleInfo={
           'The average number of measurements for each pollutant by hour, day, or month at the selected locations. In some views a window may be turned off if that view is not applicable to the selected time window.'
         }
@@ -48,10 +57,32 @@ function ProjectDashboard({ projectData, lifecycle, dateRange }) {
   );
 }
 
-ProjectDashboard.propTypes = {
-  projectData: T.object,
-  lifecycle: T.array,
-  dateRange: T.string,
+Dashboard.propTypes = {
+  measurements: PropTypes.number,
+  projectName: PropTypes.string,
+  projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  selectedParams: PropTypes.array,
+  lifecycle: PropTypes.arrayOf(PropTypes.number),
+  dateRange: PropTypes.string,
+  selectedLocationDates: PropTypes.shape({
+    start: PropTypes.instanceOf(Date),
+    end: PropTypes.instanceOf(Date),
+  }),
+  sources: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      sourceURL: PropTypes.string,
+      url: PropTypes.string,
+      contacts: PropTypes.array,
+    })
+  ),
+  locations: PropTypes.arrayOf(PropTypes.number),
+  country: PropTypes.string,
+  timeseriesAverages: PropTypes.object,
 };
 
-export default ProjectDashboard;
+Dashboard.defaultProps = {
+  timeseriesAverages: null,
+};
+
+export default Dashboard;

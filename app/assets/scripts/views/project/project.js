@@ -8,7 +8,7 @@ import config from '../../config';
 import { getCountryBbox } from '../../utils/countries';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
-import ProjectDashboard from './project-dashboard';
+import Dashboard from './dashboard';
 import NodesDashboard from './nodes-dashboard';
 import NodeLocations from './node-locations';
 import DateSelector from '../../components/date-selector';
@@ -80,19 +80,22 @@ function Project({ match, history, location }) {
         }
       );
   };
-  console.log('selectedLocations', selectedLocations);
+
   const handleLocationSelection = (paramId, locationId) => {
-    const { paramId, ...selectedLocations } = removedParam;
     if (selectedLocations[paramId]?.includes(locationId)) {
-      // removes location
-      selectedLocations[paramId].length < 1
-        ? setSelectedLocations(removedParam)
-        : setSelectedLocations({
-            ...selectedLocations,
-            [paramId]: selectedLocations[paramId].filter(
-              location => location !== locationId
-            ),
-          });
+      setSelectedLocations(prevSelections => {
+        // removes location
+        const updatedSelection = {
+          ...prevSelections,
+          [paramId]: selectedLocations[paramId].filter(
+            location => location !== locationId
+          ),
+        };
+        // removes param if last location was removed
+        updatedSelection[paramId].length < 1 &&
+          delete updatedSelection[paramId];
+        return updatedSelection;
+      });
     } else if (Object.values(selectedLocations).flat().length < 15) {
       setSelectedLocations({
         ...selectedLocations,
@@ -153,16 +156,19 @@ function Project({ match, history, location }) {
                 }}
               />
             </div>
-            <div style={{ display: `flex`, justifyContent: `flex-end` }}>
-              <button
-                className="nav__action-link"
-                onClick={() => toggleNodeDisplay(true)}
-              >
-                Apply Selection
-              </button>
-            </div>
+            {!isDisplayingNodes && (
+              <div style={{ display: `flex`, justifyContent: `flex-end` }}>
+                <button
+                  className="nav__action-link"
+                  onClick={() => toggleNodeDisplay(true)}
+                >
+                  Apply Selection
+                </button>
+              </div>
+            )}
           </div>
         )}
+
         <NodeLocations
           bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
           locationIds={projectData.locationIds}
@@ -181,6 +187,8 @@ function Project({ match, history, location }) {
         {isDisplayingNodes ? (
           <NodesDashboard
             measurements={projectData.measurements}
+            projectId={projectData.id}
+            projectName={projectData.name}
             selectedParams={Object.keys(selectedLocations)}
             lifecycle={lifecycle}
             dateRange={dateRange}
@@ -188,17 +196,23 @@ function Project({ match, history, location }) {
               start: projectData.firstUpdated,
               end: projectData.lastUpdated,
             }}
-            sources={projectData.sources}
+            sources={projectData.sources[0].flat()}
             locations={Object.values(selectedLocations).flat()}
             country={projectData.countries && projectData.countries[0]}
-            name={projectData.name}
           />
         ) : (
-          <ProjectDashboard
-            projectData={projectData}
+          <Dashboard
+            measurements={projectData.measurements}
+            projectParams={projectData.parameters}
+            projectId={projectData.id}
+            projectName={projectData.name}
             lifecycle={lifecycle}
-            dateRange={dateRange}
-            sources={projectData.sources}
+            selectedDateRange={dateRange}
+            projectDates={{
+              start: projectData.firstUpdated,
+              end: projectData.lastUpdated,
+            }}
+            sources={projectData.sources[0].flat()}
           />
         )}
       </div>

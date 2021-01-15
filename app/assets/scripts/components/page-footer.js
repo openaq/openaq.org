@@ -247,7 +247,7 @@ var PageFooter = createReactClass({
                     type="text"
                     name="b_ca93b2911fff40db15f6e7203_e65a8618a1"
                     tabIndex="-1"
-                    value=""
+                    defaultValue=""
                   />
                 </div>
               </form>
