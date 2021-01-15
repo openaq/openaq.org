@@ -147,7 +147,7 @@ Header.propTypes = {
       label: T.string,
     })
   ),
-  disclaimer: T.func,
+  disclaimer: T.bool,
   action: T.shape({
     api: T.string,
     download: T.func,
