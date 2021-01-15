@@ -206,7 +206,7 @@ export default function Filter({
               {parameters && parameters.length > 1 && by.includes('countries') && (
                 <Dropdown
                   triggerElement="a"
-                  triggerTitle="View filter options"
+                  triggerTitle="View parameter options"
                   triggerText="Parameter"
                   triggerClassName="button--drop-filter filter--drop"
                 >
@@ -257,7 +257,7 @@ export default function Filter({
               {by.includes('sensor') && (
                 <Dropdown
                   triggerElement="a"
-                  triggerTitle="View source type options"
+                  triggerTitle="View sensor type options"
                   triggerText="Sensor Type"
                   triggerClassName="button--drop-filter"
                   className="sensor__type-filter"
