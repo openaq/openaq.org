@@ -13,6 +13,7 @@ import Card, {
 import TabbedSelector from '../tabbed-selector';
 import LineChart from '../line-chart';
 import InfoButton from '../info-button';
+import { formatValueByUnit, renderUnit } from '../../utils/format';
 
 const ChartContainer = styled.div`
   max-height: 24rem;
@@ -155,9 +156,16 @@ export default function TimeSeriesCard({
             <LoadingMessage />
           ) : data && data.length ? (
             <LineChart
-              data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
+              data={data.map(m => ({
+                x: new Date(m[temporal]),
+                y: formatValueByUnit(
+                  m.average,
+                  data[0].unit,
+                  renderUnit(data[0].unit)
+                ),
+              }))}
               yLabel={data && data[0].displayName}
-              yUnit={data && data[0].unit}
+              yUnit={data && renderUnit(data[0].unit)}
               xUnit={temporal}
             />
           ) : (
