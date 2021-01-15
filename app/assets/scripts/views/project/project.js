@@ -28,6 +28,8 @@ function Project({ match, history, location }) {
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
   );
   const [isAllLocations, toggleAllLocations] = useState(true);
+  const [isDisplayingNodes, toggleNodeDisplay] = useState(false);
+
   const [selectedLocations, setSelectedLocations] = useState({});
   const [{ fetched, fetching, error, projectData }, setState] = useState(
     defaultState
@@ -78,23 +80,27 @@ function Project({ match, history, location }) {
         }
       );
   };
-
+  console.log('selectedLocations', selectedLocations);
   const handleLocationSelection = (paramId, locationId) => {
-    selectedLocations[paramId]?.includes(locationId)
-      ? setSelectedLocations({
-          ...selectedLocations,
-          [paramId]: selectedLocations[paramId].filter(
-            location => location !== locationId
-          ),
-        })
-      : Object.values(selectedLocations).flat().length < 15
-      ? setSelectedLocations({
-          ...selectedLocations,
-          [paramId]: selectedLocations[paramId]
-            ? [...selectedLocations[paramId], locationId]
-            : [locationId],
-        })
-      : null;
+    const { paramId, ...selectedLocations } = removedParam;
+    if (selectedLocations[paramId]?.includes(locationId)) {
+      // removes location
+      selectedLocations[paramId].length < 1
+        ? setSelectedLocations(removedParam)
+        : setSelectedLocations({
+            ...selectedLocations,
+            [paramId]: selectedLocations[paramId].filter(
+              location => location !== locationId
+            ),
+          });
+    } else if (Object.values(selectedLocations).flat().length < 15) {
+      setSelectedLocations({
+        ...selectedLocations,
+        [paramId]: selectedLocations[paramId]
+          ? [...selectedLocations[paramId], locationId]
+          : [locationId],
+      });
+    }
   };
 
   if (!fetched && !fetching) {
@@ -140,13 +146,17 @@ function Project({ match, history, location }) {
             <div>
               <Pill
                 title={`${Object.values(selectedLocations).flat().length}/15`}
-                action={() => toggleAllLocations(true)}
+                action={() => {
+                  setSelectedLocations({});
+                  toggleAllLocations(true);
+                  toggleNodeDisplay(false);
+                }}
               />
             </div>
             <div style={{ display: `flex`, justifyContent: `flex-end` }}>
               <button
                 className="nav__action-link"
-                onClick={() => toggleAllLocations(false)}
+                onClick={() => toggleNodeDisplay(true)}
               >
                 Apply Selection
               </button>
@@ -168,7 +178,7 @@ function Project({ match, history, location }) {
         >
           <h1 className="fold__title">Values for selected stations</h1>
         </header>
-        {!isAllLocations ? (
+        {isDisplayingNodes ? (
           <NodesDashboard
             measurements={projectData.measurements}
             selectedParams={Object.keys(selectedLocations)}
