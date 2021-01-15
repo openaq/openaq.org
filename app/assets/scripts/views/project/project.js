@@ -162,7 +162,7 @@ function Project({ match, history, location }) {
                   className="nav__action-link"
                   onClick={() => toggleNodeDisplay(true)}
                 >
-                  View Selections
+                  View Location Data
                 </button>
               </div>
             )}
