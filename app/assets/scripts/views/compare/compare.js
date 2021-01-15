@@ -12,6 +12,7 @@ import AvailabilityMessage from './availability-message';
 import CompareBrushChart from './compare-brush-chart';
 
 import {
+  fetchBaseData,
   fetchCompareLocationIfNeeded,
   removeCompareLocation,
   selectCompareOptions,
@@ -40,6 +41,7 @@ function Compare(props) {
 
     _invalidateCompare,
     _removeCompareLocation,
+    _fetchBaseData,
     _fetchCompareLocationIfNeeded,
     _fetchCompareLocationMeasurements,
     _cancelCompareOptions,
@@ -50,6 +52,14 @@ function Compare(props) {
     _selectCompareArea,
     _selectCompareLocation,
   } = props;
+
+  useEffect(() => {
+    if (!parameters) {
+      _fetchBaseData();
+    }
+    // On unmount cleanup the compare.
+    return () => _invalidateCompare();
+  }, []);
 
   // Data for the active parameter or default to PM25
   const activeParameterData = useMemo(() => {
@@ -131,12 +141,6 @@ function Compare(props) {
     });
   };
 
-  useEffect(() => {
-    // No mount action.
-    // On unmount cleanup the compare.
-    return () => _invalidateCompare();
-  }, []);
-
   // Fetch data for all locations being compared.
   // Locations are stored using their index, and this order never changes.
   const { loc1, loc2, loc3 } = match.params;
@@ -209,7 +213,7 @@ function Compare(props) {
         </div>
       </header>
       <div className="inpage__body">
-        {locs.length ? (
+        {activeParameterData && locs.length ? (
           <section className="fold" id="compare-fold-measurements">
             <div className="inner">
               <header className="fold__header">
@@ -247,6 +251,7 @@ function Compare(props) {
 }
 
 Compare.propTypes = {
+  _fetchBaseData: T.func,
   _fetchCompareLocationIfNeeded: T.func,
   _removeCompareLocation: T.func,
   _selectCompareOptions: T.func,
@@ -292,6 +297,7 @@ function selector(state) {
 
 function dispatcher(d) {
   return {
+    _fetchBaseData: (...args) => d(fetchBaseData(...args)),
     _selectCompareOptions: (...args) => d(selectCompareOptions(...args)),
     _cancelCompareOptions: (...args) => d(cancelCompareOptions(...args)),
 
