@@ -13,6 +13,7 @@ import NodesDashboard from './nodes-dashboard';
 import NodeLocations from './node-locations';
 import DateSelector from '../../components/date-selector';
 import Pill from '../../components/pill';
+import { formatValueByUnit, renderUnit } from '../../utils/format';
 
 const defaultState = {
   fetched: false,
@@ -60,6 +61,44 @@ function Project({ match, history, location }) {
       })
       .then(
         json => {
+          const dat = json.results[0];
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            projectData: {
+              ...dat,
+              parameters: dat.parameters.map(p => ({
+                ...p,
+                average: formatValueByUnit(
+                  p.average,
+                  p.unit,
+                  renderUnit(p.unit)
+                ),
+                lastValue: formatValueByUnit(
+                  p.lastValue,
+                  p.unit,
+                  renderUnit(p.unit)
+                ),
+                unit: renderUnit(p.unit),
+              })),
+            },
+          }));
+        },
+        e => {
+          console.log('e', e);
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            error: e,
+          }));
+        }
+      );
+  };
+  /*
+      .then(
+        json => {
           setState(state => ({
             ...state,
             fetched: true,
@@ -77,7 +116,7 @@ function Project({ match, history, location }) {
           }));
         }
       );
-  };
+  };*/
 
   const handleLocationSelection = (paramId, locationId) => {
     selectedLocations[paramId]?.includes(locationId)

@@ -59,21 +59,28 @@ function Location({ location, history, match, openDownloadModal }) {
         })
         .then(
           json => {
-            const dat = json.results[0]
-            console.log(dat)
+            const dat = json.results[0];
             setState(state => ({
               ...state,
               fetched: true,
               fetching: false,
               data: {
                 ...dat,
-                parameters: dat.parameters.map( p => ({
+                parameters: dat.parameters.map(p => ({
                   ...p,
-                  average: formatValueByUnit(p.average, p.unit, renderUnit(p.unit)),
-                  lastValue: formatValueByUnit(p.lastValue, p.unit, renderUnit(p.unit)),
-                  unit: renderUnit(p.unit)
-                }))
-              }
+                  average: formatValueByUnit(
+                    p.average,
+                    p.unit,
+                    renderUnit(p.unit)
+                  ),
+                  lastValue: formatValueByUnit(
+                    p.lastValue,
+                    p.unit,
+                    renderUnit(p.unit)
+                  ),
+                  unit: renderUnit(p.unit),
+                })),
+              },
             }));
           },
           e => {
