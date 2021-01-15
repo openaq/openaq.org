@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 
-import { openDownloadModal } from '../../actions/action-creators';
+import { openDownloadModal as openDownloadModalAction } from '../../actions/action-creators';
 import config from '../../config';
 import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
@@ -29,10 +28,8 @@ const defaultState = {
   data: null,
 };
 
-function Location(props) {
-  let history = useHistory();
-  let location = useLocation();
-  const { id } = props.match.params;
+function Location({ location, history, match, openDownloadModal }) {
+  const { id } = match.params;
 
   const [dateRange, setDateRange] = useState(
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
@@ -122,7 +119,7 @@ function Location(props) {
   }
 
   function onDownloadClick() {
-    props._openDownloadModal({
+    openDownloadModal({
       country: data.country,
       area: data.city,
       location: data.location,
@@ -217,29 +214,20 @@ function Location(props) {
 }
 
 Location.propTypes = {
-  match: T.object,
-  _openDownloadModal: T.func,
-  sources: T.array,
-  measurements: T.array,
-  parameters: T.array,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+
+  openDownloadModal: PropTypes.func.isRequired,
 };
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-function selector(state) {
-  return {
-    parameters: state.baseData.data.parameters,
-    sources: state.baseData.data.sources,
-    measurements: state.measurements,
-    latestMeasurements: state.latestMeasurements,
-  };
-}
-
 function dispatcher(dispatch) {
   return {
-    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
+    openDownloadModal: (...args) => dispatch(openDownloadModalAction(...args)),
   };
 }
 
-export default connect(selector, dispatcher)(Location);
+export default connect(null, dispatcher)(Location);

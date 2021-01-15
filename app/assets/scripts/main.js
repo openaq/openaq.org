@@ -6,7 +6,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import reducer from './reducers/index';
-import { fetchBaseData, fetchBaseStats } from './actions/action-creators';
 
 import ScrollToTop from './components/scroll-to-top';
 import App from './views/app';
@@ -41,10 +40,6 @@ const composeEnhancers =
 const middlewares = applyMiddleware(thunkMiddleware, logger);
 
 const store = createStore(reducer, {}, composeEnhancers(middlewares));
-
-// Base data.
-store.dispatch(fetchBaseData());
-store.dispatch(fetchBaseStats());
 
 render(
   <Provider store={store}>

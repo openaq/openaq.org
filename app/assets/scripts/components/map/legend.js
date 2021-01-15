@@ -56,17 +56,13 @@ const Circle = styled(Square)`
   border-radius: 50%;
 `;
 
-export default function Legend({
-  isOnlyCoreParams,
-  parameters,
-  activeParameter,
-  onParamSelection,
-}) {
+const Drop = ({ parameters, activeParameter, onParamSelection }) => {
   function onFilterSelect(parameter, e) {
     e.preventDefault();
     onParamSelection(parameter);
   }
-  let drop = (
+
+  return (
     <Dropdown
       triggerElement="button"
       triggerClassName="button button--primary-unbounded drop__toggle--caret"
@@ -96,7 +92,25 @@ export default function Legend({
       </ul>
     </Dropdown>
   );
+};
 
+Drop.propTypes = {
+  parameters: PropTypes.array,
+  activeParameter: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    id: PropTypes.number,
+    parameterId: PropTypes.number.isRequired,
+  }).isRequired,
+  onParamSelection: PropTypes.func,
+};
+
+export default function Legend({
+  isOnlyCoreParams,
+  parameters,
+  activeParameter,
+  onParamSelection,
+}) {
   const scaleStops = generateLegendStops(
     activeParameter.parameterId || activeParameter.id
   );
@@ -107,8 +121,16 @@ export default function Legend({
       <Container>
         {!isOnlyCoreParams && (
           <p>
-            Showing values for:
-            {parameters.length > 1 ? drop : activeParameter.displayName}
+            Showing locations for:
+            {parameters?.length > 1 ? (
+              <Drop
+                parameters={parameters}
+                activeParameter={activeParameter}
+                onParamSelection={onParamSelection}
+              />
+            ) : (
+              activeParameter.displayName
+            )}
           </p>
         )}
         <Definition>
@@ -127,7 +149,15 @@ export default function Legend({
         <Container>
           <p>
             Showing the most recent* values for{' '}
-            {parameters.length > 1 ? drop : activeParameter.displayName}
+            {parameters?.length > 1 ? (
+              <Drop
+                parameters={parameters}
+                activeParameter={activeParameter}
+                onParamSelection={onParamSelection}
+              />
+            ) : (
+              activeParameter.displayName
+            )}
           </p>
           <ul className="color-scale">
             {scaleStops.map(o => (
@@ -154,7 +184,7 @@ export default function Legend({
 
 Legend.propTypes = {
   isOnlyCoreParams: PropTypes.bool,
-  parameters: PropTypes.array.isRequired,
+  parameters: PropTypes.array,
   activeParameter: PropTypes.shape({
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,

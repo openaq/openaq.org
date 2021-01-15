@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { PropTypes as T } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import c from 'classnames';
 import _ from 'lodash';
 import { Dropdown } from 'openaq-design-system';
-import ParamSelect from '../../components/parameters-selection';
-import SensorTypeFilter from './sensor-type-filter';
 
-import { buildQS } from '../../utils/url';
-import { toggleValue } from '../../utils/array';
+import { fetchBaseData as fetchBaseDataAction } from '../actions/action-creators';
+import { buildQS } from '../utils/url';
+import { toggleValue } from '../utils/array';
+import ParamSelect from './parameters-selection';
+import SensorTypeFilter from './sensor-type-filter';
 
 const defaultSelected = {
   parameters: [],
@@ -44,6 +46,11 @@ const initFromLocation = ({
   };
 };
 export default function Filter({
+  slug,
+  by,
+
+  fetchBaseData,
+
   countries,
   parameters,
   sources,
@@ -56,10 +63,14 @@ export default function Filter({
     initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
   );
 
+  useEffect(() => {
+    fetchBaseData();
+  }, []);
+
   // alphabetizes filter names
   const sortList = list => list.sort((a, b) => a.name.localeCompare(b.name));
-  sortList(countries);
-  sortList(parameters);
+  if (countries) sortList(countries);
+  if (parameters) sortList(parameters);
 
   function onFilterSelect(what, value) {
     let query = qs.parse(location.search, {
@@ -146,7 +157,7 @@ export default function Filter({
     }
 
     // update url
-    history.push(`/locations?${buildQS(query)}`);
+    history.push(`${slug}?${buildQS(query)}`);
   }
 
   return (
@@ -156,108 +167,117 @@ export default function Filter({
           <div className="filters__group">
             <h2>Filter by</h2>
             <div className="filter__values">
-              <Dropdown
-                triggerElement="a"
-                triggerTitle="View country options"
-                triggerText="Country"
-                triggerClassName="button--drop-filter filter--drop"
-              >
-                <ul
-                  role="menu"
-                  data-cy="filter-countries"
-                  className="drop__menu drop__menu--select scrollable"
+              {countries && countries.length > 1 && by.includes('countries') && (
+                <Dropdown
+                  triggerElement="a"
+                  triggerTitle="View country options"
+                  triggerText="Country"
+                  triggerClassName="button--drop-filter filter--drop"
                 >
-                  {_.sortBy(countries).map(o => {
-                    return (
-                      <li key={o.code}>
-                        <div
-                          data-cy="filter-menu-item"
-                          className={c('drop__menu-item', {
-                            'drop__menu-item--active': selected.countries.includes(
-                              o.code
-                            ),
-                          })}
-                          data-hook="dropdown:close"
-                          onClick={() => {
-                            onFilterSelect('countries', o.code);
-                          }}
-                        >
-                          <span data-cy={o.name}>{o.name}</span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Dropdown>
+                  <ul
+                    role="menu"
+                    data-cy="filter-countries"
+                    className="drop__menu drop__menu--select scrollable"
+                  >
+                    {_.sortBy(countries).map(o => {
+                      return (
+                        <li key={o.code}>
+                          <div
+                            data-cy="filter-menu-item"
+                            className={c('drop__menu-item', {
+                              'drop__menu-item--active': selected.countries.includes(
+                                o.code
+                              ),
+                            })}
+                            data-hook="dropdown:close"
+                            onClick={() => {
+                              onFilterSelect('countries', o.code);
+                            }}
+                          >
+                            <span data-cy={o.name}>{o.name}</span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Dropdown>
+              )}
 
-              <Dropdown
-                triggerElement="a"
-                triggerTitle="View filter options"
-                triggerText="Parameter"
-                triggerClassName="button--drop-filter filter--drop"
-              >
-                <ParamSelect
-                  parameters={parameters}
-                  onFilterSelect={onFilterSelect}
-                  selected={selected}
-                />
-              </Dropdown>
-
-              <Dropdown
-                triggerElement="a"
-                triggerTitle="View source options"
-                triggerText="Data Source"
-                triggerClassName="button--drop-filter"
-              >
-                <ul
-                  role="menu"
-                  data-cy="filter-sources"
-                  className="drop__menu drop__menu--select scrollable"
+              {parameters && parameters.length > 1 && by.includes('countries') && (
+                <Dropdown
+                  triggerElement="a"
+                  triggerTitle="View parameter options"
+                  triggerText="Parameter"
+                  triggerClassName="button--drop-filter filter--drop"
                 >
-                  {_.sortBy(sources).map(o => {
-                    return (
-                      <li key={o.sourceSlug}>
-                        <div
-                          data-cy="filter-menu-item"
-                          className={c('drop__menu-item', {
-                            'drop__menu-item--active': selected.sources.includes(
-                              o.sourceSlug
-                            ),
-                          })}
-                          data-hook="dropdown:close"
-                          onClick={() => {
-                            onFilterSelect('sources', o.sourceSlug);
-                          }}
-                        >
-                          <span data-cy={o.sourceSlug}>{o.sourceName}</span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Dropdown>
-              <Dropdown
-                triggerElement="a"
-                triggerTitle="View source type options"
-                triggerText="Sensor Type"
-                triggerClassName="button--drop-filter"
-                className="sensor__type-filter"
-              >
-                <SensorTypeFilter
-                  onApplyClick={(grade, manufacturer, mobility, entity) => {
-                    onFilterSelect('source_type', {
-                      grade,
-                      manufacturer,
-                      mobility,
-                      entity,
-                    });
-                  }}
-                  grade={selected.grade}
-                  mobility={selected.mobility}
-                  entity={selected.entity}
-                  manufacturers={manufacturers}
-                />
-              </Dropdown>
+                  <ParamSelect
+                    parameters={parameters}
+                    onFilterSelect={onFilterSelect}
+                    selected={selected}
+                  />
+                </Dropdown>
+              )}
+
+              {sources && sources.length > 1 && by.includes('sources') && (
+                <Dropdown
+                  triggerElement="a"
+                  triggerTitle="View source options"
+                  triggerText="Data Source"
+                  triggerClassName="button--drop-filter"
+                >
+                  <ul
+                    role="menu"
+                    data-cy="filter-sources"
+                    className="drop__menu drop__menu--select scrollable"
+                  >
+                    {_.sortBy(sources).map(o => {
+                      return (
+                        <li key={o.sourceSlug}>
+                          <div
+                            data-cy="filter-menu-item"
+                            className={c('drop__menu-item', {
+                              'drop__menu-item--active': selected.sources.includes(
+                                o.sourceSlug
+                              ),
+                            })}
+                            data-hook="dropdown:close"
+                            onClick={() => {
+                              onFilterSelect('sources', o.sourceSlug);
+                            }}
+                          >
+                            <span data-cy={o.sourceSlug}>{o.sourceName}</span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Dropdown>
+              )}
+
+              {by.includes('sensor') && (
+                <Dropdown
+                  triggerElement="a"
+                  triggerTitle="View sensor type options"
+                  triggerText="Sensor Type"
+                  triggerClassName="button--drop-filter"
+                  className="sensor__type-filter"
+                >
+                  <SensorTypeFilter
+                    onApplyClick={(grade, manufacturer, mobility, entity) => {
+                      onFilterSelect('source_type', {
+                        grade,
+                        manufacturer,
+                        mobility,
+                        entity,
+                      });
+                    }}
+                    grade={selected.grade}
+                    mobility={selected.mobility}
+                    entity={selected.entity}
+                    manufacturers={manufacturers}
+                  />
+                </Dropdown>
+              )}
             </div>
           </div>
           <div className="filters__group">
@@ -302,7 +322,7 @@ export default function Filter({
         return Array.isArray(o) ? o.length > 0 : o;
       }) && (
         <div className="filters-summary">
-          {!!countries.length &&
+          {!!countries?.length &&
             selected.countries.map(o => {
               const country = countries.find(x => x.code === o);
               return (
@@ -318,7 +338,7 @@ export default function Filter({
               );
             })}
 
-          {!!parameters.length &&
+          {!!parameters?.length &&
             selected.parameters.map(o => {
               const parameter = parameters.find(x => x.id === o);
               return (
@@ -335,7 +355,7 @@ export default function Filter({
             })}
 
           {sources &&
-            !!sources.length &&
+            !!sources?.length &&
             selected.sources.map(o => {
               const source = sources.find(x => x.sourceSlug === o);
               return (
@@ -408,10 +428,43 @@ export default function Filter({
 }
 
 Filter.propTypes = {
-  organizations: T.array,
-  parameters: T.array,
-  countries: T.array,
-  sources: T.array,
-  order_by: T.array,
-  manufacturers: T.array,
+  slug: PropTypes.string.isRequired,
+  by: PropTypes.arrayOf(
+    PropTypes.oneOf([
+      'organizations',
+      'parameters',
+      'countries',
+      'sources',
+      'manufacturers',
+    ])
+  ),
+
+  fetchBaseData: PropTypes.func.isRequired,
+
+  organizations: PropTypes.array,
+  parameters: PropTypes.array,
+  countries: PropTypes.array,
+  sources: PropTypes.array,
+  order_by: PropTypes.array,
+  manufacturers: PropTypes.array,
 };
+
+// /////////////////////////////////////////////////////////////////////
+// Connect functions
+
+function selector(state) {
+  return {
+    parameters: state.baseData.data.parameters,
+    countries: state.baseData.data.countries,
+    sources: state.baseData.data.sources,
+    manufacturers: state.baseData.data.manufacturers,
+  };
+}
+
+function dispatcher(dispatch) {
+  return {
+    fetchBaseData: (...args) => dispatch(fetchBaseDataAction(...args)),
+  };
+}
+
+module.exports = connect(selector, dispatcher)(Filter);

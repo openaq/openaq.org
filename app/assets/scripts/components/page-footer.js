@@ -18,7 +18,7 @@ var PageFooter = createReactClass({
   render: function () {
     let copyright =
       this.props.measurements !== null
-        ? `${formatThousands(this.props.measurements)} measurements captured`
+        ? `${formatThousands(this.props.measurements)} measurements captured` // TODO: insert no. of measurements as prop
         : 'Built';
 
     return (

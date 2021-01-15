@@ -137,8 +137,6 @@ function Country(props) {
 
   let locationGroups = _(locations).sortBy('city').groupBy('city').value();
 
-  // We are only using one parameter for this map, extract it from the parameters list here
-  const pm25 = props.parameters.find(p => p.name === 'pm25');
   return (
     <section className="inpage" data-cy="country-page">
       {countryFetching || locationFetching ? (
@@ -187,7 +185,9 @@ function Country(props) {
                       country={country.code}
                     />
                   </LocationsSource>
-                  <Legend parameters={[pm25]} activeParameter={pm25} />
+                  <Legend
+                    activeParameter={{ parameterId: 2, displayName: 'PM2.5' }}
+                  />
                 </MapComponent>
               </div>
             </section>
@@ -273,17 +273,12 @@ function Country(props) {
 
 Country.propTypes = {
   match: T.object,
-  parameters: T.array,
+
   _openDownloadModal: T.func,
 };
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
-function selector(state) {
-  return {
-    parameters: state.baseData.data.parameters,
-  };
-}
 
 function dispatcher(dispatch) {
   return {
@@ -291,4 +286,4 @@ function dispatcher(dispatch) {
   };
 }
 
-export default connect(selector, dispatcher)(Country);
+export default connect(null, dispatcher)(Country);
