@@ -15,6 +15,7 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import MapCard from '../../components/dashboard/map-card';
 import DateSelector from '../../components/date-selector';
 
 import { buildQS } from '../../utils/url';
@@ -171,6 +172,17 @@ function Location({ location, history, match, openDownloadModal }) {
               'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown for the most recent week of data.'
             }
           />
+          {data.isMobile && (
+            <MapCard
+              parameters={data.parameters}
+              isMobile={data.isMobile}
+              locationId={data.id}
+              bbox={data.bounds}
+              points={data.points}
+              firstUpdated={data.firstUpdated}
+              lastUpdated={data.lastUpdated}
+            />
+          )}
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
