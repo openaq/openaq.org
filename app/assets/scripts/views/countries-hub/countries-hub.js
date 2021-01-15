@@ -40,7 +40,7 @@ export default function CountriesHub({ _openDownloadModal }) {
               ...state,
               fetched: true,
               fetching: false,
-              data: json.results,
+              countries: json.results,
             }));
           },
           e => {
