@@ -64,8 +64,8 @@ Dashboard.propTypes = {
   lifecycle: PropTypes.arrayOf(PropTypes.number),
   dateRange: PropTypes.string,
   projectDates: PropTypes.shape({
-    start: PropTypes.instanceOf(Date),
-    end: PropTypes.instanceOf(Date),
+    start: PropTypes.string,
+    end: PropTypes.string,
   }),
   sources: PropTypes.arrayOf(
     PropTypes.shape({

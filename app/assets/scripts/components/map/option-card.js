@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function OptionCard({ toggleAllLocations, isAllLocations }) {
+export default function OptionCard({
+  toggleLocationSelection,
+  isDisplayingSelectionTools,
+}) {
   return (
     <div
       className="map__legend"
       style={{ top: `2rem`, bottom: `unset`, maxWidth: `16rem` }}
     >
-      <form
-        className="form"
-        onChange={e => toggleAllLocations(e.target.value === 'isAllLocations')}
-      >
+      <form className="form" onChange={() => toggleLocationSelection()}>
         <fieldset className="form__fieldset">
           <div className="form__group">
             <label className="form__option form__option--inline form__option--custom-radio">
               <input
                 type="radio"
-                id="isAllLocations"
+                id="isFullProject"
                 name="selectLocations"
                 className="form__option form__option--custom-radio"
-                defaultChecked={isAllLocations}
-                value="isAllLocations"
+                checked={!isDisplayingSelectionTools}
+                value={'isFullProject'}
               />
               <span className="form__option__text">All locations selected</span>
               <span className="form__option__ui"></span>
@@ -30,7 +30,7 @@ export default function OptionCard({ toggleAllLocations, isAllLocations }) {
                 type="radio"
                 id="isNodeSelection"
                 name="selectLocations"
-                defaultChecked={!isAllLocations}
+                checked={isDisplayingSelectionTools}
                 value="isNodeSelection"
               />
               <span className="form__option__text">Select locations</span>
@@ -44,6 +44,6 @@ export default function OptionCard({ toggleAllLocations, isAllLocations }) {
 }
 
 OptionCard.propTypes = {
-  isAllLocations: PropTypes.bool.isRequired,
-  toggleAllLocations: PropTypes.func.isRequired,
+  isDisplayingSelectionTools: PropTypes.bool.isRequired,
+  toggleLocationSelection: PropTypes.func.isRequired,
 };

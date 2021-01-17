@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
 import qs from 'qs';
@@ -14,6 +14,13 @@ import NodeLocations from './node-locations';
 import DateSelector from '../../components/date-selector';
 import Pill from '../../components/pill';
 
+const projectActions = {
+  SET_INITIAL_STATE: 'SET_INITIAL_STATE',
+  SELECT_LOCATION: 'SELECT_LOCATION',
+  DISPLAY_FETCHED_LOCATION_DATA: 'DISPLAY_FETCHED_LOCATION_DATA',
+  TOGGLE_MAP_STATE: 'TOGGLE_MAP_STATE',
+};
+
 const defaultState = {
   fetched: false,
   fetching: false,
@@ -21,16 +28,73 @@ const defaultState = {
   projectData: null,
 };
 
+const initialProjectState = {
+  isFullProject: true,
+  isDisplayingSelectionTools: false,
+  selectedLocations: {},
+};
+
+function updateSelectedLocation(state, paramId, locationId) {
+  const { selectedLocations } = state;
+  if (selectedLocations[paramId]?.includes(locationId)) {
+    // removes location
+    const updatedSelection = {
+      ...selectedLocations,
+      [paramId]: selectedLocations[paramId].filter(
+        location => location !== locationId
+      ),
+    };
+    // removes param if last location was removed
+    updatedSelection[paramId].length < 1 && delete updatedSelection[paramId];
+    return updatedSelection;
+  } else if (Object.values(selectedLocations).flat().length < 15) {
+    return {
+      ...selectedLocations,
+      [paramId]: selectedLocations[paramId]
+        ? [...selectedLocations[paramId], locationId]
+        : [locationId],
+    };
+  }
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case projectActions.TOGGLE_MAP_STATE:
+      return {
+        isFullProject: !state.isFullProject ? true : state.isFullProject, // only update if previous state was false
+        isDisplayingSelectionTools: !state.isDisplayingSelectionTools,
+        selectedLocations: {},
+      };
+    case projectActions.SET_INITIAL_STATE:
+      return initialProjectState;
+    case projectActions.SELECT_LOCATION:
+      return {
+        isFullProject: state.isFullProject,
+        isDisplayingSelectionTools: true,
+        selectedLocations: updateSelectedLocation(
+          state,
+          action.paramId,
+          action.locationId
+        ),
+      };
+    case projectActions.DISPLAY_FETCHED_LOCATION_DATA:
+      return {
+        isFullProject: false,
+        isDisplayingSelectionTools: true,
+        selectedLocations: state.selectedLocations,
+      };
+    default:
+      throw new Error();
+  }
+}
+
 function Project({ match, history, location }) {
   const { id } = match.params;
-
+  const [projectState, dispatch] = useReducer(reducer, initialProjectState);
   const [dateRange, setDateRange] = useState(
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
   );
-  const [isAllLocations, toggleAllLocations] = useState(true);
-  const [isDisplayingNodes, toggleNodeDisplay] = useState(false);
 
-  const [selectedLocations, setSelectedLocations] = useState({});
   const [{ fetched, fetching, error, projectData }, setState] = useState(
     defaultState
   );
@@ -82,28 +146,7 @@ function Project({ match, history, location }) {
   };
 
   const handleLocationSelection = (paramId, locationId) => {
-    if (selectedLocations[paramId]?.includes(locationId)) {
-      setSelectedLocations(prevSelections => {
-        // removes location
-        const updatedSelection = {
-          ...prevSelections,
-          [paramId]: selectedLocations[paramId].filter(
-            location => location !== locationId
-          ),
-        };
-        // removes param if last location was removed
-        updatedSelection[paramId].length < 1 &&
-          delete updatedSelection[paramId];
-        return updatedSelection;
-      });
-    } else if (Object.values(selectedLocations).flat().length < 15) {
-      setSelectedLocations({
-        ...selectedLocations,
-        [paramId]: selectedLocations[paramId]
-          ? [...selectedLocations[paramId], locationId]
-          : [locationId],
-      });
-    }
+    dispatch({ type: projectActions.SELECT_LOCATION, paramId, locationId });
   };
 
   if (!fetched && !fetching) {
@@ -137,7 +180,7 @@ function Project({ match, history, location }) {
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
-        {!isAllLocations && (
+        {projectState.isDisplayingSelectionTools && (
           <div
             className={'filters, inner'}
             style={{
@@ -148,19 +191,23 @@ function Project({ match, history, location }) {
           >
             <div>
               <Pill
-                title={`${Object.values(selectedLocations).flat().length}/15`}
-                action={() => {
-                  setSelectedLocations({});
-                  toggleAllLocations(true);
-                  toggleNodeDisplay(false);
-                }}
+                title={`${
+                  Object.values(projectState.selectedLocations).flat().length
+                }/15`}
+                action={() =>
+                  dispatch({ type: projectActions.SET_INITIAL_STATE })
+                }
               />
             </div>
-            {!isDisplayingNodes && (
+            {projectState.isFullProject && (
               <div style={{ display: `flex`, justifyContent: `flex-end` }}>
                 <button
                   className="nav__action-link"
-                  onClick={() => toggleNodeDisplay(true)}
+                  onClick={() =>
+                    dispatch({
+                      type: projectActions.DISPLAY_FETCHED_LOCATION_DATA,
+                    })
+                  }
                 >
                   View Location Data
                 </button>
@@ -173,47 +220,59 @@ function Project({ match, history, location }) {
           bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
           locationIds={projectData.locationIds}
           parameters={projectData.parameters}
-          toggleAllLocations={toggleAllLocations}
-          isAllLocations={isAllLocations}
-          selectedLocations={selectedLocations}
+          toggleLocationSelection={() =>
+            dispatch({ type: projectActions.TOGGLE_MAP_STATE })
+          }
+          isDisplayingSelectionTools={projectState.isDisplayingSelectionTools}
+          selectedLocations={projectState.selectedLocations}
           handleLocationSelection={handleLocationSelection}
         />
-        <header
-          className="fold__header inner"
-          style={{ gridTemplateColumns: `1fr`, paddingTop: `4rem` }}
-        >
-          <h1 className="fold__title">Values for selected stations</h1>
-        </header>
-        {isDisplayingNodes ? (
-          <NodesDashboard
-            measurements={projectData.measurements}
-            projectId={projectData.id}
-            projectName={projectData.name}
-            selectedParams={Object.keys(selectedLocations)}
-            lifecycle={lifecycle}
-            dateRange={dateRange}
-            projectDates={{
-              start: projectData.firstUpdated,
-              end: projectData.lastUpdated,
-            }}
-            sources={projectData.sources[0].flat()}
-            locations={Object.values(selectedLocations).flat()}
-            country={projectData.countries && projectData.countries[0]}
-          />
+        {!projectState.isFullProject ? (
+          <>
+            <header
+              className="fold__header inner"
+              style={{ gridTemplateColumns: `1fr`, paddingTop: `4rem` }}
+            >
+              <h1 className="fold__title">Values for selected stations</h1>
+            </header>
+            <NodesDashboard
+              measurements={projectData.measurements}
+              projectId={projectData.id}
+              projectName={projectData.name}
+              selectedParams={Object.keys(projectState.selectedLocations)}
+              lifecycle={lifecycle}
+              dateRange={dateRange}
+              projectDates={{
+                start: projectData.firstUpdated,
+                end: projectData.lastUpdated,
+              }}
+              sources={projectData.sources[0].flat()}
+              locations={Object.values(projectState.selectedLocations).flat()}
+              country={projectData.countries && projectData.countries[0]}
+            />
+          </>
         ) : (
-          <Dashboard
-            measurements={projectData.measurements}
-            projectParams={projectData.parameters}
-            projectId={projectData.id}
-            projectName={projectData.name}
-            lifecycle={lifecycle}
-            dateRange={dateRange}
-            projectDates={{
-              start: projectData.firstUpdated,
-              end: projectData.lastUpdated,
-            }}
-            sources={projectData.sources[0].flat()}
-          />
+          <>
+            <header
+              className="fold__header inner"
+              style={{ gridTemplateColumns: `1fr`, paddingTop: `4rem` }}
+            >
+              <h1 className="fold__title">Values for all stations</h1>
+            </header>
+            <Dashboard
+              measurements={projectData.measurements}
+              projectParams={projectData.parameters}
+              projectId={projectData.id}
+              projectName={projectData.name}
+              lifecycle={lifecycle}
+              dateRange={dateRange}
+              projectDates={{
+                start: projectData.firstUpdated,
+                end: projectData.lastUpdated,
+              }}
+              sources={projectData.sources[0].flat()}
+            />
+          </>
         )}
       </div>
     </section>
