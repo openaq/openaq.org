@@ -53,8 +53,8 @@ export default function TimeSeriesCard({
     Number
   );
 
-  // eslint-disable-next-line no-unused-vars
-  const [temporal, setTemporal] = useState(day ? 'hour' : 'day');
+  const temporal = day ? 'hour' : 'day';
+  const activeData = prefetchedData && prefetchedData[activeTab.id];
 
   useEffect(() => {
     if (!prefetchedData) {
@@ -94,14 +94,7 @@ export default function TimeSeriesCard({
     } else if (projectId) {
       query = { ...query, project: projectId, spatial: 'project' };
     }
-    //If date range is not lifetime, get hourly data
-    if (dateRange) {
-      setTemporal('hour');
-      query = {
-        ...query,
-        temporal: 'hour',
-      };
-    }
+
     fetch(`${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`)
       .then(response => {
         if (response.status >= 400) {
@@ -133,7 +126,6 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
-  const activeData = prefetchedData && prefetchedData[activeTab.id];
 
   return (
     <Card

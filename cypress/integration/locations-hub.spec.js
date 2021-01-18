@@ -13,10 +13,10 @@ describe('The Locations Hub', () => {
   });
 
   it('has a header with title and description', () => {
-    cy.get('h1').should('contain', 'Locations');
+    cy.get('h1').should('contain', 'Location');
     cy.get('.inpage__introduction').should(
       'contain',
-      'Lorem ipsum dolor sit amet'
+      'We are currently collecting data in'
     );
   });
 
