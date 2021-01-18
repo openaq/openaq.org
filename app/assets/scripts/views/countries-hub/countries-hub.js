@@ -75,10 +75,7 @@ export default function CountriesHub({ _openDownloadModal }) {
 
   return (
     <section className="inpage">
-      <HubHeader
-        title="Air Quality Data by Country"
-        countriesCount={countryCount}
-      />
+      <HubHeader title="Country" countriesCount={countryCount} />
       <div className="inpage__body">
         <div className="fold">
           {fetched && countries ? (

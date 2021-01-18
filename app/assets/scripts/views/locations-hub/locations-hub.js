@@ -94,10 +94,7 @@ export default function LocationsHub({
 
   return (
     <section className="inpage">
-      <HubHeader
-        title="Air Quality Data by Location"
-        countriesCount={countryCount}
-      />
+      <HubHeader title="Location" countriesCount={countryCount} />
 
       <div className="inpage__body">
         <Filter

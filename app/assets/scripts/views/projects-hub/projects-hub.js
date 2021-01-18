@@ -82,10 +82,7 @@ export default function ProjectsHub({
 
   return (
     <section className="inpage">
-      <HubHeader
-        title="Air Quality Data by Dataset"
-        countriesCount={countryCount.length}
-      />
+      <HubHeader title="Dataset" countriesCount={countryCount} />
 
       <div className="inpage__body">
         <Filter slug="/projects" by={['parameters', 'countries']} />
@@ -146,7 +143,7 @@ function selector(state) {
     error: state.projects.error,
     results: state.projects.data.results,
     meta: state.projects.data.meta,
-    countries: state.baseData.countries,
+    countries: state.baseData.data.countries,
   };
 }
 
