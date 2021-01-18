@@ -15,7 +15,7 @@ const CardHeader = styled(BaseHeader)`
   grid-gap: 0.5rem;
 `;
 
-export default function MapCard({
+export default function MobileDataLocationsCard({
   locationId,
   bbox,
   firstUpdated,
@@ -33,7 +33,11 @@ export default function MapCard({
           <LocationsSource>
             <MobileBoundsLayer locationId={locationId} />
           </LocationsSource>
-          <MobileSource firstUpdated={firstUpdated} lastUpdated={lastUpdated}>
+          <MobileSource
+            locationId={locationId}
+            firstUpdated={firstUpdated}
+            lastUpdated={lastUpdated}
+          >
             <MobilePointsLayer locationId={locationId} />
           </MobileSource>
         </Map>
@@ -42,7 +46,7 @@ export default function MapCard({
   );
 }
 
-MapCard.propTypes = {
+MobileDataLocationsCard.propTypes = {
   locationId: PropTypes.number.isRequired,
   bbox: PropTypes.arrayOf(PropTypes.number).isRequired,
   firstUpdated: PropTypes.string.isRequired,
