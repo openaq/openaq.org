@@ -1,14 +1,13 @@
-# This workflow will build and deploy the site
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# This workflow will build and deploy the staging site
 
-name: Deploy
+name: Staging Deploy
 
 on:
   workflow_run:
     workflows: ["QA"]
     types:
       - completed
-    branches: [develop, master] 
+    branches: [develop] 
 
 jobs:
   build-and-deploy:
@@ -46,7 +45,7 @@ jobs:
         with:
           args: --acl public-read --follow-symlinks
         env:
-          AWS_S3_BUCKET: ${{ github.ref == 'refs/heads/master' && 'openaq.org' || 'openaq-staging.org' }}
+          AWS_S3_BUCKET: 'openaq-staging.org'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "us-east-1"
