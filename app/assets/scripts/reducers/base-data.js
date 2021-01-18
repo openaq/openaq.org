@@ -8,8 +8,10 @@ const defaultState = {
     countries: null,
     sources: null,
     parameters: null,
-    totalMeasurements: null
-  }
+    manufacturers: null,
+    models: null,
+    totalMeasurements: null,
+  },
 };
 
 export default function (state = defaultState, action) {
@@ -27,6 +29,8 @@ export default function (state = defaultState, action) {
         state.data.countries = action.json.countries;
         state.data.sources = action.json.sources;
         state.data.parameters = action.json.parameters;
+        state.data.manufacturers = action.json.manufacturers;
+        state.data.models = action.json.models;
         state.data.totalMeasurements = action.json.totalMeasurements;
       }
       state.fetching = false;

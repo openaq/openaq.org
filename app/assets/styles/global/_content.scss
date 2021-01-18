@@ -22,6 +22,9 @@
   }
 }
 
+a.disabled {
+  color: $base-color;
+}
 
 /* Special button for inpage header
    ========================================================================== */
@@ -57,7 +60,8 @@
   display: flex;
   align-items: center;
 
-  a, a:visited {
+  a,
+  a:visited {
     display: inline-flex;
     color: inherit;
     background: rgba(#fff, 0.12);
@@ -80,11 +84,6 @@
   }
 }
 
-.disclaimer {
-  display: block;
-}
-
-
 /* Lists
    ========================================================================== */
 
@@ -103,3 +102,56 @@
     margin-bottom: 1rem;
   }
 }
+
+.global-table th {
+  font-family: $heading-font-family;
+  line-height: 1rem;
+  letter-spacing: 0.125em;
+  text-transform: uppercase;
+  color: $base-color;
+}
+
+/* Info button icon
+   ========================================================================== */
+.info-button {
+  &::after {
+    @extend %openaq-ds-icon-circle-information;
+    color: tint($base-color, 45%);
+    font-weight: 400;
+  }
+}
+
+.tabbed-selector__link {
+  font-family: $heading-font-family;
+  display: flex;
+  align-items: center;
+  font-weight: $heading-font-bold;
+  font-size: 0.875rem;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+
+  &,
+  &:visited {
+    color: $base-color;
+  }
+
+  &--active {
+    box-shadow: inset 0 -0.25rem 0 0 $primary-color;
+  }
+}
+
+/* Filters
+   ========================================================================== */
+.drop__menu--select.padded {
+  padding: 1rem;
+}
+
+.drop__menu-section-title {
+  text-decoration: underline $primary-color dotted;
+  text-underline-position: under;
+}
+
+.__react_component_tooltip.filter-tooltip {
+  z-index: 10000;
+}
+

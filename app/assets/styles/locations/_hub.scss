@@ -18,51 +18,115 @@
   }
 }
 
-.filters__title,
-.filters-summary-title {
-  @include heading(1rem);
-}
+.hub-filters {
+  // position: sticky;
+  // top: 0;
+  // background-color: #fff;
+  padding: $global-spacing 0;
 
-.filters-summary-title {
-  margin-bottom: 0.5rem;
-}
+  > .inner {
+    @extend .constrainer;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: $global-spacing;
 
-.filters-summary {
-  margin-bottom: 1rem;
-}
-
-.filters {
-  margin-bottom: 2rem;
-
-  &__group {
-    overflow: hidden;
-    box-shadow: 0 1px 0 0 $base-semi-alpha-color, 0 -1px 0 0 $base-semi-alpha-color;
-
-    .scrollarea-inner {
-      max-height: 10rem;
+    .filters__group {
+      grid-column: 1 / -1;
     }
-    .scrollarea-content {
-      padding: 1rem 0;
 
-      .form__option:last-child {
-        margin-bottom: 0;
+    @include media(medium-up) {
+      grid-template-columns: repeat(8, 1fr);
+  
+      .filters__group:nth-child(1) {
+        grid-column: 1 / 6;
+      }
+    
+      .filters__group:nth-child(2) {
+        grid-column: 7 / -1;
+      }
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: $global-spacing * 2;
+  
+      .filters__group:nth-child(1) {
+        grid-column: 1 / 8;
+      }
+    
+      .filters__group:nth-child(2) {
+        grid-column: 11 / -1;
       }
     }
   }
 
-  &__title {
-    margin-bottom: 0.5rem;
+  h2 {
+    @include heading(0.75rem);
+    @extend .heading-alt;
   }
 
-  &--country {
+  .filter__values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    align-items: center;
+    grid-gap: $global-spacing;
   }
 
-  &--values {
-    .form__option {
-      margin: 0 0 0.5rem 0;
-      @include col(6/12, $cycle: 2);
-    }
+  .filter--drop.sort-order {
+    border-radius: $full-border-radius;
   }
+}
+
+.filters .fold__nav {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filters .fold__nav h2 {
+  width: auto;
+}
+
+/* OpenAQ design system defined a fixed with for dropdown content
+ * Override this here for sensor type filter on locations hub
+ */
+.sensor__type-filter.drop__content.drop__content--react {
+  width: auto;
+
+  .button--base-bounded {
+    box-shadow: none;
+    border: 0.5px solid $base-color;
+    border-left: none;
+
+  }
+  .button--base-bounded:first-child {
+    border-left: 0.5px solid $base-color;
+  }
+
+
+  .button--base-bounded:last-child {
+    border-right: 0.5px solid $base-color;
+
+  }
+  select#manufacturer__name {
+    box-shadow: inset 0 0 0 0.5px $base-color;
+    color: $base-color;
+    font-weight: unset;
+  }
+}
+
+
+
+
+.filters .drop__toggle.sort-order {
+  grid-column-end: -1;
+  border-radius: $base-border-radius * 10;
+}
+
+.filters-summary {
+  @extend .constrainer;
+  margin-bottom: 1rem;
 }
 
 .button--filter-pill {
@@ -72,6 +136,19 @@
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
 
+  &::after {
+    @extend %openaq-ds-icon-xmark--small;
+  }
+}
+.button--filter-pill.orderBy {
+  background-color: tint($primary-color, 64%);
+  color: $primary-color;
+}
+
+.button--pill {
+  @extend .button, .button--small, .button--capsule;
+  background-color: $primary-color;
+  color: white;
   &::after {
     @extend %openaq-ds-icon-xmark--small;
   }
@@ -108,8 +185,30 @@
 }
 
 .inpage__results {
+  display: grid;
+  grid-gap: $global-spacing;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: $global-spacing * 2;
+
   .card {
-    margin-bottom: 2rem;
+    grid-column: span 4;
+  }
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  @include media(large-up) {
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: $global-spacing * 2;
+  }
+
+  .card__header {
+    display: grid;
+    grid-gap: 0.5rem;
+    .filter-pill.card__tag {
+      cursor: default;
+    }
   }
 }
 
@@ -125,4 +224,39 @@
   @include media(large-up) {
     @include col(8/12);
   }
+}
+
+.pagination .pages__wrapper .pages__page,
+.pagination .previous a,
+.pagination .next a,
+.pagination .break .pages__page {
+  width: 3rem;
+  height: 3rem;
+  border-radius: unset;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pagination .previous a::before,
+.pagination .next a::before {
+  margin-right: 0;
+}
+
+.pagination .pages__wrapper .pages__page,
+.pagination .break .pages__page {
+  box-shadow: none;
+  border: 0.5px solid rgba($base-color, 0.2);
+}
+
+.pagination .break .pages__page {
+  background: none;
+  border: none;
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(3.5rem, 1fr));
+  grid-template-rows: 1fr;
 }

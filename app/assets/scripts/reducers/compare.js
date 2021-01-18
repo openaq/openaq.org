@@ -7,42 +7,42 @@ const defaultState = {
     status: 'none',
     country: '--',
     area: '--',
-    location: '--'
+    location: '--',
   },
   locations: [
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
-    }
+      data: null,
+    },
   ],
   measurements: [
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
+      data: null,
     },
     {
       fetching: false,
       fetched: false,
-      data: null
-    }
-  ]
+      data: null,
+    },
+  ],
 };
 
 export default function (state = defaultState, action) {
@@ -62,10 +62,25 @@ export default function (state = defaultState, action) {
       state.locations[action.index].fetching = false;
       state.locations[action.index].fetched = true;
       break;
+    case actions.RECEIVE_MULTIPLE_COMPARE_LOCATION:
+      state = _.cloneDeep(state);
+      // Store all the locations in the correct index.
+      for (let index = 0; index < action.count; index++) {
+        if (action.error) {
+          state.locations[index].error = action.error;
+        } else {
+          state.locations[index].data = action.data[index];
+        }
+        state.locations[index].fetching = false;
+        state.locations[index].fetched = true;
+      }
+      break;
     case actions.REMOVE_COMPARE_LOCATION:
       state = _.cloneDeep(state);
       state.locations[action.index] = _.cloneDeep(defaultState.locations[0]);
-      state.measurements[action.index] = _.cloneDeep(defaultState.measurements[0]);
+      state.measurements[action.index] = _.cloneDeep(
+        defaultState.measurements[0]
+      );
       break;
 
     case actions.SELECT_COMPARE_OPTIONS:

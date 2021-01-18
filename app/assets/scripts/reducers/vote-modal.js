@@ -2,7 +2,7 @@ import _ from 'lodash';
 import * as actions from '../actions/action-types';
 
 const defaultState = {
-  open: true
+  open: true,
 };
 
 export default function (state = defaultState, action) {

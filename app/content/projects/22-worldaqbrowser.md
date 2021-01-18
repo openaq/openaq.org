@@ -1,5 +1,5 @@
 ---
-title: "World Air Quality Browser"
+title: 'World Air Quality Browser'
 url: http://www.surekhatech.com/angular-js/air-quality-index
 image: assets/graphics/content/view--community-projects/projects/covers/world_aq_browser.jpg
 type: Data platform

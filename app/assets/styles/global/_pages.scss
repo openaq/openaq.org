@@ -44,6 +44,78 @@ html {
   @extend .visually-hidden;
 }
 
+.news-banner {
+  @extend .antialiased;
+  position: absolute;
+  width: 100%;
+  background-color: $base-color;
+  padding: $global-spacing 0;
+  color: #fff;
+
+  .inner {
+    @extend .constrainer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+
+    @include media(medium-up) {
+      flex-flow: row;
+    }
+  }
+
+  &__msg {
+    margin: 0 0 $global-spacing 0;
+
+    @include media(medium-up) {
+      margin: 0 $global-spacing * 2 0 0;
+    }
+  }
+
+  &__actions {
+    > *:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  .msg-status {
+    border: 1px solid $secondary-color;
+    border-radius: $full-border-radius;
+    color: $secondary-color;
+    padding: 0 $global-spacing / 2;
+    margin: 0 $global-spacing / 2 0 0;
+  }
+
+  &__close {
+    @extend .button, .button--small, .button--achromic-unbounded, .button--text-hidden;
+    position: absolute;
+    right: $global-spacing;
+
+    &::before {
+      @extend %openaq-ds-icon-xmark--small;
+    }
+
+    @include media(small-up) {
+      right: $global-spacing * 2;
+    }
+  
+    @include media(xlarge-up) {
+      right: $global-spacing * 4;
+    }
+  }
+
+  @include media(xsmall-only) {
+    /* Ensure the correct display on small screens */
+    .inner {
+      padding-top: 0.5rem;
+    }
+
+    .news-banner__close {
+      top: -0.5rem;
+    }
+  }
+}
 
 /* Body
    ========================================================================== */

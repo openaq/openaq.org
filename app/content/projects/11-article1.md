@@ -1,5 +1,5 @@
 ---
-title: "Putting a magnifying glass on air pollution"
+title: 'Putting a magnifying glass on air pollution'
 url: http://theubpost.mn/2017/01/12/putting-a-magnifying-glass-on-air-pollution/
 image: assets/graphics/content/view--community-projects/projects/covers/article1.jpg
 type: Media

@@ -1,3 +1,33 @@
 /* ==========================================================================
    Locations: Global
    ========================================================================== */
+
+.button--drop-filter {
+  @extend .button, .button--base-bounded, .drop__toggle--caret;
+  display: flex;
+
+  &::after {
+    margin-left: auto;
+  }
+}
+
+.filter-pill {
+  @extend .button, .button--small;
+  background-color: rbga($base-color, 0);
+  color: $secondary-color;
+  border: 0.5px solid $secondary-color;
+  width: min-content;
+
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.drop__menu.drop__menu--select.scrollable {
+   max-height: 10rem;
+   overflow-y: scroll;
+ }
+ .drop__content {
+   overflow: auto;
+ }
+

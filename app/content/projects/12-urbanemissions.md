@@ -1,5 +1,5 @@
 ---
-title: "UrbanEmissions.info"
+title: 'UrbanEmissions.info'
 url: http://urbanemissions.info
 image: assets/graphics/content/view--community-projects/projects/covers/urbanemissions.jpg
 logo: assets/graphics/content/view--community-projects/projects/logos/urban-emissions.png

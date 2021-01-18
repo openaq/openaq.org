@@ -19,9 +19,12 @@ var defaultsDeep = require('lodash').defaultsDeep;
  *      polluting the repo.
  */
 
-var configurations = require('./config/*.js', {mode: 'hash'});
+var configurations = require('./config/*.js', { mode: 'hash' });
 var config = configurations.local || {};
 
+if (process.env.DS_ENV === 'testing') {
+  defaultsDeep(config, configurations.testing);
+}
 if (process.env.DS_ENV === 'staging') {
   defaultsDeep(config, configurations.staging);
 }

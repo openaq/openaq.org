@@ -7,30 +7,28 @@ import config from '../config';
 //                           LOCATIONS                           //
 // ////////////////////////////////////////////////////////////////
 
-function requestLocationsByCountry () {
+function requestLocationsByCountry() {
   return {
-    type: actions.REQUEST_LOCATIONS_BY_COUNTRY
+    type: actions.REQUEST_LOCATIONS_BY_COUNTRY,
   };
 }
 
-function receiveLocationsByCountry (json, error = null) {
+function receiveLocationsByCountry(json, error = null) {
   return {
     type: actions.RECEIVE_LOCATIONS_BY_COUNTRY,
     json: json,
     error,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   };
 }
 
-export function fetchLocationsByCountry (country, filters = {}) {
+export function fetchLocationsByCountry(country, filters = {}) {
   return function (dispatch) {
     dispatch(requestLocationsByCountry());
 
     let limit = 10000;
     filters.country = country;
     let f = buildAPIQS(filters);
-
-    // console.log('url', `${config.api}/locations?limit=${limit}&${f}`);
 
     fetch(`${config.api}/locations?limit=${limit}&${f}`)
       .then(response => {
@@ -39,20 +37,25 @@ export function fetchLocationsByCountry (country, filters = {}) {
         }
         return response.json();
       })
-      .then(json => {
-        // setTimeout(() => {
-        //   dispatch(receiveLocations(json));
-        // }, 2000);
-        dispatch(receiveLocationsByCountry(json));
-      }, e => {
-        console.log('e', e);
-        return dispatch(receiveLocationsByCountry(null, 'Data not available'));
-      });
+      .then(
+        json => {
+          // setTimeout(() => {
+          //   dispatch(receiveLocations(json));
+          // }, 2000);
+          dispatch(receiveLocationsByCountry(json));
+        },
+        e => {
+          console.log('e', e);
+          return dispatch(
+            receiveLocationsByCountry(null, 'Data not available')
+          );
+        }
+      );
   };
 }
 
-export function invalidateLocationsByCountry () {
+export function invalidateLocationsByCountry() {
   return {
-    type: actions.INVALIDATE_LOCATIONS_BY_COUNTRY
+    type: actions.INVALIDATE_LOCATIONS_BY_COUNTRY,
   };
 }

@@ -3,9 +3,11 @@ import * as actions from '../actions/action-types';
 
 const defaultState = {
   open: false,
+  downloadType: null,
   country: null,
   area: null,
-  location: null
+  location: null,
+  project: null,
 };
 
 export default function (state = defaultState, action) {
@@ -21,6 +23,12 @@ export default function (state = defaultState, action) {
       }
       if (action.options.location) {
         state.location = action.options.location;
+      }
+      if (action.options.downloadType) {
+        state.downloadType = action.options.downloadType;
+      }
+      if (action.options.project) {
+        state.project = action.options.project;
       }
       break;
     case actions.CLOSE_DOWNLOAD_MODAL:

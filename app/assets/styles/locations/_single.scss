@@ -3,6 +3,18 @@
    ========================================================================== */
 
 .page--locations-single {
+  .card__highlight-text {
+    color: $primary-color;
+  }
+  .card__title {
+    font-weight: $base-font-bold;
+    font-size: 1.25rem;
+  }
+  .card__meta-details {
+    color: $base-color;
+    display: flex;
+  }
+
   .inpage__headline {
     @include media(large-up) {
       grid-column: 1 / span 8;
@@ -57,14 +69,101 @@
   }
 }
 
+/* Filters
+   ========================================================================== */
+
+.date-selector-filters {
+  @extend .constrainer;
+  display: grid;
+  grid-gap: $global-spacing;
+  margin-top: $global-spacing;
+  margin-bottom: $global-spacing;
+  grid-template-columns: repeat(1, 1fr);
+
+  .filter--time-window,
+  .filter--drop {
+    grid-column: 1 / -1;
+  }
+
+  @include media(medium-up) {
+    grid-template-columns: repeat(9, 1fr);
+
+    .filter--drop {
+      grid-column: auto / span 3;
+    }
+  }
+
+  @include media(large-up) {
+    grid-template-columns: repeat(12, 1fr);
+    margin-top: $global-spacing * 2;
+    margin-bottom: $global-spacing * 2;
+
+    .filter--time-window,
+    .filter--drop {
+      grid-column: auto / span 3;
+    }
+  }
+}
+
+/* Fold: Dashboard
+  ========================================================================== */
+
+.dashboard-cards {
+  > .card {
+    grid-column: 1 / -1;
+  }
+
+  @include media(small-up) {
+    .card--details {
+      grid-column: 1 / span 2;
+    }
+    .card--sources {
+      grid-row: 1;
+      grid-column: 3 / span 2;
+    }
+  }
+
+  @include media(medium-up) {
+    .card--details {
+      grid-column-end: span 4;
+    }
+    .card--sources {
+      grid-column: 5 / span 4;
+    }
+  }
+  @include media(large-up) {
+    .card--details {
+      grid-column-end: span 3;
+    }
+    .card--sources {
+      grid-column: 10 / span 3;
+    }
+
+    .card--latest {
+      grid-column: 4 / span 6;
+    }
+  }
+}
+
+.card--temporal-coverage {
+  .chart__list {
+    display: grid;
+    grid-gap: $global-spacing;
+    grid-template-columns: repeat(1, 1fr);
+
+    @include media(medium-up) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: $global-spacing * 2;
+    }
+
+    @include media(large-up) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
 
 /* Fold: Stats
    ========================================================================== */
-
-#location-fold-stats {
-
-}
-
 .measurements-list {
   padding: 0;
   margin: 0;
@@ -89,21 +188,13 @@
   }
 }
 
-
 /* Fold: Source
    ========================================================================== */
-
-#location-fold-metadata {
-}
 
 .update-metadata-callout {
   grid-row: 3;
   grid-column: 1 / -1;
 }
-
-
-/* Fold: Source
-   ========================================================================== */
 
 #location-fold-source {
   .fold__header {
@@ -121,7 +212,7 @@
   @include media(medium-up) {
     .col-main {
       padding-right: 1rem;
-      padding-bottom: .5rem;
+      padding-bottom: 0.5rem;
       @include col(4/12);
     }
 
@@ -134,12 +225,53 @@
     padding: 0;
     list-style: none;
 
-    li{
-      margin-bottom: .3rem;
+    li {
+      margin-bottom: 0.3rem;
     }
   }
 }
 
+.source__title {
+  @extend .truncated;
+  display: block;
+  color: $base-color;
+  margin: 0;
+
+  &--external {
+    color: $primary-color;
+    &::before {
+      @extend %openaq-ds-icon-share;
+      margin-right: 0.25rem;
+    }
+  }
+}
+
+.source__readme {
+  color: $base-font-color;
+  margin-bottom: 0;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
+.sources__info {
+  box-shadow: 0 -1px 0 0 $base-alpha-color;
+  padding-top: $global-spacing;
+  margin-top: -$global-spacing / 2;
+}
+
+#location-fold-dataset {
+  .fold__body {
+    position: relative;
+    z-index: 1;
+    height: 30rem;
+    margin-left: calc(50% - 40vw);
+    margin-right: calc(50% - 40vw);
+    margin-top: 1rem;
+  }
+}
 
 /* Fold: Nearby
    ========================================================================== */
@@ -164,4 +296,15 @@
 
 .update-metadata-callout {
   margin-top: 30px;
+}
+
+.drop__toggle.drop__toggle-day {
+  border: 0px;
+  display: flex;
+  padding-right: 1rem;
+}
+
+.drop__content-day {
+  overflow: visible;
+  width: min-content;
 }
