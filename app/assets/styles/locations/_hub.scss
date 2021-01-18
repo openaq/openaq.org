@@ -206,10 +206,8 @@
   .card__header {
     display: grid;
     grid-gap: 0.5rem;
-
-    .card__tags {
-      display: grid;
-      width: min-content;
+    .filter-pill.card__tag {
+      cursor: default;
     }
   }
 }

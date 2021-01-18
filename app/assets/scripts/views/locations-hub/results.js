@@ -86,6 +86,7 @@ export default function Results({
               parametersList={loc.parameters}
               sources={loc.sources || []}
               sensorType={loc.sensorType}
+              entity={loc.entity}
               totalMeasurements={loc.measurements}
             />
           );
