@@ -69,7 +69,7 @@ export default function Results({
           let openModal = () =>
             openDownloadModal({
               country: loc.country,
-              area: loc.city,
+              area: loc.city || NO_CITY,
               location: loc.id,
             });
           return (
