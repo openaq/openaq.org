@@ -13,10 +13,10 @@ describe('The Projects Hub', () => {
   });
 
   it('has a header with title and description', () => {
-    cy.get('h1').should('contain', 'Datasets');
+    cy.get('h1').should('contain', 'Dataset');
     cy.get('.inpage__introduction').should(
       'contain',
-      'Lorem ipsum dolor sit amet'
+      'This page groups data from monitoring locations'
     );
   });
 
