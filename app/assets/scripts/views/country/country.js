@@ -115,26 +115,6 @@ function Country(props) {
     };
   }, [id]);
 
-  function onDownloadClick(data) {
-    // e && e.preventDefault();
-    props._openDownloadModal(data);
-  }
-
-  // gets sources from locations and uses set to create an array with no duplicates
-  const locationSources =
-    locations &&
-    locations
-      .map(location => location.sources)
-      .flat()
-      .filter(source => source !== undefined);
-  const sourceList = locations
-    ? Array.from(new Set(locationSources.map(source => source.id))).map(
-        sourceId => {
-          return locationSources.find(source => source.id === sourceId);
-        }
-      )
-    : null;
-
   let locationGroups = _(locations).sortBy('city').groupBy('city').value();
 
   return (
@@ -157,14 +137,14 @@ function Country(props) {
                 label: 'measurements',
               },
               {
-                number: sourceList.length,
-                label: sourceList.length > 1 ? 'sources' : 'source',
+                number: country.sources,
+                label: country.sources > 1 ? 'sources' : 'source',
               },
             ]}
             action={{
               api: config.apiDocs,
               download: () =>
-                onDownloadClick({
+                props._openDownloadModal({
                   country: id,
                 }),
             }}
