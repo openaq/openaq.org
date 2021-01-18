@@ -14,6 +14,7 @@ export default function DetailsCard({ measurements, date, coords, lifecycle }) {
       title="Details"
       id="details"
       className="card--details"
+      isDashboardHeader
       renderBody={() => {
         return (
           <>

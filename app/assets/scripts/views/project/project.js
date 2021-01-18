@@ -15,6 +15,7 @@ import NodesDashboard from './nodes-dashboard';
 import NodeLocations from './node-locations';
 import DateSelector from '../../components/date-selector';
 import Pill from '../../components/pill';
+import { formatValueByUnit, renderUnit } from '../../utils/format';
 
 const projectActions = {
   SET_INITIAL_STATE: 'SET_INITIAL_STATE',
@@ -128,6 +129,44 @@ function Project({ match, history, location, _openDownloadModal }) {
       })
       .then(
         json => {
+          const dat = json.results[0];
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            projectData: {
+              ...dat,
+              parameters: dat.parameters.map(p => ({
+                ...p,
+                average: formatValueByUnit(
+                  p.average,
+                  p.unit,
+                  renderUnit(p.unit)
+                ),
+                lastValue: formatValueByUnit(
+                  p.lastValue,
+                  p.unit,
+                  renderUnit(p.unit)
+                ),
+                unit: renderUnit(p.unit),
+              })),
+            },
+          }));
+        },
+        e => {
+          console.log('e', e);
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            error: e,
+          }));
+        }
+      );
+  };
+  /*
+      .then(
+        json => {
           setState(state => ({
             ...state,
             fetched: true,
@@ -145,7 +184,7 @@ function Project({ match, history, location, _openDownloadModal }) {
           }));
         }
       );
-  };
+  };*/
 
   const handleLocationSelection = (paramId, locationId) => {
     dispatch({ type: projectActions.SELECT_LOCATION, paramId, locationId });
@@ -253,7 +292,7 @@ function Project({ match, history, location, _openDownloadModal }) {
                 start: projectData.firstUpdated,
                 end: projectData.lastUpdated,
               }}
-              sources={projectData.sources[0].flat()}
+              sources={projectData.sources}
               locations={Object.values(projectState.selectedLocations).flat()}
               country={projectData.countries && projectData.countries[0]}
             />
@@ -277,7 +316,7 @@ function Project({ match, history, location, _openDownloadModal }) {
                 start: projectData.firstUpdated,
                 end: projectData.lastUpdated,
               }}
-              sources={projectData.sources[0].flat()}
+              sources={projectData.sources}
             />
           </>
         )}

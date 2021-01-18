@@ -26,6 +26,7 @@ export default function SourceInfo({ sources }) {
     <Card
       title={sources && sources.length > 1 ? 'Sources' : 'Source'}
       id="sources"
+      isDashboardHeader
       className="card--sources"
       renderBody={() => {
         if (sources) {

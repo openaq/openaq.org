@@ -55,6 +55,7 @@ const TagWrapper = styled.div`
 export default function Card({
   id,
   className,
+  isDashboardHeader,
   title,
   subtitle,
   tags,
@@ -66,7 +67,9 @@ export default function Card({
 }) {
   return (
     <article data-cy={`${id}-card`} className={c('card', className)}>
-      <CardContents className="card__contents">
+      <CardContents
+        className={`card__contents ${isDashboardHeader && 'card__grey'}`}
+      >
         {renderHeader ? (
           renderHeader()
         ) : (
@@ -108,6 +111,7 @@ export default function Card({
 
 Card.propTypes = {
   id: T.string,
+  isDashboardHeader: T.bool,
   titleInfo: T.string,
   className: T.string,
   title: T.oneOfType([T.string, T.element]),
