@@ -162,6 +162,7 @@ function Location({ location, history, match, openDownloadModal }) {
           compare: `/compare/${encodeURIComponent(data.id)}`,
         }}
         sourceType={data.sensorType}
+        entity={data.entity}
         isMobile={data.isMobile}
       />
       <div className="inpage__body">
