@@ -10,7 +10,10 @@ export default function FooterActions({ what, onDownloadClick, viewMorePath }) {
           href="#"
           className="cfa-download"
           title={`Download data for ${what}`}
-          onClick={onDownloadClick}
+          onClick={e => {
+            e.preventDefault();
+            onDownloadClick();
+          }}
         >
           Download
         </a>

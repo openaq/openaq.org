@@ -29,10 +29,6 @@
       margin-bottom: 0;
     }
   }
-
-  &--parameters {
-    margin-bottom: 3rem;
-  }
 }
 
 .form--download, .form-vote {
@@ -52,7 +48,7 @@
     @extend .clearfix;
     .form__option {
       float: left;
-      width: 5rem;
+      width: 8rem;
       margin: 0 1rem 1rem 0;
     }
   }
