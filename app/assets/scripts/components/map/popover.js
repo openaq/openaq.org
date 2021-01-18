@@ -16,14 +16,14 @@ const defaultState = {
 
 export default function Popover({
   activeParameter,
-  isAllLocations,
+  isDisplayingSelectionTools,
   locationId,
   currentPage,
   selectedLocations,
   handleLocationSelection,
 }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
-  // console.log('isAllLocations', isAllLocations);
+
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
@@ -118,7 +118,7 @@ export default function Popover({
               </a>
             </p>
           )}
-          {isAllLocations || !allSelectedLocations ? (
+          {!isDisplayingSelectionTools ? (
             <ul className="popover__actions">
               {/*
                 Using `a` instead of `Link` because these are rendered outside
@@ -175,11 +175,11 @@ Popover.propTypes = {
   activeParameter: T.number.isRequired,
   locationId: T.number.isRequired,
   currentPage: T.number.isRequired,
-  isAllLocations: T.bool,
+  isDisplayingSelectionTools: T.bool,
   selectedLocations: T.object,
   handleLocationSelection: T.func,
 };
 
 Popover.defaultProps = {
-  isAllLocations: true,
+  isDisplayingSelectionTools: true,
 };

@@ -18,7 +18,7 @@ import { square } from './square';
 
 export default function NodeLayer({
   activeParameter,
-  isAllLocations,
+  isDisplayingSelectionTools,
   locationIds,
   map,
   sourceId,
@@ -142,7 +142,7 @@ export default function NodeLayer({
       ReactDOM.render(
         <Popover
           activeParameter={activeParameter}
-          isAllLocations={isAllLocations}
+          isDisplayingSelectionTools={isDisplayingSelectionTools}
           locationId={e.features[0].properties.locationId}
           currentPage={parseInt(match.params.id, 10)}
           selectedLocations={selectedLocations}
@@ -158,7 +158,7 @@ export default function NodeLayer({
 
     map.on('click', `${activeParameter}-circles`, openPopup);
     map.on('click', `${activeParameter}-squares`, openPopup);
-  }, [isAllLocations, selectedLocations, activeParameter]);
+  }, [isDisplayingSelectionTools, selectedLocations, activeParameter]);
 
   useEffect(() => {
     if (
@@ -194,7 +194,7 @@ export default function NodeLayer({
 
 NodeLayer.propTypes = {
   activeParameter: PropTypes.number.isRequired,
-  isAllLocations: PropTypes.bool.isRequired,
+  isDisplayingSelectionTools: PropTypes.bool.isRequired,
   locationIds: PropTypes.array,
   sourceId: PropTypes.string,
   map: PropTypes.object,
