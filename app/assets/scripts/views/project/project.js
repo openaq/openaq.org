@@ -253,7 +253,7 @@ function Project({ match, history, location, _openDownloadModal }) {
                 start: projectData.firstUpdated,
                 end: projectData.lastUpdated,
               }}
-              sources={projectData.sources[0].flat()}
+              sources={projectData.sources}
               locations={Object.values(projectState.selectedLocations).flat()}
               country={projectData.countries && projectData.countries[0]}
             />
@@ -277,7 +277,7 @@ function Project({ match, history, location, _openDownloadModal }) {
                 start: projectData.firstUpdated,
                 end: projectData.lastUpdated,
               }}
-              sources={projectData.sources[0].flat()}
+              sources={projectData.sources}
             />
           </>
         )}

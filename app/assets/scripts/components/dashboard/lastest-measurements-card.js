@@ -20,6 +20,7 @@ export default function LatestMeasurementsCard({ parameters }) {
     <Card
       title="Latest Measurements"
       id="latest"
+      isDashboardHeader
       className="card--latest"
       renderBody={() => {
         return (
