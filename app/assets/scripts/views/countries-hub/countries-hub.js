@@ -63,11 +63,6 @@ export default function CountriesHub({ _openDownloadModal }) {
     };
   }, []);
 
-  const onDownloadClick = (country, e) => {
-    e.preventDefault();
-    _openDownloadModal({ country: country });
-  };
-
   const countryCount = fetching
     ? '...'
     : fetched && !error
@@ -112,7 +107,9 @@ export default function CountriesHub({ _openDownloadModal }) {
                       renderFooter={() => (
                         <FooterActions
                           what={o.name}
-                          onDownloadClick={e => onDownloadClick(e, o.code)}
+                          onDownloadClick={() =>
+                            _openDownloadModal({ country: o.code })
+                          }
                           viewMorePath={`/countries/${o.code}`}
                         />
                       )}
@@ -132,17 +129,10 @@ export default function CountriesHub({ _openDownloadModal }) {
 
 CountriesHub.propTypes = {
   _openDownloadModal: T.func,
-  countries: T.array,
 };
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
-
-function selector(state) {
-  return {
-    countries: state.baseData.data.countries,
-  };
-}
 
 function dispatcher(dispatch) {
   return {
@@ -150,4 +140,4 @@ function dispatcher(dispatch) {
   };
 }
 
-module.exports = connect(selector, dispatcher)(CountriesHub);
+module.exports = connect(null, dispatcher)(CountriesHub);
