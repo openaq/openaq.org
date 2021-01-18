@@ -1,43 +1,17 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import c from 'classnames';
-import createReactClass from 'create-react-class';
 
-/*
- * create-react-class provides a drop-in replacement for the outdated React.createClass,
- * see https://reactjs.org/docs/react-without-es6.html
- * Please modernize this code using functional components and hooks!
- */
-var LoadingMessage = createReactClass({
-  displayName: 'LoadingMessage',
+export default function LoadingMessage(props) {
+  const { type, className, children } = props;
 
-  propTypes: {
-    type: T.string,
-    children: T.object,
-    className: T.string,
-  },
+  const classes = c('data-loading-msg', className, {
+    'data-loading-msg--minimal': type === 'minimal',
+    'data-loading-msg--default': !type,
+  });
 
-  getClasses: function () {
-    return c('data-loading-msg', {
-      'data-loading-msg--minimal': this.props.type === 'minimal',
-      'data-loading-msg--default': !this.props.type,
-    });
-  },
-
-  renderMsg: function () {
-    if (this.props.type === 'minimal') {
-      return '';
-    }
-    return this.props.children ? (
-      this.props.children
-    ) : (
-      <p>Data is loading...</p>
-    );
-  },
-
-  renderSvg: function () {
-    return (
+  return (
+    <div className={classes}>
       <svg
         version="1.1"
         className="wind-animated"
@@ -58,17 +32,13 @@ var LoadingMessage = createReactClass({
           d="M81.6,62.6c0,0,59.5-0.4,62.8,0c3.1,0.4,8.2,1.2,8,7.8c-0.2,6.5-10.8,7.4-10.5,0.9"
         />
       </svg>
-    );
-  },
+      {type !== 'minimal' && (children || <p>Data is loading...</p>)}
+    </div>
+  );
+}
 
-  render: function () {
-    return (
-      <div className={`${this.getClasses()} ${this.props.className || ''}`}>
-        {this.renderSvg()}
-        {this.renderMsg()}
-      </div>
-    );
-  },
-});
-
-module.exports = LoadingMessage;
+LoadingMessage.propTypes = {
+  type: T.string,
+  children: T.object,
+  className: T.string,
+};

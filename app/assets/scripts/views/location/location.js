@@ -121,8 +121,8 @@ function Location({ location, history, match, openDownloadModal }) {
   function onDownloadClick() {
     openDownloadModal({
       country: data.country,
-      area: data.city,
-      location: data.location,
+      area: data.city || NO_CITY,
+      location: data.id,
     });
   }
 
