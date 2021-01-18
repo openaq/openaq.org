@@ -23,7 +23,7 @@ export default function MeasurementsLayer({
   let match = useRouteMatch();
 
   const countryFilter = ['==', ['get', 'country'], country];
-  const circlesFilter = ['==', ['get', 'sensorType'], 'reference'];
+  const circlesFilter = ['==', ['get', 'sensorType'], 'reference grade'];
   const squaresFilter = ['==', ['get', 'sensorType'], 'low-cost sensor'];
 
   const circlesCountryFilter = ['all', countryFilter, circlesFilter];
