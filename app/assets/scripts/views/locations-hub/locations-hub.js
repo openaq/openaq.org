@@ -7,10 +7,11 @@ import {
   fetchLocations as fetchLocationsAction,
   invalidateLocations as invalidateLocationsAction,
   openDownloadModal as openDownloadModalAction,
+  fetchBaseData as fetchBaseDataAction,
 } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
 
-import Header from '../../components/header';
+import { HubHeader } from '../../components/header';
 import Filter from '../../components/filter';
 import Results from './results';
 
@@ -29,12 +30,14 @@ export default function LocationsHub({
   fetchLocations,
   invalidateLocations,
   openDownloadModal,
+  fetchBaseData,
 
   fetching,
   fetched,
   error,
   results,
   meta,
+  countries,
 
   location,
   history,
@@ -81,14 +84,17 @@ export default function LocationsHub({
     history.push(`/locations?${buildQS(query)}`);
   }
 
+  useEffect(() => {
+    fetchBaseData();
+  }, []);
+
+  const countryCount = countries ? countries.length : 'many';
+
   const totalPages = Math.ceil(meta.found / PER_PAGE);
 
   return (
     <section className="inpage">
-      <Header
-        title="Locations"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-      />
+      <HubHeader title="Location" countriesCount={countryCount} />
 
       <div className="inpage__body">
         <Filter
@@ -132,6 +138,7 @@ LocationsHub.propTypes = {
   error: T.object,
   results: T.array,
   meta: T.object,
+  countries: T.array,
 
   location: T.object,
   history: T.object,
@@ -152,6 +159,7 @@ function selector(state) {
     error: state.locations.error,
     results: state.locations.data.results,
     meta: state.locations.data.meta,
+    countries: state.baseData.countries,
   };
 }
 
@@ -161,6 +169,7 @@ function dispatcher(dispatch) {
     invalidateLocations: (...args) =>
       dispatch(invalidateLocationsAction(...args)),
     openDownloadModal: (...args) => dispatch(openDownloadModalAction(...args)),
+    fetchBaseData: (...args) => dispatch(fetchBaseDataAction(...args)),
   };
 }
 

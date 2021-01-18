@@ -61,6 +61,16 @@ $page-header-y: $global-spacing * 5;
     }
   }
 
+  &__header-actions {
+    > a {
+      font-size: 0.875rem;
+    }
+
+    > *:not(:last-child) {
+      margin-right: $global-spacing / 2;
+    }
+  }
+
   &__headline {
     grid-row: 1;
     grid-column: 1 / -1;
