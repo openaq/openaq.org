@@ -43,10 +43,10 @@ export const HighlightText = styled.h1`
 `;
 
 const TagWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-flow: row;
-  grid-gap: 0.5rem;
+  margin: 0.5rem 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 /*
