@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import fetch from 'isomorphic-fetch';
 import { stringify as buildAPIQS } from 'qs';
 
@@ -7,12 +7,7 @@ import config from '../../config';
 
 import LoadingMessage from '../../components/loading-message';
 import ErrorMessage from '../../components/error-message';
-import DetailsCard from '../../components/dashboard/details-card';
-import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
-import SourcesCard from '../../components/dashboard/sources-card';
-import MeasureandsCard from '../../components/dashboard/measurands-card';
-import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
-import TimeSeriesCard from '../../components/dashboard/node-time-series-card';
+import Dashboard from './dashboard';
 
 const defaultState = {
   fetched: false,
@@ -24,14 +19,15 @@ const defaultState = {
 
 function NodesDashboard({
   measurements,
+  projectId,
+  projectName,
   selectedParams,
   lifecycle,
   dateRange,
-  selectedLocationDates,
+  projectDates,
   sources,
   locations,
   country,
-  name,
 }) {
   const [
     { fetched, fetching, error, parameters, averages },
@@ -167,57 +163,41 @@ function NodesDashboard({
   }
 
   return (
-    <div className="inner dashboard-cards">
-      <DetailsCard
-        measurements={measurements}
-        lifecycle={lifecycle}
-        date={selectedLocationDates}
-      />
-      <LatestMeasurementsCard parameters={parameters} />
-      <SourcesCard sources={sources} />
-      <TimeSeriesCard
-        parameters={parameters}
-        data={averages}
-        titleInfo={
-          'The average value of a pollutant over time during the specified window at each individual node selected and the average values across all locations selected. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown. If all locations are selected only the average across all locations is shown, not the individual location values.'
-        }
-      />
-      <MeasureandsCard
-        parameters={parameters}
-        titleInfo={
-          "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
-        }
-      />
-      <TemporalCoverageCard
-        parameters={parameters}
-        dateRange={dateRange}
-        spatial="project"
-        id={name}
-        titleInfo={
-          'The average number of measurements for each pollutant by hour, day, or month at the selected locations. In some views a window may be turned off if that view is not applicable to the selected time window.'
-        }
-      />
-    </div>
+    <Dashboard
+      measurements={measurements}
+      projectParams={parameters}
+      projectId={projectId}
+      projectName={projectName}
+      lifecycle={lifecycle}
+      dateRange={dateRange}
+      projectDates={projectDates}
+      sources={sources}
+      timeseriesAverages={averages}
+    />
   );
 }
 
 NodesDashboard.propTypes = {
-  measurements: T.number,
-  selectedParams: T.array,
-  lifecycle: T.array,
-  dateRange: T.string,
-  selectedLocationDates: T.object,
-  sources: T.arrayOf(
-    T.shape({
-      name: T.string,
-      sourceURL: T.string,
-      url: T.string,
-      contacts: T.array,
+  measurements: PropTypes.number,
+  projectName: PropTypes.string,
+  projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  selectedParams: PropTypes.array,
+  lifecycle: PropTypes.arrayOf(PropTypes.number),
+  dateRange: PropTypes.string,
+  projectDates: PropTypes.shape({
+    start: PropTypes.string,
+    end: PropTypes.string,
+  }),
+  sources: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      sourceURL: PropTypes.string,
+      url: PropTypes.string,
+      contacts: PropTypes.array,
     })
   ),
-  locations: T.array,
-  country: T.string,
-  name: T.string,
+  locations: PropTypes.arrayOf(PropTypes.number),
+  country: PropTypes.string,
 };
 
 export default NodesDashboard;

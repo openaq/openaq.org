@@ -9,6 +9,7 @@ import { formatThousands } from '../../utils/format';
 import { openDownloadModal } from '../../actions/action-creators';
 import Card, { CardDetails, FooterActions } from '../../components/card';
 import { HubHeader } from '../../components/header';
+import LoadingMessage from '../../components/loading-message';
 import ErrorMessage from '../../components/error-message';
 
 const defaultState = {
@@ -78,7 +79,9 @@ export default function CountriesHub({ _openDownloadModal }) {
       <HubHeader title="Country" countriesCount={countryCount} />
       <div className="inpage__body">
         <div className="fold">
-          {fetched && countries ? (
+          {fetching ? (
+            <LoadingMessage />
+          ) : fetched && countries ? (
             <div className="inner">
               <ol className="country-list">
                 {sortBy(countries, 'name').map(o => (

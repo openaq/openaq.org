@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
 import config from '../../config';
@@ -37,6 +37,7 @@ export default function TimeSeriesCard({
   locationId,
   projectId,
   parameters,
+  prefetchedData,
   dateRange,
   titleInfo,
 }) {
@@ -52,76 +53,75 @@ export default function TimeSeriesCard({
     Number
   );
 
-  // eslint-disable-next-line no-unused-vars
-  const [temporal, setTemporal] = useState(day ? 'hour' : 'day');
+  const temporal = day ? 'hour' : 'day';
+  const activeData = prefetchedData && prefetchedData[activeTab.id];
 
   useEffect(() => {
-    const fetchData = () => {
-      setState(state => ({ ...state, fetching: true, error: null }));
-
-      let query = {
-        parameter: activeTab.id,
-        temporal,
-        ...(dateRange
-          ? {
-              // In user space, month is 1 indexed
-              date_from: new Date(year, month - 1, day || 1),
-              date_to: day
-                ? new Date(year, month - 1, day + 1)
-                : new Date(year, month, 0),
-            }
-          : {}),
-      };
-
-      if (locationId) {
-        query = { ...query, location: locationId, spatial: 'location' };
-      } else if (projectId) {
-        query = { ...query, project: projectId, spatial: 'project' };
-      }
-      //If date range is not lifetime, get hourly data
-      if (dateRange) {
-        setTemporal('hour');
-        query = {
-          ...query,
-          temporal: 'hour',
-        };
-      }
-      fetch(
-        `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
-      )
-        .then(response => {
-          if (response.status >= 400) {
-            throw new Error('Bad response');
-          }
-          return response.json();
-        })
-        .then(
-          json => {
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              data: json.results,
-            }));
-          },
-          e => {
-            console.log('e', e);
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              error: e,
-            }));
-          }
-        );
-    };
-
-    fetchData();
+    if (!prefetchedData) {
+      fetchData();
+    } else {
+      setState(state => ({
+        ...state,
+        fetched: true,
+        fetching: false,
+      }));
+    }
 
     return () => {
       setState(defaultState);
     };
   }, [activeTab, dateRange]);
+
+  const fetchData = () => {
+    setState(state => ({ ...state, fetching: true, error: null }));
+
+    let query = {
+      parameter: activeTab.id,
+      temporal,
+      ...(dateRange
+        ? {
+            // In user space, month is 1 indexed
+            date_from: new Date(year, month - 1, day || 1),
+            date_to: day
+              ? new Date(year, month - 1, day + 1)
+              : new Date(year, month, 0),
+          }
+        : {}),
+    };
+
+    if (locationId) {
+      query = { ...query, location: locationId, spatial: 'location' };
+    } else if (projectId) {
+      query = { ...query, project: projectId, spatial: 'project' };
+    }
+
+    fetch(`${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => {
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            data: json.results,
+          }));
+        },
+        e => {
+          console.log('e', e);
+          setState(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            error: e,
+          }));
+        }
+      );
+  };
 
   if (!fetched && !fetching) {
     return null;
@@ -151,7 +151,16 @@ export default function TimeSeriesCard({
       )}
       renderBody={() => (
         <ChartContainer className="card__body">
-          {fetching ? (
+          {prefetchedData && activeData?.length ? (
+            <LineChart
+              data={activeData.map(m => ({
+                x: new Date(m['day']),
+                y: m.average,
+              }))}
+              yLabel={activeData && activeData[0].displayName}
+              yUnit={activeData && activeData[0].unit}
+            />
+          ) : fetching ? (
             <LoadingMessage />
           ) : data && data.length ? (
             <LineChart
@@ -161,7 +170,7 @@ export default function TimeSeriesCard({
               xUnit={temporal}
             />
           ) : (
-            <ErrorMessage instructions="Please try a different time" />
+            <ErrorMessage instructions="Please try a different time or parameter" />
           )}
         </ChartContainer>
       )}
@@ -170,13 +179,14 @@ export default function TimeSeriesCard({
 }
 
 TimeSeriesCard.propTypes = {
-  titleInfo: T.string,
-  locationId: T.oneOfType([T.string, T.number]),
-  projectId: T.string,
-  parameters: T.arrayOf(
-    T.shape({
-      parameter: T.string.isRequired,
+  titleInfo: PropTypes.string,
+  locationId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  prefetchedData: PropTypes.object,
+  parameters: PropTypes.arrayOf(
+    PropTypes.shape({
+      parameter: PropTypes.string.isRequired,
     })
   ),
-  dateRange: T.string,
+  dateRange: PropTypes.string,
 };
