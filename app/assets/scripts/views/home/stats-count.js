@@ -1,12 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import config from '../../config';
 import { shortenLargeNumber } from '../../utils/format';
 import LoadingMessage from '../../components/loading-message';
 
-export default function StatsCount(props) {
-  const { fetched, fetching, data } = props;
+const defaultState = {
+  fetched: false,
+  fetching: false,
+  error: null,
+  data: null,
+};
+
+export default function StatsCount() {
+  const [{ fetched, fetching, data }, setState] = useState(defaultState);
+
+  useEffect(() => {
+    const fetchData = () => {
+      setState(state => ({ ...state, fetching: true, error: null }));
+
+      // TODO: replace with stats endpoint
+      fetch(`${config.api}/locations`)
+        .then(response => {
+          if (response.status >= 400) {
+            throw new Error('Bad response');
+          }
+          return response.json();
+        })
+        .then(
+          json => {
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              data: { locations: json.meta.found },
+            }));
+          },
+          e => {
+            console.log('e', e);
+            setState(state => ({
+              ...state,
+              fetched: true,
+              fetching: false,
+              error: e,
+            }));
+          }
+        );
+    };
+
+    fetchData();
+
+    return () => {
+      setState(defaultState);
+    };
+  }, []);
 
   if (!fetched && !fetching) {
     return null;
@@ -85,32 +133,40 @@ export default function StatsCount(props) {
         <figure className="fold__media">
           {!fetching ? (
             <ol className="big-stats-list">
-              <li className="big-stat">
-                <strong className="big-stat__value">
-                  {shortenLargeNumber(data.totalMeasurements, 0)}
-                </strong>
-                <span className="big-stat__label">
-                  Air quality measurements
-                </span>
-              </li>
-              <li className="big-stat">
-                <strong className="big-stat__value">
-                  {shortenLargeNumber(data.sources, 0)}
-                </strong>
-                <span className="big-stat__label">Data sources</span>
-              </li>
-              <li className="big-stat">
-                <strong className="big-stat__value">
-                  {shortenLargeNumber(data.locations, 0)}
-                </strong>
-                <span className="big-stat__label">Locations</span>
-              </li>
-              <li className="big-stat">
-                <strong className="big-stat__value">
-                  {shortenLargeNumber(data.countries, 0)}
-                </strong>
-                <span className="big-stat__label">Countries</span>
-              </li>
+              {data.totalMeasurements && (
+                <li className="big-stat">
+                  <strong className="big-stat__value">
+                    {shortenLargeNumber(data.totalMeasurements, 0)}
+                  </strong>
+                  <span className="big-stat__label">
+                    Air quality measurements
+                  </span>
+                </li>
+              )}
+              {data.sources && (
+                <li className="big-stat">
+                  <strong className="big-stat__value">
+                    {shortenLargeNumber(data.sources, 0)}
+                  </strong>
+                  <span className="big-stat__label">Data sources</span>
+                </li>
+              )}
+              {data.locations && (
+                <li className="big-stat">
+                  <strong className="big-stat__value">
+                    {shortenLargeNumber(data.locations, 0)}
+                  </strong>
+                  <span className="big-stat__label">Locations</span>
+                </li>
+              )}
+              {data.countries && (
+                <li className="big-stat">
+                  <strong className="big-stat__value">
+                    {shortenLargeNumber(data.countries, 0)}
+                  </strong>
+                  <span className="big-stat__label">Countries</span>
+                </li>
+              )}
             </ol>
           ) : (
             <LoadingMessage />

@@ -25,7 +25,6 @@ function Home(props) {
     compareLoc,
     compareMeasurements,
     _invalidateCompare,
-    baseStats,
     _fetchRandomCompareLocs,
     _fetchCompareLocationMeasurements,
   } = props;
@@ -156,11 +155,7 @@ function Home(props) {
           </div>
         </section>
 
-        <StatsCount
-          fetching={baseStats.fetching}
-          fetched={baseStats.fetched}
-          data={baseStats.data}
-        />
+        <StatsCount />
 
         <section className="fold fold--type-a" id="home-fold-community">
           <div className="inner">
@@ -237,7 +232,6 @@ Home.propTypes = {
   _fetchCompareLocationMeasurements: T.func,
   _invalidateCompare: T.func,
 
-  baseStats: T.object,
   compareLoc: T.array,
   compareMeasurements: T.array,
 };
@@ -247,7 +241,6 @@ Home.propTypes = {
 
 function selector(state) {
   return {
-    baseStats: state.baseStats,
     compareLoc: state.compare.locations,
     compareMeasurements: state.compare.measurements,
   };
