@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
 import qs from 'qs';
 
-import { openDownloadModal } from '../../actions/action-creators';
+import { openDownloadModal as openDownloadModalAction } from '../../actions/action-creators';
 import config from '../../config';
 import { HeaderMessage } from '../../components/header';
 import Header from '../../components/header';
@@ -16,6 +15,7 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import MapCard from '../../components/dashboard/map-card';
 import DateSelector from '../../components/date-selector';
 
 import { buildQS } from '../../utils/url';
@@ -28,10 +28,8 @@ const defaultState = {
   data: null,
 };
 
-function Location(props) {
-  let history = useHistory();
-  let location = useLocation();
-  const { id } = props.match.params;
+function Location({ location, history, match, openDownloadModal }) {
+  const { id } = match.params;
 
   const [dateRange, setDateRange] = useState(
     qs.parse(location.search, { ignoreQueryPrefix: true }).dateRange
@@ -121,7 +119,7 @@ function Location(props) {
   }
 
   function onDownloadClick() {
-    props._openDownloadModal({
+    openDownloadModal({
       country: data.country,
       area: data.city || NO_CITY,
       location: data.id,
@@ -174,6 +172,17 @@ function Location(props) {
               'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown for the most recent week of data.'
             }
           />
+          {data.isMobile && (
+            <MapCard
+              parameters={data.parameters}
+              isMobile={data.isMobile}
+              locationId={data.id}
+              bbox={data.bounds}
+              points={data.points}
+              firstUpdated={data.firstUpdated}
+              lastUpdated={data.lastUpdated}
+            />
+          )}
           <TemporalCoverageCard
             parameters={data.parameters}
             spatial="location"
@@ -205,29 +214,20 @@ function Location(props) {
 }
 
 Location.propTypes = {
-  match: T.object,
-  _openDownloadModal: T.func,
-  sources: T.array,
-  measurements: T.array,
-  parameters: T.array,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+
+  openDownloadModal: PropTypes.func.isRequired,
 };
 
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-function selector(state) {
-  return {
-    parameters: state.baseData.data.parameters,
-    sources: state.baseData.data.sources,
-    measurements: state.measurements,
-    latestMeasurements: state.latestMeasurements,
-  };
-}
-
 function dispatcher(dispatch) {
   return {
-    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
+    openDownloadModal: (...args) => dispatch(openDownloadModalAction(...args)),
   };
 }
 
-export default connect(selector, dispatcher)(Location);
+export default connect(null, dispatcher)(Location);

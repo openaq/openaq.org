@@ -33,7 +33,7 @@ export default function Map({ center, bbox, scrollZoomDisabled, children }) {
       if (center) {
         m.flyTo({ center, zoom: 15 });
       } else if (bbox) {
-        m.fitBounds(bbox);
+        m.fitBounds(bbox, { padding: 20 });
       }
     });
 
