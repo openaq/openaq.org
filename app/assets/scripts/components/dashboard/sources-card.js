@@ -31,8 +31,8 @@ export default function SourceInfo({ sources }) {
         if (sources) {
           return (
             <SourceList>
-              {sources.map(source => (
-                <li key={source.id}>
+              {sources.map((source, idx) => (
+                <li key={idx}>
                   {source.url ? (
                     <a
                       className="source__title source__title--external"
