@@ -13,7 +13,7 @@ describe('The Countries Hub', () => {
   });
 
   it('has a header with title and description', () => {
-    cy.get('h1').should('contain', 'Browse by Country');
+    cy.get('h1').should('contain', 'Country');
     cy.get('.inpage__introduction').should(
       'contain',
       'We are currently collecting data in'
