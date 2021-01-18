@@ -26,6 +26,7 @@ import LoadingMessage from '../loading-message';
 import DownloadType, { downloadTypeDefault } from './download-type-selector';
 import ProjectSelector from './project-selector';
 import { fetchProjects } from '../../actions/projects';
+import { fetchBaseData } from '../../actions/base-data';
 
 const EMPTY = '';
 const API_LIMIT = 66536;
@@ -128,6 +129,7 @@ function ModalDownload(props) {
     _invalidateLocationsByCountry,
     _fetchLocationsByCountry,
     _fetchProjects,
+    _fetchBaseData,
   } = props;
 
   const [formState, setFormState] = useState({
@@ -156,6 +158,7 @@ function ModalDownload(props) {
     fetchVal(`${config.api}/measurements?limit=1`).then(v =>
       setMeasurementCount(v)
     );
+    _fetchBaseData();
   }, []);
 
   const useRevealed = (fn, deps) => {
@@ -167,12 +170,6 @@ function ModalDownload(props) {
   // Update the state when the input parameters change. This is used to open the
   // modal in a specific location.
   useRevealed(() => {
-    console.log('[country, area, location, project]', [
-      country,
-      area,
-      location,
-      project,
-    ]);
     setFormState(s => ({
       ...s,
       locCountry: country || EMPTY,
@@ -401,6 +398,7 @@ ModalDownload.propTypes = {
   _fetchLocationsByCountry: T.func,
   _invalidateLocationsByCountry: T.func,
   _fetchProjects: T.func,
+  _fetchBaseData: T.func,
   onModalClose: T.func,
   revealed: T.bool,
 
@@ -438,6 +436,7 @@ function dispatcher(dispatch) {
     _fetchLocationsByCountry: (...args) =>
       dispatch(fetchLocationsByCountry(...args)),
     _fetchProjects: (...args) => dispatch(fetchProjects(...args)),
+    _fetchBaseData: (...args) => dispatch(fetchBaseData(...args)),
   };
 }
 
