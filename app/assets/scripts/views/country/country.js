@@ -148,9 +148,6 @@ function Country(props) {
             tagline="Country"
             title={country.name}
             stats={[
-              ...(country.cities
-                ? [{ number: country.cities, label: 'areas' }]
-                : []),
               {
                 number: country.locations,
                 label: country.locations > 1 ? 'locations' : 'location',
