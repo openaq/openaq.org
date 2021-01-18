@@ -8,7 +8,7 @@ on:
     workflows: ["QA"]
     types:
       - completed
-    branches: [develop] 
+    branches: [develop, master] 
 
 jobs:
   build-and-deploy:
