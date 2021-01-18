@@ -26,15 +26,17 @@ function App(props) {
       <main className="page__body" role="main">
         {children}
       </main>
-      <ModalDownload
-        downloadType={downloadModal.downloadType}
-        country={downloadModal.country}
-        area={downloadModal.area}
-        location={downloadModal.location}
-        project={downloadModal.project}
-        onModalClose={closeDownloadModal}
-        revealed={downloadModal.open}
-      />
+      {downloadModal.open && (
+        <ModalDownload
+          downloadType={downloadModal.downloadType}
+          country={downloadModal.country}
+          area={downloadModal.area}
+          location={downloadModal.location}
+          project={downloadModal.project}
+          onModalClose={closeDownloadModal}
+          revealed={downloadModal.open}
+        />
+      )}
       <PageFooter measurements={null} />
     </div>
   );
