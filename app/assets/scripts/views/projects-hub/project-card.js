@@ -41,6 +41,7 @@ export default function ProjectCard({
           id="project"
           list={[
             { label: 'Collection dates', value: `${started} - ${ended}` },
+            { label: 'Locations', value: formatThousands(totalLocations) },
             {
               label: 'Measurements',
               value: formatThousands(totalMeasurements),
@@ -49,7 +50,6 @@ export default function ProjectCard({
               label: 'Parameters',
               value: parametersList.map(p => p.displayName).join(', '),
             },
-            { label: 'Locations', value: formatThousands(totalLocations) },
             {
               label: sources.length > 1 ? 'Sources' : 'Source',
               value: sources.map(source => (
