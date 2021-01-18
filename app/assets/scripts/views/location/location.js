@@ -17,6 +17,7 @@ import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-c
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 import MobileDataLocationsCard from '../../components/dashboard/mobile-data-locations-card';
 import DateSelector from '../../components/date-selector';
+import { formatValueByUnit, renderUnit } from '../../utils/format';
 
 import { buildQS } from '../../utils/url';
 import { NO_CITY } from '../../utils/constants';
@@ -58,11 +59,28 @@ function Location({ location, history, match, openDownloadModal }) {
         })
         .then(
           json => {
+            const dat = json.results[0];
             setState(state => ({
               ...state,
               fetched: true,
               fetching: false,
-              data: json.results[0],
+              data: {
+                ...dat,
+                parameters: dat.parameters.map(p => ({
+                  ...p,
+                  average: formatValueByUnit(
+                    p.average,
+                    p.unit,
+                    renderUnit(p.unit)
+                  ),
+                  lastValue: formatValueByUnit(
+                    p.lastValue,
+                    p.unit,
+                    renderUnit(p.unit)
+                  ),
+                  unit: renderUnit(p.unit),
+                })),
+              },
             }));
           },
           e => {

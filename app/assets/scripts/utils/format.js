@@ -1,5 +1,20 @@
 var d3 = require('d3');
 
+export function formatValueByUnit(value, currentUnit, targetUnit) {
+  if (!(currentUnit && targetUnit)) {
+    return value;
+  }
+  if (currentUnit === targetUnit) {
+    return value;
+  } else if (currentUnit === 'ppm' && targetUnit === 'ppb') {
+    return round(value * 1000, 2);
+  }
+}
+
+export function renderUnit(unit) {
+  return unit === 'ppm' ? 'ppb' : unit;
+}
+
 export function formatPercent(n, upperLimit) {
   if ((n !== 0 && !n) || isNaN(n)) {
     return '-';
