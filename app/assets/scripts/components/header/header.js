@@ -19,6 +19,7 @@ export default function Header({
   description,
   stats,
   disclaimer,
+  feedback,
   action,
   sourceType,
   entity,
@@ -40,12 +41,25 @@ export default function Header({
           {description && (
             <div className="inpage__introduction">
               <p>{description}</p>
-              {disclaimer && (
-                <small className="disclaimer">
-                  <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
-                    Data Disclaimer and More Information
-                  </a>
-                </small>
+              {(disclaimer || feedback) && (
+                <div className="inpage__header-actions">
+                  {disclaimer && (
+                    <a
+                      href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85"
+                      title="View Data Disclaimer and More Information"
+                    >
+                      Data Disclaimer and More Information
+                    </a>
+                  )}
+                  {feedback && (
+                    <a
+                      href="https://docs.google.com/forms/d/1s5GYME3He-EDed-jgg11Ry3zmvTZkPK5xSnQUWwu0Gk/edit"
+                      title="Give feedback about the platform"
+                    >
+                      Share Feedback
+                    </a>
+                  )}
+                </div>
               )}
             </div>
           )}
@@ -155,6 +169,7 @@ Header.propTypes = {
     })
   ),
   disclaimer: T.bool,
+  feedback: T.bool,
   action: T.shape({
     api: T.string,
     download: T.func,
