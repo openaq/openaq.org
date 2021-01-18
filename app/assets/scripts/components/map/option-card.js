@@ -1,43 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function OptionCard({ toggleAllLocations, isAllLocations }) {
+export default function OptionCard({
+  toggleLocationSelection,
+  isDisplayingSelectionTools,
+}) {
   return (
     <div
       className="map__legend"
-      style={{ top: `2rem`, bottom: `unset`, maxWidth: `12rem` }}
+      style={{ top: `2rem`, bottom: `unset`, maxWidth: `16rem` }}
     >
-      <form
-        onChange={e => toggleAllLocations(e.target.value === 'isAllLocations')}
-      >
-        <div style={{ display: `block`, paddingBottom: `.5rem` }}>
-          <input
-            type="radio"
-            id="isAllLocations"
-            name="selectLocations"
-            checked={isAllLocations}
-            value="isAllLocations"
-            style={{ marginRight: `.5rem` }}
-          />
-          <label htmlFor="isAllLocations">All locations selected</label>
-        </div>
-        <div style={{ display: `block` }}>
-          <input
-            type="radio"
-            id="isNodeSelection"
-            name="selectLocations"
-            checked={!isAllLocations}
-            value="isNodeSelection"
-            style={{ marginRight: `.5rem` }}
-          />
-          <label htmlFor="isNodeSelection">Select locations</label>
-        </div>
+      <form className="form" onChange={() => toggleLocationSelection()}>
+        <fieldset className="form__fieldset">
+          <div className="form__group">
+            <label className="form__option form__option--inline form__option--custom-radio">
+              <input
+                type="radio"
+                id="isFullProject"
+                name="selectLocations"
+                className="form__option form__option--custom-radio"
+                checked={!isDisplayingSelectionTools}
+                value={'isFullProject'}
+              />
+              <span className="form__option__text">All locations selected</span>
+              <span className="form__option__ui"></span>
+            </label>
+            <label className="form__option form__option--custom-radio">
+              <input
+                type="radio"
+                id="isNodeSelection"
+                name="selectLocations"
+                checked={isDisplayingSelectionTools}
+                value="isNodeSelection"
+              />
+              <span className="form__option__text">Select locations</span>
+              <span className="form__option__ui"></span>
+            </label>
+          </div>
+        </fieldset>
       </form>
     </div>
   );
 }
 
 OptionCard.propTypes = {
-  isAllLocations: PropTypes.bool.isRequired,
-  toggleAllLocations: PropTypes.func.isRequired,
+  isDisplayingSelectionTools: PropTypes.bool.isRequired,
+  toggleLocationSelection: PropTypes.func.isRequired,
 };
