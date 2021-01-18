@@ -270,33 +270,37 @@ function ModalDownload(props) {
         {countries ? (
           <div className="prose">
             <p className="modal__description">
-              Customize the data you want to download. Currently, the last two
-              years of data are available from this form.{' '}
+              Customize the data you want to download, now including low cost
+              sensor data. For greater customization, use the{' '}
+              <a
+                href="http://docs.openaq.org/"
+                title="View API"
+                target="_blank"
+                rel="noreferrer"
+              >
+                API
+              </a>
+              .{' '}
               <a
                 href="https://openaq-fetches.s3.amazonaws.com/index.html"
+                title="View realtime data"
                 target="_blank"
                 rel="noreferrer"
               >
                 Realtime
               </a>{' '}
-              and{' '}
+              archives of all {formatThousands(measurementCount)} measurements
+              are also available.
               <a
-                href="http://openaq-data.s3.amazonaws.com/index.html"
+                href="https://docs.google.com/forms/d/1s5GYME3He-EDed-jgg11Ry3zmvTZkPK5xSnQUWwu0Gk/edit"
+                title="Share feedback in a google form"
                 target="_blank"
                 rel="noreferrer"
               >
-                daily
+                Share your feedback
               </a>{' '}
-              archives of all {formatThousands(measurementCount)} are also
-              available.{' '}
-              <a
-                // eslint-disable-next-line inclusive-language/use-inclusive-words
-                href="https://github.com/openaq/openaq-info/blob/master/FAQ.md#90days"
-                target="_blank"
-                rel="noreferrer"
-              >
-                More Info
-              </a>{' '}
+              on the low cost sensor pilot so we can continue to improve the
+              platform!
             </p>
 
             <form className="form form--download">
