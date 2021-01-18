@@ -181,5 +181,5 @@ Popover.propTypes = {
 };
 
 Popover.defaultProps = {
-  isDisplayingSelectionTools: true,
+  isDisplayingSelectionTools: false,
 };
