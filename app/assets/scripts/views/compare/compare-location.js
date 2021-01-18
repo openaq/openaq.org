@@ -43,7 +43,7 @@ export default function CompareLocation(props) {
           </span>
         </Link>{' '}
         <small>
-          in {d.city || NO_CITY}, {countryData.name}
+          in {d.city || NO_CITY}, {countryData?.name}
         </small>
       </h2>
       <p className="compare-parameters">
