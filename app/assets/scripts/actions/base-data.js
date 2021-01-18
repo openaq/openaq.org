@@ -24,11 +24,21 @@ function receiveBaseData(json, error = null) {
 }
 
 export function fetchBaseData() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const current = getState().baseData;
+
+    if (current.fetching) {
+      // Do nothing as a request is in progress.
+      return;
+    }
+
     dispatch(requestBaseData());
-    // We have to make 3 separate request.
-    // Keep track of what's finished.
-    let complete = 0;
+
+    if (current.fetched && !current.error) {
+      // There's data. No need to request again.
+      return dispatch(receiveBaseData(current.data));
+    }
+
     let data = {
       countries: [],
       sources: [],
@@ -39,7 +49,7 @@ export function fetchBaseData() {
     };
 
     // Data fetcher.
-    const fetcher = what => {
+    const fetcher = what =>
       fetch(`${config.api}/${what}?limit=1000`)
         .then(response => {
           if (response.status >= 400) {
@@ -47,42 +57,31 @@ export function fetchBaseData() {
           }
           return response.json();
         })
-        .then(
-          json => {
-            data[what] = json.results;
+        .then(json => {
+          data[what] = json.results;
+          return json;
+        });
 
-            // Special case to grab all measurements
-            // from the /countries endpoint instead
-            // of using the more limited /measurements
-            if (what === 'countries') {
-              json.results.forEach(c => {
-                data.totalMeasurements += c.count;
-              });
-              data[what] = data[what].filter(country => country.name);
-            }
-
-            // Check if we're done with the requests.
-            if (complete === -1 || ++complete < 3) {
-              return;
-            }
-            dispatch(receiveBaseData(data));
-          },
-          e => {
-            // Throw error only once.
-            if (complete === -1) {
-              return;
-            }
-            complete = -1;
-            console.log('e', e);
-            return dispatch(receiveBaseData(null, 'Data not available'));
-          }
+    Promise.all([
+      fetcher('countries').then(json => {
+        data.totalMeasurements = json.results.reduce(
+          (acc, c) => acc + c.count,
+          0
         );
-    };
-
-    fetcher('countries');
-    fetcher('sources');
-    fetcher('parameters');
-    fetcher('manufacturers');
-    fetcher('models');
+        data.countries = data.countries.filter(country => country.name);
+      }),
+      fetcher('sources'),
+      fetcher('parameters'),
+      fetcher('manufacturers'),
+      fetcher('models'),
+    ]).then(
+      () => {
+        dispatch(receiveBaseData(data));
+      },
+      e => {
+        console.log('Base data error', e);
+        return dispatch(receiveBaseData(null, 'Data not available'));
+      }
+    );
   };
 }

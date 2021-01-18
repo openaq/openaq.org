@@ -8,6 +8,8 @@ const defaultState = {
     countries: null,
     sources: null,
     parameters: null,
+    manufacturers: null,
+    models: null,
     totalMeasurements: null,
   },
 };

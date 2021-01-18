@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';
+import { connect } from 'react-redux';
 import qs from 'qs';
 
+import { openDownloadModal } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
 import config from '../../config';
 import { getCountryBbox } from '../../utils/countries';
@@ -21,7 +23,7 @@ const defaultState = {
   projectData: null,
 };
 
-function Project({ match, history, location }) {
+function Project({ match, history, location, _openDownloadModal }) {
   const { id } = match.params;
 
   const [dateRange, setDateRange] = useState(
@@ -121,7 +123,12 @@ function Project({ match, history, location }) {
         subtitle={projectData.subtitle}
         action={{
           api: `${config.apiDocs}`,
-          download: () => {},
+          download: () =>
+            _openDownloadModal({
+              downloadType: 'projects',
+              country: projectData.countries && projectData.countries[0],
+              project: projectData.id,
+            }),
         }}
         sourceType={projectData.sourceType}
         isMobile={projectData.isMobile}
@@ -197,9 +204,19 @@ function Project({ match, history, location }) {
 }
 
 Project.propTypes = {
+  _openDownloadModal: T.func,
   match: T.object, // from react-router
   history: T.object,
   location: T.object,
 };
 
-export default Project;
+// /////////////////////////////////////////////////////////////////// //
+// Connect functions
+
+function dispatcher(dispatch) {
+  return {
+    _openDownloadModal: (...args) => dispatch(openDownloadModal(...args)),
+  };
+}
+
+export default connect(() => ({}), dispatcher)(Project);

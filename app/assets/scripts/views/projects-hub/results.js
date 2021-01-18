@@ -66,7 +66,9 @@ export default function Results({
         {projects.map(project => {
           let openModal = () =>
             openDownloadModal({
-              project: project,
+              downloadType: 'projects',
+              country: project.countries && project.countries[0],
+              project: project.id,
             });
           return (
             <ProjectCard
