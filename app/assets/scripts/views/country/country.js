@@ -195,7 +195,7 @@ function Country(props) {
                             className="location-download-button"
                             title={`Download ${city} data`}
                             onClick={() =>
-                              onDownloadClick({
+                              props._openDownloadModal({
                                 country: id,
                                 area: city,
                               })
@@ -208,7 +208,7 @@ function Country(props) {
                       <div className="inpage__results">
                         {cityLocations.map(loc => {
                           let openModal = () =>
-                            onDownloadClick({
+                            props._openDownloadModal({
                               country: loc.country,
                               area: loc.city,
                               location: loc.id,
