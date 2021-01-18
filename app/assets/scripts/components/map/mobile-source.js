@@ -5,6 +5,7 @@ import moment from 'moment';
 import config from '../../config';
 
 export default function MobileSource({
+  locationId,
   firstUpdated,
   lastUpdated,
   map,
@@ -15,6 +16,7 @@ export default function MobileSource({
   useEffect(() => {
     if (!map.getSource('mobile-source')) {
       const query = {
+        location: locationId,
         dateFrom: moment(firstUpdated).subtract(1, 'd').format('YYYY-MM-DD'),
         dateTo: moment(lastUpdated).add(1, 'd').format('YYYY-MM-DD'),
       };
@@ -56,6 +58,7 @@ export default function MobileSource({
 }
 
 MobileSource.propTypes = {
+  locationId: PropTypes.number.isRequired,
   firstUpdated: PropTypes.string.isRequired,
   lastUpdated: PropTypes.string.isRequired,
   map: PropTypes.object,

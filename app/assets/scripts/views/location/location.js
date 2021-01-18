@@ -15,7 +15,7 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
-import MapCard from '../../components/dashboard/map-card';
+import MobileDataLocationsCard from '../../components/dashboard/mobile-data-locations-card';
 import DateSelector from '../../components/date-selector';
 
 import { buildQS } from '../../utils/url';
@@ -174,12 +174,9 @@ function Location({ location, history, match, openDownloadModal }) {
             }
           />
           {data.isMobile && (
-            <MapCard
-              parameters={data.parameters}
-              isMobile={data.isMobile}
+            <MobileDataLocationsCard
               locationId={data.id}
               bbox={data.bounds}
-              points={data.points}
               firstUpdated={data.firstUpdated}
               lastUpdated={data.lastUpdated}
             />
