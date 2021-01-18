@@ -171,7 +171,7 @@ function Compare(props) {
   }, new Set());
 
   const locParams = Array.from(locParamsIds).map(id =>
-    parameters.find(p => p.id === id)
+    parameters?.find(p => p.id === id)
   );
 
   return (
