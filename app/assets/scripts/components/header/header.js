@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Tags = styled.div`
-  display: grid;
-  grid-gap: 0.5rem;
-  width: fit-content;
-  grid-template-columns: 1fr 1fr;
+  margin: 0.5rem 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 export default function Header({
@@ -20,8 +20,9 @@ export default function Header({
   stats,
   disclaimer,
   action,
-  isMobile,
   sourceType,
+  entity,
+  isMobile,
 }) {
   return (
     <header className="inpage__header" data-cy={`${id}-header`}>
@@ -65,6 +66,11 @@ export default function Header({
             {sourceType && (
               <div className="header__pill">
                 {`${sourceType[0].toUpperCase()}${sourceType.slice(1)}`}
+              </div>
+            )}
+            {entity && (
+              <div className="header__pill">
+                {`${entity[0].toUpperCase()}${entity.slice(1)}`}
               </div>
             )}
             {isMobile !== undefined && (
@@ -138,8 +144,9 @@ Header.propTypes = {
   tagline: T.string,
   title: T.string.isRequired,
   subtitle: T.string,
-  isMobile: T.bool,
   sourceType: T.string,
+  entity: T.string,
+  isMobile: T.bool,
   description: T.oneOfType([T.string, T.node]),
   stats: T.arrayOf(
     T.shape({
