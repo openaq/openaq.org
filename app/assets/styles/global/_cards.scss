@@ -2,6 +2,10 @@
    Global: Cards
    ========================================================================== */
 
+.card__grey {
+  background-color: #e5ebf0;
+}
+
 .card__contents {
   max-width: 100%;
 }
@@ -13,7 +17,7 @@
 .card__title {
   @extend .truncated;
   flex: unset;
-  
+
   small {
     @extend .truncated;
     display: block;
@@ -42,7 +46,6 @@
     text-transform: uppercase;
   }
 }
-
 
 .card__go-link {
   @extend .button, .button--primary, .button--large, .button--capsule;
@@ -76,8 +79,8 @@
  * "cfa-" prefix stands for "card footer actions"
  */
 
-[class^="cfa-"],
-[class*=" cfa-"] {
+[class^='cfa-'],
+[class*=' cfa-'] {
   @extend .button, .button--xlarge, .button--primary-unbounded;
   border-radius: 0;
   display: block;
@@ -94,7 +97,7 @@
     @extend %openaq-ds-icon-arrow-right;
   }
 }
-[class*=" sort_"] {
+[class*=' sort_'] {
   &::after {
     @extend %openaq-ds-icon-arrow-right;
     display: inline-block;
@@ -116,9 +119,8 @@
     tr:nth-child(odd) {
       background-color: rgba($base-color, 0);
     }
-    tr:nth-child(even) { 
-      background-color: tint($primary-color, 90% );
+    tr:nth-child(even) {
+      background-color: tint($primary-color, 90%);
     }
   }
 }
-
