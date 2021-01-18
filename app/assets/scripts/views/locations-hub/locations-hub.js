@@ -62,7 +62,7 @@ export default function LocationsHub({
       sort: 'desc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
-      source: query.sources && query.sources.split(','),
+      sourceName: query.sources && query.sources.split(','),
       // The following are not lists
       isMobile: query.mobility && query.mobility === 'Mobile',
       entity: query.entity && query.entity.toLowerCase(),
