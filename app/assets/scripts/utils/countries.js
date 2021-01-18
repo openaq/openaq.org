@@ -2366,7 +2366,7 @@ const countries = [
   },
 ];
 
-export function getCountryByIso(iso) {
+export function getCountryByIso(iso = '') {
   iso = iso.toUpperCase();
   const country = countries.find(o => o.iso === iso);
   return country || {};
