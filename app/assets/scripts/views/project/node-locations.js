@@ -11,8 +11,8 @@ export default function NodeLocations({
   bbox,
   locationIds,
   parameters,
-  toggleAllLocations,
-  isAllLocations,
+  toggleLocationSelection,
+  isDisplayingSelectionTools,
   selectedLocations,
   handleLocationSelection,
 }) {
@@ -31,7 +31,7 @@ export default function NodeLocations({
           <LocationsSource activeParameter={activeParameter.parameterId}>
             <NodeLayer
               activeParameter={activeParameter.parameterId}
-              isAllLocations={isAllLocations}
+              isDisplayingSelectionTools={isDisplayingSelectionTools}
               locationIds={locationIds}
               selectedLocations={selectedLocations}
               handleLocationSelection={handleLocationSelection}
@@ -39,8 +39,8 @@ export default function NodeLocations({
           </LocationsSource>
 
           <OptionCard
-            toggleAllLocations={toggleAllLocations}
-            isAllLocations={isAllLocations}
+            toggleLocationSelection={toggleLocationSelection}
+            isDisplayingSelectionTools={isDisplayingSelectionTools}
           />
           <Legend
             parameters={parameters}
@@ -61,8 +61,8 @@ NodeLocations.propTypes = {
   city: PropTypes.string,
   bbox: PropTypes.array,
   activeParameter: PropTypes.string,
-  isAllLocations: PropTypes.bool.isRequired,
-  toggleAllLocations: PropTypes.func.isRequired,
+  isDisplayingSelectionTools: PropTypes.bool.isRequired,
+  toggleLocationSelection: PropTypes.func.isRequired,
   selectedLocations: PropTypes.object,
   handleLocationSelection: PropTypes.func.isRequired,
 };
