@@ -90,7 +90,10 @@ export default function ProjectsHub({
       <HubHeader title="Dataset" countriesCount={countryCount} />
 
       <div className="inpage__body">
-        <Filter slug="/projects" by={['parameters', 'countries', 'sensor']} />
+        <Filter
+          slug="/projects"
+          by={['parameters', 'countries', 'sources', 'sensor']}
+        />
         <div className="constrainer">
           <div className="content__meta">
             <div className="content__header">
