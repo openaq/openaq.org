@@ -17,6 +17,8 @@ export default function ProjectCard({
   totalMeasurements,
   parametersList,
   sources,
+  sensorType, entity,
+  mobile
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
@@ -35,7 +37,8 @@ export default function ProjectCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={sourceType}
+      tags={[sensorType, entity, mobile ? 'Mobile' : 'Stationary']}
+
       renderBody={() => (
         <CardDetails
           id="project"
