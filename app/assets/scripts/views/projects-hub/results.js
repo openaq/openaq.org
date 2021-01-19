@@ -83,6 +83,9 @@ export default function Results({
               totalLocations={project.locations}
               totalMeasurements={project.measurements}
               parametersList={project.parameters}
+              mobile={project.isMobile}
+              sensorType={project.sensorType}
+              entity={project.entity}
             />
           );
         })}
