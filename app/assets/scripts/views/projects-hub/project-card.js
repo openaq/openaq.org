@@ -52,15 +52,17 @@ export default function ProjectCard({
             },
             {
               label: sources.length > 1 ? 'Sources' : 'Source',
-              value: sources.map(source => (
+              value: sources?.map(source => [
                 <a
-                  href={source.sourceURL}
+                  href={source.url}
                   title={`View source for ${name}`}
                   key={source.name}
+                  className={!source.url && 'disabled'}
                 >
                   {source.name}
-                </a>
-              )),
+                </a>,
+                <p key={source.organization}>{source.organization}</p>,
+              ]),
             },
           ]}
         />
