@@ -54,7 +54,12 @@ export default function ProjectsHub({
       sort: 'desc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
-      source: query.sources && query.sources.split(','),
+      sourceName: query.sources && query.sources.split(','),
+      // The following are not lists
+      isMobile: query.mobility && query.mobility === 'Mobile',
+      entity: query.entity && query.entity.toLowerCase(),
+      sensorType: query.grade && query.grade.toLowerCase(),
+      manufacturerName: query.manufacturer && query.manufacturer,
     });
   }, [location]);
 
@@ -85,7 +90,7 @@ export default function ProjectsHub({
       <HubHeader title="Dataset" countriesCount={countryCount} />
 
       <div className="inpage__body">
-        <Filter slug="/projects" by={['parameters', 'countries']} />
+        <Filter slug="/projects" by={['parameters', 'countries', 'sensor']} />
         <div className="constrainer">
           <div className="content__meta">
             <div className="content__header">

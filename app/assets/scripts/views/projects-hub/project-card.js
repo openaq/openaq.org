@@ -11,14 +11,14 @@ export default function ProjectCard({
   id,
   name,
   subtitle,
-  sourceType,
   firstUpdated,
   totalLocations,
   totalMeasurements,
   parametersList,
   sources,
-  sensorType, entity,
-  mobile
+  sensorType,
+  entity,
+  mobile,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
@@ -38,7 +38,6 @@ export default function ProjectCard({
         </>
       }
       tags={[sensorType, entity, mobile ? 'Mobile' : 'Stationary']}
-
       renderBody={() => (
         <CardDetails
           id="project"
@@ -85,7 +84,9 @@ ProjectCard.propTypes = {
   name: T.string,
   id: T.oneOfType([T.string, T.number]),
   subtitle: T.string,
-  sourceType: T.oneOfType([T.array, T.string]),
+  sensorType: T.string,
+  entity: T.string,
+  mobile: T.bool,
   sources: T.array,
   firstUpdated: T.string,
   totalLocations: T.number,
