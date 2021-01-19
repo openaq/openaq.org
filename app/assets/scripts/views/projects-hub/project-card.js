@@ -63,7 +63,6 @@ export default function ProjectCard({
                 >
                   {source.name}
                 </a>,
-                <p key={source.organization}>{source.organization}</p>,
               ]),
             },
           ]}
