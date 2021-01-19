@@ -20,8 +20,7 @@ export default function StatsCount() {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
 
-      // TODO: replace with stats endpoint
-      fetch(`${config.api}/locations`)
+      fetch(`${config.api}/summary`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
@@ -34,7 +33,7 @@ export default function StatsCount() {
               ...state,
               fetched: true,
               fetching: false,
-              data: { locations: json.meta.found },
+              data: json.results[0],
             }));
           },
           e => {
@@ -133,17 +132,17 @@ export default function StatsCount() {
         <figure className="fold__media">
           {!fetching ? (
             <ol className="big-stats-list">
-              {data.totalMeasurements && (
+              {data?.count && (
                 <li className="big-stat">
                   <strong className="big-stat__value">
-                    {shortenLargeNumber(data.totalMeasurements, 0)}
+                    {shortenLargeNumber(data.count, 0)}
                   </strong>
                   <span className="big-stat__label">
                     Air quality measurements
                   </span>
                 </li>
               )}
-              {data.sources && (
+              {data?.sources && (
                 <li className="big-stat">
                   <strong className="big-stat__value">
                     {shortenLargeNumber(data.sources, 0)}
@@ -151,7 +150,7 @@ export default function StatsCount() {
                   <span className="big-stat__label">Data sources</span>
                 </li>
               )}
-              {data.locations && (
+              {data?.locations && (
                 <li className="big-stat">
                   <strong className="big-stat__value">
                     {shortenLargeNumber(data.locations, 0)}
@@ -159,7 +158,7 @@ export default function StatsCount() {
                   <span className="big-stat__label">Locations</span>
                 </li>
               )}
-              {data.countries && (
+              {data?.countries && (
                 <li className="big-stat">
                   <strong className="big-stat__value">
                     {shortenLargeNumber(data.countries, 0)}
