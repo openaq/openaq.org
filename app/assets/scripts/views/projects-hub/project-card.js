@@ -11,12 +11,14 @@ export default function ProjectCard({
   id,
   name,
   subtitle,
-  sourceType,
   firstUpdated,
   totalLocations,
   totalMeasurements,
   parametersList,
   sources,
+  sensorType,
+  entity,
+  mobile,
 }) {
   let updated = moment(lastUpdated).fromNow();
   let started = moment(firstUpdated).format('YYYY/MM/DD');
@@ -35,7 +37,7 @@ export default function ProjectCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={sourceType}
+      tags={[sensorType, entity, mobile ? 'Mobile' : 'Stationary']}
       renderBody={() => (
         <CardDetails
           id="project"
@@ -52,15 +54,16 @@ export default function ProjectCard({
             },
             {
               label: sources.length > 1 ? 'Sources' : 'Source',
-              value: sources.map(source => (
+              value: sources?.map(source => [
                 <a
-                  href={source.sourceURL}
+                  href={source.url}
                   title={`View source for ${name}`}
                   key={source.name}
+                  className={!source.url && 'disabled'}
                 >
                   {source.name}
-                </a>
-              )),
+                </a>,
+              ]),
             },
           ]}
         />
@@ -82,7 +85,9 @@ ProjectCard.propTypes = {
   name: T.string,
   id: T.oneOfType([T.string, T.number]),
   subtitle: T.string,
-  sourceType: T.oneOfType([T.array, T.string]),
+  sensorType: T.string,
+  entity: T.string,
+  mobile: T.bool,
   sources: T.array,
   firstUpdated: T.string,
   totalLocations: T.number,

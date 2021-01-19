@@ -6,6 +6,7 @@ import config from '../../config';
 import { round } from '../../utils/format';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
+import SourcesList from '../sources-list';
 
 const defaultState = {
   fetched: false,
@@ -111,12 +112,9 @@ export default function Popover({
           )}
 
           {data.sources && (
-            <p>
-              Source:{' '}
-              <a href={data.sources[0].url} title="View source information">
-                {data.sources[0].name}
-              </a>
-            </p>
+            <div style={{ display: `flex`, gap: `0.5rem` }}>
+              Source: <SourcesList sources={data.sources} />
+            </div>
           )}
           {!isDisplayingSelectionTools ? (
             <ul className="popover__actions">
