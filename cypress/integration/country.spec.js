@@ -19,7 +19,7 @@ describe('The Country Page', () => {
     cy.get('[data-cy=country-header-stats').should('exist');
     cy.get('[data-cy=country-header-stat-locations').should('exist');
     cy.get('[data-cy=country-header-stat-measurements').should('exist');
-    cy.get('[data-cy=country-header-stat-source').should('exist');
+    cy.get('[data-cy=country-header-stat-sources').should('exist');
 
     // tests that the link should open in a new tab
     cy.get('[data-cy=header-apidocs-btn').should(
