@@ -4,16 +4,7 @@ import styled from 'styled-components';
 
 import SmartLink from '../smart-link';
 import Card from '../card';
-import config from '../../config';
-
-const SourceList = styled.ul`
-  padding: 0;
-  list-style: none;
-
-  > *:not(:last-child) {
-    margin-bottom: 0.5rem;
-  }
-`;
+import SourcesList from '../sources-list';
 
 const InfoMessage = styled.div`
   box-shadow: 0 0 0 1px rgba(35, 47, 59, 0.08);
@@ -28,49 +19,10 @@ export default function SourceInfo({ sources }) {
       id="sources"
       isDashboardHeader
       className="card--sources"
-      renderBody={() => {
-        if (sources) {
-          return (
-            <SourceList>
-              {sources.map((source, idx) => (
-                <li key={idx}>
-                  {source.url ? (
-                    <a
-                      className="source__title source__title--external"
-                      href={source.url}
-                      rel="noreferrer noopener"
-                      target="_blank"
-                      title={source.name}
-                    >
-                      {source.name}
-                    </a>
-                  ) : (
-                    <p className="source__title" title={source.name}>
-                      {source.name}
-                    </p>
-                  )}
-                  <p className="source__readme">
-                    {source.readme ? (
-                      <a
-                        href={`${config.api}/${source.readme.replace(
-                          /^\/v2\//,
-                          ''
-                        )}`}
-                        rel="noreferrer noopener"
-                        target="_blank"
-                      >
-                        Technical readme
-                      </a>
-                    ) : (
-                      'No technical readme for this source'
-                    )}
-                  </p>
-                </li>
-              ))}
-            </SourceList>
-          );
-        }
-        return (
+      renderBody={() =>
+        sources ? (
+          <SourcesList sources={sources} showReadme />
+        ) : (
           <InfoMessage>
             <p>There are no sources listed.</p>
             <p>
@@ -84,8 +36,8 @@ export default function SourceInfo({ sources }) {
               .
             </p>
           </InfoMessage>
-        );
-      }}
+        )
+      }
       renderFooter={
         sources && sources.length
           ? () => (

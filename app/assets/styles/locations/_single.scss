@@ -234,7 +234,8 @@
 .source__title {
   @extend .truncated;
   display: block;
-  color: $base-color;
+  color: $base-font-color;
+  font-weight: $base-font-bold;
   margin: 0;
 
   &--external {
