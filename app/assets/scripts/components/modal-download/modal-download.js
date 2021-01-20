@@ -206,7 +206,7 @@ function ModalDownload(props) {
     }
   }, [country]);
 
-  const checkingUrl = computeApiUrl(downloadType, formState, { limit: 1 });
+  const checkingUrl = computeApiUrl(selectedDownType, formState, { limit: 1 });
   useRevealed(() => {
     // What is going on here?
     // The api is limited to 65,536 results, but some download options
@@ -378,7 +378,7 @@ function ModalDownload(props) {
                   Cancel
                 </button>
                 <a
-                  href={computeApiUrl(downloadType, formState, {
+                  href={computeApiUrl(selectedDownType, formState, {
                     format: 'csv',
                   })}
                   className={c('button-modal-download', { disabled: false })}
