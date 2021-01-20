@@ -44,6 +44,7 @@ function Dashboard({
       {isMobile && (
         <MobileDataLocationsCard
           locationId={locationIds.length === 1 ? locationIds[0] : null}
+          locationIds={locationIds}
           bbox={bbox}
           firstUpdated={projectDates.start}
           lastUpdated={projectDates.end}
