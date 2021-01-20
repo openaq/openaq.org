@@ -309,6 +309,7 @@ function Project({ match, history, location, _openDownloadModal }) {
             <Dashboard
               bbox={projectData.bbox}
               isMobile={projectData.isMobile}
+              locationIds={projectData.locationIds}
               measurements={projectData.measurements}
               projectParams={projectData.parameters}
               projectId={projectData.id}

@@ -12,6 +12,7 @@ import MobileDataLocationsCard from '../../components/dashboard/mobile-data-loca
 function Dashboard({
   bbox,
   isMobile,
+  locationIds,
   measurements,
   projectParams,
   projectId,
@@ -42,6 +43,7 @@ function Dashboard({
       />
       {isMobile && (
         <MobileDataLocationsCard
+          locationId={locationIds.length === 1 ? locationIds[0] : null}
           bbox={bbox}
           firstUpdated={projectDates.start}
           lastUpdated={projectDates.end}
@@ -69,6 +71,7 @@ function Dashboard({
 Dashboard.propTypes = {
   bbox: PropTypes.array,
   isMobile: PropTypes.bool,
+  locationIds: PropTypes.arrayOf(PropTypes.number),
   measurements: PropTypes.number,
   projectName: PropTypes.string,
   projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -87,8 +90,6 @@ Dashboard.propTypes = {
       contacts: PropTypes.array,
     })
   ),
-  locations: PropTypes.arrayOf(PropTypes.number),
-  country: PropTypes.string,
   timeseriesAverages: PropTypes.object,
 };
 
