@@ -18,6 +18,8 @@ const defaultState = {
 };
 
 function NodesDashboard({
+  bbox,
+  isMobile,
   measurements,
   projectId,
   projectName,
@@ -164,6 +166,8 @@ function NodesDashboard({
 
   return (
     <Dashboard
+      bbox={bbox}
+      isMobile={isMobile}
       measurements={measurements}
       projectParams={parameters}
       projectId={projectId}
@@ -178,6 +182,8 @@ function NodesDashboard({
 }
 
 NodesDashboard.propTypes = {
+  bbox: PropTypes.array,
+  isMobile: PropTypes.bool,
   measurements: PropTypes.number,
   projectName: PropTypes.string,
   projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

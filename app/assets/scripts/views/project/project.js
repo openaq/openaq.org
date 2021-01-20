@@ -282,6 +282,8 @@ function Project({ match, history, location, _openDownloadModal }) {
               <h1 className="fold__title">Values for selected stations</h1>
             </header>
             <NodesDashboard
+              bbox={projectData.bbox}
+              isMobile={projectData.isMobile}
               measurements={projectData.measurements}
               projectId={projectData.id}
               projectName={projectData.name}
@@ -306,6 +308,8 @@ function Project({ match, history, location, _openDownloadModal }) {
               <h1 className="fold__title">Values for all stations</h1>
             </header>
             <Dashboard
+              bbox={projectData.bbox}
+              isMobile={projectData.isMobile}
               measurements={projectData.measurements}
               projectParams={projectData.parameters}
               projectId={projectData.id}
