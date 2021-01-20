@@ -7,7 +7,6 @@ import qs from 'qs';
 import { openDownloadModal } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
 import config from '../../config';
-import { getCountryBbox } from '../../utils/countries';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import Dashboard from './dashboard';
