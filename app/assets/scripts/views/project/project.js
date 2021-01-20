@@ -226,7 +226,7 @@ function Project({ match, history, location, _openDownloadModal }) {
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
-        {projectState.isDisplayingSelectionTools && (
+        {!projectData.isMobile && projectState.isDisplayingSelectionTools && (
           <div
             className={'filters, inner'}
             style={{
@@ -262,18 +262,20 @@ function Project({ match, history, location, _openDownloadModal }) {
           </div>
         )}
 
-        <NodeLocations
-          bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
-          locationIds={projectData.locationIds}
-          parameters={projectData.parameters}
-          toggleLocationSelection={() =>
-            dispatch({ type: projectActions.TOGGLE_MAP_STATE })
-          }
-          isDisplayingSelectionTools={projectState.isDisplayingSelectionTools}
-          selectedLocations={projectState.selectedLocations}
-          handleLocationSelection={handleLocationSelection}
-        />
-        {!projectState.isFullProject ? (
+        {!projectData.isMobile && (
+          <NodeLocations
+            bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
+            locationIds={projectData.locationIds}
+            parameters={projectData.parameters}
+            toggleLocationSelection={() =>
+              dispatch({ type: projectActions.TOGGLE_MAP_STATE })
+            }
+            isDisplayingSelectionTools={projectState.isDisplayingSelectionTools}
+            selectedLocations={projectState.selectedLocations}
+            handleLocationSelection={handleLocationSelection}
+          />
+        )}
+        {!projectData.isMobile && !projectState.isFullProject ? (
           <>
             <header
               className="fold__header inner"
@@ -282,8 +284,6 @@ function Project({ match, history, location, _openDownloadModal }) {
               <h1 className="fold__title">Values for selected stations</h1>
             </header>
             <NodesDashboard
-              bbox={projectData.bbox}
-              isMobile={projectData.isMobile}
               measurements={projectData.measurements}
               projectId={projectData.id}
               projectName={projectData.name}
