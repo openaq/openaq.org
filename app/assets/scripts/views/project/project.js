@@ -264,7 +264,7 @@ function Project({ match, history, location, _openDownloadModal }) {
 
         {!projectData.isMobile && (
           <NodeLocations
-            bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
+            bbox={projectData.bbox}
             locationIds={projectData.locationIds}
             parameters={projectData.parameters}
             toggleLocationSelection={() =>

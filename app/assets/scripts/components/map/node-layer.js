@@ -27,8 +27,8 @@ export default function NodeLayer({
 }) {
   let match = useRouteMatch();
 
-  const circlesFilter = ['==', ['get', 'isMobile'], false];
-  const squaresFilter = ['==', ['get', 'isMobile'], true];
+  const circlesFilter = ['==', ['get', 'sensorType'], 'reference grade'];
+  const squaresFilter = ['==', ['get', 'sensorType'], 'low-cost sensor'];
   const locationIdFilter = [
     'in',
     ['number', ['get', 'locationId']],
