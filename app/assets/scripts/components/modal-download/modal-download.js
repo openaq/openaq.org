@@ -21,7 +21,7 @@ import { NO_CITY } from '../../utils/constants';
 
 import LocationSelector from './location-selector';
 import DateSelector from './date-selector';
-import Parameters from './parameters';
+import Options from './options';
 import LoadingMessage from '../loading-message';
 import DownloadType, { downloadTypeDefault } from './download-type-selector';
 import ProjectSelector from './project-selector';
@@ -72,6 +72,11 @@ const computeApiUrl = (downloadType, values, initalQS = {}) => {
     } else if (state.locCountry) {
       qs.country = state.locCountry;
     }
+
+    // Sensor type as long as there's no location selected.
+    if (state.sensorTypes?.length && !state.locLocation) {
+      qs.sensorType = state.sensorTypes;
+    }
   } else if (downloadType === 'projects') {
     if (state.projDataset) {
       qs.project = state.projDataset;
@@ -88,7 +93,7 @@ const computeApiUrl = (downloadType, values, initalQS = {}) => {
     qs.date_to = state.eDate;
   }
 
-  if (state.parameters) {
+  if (state.parameters?.length) {
     qs.parameter = state.parameters;
   }
 
@@ -112,6 +117,17 @@ const fetchVal = url =>
         return -1;
       }
     );
+
+const sensorTypesOptions = [
+  {
+    id: 'low-cost sensor',
+    displayName: 'Low-cost Sensor',
+  },
+  {
+    id: 'reference',
+    displayName: 'Reference Grade',
+  },
+];
 
 function ModalDownload(props) {
   const {
@@ -145,6 +161,7 @@ function ModalDownload(props) {
     projCountry: EMPTY,
     projDataset: EMPTY,
     parameters: [],
+    sensorTypes: [],
   });
 
   const [selectionCount, setSelectionCount] = useState(null);
@@ -249,6 +266,13 @@ function ModalDownload(props) {
     setFormState(s => ({ ...s, parameters: toggleValue(s.parameters, value) }));
   };
 
+  const onSensorTypeSelect = value => {
+    setFormState(s => ({
+      ...s,
+      sensorTypes: toggleValue(s.sensorTypes, value),
+    }));
+  };
+
   const [coreParam, additionalParam] = useMemo(
     () => _.partition(parameters, p => p.isCore),
     [parameters]
@@ -341,14 +365,27 @@ function ModalDownload(props) {
                 onOptSelect={onOptSelect}
                 dateState={formState}
               />
-              <Parameters
+              {selectedDownType === 'locations' && (
+                <Options
+                  title="Sensor type"
+                  name="sensor-type"
+                  list={sensorTypesOptions}
+                  selected={formState.sensorTypes}
+                  onSelect={onSensorTypeSelect}
+                  info="When an individual location is selected the sensor type can't be selected since a location only has one type."
+                  disabled={!!formState.locLocation}
+                />
+              )}
+              <Options
                 title="Core parameters"
+                name="core-params"
                 list={coreParam}
                 selected={formState.parameters}
                 onSelect={onParameterSelect}
               />
-              <Parameters
+              <Options
                 title="Additional parameters"
+                name="add-params"
                 list={additionalParam}
                 selected={formState.parameters}
                 onSelect={onParameterSelect}

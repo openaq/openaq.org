@@ -114,6 +114,8 @@ a.disabled {
 /* Info button icon
    ========================================================================== */
 .info-button {
+  @extend .button, .button--small, .button--achromic-unbounded, .button--text-hidden;
+
   &::after {
     @extend %openaq-ds-icon-circle-information;
     color: tint($base-color, 45%);

@@ -17,7 +17,14 @@ function InfoButton(props) {
   const { info, id, width } = props;
   return (
     <Wrapper>
-      <a data-tip data-for={id} className="info-button"></a>
+      <button
+        data-tip
+        data-effect="solid"
+        data-for={id}
+        className="info-button"
+      >
+        <span>{info}</span>
+      </button>
       {info && (
         <StyledTooltip width={width} id={id} place="bottom" effect="float">
           {info}
