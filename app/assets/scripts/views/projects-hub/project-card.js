@@ -58,10 +58,10 @@ export default function ProjectCard({
                 <a
                   href={source.url}
                   title={`View source for ${name}`}
-                  key={source.name}
+                  key={source.organization}
                   className={!source.url && 'disabled'}
                 >
-                  {source.name}
+                  {source.organization}
                 </a>,
               ]),
             },
