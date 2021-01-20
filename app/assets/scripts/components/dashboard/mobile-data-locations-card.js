@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
 import Map from '../map';
-import LocationsSource from '../map/locations-source';
 import MobileSource from '../map/mobile-source';
 import MobileBoundsLayer from '../map/mobile-bounds-layer';
 import MobilePointsLayer from '../map/mobile-points-layer';
@@ -30,14 +29,12 @@ export default function MobileDataLocationsCard({
       )}
       renderBody={() => (
         <Map bbox={bbox}>
-          <LocationsSource>
-            <MobileBoundsLayer locationId={locationId} />
-          </LocationsSource>
           <MobileSource
             locationId={locationId}
             firstUpdated={firstUpdated}
             lastUpdated={lastUpdated}
           >
+            <MobileBoundsLayer locationId={locationId} />
             <MobilePointsLayer locationId={locationId} />
           </MobileSource>
         </Map>
