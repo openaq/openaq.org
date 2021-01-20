@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import mapbox from 'mapbox-gl';
 
 import config from '../../config';
+import LoadingMessage from '../loading-message';
 
 export default function Map({ center, bbox, scrollZoomDisabled, children }) {
   const containerRef = useRef();
 
   const [map, setMap] = useState(null);
+  const [tilesLoaded, setTilesLoaded] = useState(false);
 
   useEffect(() => {
     mapbox.accessToken = config.mapbox.token;
@@ -44,6 +46,13 @@ export default function Map({ center, bbox, scrollZoomDisabled, children }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (map) setTilesLoaded(map.areTilesLoaded());
+    return () => {
+      setTilesLoaded(false);
+    };
+  }, [map && map.areTilesLoaded()]);
+
   return (
     <div className="map" style={{ minHeight: `20rem` }}>
       <div ref={containerRef} className="map__container" data-cy="mapboxgl-map">
@@ -54,6 +63,19 @@ export default function Map({ center, bbox, scrollZoomDisabled, children }) {
               map,
             })
           )}
+        {!tilesLoaded && (
+          <div
+            style={{
+              position: `absolute`,
+              top: `50%`,
+              left: `50%`,
+              transform: `translate(-50%, -50%)`,
+              zIndex: 20,
+            }}
+          >
+            <LoadingMessage type="minimal" />
+          </div>
+        )}
       </div>
     </div>
   );
