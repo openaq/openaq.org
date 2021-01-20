@@ -163,27 +163,6 @@ function Project({ match, history, location, _openDownloadModal }) {
         }
       );
   };
-  /*
-      .then(
-        json => {
-          setState(state => ({
-            ...state,
-            fetched: true,
-            fetching: false,
-            projectData: json.results[0],
-          }));
-        },
-        e => {
-          console.log('e', e);
-          setState(state => ({
-            ...state,
-            fetched: true,
-            fetching: false,
-            error: e,
-          }));
-        }
-      );
-  };*/
 
   const handleLocationSelection = (paramId, locationId) => {
     dispatch({ type: projectActions.SELECT_LOCATION, paramId, locationId });
@@ -209,8 +188,7 @@ function Project({ match, history, location, _openDownloadModal }) {
     <section className="inpage">
       <Header
         tagline="Datasets"
-        title={projectData.name}
-        subtitle={projectData.subtitle}
+        title={projectData.subtitle}
         action={{
           api: `${config.apiDocs}`,
           download: () =>
