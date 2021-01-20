@@ -30,7 +30,7 @@ export default function MobileDataLocationsCard({
         </CardHeader>
       )}
       renderBody={() => {
-        if (locationIds.length > 15) {
+        if (locationIds?.length > 15) {
           return (
             <ErrorMessage
               isShowingDiagnosis={false}
