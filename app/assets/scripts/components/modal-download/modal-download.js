@@ -198,13 +198,13 @@ function ModalDownload(props) {
     }
   }, [country]);
 
-  // Fetch datasets for a given country.
+  // Use case for when a location has no country.
+  // In this case we have to load the location data disregarding the country.
   useRevealed(() => {
-    _invalidateLocationsByCountry();
-    if (country) {
-      _fetchLocationsByCountry(country);
+    if (!country && location) {
+      _fetchLocationsByCountry(null, { location });
     }
-  }, [country]);
+  }, [country, location]);
 
   const checkingUrl = computeApiUrl(selectedDownType, formState, { limit: 1 });
   useRevealed(() => {

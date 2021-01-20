@@ -28,7 +28,7 @@ export function fetchLocationsByCountry(country, filters = {}) {
 
     let limit = 10000;
     filters.country = country;
-    let f = buildAPIQS(filters);
+    let f = buildAPIQS(filters, { skipNulls: true });
 
     fetch(`${config.api}/locations?limit=${limit}&${f}`)
       .then(response => {
