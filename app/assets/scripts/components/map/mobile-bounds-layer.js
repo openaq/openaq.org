@@ -7,6 +7,7 @@ import { addPopover } from './map-interaction';
 
 export default function MobileBoundsLayer({
   locationId,
+  locationIds,
   activeParameter,
   map,
   sourceId,
@@ -53,11 +54,24 @@ export default function MobileBoundsLayer({
     };
   }, [locationId]);
 
+  useEffect(() => {
+    if (locationIds && map.getLayer(`mobile-bounds-${activeParameter}`))
+      map.setFilter(`mobile-bounds-${activeParameter}`, [
+        'in',
+        ['get', 'locationId'],
+        ['literal', locationIds],
+      ]);
+    return () => {
+      map.setFilter(`mobile-bounds-${activeParameter}`, null);
+    };
+  }, [locationIds]);
+
   return null;
 }
 
 MobileBoundsLayer.propTypes = {
   locationId: PropTypes.number,
+  locationIds: PropTypes.arrayOf(PropTypes.number),
   activeParameter: PropTypes.number,
   map: PropTypes.object,
   sourceId: PropTypes.string,
