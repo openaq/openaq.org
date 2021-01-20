@@ -47,8 +47,14 @@ export default function MobileDataLocationsCard({
               firstUpdated={firstUpdated}
               lastUpdated={lastUpdated}
             >
-              <MobileBoundsLayer locationId={locationId} />
-              <MobilePointsLayer locationId={locationId} />
+              <MobileBoundsLayer
+                locationId={locationId}
+                locationIds={locationIds}
+              />
+              <MobilePointsLayer
+                locationId={locationId}
+                locationIds={locationIds}
+              />
             </MobileSource>
           </Map>
         );
@@ -58,7 +64,7 @@ export default function MobileDataLocationsCard({
 }
 
 MobileDataLocationsCard.propTypes = {
-  locationId: PropTypes.number.isRequired,
+  locationId: PropTypes.number,
   locationIds: PropTypes.arrayOf(PropTypes.number),
   bbox: PropTypes.arrayOf(PropTypes.number).isRequired,
   firstUpdated: PropTypes.string.isRequired,
