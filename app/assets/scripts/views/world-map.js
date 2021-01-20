@@ -6,6 +6,7 @@ import qs from 'qs';
 import config from '../config';
 import { HeaderMessage } from '../components/header';
 import MapComponent from '../components/map';
+import MobileSource from '../components/map/mobile-source';
 import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
 import MobileBoundsLayer from '../components/map/mobile-bounds-layer';
@@ -119,8 +120,10 @@ function WorldMap({ location, history }) {
       </header>
       <div className="inpage__body">
         <MapComponent>
-          <LocationsSource activeParameter={activeParameter.id}>
+          <MobileSource activeParameter={activeParameter.id}>
             <MobileBoundsLayer activeParameter={activeParameter.id} />
+          </MobileSource>
+          <LocationsSource activeParameter={activeParameter.id}>
             <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
           <Legend

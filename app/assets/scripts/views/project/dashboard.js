@@ -7,8 +7,12 @@ import SourcesCard from '../../components/dashboard/sources-card';
 import MeasureandsCard from '../../components/dashboard/measurands-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
+import MobileDataLocationsCard from '../../components/dashboard/mobile-data-locations-card';
 
 function Dashboard({
+  bbox,
+  isMobile,
+  locationIds,
   measurements,
   projectParams,
   projectId,
@@ -37,6 +41,15 @@ function Dashboard({
           'The average value of a pollutant over time during the specified window at each individual node selected and the average values across all locations selected. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown. If all locations are selected only the average across all locations is shown, not the individual location values.'
         }
       />
+      {isMobile && (
+        <MobileDataLocationsCard
+          locationId={locationIds.length === 1 ? locationIds[0] : null}
+          locationIds={locationIds}
+          bbox={bbox}
+          firstUpdated={projectDates.start}
+          lastUpdated={projectDates.end}
+        />
+      )}
       <MeasureandsCard
         parameters={projectParams}
         titleInfo={
@@ -57,6 +70,9 @@ function Dashboard({
 }
 
 Dashboard.propTypes = {
+  bbox: PropTypes.array,
+  isMobile: PropTypes.bool,
+  locationIds: PropTypes.arrayOf(PropTypes.number),
   measurements: PropTypes.number,
   projectName: PropTypes.string,
   projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -75,8 +91,6 @@ Dashboard.propTypes = {
       contacts: PropTypes.array,
     })
   ),
-  locations: PropTypes.arrayOf(PropTypes.number),
-  country: PropTypes.string,
   timeseriesAverages: PropTypes.object,
 };
 

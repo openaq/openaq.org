@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card, { CardHeader as BaseHeader, CardTitle } from '../card';
+import ErrorMessage from '../error-message';
 import Map from '../map';
-import LocationsSource from '../map/locations-source';
 import MobileSource from '../map/mobile-source';
 import MobileBoundsLayer from '../map/mobile-bounds-layer';
 import MobilePointsLayer from '../map/mobile-points-layer';
@@ -17,6 +17,7 @@ const CardHeader = styled(BaseHeader)`
 
 export default function MobileDataLocationsCard({
   locationId,
+  locationIds,
   bbox,
   firstUpdated,
   lastUpdated,
@@ -28,26 +29,37 @@ export default function MobileDataLocationsCard({
           <CardTitle className="card__title">Mobile data locations</CardTitle>
         </CardHeader>
       )}
-      renderBody={() => (
-        <Map bbox={bbox}>
-          <LocationsSource>
-            <MobileBoundsLayer locationId={locationId} />
-          </LocationsSource>
-          <MobileSource
-            locationId={locationId}
-            firstUpdated={firstUpdated}
-            lastUpdated={lastUpdated}
-          >
-            <MobilePointsLayer locationId={locationId} />
-          </MobileSource>
-        </Map>
-      )}
+      renderBody={() => {
+        if (locationIds.length > 15) {
+          return (
+            <ErrorMessage
+              isShowingDiagnosis={false}
+              instructions={
+                "Can't show detailed mobile data for more than 15 locations"
+              }
+            />
+          );
+        }
+        return (
+          <Map bbox={bbox}>
+            <MobileSource
+              locationId={locationId}
+              firstUpdated={firstUpdated}
+              lastUpdated={lastUpdated}
+            >
+              <MobileBoundsLayer locationId={locationId} />
+              <MobilePointsLayer locationId={locationId} />
+            </MobileSource>
+          </Map>
+        );
+      }}
     />
   );
 }
 
 MobileDataLocationsCard.propTypes = {
   locationId: PropTypes.number.isRequired,
+  locationIds: PropTypes.arrayOf(PropTypes.number),
   bbox: PropTypes.arrayOf(PropTypes.number).isRequired,
   firstUpdated: PropTypes.string.isRequired,
   lastUpdated: PropTypes.string.isRequired,
