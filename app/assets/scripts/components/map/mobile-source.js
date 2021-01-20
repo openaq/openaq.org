@@ -23,7 +23,9 @@ export default function MobileSource({
       map.addSource('mobile-source', {
         type: 'vector',
         tiles: [
-          `${config.api}/locations/tiles/mobile/{z}/{x}/{y}.pbf?${qs.stringify(
+          `${
+            config.api
+          }/locations/tiles/mobile-generalized/{z}/{x}/{y}.pbf?${qs.stringify(
             query,
             {
               skipNulls: true,
