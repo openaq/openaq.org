@@ -28,7 +28,8 @@ export default function LocationCard({
       id="location"
       title={
         <>
-          {name}{' '}
+          {name} <br />
+          <small>{`Location ID ${id} `}</small>
           <small>
             in {city}, {country}
           </small>
