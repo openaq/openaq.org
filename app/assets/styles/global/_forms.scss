@@ -63,6 +63,44 @@
   }
 }
 
+/* Form inner *
+   ========================================================================== */
+
+.form__inner-header {
+  display: flex;
+  margin-bottom: ($global-spacing / 2);
+  align-items: flex-start;
+
+  > *:not(:first-child) {
+    margin-left: $global-spacing;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form__inner-headline {
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form__inner-toolbar {
+  @extend .toolbar, .toolbar--small;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+}
+
+.form__inner-actions {
+  display: flex;
+  margin: 0 0 0 auto;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
 /* Form color modifiers
    ========================================================================== */
 
