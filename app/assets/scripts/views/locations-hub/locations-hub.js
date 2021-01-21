@@ -60,9 +60,7 @@ export default function LocationsHub({
     setFilters({
       // In the front end we are using param 'area', but this is
       // mapped to 'city' before getting sent to backend.
-      order_by:
-        query.order_by &&
-        query.order_by.split(',').map(opt => (opt === 'area' ? 'city' : opt)),
+      order_by: query.order_by === 'area' ? 'city' : query.order_by,
       sort: 'desc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
@@ -104,6 +102,7 @@ export default function LocationsHub({
         <Filter
           slug="/locations"
           by={['parameters', 'countries', 'sources', 'sensor']}
+          orderByOptions={['location', 'country', 'area', 'count']}
         />
         <div className="constrainer">
           <div className="content__meta">

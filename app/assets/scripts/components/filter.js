@@ -21,10 +21,6 @@ const defaultSelected = {
   source_type: [],
 };
 
-// In the front end we are using param 'area', but this is
-// mapped to 'city' before getting sent to backend
-const sortOptions = ['location', 'country', 'area', 'count'];
-
 const initFromLocation = ({
   countries,
   parameters,
@@ -52,7 +48,7 @@ export default function Filter({
   by,
 
   fetchBaseData,
-
+  orderByOptions,
   countries,
   parameters,
   sources,
@@ -295,7 +291,7 @@ export default function Filter({
                   role="menu"
                   className="drop__menu drop__menu--select scrollable"
                 >
-                  {_.sortBy(sortOptions).map(o => {
+                  {_.sortBy(orderByOptions).map(o => {
                     return (
                       <li key={o}>
                         <div
@@ -440,6 +436,7 @@ Filter.propTypes = {
       'manufacturers',
     ])
   ),
+  orderByOptions: PropTypes.array,
 
   fetchBaseData: PropTypes.func.isRequired,
 
