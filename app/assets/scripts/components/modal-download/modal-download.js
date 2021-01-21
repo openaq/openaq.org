@@ -206,14 +206,15 @@ function ModalDownload(props) {
   // Fetch locations/datasets for a given country.
   useRevealed(() => {
     _invalidateLocationsByCountry();
+    const country = formState.locCountry || formState.projCountry;
     if (country) {
-      if (downloadType === 'locations') {
+      if (selectedDownType === 'locations') {
         _fetchLocationsByCountry(country);
-      } else if (downloadType === 'projects') {
+      } else if (selectedDownType === 'projects') {
         _fetchProjects(1, { country }, 1000);
       }
     }
-  }, [country]);
+  }, [formState.locCountry, formState.projCountry, selectedDownType]);
 
   // Use case for when a location has no country.
   // In this case we have to load the location data disregarding the country.
@@ -244,18 +245,11 @@ function ModalDownload(props) {
     };
 
     if (key === 'locCountry') {
-      _invalidateLocationsByCountry();
-      if (e.target.value) {
-        _fetchLocationsByCountry(e.target.value);
-      }
       newState.locArea = EMPTY;
       newState.locLocation = EMPTY;
     } else if (key === 'locArea') {
       newState.locLocation = EMPTY;
     } else if (key === 'projCountry') {
-      if (e.target.value) {
-        _fetchProjects(1, { country: e.target.value }, 1000);
-      }
       newState.projDataset = EMPTY;
     }
     setFormState(newState);
