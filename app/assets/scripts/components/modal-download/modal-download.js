@@ -74,8 +74,8 @@ const computeApiUrl = (downloadType, values, initalQS = {}) => {
     }
 
     // Sensor type as long as there's no location selected.
-    if (state.sensorTypes?.length && !state.locLocation) {
-      qs.sensorType = state.sensorTypes;
+    if (state.sensorTypes?.length === 1 && !state.locLocation) {
+      qs.sensorType = state.sensorTypes[0];
     }
   } else if (downloadType === 'projects') {
     if (state.projDataset) {
