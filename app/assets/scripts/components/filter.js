@@ -21,7 +21,9 @@ const defaultSelected = {
   source_type: [],
 };
 
-const sortOptions = ['location', 'country', 'city', 'count'];
+// In the front end we are using param 'area', but this is
+// mapped to 'city' before getting sent to backend
+const sortOptions = ['location', 'country', 'area', 'count'];
 
 const initFromLocation = ({
   countries,

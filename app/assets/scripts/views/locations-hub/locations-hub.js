@@ -58,7 +58,11 @@ export default function LocationsHub({
     setPage(() => getPage(query));
 
     setFilters({
-      order_by: query.order_by && query.order_by.split(','),
+      // In the front end we are using param 'area', but this is
+      // mapped to 'city' before getting sent to backend.
+      order_by:
+        query.order_by &&
+        query.order_by.split(',').map(opt => (opt === 'area' ? 'city' : opt)),
       sort: 'desc',
       parameter: query.parameters && query.parameters.split(','),
       country: query.countries && query.countries.split(','),
