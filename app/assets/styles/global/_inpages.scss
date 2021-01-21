@@ -321,6 +321,8 @@ $page-header-y: $global-spacing * 5;
     color: rgba(#fff, 0.48);
   }
 
+
+
   .inpage__introduction {
     color: #fff;
 
@@ -332,6 +334,10 @@ $page-header-y: $global-spacing * 5;
       vertical-align: top;
     }
   }
+   a.feedback__button, a.feedback__button:visited {
+    background: rgba($secondary-color, 1);
+  }
+
 }
 
 
