@@ -53,7 +53,8 @@ export default function TimeSeriesCard({
     Number
   );
 
-  const temporal = day ? 'hour' : 'day';
+  // If lifetime, use day. Else hour
+  const temporal = year ? 'hour' : 'day';
   const activeData = prefetchedData && prefetchedData[activeTab.id];
 
   useEffect(() => {
