@@ -109,4 +109,5 @@ LocationCard.propTypes = {
   entity: T.string.isRequired,
   totalMeasurements: T.number.isRequired,
   isMobile: T.bool.isRequired,
+  isAnalysis: T.bool,
 };
