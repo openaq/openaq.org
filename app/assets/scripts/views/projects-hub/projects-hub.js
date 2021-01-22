@@ -95,7 +95,13 @@ export default function ProjectsHub({
       <div className="inpage__body">
         <Filter
           slug="/projects"
-          by={['parameters', 'countries', 'sources', 'processing-level', 'sensor']}
+          by={[
+            'parameters',
+            'countries',
+            'sources',
+            'processing-level',
+            'sensor',
+          ]}
           orderByOptions={[
             'id',
             'name',
