@@ -66,20 +66,22 @@ function Location({ location, history, match, openDownloadModal }) {
               fetching: false,
               data: {
                 ...dat,
-                parameters: dat.parameters.map(p => ({
-                  ...p,
-                  average: formatValueByUnit(
-                    p.average,
-                    p.unit,
-                    renderUnit(p.unit)
-                  ),
-                  lastValue: formatValueByUnit(
-                    p.lastValue,
-                    p.unit,
-                    renderUnit(p.unit)
-                  ),
-                  unit: renderUnit(p.unit),
-                })),
+                parameters: dat.parameters
+                  .filter(p => p) // removes null values
+                  .map(p => ({
+                    ...p,
+                    average: formatValueByUnit(
+                      p.average,
+                      p.unit,
+                      renderUnit(p.unit)
+                    ),
+                    lastValue: formatValueByUnit(
+                      p.lastValue,
+                      p.unit,
+                      renderUnit(p.unit)
+                    ),
+                    unit: renderUnit(p.unit),
+                  })),
               },
             }));
           },
