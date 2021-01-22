@@ -5,6 +5,7 @@ import moment from 'moment';
 import config from '../../config';
 
 export default function MobileSource({
+  activeParameter,
   locationId,
   firstUpdated,
   lastUpdated,
@@ -14,16 +15,24 @@ export default function MobileSource({
   const [sourceId, setSourceId] = useState(null);
 
   useEffect(() => {
-    if (!map.getSource('mobile-source')) {
+    if (!map.getSource(`mobile-source-${activeParameter}`)) {
       const query = {
+        parameter: activeParameter,
         location: locationId,
-        dateFrom: moment(firstUpdated).subtract(1, 'd').format('YYYY-MM-DD'),
-        dateTo: moment(lastUpdated).add(1, 'd').format('YYYY-MM-DD'),
+        dateFrom: firstUpdated
+          ? moment(firstUpdated).subtract(1, 'd').format('YYYY-MM-DD')
+          : null,
+        dateTo: lastUpdated
+          ? moment(lastUpdated).add(1, 'd').format('YYYY-MM-DD')
+          : null,
       };
-      map.addSource('mobile-source', {
+
+      map.addSource(`mobile-source-${activeParameter}`, {
         type: 'vector',
         tiles: [
-          `${config.api}/locations/tiles/mobile/{z}/{x}/{y}.pbf?${qs.stringify(
+          `${
+            config.api
+          }/locations/tiles/mobile-generalized/{z}/{x}/{y}.pbf?${qs.stringify(
             query,
             {
               skipNulls: true,
@@ -36,12 +45,12 @@ export default function MobileSource({
       });
     }
 
-    setSourceId('mobile-source');
+    setSourceId(`mobile-source-${activeParameter}`);
 
     return () => {
       setSourceId(null);
     };
-  }, []);
+  }, [activeParameter]); // activeParameter is the only prop that could update without unmounting the component
 
   return (
     <>
@@ -58,9 +67,10 @@ export default function MobileSource({
 }
 
 MobileSource.propTypes = {
-  locationId: PropTypes.number.isRequired,
-  firstUpdated: PropTypes.string.isRequired,
-  lastUpdated: PropTypes.string.isRequired,
+  activeParameter: PropTypes.number,
+  locationId: PropTypes.number,
+  firstUpdated: PropTypes.string,
+  lastUpdated: PropTypes.string,
   map: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.element,

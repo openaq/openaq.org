@@ -55,6 +55,7 @@ export default function Header({
                     <a
                       href="https://docs.google.com/forms/d/1s5GYME3He-EDed-jgg11Ry3zmvTZkPK5xSnQUWwu0Gk/edit"
                       title="Give feedback about the platform"
+                      className="feedback__button"
                     >
                       Share Feedback
                     </a>

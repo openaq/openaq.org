@@ -7,7 +7,6 @@ import qs from 'qs';
 import { openDownloadModal } from '../../actions/action-creators';
 import { buildQS } from '../../utils/url';
 import config from '../../config';
-import { getCountryBbox } from '../../utils/countries';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import Dashboard from './dashboard';
@@ -164,27 +163,6 @@ function Project({ match, history, location, _openDownloadModal }) {
         }
       );
   };
-  /*
-      .then(
-        json => {
-          setState(state => ({
-            ...state,
-            fetched: true,
-            fetching: false,
-            projectData: json.results[0],
-          }));
-        },
-        e => {
-          console.log('e', e);
-          setState(state => ({
-            ...state,
-            fetched: true,
-            fetching: false,
-            error: e,
-          }));
-        }
-      );
-  };*/
 
   const handleLocationSelection = (paramId, locationId) => {
     dispatch({ type: projectActions.SELECT_LOCATION, paramId, locationId });
@@ -210,8 +188,7 @@ function Project({ match, history, location, _openDownloadModal }) {
     <section className="inpage">
       <Header
         tagline="Datasets"
-        title={projectData.name}
-        subtitle={projectData.subtitle}
+        title={projectData.subtitle}
         action={{
           api: `${config.apiDocs}`,
           download: () =>
@@ -226,7 +203,7 @@ function Project({ match, history, location, _openDownloadModal }) {
       />
       <div className="inpage__body">
         <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
-        {projectState.isDisplayingSelectionTools && (
+        {!projectData.isMobile && projectState.isDisplayingSelectionTools && (
           <div
             className={'filters, inner'}
             style={{
@@ -262,18 +239,20 @@ function Project({ match, history, location, _openDownloadModal }) {
           </div>
         )}
 
-        <NodeLocations
-          bbox={projectData.bbox || getCountryBbox(projectData.countries[0])}
-          locationIds={projectData.locationIds}
-          parameters={projectData.parameters}
-          toggleLocationSelection={() =>
-            dispatch({ type: projectActions.TOGGLE_MAP_STATE })
-          }
-          isDisplayingSelectionTools={projectState.isDisplayingSelectionTools}
-          selectedLocations={projectState.selectedLocations}
-          handleLocationSelection={handleLocationSelection}
-        />
-        {!projectState.isFullProject ? (
+        {!projectData.isMobile && (
+          <NodeLocations
+            bbox={projectData.bbox}
+            locationIds={projectData.locationIds}
+            parameters={projectData.parameters}
+            toggleLocationSelection={() =>
+              dispatch({ type: projectActions.TOGGLE_MAP_STATE })
+            }
+            isDisplayingSelectionTools={projectState.isDisplayingSelectionTools}
+            selectedLocations={projectState.selectedLocations}
+            handleLocationSelection={handleLocationSelection}
+          />
+        )}
+        {!projectData.isMobile && !projectState.isFullProject ? (
           <>
             <header
               className="fold__header inner"
@@ -306,6 +285,9 @@ function Project({ match, history, location, _openDownloadModal }) {
               <h1 className="fold__title">Values for all stations</h1>
             </header>
             <Dashboard
+              bbox={projectData.bbox}
+              isMobile={projectData.isMobile}
+              locationIds={projectData.locationIds}
               measurements={projectData.measurements}
               projectParams={projectData.parameters}
               projectId={projectData.id}

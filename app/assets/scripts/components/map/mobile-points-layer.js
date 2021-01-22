@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-export default function MobilePointsLayer({ map, sourceId }) {
+export default function MobilePointsLayer({ locationIds, map, sourceId }) {
   useEffect(() => {
     map.addLayer({
       id: 'mobile-points',
@@ -19,10 +19,23 @@ export default function MobilePointsLayer({ map, sourceId }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (locationIds && map.getLayer('mobile-points'))
+      map.setFilter('mobile-points', [
+        'in',
+        ['get', 'locationId'],
+        ['literal', locationIds],
+      ]);
+    return () => {
+      map.setFilter('mobile-points', null);
+    };
+  }, [locationIds]);
+
   return null;
 }
 
 MobilePointsLayer.propTypes = {
+  locationIds: PropTypes.arrayOf(PropTypes.number),
   map: PropTypes.object,
   sourceId: PropTypes.string,
 };
