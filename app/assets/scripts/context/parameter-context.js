@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import config from '../config';
 
 const defaultState = {
@@ -61,3 +62,6 @@ export function ParameterProvider(props) {
     </ParameterContext.Provider>
   );
 }
+ParameterProvider.propTypes = {
+  children: PropTypes.node,
+};
