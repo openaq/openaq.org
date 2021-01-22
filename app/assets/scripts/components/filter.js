@@ -21,8 +21,6 @@ const defaultSelected = {
   source_type: [],
 };
 
-const sortOptions = ['location', 'country', 'city', 'count'];
-
 const initFromLocation = ({
   countries,
   parameters,
@@ -50,7 +48,7 @@ export default function Filter({
   by,
 
   fetchBaseData,
-
+  orderByOptions,
   countries,
   parameters,
   sources,
@@ -293,7 +291,7 @@ export default function Filter({
                   role="menu"
                   className="drop__menu drop__menu--select scrollable"
                 >
-                  {_.sortBy(sortOptions).map(o => {
+                  {_.sortBy(orderByOptions).map(o => {
                     return (
                       <li key={o}>
                         <div
@@ -438,6 +436,7 @@ Filter.propTypes = {
       'manufacturers',
     ])
   ),
+  orderByOptions: PropTypes.array,
 
   fetchBaseData: PropTypes.func.isRequired,
 
