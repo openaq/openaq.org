@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import qs from 'qs';
 
-import config from '../config';
+import {
+  ParameterContext,
+  ParameterProvider,
+} from '../context/parameter-context';
+
 import { HeaderMessage } from '../components/header';
 import MapComponent from '../components/map';
 import MobileSource from '../components/map/mobile-source';
@@ -13,67 +17,19 @@ import MobileBoundsLayer from '../components/map/mobile-bounds-layer';
 import Legend from '../components/map/legend';
 import { parameterMax } from '../utils/map-settings';
 
-const defaultState = {
-  fetched: false,
-  fetching: false,
-  error: null,
-  parameters: null,
-};
-
 function WorldMap({ location, history }) {
-  const [{ fetched, fetching, error, parameters }, setState] = useState(
-    defaultState
+  const { fetchedParams, fetchingParams, paramError, parameters } = useContext(
+    ParameterContext
   );
   const setActiveParamUrl = parameter => {
     history.push(`${location.pathname}?parameter=${parameter}`);
   };
 
-  useEffect(() => {
-    const fetchData = () => {
-      setState(state => ({ ...state, fetching: true, error: null }));
-
-      fetch(`${config.api}/parameters`)
-        .then(response => {
-          if (response.status >= 400) {
-            throw new Error('Bad response');
-          }
-          return response.json();
-        })
-        .then(
-          json => {
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              parameters: json.results.filter(p =>
-                Object.keys(parameterMax).includes(p.id.toString())
-              ),
-            }));
-          },
-          e => {
-            console.log('e', e);
-            setState(state => ({
-              ...state,
-              fetched: true,
-              fetching: false,
-              error: e,
-            }));
-          }
-        );
-    };
-
-    fetchData();
-
-    return () => {
-      setState(defaultState);
-    };
-  }, []);
-
-  if (!fetched && !fetching) {
+  if (!fetchedParams && !fetchingParams) {
     return null;
   }
 
-  if (fetching) {
+  if (fetchingParams) {
     return (
       <HeaderMessage>
         <h1>Take a deep breath.</h1>
@@ -84,7 +40,7 @@ function WorldMap({ location, history }) {
     );
   }
 
-  if (error || !parameters) {
+  if (paramError || !parameters) {
     return (
       <HeaderMessage>
         <h1>Uh oh, something went wrong.</h1>
@@ -102,10 +58,12 @@ function WorldMap({ location, history }) {
       </HeaderMessage>
     );
   }
-
+  const coreParameters = parameters.filter(p =>
+    Object.keys(parameterMax).includes(p.id.toString())
+  );
   const queryParameter = qs.parse(location.search, { ignoreQueryPrefix: true })
     .parameter;
-  const activeParameter = _.find(parameters, {
+  const activeParameter = _.find(coreParameters, {
     id: Number(queryParameter) || 2,
   });
 
@@ -127,7 +85,7 @@ function WorldMap({ location, history }) {
             <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
           <Legend
-            parameters={parameters}
+            parameters={coreParameters}
             activeParameter={activeParameter}
             onParamSelection={setActiveParamUrl}
           />
@@ -142,4 +100,12 @@ WorldMap.propTypes = {
   history: PropTypes.object,
 };
 
-export default WorldMap;
+function WorldMapWrapper(props) {
+  return (
+    <ParameterProvider>
+      <WorldMap {...props} />
+    </ParameterProvider>
+  );
+}
+
+export default WorldMapWrapper;
