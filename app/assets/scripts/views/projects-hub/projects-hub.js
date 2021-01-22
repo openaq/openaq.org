@@ -59,6 +59,7 @@ export default function ProjectsHub({
       sourceName: query.sources && query.sources.split(','),
       // The following are not lists
       isMobile: query.mobility && query.mobility === 'Mobile',
+      isAnalysis: query.procLevel === 'Analysis',
       entity: query.entity && query.entity.toLowerCase(),
       sensorType: query.grade && query.grade.toLowerCase(),
       manufacturerName: query.manufacturer && query.manufacturer,
@@ -94,7 +95,7 @@ export default function ProjectsHub({
       <div className="inpage__body">
         <Filter
           slug="/projects"
-          by={['parameters', 'countries', 'sources', 'sensor']}
+          by={['parameters', 'countries', 'sources', 'processing-level', 'sensor']}
           orderByOptions={[
             'id',
             'name',
