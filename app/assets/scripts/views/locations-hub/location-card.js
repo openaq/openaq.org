@@ -45,7 +45,7 @@ export default function LocationCard({
         sensorType,
         entity,
         isMobile ? 'Mobile' : 'Stationary',
-        isAnalysis && 'Analysis',
+        isAnalysis ? 'Analysis' : 'Raw',
       ]}
       renderBody={() => (
         <CardDetails
