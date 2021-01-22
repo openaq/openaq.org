@@ -81,7 +81,7 @@ export default function LocationSelector(props) {
       </div>
       <div className={c('form__group', { disabled: disableArea })}>
         <label htmlFor="loc-area" className="form__label">
-          Area
+          City/Region
         </label>
         <select
           id="loc-area"
