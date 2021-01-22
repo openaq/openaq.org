@@ -128,8 +128,9 @@ export default function Legend({
   const filteredParams =
     paramIds && parameters
       ? parameters.filter(param => paramIds.includes(param.id))
-      : [];
-  let legendParameters = presetParameterList || filteredParams;
+      : null;
+  let legendParameters = presetParameterList ||
+    filteredParams || [activeParameter];
   return (
     <Wrapper>
       <Container>
