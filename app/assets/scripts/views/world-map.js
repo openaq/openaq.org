@@ -85,7 +85,7 @@ function WorldMap({ location, history }) {
             <MeasurementsLayer activeParameter={activeParameter.id} />
           </LocationsSource>
           <Legend
-            parameters={coreParameters}
+            presetParameterList={coreParameters}
             activeParameter={activeParameter}
             onParamSelection={setActiveParamUrl}
           />

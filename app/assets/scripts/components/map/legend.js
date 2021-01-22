@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'openaq-design-system';
 import c from 'classnames';
 import styled from 'styled-components';
 
+import { ParameterContext } from '../../context/parameter-context';
 import { generateLegendStops } from '../../utils/colors';
 
 const Wrapper = styled.div`
@@ -106,25 +107,38 @@ Drop.propTypes = {
 };
 
 export default function Legend({
-  isOnlyCoreParams,
-  parameters,
+  presetParameterList,
+  paramIds,
   activeParameter,
   onParamSelection,
+  showOnlyParam,
 }) {
+  const { parameters } = useContext(ParameterContext);
   const scaleStops = generateLegendStops(
     activeParameter.parameterId || activeParameter.id
   );
-  const colorWidth = 100 / scaleStops.length;
 
+  const isCore = activeParameter =>
+    parameters &&
+    parameters.find(
+      p => p.id === (activeParameter.parameterId || activeParameter.id)
+    ).isCore;
+
+  const colorWidth = 100 / scaleStops.length;
+  const filteredParams =
+    paramIds && parameters
+      ? parameters.filter(param => paramIds.includes(param.id))
+      : [];
+  let legendParameters = presetParameterList || filteredParams;
   return (
     <Wrapper>
       <Container>
-        {!isOnlyCoreParams && (
+        {showOnlyParam && (
           <p>
             Showing locations for:
-            {parameters?.length > 1 ? (
+            {legendParameters?.length > 1 ? (
               <Drop
-                parameters={parameters}
+                parameters={legendParameters}
                 activeParameter={activeParameter}
                 onParamSelection={onParamSelection}
               />
@@ -145,13 +159,13 @@ export default function Legend({
           <dd>Low Cost Sensor</dd>
         </Definition>
       </Container>
-      {isOnlyCoreParams && (
+      {!showOnlyParam && (
         <Container>
           <p>
             Showing the most recent* values for{' '}
-            {parameters?.length > 1 ? (
+            {legendParameters?.length > 1 ? (
               <Drop
-                parameters={parameters}
+                parameters={legendParameters}
                 activeParameter={activeParameter}
                 onParamSelection={onParamSelection}
               />
@@ -159,23 +173,32 @@ export default function Legend({
               activeParameter.displayName
             )}
           </p>
-          <ul className="color-scale">
-            {scaleStops.map(o => (
-              <li
-                key={o.label}
-                style={{ backgroundColor: o.color, width: `${colorWidth}%` }}
-                className="color-scale__item"
-              >
-                <span className="color-scale__value">{o.label}</span>
-              </li>
-            ))}
-          </ul>
-          <p>* Locations not updated in the last two days are shown in grey.</p>
-          <small className="disclaimer">
-            <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
-              Data Disclaimer and More Information
-            </a>
-          </small>
+          {isCore(activeParameter) && (
+            <>
+              <ul className="color-scale">
+                {scaleStops.map(o => (
+                  <li
+                    key={o.label}
+                    style={{
+                      backgroundColor: o.color,
+                      width: `${colorWidth}%`,
+                    }}
+                    className="color-scale__item"
+                  >
+                    <span className="color-scale__value">{o.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <p>
+                * Locations not updated in the last two days are shown in grey.
+              </p>
+              <small className="disclaimer">
+                <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
+                  Data Disclaimer and More Information
+                </a>
+              </small>
+            </>
+          )}
         </Container>
       )}
     </Wrapper>
@@ -183,8 +206,8 @@ export default function Legend({
 }
 
 Legend.propTypes = {
-  isOnlyCoreParams: PropTypes.bool,
-  parameters: PropTypes.array,
+  presetParameterList: PropTypes.array,
+  paramIds: PropTypes.array,
   activeParameter: PropTypes.shape({
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
@@ -192,8 +215,5 @@ Legend.propTypes = {
     parameterId: PropTypes.number.isRequired,
   }).isRequired,
   onParamSelection: PropTypes.func,
-};
-
-Legend.defaultProps = {
-  isOnlyCoreParams: true,
+  showOnlyParam: PropTypes.bool,
 };

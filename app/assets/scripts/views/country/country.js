@@ -164,6 +164,7 @@ function Country(props) {
                   </LocationsSource>
                   <Legend
                     activeParameter={{ parameterId: 2, displayName: 'PM2.5' }}
+                    showOnlyParam
                   />
                 </MapComponent>
               </div>
