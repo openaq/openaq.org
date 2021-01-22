@@ -51,7 +51,7 @@
       grid-gap: $global-spacing * 2;
   
       .filters__group:nth-child(1) {
-        grid-column: 1 / 8;
+        grid-column: 1 / 10;
       }
     
       .filters__group:nth-child(2) {
@@ -67,7 +67,7 @@
 
   .filter__values {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
     align-items: center;
     grid-gap: $global-spacing;
   }
