@@ -33,6 +33,7 @@ const CardHeader = styled(BaseHeader)`
 const LIFETIME_FORMAT = null;
 const MONTH_FORMAT = 2;
 const DAY_FORMAT = 3;
+/* eslint-disable-next-line */
 const MOBILE_ONLY = true;
 
 const defaultState = {
@@ -49,9 +50,7 @@ const defaultState = {
     // Single day is not accepted
     //dateRangeType: [null, 2, 3],
     dateRangeType: [
-      //[LIFETIME_FORMAT, MOBILE_ONLY],
-      [MONTH_FORMAT, MOBILE_ONLY],
-      [DAY_FORMAT, MOBILE_ONLY],
+      [DAY_FORMAT],
     ],
   },
   dow: {
