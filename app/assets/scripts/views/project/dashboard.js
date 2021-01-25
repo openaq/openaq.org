@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
@@ -46,8 +47,28 @@ function Dashboard({
           locationId={locationIds.length === 1 ? locationIds[0] : null}
           locationIds={locationIds}
           bbox={bbox}
-          firstUpdated={projectDates.start}
-          lastUpdated={projectDates.end}
+          dateRange={
+            dateRange
+              ? {
+                  start: moment(dateRange)
+                    .startOf(
+                      dateRange.split('/').length === 2 ? 'month' : 'day'
+                    )
+                    .utc(true)
+                    .format(),
+                  end: moment(dateRange)
+                    .endOf(dateRange.split('/').length === 2 ? 'month' : 'day')
+                    .utc(true)
+                    .format(),
+                }
+              : {
+                  start: moment(projectDates.start)
+                    .startOf('day')
+                    .utc(true)
+                    .format(),
+                  end: moment(projectDates.end).endOf('day').utc(true).format(),
+                }
+          }
         />
       )}
       <MeasureandsCard

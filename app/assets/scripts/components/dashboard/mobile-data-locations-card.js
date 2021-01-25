@@ -19,6 +19,7 @@ export default function MobileDataLocationsCard({
   locationId,
   locationIds,
   bbox,
+  dateRange,
 }) {
   return (
     <Card
@@ -48,6 +49,7 @@ export default function MobileDataLocationsCard({
               <MobilePointsLayer
                 locationId={locationId}
                 locationIds={locationIds}
+                dateRange={dateRange}
               />
             </MobileSource>
           </Map>
@@ -61,6 +63,8 @@ MobileDataLocationsCard.propTypes = {
   locationId: PropTypes.number,
   locationIds: PropTypes.arrayOf(PropTypes.number),
   bbox: PropTypes.arrayOf(PropTypes.number).isRequired,
-  firstUpdated: PropTypes.string.isRequired,
-  lastUpdated: PropTypes.string.isRequired,
+  dateRange: PropTypes.shape({
+    start: PropTypes.string.isRequired,
+    end: PropTypes.string.isRequired,
+  }),
 };
