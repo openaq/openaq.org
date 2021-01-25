@@ -33,7 +33,6 @@ export default function NodeLayer({
 
   const allSelectedLocations =
     selectedLocations && Object.values(selectedLocations).flat();
-  console.log(allSelectedLocations);
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
