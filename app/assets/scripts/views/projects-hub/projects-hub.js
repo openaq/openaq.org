@@ -99,7 +99,6 @@ export default function ProjectsHub({
             'parameters',
             'countries',
             'sources',
-            'processing-level',
             'sensor',
           ]}
           orderByOptions={[
