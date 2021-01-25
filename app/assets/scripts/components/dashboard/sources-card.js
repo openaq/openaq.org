@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import SmartLink from '../smart-link';
 import Card from '../card';
 import SourcesList from '../sources-list';
+import config from '../../config';
 
 const InfoMessage = styled.div`
   box-shadow: 0 0 0 1px rgba(35, 47, 59, 0.08);
@@ -27,10 +28,7 @@ export default function SourceInfo({ sources }) {
             <p>There are no sources listed.</p>
             <p>
               Maybe you&apos;d like to suggest a{' '}
-              <SmartLink
-                to="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-                title="Suggest a new source"
-              >
+              <SmartLink to={config.newSourceUrl} title="Suggest a new source">
                 new source
               </SmartLink>
               .
