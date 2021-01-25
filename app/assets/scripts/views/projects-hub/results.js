@@ -83,7 +83,8 @@ export default function Results({
               totalLocations={project.locations}
               totalMeasurements={project.measurements}
               parametersList={project.parameters}
-              mobile={project.isMobile}
+              isMobile={project.isMobile}
+              isAnalysis={project.isAnalysis}
               sensorType={project.sensorType}
               entity={project.entity}
             />
