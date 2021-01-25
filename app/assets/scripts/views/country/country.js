@@ -7,6 +7,7 @@ import { getCountryBbox } from '../../utils/countries';
 import { formatThousands } from '../../utils/format';
 import config from '../../config';
 import { openDownloadModal } from '../../actions/action-creators';
+import { ParameterProvider } from '../../context/parameter-context';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import LoadingMessage from '../../components/loading-message';
@@ -162,9 +163,11 @@ function Country(props) {
                       country={country.code}
                     />
                   </LocationsSource>
-                  <Legend
-                    activeParameter={{ parameterId: 2, displayName: 'PM2.5' }}
-                  />
+                  <ParameterProvider>
+                    <Legend
+                      activeParameter={{ parameterId: 2, displayName: 'PM2.5' }}
+                    />
+                  </ParameterProvider>
                 </MapComponent>
               </div>
             </section>
