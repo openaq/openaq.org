@@ -19,6 +19,8 @@
 
   &__header {
     margin-bottom: 0.5rem;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   &__body {
