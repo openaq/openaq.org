@@ -59,7 +59,7 @@ export default function ProjectsHub({
       sourceName: query.sources && query.sources.split(','),
       // The following are not lists
       isMobile: query.mobility && query.mobility === 'Mobile',
-      isAnalysis: query.procLevel === 'Analysis',
+      isAnalysis: query.procLevel && query.proecLevel === 'Analysis',
       entity: query.entity && query.entity.toLowerCase(),
       sensorType: query.grade && query.grade.toLowerCase(),
       manufacturerName: query.manufacturer && query.manufacturer,
