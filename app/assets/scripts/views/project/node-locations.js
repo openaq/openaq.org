@@ -43,10 +43,10 @@ export default function NodeLocations({
             isDisplayingSelectionTools={isDisplayingSelectionTools}
           />
           <Legend
-            parameters={parameters}
+            presetParameterList={parameters}
             activeParameter={activeParameter}
             onParamSelection={onParamSelection}
-            isOnlyCoreParams={false}
+            showOnlyParam
           />
         </MapComponent>
       </div>
