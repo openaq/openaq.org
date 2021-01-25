@@ -21,7 +21,7 @@ export default function MeasurementsLayer({
     ['get', 'sensorType'],
     'low-cost sensor',
     'square',
-    'reference',
+    'reference grade',
     'circle',
     'circle', // fallback
   ];
