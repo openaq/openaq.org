@@ -197,44 +197,49 @@ function Country({ match, history, location, _openDownloadModal }) {
             }}
           />
           <div className="inpage__body">
-            <section className="fold" id="country-fold-map">
-              <div className="fold__body">
-                <MapComponent
-                  bbox={getCountryBbox(country.code)}
-                  scrollZoomDisabled
-                >
-                  <LocationsSource activeParameter={2}>
-                    <MeasurementsLayer
-                      activeParameter={2}
-                      country={country.code}
-                    />
-                  </LocationsSource>
-                  <ParameterProvider>
-                    <Legend
-                      activeParameter={{ parameterId: 2, displayName: 'PM2.5' }}
-                    />
-                  </ParameterProvider>
-                </MapComponent>
-              </div>
-            </section>
+            <div className="constrainer">
+              <section className="fold" id="country-fold-map">
+                <div className="fold__body">
+                  <MapComponent
+                    bbox={getCountryBbox(country.code)}
+                    scrollZoomDisabled
+                  >
+                    <LocationsSource activeParameter={2}>
+                      <MeasurementsLayer
+                        activeParameter={2}
+                        country={country.code}
+                      />
+                    </LocationsSource>
+                    <ParameterProvider>
+                      <Legend
+                        activeParameter={{
+                          parameterId: 2,
+                          displayName: 'PM2.5',
+                        }}
+                      />
+                    </ParameterProvider>
+                  </MapComponent>
+                </div>
+              </section>
 
-            {locationFetching ? (
-              <LoadingMessage />
-            ) : !locationError ? (
-              <Results
-                fetched={locationFetched}
-                fetching={locationFetching}
-                error={locationError}
-                locationGroups={locationGroups}
-                id={id}
-                totalPages={totalPages}
-                page={page}
-                openDownloadModal={_openDownloadModal}
-                handlePageClick={handlePageClick}
-              />
-            ) : (
-              <InfoMessage standardMessage />
-            )}
+              {locationFetching ? (
+                <LoadingMessage />
+              ) : !locationError ? (
+                <Results
+                  fetched={locationFetched}
+                  fetching={locationFetching}
+                  error={locationError}
+                  locationGroups={locationGroups}
+                  id={id}
+                  totalPages={totalPages}
+                  page={page}
+                  openDownloadModal={_openDownloadModal}
+                  handlePageClick={handlePageClick}
+                />
+              ) : (
+                <InfoMessage standardMessage />
+              )}
+            </div>
           </div>
         </>
       ) : (
