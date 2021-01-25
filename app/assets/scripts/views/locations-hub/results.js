@@ -74,13 +74,14 @@ export default function Results({
             });
           return (
             <LocationCard
-              mobile={loc.isMobile}
+              isMobile={loc.isMobile}
               key={loc.id}
               city={loc.city || NO_CITY}
               country={loc.country}
               firstUpdated={loc.firstUpdated}
               id={loc.id}
               lastUpdated={loc.lastUpdated}
+              isAnalysis={loc.isAnalysis}
               name={loc.name}
               onDownloadClick={openModal}
               parametersList={loc.parameters}

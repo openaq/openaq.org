@@ -17,7 +17,8 @@ export default function LocationCard({
   sources,
   sensorType,
   totalMeasurements,
-  mobile,
+  isMobile,
+  isAnalysis,
   entity,
 }) {
   let updated = moment(lastUpdated).fromNow();
@@ -40,7 +41,12 @@ export default function LocationCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={[sensorType, entity, mobile ? 'Mobile' : 'Stationary']}
+      tags={[
+        sensorType,
+        entity,
+        isMobile ? 'Mobile' : 'Stationary',
+        isAnalysis && 'Analysis',
+      ]}
       renderBody={() => (
         <CardDetails
           id="location"
@@ -103,5 +109,6 @@ LocationCard.propTypes = {
   sensorType: T.string.isRequired,
   entity: T.string.isRequired,
   totalMeasurements: T.number.isRequired,
-  mobile: T.bool.isRequired,
+  isMobile: T.bool.isRequired,
+  isAnalysis: T.bool,
 };
