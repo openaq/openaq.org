@@ -6,8 +6,6 @@ import location from './location';
 import nearbyLocations from './nearby-locations';
 import baseStats from './base-stats';
 import geolocation from './geolocation';
-import latestMeasurements from './latest-measurements';
-import averageMeasurements from './average-measurements';
 import measurements from './measurements';
 import compare from './compare';
 import locationsByCountry from './locations-by-country';
@@ -23,8 +21,6 @@ export default combineReducers({
   baseStats,
   geolocation,
   measurements,
-  latestMeasurements,
-  averageMeasurements,
   compare,
   locationsByCountry,
   downloadModal,
