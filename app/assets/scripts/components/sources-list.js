@@ -44,7 +44,7 @@ export default function SourcesList({ sources, showReadme, showOrganisation }) {
                   rel="noreferrer noopener"
                   target="_blank"
                 >
-                  Technical readm
+                  Technical readme
                 </a>
               ) : (
                 'No technical readme for this source'
