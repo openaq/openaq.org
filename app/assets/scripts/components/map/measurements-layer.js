@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 
-import { coloredSymbolSize, borderSymbolSize } from '../../utils/map-settings';
+import {
+  iconMatch,
+  coloredSymbolSize,
+  borderSymbolSize,
+} from '../../utils/map-settings';
 import { getFillExpression } from '../../utils/colors';
 import { addPopover, debugProperties } from './map-interaction';
 import { square, circle } from './symbols';
@@ -16,15 +20,6 @@ export default function MeasurementsLayer({
   let match = useRouteMatch();
 
   const countryFilter = ['==', ['get', 'country'], country];
-  const iconMatch = [
-    'match',
-    ['get', 'sensorType'],
-    'low-cost sensor',
-    'square',
-    'reference grade',
-    'circle',
-    'circle', // fallback
-  ];
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });

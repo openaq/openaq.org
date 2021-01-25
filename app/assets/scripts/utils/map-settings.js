@@ -1,5 +1,14 @@
 // Map styling
-export const defaultColor = '#0b75a9';
+export const iconMatch = [
+  'match',
+  ['get', 'sensorType'],
+  'low-cost sensor',
+  'square',
+  'reference grade',
+  'circle',
+  'circle', // fallback
+];
+
 export const circleOpacity = 1;
 export const circleBlur = {
   stops: [
