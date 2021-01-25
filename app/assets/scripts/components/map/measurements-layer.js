@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router-dom';
 
 import { coloredSymbolSize, borderSymbolSize } from '../../utils/map-settings';
 import { getFillExpression } from '../../utils/colors';
-import { addPopover } from './map-interaction';
+import { addPopover, debugProperties } from './map-interaction';
 import { square, circle } from './symbols';
 
 export default function MeasurementsLayer({
@@ -66,6 +66,11 @@ export default function MeasurementsLayer({
       match.params.id,
       activeParameter
     );
+
+    //  DEBUGGING HELPER: shows properties on hover
+    if (process.env.DS_ENV === 'development') {
+      debugProperties(map, `${activeParameter}-layer`);
+    }
 
     return () => {
       if (map.getLayer(`${activeParameter}-layer`))
