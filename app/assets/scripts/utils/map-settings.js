@@ -31,8 +31,8 @@ export const coloredCircleRadius = {
 export const coloredSymbolSize = {
   stops: [
     [0, 0.1],
-    [5, 0.3],
-    [7, 0.4],
+    [5, 0.2],
+    [7, 0.3],
   ],
 };
 
@@ -49,9 +49,9 @@ export const borderCircleRadius = {
 // Border for all squares
 export const borderSymbolSize = {
   stops: [
-    [0, 0.2],
-    [5, 0.4],
-    [7, 0.5],
+    [0, 0.15],
+    [5, 0.25],
+    [7, 0.35],
   ],
 };
 
