@@ -232,7 +232,7 @@
 }
 
 .source__title {
-  @extend .truncated;
+  // @extend .truncated;
   line-height: 1.2rem; // without it .truncated cuts off descender
 
   display: block;
