@@ -14,7 +14,7 @@ import {
   borderSquareSize,
 } from '../../utils/map-settings';
 import Popover from './popover';
-import { square } from './square';
+import { square } from './symbols';
 
 export default function NodeLayer({
   activeParameter,
