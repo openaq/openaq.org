@@ -60,7 +60,6 @@ export default function Results({
       </InfoMessage>
     );
   }
-
   return (
     <>
       <div className="countries-list">
@@ -105,7 +104,8 @@ export default function Results({
                     });
                   return (
                     <LocationCard
-                      mobile={loc.isMobile}
+                      isMobile={loc.isMobile}
+                      isAnalysis={loc.isAnalysis}
                       key={loc.id}
                       city={loc.city}
                       country={loc.country}

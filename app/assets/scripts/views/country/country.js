@@ -60,16 +60,17 @@ function Country({ match, history, location, _openDownloadModal }) {
     defaultCountry
   );
   const [page, setPage] = useState(1);
-
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    // on url change
+    setIsMounted(true);
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
     setPage(() => getPage(query));
-  }, [location]);
+  }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
     fetchLocations(id, page);
     fetchCountry(id);
 
@@ -77,11 +78,7 @@ function Country({ match, history, location, _openDownloadModal }) {
       setLocations(defaultLocations);
       setCountry(defaultCountry);
     };
-  }, [id]);
-
-  useEffect(() => {
-    fetchLocations(id, page);
-  }, [page]);
+  }, [id, page, isMounted]);
 
   const fetchLocations = (id, page) => {
     setLocations(state => ({
@@ -157,7 +154,9 @@ function Country({ match, history, location, _openDownloadModal }) {
 
   function handlePageClick(d) {
     let query = qs.parse(id, location.search, { ignoreQueryPrefix: true });
-    query.page = d.selected + 1;
+    const pageNumber = d.selected + 1;
+    query.page = pageNumber;
+    setPage(pageNumber);
 
     history.push(`/countries/${id}?${buildQS(query)}`);
   }
