@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { round} from '../utils/format';
+import { round } from '../utils/format';
 
 import { Line } from 'react-chartjs-2';
 
@@ -34,8 +34,7 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
           if (label) {
             label += ': ';
           }
-          //label += Math.round(tooltipItem.yLabel * 100) / 100;
-          label += round(tooltipItem.yLabel, tooltipItem.ylabel, 2);
+          label += round(tooltipItem.yLabel, 4);
           return label;
         },
       },
