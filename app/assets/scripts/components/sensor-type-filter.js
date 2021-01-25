@@ -32,7 +32,7 @@ const SectionButtons = styled.div`
   }
 `;
 
-const gradeOptions = ['Low-Cost Sensor', 'Reference'];
+const gradeOptions = ['Low-Cost Sensor', 'Reference Grade'];
 const mobilityOptions = ['Mobile', 'Stationary'];
 const entityOptions = ['Community', 'Research', 'Government'];
 const LCS = gradeOptions[0];
