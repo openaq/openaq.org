@@ -3,7 +3,6 @@ import baseData from './base-data';
 import projects from './projects';
 import locations from './locations';
 import location from './location';
-import nearbyLocations from './nearby-locations';
 import baseStats from './base-stats';
 import geolocation from './geolocation';
 import measurements from './measurements';
@@ -17,7 +16,6 @@ export default combineReducers({
   projects,
   locations,
   location,
-  nearbyLocations,
   baseStats,
   geolocation,
   measurements,
