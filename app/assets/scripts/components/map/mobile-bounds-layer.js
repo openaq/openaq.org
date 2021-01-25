@@ -50,7 +50,8 @@ export default function MobileBoundsLayer({
         locationId,
       ]);
     return () => {
-      map.setFilter(`mobile-bounds-${activeParameter}`, null);
+      if (map.getLayer(`mobile-bounds-${activeParameter}`))
+        map.setFilter(`mobile-bounds-${activeParameter}`, null);
     };
   }, [locationId]);
 
@@ -62,7 +63,8 @@ export default function MobileBoundsLayer({
         ['literal', locationIds],
       ]);
     return () => {
-      map.setFilter(`mobile-bounds-${activeParameter}`, null);
+      if (map.getLayer(`mobile-bounds-${activeParameter}`))
+        map.setFilter(`mobile-bounds-${activeParameter}`, null);
     };
   }, [locationIds]);
 
