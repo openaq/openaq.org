@@ -33,6 +33,7 @@ const CardHeader = styled(BaseHeader)`
 const LIFETIME_FORMAT = null;
 const MONTH_FORMAT = 2;
 const DAY_FORMAT = 3;
+/* eslint-disable-next-line */
 const MOBILE_ONLY = true;
 
 const defaultState = {
@@ -48,11 +49,9 @@ const defaultState = {
     // OR length 2 -> single month (YYYY/MM)
     // Single day is not accepted
     //dateRangeType: [null, 2, 3],
-    dateRangeType: [
-      //[LIFETIME_FORMAT, MOBILE_ONLY],
-      [MONTH_FORMAT, MOBILE_ONLY],
-      [DAY_FORMAT, MOBILE_ONLY],
-    ],
+    dateRangeType: [[DAY_FORMAT]],
+    noDisplayMessage:
+      'This view is not available with this date window. Please select a single day to use this view.',
   },
   dow: {
     fetched: false,
@@ -78,6 +77,8 @@ const defaultState = {
     // Single day is not accepted, Single month not accepted
     //dateRangeType: [null],
     dateRangeType: [[LIFETIME_FORMAT], [MONTH_FORMAT]],
+    noDisplayMessage:
+      'This view is not available with this date window. Please select lifetime or an entire month to use this view.',
   },
 };
 
@@ -281,6 +282,7 @@ export default function TemporalCoverageCard({
               data={state.hod.data}
               fetching={state.hod.fetching}
               error={state.hod.error}
+              noDisplayMessage={state.hod.noDisplayMessage}
             />
             <Chart
               title="Day of the Week"
@@ -288,6 +290,7 @@ export default function TemporalCoverageCard({
               data={state.dow.data && Object.values(combinedDays)}
               error={state.dow.error}
               fetching={state.dow.fetching}
+              noDisplayMessage={state.dow.noDisplayMessage}
             />
             <Chart
               title="Month of the Year"
@@ -295,6 +298,7 @@ export default function TemporalCoverageCard({
               data={state.moy.data}
               error={state.moy.error}
               fetching={state.moy.fetching}
+              noDisplayMessage={state.moy.noDisplayMessage}
             />
           </div>
         )
@@ -318,10 +322,7 @@ TemporalCoverageCard.propTypes = {
   isMobile: T.bool,
 };
 
-function Chart({ title, temporal, data, error, fetching }) {
-  if (!data && !error) {
-    return null;
-  }
+function Chart({ title, temporal, data, error, fetching, noDisplayMessage }) {
   return (
     <div className="chart__item">
       <div className="header">
@@ -336,7 +337,7 @@ function Chart({ title, temporal, data, error, fetching }) {
           xAxisLabels={data.map(m => m[temporal])}
         />
       ) : !error ? (
-        <p>Not applicable.</p>
+        <p>{noDisplayMessage}</p>
       ) : (
         <ErrorMessage />
       )}
@@ -357,4 +358,5 @@ Chart.propTypes = {
   ),
   error: T.object,
   fetching: T.bool.isRequired,
+  noDisplayMessage: T.string.isRequired,
 };
