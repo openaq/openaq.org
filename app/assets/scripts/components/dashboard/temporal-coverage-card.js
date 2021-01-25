@@ -265,10 +265,7 @@ export default function TemporalCoverageCard({
             <p>There are no data for the selected parameter.</p>
             <p>
               Maybe you&apos;d like to suggest a{' '}
-              <a
-                href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-                title="Suggest a new source"
-              >
+              <a href={config.newSourceUrl} title="Suggest a new source">
                 new source
               </a>
               .

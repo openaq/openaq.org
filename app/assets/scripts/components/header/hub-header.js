@@ -27,10 +27,7 @@ export default function HubHeader(props) {
             those standard set of pollutants are now available through low cost
             sensor sources at certain locations. If you cannot find the location
             you are looking for, please{' '}
-            <a
-              href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-              title="Suggest a new source"
-            >
+            <a href={config.newSourceUrl} title="Suggest a new source">
               suggest a source
             </a>{' '}
             and{' '}

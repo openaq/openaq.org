@@ -7,6 +7,7 @@ import LoadingMessage from '../../components/loading-message';
 import LocationCard from './location-card';
 
 import { NO_CITY } from '../../utils/constants';
+import config from '../../config';
 
 export default function Results({
   fetched,
@@ -46,10 +47,7 @@ export default function Results({
         <p>No data was found for your criteria.</p>
         <p>
           Maybe you&apos;d like to suggest a{' '}
-          <a
-            href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-            title="Suggest a new source"
-          >
+          <a href={config.newSourceUrl} title="Suggest a new source">
             new source
           </a>{' '}
           or{' '}
