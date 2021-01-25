@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import qs from 'qs';
+import moment from 'moment';
 
 import { openDownloadModal as openDownloadModalAction } from '../../actions/action-creators';
 import config from '../../config';
@@ -199,6 +200,27 @@ function Location({ location, history, match, openDownloadModal }) {
               bbox={data.bounds}
               firstUpdated={data.firstUpdated}
               lastUpdated={data.lastUpdated}
+              dateRange={
+                dateRange
+                  ? {
+                      start: moment(dateRange)
+                        .startOf(
+                          dateRange.split('/').length === 2 ? 'month' : 'day'
+                        )
+                        .utc(true)
+                        .format(),
+                      end: moment(dateRange)
+                        .endOf(
+                          dateRange.split('/').length === 2 ? 'month' : 'day'
+                        )
+                        .utc(true)
+                        .format(),
+                    }
+                  : {
+                      start: data.firstUpdated,
+                      end: data.lastUpdated,
+                    }
+              }
             />
           )}
           <TemporalCoverageCard
