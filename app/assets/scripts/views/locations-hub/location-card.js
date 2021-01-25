@@ -51,10 +51,11 @@ export default function LocationCard({
               label: 'Measurements',
               value: formatThousands(totalMeasurements),
             },
-            {
+            parametersList && {
               label: 'Parameters',
               value: parametersList
-                .map(p => p.displayName || p.parameter)
+                .filter(p => p)
+                .map(p => p.displayName || p.parameter || p)
                 .join(', '),
             },
             {

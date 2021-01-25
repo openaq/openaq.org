@@ -31,7 +31,7 @@ import { fetchBaseData } from '../../actions/base-data';
 const EMPTY = '';
 const API_LIMIT = 66536;
 
-const computeApiUrl = (downloadType, values, initalQS = {}) => {
+const computeApiUrl = (downloadType, values, initalFilters = {}) => {
   let state = _.clone(values);
   _.forEach(state, (o, i) => {
     if (o === null || !o.length) {
@@ -60,46 +60,45 @@ const computeApiUrl = (downloadType, values, initalQS = {}) => {
   }
 
   // Build url.
-  let qs = initalQS;
-  qs.limit = qs.limit || API_LIMIT;
+  let filters = initalFilters;
+  filters.limit = filters.limit || API_LIMIT;
 
   if (downloadType === 'locations') {
     // It's enough to have one of these.
     if (state.locLocation) {
-      qs.location = state.locLocation;
+      filters.location = state.locLocation;
     } else if (state.locArea) {
-      qs.city = state.locArea === NO_CITY ? '' : state.locArea;
+      filters.city = state.locArea === NO_CITY ? '' : state.locArea;
     } else if (state.locCountry) {
-      qs.country = state.locCountry;
+      filters.country = state.locCountry;
     }
 
     // Sensor type as long as there's no location selected.
     if (state.sensorTypes?.length === 1 && !state.locLocation) {
-      qs.sensorType = state.sensorTypes[0];
+      filters.sensorType = state.sensorTypes[0];
     }
   } else if (downloadType === 'projects') {
     if (state.projDataset) {
-      qs.project = state.projDataset;
+      filters.project = state.projDataset;
     } else if (state.projCountry) {
-      qs.country = state.projCountry;
+      filters.country = state.projCountry;
     }
   }
 
   if (state.sDate) {
-    qs.date_from = state.sDate;
+    filters.date_from = state.sDate;
   }
 
   if (state.eDate) {
-    qs.date_to = state.eDate;
+    filters.date_to = state.eDate;
   }
 
   if (state.parameters?.length) {
-    qs.parameter = state.parameters;
+    filters.parameter = state.parameters;
   }
+  let f = buildAPIQS(filters, { arrayFormat: 'repeat' });
 
-  qs = `${config.api}/measurements?${buildAPIQS(qs)}`;
-
-  return qs;
+  return `${config.api}/measurements?${f}`;
 };
 
 const fetchVal = url =>
@@ -124,7 +123,7 @@ const sensorTypesOptions = [
     displayName: 'Low-cost Sensor',
   },
   {
-    id: 'reference',
+    id: 'reference grade',
     displayName: 'Reference Grade',
   },
 ];

@@ -19,8 +19,6 @@ export default function MobileDataLocationsCard({
   locationId,
   locationIds,
   bbox,
-  firstUpdated,
-  lastUpdated,
 }) {
   return (
     <Card
@@ -42,11 +40,7 @@ export default function MobileDataLocationsCard({
         }
         return (
           <Map bbox={bbox}>
-            <MobileSource
-              locationId={locationId}
-              firstUpdated={firstUpdated}
-              lastUpdated={lastUpdated}
-            >
+            <MobileSource>
               <MobileBoundsLayer
                 locationId={locationId}
                 locationIds={locationIds}
