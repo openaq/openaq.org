@@ -28,11 +28,11 @@ export const coloredCircleRadius = {
 };
 
 // Fill Radius for all station points w/ values
-export const coloredSquareSize = {
+export const coloredSymbolSize = {
   stops: [
-    [0, 0.3],
-    [5, 0.5],
-    [7, 1.2],
+    [0, 0.1],
+    [5, 0.2],
+    [7, 0.3],
   ],
 };
 
@@ -47,11 +47,11 @@ export const borderCircleRadius = {
 };
 
 // Border for all squares
-export const borderSquareSize = {
+export const borderSymbolSize = {
   stops: [
-    [0, 0.5],
-    [5, 0.7],
-    [7, 1.4],
+    [0, 0.15],
+    [5, 0.25],
+    [7, 0.35],
   ],
 };
 

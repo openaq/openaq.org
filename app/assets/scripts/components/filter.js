@@ -21,6 +21,8 @@ const defaultSelected = {
   source_type: [],
 };
 
+const procLevelOptions = ['Analysis'];
+
 const initFromLocation = ({
   countries,
   parameters,
@@ -30,13 +32,14 @@ const initFromLocation = ({
   manufacturer,
   mobility,
   entity,
+  procLevel,
 }) => {
   return {
     parameters: parameters ? parameters.split(',').map(Number) : [],
     countries: countries ? countries.split(',') : [],
     sources: sources ? sources.split(',') : [],
     order_by: order_by ? order_by.split(',') : [],
-
+    procLevel: procLevel,
     grade: grade,
     manufacturer: manufacturer,
     mobility: mobility,
@@ -46,7 +49,6 @@ const initFromLocation = ({
 export default function Filter({
   slug,
   by,
-
   fetchBaseData,
   orderByOptions,
   countries,
@@ -105,6 +107,15 @@ export default function Filter({
           manufacturer: query.manufacturer,
           mobility: query.mobility,
           entity: query.entity,
+        }));
+        break;
+      }
+
+      case 'procLevel': {
+        query.procLevel = value;
+        setSelected(prev => ({
+          ...prev,
+          procLevel: value,
         }));
         break;
       }
@@ -251,6 +262,39 @@ export default function Filter({
                   </ul>
                 </Dropdown>
               )}
+              {by.includes('processing-level') && (
+                <Dropdown
+                  triggerElement="a"
+                  triggerTitle="View processing level options"
+                  triggerText="Processing level"
+                  triggerClassName="button--drop-filter"
+                >
+                  <ul
+                    role="menu"
+                    data-cy="filter-processing-level"
+                    className="drop__menu drop__menu--select scrollable"
+                  >
+                    {_.sortBy(procLevelOptions).map(o => {
+                      return (
+                        <li key={o}>
+                          <div
+                            data-cy="filter-menu-item"
+                            className={c('drop__menu-item', {
+                              'drop__menu-item--active': selected.procLevel,
+                            })}
+                            data-hook="dropdown:close"
+                            onClick={() => {
+                              onFilterSelect('procLevel', o);
+                            }}
+                          >
+                            <span data-cy={o}>{o}</span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Dropdown>
+              )}
 
               {by.includes('sensor') && (
                 <Dropdown
@@ -335,7 +379,6 @@ export default function Filter({
                 </button>
               );
             })}
-
           {!!parameters?.length &&
             selected.parameters.map(o => {
               const parameter = parameters.find(x => x.id === o);
@@ -351,6 +394,17 @@ export default function Filter({
                 </button>
               );
             })}
+          {selected.procLevel && (
+            <button
+              type="button"
+              className="button--filter-pill"
+              data-cy="filter-pill"
+              key={selected.procLevel}
+              onClick={() => onFilterSelect('procLevel', null)}
+            >
+              <span>{selected.procLevel}</span>
+            </button>
+          )}
 
           {sources &&
             !!sources?.length &&
@@ -368,7 +422,6 @@ export default function Filter({
                 </button>
               );
             })}
-
           {['grade', 'manufacturer', 'mobility', 'entity'].map(key => {
             const o = selected[key];
             return (
@@ -393,7 +446,6 @@ export default function Filter({
               )
             );
           })}
-
           {selected.order_by.map(o => {
             return (
               <button
@@ -406,7 +458,6 @@ export default function Filter({
               </button>
             );
           })}
-
           <button
             type="button"
             className="button button--small button--primary-unbounded"
