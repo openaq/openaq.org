@@ -42,7 +42,7 @@ export default function ProjectCard({
         sensorType,
         entity,
         isMobile ? 'Mobile' : 'Stationary',
-        isAnalysis ? 'Analysis' : 'Raw',
+        isAnalysis && 'Analysis',
       ]}
       renderBody={() => (
         <CardDetails
