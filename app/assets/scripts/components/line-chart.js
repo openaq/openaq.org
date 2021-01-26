@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { round } from '../utils/format';
+
 import { Line } from 'react-chartjs-2';
 
 export default function LineChart({ data, xUnit, yLabel, yUnit }) {
@@ -24,6 +26,18 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
     },
     tooltips: {
       intersect: false,
+
+      callbacks: {
+        label: (tooltipItem, data) => {
+          let label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+          if (label) {
+            label += ': ';
+          }
+          label += round(tooltipItem.yLabel, 4);
+          return label;
+        },
+      },
     },
     scales: {
       yAxes: [

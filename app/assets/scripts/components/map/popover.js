@@ -7,6 +7,7 @@ import { round } from '../../utils/format';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
 import SourcesList from '../sources-list';
+import CardTag from '../card/card-tag';
 
 const defaultState = {
   fetched: false,
@@ -99,13 +100,15 @@ export default function Popover({
               {data.name}
             </a>
           </h1>
+          {data.isAnalysis && <CardTag label="Analysis" />}
         </header>
         <div className="popover__body">
           {parameter && (
             <p>
               Last reading{' '}
               <strong>
-                {round(parameter.lastValue)} {parameter.unit}
+                {round(parameter.lastValue, parameter.value > 2 ? 2 : 0)}{' '}
+                {parameter.unit}
               </strong>{' '}
               at <strong>{lastUpdated}</strong>
             </p>
