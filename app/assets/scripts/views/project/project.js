@@ -184,6 +184,10 @@ function Project({ match, history, location, _openDownloadModal }) {
   const lifecycle = projectData.sources
     .map(s => s.lifecycle_stage)
     .filter(Boolean);
+
+  const selectedLocationCount = Object.values(
+    projectState.selectedLocations
+  ).flat().length;
   return (
     <section className="inpage">
       <Header
@@ -216,9 +220,7 @@ function Project({ match, history, location, _openDownloadModal }) {
           >
             <div>
               <Pill
-                title={`${
-                  Object.values(projectState.selectedLocations).flat().length
-                }/15`}
+                title={`${selectedLocationCount}/15`}
                 action={() =>
                   dispatch({ type: projectActions.SET_INITIAL_STATE })
                 }
@@ -254,14 +256,18 @@ function Project({ match, history, location, _openDownloadModal }) {
             handleLocationSelection={handleLocationSelection}
           />
         )}
-
+        {console.log(projectData.locationIds)}
         {!projectData.isMobile && !projectState.isFullProject ? (
           <>
             <header
               className="fold__header inner"
               style={{ gridTemplateColumns: `1fr`, paddingTop: `4rem` }}
             >
-              <h1 className="fold__title">Values for selected stations</h1>
+              <h1 className="fold__title">
+                {`Values for ${selectedLocationCount} selected station${
+                  selectedLocationCount !== 1 ? 's' : ''
+                }`}
+              </h1>
             </header>
             <NodesDashboard
               measurements={projectData.measurements}
@@ -285,7 +291,13 @@ function Project({ match, history, location, _openDownloadModal }) {
               className="fold__header inner"
               style={{ gridTemplateColumns: `1fr`, paddingTop: `4rem` }}
             >
-              <h1 className="fold__title">Values for all stations</h1>
+              <h1 className="fold__title">
+                {`Values for ${
+                  projectData.locationIds.length !== 1 ? 'all ' : ''
+                }${projectData.locationIds.length} station${
+                  projectData.locationIds.length !== 1 ? 's' : ''
+                }`}
+              </h1>
             </header>
             <Dashboard
               bbox={projectData.bbox}
