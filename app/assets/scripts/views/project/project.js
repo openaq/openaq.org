@@ -202,7 +202,9 @@ function Project({ match, history, location, _openDownloadModal }) {
         isMobile={projectData.isMobile}
       />
       <div className="inpage__body">
-        <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
+        {!projectData.isAnalysis && (
+          <DateSelector setDateRange={setDateRange} dateRange={dateRange} />
+        )}
         {!projectData.isMobile && projectState.isDisplayingSelectionTools && (
           <div
             className={'filters, inner'}
@@ -252,6 +254,7 @@ function Project({ match, history, location, _openDownloadModal }) {
             handleLocationSelection={handleLocationSelection}
           />
         )}
+
         {!projectData.isMobile && !projectState.isFullProject ? (
           <>
             <header
