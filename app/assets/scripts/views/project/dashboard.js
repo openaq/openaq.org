@@ -68,7 +68,7 @@ function Dashboard({
           spatial="project"
           id={projectName}
           titleInfo={
-            'The average number of measurements for each pollutant by hour, day, or month at the selected locations. In some views a window may be turned off if that view is not applicable to the selected time window.'
+            'The average number of measurements for each pollutant by hour, day, or month at the selected locations. If a parameter is not present at one location in the dataset it will be omitted from the average. In some views a window may be turned off if that view is not applicable to the selected time window.'
           }
         />
       )}
