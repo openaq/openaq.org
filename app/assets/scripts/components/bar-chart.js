@@ -48,7 +48,6 @@ export default function BarChart({ data, yAxisLabel, xAxisLabels }) {
           gridLines: { display: false },
           scaleLabel: {
             display: true,
-            labelString: 'Date',
             fontSize: 14,
           },
         },
