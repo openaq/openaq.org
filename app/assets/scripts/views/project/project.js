@@ -256,7 +256,7 @@ function Project({ match, history, location, _openDownloadModal }) {
             handleLocationSelection={handleLocationSelection}
           />
         )}
-        {console.log(projectData.locationIds)}
+
         {!projectData.isMobile && !projectState.isFullProject ? (
           <>
             <header
