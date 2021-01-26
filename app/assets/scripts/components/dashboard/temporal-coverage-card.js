@@ -330,8 +330,10 @@ function Chart({ title, temporal, data, error, fetching, noDisplayMessage }) {
       ) : data ? (
         <BarChart
           data={data.map(m => m.measurement_count)}
-          yAxisLabel="Count"
-          xAxisLabels={data.map(m => m[temporal])}
+          yAxisLabel="Avg Count"
+          xAxisLabels={data.map(
+            m => m[temporal] + `${temporal === 'hod' ? ':00' : ''}`
+          )}
         />
       ) : !error ? (
         <p>{noDisplayMessage}</p>
