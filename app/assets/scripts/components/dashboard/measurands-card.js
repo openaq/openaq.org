@@ -3,7 +3,7 @@ import { PropTypes as T } from 'prop-types';
 
 import Card from '../card';
 import Table from '../table';
-import { shortenLargeNumber } from '../../utils/format';
+import { shortenLargeNumber, round } from '../../utils/format';
 
 const tableHeaders = [
   {
@@ -16,7 +16,7 @@ const tableHeaders = [
     value: 'Average',
     sortable: true,
     formatCell: (value, row) => {
-      return `${shortenLargeNumber(value)} (${row.unit})`;
+      return `${round(value, value < 2 ? 2 : 0)} (${row.unit})`;
     },
   },
   {
