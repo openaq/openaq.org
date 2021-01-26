@@ -105,7 +105,8 @@ export default function Popover({
             <p>
               Last reading{' '}
               <strong>
-                {round(parameter.lastValue)} {parameter.unit}
+                {round(parameter.lastValue, parameter.value > 2 ? 2 : 0)}{' '}
+                {parameter.unit}
               </strong>{' '}
               at <strong>{lastUpdated}</strong>
             </p>
