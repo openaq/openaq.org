@@ -33,3 +33,31 @@ export function addPopover(map, layerId, locationId, activeParameter) {
 
   map.on('click', layerId, openPopup);
 }
+
+export function debugProperties(map, layerId) {
+  var popup = new mapbox.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+
+  map.on('mouseenter', layerId, function (e) {
+    map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = JSON.stringify(e.features[0].properties);
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+  });
+
+  map.on('mouseleave', layerId, function () {
+    map.getCanvas().style.cursor = '';
+    popup.remove();
+  });
+}

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import config from '../../config';
+
 const Tags = styled.div`
   margin: 0.5rem 0;
   display: flex;
@@ -53,9 +55,11 @@ export default function Header({
                   )}
                   {feedback && (
                     <a
-                      href="https://docs.google.com/forms/d/1s5GYME3He-EDed-jgg11Ry3zmvTZkPK5xSnQUWwu0Gk/edit"
+                      href={config.feedbackUrl}
                       title="Give feedback about the platform"
                       className="feedback__button"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       Share Feedback
                     </a>
