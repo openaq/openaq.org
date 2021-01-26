@@ -1,22 +1,114 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, useLocation } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import _ from 'lodash';
+import qs from 'qs';
+
+import { buildQS } from '../../utils/url';
+import config from '../../config';
 
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import LocationCard from '../locations-hub/location-card';
 
-export default function Results({
-  fetched,
-  fetching,
-  error,
-  locationGroups,
-  id,
-  totalPages,
-  page,
-  openDownloadModal,
-  handlePageClick,
-}) {
+const defaultLocations = {
+  fetching: false,
+  fetched: false,
+  error: null,
+  locations: null,
+  meta: null,
+};
+const PER_PAGE = 30;
+
+function getPage(query) {
+  if (query && query.page) {
+    let page = query.page;
+    page = isNaN(page) || page < 1 ? 1 : +page;
+    return page;
+  }
+  return 1;
+}
+
+export default function Results({ id, openDownloadModal }) {
+  let history = useHistory();
+  let location = useLocation();
+
+  const [page, setPage] = useState(1);
+
+  const [
+    { fetching, fetched, error, locations, meta },
+    setLocations,
+  ] = useState(defaultLocations);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    let query = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    setPage(() => getPage(query));
+  }, [location]);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
+    fetchLocations(id, page);
+
+    return () => {
+      setLocations(defaultLocations);
+    };
+  }, [isMounted, page]);
+
+  const fetchLocations = (id, page) => {
+    setLocations(state => ({
+      ...state,
+      fetching: true,
+      fetched: false,
+      error: null,
+    }));
+
+    fetch(
+      `${config.api}/locations?page=${page}&limit=${PER_PAGE}&metadata=true&country=${id}&order_by=city&sort=asc`
+    )
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error('Bad response');
+        }
+        return response.json();
+      })
+      .then(
+        json => {
+          setLocations(state => ({
+            ...state,
+            fetched: true,
+            fetching: false,
+            locations: json.results,
+            meta: json.meta,
+          }));
+        },
+        e => {
+          console.log('e', e);
+          setLocations(state => ({
+            ...state,
+            fetching: false,
+            fetched: false,
+            error: e,
+          }));
+        }
+      );
+  };
+
+  function handlePageClick(d) {
+    let query = qs.parse(id, location.search, { ignoreQueryPrefix: true });
+    const pageNumber = d.selected + 1;
+    query.page = pageNumber;
+    setPage(pageNumber);
+
+    history.push(`/countries/${id}?${buildQS(query)}`);
+  }
+
   if (!fetched && !fetching) {
     return null;
   }
@@ -26,18 +118,11 @@ export default function Results({
   }
 
   if (error) {
-    return (
-      <InfoMessage>
-        <p>We coudn&apos;t get the data. Please try again later.</p>
-        <p>
-          If you think there&apos;s a problem, please{' '}
-          <a href="mailto:info@openaq.org" title="Contact openaq">
-            contact us.
-          </a>
-        </p>
-      </InfoMessage>
-    );
+    return <InfoMessage standardMessage />;
   }
+
+  let locationGroups = _(locations).sortBy('name').groupBy('city').value();
+  const totalPages = meta && Math.ceil(meta.found / PER_PAGE);
 
   if (!Object.values(locationGroups).length) {
     return (
@@ -148,14 +233,6 @@ export default function Results({
 }
 
 Results.propTypes = {
-  fetched: PropTypes.bool,
-  fetching: PropTypes.bool,
-  error: PropTypes.bool,
-  locationGroups: PropTypes.object,
-  id: PropTypes.string,
-  totalPages: PropTypes.number,
-  page: PropTypes.number,
-  openDownloadModal: PropTypes.func,
-  handlePageClick: PropTypes.func,
-  history: PropTypes.object,
+  id: PropTypes.string.isRequired,
+  openDownloadModal: PropTypes.func.isRequired,
 };
