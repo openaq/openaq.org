@@ -71,7 +71,7 @@ export default function LocationCard({
                   href={source.url}
                   title={`View source for ${name}`}
                   key={source.name}
-                  className={!source.url && 'disabled'}
+                  className={!source.url ? 'disabled' : null}
                 >
                   {`${i > 0 ? ', ' : ''}${source.name}`}
                 </a>
@@ -92,8 +92,8 @@ export default function LocationCard({
 }
 
 LocationCard.propTypes = {
-  city: T.string.isRequired,
-  country: T.string.isRequired,
+  city: T.string,
+  country: T.string,
   firstUpdated: T.string.isRequired,
   id: T.number.isRequired,
   lastUpdated: T.string.isRequired,
@@ -106,8 +106,8 @@ LocationCard.propTypes = {
       url: T.string,
     })
   ).isRequired,
-  sensorType: T.string.isRequired,
-  entity: T.string.isRequired,
+  sensorType: T.string,
+  entity: T.string,
   totalMeasurements: T.number.isRequired,
   isMobile: T.bool.isRequired,
   isAnalysis: T.bool,
