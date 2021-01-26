@@ -28,7 +28,7 @@ export default function CountriesHub({ _openDownloadModal }) {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
 
-      fetch(`${config.api}/countries`)
+      fetch(`${config.api}/countries?limit=1000`)
         .then(response => {
           if (response.status >= 400) {
             throw new Error('Bad response');
