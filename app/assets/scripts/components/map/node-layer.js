@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 import mapbox from 'mapbox-gl';
 
-import { defaultColor, unusedBorderColor } from '../../utils/colors';
+import {
+  defaultColor,
+  highlightColor,
+  unusedBorderColor,
+} from '../../utils/colors';
 import {
   iconMatch,
   borderSymbolSize,
@@ -44,16 +48,7 @@ export default function NodeLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': [
-          'case',
-          [
-            'in',
-            ['number', ['get', 'locationId']],
-            ['literal', allSelectedLocations],
-          ],
-          'white',
-          unusedBorderColor,
-        ],
+        'icon-color': unusedBorderColor,
       },
       layout: {
         'icon-image': iconMatch,
@@ -68,7 +63,16 @@ export default function NodeLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': defaultColor,
+        'icon-color': [
+          'case',
+          [
+            'in',
+            ['number', ['get', 'locationId']],
+            ['literal', allSelectedLocations],
+          ],
+          highlightColor,
+          defaultColor,
+        ],
       },
       layout: {
         'icon-image': iconMatch,
@@ -96,15 +100,15 @@ export default function NodeLayer({
   }, [activeParameter]);
 
   useEffect(() => {
-    map.setPaintProperty(`${activeParameter}-node-outline`, 'icon-color', [
+    map.setPaintProperty(`${activeParameter}-nodes`, 'icon-color', [
       'case',
       [
         'in',
         ['number', ['get', 'locationId']],
         ['literal', allSelectedLocations],
       ],
-      unusedBorderColor,
-      'white',
+      highlightColor,
+      defaultColor,
     ]);
   }, [allSelectedLocations]);
 
