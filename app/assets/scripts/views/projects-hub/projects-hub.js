@@ -71,8 +71,9 @@ export default function ProjectsHub({
       isMobile: query.mobility && query.mobility === 'Mobile',
       isAnalysis: query.procLevel && query.proecLevel === 'Analysis',
       entity: query.entity && query.entity.toLowerCase(),
-      sensorType: query.grade && query.grade.toLowerCase(),
-      manufacturerName: query.manufacturer && query.manufacturer,
+      sensorType: query.grade && query.grade.toLowerCase().replace(/_/g, ' '),
+      manufacturerName:
+        query.manufacturer && query.manufacturer.replace(/_/g, ' '),
     });
   }, [location]);
 
@@ -80,10 +81,10 @@ export default function ProjectsHub({
     fetchProjects(page, filters, PER_PAGE);
     let query = qs.parse(location.search, { ignoreQueryPrefix: true });
 
-    if (page !== query.page) {
+    if (page !== Number(query.page)) {
       // If page and query are out of sync we need to sync
       query.page = page;
-      history.push(`/locations?${buildQS(query)}`);
+      history.push(`/projects?${buildQS(query)}`);
     }
 
     return () => {
