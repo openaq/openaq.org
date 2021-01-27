@@ -198,6 +198,7 @@ function Location({ location, history, match, openDownloadModal }) {
           <SourcesCard sources={data.sources} />
           <TimeSeriesCard
             locationId={data.id}
+            lastUpdated={data.lastUpdated}
             parameters={data.parameters}
             xUnit="day"
             dateRange={dateRange}
