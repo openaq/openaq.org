@@ -1,12 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import { ParameterContext } from '../../context/parameter-context';
 import {
-  coloredCircleRadius,
-  selectCircleRadius,
-  selectShadowCircleRadius,
+  iconMatch,
+  coloredSymbolSize,
+  selectSymbolSize,
+  selectShadowSymbolSize,
 } from '../../utils/map-settings';
-import { generateColorStops } from '../../utils/colors';
+import { getFillExpression, defaultColor } from '../../utils/colors';
+import { square, circle } from './symbols';
 
 export default function LocationLayer({
   activeParameter,
@@ -14,59 +17,74 @@ export default function LocationLayer({
   map,
   sourceId,
 }) {
-  useEffect(() => {
-    if (!map.getLayer('location-layer')) {
-      // Add Shadow
-      map.addLayer({
-        id: 'location-shadow',
-        source: sourceId,
-        'source-layer': 'default',
-        filter: ['in', 'locationId', ['literal', locationIds]],
-        type: 'circle',
-        paint: {
-          'circle-color': '#000',
-          'circle-opacity': 0.3,
-          'circle-radius': selectShadowCircleRadius,
-          'circle-blur': 0.5,
-          'circle-translate': [0.5, 0.5],
-        },
-      });
-      // Add Highlight
-      map.addLayer({
-        id: 'location-highlight',
-        source: sourceId,
-        'source-layer': 'default',
-        filter: ['in', 'locationId', ['literal', locationIds]],
-        type: 'circle',
-        paint: {
-          'circle-color': '#fff',
-          'circle-opacity': 1,
-          'circle-radius': selectCircleRadius,
-          'circle-blur': 0,
-        },
-      });
+  const { isCore } = useContext(ParameterContext);
 
-      // Re-add fill by value
-      map.addLayer({
-        id: 'location-layer',
-        source: sourceId,
-        'source-layer': 'default',
-        filter: ['in', 'locationId', ['literal', locationIds]],
-        type: 'circle',
-        paint: {
-          'circle-color': {
-            property: 'lastValue',
-            stops: generateColorStops(activeParameter),
-          },
-          'circle-opacity': 1,
-          'circle-radius': coloredCircleRadius,
-          'circle-blur': 0,
-        },
-      });
-    }
+  useEffect(() => {
+    if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
+    if (!map.hasImage('circle')) map.addImage('circle', circle, { sdf: true });
+
+    // Add Shadow
+    map.addLayer({
+      id: 'location-shadow',
+      source: sourceId,
+      'source-layer': 'default',
+      filter: ['in', ['get', 'locationId'], ['literal', locationIds]],
+      type: 'symbol',
+      paint: {
+        'icon-color': '#000',
+        'icon-opacity': 0.3,
+        'icon-halo-blur': 0.5,
+        'icon-translate': [0.5, 0.5],
+      },
+      layout: {
+        'icon-image': iconMatch,
+        'icon-size': selectShadowSymbolSize,
+        'icon-allow-overlap': true,
+      },
+    });
+    // Add Highlight
+    map.addLayer({
+      id: 'location-highlight',
+      source: sourceId,
+      'source-layer': 'default',
+      filter: ['in', ['get', 'locationId'], ['literal', locationIds]],
+      type: 'symbol',
+      paint: {
+        'icon-color': '#fff',
+        'icon-opacity': 1,
+        'icon-halo-blur': 0,
+      },
+      layout: {
+        'icon-image': iconMatch,
+        'icon-size': selectSymbolSize,
+        'icon-allow-overlap': true,
+      },
+    });
+
+    // Re-add fill by value
+    map.addLayer({
+      id: 'location-layer',
+      source: sourceId,
+      'source-layer': 'default',
+      filter: ['in', ['get', 'locationId'], ['literal', locationIds]],
+      type: 'symbol',
+      paint: {
+        'icon-color': isCore(activeParameter)
+          ? getFillExpression(activeParameter)
+          : defaultColor,
+      },
+      layout: {
+        'icon-image': iconMatch,
+        'icon-size': coloredSymbolSize,
+        'icon-allow-overlap': true,
+      },
+    });
 
     return () => {
       if (map.getLayer('location-layer')) map.removeLayer('location-layer');
+      if (map.getLayer('location-showdow')) map.removeLayer('location-showdow');
+      if (map.getLayer('location-highlight'))
+        map.removeLayer('location-highlight');
     };
   }, []);
 

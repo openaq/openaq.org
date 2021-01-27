@@ -69,9 +69,7 @@ describe('The Locations Hub', () => {
     cy.get('[title="View source options"]')
       .find('span')
       .contains('Data Source');
-    cy.get('[data-cy=filter-sources]')
-      .find('[data-cy=boston_methane]')
-      .should('length', 1);
+
     cy.get('[data-cy=filter-menu-item]').first().click();
 
     cy.get('[data-cy=filter-pill]').should('exist');

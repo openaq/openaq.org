@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ParameterProvider } from '../../context/parameter-context';
 import MapComponent from '../../components/map';
 import LocationsSource from '../../components/map/locations-source';
 import MeasurementsLayer from '../../components/map/measurements-layer';
@@ -42,13 +41,11 @@ export default function NearbyLocations({
                 locationIds={[locationId]}
               />
             </LocationsSource>
-            <ParameterProvider>
-              <Legend
-                paramIds={parameters.map(p => p.parameterId)}
-                activeParameter={activeParameter}
-                onParamSelection={onParamSelection}
-              />
-            </ParameterProvider>
+            <Legend
+              paramIds={parameters.map(p => p.parameterId)}
+              activeParameter={activeParameter}
+              onParamSelection={onParamSelection}
+            />
           </MapComponent>
         </div>
       </div>
