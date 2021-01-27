@@ -112,12 +112,7 @@ function Country({ match, _openDownloadModal }) {
                       <LocationsLayer country={country.code} />
                     </LocationsSource>
                     <ParameterProvider>
-                      <Legend
-                        activeParameter={{
-                          parameterId: 2,
-                          displayName: 'PM2.5',
-                        }}
-                      />
+                      <Legend />
                     </ParameterProvider>
                   </MapComponent>
                 </div>
