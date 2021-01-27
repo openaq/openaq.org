@@ -60,6 +60,18 @@ function Location({ location, history, match, openDownloadModal }) {
         .then(
           json => {
             const dat = json.results[0];
+
+            if (!dat) {
+              setState(state => ({
+                ...state,
+                fetched: true,
+                fetching: false,
+                error: json,
+              }));
+
+              throw new Error('Bad response');
+            }
+
             setState(state => ({
               ...state,
               fetched: true,
