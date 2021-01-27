@@ -92,10 +92,7 @@ render(
           <Route
             name="locationsHub"
             path="/locations"
-            //component={LocationsHub}
-            component={props => (
-              <LocationsHub timestamp={new Date().toString()} {...props} />
-            )}
+            component={LocationsHub}
             pageClass="page--locations-hub page--dark"
           />
           <Route
