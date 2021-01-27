@@ -73,12 +73,28 @@ export const selectCircleRadius = {
   ],
 };
 
+export const selectSymbolSize = {
+  stops: [
+    [0, 0.28],
+    [5, 0.38],
+    [7, 0.48],
+  ],
+};
+
 // Fill Radius for the shadow around selected points
 export const selectShadowCircleRadius = {
   stops: [
     [0, 3.5],
     [5, 6],
     [7, 12],
+  ],
+};
+
+export const selectShadowSymbolSize = {
+  stops: [
+    [0, 0.3],
+    [5, 0.4],
+    [7, 0.5],
   ],
 };
 

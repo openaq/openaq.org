@@ -1,13 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 
+import { ParameterContext } from '../../context/parameter-context';
 import {
   iconMatch,
   coloredSymbolSize,
   borderSymbolSize,
 } from '../../utils/map-settings';
-import { getFillExpression } from '../../utils/colors';
+import {
+  getFillExpression,
+  defaultColor,
+  defaultBorderColor,
+} from '../../utils/colors';
 import { addPopover, debugProperties } from './map-interaction';
 import { square, circle } from './symbols';
 
@@ -18,6 +23,8 @@ export default function MeasurementsLayer({
   sourceId,
 }) {
   let match = useRouteMatch();
+
+  const { isCore } = useContext(ParameterContext);
 
   const countryFilter = ['==', ['get', 'country'], country];
 
@@ -31,7 +38,9 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': getFillExpression(activeParameter, 'dark'),
+        'icon-color': isCore(activeParameter)
+          ? getFillExpression(activeParameter, 'dark')
+          : defaultBorderColor,
       },
       layout: {
         'icon-image': iconMatch,
@@ -46,7 +55,9 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': getFillExpression(activeParameter),
+        'icon-color': isCore(activeParameter)
+          ? getFillExpression(activeParameter)
+          : defaultColor,
       },
       layout: {
         'icon-image': iconMatch,
