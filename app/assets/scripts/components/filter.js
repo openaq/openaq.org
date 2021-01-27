@@ -67,6 +67,12 @@ export default function Filter({
     fetchBaseData();
   }, []);
 
+  useEffect(() => {
+    setSelected(
+      initFromLocation(qs.parse(location.search, { ignoreQueryPrefix: true }))
+    );
+  }, [location]);
+
   // alphabetizes filter names
   const sortList = list => list.sort((a, b) => a.name.localeCompare(b.name));
   if (countries) sortList(countries);
