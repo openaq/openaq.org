@@ -101,23 +101,17 @@ Drop.propTypes = {
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
     id: PropTypes.number,
-    parameterId: PropTypes.number.isRequired,
+    parameterId: PropTypes.number,
   }).isRequired,
   onParamSelection: PropTypes.func,
 };
 
 const ColorScaleLegend = ({
-  parameters,
   legendParameters,
   activeParameter,
   onParamSelection,
+  isCoreParameter,
 }) => {
-  const isCore = activeParameter =>
-    parameters &&
-    parameters.find(
-      p => p.id === (activeParameter.parameterId || activeParameter.id)
-    ).isCore;
-
   const scaleStops = generateLegendStops(
     activeParameter.parameterId || activeParameter.id
   );
@@ -138,7 +132,7 @@ const ColorScaleLegend = ({
           activeParameter.displayName
         )}
       </p>
-      {isCore(activeParameter) && (
+      {isCoreParameter && (
         <>
           <ul className="color-scale">
             {scaleStops.map(o => (
@@ -173,9 +167,10 @@ ColorScaleLegend.propTypes = {
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
     id: PropTypes.number,
-    parameterId: PropTypes.number.isRequired,
+    parameterId: PropTypes.number,
   }).isRequired,
   onParamSelection: PropTypes.func,
+  isCoreParameter: PropTypes.bool.isRequired,
 };
 
 export default function Legend({
@@ -185,7 +180,9 @@ export default function Legend({
   onParamSelection,
   showOnlyParam,
 }) {
-  const { parameters } = useContext(ParameterContext);
+  const { parameters, isCore } = useContext(ParameterContext);
+
+  const activeParameterId = activeParameter.parameterId || activeParameter.id;
 
   const filteredParams =
     paramIds && parameters
@@ -223,10 +220,10 @@ export default function Legend({
 
       {!showOnlyParam && activeParameter && (
         <ColorScaleLegend
-          parameters={parameters}
           legendParameters={legendParameters}
           activeParameter={activeParameter}
           onParamSelection={onParamSelection}
+          isCoreParameter={isCore(activeParameterId)}
         />
       )}
     </Wrapper>
@@ -240,7 +237,7 @@ Legend.propTypes = {
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
     id: PropTypes.number,
-    parameterId: PropTypes.number.isRequired,
+    parameterId: PropTypes.number,
   }).isRequired,
   onParamSelection: PropTypes.func,
   showOnlyParam: PropTypes.bool,

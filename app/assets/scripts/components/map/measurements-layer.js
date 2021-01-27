@@ -24,9 +24,7 @@ export default function MeasurementsLayer({
 }) {
   let match = useRouteMatch();
 
-  const { parameters } = useContext(ParameterContext);
-  const isCore = activeParameter =>
-    parameters && parameters.find(p => p.id === activeParameter).isCore;
+  const { isCore } = useContext(ParameterContext);
 
   const countryFilter = ['==', ['get', 'country'], country];
 

@@ -15,10 +15,7 @@ export default function LocationLayer({
   map,
   sourceId,
 }) {
-  const { parameters } = useContext(ParameterContext);
-
-  const isCore = activeParameter =>
-    parameters && parameters.find(p => p.id === activeParameter).isCore;
+  const { isCore } = useContext(ParameterContext);
 
   useEffect(() => {
     if (!map.getLayer('location-layer')) {
