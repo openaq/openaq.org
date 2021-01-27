@@ -25,7 +25,6 @@ export default function MeasurementsLayer({
   let match = useRouteMatch();
 
   const { parameters } = useContext(ParameterContext);
-  // TODO: Why is parameters undefined?
   const isCore = activeParameter =>
     parameters && parameters.find(p => p.id === activeParameter).isCore;
 
