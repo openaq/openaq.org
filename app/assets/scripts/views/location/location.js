@@ -196,15 +196,17 @@ function Location({ location, history, match, openDownloadModal }) {
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
-          <TimeSeriesCard
-            locationId={data.id}
-            parameters={data.parameters}
-            xUnit="day"
-            dateRange={dateRange}
-            titleInfo={
-              'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown for the most recent week of data.'
-            }
-          />
+          {!data.isAnalysis && (
+            <TimeSeriesCard
+              locationId={data.id}
+              parameters={data.parameters}
+              xUnit="day"
+              dateRange={dateRange}
+              titleInfo={
+                'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown for the most recent week of data.'
+              }
+            />
+          )}
           {data.isMobile && (
             <MobileDataLocationsCard
               locationId={data.id}
@@ -213,16 +215,18 @@ function Location({ location, history, match, openDownloadModal }) {
               lastUpdated={data.lastUpdated}
             />
           )}
-          <TemporalCoverageCard
-            parameters={data.parameters}
-            spatial="location"
-            id={data.id}
-            dateRange={dateRange}
-            titleInfo={
-              'The average number of measurements for each pollutant by hour, day, or month. In some views a window may be turned off if that view is not applicable to the selected time window.'
-            }
-            isMobile={data.isMobile}
-          />
+          {!data.isAnalysis && (
+            <TemporalCoverageCard
+              parameters={data.parameters}
+              spatial="location"
+              id={data.id}
+              dateRange={dateRange}
+              titleInfo={
+                'The average number of measurements for each pollutant by hour, day, or month. In some views a window may be turned off if that view is not applicable to the selected time window.'
+              }
+              isMobile={data.isMobile}
+            />
+          )}
           <MeasureandsCard
             parameters={data.parameters}
             titleInfo={
