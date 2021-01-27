@@ -7,7 +7,8 @@ import mapbox from 'mapbox-gl';
 import {
   defaultColor,
   highlightColor,
-  unusedBorderColor,
+  defaultBorderColor,
+  highlightBorderColor,
 } from '../../utils/colors';
 import {
   iconMatch,
@@ -48,7 +49,16 @@ export default function NodeLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': unusedBorderColor,
+        'icon-color': [
+          'case',
+          [
+            'in',
+            ['number', ['get', 'locationId']],
+            ['literal', allSelectedLocations],
+          ],
+          highlightBorderColor,
+          defaultBorderColor,
+        ],
       },
       layout: {
         'icon-image': iconMatch,

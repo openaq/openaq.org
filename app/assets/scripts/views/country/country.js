@@ -11,7 +11,7 @@ import { ParameterProvider } from '../../context/parameter-context';
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import MapComponent from '../../components/map';
 import LocationsSource from '../../components/map/locations-source';
-import MeasurementsLayer from '../../components/map/measurements-layer';
+import LocationsLayer from '../../components/map/locations-layer';
 import Legend from '../../components/map/legend';
 import Results from './results';
 
@@ -108,11 +108,8 @@ function Country({ match, _openDownloadModal }) {
                     bbox={getCountryBbox(country.code)}
                     scrollZoomDisabled
                   >
-                    <LocationsSource activeParameter={2}>
-                      <MeasurementsLayer
-                        activeParameter={2}
-                        country={country.code}
-                      />
+                    <LocationsSource>
+                      <LocationsLayer country={country.code} />
                     </LocationsSource>
                     <ParameterProvider>
                       <Legend
