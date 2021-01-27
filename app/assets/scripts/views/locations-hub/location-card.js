@@ -73,7 +73,7 @@ export default function LocationCard({
                   key={source.name}
                   className={!source.url ? 'disabled' : null}
                 >
-                  {`${i > 0 ? ', ' : ''}${source.name}`}
+                  {`${i > 0 ? ', ' : ''}${source.organization || source.name}`}
                 </a>
               )),
             },

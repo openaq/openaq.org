@@ -120,6 +120,8 @@ export default function TemporalCoverageCard({
       );
 
       let query = {
+        sort: 'asc',
+        order_by: temporal,
         temporal,
         parameter: activeTab.id,
         spatial,

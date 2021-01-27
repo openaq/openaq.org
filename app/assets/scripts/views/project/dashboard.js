@@ -36,6 +36,7 @@ function Dashboard({
       {!isAnalysis && (
         <TimeSeriesCard
           projectId={projectId}
+          lastUpdated={projectDates.end}
           parameters={projectParams}
           prefetchedData={timeseriesAverages}
           dateRange={dateRange}
