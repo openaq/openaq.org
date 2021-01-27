@@ -55,7 +55,7 @@ function Section(props) {
               setSelected(v === selected ? null : v);
             }}
           >
-            {v.replace(/_/g,' ')}
+            {v.replace(/_/g, ' ')}
           </button>
         ))}
       </SectionButtons>
