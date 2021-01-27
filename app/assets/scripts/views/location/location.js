@@ -238,8 +238,6 @@ function Location({ location, history, match, openDownloadModal }) {
         <NearbyLocations
           locationId={data.id}
           center={[data.coordinates.longitude, data.coordinates.latitude]}
-          city={data.city || NO_CITY}
-          country={data.country}
           parameters={data.parameters}
           initialActiveParameter={data.parameters[0]}
         />
