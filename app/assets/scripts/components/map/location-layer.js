@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import { ParameterContext } from '../../context/parameter-context';
 import {
   coloredCircleRadius,
   selectCircleRadius,
   selectShadowCircleRadius,
 } from '../../utils/map-settings';
-import { generateColorStops } from '../../utils/colors';
+import { getFillExpression, defaultColor } from '../../utils/colors';
 
 export default function LocationLayer({
   activeParameter,
@@ -14,6 +15,11 @@ export default function LocationLayer({
   map,
   sourceId,
 }) {
+  const { parameters } = useContext(ParameterContext);
+
+  const isCore = activeParameter =>
+    parameters && parameters.find(p => p.id === activeParameter).isCore;
+
   useEffect(() => {
     if (!map.getLayer('location-layer')) {
       // Add Shadow
@@ -21,7 +27,7 @@ export default function LocationLayer({
         id: 'location-shadow',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['in', 'locationId', ['literal', locationIds]],
+        filter: ['in', ['get', 'locationId'], ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': '#000',
@@ -36,7 +42,7 @@ export default function LocationLayer({
         id: 'location-highlight',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['in', 'locationId', ['literal', locationIds]],
+        filter: ['in', ['get', 'locationId'], ['literal', locationIds]],
         type: 'circle',
         paint: {
           'circle-color': '#fff',
@@ -51,13 +57,12 @@ export default function LocationLayer({
         id: 'location-layer',
         source: sourceId,
         'source-layer': 'default',
-        filter: ['in', 'locationId', ['literal', locationIds]],
+        filter: ['in', ['get', 'locationId'], ['literal', locationIds]],
         type: 'circle',
         paint: {
-          'circle-color': {
-            property: 'lastValue',
-            stops: generateColorStops(activeParameter),
-          },
+          'circle-color': isCore(activeParameter)
+            ? getFillExpression(activeParameter)
+            : defaultColor,
           'circle-opacity': 1,
           'circle-radius': coloredCircleRadius,
           'circle-blur': 0,
@@ -67,6 +72,9 @@ export default function LocationLayer({
 
     return () => {
       if (map.getLayer('location-layer')) map.removeLayer('location-layer');
+      if (map.getLayer('location-showdow')) map.removeLayer('location-showdow');
+      if (map.getLayer('location-highlight'))
+        map.removeLayer('location-highlight');
     };
   }, []);
 

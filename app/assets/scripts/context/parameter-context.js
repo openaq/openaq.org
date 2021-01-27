@@ -16,6 +16,7 @@ export function ParameterProvider(props) {
     { fetchedParams, fetchingParams, paramError, parameters },
     setState,
   ] = useState(defaultState);
+
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetchingParams: true, paramError: null }));
@@ -54,6 +55,7 @@ export function ParameterProvider(props) {
       setState(defaultState);
     };
   }, []);
+
   return (
     <ParameterContext.Provider
       value={{ fetchedParams, fetchingParams, paramError, parameters }}
