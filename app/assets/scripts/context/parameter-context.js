@@ -16,6 +16,13 @@ export function ParameterProvider(props) {
     { fetchedParams, fetchingParams, paramError, parameters },
     setState,
   ] = useState(defaultState);
+
+  const isCore = function (activeParameterId) {
+    return (
+      parameters && parameters.find(p => p.id === activeParameterId).isCore
+    );
+  };
+
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetchingParams: true, paramError: null }));
@@ -54,9 +61,10 @@ export function ParameterProvider(props) {
       setState(defaultState);
     };
   }, []);
+
   return (
     <ParameterContext.Provider
-      value={{ fetchedParams, fetchingParams, paramError, parameters }}
+      value={{ fetchedParams, fetchingParams, paramError, parameters, isCore }}
     >
       {props.children}
     </ParameterContext.Provider>

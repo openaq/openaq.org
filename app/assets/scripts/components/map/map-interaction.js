@@ -17,6 +17,18 @@ export function addPopover(map, layerId, locationId, activeParameter) {
 
   const openPopup = e => {
     let popoverElement = document.createElement('div');
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    let lngLat = typeof coordinates[0] === 'number' ? coordinates : e.lngLat;
+
     ReactDOM.render(
       <Popover
         activeParameter={activeParameter}
@@ -26,7 +38,7 @@ export function addPopover(map, layerId, locationId, activeParameter) {
       popoverElement
     );
     new mapbox.Popup()
-      .setLngLat(e.lngLat)
+      .setLngLat(lngLat)
       .setDOMContent(popoverElement)
       .addTo(map);
   };
@@ -53,7 +65,9 @@ export function debugProperties(map, layerId) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    let lngLat = typeof coordinates[0] === 'number' ? coordinates : e.lngLat;
+
+    popup.setLngLat(lngLat).setHTML(description).addTo(map);
   });
 
   map.on('mouseleave', layerId, function () {

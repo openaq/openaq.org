@@ -20,8 +20,10 @@ const mapColors = [
 // Colors for the stations without recent values
 export const unusedColor = '#ddd';
 export const unusedBorderColor = '#555';
-export const defaultColor = '#0b75a9';
+export const defaultColor = '#198cff';
+export const defaultBorderColor = chroma(defaultColor).darken().hex();
 export const highlightColor = '#faa204';
+export const highlightBorderColor = chroma(highlightColor).darken().hex();
 
 // Generate an array of darker colors for the point borders
 export function darkenColors() {
