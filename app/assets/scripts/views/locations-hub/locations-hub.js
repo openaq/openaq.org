@@ -55,6 +55,7 @@ export default function LocationsHub({
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
+    
     setPage(prev => {
       const cur = getPage(query);
       if (prev === cur) {
@@ -76,8 +77,8 @@ export default function LocationsHub({
       // The following are not lists
       isMobile: query.mobility && query.mobility === 'Mobile',
       entity: query.entity && query.entity.toLowerCase(),
-      sensorType: query.grade && query.grade.toLowerCase(),
-      manufacturerName: query.manufacturer && query.manufacturer,
+      sensorType: query.grade && query.grade.toLowerCase().replace(/_/g, ' '),
+      manufacturerName: query.manufacturer && query.manufacturer.replace(/_/g, ' '),
     });
   }, [location]);
 

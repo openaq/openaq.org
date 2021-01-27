@@ -32,7 +32,7 @@ const SectionButtons = styled.div`
   }
 `;
 
-const gradeOptions = ['Low-Cost Sensor', 'Reference Grade'];
+const gradeOptions = ['Low-Cost_Sensor', 'Reference_Grade'];
 const mobilityOptions = ['Mobile', 'Stationary'];
 const entityOptions = ['Community', 'Research', 'Government'];
 const LCS = gradeOptions[0];
@@ -55,7 +55,7 @@ function Section(props) {
               setSelected(v === selected ? null : v);
             }}
           >
-            {v}
+            {v.replace(/_/g,' ')}
           </button>
         ))}
       </SectionButtons>
@@ -113,7 +113,7 @@ function SensorTypeFilter(props) {
               {'Select manufacturer'}
             </option>
             {manufacturers.map(m => (
-              <option value={m} key={m}>
+              <option value={m.replace(/ /g, '_')} key={m}>
                 {m}
               </option>
             ))}
