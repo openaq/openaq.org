@@ -264,7 +264,7 @@ function Project({ match, history, location, _openDownloadModal }) {
               style={{ gridTemplateColumns: `1fr`, paddingTop: `4rem` }}
             >
               <h1 className="fold__title">
-                {`Values for ${selectedLocationCount} selected nodes${
+                {`Values for ${selectedLocationCount} selected node${
                   selectedLocationCount !== 1 ? 's' : ''
                 }`}
               </h1>
@@ -292,7 +292,7 @@ function Project({ match, history, location, _openDownloadModal }) {
               style={{ gridTemplateColumns: `1fr`, paddingTop: `4rem` }}
             >
               <h1 className="fold__title">
-                {`Values for ${projectData.locationIds.length} nodes${
+                {`Values for ${projectData.locationIds.length} node${
                   projectData.locationIds.length !== 1 ? 's' : ''
                 }`}
               </h1>
