@@ -196,18 +196,18 @@ function Location({ location, history, match, openDownloadModal }) {
           />
           <LatestMeasurementsCard parameters={data.parameters} />
           <SourcesCard sources={data.sources} />
-          {!data.isAnalysis && (
-            <TimeSeriesCard
-              locationId={data.id}
-              lastUpdated={data.lastUpdated}
-              parameters={data.parameters}
-              xUnit="day"
-              dateRange={dateRange}
-              titleInfo={
-                'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For the project lifetime the daily averages are shown for the most recent week of data.'
-              }
-            />
-          )}
+{!data.isAnalysis && (
+          <TimeSeriesCard
+            locationId={data.id}
+            lastUpdated={data.lastUpdated}
+            parameters={data.parameters}
+            xUnit="day"
+            dateRange={dateRange}
+            titleInfo={
+              'The value of a pollutant over time during the specified window. While locations have varying time intervals over which they report, all time series charts show data at the same intervals. For one day or one month of data the hourly average is shown. For project lifetimes the daily averages are shown for the full project, up to 2 years of data.'
+            }
+          />
+)}
           {data.isMobile && (
             <MobileDataLocationsCard
               locationId={data.id}
