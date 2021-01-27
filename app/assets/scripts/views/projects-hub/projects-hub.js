@@ -48,7 +48,17 @@ export default function ProjectsHub({
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
-    setPage(() => getPage(query));
+
+    setPage(prev => {
+      const cur = getPage(query);
+      if (prev === cur) {
+        //This means that only filtes have updated
+        //Reset page to 1
+        return 1;
+      }
+      return cur;
+    });
+
     setFilters({
       // In the front end we are using param 'area', but this is
       // mapped to 'city' before getting sent to backend.
@@ -61,13 +71,22 @@ export default function ProjectsHub({
       isMobile: query.mobility && query.mobility === 'Mobile',
       isAnalysis: query.procLevel && query.proecLevel === 'Analysis',
       entity: query.entity && query.entity.toLowerCase(),
-      sensorType: query.grade && query.grade.toLowerCase(),
-      manufacturerName: query.manufacturer && query.manufacturer,
+      sensorType: query.grade && query.grade.toLowerCase().replace(/_/g, ' '),
+      manufacturerName:
+        query.manufacturer && query.manufacturer.replace(/_/g, ' '),
     });
   }, [location]);
 
   useEffect(() => {
     fetchProjects(page, filters, PER_PAGE);
+    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+
+    if (page !== Number(query.page)) {
+      // If page and query are out of sync we need to sync
+      query.page = page;
+      history.push(`/projects?${buildQS(query)}`);
+    }
+
     return () => {
       invalidateProjects();
     };

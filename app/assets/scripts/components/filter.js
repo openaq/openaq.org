@@ -447,7 +447,7 @@ export default function Filter({
                     })
                   }
                 >
-                  <span>{o}</span>
+                  <span>{o.replace(/_/g, ' ')}</span>
                 </button>
               )
             );
