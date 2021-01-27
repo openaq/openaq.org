@@ -182,7 +182,9 @@ export default function Legend({
 }) {
   const { parameters, isCore } = useContext(ParameterContext);
 
-  const activeParameterId = activeParameter.parameterId || activeParameter.id;
+  const activeParameterId = activeParameter
+    ? activeParameter.parameterId || activeParameter.id
+    : null;
 
   const filteredParams =
     paramIds && parameters
@@ -238,7 +240,7 @@ Legend.propTypes = {
     name: PropTypes.string,
     id: PropTypes.number,
     parameterId: PropTypes.number,
-  }).isRequired,
+  }),
   onParamSelection: PropTypes.func,
   showOnlyParam: PropTypes.bool,
 };
