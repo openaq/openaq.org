@@ -6,7 +6,6 @@ import { getCountryBbox } from '../../utils/countries';
 import { formatThousands } from '../../utils/format';
 import config from '../../config';
 import { openDownloadModal } from '../../actions/action-creators';
-import { ParameterProvider } from '../../context/parameter-context';
 
 import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import MapComponent from '../../components/map';
@@ -111,9 +110,7 @@ function Country({ match, _openDownloadModal }) {
                     <LocationsSource>
                       <LocationsLayer country={country.code} />
                     </LocationsSource>
-                    <ParameterProvider>
-                      <Legend />
-                    </ParameterProvider>
+                    <Legend />
                   </MapComponent>
                 </div>
               </section>
