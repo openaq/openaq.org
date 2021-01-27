@@ -36,6 +36,7 @@ const defaultState = {
 export default function TimeSeriesCard({
   locationId,
   projectId,
+  lastUpdated,
   parameters,
   prefetchedData,
   dateRange,
@@ -76,9 +77,14 @@ export default function TimeSeriesCard({
   const fetchData = () => {
     setState(state => ({ ...state, fetching: true, error: null }));
 
+    // get date 2 years prior to last updated
+    let defaultStartDate = new Date();
+    defaultStartDate.setFullYear(new Date(lastUpdated).getFullYear() - 2);
+
     let query = {
       parameter: activeTab.id,
       temporal,
+      limit: 10000,
       ...(dateRange
         ? {
             // In user space, month is 1 indexed
@@ -87,7 +93,10 @@ export default function TimeSeriesCard({
               ? new Date(year, month - 1, day + 1)
               : new Date(year, month, 0),
           }
-        : {}),
+        : {
+            date_from: defaultStartDate,
+            date_to: lastUpdated,
+          }),
     };
 
     if (locationId) {
@@ -183,6 +192,7 @@ TimeSeriesCard.propTypes = {
   titleInfo: PropTypes.string,
   locationId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  lastUpdated: PropTypes.instanceOf(Date),
   prefetchedData: PropTypes.object,
   parameters: PropTypes.arrayOf(
     PropTypes.shape({
