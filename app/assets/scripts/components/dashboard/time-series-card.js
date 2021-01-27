@@ -78,7 +78,7 @@ export default function TimeSeriesCard({
     setState(state => ({ ...state, fetching: true, error: null }));
 
     // get date 2 years prior to last updated
-    const defaultStartDate = new Date();
+    let defaultStartDate = new Date();
     defaultStartDate.setFullYear(new Date(lastUpdated).getFullYear() - 3);
 
     let query = {
