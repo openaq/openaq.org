@@ -79,11 +79,12 @@ export default function TimeSeriesCard({
 
     // get date 2 years prior to last updated
     let defaultStartDate = new Date();
-    defaultStartDate.setFullYear(new Date(lastUpdated).getFullYear() - 3);
+    defaultStartDate.setFullYear(new Date(lastUpdated).getFullYear() - 2);
 
     let query = {
       parameter: activeTab.id,
       temporal,
+      limit: 10000,
       ...(dateRange
         ? {
             // In user space, month is 1 indexed
