@@ -65,7 +65,8 @@ export default function Card({
   noBodyStyle,
   titleInfo,
 }) {
-  console.log(tags);
+
+    console.log(tags);
   return (
     <article data-cy={`${id}-card`} className={c('card', className)}>
       <CardContents
