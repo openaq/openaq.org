@@ -11,6 +11,8 @@ import Header, { LoadingHeader, ErrorHeader } from '../../components/header';
 import MapComponent from '../../components/map';
 import LocationsSource from '../../components/map/locations-source';
 import LocationsLayer from '../../components/map/locations-layer';
+import MobileSource from '../../components/map/mobile-source';
+import MobileBoundsLayer from '../../components/map/mobile-bounds-layer';
 import Legend from '../../components/map/legend';
 import Results from './results';
 
@@ -110,6 +112,9 @@ function Country({ match, _openDownloadModal }) {
                     <LocationsSource>
                       <LocationsLayer country={country.code} />
                     </LocationsSource>
+                    <MobileSource>
+                      <MobileBoundsLayer country={country.code} />
+                    </MobileSource>
                     <Legend />
                   </MapComponent>
                 </div>
