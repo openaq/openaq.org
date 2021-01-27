@@ -101,9 +101,76 @@ Drop.propTypes = {
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
     id: PropTypes.number,
-    parameterId: PropTypes.number.isRequired,
+    parameterId: PropTypes.number,
   }).isRequired,
   onParamSelection: PropTypes.func,
+};
+
+const ColorScaleLegend = ({
+  legendParameters,
+  activeParameter,
+  onParamSelection,
+  isCoreParameter,
+}) => {
+  const scaleStops = generateLegendStops(
+    activeParameter.parameterId || activeParameter.id
+  );
+
+  const colorWidth = 100 / scaleStops.length;
+
+  return (
+    <Container>
+      <p>
+        Showing the most recent* values for{' '}
+        {legendParameters?.length > 1 ? (
+          <Drop
+            parameters={legendParameters}
+            activeParameter={activeParameter}
+            onParamSelection={onParamSelection}
+          />
+        ) : (
+          activeParameter.displayName
+        )}
+      </p>
+      {isCoreParameter && (
+        <>
+          <ul className="color-scale">
+            {scaleStops.map(o => (
+              <li
+                key={o.label}
+                style={{
+                  backgroundColor: o.color,
+                  width: `${colorWidth}%`,
+                }}
+                className="color-scale__item"
+              >
+                <span className="color-scale__value">{o.label}</span>
+              </li>
+            ))}
+          </ul>
+          <p>* Locations not updated in the last two days are shown in grey.</p>
+          <small className="disclaimer">
+            <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
+              Data Disclaimer and More Information
+            </a>
+          </small>
+        </>
+      )}
+    </Container>
+  );
+};
+
+ColorScaleLegend.propTypes = {
+  parameters: PropTypes.array,
+  legendParameters: PropTypes.array,
+  activeParameter: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    id: PropTypes.number,
+    parameterId: PropTypes.number,
+  }).isRequired,
+  onParamSelection: PropTypes.func,
+  isCoreParameter: PropTypes.bool.isRequired,
 };
 
 export default function Legend({
@@ -113,41 +180,31 @@ export default function Legend({
   onParamSelection,
   showOnlyParam,
 }) {
-  const { parameters } = useContext(ParameterContext);
-  const scaleStops = generateLegendStops(
-    activeParameter.parameterId || activeParameter.id
-  );
+  const { parameters, isCore } = useContext(ParameterContext);
 
-  const isCore = activeParameter =>
-    parameters &&
-    parameters.find(
-      p => p.id === (activeParameter.parameterId || activeParameter.id)
-    ).isCore;
+  const activeParameterId = activeParameter.parameterId || activeParameter.id;
 
-  const colorWidth = 100 / scaleStops.length;
   const filteredParams =
     paramIds && parameters
       ? parameters.filter(param => paramIds.includes(param.id))
       : null;
   let legendParameters = presetParameterList ||
     filteredParams || [activeParameter];
+
   return (
     <Wrapper>
       <Container>
-        {showOnlyParam && (
+        {showOnlyParam && legendParameters?.length > 1 && (
           <p>
             Showing locations for:
-            {legendParameters?.length > 1 ? (
-              <Drop
-                parameters={legendParameters}
-                activeParameter={activeParameter}
-                onParamSelection={onParamSelection}
-              />
-            ) : (
-              activeParameter.displayName
-            )}
+            <Drop
+              parameters={legendParameters}
+              activeParameter={activeParameter}
+              onParamSelection={onParamSelection}
+            />
           </p>
         )}
+
         <Definition>
           <dt>
             <Circle />
@@ -160,47 +217,14 @@ export default function Legend({
           <dd>Low Cost Sensor</dd>
         </Definition>
       </Container>
-      {!showOnlyParam && (
-        <Container>
-          <p>
-            Showing the most recent* values for{' '}
-            {legendParameters?.length > 1 ? (
-              <Drop
-                parameters={legendParameters}
-                activeParameter={activeParameter}
-                onParamSelection={onParamSelection}
-              />
-            ) : (
-              activeParameter.displayName
-            )}
-          </p>
-          {isCore(activeParameter) && (
-            <>
-              <ul className="color-scale">
-                {scaleStops.map(o => (
-                  <li
-                    key={o.label}
-                    style={{
-                      backgroundColor: o.color,
-                      width: `${colorWidth}%`,
-                    }}
-                    className="color-scale__item"
-                  >
-                    <span className="color-scale__value">{o.label}</span>
-                  </li>
-                ))}
-              </ul>
-              <p>
-                * Locations not updated in the last two days are shown in grey.
-              </p>
-              <small className="disclaimer">
-                <a href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85">
-                  Data Disclaimer and More Information
-                </a>
-              </small>
-            </>
-          )}
-        </Container>
+
+      {!showOnlyParam && activeParameter && (
+        <ColorScaleLegend
+          legendParameters={legendParameters}
+          activeParameter={activeParameter}
+          onParamSelection={onParamSelection}
+          isCoreParameter={isCore(activeParameterId)}
+        />
       )}
     </Wrapper>
   );
@@ -213,7 +237,7 @@ Legend.propTypes = {
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
     id: PropTypes.number,
-    parameterId: PropTypes.number.isRequired,
+    parameterId: PropTypes.number,
   }).isRequired,
   onParamSelection: PropTypes.func,
   showOnlyParam: PropTypes.bool,

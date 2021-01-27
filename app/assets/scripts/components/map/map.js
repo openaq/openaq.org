@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import mapbox from 'mapbox-gl';
 
+import { ParameterProvider } from '../../context/parameter-context';
 import config from '../../config';
 
 export default function Map({ center, bbox, scrollZoomDisabled, children }) {
@@ -47,13 +48,15 @@ export default function Map({ center, bbox, scrollZoomDisabled, children }) {
   return (
     <div className="map" style={{ minHeight: `20rem` }}>
       <div ref={containerRef} className="map__container" data-cy="mapboxgl-map">
-        {map &&
-          children &&
-          React.Children.map(children, child =>
-            React.cloneElement(child, {
-              map,
-            })
-          )}
+        <ParameterProvider>
+          {map &&
+            children &&
+            React.Children.map(children, child =>
+              React.cloneElement(child, {
+                map,
+              })
+            )}
+        </ParameterProvider>
       </div>
     </div>
   );
