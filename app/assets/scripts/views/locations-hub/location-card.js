@@ -71,7 +71,9 @@ export default function LocationCard({
                   href={source.url}
                   title={`View source for ${name}`}
                   key={source.name}
-                  className={!source.url ? 'disabled' : null}
+                  className={!source.url && 'disabled'}
+                  rel="noreferrer noopener"
+                  target="_blank"
                 >
                   {`${i > 0 ? ', ' : ''}${source.organization || source.name}`}
                 </a>
