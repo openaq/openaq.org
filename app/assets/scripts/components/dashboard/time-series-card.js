@@ -178,7 +178,7 @@ export default function TimeSeriesCard({
             <CardTitle className="card__title">Time Series Data</CardTitle>
             {titleInfo && <InfoButton info={titleInfo} id="time-series-info" />}
           </CardHeadline>
-          {data?.length > 0 && (
+          {data?.length > 0 && !dateRange && (
             <span>
               Parameter Collection Dates:{' '}
               {formatDate(data[data.length - 1].day)} -{' '}
