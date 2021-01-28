@@ -88,17 +88,14 @@ export default function TimeSeriesCard({
       ...(dateRange
         ? {
             date_from: day
-              ? moment.utc(dateRange).startOf('day').toISOString()
-              : moment.utc(dateRange).startOf('month').toISOString(),
+              ? moment(dateRange).startOf('day').toISOString()
+              : moment(dateRange).startOf('month').toISOString(),
             date_to: day
-              ? moment.utc(dateRange).endOf('day').toISOString()
-              : moment.utc(dateRange).endOf('month').toISOString(),
+              ? moment(dateRange).endOf('day').toISOString()
+              : moment(dateRange).endOf('month').toISOString(),
           }
         : {
-            date_from: moment
-              .utc(lastUpdated)
-              .subtract(2, 'years')
-              .toISOString(),
+            date_from: moment(lastUpdated).subtract(2, 'years').toISOString(),
             date_to: lastUpdated,
           }),
     };
