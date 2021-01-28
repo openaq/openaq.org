@@ -136,7 +136,17 @@ export default function TimeSeriesCard({
   if (!fetched && !fetching) {
     return null;
   }
+  const formatDate = date => {
+    let d = new Date(date);
+    let month = d.getMonth() + 1;
+    let day = d.getDate() + 1;
+    let year = d.getFullYear();
 
+    if (month < 10) month = '0' + month;
+    if (day < 10) day = '0' + day;
+
+    return [year, month, day].join('/');
+  };
   return (
     <Card
       id="time-series"
@@ -157,6 +167,12 @@ export default function TimeSeriesCard({
             <CardTitle className="card__title">Time Series Data</CardTitle>
             {titleInfo && <InfoButton info={titleInfo} id="time-series-info" />}
           </CardHeadline>
+          {data && (
+            <span>
+              Collection Dates: {formatDate(data[data.length - 1].day)} -{' '}
+              {formatDate(data[0].day)}{' '}
+            </span>
+          )}
         </CardHeader>
       )}
       renderBody={() => (

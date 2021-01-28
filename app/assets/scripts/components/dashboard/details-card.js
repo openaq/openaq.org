@@ -55,7 +55,7 @@ export default function DetailsCard({ measurements, date, coords, lifecycle }) {
                       zIndex: `40`,
                     }}
                   >
-                    <dt>Collection Dates</dt>
+                    <dt>Project Collection Dates</dt>
                     <InfoButton
                       info={
                         'Collection dates may vary by parameter. This is the collection dates across all parameters.'
