@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
+import datefns from 'date-fns';
+
 import config from '../../config';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
@@ -50,6 +52,7 @@ export default function TimeSeriesCard({
     name: parameters[0].parameter || parameters[0],
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
     Number
   );
@@ -77,9 +80,16 @@ export default function TimeSeriesCard({
   const fetchData = () => {
     setState(state => ({ ...state, fetching: true, error: null }));
 
-    // get date 2 years prior to last updated
-    let defaultStartDate = new Date();
-    defaultStartDate.setFullYear(new Date(lastUpdated).getFullYear() - 2);
+    const formatDate = (dateStr, dateFunc) => {
+      let d = datefns.format(dateFunc(dateStr), 'YYYY-MM-DDTHH:mm:ss.SSS');
+      /* The browser will treat dates as if they are in the users local time zone.
+       * The backend expects time zone to be UTC
+       * to compensate, treat the date as if it is already UTC. AKA we are NOT converting to UTC, just treating the date as such.
+       * */
+
+      d = `${d}Z`;
+      return d;
+    };
 
     let query = {
       parameter: activeTab.id,
@@ -87,15 +97,16 @@ export default function TimeSeriesCard({
       limit: 10000,
       ...(dateRange
         ? {
-            // In user space, month is 1 indexed
-            date_from: new Date(year, month - 1, day || 1),
+            date_from: day
+              ? formatDate(dateRange, datefns.startOfDay)
+              : formatDate(dateRange, datefns.startOfMonth),
             date_to: day
-              ? new Date(year, month - 1, day + 1)
-              : new Date(year, month, 0),
+              ? formatDate(dateRange, datefns.endOfDay)
+              : formatDate(dateRange, datefns.endOfMonth),
           }
         : {
-            date_from: defaultStartDate,
-            date_to: lastUpdated,
+            date_from: formatDate(lastUpdated, str => datefns.subYears(str, 2)),
+            date_to: formatDate(lastUpdated, str => new Date(str)),
           }),
     };
 
@@ -167,7 +178,7 @@ export default function TimeSeriesCard({
             <CardTitle className="card__title">Time Series Data</CardTitle>
             {titleInfo && <InfoButton info={titleInfo} id="time-series-info" />}
           </CardHeadline>
-          {data && (
+          {data?.length > 0 && !dateRange && (
             <span>
               Parameter Collection Dates:{' '}
               {formatDate(data[data.length - 1].day)} -{' '}
@@ -191,7 +202,10 @@ export default function TimeSeriesCard({
             <LoadingMessage />
           ) : data && data.length ? (
             <LineChart
-              data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
+              data={data.map(m => ({
+                x: new Date(m[temporal]),
+                y: m.average,
+              }))}
               yLabel={data && data[0].displayName}
               yUnit={data && data[0].unit}
               xUnit={temporal}

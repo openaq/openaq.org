@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
+import datefns from 'date-fns';
 
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
@@ -115,9 +116,21 @@ export default function TemporalCoverageCard({
         ...state,
         [temporal]: { ...state[temporal], fetching: true, error: null },
       }));
+      // eslint-disable-next-line no-unused-vars
       const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
         Number
       );
+
+      const formatDate = (dateStr, dateFunc) => {
+        let d = datefns.format(dateFunc(dateStr), 'YYYY-MM-DDTHH:mm:ss.SSS');
+        /* The browser will treat dates as if they are in the users local time zone.
+         * The backend expects time zone to be UTC
+         * to compensate, treat the date as if it is already UTC. AKA we are NOT converting to UTC, just treating the date as such.
+         * */
+
+        d = `${d}Z`;
+        return d;
+      };
 
       let query = {
         sort: 'asc',
@@ -125,13 +138,14 @@ export default function TemporalCoverageCard({
         temporal,
         parameter: activeTab.id,
         spatial,
-
         ...(dateRange
           ? {
-              date_from: new Date(year, month - 1, day || 1),
+              date_from: day
+                ? formatDate(dateRange, datefns.startOfDay)
+                : formatDate(dateRange, datefns.startOfMonth),
               date_to: day
-                ? new Date(year, month - 1, day + 1)
-                : new Date(year, month, 1),
+                ? formatDate(dateRange, datefns.endOfDay)
+                : formatDate(dateRange, datefns.endOfMonth),
             }
           : {}),
       };
@@ -149,7 +163,9 @@ export default function TemporalCoverageCard({
       }
 
       fetch(
-        `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
+        `${config.api}/averages?${qs.stringify(query, {
+          skipNulls: true,
+        })}`
       )
         .then(response => {
           if (response.status >= 400) {

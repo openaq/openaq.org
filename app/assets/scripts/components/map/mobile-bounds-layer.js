@@ -45,34 +45,39 @@ export default function MobileBoundsLayer({
     }
 
     return () => {
-      if (map.getLayer(`mobile-bounds-${activeParameter}`))
+      if (map.getLayer(`mobile-bounds-${activeParameter}`)) {
         map.removeLayer(`mobile-bounds-${activeParameter}`);
+      }
     };
   }, [sourceId, activeParameter]);
 
   useEffect(() => {
-    if (locationId && map.getLayer(`mobile-bounds-${activeParameter}`))
+    if (locationId && map.getLayer(`mobile-bounds-${activeParameter}`)) {
       map.setFilter(`mobile-bounds-${activeParameter}`, [
         '==',
         'locationId',
         locationId,
       ]);
+    }
     return () => {
-      if (map.getLayer(`mobile-bounds-${activeParameter}`))
+      if (map.getLayer(`mobile-bounds-${activeParameter}`)) {
         map.setFilter(`mobile-bounds-${activeParameter}`, null);
+      }
     };
   }, [locationId]);
 
   useEffect(() => {
-    if (locationIds && map.getLayer(`mobile-bounds-${activeParameter}`))
+    if (locationIds && map.getLayer(`mobile-bounds-${activeParameter}`)) {
       map.setFilter(`mobile-bounds-${activeParameter}`, [
         'in',
         ['get', 'locationId'],
         ['literal', locationIds],
       ]);
+    }
     return () => {
-      if (map.getLayer(`mobile-bounds-${activeParameter}`))
+      if (map.getLayer(`mobile-bounds-${activeParameter}`)) {
         map.setFilter(`mobile-bounds-${activeParameter}`, null);
+      }
     };
   }, [locationIds]);
 
@@ -81,8 +86,9 @@ export default function MobileBoundsLayer({
       map.setFilter(`mobile-bounds-${activeParameter}`, countryFilter);
     }
     return () => {
-      if (map.getLayer(`mobile-bounds-${activeParameter}`))
+      if (map.getLayer(`mobile-bounds-${activeParameter}`)) {
         map.setFilter(`mobile-bounds-${activeParameter}`, null);
+      }
     };
   }, [country]);
 
