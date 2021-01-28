@@ -3,6 +3,8 @@ import { PropTypes as T } from 'prop-types';
 import moment from 'moment';
 
 import Card, { HighlightText, CardSubtitle } from '../card';
+import InfoButton from '../info-button';
+
 import { formatThousands } from '../../utils/format';
 
 export default function DetailsCard({ measurements, date, coords, lifecycle }) {
@@ -15,6 +17,7 @@ export default function DetailsCard({ measurements, date, coords, lifecycle }) {
       id="details"
       className="card--details"
       isDashboardHeader
+      promoteZIndex
       renderBody={() => {
         return (
           <>
@@ -45,7 +48,21 @@ export default function DetailsCard({ measurements, date, coords, lifecycle }) {
               )}
               {date && (
                 <>
-                  <dt>Collection Dates</dt>
+                  <div
+                    style={{
+                      display: `flex`,
+                      alignItems: `baseline`,
+                      zIndex: `40`,
+                    }}
+                  >
+                    <dt>Collection Dates</dt>
+                    <InfoButton
+                      info={
+                        'Collection dates may vary by parameter. This is the collection dates across all parameters.'
+                      }
+                      id="dashboard-details-info"
+                    />
+                  </div>
                   <dd>
                     {startDate} - {endDate}
                   </dd>

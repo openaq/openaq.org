@@ -56,6 +56,7 @@ export default function Card({
   id,
   className,
   isDashboardHeader,
+  promoteZIndex,
   title,
   subtitle,
   tags,
@@ -66,7 +67,11 @@ export default function Card({
   titleInfo,
 }) {
   return (
-    <article data-cy={`${id}-card`} className={c('card', className)}>
+    <article
+      style={promoteZIndex && { zIndex: `1003` }} // needed if tooltip is used in card and spills onto neighboring card. Consecutive card will cover tooltip without this.
+      data-cy={`${id}-card`}
+      className={c('card', className)}
+    >
       <CardContents
         className={`card__contents ${isDashboardHeader && 'card__grey'}`}
       >
@@ -112,6 +117,7 @@ export default function Card({
 Card.propTypes = {
   id: T.string,
   isDashboardHeader: T.bool,
+  promoteZIndex: T.bool,
   titleInfo: T.string,
   className: T.string,
   title: T.oneOfType([T.string, T.element]),
