@@ -66,8 +66,10 @@ export default function ProjectCard({
                   title={`View source for ${name}`}
                   key={source.organization}
                   className={!source.url && 'disabled'}
+                  rel="noreferrer noopener"
+                  target="_blank"
                 >
-                  {source.organization}
+                  {source.organization || source.name}
                 </a>,
               ]),
             },
