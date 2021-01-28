@@ -169,7 +169,8 @@ export default function TimeSeriesCard({
           </CardHeadline>
           {data && (
             <span>
-              Collection Dates: {formatDate(data[data.length - 1].day)} -{' '}
+              Parameter Collection Dates:{' '}
+              {formatDate(data[data.length - 1].day)} -{' '}
               {formatDate(data[0].day)}{' '}
             </span>
           )}
@@ -208,7 +209,7 @@ TimeSeriesCard.propTypes = {
   titleInfo: PropTypes.string,
   locationId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  lastUpdated: PropTypes.instanceOf(Date),
+  lastUpdated: PropTypes.string,
   prefetchedData: PropTypes.object,
   parameters: PropTypes.arrayOf(
     PropTypes.shape({
