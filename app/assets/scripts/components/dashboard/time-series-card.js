@@ -105,8 +105,8 @@ export default function TimeSeriesCard({
               : formatDate(dateRange, datefns.endOfMonth),
           }
         : {
-            date_from: datefns(lastUpdated).subYears(2),
-            date_to: lastUpdated,
+            date_from: formatDate(lastUpdated, str => datefns.subYears(str, 2)),
+            date_to: formatDate(lastUpdated, str => new Date(str)),
           }),
     };
 

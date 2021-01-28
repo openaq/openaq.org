@@ -254,7 +254,6 @@ export default function TemporalCoverageCard({
   } else if (state.hod.error && state.dow.error && state.moy.error) {
     return <ErrorMessage />;
   }
-  console.log(state.dow);
 
   return (
     <Card
