@@ -88,11 +88,11 @@ export default function TimeSeriesCard({
       ...(dateRange
         ? {
             date_from: day
-              ? moment.utc(dateRange).format('YYYY-MM-DD')
-              : moment.utc(dateRange).startOf('month').format('YYYY-MM-DD'),
+              ? moment.utc(dateRange).startOf('day').toISOString()
+              : moment.utc(dateRange).startOf('month').toISOString(),
             date_to: day
-              ? moment.utc(dateRange).format('YYYY-MM-DD')
-              : moment.utc(dateRange).endOf('month').format('YYYY-MM-DD'),
+              ? moment.utc(dateRange).endOf('day').toISOString()
+              : moment.utc(dateRange).endOf('month').toISOString(),
           }
         : {
             date_from: moment
