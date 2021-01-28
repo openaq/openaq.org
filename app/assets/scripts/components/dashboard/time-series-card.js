@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
+import moment from 'moment';
+
 import config from '../../config';
 import LoadingMessage from '../loading-message';
 import ErrorMessage from '../error-message';
@@ -50,6 +52,7 @@ export default function TimeSeriesCard({
     name: parameters[0].parameter || parameters[0],
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
     Number
   );
@@ -77,24 +80,25 @@ export default function TimeSeriesCard({
   const fetchData = () => {
     setState(state => ({ ...state, fetching: true, error: null }));
 
-    // get date 2 years prior to last updated
-    let defaultStartDate = new Date();
-    defaultStartDate.setFullYear(new Date(lastUpdated).getFullYear() - 2);
-
     let query = {
       parameter: activeTab.id,
       temporal,
       limit: 10000,
+
       ...(dateRange
         ? {
-            // In user space, month is 1 indexed
-            date_from: new Date(year, month - 1, day || 1),
+            date_from: day
+              ? moment.utc(dateRange).format('YYYY-MM-DD')
+              : moment.utc(dateRange).startOf('month').format('YYYY-MM-DD'),
             date_to: day
-              ? new Date(year, month - 1, day + 1)
-              : new Date(year, month, 0),
+              ? moment.utc(dateRange).format('YYYY-MM-DD')
+              : moment.utc(dateRange).endOf('month').format('YYYY-MM-DD'),
           }
         : {
-            date_from: defaultStartDate,
+            date_from: moment
+              .utc(lastUpdated)
+              .subtract(2, 'years')
+              .toISOString(),
             date_to: lastUpdated,
           }),
     };
@@ -192,7 +196,7 @@ TimeSeriesCard.propTypes = {
   titleInfo: PropTypes.string,
   locationId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  lastUpdated: PropTypes.instanceOf(Date),
+  lastUpdated: PropTypes.string,
   prefetchedData: PropTypes.object,
   parameters: PropTypes.arrayOf(
     PropTypes.shape({

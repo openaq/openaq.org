@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
+import moment from 'moment';
 
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
@@ -115,6 +116,7 @@ export default function TemporalCoverageCard({
         ...state,
         [temporal]: { ...state[temporal], fetching: true, error: null },
       }));
+      // eslint-disable-next-line no-unused-vars
       const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
         Number
       );
@@ -128,10 +130,12 @@ export default function TemporalCoverageCard({
 
         ...(dateRange
           ? {
-              date_from: new Date(year, month - 1, day || 1),
+              date_from: day
+                ? moment.utc(dateRange).format('YYYY-MM-DD')
+                : moment.utc(dateRange).startOf('month').format('YYYY-MM-DD'),
               date_to: day
-                ? new Date(year, month - 1, day + 1)
-                : new Date(year, month, 1),
+                ? moment.utc(dateRange).format('YYYY-MM-DD')
+                : moment.utc(dateRange).endOf('month').format('YYYY-MM-DD'),
             }
           : {}),
       };
