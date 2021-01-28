@@ -131,11 +131,14 @@ export default function TemporalCoverageCard({
         ...(dateRange
           ? {
               date_from: day
-                ? moment(dateRange).startOf('day').toISOString()
-                : moment(dateRange).startOf('month').toISOString(),
+                ? moment(dateRange).startOf('day').add(1, 'hour').toISOString()
+                : moment(dateRange)
+                    .startOf('month')
+                    .add(1, 'hour')
+                    .toISOString(),
               date_to: day
-                ? moment(dateRange).endOf('day').toISOString()
-                : moment(dateRange).endOf('month').toISOString(),
+                ? moment(dateRange).endOf('day').add(1, 'hour').toISOString()
+                : moment(dateRange).endOf('month').add(1, 'hour').toISOString(),
             }
           : {}),
       };
