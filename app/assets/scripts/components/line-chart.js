@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { round } from '../utils/format';
-
+import datefns from 'date-fns';
 import { Line } from 'react-chartjs-2';
+import { formatDateUTC } from '../utils/format';
 
 export default function LineChart({ data, xUnit, yLabel, yUnit }) {
   const series = {
@@ -26,7 +27,6 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
     },
     tooltips: {
       intersect: false,
-
       callbacks: {
         label: (tooltipItem, data) => {
           let label = data.datasets[tooltipItem.datasetIndex].label || '';
@@ -36,6 +36,11 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
           }
           label += round(tooltipItem.yLabel, 4);
           return label;
+        },
+        title: ([item], data) => {
+          const date = data.datasets[item.datasetIndex].data[item.index].x;
+
+          return formatDateUTC(date);
         },
       },
     },
@@ -81,6 +86,15 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
             beginAtZero: true,
             maxTicksLimit: 15,
             fontSize: 14,
+            callback: (label, index, values) => {
+              /*
+              const date = new Date(values[index].value);
+              const d = datefns.addMinutes(date, date.getTimezoneOffset());
+              return datefns.format(d, 'YYYY/MM/DD hA');*/
+
+
+              return formatDateUTC(values[index].value)
+            },
           },
           scaleLabel: {
             display: true,

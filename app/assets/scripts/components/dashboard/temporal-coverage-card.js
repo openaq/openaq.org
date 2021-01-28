@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
-import moment from 'moment';
+import datefns from 'date-fns';
 
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
@@ -121,27 +121,35 @@ export default function TemporalCoverageCard({
         Number
       );
 
+      const formatDate = (dateStr, dateFunc) => {
+        let d = datefns.format(dateFunc(dateStr), 'YYYY-MM-DDTHH:mm:ss.SSS');
+        /* The browser will treat dates as if they are in the users local time zone.
+         * The backend expects time zone to be UTC
+         * to compensate, treat the date as if it is already UTC. AKA we are NOT converting to UTC, just treating the date as such.
+         * */
+
+        d = `${d}Z`;
+        return d;
+      };
+
       let query = {
         sort: 'asc',
         order_by: temporal,
         temporal,
         parameter: activeTab.id,
         spatial,
-
         ...(dateRange
           ? {
               date_from: day
-                ? moment(dateRange).startOf('day').add(1, 'hour').toISOString()
-                : moment(dateRange)
-                    .startOf('month')
-                    .add(1, 'hour')
-                    .toISOString(),
+                ? formatDate(dateRange, datefns.startOfDay)
+                : formatDate(dateRange, datefns.startOfMonth),
               date_to: day
-                ? moment(dateRange).endOf('day').add(1, 'hour').toISOString()
-                : moment(dateRange).endOf('month').add(1, 'hour').toISOString(),
+                ? formatDate(dateRange, datefns.endOfDay)
+                : formatDate(dateRange, datefns.endOfMonth),
             }
           : {}),
       };
+      console.log(query);
 
       if (spatial === 'project') {
         query = {
@@ -156,7 +164,9 @@ export default function TemporalCoverageCard({
       }
 
       fetch(
-        `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
+        `${config.api}/averages?${qs.stringify(query, {
+          skipNulls: true,
+        })}`
       )
         .then(response => {
           if (response.status >= 400) {
@@ -245,6 +255,7 @@ export default function TemporalCoverageCard({
   } else if (state.hod.error && state.dow.error && state.moy.error) {
     return <ErrorMessage />;
   }
+  console.log(state.dow);
 
   return (
     <Card

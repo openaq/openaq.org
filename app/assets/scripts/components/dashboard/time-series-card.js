@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
 import moment from 'moment';
+import datefns from 'date-fns';
 
 import config from '../../config';
 import LoadingMessage from '../loading-message';
@@ -80,22 +81,32 @@ export default function TimeSeriesCard({
   const fetchData = () => {
     setState(state => ({ ...state, fetching: true, error: null }));
 
+    const formatDate = (dateStr, dateFunc) => {
+      let d = datefns.format(dateFunc(dateStr), 'YYYY-MM-DDTHH:mm:ss.SSS');
+      /* The browser will treat dates as if they are in the users local time zone.
+       * The backend expects time zone to be UTC
+       * to compensate, treat the date as if it is already UTC. AKA we are NOT converting to UTC, just treating the date as such.
+       * */
+
+      d = `${d}Z`;
+      return d;
+    };
+
     let query = {
       parameter: activeTab.id,
       temporal,
       limit: 10000,
-
       ...(dateRange
         ? {
             date_from: day
-              ? moment(dateRange).startOf('day').add(1, 'hour').toISOString()
-              : moment(dateRange).startOf('month').add(1, 'hour').toISOString(),
+              ? formatDate(dateRange, datefns.startOfDay)
+              : formatDate(dateRange, datefns.startOfMonth),
             date_to: day
-              ? moment(dateRange).endOf('day').add(1, 'hour').toISOString()
-              : moment(dateRange).endOf('month').add(1, 'hour').toISOString(),
+              ? formatDate(dateRange, datefns.endOfDay)
+              : formatDate(dateRange, datefns.endOfMonth),
           }
         : {
-            date_from: moment(lastUpdated).subtract(2, 'years').toISOString(),
+            date_from: datefns(lastUpdated).subYears(2),
             date_to: lastUpdated,
           }),
     };
@@ -175,7 +186,10 @@ export default function TimeSeriesCard({
             <LoadingMessage />
           ) : data && data.length ? (
             <LineChart
-              data={data.map(m => ({ x: new Date(m[temporal]), y: m.average }))}
+              data={data.map(m => ({
+                x: new Date(m[temporal]),
+                y: m.average,
+              }))}
               yLabel={data && data[0].displayName}
               yUnit={data && data[0].unit}
               xUnit={temporal}
