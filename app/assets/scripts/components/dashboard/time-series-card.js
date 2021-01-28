@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
-import moment from 'moment';
 import datefns from 'date-fns';
 
 import config from '../../config';

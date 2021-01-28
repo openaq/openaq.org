@@ -149,7 +149,6 @@ export default function TemporalCoverageCard({
             }
           : {}),
       };
-      console.log(query);
 
       if (spatial === 'project') {
         query = {

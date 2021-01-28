@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { round } from '../utils/format';
-import datefns from 'date-fns';
 import { Line } from 'react-chartjs-2';
 import { formatDateUTC } from '../utils/format';
 
@@ -87,13 +86,7 @@ export default function LineChart({ data, xUnit, yLabel, yUnit }) {
             maxTicksLimit: 15,
             fontSize: 14,
             callback: (label, index, values) => {
-              /*
-              const date = new Date(values[index].value);
-              const d = datefns.addMinutes(date, date.getTimezoneOffset());
-              return datefns.format(d, 'YYYY/MM/DD hA');*/
-
-
-              return formatDateUTC(values[index].value)
+              return formatDateUTC(values[index].value);
             },
           },
           scaleLabel: {

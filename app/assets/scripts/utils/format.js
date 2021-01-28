@@ -3,7 +3,7 @@ import datefns from 'date-fns';
 var d3 = require('d3');
 export function formatDateUTC(d) {
   let date = new Date(d);
-  date  = datefns.addMinutes(date, date.getTimezoneOffset());
+  date = datefns.addMinutes(date, date.getTimezoneOffset());
   return datefns.format(date, 'YYYY/MM/DD hA');
 }
 
