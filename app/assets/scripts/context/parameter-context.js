@@ -59,7 +59,7 @@ export function ParameterProvider(props) {
   const isCore = function (activeParameterId) {
     return parameters && activeParameterId
       ? parameters.find(p => p.id === activeParameterId).isCore
-      : null;
+      : false;
   };
 
   return (
