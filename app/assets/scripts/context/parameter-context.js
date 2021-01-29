@@ -17,12 +17,6 @@ export function ParameterProvider(props) {
     setState,
   ] = useState(defaultState);
 
-  const isCore = function (activeParameterId) {
-    return (
-      parameters && parameters.find(p => p.id === activeParameterId).isCore
-    );
-  };
-
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetchingParams: true, paramError: null }));
@@ -61,6 +55,12 @@ export function ParameterProvider(props) {
       setState(defaultState);
     };
   }, []);
+
+  const isCore = function (activeParameterId) {
+    return parameters && activeParameterId
+      ? parameters.find(p => p.id === activeParameterId).isCore
+      : false;
+  };
 
   return (
     <ParameterContext.Provider
