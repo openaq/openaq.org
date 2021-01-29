@@ -69,9 +69,7 @@ describe('The Locations Hub', () => {
     cy.get('[title="View source options"]')
       .find('span')
       .contains('Data Source');
-    cy.get('[data-cy=filter-sources]')
-      .find('[data-cy=boston_methane]')
-      .should('length', 1);
+
     cy.get('[data-cy=filter-menu-item]').first().click();
 
     cy.get('[data-cy=filter-pill]').should('exist');
@@ -89,5 +87,23 @@ describe('The Locations Hub', () => {
     cy.get('[data-cy=location-card-detail-label]').contains('Measurements');
     cy.get('[data-cy=location-card-detail-label]').contains('Parameters');
     cy.get('[data-cy=location-card-detail-label]').contains('Source');
+  });
+
+  it('Pagination is reset on filter change', () => {
+    cy.get('.pages__page[aria-label="Page 2"]').click();
+    cy.location().should(loc => {
+      const search = loc.href.split('?');
+      expect(search).to.include('page=2');
+    });
+
+    cy.get('[title="View country options"]').click();
+    cy.get('[title="View country options"]').find('span').contains('Country');
+    cy.get('[data-cy=filter-countries]')
+      .find('[data-cy=Australia]')
+      .should('length', 1);
+    cy.get('[data-cy=filter-menu-item]').first().click();
+    cy.location().should(loc => {
+      expect(loc.hash).to.include('page=1');
+    });
   });
 });

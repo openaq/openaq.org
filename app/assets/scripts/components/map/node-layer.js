@@ -6,15 +6,18 @@ import mapbox from 'mapbox-gl';
 
 import {
   defaultColor,
-  circleOpacity,
-  circleBlur,
-  coloredCircleRadius,
-  borderCircleRadius,
-  coloredSquareSize,
-  borderSquareSize,
+  highlightColor,
+  defaultBorderColor,
+  highlightBorderColor,
+} from '../../utils/colors';
+import {
+  iconMatch,
+  borderSymbolSize,
+  coloredSymbolSize,
 } from '../../utils/map-settings';
+// import { debugProperties } from './map-interaction';
 import Popover from './popover';
-import { square } from './square';
+import { square, circle } from './symbols';
 
 export default function NodeLayer({
   activeParameter,
@@ -27,105 +30,97 @@ export default function NodeLayer({
 }) {
   let match = useRouteMatch();
 
-  const circlesFilter = ['==', ['get', 'sensorType'], 'reference grade'];
-  const squaresFilter = ['==', ['get', 'sensorType'], 'low-cost sensor'];
   const locationIdFilter = [
     'in',
     ['number', ['get', 'locationId']],
     ['literal', locationIds],
   ];
-  const circlesLocationIdFilter = ['all', locationIdFilter, circlesFilter];
-  const squaresLocationIdFilter = ['all', locationIdFilter, squaresFilter];
+
+  const allSelectedLocations =
+    selectedLocations && Object.values(selectedLocations).flat();
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
+    if (!map.hasImage('circle')) map.addImage('circle', circle, { sdf: true });
+
     map.addLayer({
-      id: `${activeParameter}-square-outline`,
+      id: `${activeParameter}-node-outline`,
       source: sourceId,
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': defaultColor,
+        'icon-color': [
+          'case',
+          [
+            'in',
+            ['number', ['get', 'locationId']],
+            ['literal', allSelectedLocations],
+          ],
+          highlightBorderColor,
+          defaultBorderColor,
+        ],
       },
       layout: {
-        'icon-image': 'square',
-        'icon-size': borderSquareSize,
+        'icon-image': iconMatch,
+        'icon-size': borderSymbolSize,
         'icon-allow-overlap': true,
       },
-      filter: squaresFilter,
     });
 
     map.addLayer({
-      id: `${activeParameter}-squares`,
+      id: `${activeParameter}-nodes`,
       source: sourceId,
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': defaultColor,
+        'icon-color': [
+          'case',
+          [
+            'in',
+            ['number', ['get', 'locationId']],
+            ['literal', allSelectedLocations],
+          ],
+          highlightColor,
+          defaultColor,
+        ],
       },
       layout: {
-        'icon-image': 'square',
-        'icon-size': coloredSquareSize,
+        'icon-image': iconMatch,
+        'icon-size': coloredSymbolSize,
         'icon-allow-overlap': true,
       },
-      filter: squaresFilter,
-    });
-
-    map.addLayer({
-      id: `${activeParameter}-circle-outline`,
-      source: sourceId,
-      'source-layer': 'default',
-      type: 'circle',
-      paint: {
-        'circle-color': defaultColor,
-        'circle-opacity': 1,
-        'circle-radius': borderCircleRadius,
-        'circle-blur': 0,
-      },
-      filter: circlesFilter,
-    });
-
-    map.addLayer({
-      id: `${activeParameter}-circles`,
-      source: sourceId,
-      'source-layer': 'default',
-      type: 'circle',
-      paint: {
-        'circle-color': defaultColor,
-        'circle-opacity': circleOpacity,
-        'circle-radius': coloredCircleRadius,
-        'circle-blur': circleBlur,
-      },
-      filter: circlesFilter,
     });
 
     // Change the cursor to a pointer when the mouse is over the layer.
-    map.on('mouseenter', `${activeParameter}-circles`, function () {
-      map.getCanvas().style.cursor = 'pointer';
-    });
-    map.on('mouseenter', `${activeParameter}-squares`, function () {
+    map.on('mouseenter', `${activeParameter}-nodes`, function () {
       map.getCanvas().style.cursor = 'pointer';
     });
 
     // Change it back to a pointer when it leaves.
-    map.on('mouseleave', `${activeParameter}-circles`, function () {
-      map.getCanvas().style.cursor = '';
-    });
-    map.on('mouseleave', `${activeParameter}-squares`, function () {
+    map.on('mouseleave', `${activeParameter}-nodes`, function () {
       map.getCanvas().style.cursor = '';
     });
 
     return () => {
-      if (map.getLayer(`${activeParameter}-squares`))
-        map.removeLayer(`${activeParameter}-squares`);
-      if (map.getLayer(`${activeParameter}-square-outline`))
-        map.removeLayer(`${activeParameter}-square-outline`);
-      if (map.getLayer(`${activeParameter}-circles`))
-        map.removeLayer(`${activeParameter}-circles`);
-      if (map.getLayer(`${activeParameter}-circle-outline`))
-        map.removeLayer(`${activeParameter}-circle-outline`);
+      if (map.getLayer(`${activeParameter}-nodes`))
+        map.removeLayer(`${activeParameter}-nodes`);
+      if (map.getLayer(`${activeParameter}-node-outline`))
+        map.removeLayer(`${activeParameter}-node-outline`);
     };
   }, [activeParameter]);
+
+  useEffect(() => {
+    map.setPaintProperty(`${activeParameter}-nodes`, 'icon-color', [
+      'case',
+      [
+        'in',
+        ['number', ['get', 'locationId']],
+        ['literal', allSelectedLocations],
+      ],
+      highlightColor,
+      defaultColor,
+    ]);
+  }, [allSelectedLocations]);
 
   useEffect(() => {
     const openPopup = e => {
@@ -156,36 +151,28 @@ export default function NodeLayer({
         .addTo(map);
     };
 
-    map.on('click', `${activeParameter}-circles`, openPopup);
-    map.on('click', `${activeParameter}-squares`, openPopup);
+    map.on('click', `${activeParameter}-nodes`, openPopup);
+
+    //  DEBUGGING HELPER: shows properties on hover
+    // if (process.env.DS_ENV === 'development') {
+    //   debugProperties(map, `${activeParameter}-nodes`);
+    // }
   }, [isDisplayingSelectionTools, selectedLocations, activeParameter]);
 
   useEffect(() => {
     if (
       locationIds &&
       locationIds.length &&
-      map.getLayer(`${activeParameter}-circles`)
+      map.getLayer(`${activeParameter}-nodes`)
     ) {
-      map.setFilter(
-        `${activeParameter}-square-outline`,
-        squaresLocationIdFilter
-      );
-      map.setFilter(`${activeParameter}-squares`, squaresLocationIdFilter);
-      map.setFilter(
-        `${activeParameter}-circle-outline`,
-        circlesLocationIdFilter
-      );
-      map.setFilter(`${activeParameter}-circles`, circlesLocationIdFilter);
+      map.setFilter(`${activeParameter}-node-outline`, locationIdFilter);
+      map.setFilter(`${activeParameter}-nodes`, locationIdFilter);
     }
     return () => {
-      if (map.getLayer(`${activeParameter}-square-outline`))
-        map.setFilter(`${activeParameter}-square-outline`, squaresFilter);
-      if (map.getLayer(`${activeParameter}-squares`))
-        map.setFilter(`${activeParameter}-squares`, squaresFilter);
-      if (map.getLayer(`${activeParameter}-circle-outline`))
-        map.setFilter(`${activeParameter}-circle-outline`, circlesFilter);
-      if (map.getLayer(`${activeParameter}-circles`))
-        map.setFilter(`${activeParameter}-circles`, circlesFilter);
+      if (map.getLayer(`${activeParameter}-node-outline`))
+        map.setFilter(`${activeParameter}-node-outline`, null);
+      if (map.getLayer(`${activeParameter}-nodes`))
+        map.setFilter(`${activeParameter}-nodes`, null);
     };
   }, [locationIds, activeParameter]);
 

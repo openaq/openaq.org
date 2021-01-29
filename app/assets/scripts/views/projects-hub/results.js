@@ -2,6 +2,7 @@ import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import ReactPaginate from 'react-paginate';
 
+import config from '../../config';
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import ProjectCard from './project-card';
@@ -44,10 +45,7 @@ export default function Results({
         <p>No data was found for your criteria.</p>
         <p>
           Maybe you&apos;d like to suggest a{' '}
-          <a
-            href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-            title="Suggest a new source"
-          >
+          <a href={config.newSourceUrl} title="Suggest a new source">
             new source
           </a>{' '}
           or{' '}
@@ -83,7 +81,8 @@ export default function Results({
               totalLocations={project.locations}
               totalMeasurements={project.measurements}
               parametersList={project.parameters}
-              mobile={project.isMobile}
+              isMobile={project.isMobile}
+              isAnalysis={project.isAnalysis}
               sensorType={project.sensorType}
               entity={project.entity}
             />

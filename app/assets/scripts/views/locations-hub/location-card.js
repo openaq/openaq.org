@@ -17,7 +17,8 @@ export default function LocationCard({
   sources,
   sensorType,
   totalMeasurements,
-  mobile,
+  isMobile,
+  isAnalysis,
   entity,
 }) {
   let updated = moment(lastUpdated).fromNow();
@@ -40,7 +41,12 @@ export default function LocationCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={[sensorType, entity, mobile ? 'Mobile' : 'Stationary']}
+      tags={[
+        sensorType,
+        entity,
+        isMobile ? 'Mobile' : 'Stationary',
+        isAnalysis && 'Analysis',
+      ]}
       renderBody={() => (
         <CardDetails
           id="location"
@@ -66,8 +72,10 @@ export default function LocationCard({
                   title={`View source for ${name}`}
                   key={source.name}
                   className={!source.url && 'disabled'}
+                  rel="noreferrer noopener"
+                  target="_blank"
                 >
-                  {`${i > 0 ? ', ' : ''}${source.name}`}
+                  {`${i > 0 ? ', ' : ''}${source.organization || source.name}`}
                 </a>
               )),
             },
@@ -86,8 +94,8 @@ export default function LocationCard({
 }
 
 LocationCard.propTypes = {
-  city: T.string.isRequired,
-  country: T.string.isRequired,
+  city: T.string,
+  country: T.string,
   firstUpdated: T.string.isRequired,
   id: T.number.isRequired,
   lastUpdated: T.string.isRequired,
@@ -100,8 +108,9 @@ LocationCard.propTypes = {
       url: T.string,
     })
   ).isRequired,
-  sensorType: T.string.isRequired,
-  entity: T.string.isRequired,
+  sensorType: T.string,
+  entity: T.string,
   totalMeasurements: T.number.isRequired,
-  mobile: T.bool.isRequired,
+  isMobile: T.bool.isRequired,
+  isAnalysis: T.bool,
 };

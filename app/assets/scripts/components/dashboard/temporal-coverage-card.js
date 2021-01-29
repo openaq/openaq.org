@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import styled from 'styled-components';
 import qs from 'qs';
+import datefns from 'date-fns';
 
 import LoadingMessage from '../../components/loading-message';
 import InfoMessage from '../../components/info-message';
@@ -33,6 +34,7 @@ const CardHeader = styled(BaseHeader)`
 const LIFETIME_FORMAT = null;
 const MONTH_FORMAT = 2;
 const DAY_FORMAT = 3;
+/* eslint-disable-next-line */
 const MOBILE_ONLY = true;
 
 const defaultState = {
@@ -48,11 +50,9 @@ const defaultState = {
     // OR length 2 -> single month (YYYY/MM)
     // Single day is not accepted
     //dateRangeType: [null, 2, 3],
-    dateRangeType: [
-      //[LIFETIME_FORMAT, MOBILE_ONLY],
-      [MONTH_FORMAT, MOBILE_ONLY],
-      [DAY_FORMAT, MOBILE_ONLY],
-    ],
+    dateRangeType: [[DAY_FORMAT]],
+    noDisplayMessage:
+      'This view is not available with this date window. Please select a single day to use this view.',
   },
   dow: {
     fetched: false,
@@ -78,6 +78,8 @@ const defaultState = {
     // Single day is not accepted, Single month not accepted
     //dateRangeType: [null],
     dateRangeType: [[LIFETIME_FORMAT], [MONTH_FORMAT]],
+    noDisplayMessage:
+      'This view is not available with this date window. Please select lifetime or an entire month to use this view.',
   },
 };
 
@@ -114,21 +116,36 @@ export default function TemporalCoverageCard({
         ...state,
         [temporal]: { ...state[temporal], fetching: true, error: null },
       }));
+      // eslint-disable-next-line no-unused-vars
       const [year, month, day] = (dateRange ? dateRange.split('/') : []).map(
         Number
       );
 
+      const formatDate = (dateStr, dateFunc) => {
+        let d = datefns.format(dateFunc(dateStr), 'YYYY-MM-DDTHH:mm:ss.SSS');
+        /* The browser will treat dates as if they are in the users local time zone.
+         * The backend expects time zone to be UTC
+         * to compensate, treat the date as if it is already UTC. AKA we are NOT converting to UTC, just treating the date as such.
+         * */
+
+        d = `${d}Z`;
+        return d;
+      };
+
       let query = {
+        sort: 'asc',
+        order_by: temporal,
         temporal,
         parameter: activeTab.id,
         spatial,
-
         ...(dateRange
           ? {
-              date_from: new Date(year, month - 1, day || 1),
+              date_from: day
+                ? formatDate(dateRange, datefns.startOfDay)
+                : formatDate(dateRange, datefns.startOfMonth),
               date_to: day
-                ? new Date(year, month - 1, day + 1)
-                : new Date(year, month, 1),
+                ? formatDate(dateRange, datefns.endOfDay)
+                : formatDate(dateRange, datefns.endOfMonth),
             }
           : {}),
       };
@@ -146,7 +163,9 @@ export default function TemporalCoverageCard({
       }
 
       fetch(
-        `${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`
+        `${config.api}/averages?${qs.stringify(query, {
+          skipNulls: true,
+        })}`
       )
         .then(response => {
           if (response.status >= 400) {
@@ -264,10 +283,7 @@ export default function TemporalCoverageCard({
             <p>There are no data for the selected parameter.</p>
             <p>
               Maybe you&apos;d like to suggest a{' '}
-              <a
-                href="https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform"
-                title="Suggest a new source"
-              >
+              <a href={config.newSourceUrl} title="Suggest a new source">
                 new source
               </a>
               .
@@ -281,6 +297,7 @@ export default function TemporalCoverageCard({
               data={state.hod.data}
               fetching={state.hod.fetching}
               error={state.hod.error}
+              noDisplayMessage={state.hod.noDisplayMessage}
             />
             <Chart
               title="Day of the Week"
@@ -288,6 +305,7 @@ export default function TemporalCoverageCard({
               data={state.dow.data && Object.values(combinedDays)}
               error={state.dow.error}
               fetching={state.dow.fetching}
+              noDisplayMessage={state.dow.noDisplayMessage}
             />
             <Chart
               title="Month of the Year"
@@ -295,6 +313,7 @@ export default function TemporalCoverageCard({
               data={state.moy.data}
               error={state.moy.error}
               fetching={state.moy.fetching}
+              noDisplayMessage={state.moy.noDisplayMessage}
             />
           </div>
         )
@@ -318,10 +337,7 @@ TemporalCoverageCard.propTypes = {
   isMobile: T.bool,
 };
 
-function Chart({ title, temporal, data, error, fetching }) {
-  if (!data && !error) {
-    return null;
-  }
+function Chart({ title, temporal, data, error, fetching, noDisplayMessage }) {
   return (
     <div className="chart__item">
       <div className="header">
@@ -332,11 +348,13 @@ function Chart({ title, temporal, data, error, fetching }) {
       ) : data ? (
         <BarChart
           data={data.map(m => m.measurement_count)}
-          yAxisLabel="Count"
-          xAxisLabels={data.map(m => m[temporal])}
+          yAxisLabel="Avg Count"
+          xAxisLabels={data.map(
+            m => m[temporal] + `${temporal === 'hod' ? ':00' : ''}`
+          )}
         />
       ) : !error ? (
-        <p>Not applicable.</p>
+        <p>{noDisplayMessage}</p>
       ) : (
         <ErrorMessage />
       )}
@@ -357,4 +375,5 @@ Chart.propTypes = {
   ),
   error: T.object,
   fetching: T.bool.isRequired,
+  noDisplayMessage: T.string.isRequired,
 };

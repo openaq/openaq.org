@@ -307,10 +307,10 @@ function ModalDownload(props) {
                 Realtime
               </a>{' '}
               archives of all {formatThousands(measurementCount)} measurements
-              are also available.
+              are also available.{' '}
               <a
-                href="https://docs.google.com/forms/d/1s5GYME3He-EDed-jgg11Ry3zmvTZkPK5xSnQUWwu0Gk/edit"
-                title="Share feedback in a google form"
+                href={config.feedbackUrl}
+                title="Share feedback"
                 target="_blank"
                 rel="noreferrer"
               >

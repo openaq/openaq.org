@@ -1,18 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 
+import { ParameterContext } from '../../context/parameter-context';
 import {
-  circleOpacity,
-  circleBlur,
-  coloredCircleRadius,
-  borderCircleRadius,
-  coloredSquareSize,
-  borderSquareSize,
+  iconMatch,
+  coloredSymbolSize,
+  borderSymbolSize,
 } from '../../utils/map-settings';
-import { getFillExpression } from '../../utils/colors';
-import { addPopover } from './map-interaction';
-import { square } from './square';
+import {
+  getFillExpression,
+  defaultColor,
+  defaultBorderColor,
+} from '../../utils/colors';
+import { addPopover, debugProperties } from './map-interaction';
+import { square, circle } from './symbols';
 
 export default function MeasurementsLayer({
   activeParameter,
@@ -22,116 +24,78 @@ export default function MeasurementsLayer({
 }) {
   let match = useRouteMatch();
 
-  const countryFilter = ['==', ['get', 'country'], country];
-  const circlesFilter = ['==', ['get', 'sensorType'], 'reference grade'];
-  const squaresFilter = ['==', ['get', 'sensorType'], 'low-cost sensor'];
+  const { isCore } = useContext(ParameterContext);
 
-  const circlesCountryFilter = ['all', countryFilter, circlesFilter];
-  const squaresCountryFilter = ['all', countryFilter, squaresFilter];
+  const countryFilter = ['==', ['get', 'country'], country];
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
+    if (!map.hasImage('circle')) map.addImage('circle', circle, { sdf: true });
+
     map.addLayer({
-      id: `${activeParameter}-square-outline`,
+      id: `${activeParameter}-outline`,
       source: sourceId,
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': getFillExpression(activeParameter, 'dark'),
+        'icon-color': isCore(activeParameter)
+          ? getFillExpression(activeParameter, 'dark')
+          : defaultBorderColor,
       },
       layout: {
-        'icon-image': 'square',
-        'icon-size': borderSquareSize,
+        'icon-image': iconMatch,
+        'icon-size': borderSymbolSize,
         'icon-allow-overlap': true,
       },
-      filter: squaresFilter,
     });
 
     map.addLayer({
-      id: `${activeParameter}-squares`,
+      id: `${activeParameter}-layer`,
       source: sourceId,
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': getFillExpression(activeParameter),
+        'icon-color': isCore(activeParameter)
+          ? getFillExpression(activeParameter)
+          : defaultColor,
       },
       layout: {
-        'icon-image': 'square',
-        'icon-size': coloredSquareSize,
+        'icon-image': iconMatch,
+        'icon-size': coloredSymbolSize,
         'icon-allow-overlap': true,
       },
-      filter: squaresFilter,
-    });
-
-    map.addLayer({
-      id: `${activeParameter}-circle-outline`,
-      source: sourceId,
-      'source-layer': 'default',
-      type: 'circle',
-      paint: {
-        'circle-color': getFillExpression(activeParameter, 'dark'),
-        'circle-opacity': 1,
-        'circle-radius': borderCircleRadius,
-        'circle-blur': 0,
-      },
-      filter: circlesFilter,
-    });
-
-    map.addLayer({
-      id: `${activeParameter}-circles`,
-      source: sourceId,
-      'source-layer': 'default',
-      type: 'circle',
-      paint: {
-        'circle-color': getFillExpression(activeParameter),
-        'circle-opacity': circleOpacity,
-        'circle-radius': coloredCircleRadius,
-        'circle-blur': circleBlur,
-      },
-      filter: circlesFilter,
     });
 
     addPopover(
       map,
-      `${activeParameter}-squares`,
+      `${activeParameter}-layer`,
       match.params.id,
       activeParameter
     );
-    addPopover(
-      map,
-      `${activeParameter}-circles`,
-      match.params.id,
-      activeParameter
-    );
+
+    //  DEBUGGING HELPER: shows properties on hover
+    if (process.env.DS_ENV === 'development') {
+      debugProperties(map, `${activeParameter}-layer`);
+    }
 
     return () => {
-      if (map.getLayer(`${activeParameter}-squares`))
-        map.removeLayer(`${activeParameter}-squares`);
-      if (map.getLayer(`${activeParameter}-square-outline`))
-        map.removeLayer(`${activeParameter}-square-outline`);
-      if (map.getLayer(`${activeParameter}-circles`))
-        map.removeLayer(`${activeParameter}-circles`);
-      if (map.getLayer(`${activeParameter}-circle-outline`))
-        map.removeLayer(`${activeParameter}-circle-outline`);
+      if (map.getLayer(`${activeParameter}-layer`))
+        map.removeLayer(`${activeParameter}-layer`);
+      if (map.getLayer(`${activeParameter}-outline`))
+        map.removeLayer(`${activeParameter}-outline`);
     };
   }, [sourceId, activeParameter]);
 
   useEffect(() => {
-    if (country && map.getLayer(`${activeParameter}-circles`)) {
-      map.setFilter(`${activeParameter}-square-outline`, squaresCountryFilter);
-      map.setFilter(`${activeParameter}-squares`, squaresCountryFilter);
-      map.setFilter(`${activeParameter}-circle-outline`, circlesCountryFilter);
-      map.setFilter(`${activeParameter}-circles`, circlesCountryFilter);
+    if (country && map.getLayer(`${activeParameter}-layer`)) {
+      map.setFilter(`${activeParameter}-layer`, countryFilter);
+      map.setFilter(`${activeParameter}-outline`, countryFilter);
     }
     return () => {
-      if (map.getLayer(`${activeParameter}-square-outline`))
-        map.setFilter(`${activeParameter}-square-outline`, squaresFilter);
-      if (map.getLayer(`${activeParameter}-squares`))
-        map.setFilter(`${activeParameter}-squares`, squaresFilter);
-      if (map.getLayer(`${activeParameter}-circle-outline`))
-        map.setFilter(`${activeParameter}-circle-outline`, circlesFilter);
-      if (map.getLayer(`${activeParameter}-circles`))
-        map.setFilter(`${activeParameter}-circles`, circlesFilter);
+      if (map.getLayer(`${activeParameter}-outline`))
+        map.setFilter(`${activeParameter}-outline`, null);
+      if (map.getLayer(`${activeParameter}-layer`))
+        map.setFilter(`${activeParameter}-layer`, null);
     };
   }, [country]);
 

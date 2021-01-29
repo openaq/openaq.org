@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'openaq-design-system';
 import c from 'classnames';
 import styled from 'styled-components';
 
+import { ParameterContext } from '../../context/parameter-context';
 import { generateLegendStops } from '../../utils/colors';
 
 const Wrapper = styled.div`
@@ -100,70 +101,47 @@ Drop.propTypes = {
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
     id: PropTypes.number,
-    parameterId: PropTypes.number.isRequired,
+    parameterId: PropTypes.number,
   }).isRequired,
   onParamSelection: PropTypes.func,
 };
 
-export default function Legend({
-  isOnlyCoreParams,
-  parameters,
+const ColorScaleLegend = ({
+  legendParameters,
   activeParameter,
   onParamSelection,
-}) {
+  isCoreParameter,
+}) => {
   const scaleStops = generateLegendStops(
     activeParameter.parameterId || activeParameter.id
   );
+
   const colorWidth = 100 / scaleStops.length;
 
   return (
-    <Wrapper>
-      <Container>
-        {!isOnlyCoreParams && (
-          <p>
-            Showing locations for:
-            {parameters?.length > 1 ? (
-              <Drop
-                parameters={parameters}
-                activeParameter={activeParameter}
-                onParamSelection={onParamSelection}
-              />
-            ) : (
-              activeParameter.displayName
-            )}
-          </p>
+    <Container>
+      <p>
+        Showing the most recent* values for{' '}
+        {legendParameters?.length > 1 ? (
+          <Drop
+            parameters={legendParameters}
+            activeParameter={activeParameter}
+            onParamSelection={onParamSelection}
+          />
+        ) : (
+          activeParameter.displayName
         )}
-        <Definition>
-          <dt>
-            <Circle />
-          </dt>
-          <dd>Reference grade sensor</dd>
-
-          <dt>
-            <Square />
-          </dt>
-          <dd>Low Cost Sensor</dd>
-        </Definition>
-      </Container>
-      {isOnlyCoreParams && (
-        <Container>
-          <p>
-            Showing the most recent* values for{' '}
-            {parameters?.length > 1 ? (
-              <Drop
-                parameters={parameters}
-                activeParameter={activeParameter}
-                onParamSelection={onParamSelection}
-              />
-            ) : (
-              activeParameter.displayName
-            )}
-          </p>
+      </p>
+      {isCoreParameter && (
+        <>
           <ul className="color-scale">
             {scaleStops.map(o => (
               <li
                 key={o.label}
-                style={{ backgroundColor: o.color, width: `${colorWidth}%` }}
+                style={{
+                  backgroundColor: o.color,
+                  width: `${colorWidth}%`,
+                }}
                 className="color-scale__item"
               >
                 <span className="color-scale__value">{o.label}</span>
@@ -176,24 +154,93 @@ export default function Legend({
               Data Disclaimer and More Information
             </a>
           </small>
-        </Container>
+        </>
+      )}
+    </Container>
+  );
+};
+
+ColorScaleLegend.propTypes = {
+  parameters: PropTypes.array,
+  legendParameters: PropTypes.array,
+  activeParameter: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    id: PropTypes.number,
+    parameterId: PropTypes.number,
+  }).isRequired,
+  onParamSelection: PropTypes.func,
+  isCoreParameter: PropTypes.bool.isRequired,
+};
+
+export default function Legend({
+  presetParameterList,
+  paramIds,
+  activeParameter,
+  onParamSelection,
+  showOnlyParam,
+}) {
+  const { parameters, isCore } = useContext(ParameterContext);
+
+  const activeParameterId = activeParameter
+    ? activeParameter.parameterId || activeParameter.id
+    : null;
+
+  const filteredParams =
+    paramIds && parameters
+      ? parameters.filter(param => paramIds.includes(param.id))
+      : null;
+  let legendParameters = presetParameterList ||
+    filteredParams || [activeParameter];
+
+  return (
+    <Wrapper>
+      <Container>
+        {showOnlyParam && legendParameters?.length > 1 && (
+          <p>
+            Showing locations for:
+            <Drop
+              parameters={legendParameters}
+              activeParameter={activeParameter}
+              onParamSelection={onParamSelection}
+            />
+          </p>
+        )}
+
+        <Definition>
+          <dt>
+            <Circle />
+          </dt>
+          <dd>Reference grade sensor</dd>
+
+          <dt>
+            <Square />
+          </dt>
+          <dd>Low Cost Sensor</dd>
+        </Definition>
+      </Container>
+
+      {!showOnlyParam && activeParameter && (
+        <ColorScaleLegend
+          legendParameters={legendParameters}
+          activeParameter={activeParameter}
+          onParamSelection={onParamSelection}
+          isCoreParameter={isCore(activeParameterId)}
+        />
       )}
     </Wrapper>
   );
 }
 
 Legend.propTypes = {
-  isOnlyCoreParams: PropTypes.bool,
-  parameters: PropTypes.array,
+  presetParameterList: PropTypes.array,
+  paramIds: PropTypes.array,
   activeParameter: PropTypes.shape({
     displayName: PropTypes.string.isRequired,
     name: PropTypes.string,
     id: PropTypes.number,
-    parameterId: PropTypes.number.isRequired,
-  }).isRequired,
+    parameterId: PropTypes.number,
+  }),
   onParamSelection: PropTypes.func,
-};
-
-Legend.defaultProps = {
-  isOnlyCoreParams: true,
+  showOnlyParam: PropTypes.bool,
 };

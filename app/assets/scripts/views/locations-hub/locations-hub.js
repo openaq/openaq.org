@@ -55,7 +55,16 @@ export default function LocationsHub({
     let query = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
-    setPage(() => getPage(query));
+
+    setPage(prev => {
+      const cur = getPage(query);
+      if (prev === cur) {
+        // This means that only filters have updated
+        // Reset page to 1
+        return 1;
+      }
+      return cur;
+    });
 
     setFilters({
       // In the front end we are using param 'area', but this is
@@ -68,21 +77,29 @@ export default function LocationsHub({
       // The following are not lists
       isMobile: query.mobility && query.mobility === 'Mobile',
       entity: query.entity && query.entity.toLowerCase(),
-      sensorType: query.grade && query.grade.toLowerCase(),
-      manufacturerName: query.manufacturer && query.manufacturer,
+      sensorType: query.grade && query.grade.toLowerCase().replace(/_/g, ' '),
+      manufacturerName:
+        query.manufacturer && query.manufacturer.replace(/_/g, ' '),
     });
   }, [location]);
 
   useEffect(() => {
     if (!isMounted) return;
     fetchLocations(page, filters, PER_PAGE);
+    let query = qs.parse(location.search, { ignoreQueryPrefix: true });
+
+    // If page and query are out of sync we need to sync
+    if (page !== Number(query.page)) {
+      query.page = `${page}`;
+      history.push(`/locations?${buildQS(query)}`);
+    }
+
     return () => invalidateLocations();
   }, [page, filters, isMounted]);
 
   function handlePageClick(d) {
     let query = qs.parse(location.search, { ignoreQueryPrefix: true });
     query.page = d.selected + 1;
-
     history.push(`/locations?${buildQS(query)}`);
   }
 
