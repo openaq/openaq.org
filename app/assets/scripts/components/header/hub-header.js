@@ -14,9 +14,12 @@ export default function HubHeader(props) {
         <>
           <p>
             Our repository of air quality now includes low cost sensor data as a
-            pilot, in addition to reference-grade data. Learn more about the
-            data types here. Explore this data through the site or through the
-            API, where all real-time and historical data is now accessible.
+            pilot, in addition to reference-grade data.{' '}
+            <a href={config.dataTypesUrl} title="Data type definitions">
+              Learn more about the data types
+            </a>
+            . Explore this data through the site or through the API, where all
+            real-time and historical data is now accessible.
           </p>
 
           <p>
