@@ -47,6 +47,7 @@ export default function Header({
                 <div className="inpage__header-actions">
                   {disclaimer && (
                     <a
+                      // eslint-disable-next-line inclusive-language/use-inclusive-words
                       href="https://github.com/openaq/openaq-info/blob/master/DATA-POLICY.md"
                       title="View Data Policy"
                     >
