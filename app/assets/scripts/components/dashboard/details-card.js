@@ -38,7 +38,7 @@ export default function DetailsCard({ measurements, date, coords, lifecycle }) {
                   <dd>{lifecycle.join(', ')}</dd>
                 </>
               )}
-              {coords && (
+              {coords && coords.lat && coords.lng && (
                 <>
                   <dt>Coordinates</dt>
                   <dd>
@@ -83,8 +83,8 @@ DetailsCard.propTypes = {
     end: T.string.isRequired,
   }),
   coords: T.shape({
-    lat: T.number.isRequired,
-    lng: T.number.isRequired,
+    lat: T.number,
+    lng: T.number,
   }),
   lifecycle: T.array,
 };

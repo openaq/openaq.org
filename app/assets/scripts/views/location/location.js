@@ -163,7 +163,6 @@ function Location({ location, history, match, openDownloadModal }) {
   const lifecycle = (data.sources || [])
     .map(s => s.lifecycle_stage)
     .filter(Boolean);
-
   return (
     <section className="inpage">
       <Header
@@ -186,8 +185,8 @@ function Location({ location, history, match, openDownloadModal }) {
             measurements={data.measurements}
             lifecycle={lifecycle}
             coords={{
-              lat: data.coordinates.latitude,
-              lng: data.coordinates.longitude,
+              lat: data?.coordinates?.latitude || '',
+              lng: data?.coordinates?.longitude || '',
             }}
             date={{
               start: data.firstUpdated,
@@ -235,12 +234,18 @@ function Location({ location, history, match, openDownloadModal }) {
             }
           />
         </div>
-        <NearbyLocations
-          locationId={data.id}
-          center={[data.coordinates.longitude, data.coordinates.latitude]}
-          parameters={data.parameters}
-          initialActiveParameter={data.parameters[0]}
-        />
+        {(data.bounds || data.coordinates) && (
+          <NearbyLocations
+            locationId={data.id}
+            center={
+              data.bounds
+                ? data.bounds
+                : [data.coordinates.longitude, data.coordinates.latitude]
+            }
+            parameters={data.parameters}
+            initialActiveParameter={data.parameters[0]}
+          />
+        )}
       </div>
     </section>
   );
