@@ -185,8 +185,8 @@ function Location({ location, history, match, openDownloadModal }) {
             measurements={data.measurements}
             lifecycle={lifecycle}
             coords={{
-              lat: data?.coordinates?.latitude || '',
-              lng: data?.coordinates?.longitude || '',
+              lat: data?.coordinates?.latitude,
+              lng: data?.coordinates?.longitude,
             }}
             date={{
               start: data.firstUpdated,
