@@ -47,10 +47,11 @@ export default function Header({
                 <div className="inpage__header-actions">
                   {disclaimer && (
                     <a
-                      href="https://medium.com/@openaq/where-does-openaq-data-come-from-a5cf9f3a5c85"
-                      title="View Data Disclaimer and More Information"
+                      // eslint-disable-next-line inclusive-language/use-inclusive-words
+                      href="https://github.com/openaq/openaq-info/blob/master/DATA-POLICY.md"
+                      title="View Data Policy"
                     >
-                      Data Disclaimer and More Information
+                      Data Policy
                     </a>
                   )}
                   {feedback && (
