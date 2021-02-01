@@ -185,8 +185,8 @@ function Location({ location, history, match, openDownloadModal }) {
             measurements={data.measurements}
             lifecycle={lifecycle}
             coords={{
-              lat: data?.coordinates?.latitude,
-              lng: data?.coordinates?.longitude,
+              lat: data.coordinates?.latitude,
+              lng: data.coordinates?.longitude,
             }}
             date={{
               start: data.firstUpdated,
@@ -234,14 +234,10 @@ function Location({ location, history, match, openDownloadModal }) {
             }
           />
         </div>
-        {(data.bounds || data.coordinates) && (
+        {data.coordinates && (
           <NearbyLocations
             locationId={data.id}
-            center={
-              data.bounds
-                ? data.bounds
-                : [data.coordinates.longitude, data.coordinates.latitude]
-            }
+            center={[data.coordinates.longitude, data.coordinates.latitude]}
             parameters={data.parameters}
             initialActiveParameter={data.parameters[0]}
           />
