@@ -52,7 +52,7 @@ var PageFooter = createReactClass({
                 </li>
                 <li>
                   <a
-                    href="https://join.slack.com/t/openaq/shared_invite/zt-gq14aew7-CVdp131g7TR7o9iiXIVDLw"
+                    href="https://tinyurl.com/joinopenaqslack"
                     className="connect-menu__link--slack"
                     title="View Slack"
                     target="_blank"
