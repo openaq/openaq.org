@@ -1,6 +1,6 @@
 ---
 name: Matthew Whitney
-order: 9
-affiliation: Clean Air Fund
+order: 6
 image: team/avatar--matthew-whitney.png
+contact: mattw@openaq.org
 ---
