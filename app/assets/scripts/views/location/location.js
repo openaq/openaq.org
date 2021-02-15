@@ -228,6 +228,8 @@ function Location({ location, history, match, openDownloadModal }) {
             />
           )}
           <ParametersCard
+            locationId={data.id}
+            dateRange={dateRange}
             parameters={data.parameters}
             titleInfo={
               'The average of all values and total number of measurements for each pollutant during the chosen time window.'
