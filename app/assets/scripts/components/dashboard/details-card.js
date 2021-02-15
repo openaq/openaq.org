@@ -21,7 +21,7 @@ export default function DetailsCard({ measurements, date, coords, lifecycle }) {
       renderBody={() => {
         return (
           <>
-            <HighlightText className="card__highlight-text" size={'large'}>
+            <HighlightText className="card__highlight-text" size={'medium'}>
               {formatThousands(measurements)}
             </HighlightText>
             <CardSubtitle className="card__subtitle">Measurements</CardSubtitle>
