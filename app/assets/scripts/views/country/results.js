@@ -6,8 +6,8 @@ import _ from 'lodash';
 import qs from 'qs';
 
 import { buildQS } from '../../utils/url';
+import { NO_CITY } from '../../utils/constants';
 import config from '../../config';
-
 import InfoMessage from '../../components/info-message';
 import LoadingMessage from '../../components/loading-message';
 import LocationCard from '../locations-hub/location-card';
@@ -190,18 +190,19 @@ export default function Results({ id, openDownloadModal }) {
                   return (
                     <LocationCard
                       isMobile={loc.isMobile}
-                      isAnalysis={loc.isAnalysis}
                       key={loc.id}
-                      city={loc.city}
+                      city={loc.city || NO_CITY}
                       country={loc.country}
                       firstUpdated={loc.firstUpdated}
                       id={loc.id}
                       lastUpdated={loc.lastUpdated}
+                      isAnalysis={loc.isAnalysis}
                       name={loc.name}
                       onDownloadClick={openModal}
                       parametersList={loc.parameters}
-                      sources={loc.sources}
-                      sourceType={loc.sourceType}
+                      sources={loc.sources || []}
+                      sensorType={loc.sensorType}
+                      entity={loc.entity}
                       totalMeasurements={loc.measurements}
                     />
                   );

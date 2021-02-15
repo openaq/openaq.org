@@ -41,12 +41,14 @@ export default function LocationCard({
           Updated <strong>{updated}</strong>
         </>
       }
-      tags={[
-        sensorType,
-        entity,
-        isMobile ? 'Mobile' : 'Stationary',
-        isAnalysis && 'Analysis',
-      ]}
+      tags={
+        [
+          sensorType,
+          entity,
+          isMobile ? 'Mobile' : 'Stationary',
+          isAnalysis && 'Analysis',
+        ].filter(t => t) /* remove false */
+      }
       renderBody={() => (
         <CardDetails
           id="location"
