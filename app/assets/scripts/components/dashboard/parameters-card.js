@@ -37,6 +37,7 @@ const tableHeaders = [
 export default function ParametersCard({
   parameters,
   locationId,
+  projectId,
   dateRange,
   titleInfo,
 }) {
@@ -80,8 +81,6 @@ export default function ParametersCard({
     };
 
     let query = {
-      location: locationId,
-      spatial: 'location',
       temporal,
       limit: 1000,
       ...(dateRange
@@ -95,6 +94,12 @@ export default function ParametersCard({
           }
         : null),
     };
+
+    if (locationId) {
+      query = { ...query, location: locationId, spatial: 'location' };
+    } else if (projectId) {
+      query = { ...query, project: projectId, spatial: 'project' };
+    }
 
     fetch(`${config.api}/averages?${qs.stringify(query, { skipNulls: true })}`)
       .then(response => {
@@ -149,7 +154,8 @@ export default function ParametersCard({
 
 ParametersCard.propTypes = {
   titleInfo: PropTypes.string.isRequired,
-  locationId: PropTypes.number.isRequired,
+  locationId: PropTypes.number,
+  projectId: PropTypes.number,
   dateRange: PropTypes.string,
   parameters: PropTypes.arrayOf(
     PropTypes.shape({
