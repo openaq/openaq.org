@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PropTypes as T } from 'prop-types';
+import PropTypes from 'prop-types';
 import qs from 'qs';
 import datefns from 'date-fns';
 
@@ -148,12 +148,14 @@ export default function ParametersCard({
 }
 
 ParametersCard.propTypes = {
-  titleInfo: T.string,
-  parameters: T.arrayOf(
-    T.shape({
-      parameter: T.string.isRequired,
-      count: T.number.isRequired,
-      average: T.number.isRequired,
-    })
-  ),
+  titleInfo: PropTypes.string.isRequired,
+  locationId: PropTypes.number.isRequired,
+  dateRange: PropTypes.string,
+  parameters: PropTypes.arrayOf(
+    PropTypes.shape({
+      parameter: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+      average: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
 };
