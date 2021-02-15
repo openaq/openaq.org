@@ -29,13 +29,7 @@ const tableHeaders = [
   },
 ];
 
-/*  TODO This function currently just extracts the first data available for each pollutant
- *  openAQ api returns all available dates averages, or those within a specified date range.
- *  The desired data in this card needs some clarification. should it be the most recent day?
- *  User specified day? date range? etc
- */
-
-export default function MeasureandsCard({ parameters, titleInfo }) {
+export default function ParametersCard({ parameters, titleInfo }) {
   const rows = parameters.map(p => ({
     parameter: p.displayName,
     avg: p.average,
@@ -45,8 +39,8 @@ export default function MeasureandsCard({ parameters, titleInfo }) {
 
   return (
     <Card
-      id="measurand"
-      className="card--measurand"
+      id="parameter"
+      className="card--parameter"
       title="Parameters"
       renderBody={() => {
         return <Table headers={tableHeaders} rows={rows} />;
@@ -56,7 +50,7 @@ export default function MeasureandsCard({ parameters, titleInfo }) {
   );
 }
 
-MeasureandsCard.propTypes = {
+ParametersCard.propTypes = {
   titleInfo: T.string,
   parameters: T.arrayOf(
     T.shape({
