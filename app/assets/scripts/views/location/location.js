@@ -12,7 +12,7 @@ import DetailsCard from '../../components/dashboard/details-card';
 import NearbyLocations from './nearby-locations';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
-import MeasureandsCard from '../../components/dashboard/measurands-card';
+import ParametersCard from '../../components/dashboard/parameters-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 import MobileDataLocationsCard from '../../components/dashboard/mobile-data-locations-card';
@@ -227,7 +227,9 @@ function Location({ location, history, match, openDownloadModal }) {
               isMobile={data.isMobile}
             />
           )}
-          <MeasureandsCard
+          <ParametersCard
+            locationId={data.id}
+            dateRange={dateRange}
             parameters={data.parameters}
             titleInfo={
               'The average of all values and total number of measurements for each pollutant during the chosen time window.'

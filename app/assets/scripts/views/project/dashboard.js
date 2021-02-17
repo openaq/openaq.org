@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DetailsCard from '../../components/dashboard/details-card';
 import LatestMeasurementsCard from '../../components/dashboard/lastest-measurements-card';
 import SourcesCard from '../../components/dashboard/sources-card';
-import MeasureandsCard from '../../components/dashboard/measurands-card';
+import ParametersCard from '../../components/dashboard/parameters-card';
 import TemporalCoverageCard from '../../components/dashboard/temporal-coverage-card';
 import TimeSeriesCard from '../../components/dashboard/time-series-card';
 import MobileDataLocationsCard from '../../components/dashboard/mobile-data-locations-card';
@@ -55,14 +55,6 @@ function Dashboard({
         />
       )}
       {!isAnalysis && (
-        <MeasureandsCard
-          parameters={projectParams}
-          titleInfo={
-            "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
-          }
-        />
-      )}
-      {!isAnalysis && (
         <TemporalCoverageCard
           parameters={projectParams}
           dateRange={dateRange}
@@ -70,6 +62,16 @@ function Dashboard({
           id={projectName}
           titleInfo={
             'The average number of measurements for each pollutant by hour, day, or month at the selected locations. If a parameter is not present at one location in the dataset it will be omitted from the average. In some views a window may be turned off if that view is not applicable to the selected time window.'
+          }
+        />
+      )}
+      {!isAnalysis && (
+        <ParametersCard
+          parameters={projectParams}
+          dateRange={dateRange}
+          projectId={projectId}
+          titleInfo={
+            "The average of all values and total number of measurements for the available pollutants during the chosen time window and for the selected locations. Keep in mind that not all locations may report the same pollutants. What are we doing when the locations aren't reporting the same pollutants?"
           }
         />
       )}
