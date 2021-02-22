@@ -15,7 +15,6 @@ import LocationsSource from '../components/map/locations-source';
 import MeasurementsLayer from '../components/map/measurements-layer';
 import MobileBoundsLayer from '../components/map/mobile-bounds-layer';
 import Legend from '../components/map/legend';
-import { parameterMax } from '../utils/map-settings';
 
 function WorldMap({ location, history }) {
   const { fetchedParams, fetchingParams, paramError, parameters } = useContext(
@@ -58,13 +57,17 @@ function WorldMap({ location, history }) {
       </HeaderMessage>
     );
   }
-  const coreParameters = parameters.filter(p =>
-    Object.keys(parameterMax).includes(p.id.toString())
-  );
+  const coreParameters = parameters.filter(p => p.isCore);
+
   const queryParameter = qs.parse(location.search, { ignoreQueryPrefix: true })
     .parameter;
+
   const activeParameter = _.find(coreParameters, {
     id: Number(queryParameter) || 2,
+  });
+
+  const relatedParameters = _.filter(parameters, {
+    name: activeParameter.name,
   });
 
   return (
@@ -78,12 +81,18 @@ function WorldMap({ location, history }) {
       </header>
       <div className="inpage__body">
         <MapComponent>
-          <MobileSource activeParameter={activeParameter.id}>
-            <MobileBoundsLayer activeParameter={activeParameter.id} />
-          </MobileSource>
-          <LocationsSource activeParameter={activeParameter.id}>
-            <MeasurementsLayer activeParameter={activeParameter.id} />
-          </LocationsSource>
+          {relatedParameters.map(parameter => (
+            <MobileSource key={parameter.id} activeParameter={parameter.id}>
+              <MobileBoundsLayer activeParameter={parameter.id} />
+            </MobileSource>
+          ))}
+
+          {relatedParameters.map(parameter => (
+            <LocationsSource key={parameter.id} activeParameter={parameter.id}>
+              <MeasurementsLayer activeParameter={parameter.id} />
+            </LocationsSource>
+          ))}
+
           <Legend
             presetParameterList={coreParameters}
             activeParameter={activeParameter}

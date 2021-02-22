@@ -24,13 +24,14 @@ export default function MeasurementsLayer({
 }) {
   let match = useRouteMatch();
 
-  const { isCore } = useContext(ParameterContext);
+  const { getMaxColorValue } = useContext(ParameterContext);
 
   const countryFilter = ['==', ['get', 'country'], country];
-
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
     if (!map.hasImage('circle')) map.addImage('circle', circle, { sdf: true });
+
+    const maxColorValue = getMaxColorValue(activeParameter);
 
     map.addLayer({
       id: `${activeParameter}-outline`,
@@ -38,8 +39,8 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': isCore(activeParameter)
-          ? getFillExpression(activeParameter, 'dark')
+        'icon-color': maxColorValue
+          ? getFillExpression(maxColorValue, 'dark')
           : defaultBorderColor,
       },
       layout: {
@@ -55,8 +56,8 @@ export default function MeasurementsLayer({
       'source-layer': 'default',
       type: 'symbol',
       paint: {
-        'icon-color': isCore(activeParameter)
-          ? getFillExpression(activeParameter)
+        'icon-color': maxColorValue
+          ? getFillExpression(maxColorValue)
           : defaultColor,
       },
       layout: {

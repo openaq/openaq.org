@@ -17,7 +17,7 @@ export default function LocationLayer({
   map,
   sourceId,
 }) {
-  const { isCore } = useContext(ParameterContext);
+  const { getMaxColorValue } = useContext(ParameterContext);
 
   useEffect(() => {
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
@@ -61,6 +61,8 @@ export default function LocationLayer({
       },
     });
 
+    const maxColorValue = getMaxColorValue(activeParameter);
+
     // Re-add fill by value
     map.addLayer({
       id: 'location-layer',
@@ -69,8 +71,8 @@ export default function LocationLayer({
       filter: ['in', ['get', 'locationId'], ['literal', locationIds]],
       type: 'symbol',
       paint: {
-        'icon-color': isCore(activeParameter)
-          ? getFillExpression(activeParameter)
+        'icon-color': maxColorValue
+          ? getFillExpression(maxColorValue)
           : defaultColor,
       },
       layout: {
