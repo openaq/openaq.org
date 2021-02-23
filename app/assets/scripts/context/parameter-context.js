@@ -57,7 +57,7 @@ export function ParameterProvider(props) {
   }, []);
 
   const getMaxColorValue = function (activeParameterId) {
-    return parameters.find(p => p.id === activeParameterId)?.maxColorValue;
+    return parameters?.find(p => p.id === activeParameterId)?.maxColorValue;
   };
 
   return (
