@@ -110,11 +110,8 @@ const ColorScaleLegend = ({
   legendParameters,
   activeParameter,
   onParamSelection,
-  isCoreParameter,
 }) => {
-  const scaleStops = generateLegendStops(
-    activeParameter.parameterId || activeParameter.id
-  );
+  const scaleStops = generateLegendStops(activeParameter);
 
   const colorWidth = 100 / scaleStops.length;
 
@@ -132,7 +129,7 @@ const ColorScaleLegend = ({
           activeParameter.displayName
         )}
       </p>
-      {isCoreParameter && (
+      {activeParameter.maxColorValue && (
         <>
           <ul className="color-scale">
             {scaleStops.map(o => (
@@ -168,9 +165,9 @@ ColorScaleLegend.propTypes = {
     name: PropTypes.string,
     id: PropTypes.number,
     parameterId: PropTypes.number,
+    maxColorValue: PropTypes.number,
   }).isRequired,
   onParamSelection: PropTypes.func,
-  isCoreParameter: PropTypes.bool.isRequired,
 };
 
 export default function Legend({
@@ -180,11 +177,7 @@ export default function Legend({
   onParamSelection,
   showOnlyParam,
 }) {
-  const { parameters, isCore } = useContext(ParameterContext);
-
-  const activeParameterId = activeParameter
-    ? activeParameter.parameterId || activeParameter.id
-    : null;
+  const { parameters, getMaxColorValue } = useContext(ParameterContext);
 
   const filteredParams =
     paramIds && parameters
@@ -223,9 +216,16 @@ export default function Legend({
       {!showOnlyParam && activeParameter && (
         <ColorScaleLegend
           legendParameters={legendParameters}
-          activeParameter={activeParameter}
+          activeParameter={
+            activeParameter.maxColorValue
+              ? activeParameter
+              : {
+                  ...activeParameter,
+                  // extend with color value from parameters context
+                  maxColorValue: getMaxColorValue(activeParameter.parameterId),
+                }
+          }
           onParamSelection={onParamSelection}
-          isCoreParameter={isCore(activeParameterId)}
         />
       )}
     </Wrapper>
@@ -240,6 +240,7 @@ Legend.propTypes = {
     name: PropTypes.string,
     id: PropTypes.number,
     parameterId: PropTypes.number,
+    maxColorValue: PropTypes.number,
   }),
   onParamSelection: PropTypes.func,
   showOnlyParam: PropTypes.bool,

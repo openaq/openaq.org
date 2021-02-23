@@ -56,15 +56,19 @@ export function ParameterProvider(props) {
     };
   }, []);
 
-  const isCore = function (activeParameterId) {
-    return parameters
-      ? parameters.find(p => p.id === activeParameterId)?.isCore
-      : false;
+  const getMaxColorValue = function (activeParameterId) {
+    return parameters?.find(p => p.id === activeParameterId)?.maxColorValue;
   };
 
   return (
     <ParameterContext.Provider
-      value={{ fetchedParams, fetchingParams, paramError, parameters, isCore }}
+      value={{
+        fetchedParams,
+        fetchingParams,
+        paramError,
+        parameters,
+        getMaxColorValue,
+      }}
     >
       {props.children}
     </ParameterContext.Provider>

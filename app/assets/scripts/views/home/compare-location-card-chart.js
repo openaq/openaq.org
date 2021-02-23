@@ -4,7 +4,6 @@ import * as d3 from 'd3';
 import moment from 'moment';
 
 import ChartMeasurement from '../../components/chart-measurement';
-import { parameterUnit } from '../../utils/map-settings';
 
 export default function CompareLocationCardChart(props) {
   const { measurement } = props;
@@ -50,7 +49,7 @@ export default function CompareLocationCardChart(props) {
       data={[chartData]}
       xRange={xRange}
       yRange={[0, yMax]}
-      yLabel={parameterUnit['pm25']}
+      yLabel={measurement.data.results[0].unit}
       compressed
     />
   );
