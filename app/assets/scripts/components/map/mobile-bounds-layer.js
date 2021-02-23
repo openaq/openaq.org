@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 
 import { getFillExpression, defaultBorderColor } from '../../utils/colors';
 import { addPopover, debugProperties } from './map-interaction';
+import { ParameterContext } from '../../context/parameter-context';
 
 export default function MobileBoundsLayer({
   locationId,
@@ -14,10 +15,12 @@ export default function MobileBoundsLayer({
   sourceId,
 }) {
   let match = useRouteMatch();
+  const { getMaxColorValue } = useContext(ParameterContext);
 
   const countryFilter = ['==', ['get', 'country'], country];
 
   useEffect(() => {
+    const maxColorValue = getMaxColorValue(activeParameter);
     map.addLayer({
       id: `mobile-bounds-${activeParameter}`,
       source: sourceId,
@@ -25,7 +28,7 @@ export default function MobileBoundsLayer({
       type: 'line',
       paint: {
         'line-color': activeParameter
-          ? getFillExpression(activeParameter)
+          ? getFillExpression(maxColorValue)
           : defaultBorderColor,
         'line-width': 5,
         'line-opacity': 0.6,

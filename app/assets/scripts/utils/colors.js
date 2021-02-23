@@ -1,8 +1,8 @@
 var d3 = require('d3');
 var chroma = require('chroma-js');
-import { parameterMax, parameterUnit } from './map-settings';
-import { round } from '../utils/format';
 import moment from 'moment';
+
+import { round } from '../utils/format';
 
 // Colors for the legend and point fills
 const mapColors = [
@@ -48,13 +48,11 @@ export function getMapColorsLabels() {
   return mapColors.map(o => o.label);
 }
 
-export function generateColorStops(parameter, colors) {
-  const colorScale = generateColorScale(
-    parameterMax[parameter],
-    getMapColorsHex()
-  );
+export function generateColorStops(maxColorValue, mode) {
+  const colorScale = generateColorScale(maxColorValue, getMapColorsHex());
+
   const darkColorScale = generateColorScale(
-    parameterMax[parameter],
+    maxColorValue,
     getDarkenedColorsHex()
   );
   let stops = getMapColorsHex().map(c => {
@@ -64,7 +62,7 @@ export function generateColorStops(parameter, colors) {
   // And add one stop to the beginning to account for interpolation
   stops.unshift([-1, unusedColor]);
 
-  if (colors === 'dark') {
+  if (mode === 'dark') {
     stops = getDarkenedColorsHex().map(e => {
       return [darkColorScale.invertExtent(e)[0], e];
     });
@@ -75,16 +73,16 @@ export function generateColorStops(parameter, colors) {
   return stops;
 }
 
-export function generateColorScale(parameterMax, colorsHex) {
+export function generateColorScale(maxColorValue, colorsHex) {
   const colorScale = d3
     .scaleQuantize()
-    .domain([0, parameterMax])
+    .domain([0, maxColorValue])
     .range(colorsHex);
   return colorScale;
 }
 
 export function generateLegendStops(parameter) {
-  let stops = generateColorStops(parameter);
+  let stops = generateColorStops(parameter.maxColorValue);
   // Remove the "unused" color.
   stops.shift();
   let lastVal = stops[stops.length - 1][0];
@@ -101,7 +99,7 @@ export function generateLegendStops(parameter) {
   }));
 
   // Customize first and last labels.
-  stops[0].label = '0' + parameterUnit[parameter];
+  stops[0].label = '0' + parameter.preferredUnit;
   stops[stops.length - 1].label += '+';
 
   return stops;
@@ -109,7 +107,7 @@ export function generateLegendStops(parameter) {
 
 const ACTIVE_TIME_WINDOW = moment().subtract(2, 'days').toISOString();
 
-export function getFillExpression(parameter, isDark) {
+export function getFillExpression(maxColorValue, isDark) {
   return [
     'case',
     ['>', ['get', 'lastUpdated'], ['literal', ACTIVE_TIME_WINDOW]],
@@ -117,7 +115,7 @@ export function getFillExpression(parameter, isDark) {
       'interpolate',
       ['linear'],
       ['number', ['get', 'lastValue']],
-      ...generateColorStops(parameter, isDark).flat(),
+      ...generateColorStops(maxColorValue, isDark).flat(),
     ],
     isDark ? unusedBorderColor : unusedColor,
   ];
