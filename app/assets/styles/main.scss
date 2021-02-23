@@ -10,105 +10,94 @@
  * http://bourbon.io/
  */
 
-@import "bourbon";
+@import '../../../node_modules/bourbon/core/bourbon';
 
 /**
  * Jeet, a grid system designed for humans:
  * http://jeet.gs/
  */
 
-@import "jeet/jeet";
-
+@import '../../../node_modules/jeet/jeet';
 
 /* OpenAQ Design System
    ========================================================================== */
 
-@import "openaq-design-system";
-@import "../../../node_modules/mapbox-gl/dist/mapbox-gl";
+@import '../../../node_modules/openaq-design-system/assets/styles/openaq-design-system';
 
+@import '../../../node_modules/mapbox-gl/dist/mapbox-gl';
 
 /* Global
    ========================================================================== */
 
-@import "global/pages";
-@import "global/inpages";
-@import "global/folds";
-@import "global/cards";
-@import "global/asides";
-@import "global/map";
-@import "global/popover";
-@import "global/messages";
-@import "global/prime-nav";
-@import "global/forms";
-@import "global/charts";
-@import "global/content";
-@import "global/modal";
-@import "global/testimonials";
-@import "global/sponsors";
-@import "global/join-fold";
-@import "global/connect-fold";
-@import "global/workshop-fold";
-@import "global/animation";
-
+@import 'global/pages';
+@import 'global/inpages';
+@import 'global/folds';
+@import 'global/cards';
+@import 'global/asides';
+@import 'global/map';
+@import 'global/popover';
+@import 'global/messages';
+@import 'global/prime-nav';
+@import 'global/forms';
+@import 'global/charts';
+@import 'global/content';
+@import 'global/modal';
+@import 'global/testimonials';
+@import 'global/sponsors';
+@import 'global/join-fold';
+@import 'global/connect-fold';
+@import 'global/workshop-fold';
+@import 'global/animation';
 
 /* Homepage
    ========================================================================== */
 
-@import "homepage/content";
-@import "homepage/compare-chart";
-
+@import 'homepage/content';
+@import 'homepage/compare-chart';
 
 /* Map
    ========================================================================== */
 
-@import "map/content";
-
+@import 'map/content';
 
 /* Locations
    ========================================================================== */
 
-@import "locations/global";
-@import "locations/hub";
-@import "locations/single";
-@import "locations/measurement-chart";
-
+@import 'locations/global';
+@import 'locations/hub';
+@import 'locations/single';
+@import 'locations/measurement-chart';
 
 /* Countries
    ========================================================================== */
 
-@import "countries/hub";
-@import "countries/single";
-
-
+@import 'countries/hub';
+@import 'countries/single';
 
 /* Projects
    ========================================================================== */
 
-   @import "projects/hub";
-   
+@import 'projects/hub';
 
 /* Compare
    ========================================================================== */
 
-@import "compare/content";
-@import "compare/brush-chart";
-
+@import 'compare/content';
+@import 'compare/brush-chart';
 
 /* Community
    ========================================================================== */
 
-@import "community/hub";
-@import "community/projects";
-@import "community/workshops";
-
+@import 'community/hub';
+@import 'community/projects';
+@import 'community/workshops';
 
 /* About
    ========================================================================== */
 
-@import "about/content";
-
+@import 'about/content';
 
 /* Why
    ========================================================================== */
 
-@import "why/content";
+@import 'why/content';

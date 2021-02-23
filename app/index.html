@@ -1,19 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="OpenAQ is a community of scientists, software developers, and lovers of open environmental data" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="description"
+      content="OpenAQ is a community of scientists, software developers, and lovers of open environmental data"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <title>OpenAQ</title>
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@OpenAQ" />
-    <meta name="twitter:title" content="OpenAQ">
-    <meta name="twitter:description" content="OpenAQ is a community of scientists, software developers, and lovers of open environmental data" />
-    <meta name="twitter:image:src" content="assets/graphics/meta/default-meta-image.png" />
+    <meta name="twitter:title" content="OpenAQ" />
+    <meta
+      name="twitter:description"
+      content="OpenAQ is a community of scientists, software developers, and lovers of open environmental data"
+    />
+    <meta
+      name="twitter:image:src"
+      content="./assets/graphics/meta/default-meta-image.png"
+    />
     <!--/ Twitter -->
 
     <!-- OG -->
@@ -21,27 +33,37 @@
     <meta property="og:title" content="OpenAQ" />
     <meta property="og:url" content="https://openaq.org/" />
     <meta property="og:type" content="website" />
-    <meta property="og:description" content="OpenAQ is a community of scientists, software developers, and lovers of open environmental data" />
-    <meta property="og:image" content="assets/graphics/meta/default-meta-image.png" />
+    <meta
+      property="og:description"
+      content="OpenAQ is a community of scientists, software developers, and lovers of open environmental data"
+    />
+    <meta
+      property="og:image"
+      content="./assets/graphics/meta/default-meta-image.png"
+    />
     <!--/ OG -->
 
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/graphics/meta/favicon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/graphics/meta/android-chrome.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/graphics/meta/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="./assets/graphics/meta/favicon.ico"
+    />
 
-    <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700|Source+Sans+Pro:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Oxygen:400,700|Source+Sans+Pro:300,300i,400,400i,700,700i&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- build:css /assets/styles/vendor.css -->
-    <!-- endbuild -->
-
-    <!-- build:css /assets/styles/main.css -->
-    <link rel="stylesheet" href="/assets/styles/main.css">
-    <link rel="stylesheet" href="../node_modules/react-datepicker/dist/react-datepicker.css" />
-    <link rel="stylesheet" href="../node_modules/react-day-picker/lib/style.css"/>
-
-
-    <!-- endbuild -->
-
+    <link rel="stylesheet" href="./assets/styles/main.scss" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/react-datepicker/dist/react-datepicker.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/react-day-picker/lib/style.css"
+    />
   </head>
   <body>
     <div id="app-container">
@@ -49,21 +71,22 @@
     </div>
 
     <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-66787377-1');ga('send','pageview');
+      (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] ||
+          (b[l] = function () {
+            (b[l].q = b[l].q || []).push(arguments);
+          });
+        b[l].l = +new Date();
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r);
+      })(window, document, 'script', 'ga');
+      ga('create', 'UA-66787377-1');
+      ga('send', 'pageview');
     </script>
 
-    <!-- build:js /assets/scripts/vendor.js -->
-    <script src="/assets/scripts/vendor.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js /assets/scripts/bundle.js -->
-    <script src="/assets/scripts/bundle.js"></script>
-    <!-- endbuild -->
-
+    <script src="./assets/scripts/main.js"></script>
   </body>
 </html>

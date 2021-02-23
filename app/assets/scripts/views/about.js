@@ -10,6 +10,13 @@ import TeamList from '../components/team-list';
 import content from '../../content/content.json';
 import sponsors from '../../content/sponsors.json';
 
+import CoverAbout from '../../graphics/content/view--about/cover--about.jpg';
+import OaqIconIllu48Historical from '../../graphics/layout/oaq-icon-illu-48-historical.svg';
+import OaqIconIllu48Opensource from '../../graphics/layout/oaq-icon-illu-48-opensource.svg';
+import OaqIconIllu48Community from '../../graphics/layout/oaq-icon-illu-48-community.svg';
+import CardBookMedia from '../../graphics/content/view--about/card-book-media.jpg';
+import OaqLogoColPos from '../../../../node_modules/openaq-design-system/assets/graphics/layout/oaq-logo-col-pos.svg';
+
 const teamData = {
   advisoryBoard: _(content.advisoryBoard).values().sortBy(['order']).value(),
   governingBoard: _(content.governingBoard).values().sortBy(['order']).value(),
@@ -45,7 +52,7 @@ var About = createReactClass({
           <figure className="inpage__media inpage__media--cover media">
             <div className="media__item">
               <img
-                src="/assets/graphics/content/view--about/cover--about.jpg"
+                src={CoverAbout}
                 alt="Cover image"
                 width="1440"
                 height="712"
@@ -67,7 +74,7 @@ var About = createReactClass({
                       <figure className="card__media">
                         <div className="card__badge">
                           <img
-                            src="/assets/graphics/layout/oaq-icon-illu-48-historical.svg"
+                            src={OaqIconIllu48Historical}
                             width="40"
                             height="40"
                             alt="Illustration"
@@ -96,7 +103,7 @@ var About = createReactClass({
                       <figure className="card__media">
                         <div className="card__badge">
                           <img
-                            src="/assets/graphics/layout/oaq-icon-illu-48-opensource.svg"
+                            src={OaqIconIllu48Opensource}
                             width="40"
                             height="40"
                             alt="Illustration"
@@ -123,7 +130,7 @@ var About = createReactClass({
                       <figure className="card__media">
                         <div className="card__badge">
                           <img
-                            src="/assets/graphics/layout/oaq-icon-illu-48-community.svg"
+                            src={OaqIconIllu48Community}
                             width="40"
                             height="40"
                             alt="Illustration"
@@ -300,7 +307,7 @@ var About = createReactClass({
                     <figure className="card__media">
                       <div className="card__thumb">
                         <img
-                          src="/assets/graphics/content/view--about/card-book-media.jpg"
+                          src={CardBookMedia}
                           width="724"
                           height="348"
                           alt="Card media"
@@ -309,7 +316,7 @@ var About = createReactClass({
                     </figure>
                     <footer className="card__footer">
                       <img
-                        src="/assets/graphics/layout/oaq-logo-col-pos.svg"
+                        src={OaqLogoColPos}
                         alt="OpenAQ logotype"
                         width="72"
                         height="40"

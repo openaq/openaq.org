@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .info-msg {
-  @include col(12/12);
+  @include column(12/12);
 
   background: #fff;
   box-shadow: 0 0 0 1px $base-semi-alpha-color;
@@ -13,11 +13,11 @@
   text-align: center;
 
   @include media(medium-up) {
-    @include col(10/12, $offset: 1/12);
+    @include column(10/12, $offset: 1/12);
   }
 
   @include media(large-up) {
-    @include col(8/12, $offset: 2/12);
+    @include column(8/12, $offset: 2/12);
   }
 
   &__contents {
@@ -25,7 +25,6 @@
       margin-bottom: 0;
     }
   }
-
 }
 
 .data-loading-msg {
@@ -67,9 +66,19 @@
 }
 
 @keyframes dash {
-  to { stroke-dashoffset: 0;}
-  0% { opacity: 0;}
-  15% { opacity: 1;}
-  80% { opacity: 1;}
-  100% { opacity: 0;}
+  to {
+    stroke-dashoffset: 0;
+  }
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
