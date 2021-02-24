@@ -1,39 +1,17 @@
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 
-import pngImages from '../../graphics/content/view--community-projects/projects/logos/*.png';
-import jpgImages from '../../graphics/content/view--community-projects/projects/logos/*.jpg';
-import jpegImages from '../../graphics/content/view--community-projects/projects/logos/*.jpeg';
-
-import pngCoverImages from '../../graphics/content/view--community-projects/projects/covers/*.png';
-import jpgCoverImages from '../../graphics/content/view--community-projects/projects/covers/*.jpg';
-import jpegCoverImages from '../../graphics/content/view--community-projects/projects/covers/*.jpeg';
-
-function getImage(logo) {
-  const filename = logo?.split('logos/')[1]?.split('.')[0];
-  const filenameCover = logo?.split('covers/')[1]?.split('.')[0];
-  return (
-    pngImages[filename] ||
-    jpgImages[filename] ||
-    jpegImages[filename] ||
-    pngCoverImages[filenameCover] ||
-    jpgCoverImages[filenameCover] ||
-    jpegCoverImages[filenameCover] ||
-    ''
-  );
-}
 export default function CommunityCard({
   title,
   type,
   location,
-  linkTitle,
+  // linkTitle,
   url,
-  imageNode,
+  // imageNode,
   logo,
-  horizontal,
+  // horizontal,
   children,
 }) {
-  console.log('logo', logo);
   return (
     <li>
       <article className="card card--project">
@@ -47,7 +25,7 @@ export default function CommunityCard({
           <div className="card__body">{children}</div>
           <footer className="card__footer">
             <p className="card__footer-detail">{location || 'N/A'}</p>
-            {logo && <img src={getImage(logo)} alt="Project logo" />}
+            {logo && <img src={logo} alt="Project logo" />}
           </footer>
         </a>
       </article>

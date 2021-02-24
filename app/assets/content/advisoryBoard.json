@@ -1,0 +1,101 @@
+{
+  "arvind-jairam": {
+    "name": "Arvind Jairam",
+    "order": 2,
+    "affiliation": "Paul Hastings LLP",
+    "image": "team/avatar--arvind-jairam.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.704Z",
+    "filename": "arvind-jairam.md"
+  },
+  "douglas-varley": {
+    "name": "Douglas Varley, JD",
+    "order": 8,
+    "affiliation": "Caplin & Drysdale",
+    "image": null,
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.704Z",
+    "filename": "douglas-varley.md"
+  },
+  "jessica-seddon": {
+    "name": "Jessica Seddon, PhD",
+    "order": 7,
+    "affiliation": "World Resources Institute",
+    "image": null,
+    "body": "",
+    "updatedAt": "2021-02-23T20:39:36.465Z",
+    "filename": "jessica-seddon.md"
+  },
+  "martin-schultz": {
+    "name": "Martin Schultz, PhD",
+    "order": 6,
+    "affiliation": "Forschungszentrum Jülich",
+    "image": "team/avatar--martin-schultz.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.704Z",
+    "filename": "martin-schultz.md"
+  },
+  "matthew-whitney": {
+    "name": "Matthew Whitney",
+    "order": 9,
+    "affiliation": "Clean Air Fund",
+    "image": "team/avatar--matthew-whitney.png",
+    "body": "",
+    "updatedAt": "2021-02-23T20:39:36.465Z",
+    "filename": "matthew-whitney.md"
+  },
+  "michael-brauer": {
+    "name": "Michael Brauer, ScD",
+    "order": 1,
+    "affiliation": "The University of British Columbia",
+    "image": "team/avatar--michael-brauer.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "michael-brauer.md"
+  },
+  "millie-chu-baird": {
+    "name": "Millie Chu Baird",
+    "order": 10,
+    "affiliation": "Environmental Defense Fund",
+    "image": "team/avatar--millie-chu-baird.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "millie-chu-baird.md"
+  },
+  "olaf-veerman": {
+    "name": "Olaf Veerman",
+    "order": 13,
+    "affiliation": "Development Seed",
+    "image": "team/avatar--olaf-veerman.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "olaf-veerman.md"
+  },
+  "romain-lacombe": {
+    "name": "Romain Lacombe",
+    "order": 4,
+    "affiliation": "PlumeLabs",
+    "image": "team/avatar--romain-lacombe.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "romain-lacombe.md"
+  },
+  "sarath-guttikunda": {
+    "name": "Sarath Guttikunda, PhD",
+    "order": 3,
+    "affiliation": "Urban Emissions",
+    "image": "team/avatar--sarath-guttikunda.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "sarath-guttikunda.md"
+  },
+  "tom-lee": {
+    "name": "Tom Lee",
+    "order": 5,
+    "affiliation": "Mapbox",
+    "image": "team/avatar--tom-lee.jpg",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "tom-lee.md"
+  }
+}

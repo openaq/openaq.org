@@ -1,0 +1,32 @@
+{
+  "chisato": {
+    "name": "Chisato Fukuda Calvert",
+    "order": 2,
+    "role": "Deputy Director",
+    "image": "team/avatar--chisato-calvert.jpg",
+    "contact": "chisato@openaq.org",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.709Z",
+    "filename": "chisato.md"
+  },
+  "jeremy": {
+    "name": "Jeremy Taub",
+    "order": 1,
+    "role": "Executive Director",
+    "image": "team/avatar--jeremy-taub.jpg",
+    "contact": "jeremy@openaq.org",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.709Z",
+    "filename": "jeremy.md"
+  },
+  "sruti": {
+    "name": "Sruti Modekurty",
+    "order": 3,
+    "role": "Platform Lead",
+    "image": "team/avatar--sruti-modekurty.jpg",
+    "contact": "sruti@openaq.org",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.709Z",
+    "filename": "sruti.md"
+  }
+}

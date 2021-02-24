@@ -7,18 +7,23 @@ import c from 'classnames';
 import { Dropdown } from 'openaq-design-system';
 
 import WorkshopFold from '../components/workshop-fold';
-import content from '../../content/content.json';
+import content from '../../content/*.json';
+import pngImages from '../../graphics/content/view--community-workshops/*.png';
+import jpgImages from '../../graphics/content/view--community-workshops/*.jpg';
+import jpegImages from '../../graphics/content/view--community-workshops/*.jpeg';
+
 import QsState from '../utils/qs-state';
 
 import StripeCommunityWorkshops from '/assets/graphics/content/view--community-workshops/stripe--community-workshops.jpg';
-import jpgImages from '../../graphics/content/view--community-workshops/*.jpg';
 
-function getImage(img) {
-  const filename =
-    img && img.split('view--community-workshops/')[1].split('.')[0];
-  console.log('filename', jpgImages[filename]);
-  return jpgImages[filename];
+function getImage(path) {
+  const filename = path && path.split('workshops/')[1]?.split('.')[0];
+  return (
+    filename &&
+    (pngImages[filename] || jpgImages[filename] || jpegImages[filename] || null)
+  );
 }
+
 // Values for the filters.
 const filterData = {
   location: {

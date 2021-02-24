@@ -1,0 +1,58 @@
+{
+  "aimee": {
+    "name": "Aimee Barciauskas",
+    "order": 5,
+    "role": "Technical Advisor",
+    "image": "team/avatar--aimee-barciauskas.jpg",
+    "contact": "aimee@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-23T20:39:36.466Z",
+    "filename": "aimee.md"
+  },
+  "heidi": {
+    "name": "Heidi Yoon",
+    "order": 2,
+    "role": "Chair",
+    "image": "team/avatar--heidi-yoon.jpg",
+    "contact": "heidi@openaq.org",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "heidi.md"
+  },
+  "jeremy": {
+    "name": "Jeremy Taub",
+    "order": 1,
+    "role": "Executive Director",
+    "image": "team/avatar--jeremy-taub.jpg",
+    "contact": "jeremy@openaq.org",
+    "body": "",
+    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "filename": "jeremy.md"
+  },
+  "joe": {
+    "name": "Joe Flasher",
+    "order": 6,
+    "role": "Technical Advisor",
+    "body": "",
+    "updatedAt": "2021-02-23T20:39:36.466Z",
+    "filename": "joe.md"
+  },
+  "matt": {
+    "name": "Matthew Higgins",
+    "order": 3,
+    "role": "Treasurer",
+    "body": "",
+    "updatedAt": "2021-02-23T20:39:36.466Z",
+    "filename": "matt.md"
+  },
+  "robin": {
+    "name": "Robin Wilson",
+    "order": 4,
+    "role": "Secretary",
+    "image": "team/avatar--robin-wilson.jpg",
+    "contact": "robin@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-23T20:39:36.466Z",
+    "filename": "robin.md"
+  }
+}
