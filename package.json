@@ -46,7 +46,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
-    "bourbon": "^7.0.0",
+    "bourbon": "^4.3.4",
     "chart.js": "^2.9.4",
     "chroma-js": "^1.2.1",
     "classnames": "^2.2.5",
