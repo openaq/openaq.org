@@ -35,6 +35,7 @@ jobs:
 
       - name: Install
         run: npm install && npm install -g @lhci/cli@0.7.x
+        run: npm rebuild node-sass
       - name: Build
         run: npm run build
       - name: Lighthouse
