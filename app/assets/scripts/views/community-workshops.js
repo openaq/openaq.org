@@ -11,7 +11,14 @@ import content from '../../content/content.json';
 import QsState from '../utils/qs-state';
 
 import StripeCommunityWorkshops from '/assets/graphics/content/view--community-workshops/stripe--community-workshops.jpg';
+import jpgImages from '../../graphics/content/view--community-workshops/*.jpg';
 
+function getImage(img) {
+  const filename =
+    img && img.split('view--community-workshops/')[1].split('.')[0];
+  console.log('filename', jpgImages[filename]);
+  return jpgImages[filename];
+}
 // Values for the filters.
 const filterData = {
   location: {
@@ -120,7 +127,6 @@ class CommunityWorkshops extends React.Component {
         return true;
       });
     }
-
     cards = cards
       .map(o => {
         return (
@@ -136,7 +142,10 @@ class CommunityWorkshops extends React.Component {
                 <figure className="card__media">
                   <div className="card__cover">
                     <img
-                      src={o.image || 'https://via.placeholder.com/640x320'}
+                      src={
+                        getImage(o.image) ||
+                        'https://via.placeholder.com/640x320'
+                      }
                       width="640"
                       height="320"
                       alt="Card cover"
