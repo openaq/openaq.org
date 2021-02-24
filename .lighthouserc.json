@@ -2,6 +2,25 @@
   "ci": {
       "collect": {
         "staticDistDir": "dist"
+      },
+      "assert": {
+        "preset": "lighthouse:recommended",
+        "assertions": {
+          "color-contrast": "off",
+          "installable-manifest": "off",
+          "maskable-icon-audit": "off",
+          "non-composited-animations": "off",
+          "optimize-lcp/#preload-important-resources": "off",
+          "service-worker": "off",
+          "splash-screen":"off",
+          "tap-targets": "off",
+          "themed-omnibox": "off",
+          "optimize-cls/#images-without-dimensions": "off",
+          "unused-css-rules": "off",
+          "unused-javascript": "off",
+          "uses-rel-preconnect": "off",
+          "uses-responsive-images": "off"
+        }
       }
-  }
+   }
 }
