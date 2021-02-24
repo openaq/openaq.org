@@ -4,12 +4,19 @@ import { PropTypes as T } from 'prop-types';
 import pngImages from '../../graphics/content/team/*.png';
 import jpgImages from '../../graphics/content/team/*.jpg';
 import jpegImages from '../../graphics/content/team/*.jpeg';
+import placeholder from '../../graphics/content/team/avatar--placeholder.jpg';
 import { environment } from '../config';
 
 function getImage(img) {
-  const filename = img.split('team/')[1].split('.')[0] || 'avatar--placeholder';
+  const filename =
+    (img && img.split('team/')[1].split('.')[0]) || 'avatar--placeholder';
 
-  return pngImages[filename] || jpgImages[filename] || jpegImages[filename];
+  return (
+    pngImages[filename] ||
+    jpgImages[filename] ||
+    jpegImages[filename] ||
+    placeholder
+  );
 }
 
 class TeamList extends Component {
@@ -18,10 +25,6 @@ class TeamList extends Component {
 
     const details = [role, affiliation].filter(Boolean).join(' / ');
 
-    const img = image
-      ? `/assets/graphics/content/${image}`
-      : '/assets/graphics/content/team/avatar--placeholder.jpg';
-
     return (
       <li key={name}>
         <article className="team-member">
@@ -29,7 +32,7 @@ class TeamList extends Component {
             {contact ? (
               <a href={'mailto:' + contact}>
                 <img
-                  src={getImage(img)}
+                  src={getImage(image)}
                   width="320"
                   height="320"
                   alt="Team avatar"
@@ -37,7 +40,7 @@ class TeamList extends Component {
               </a>
             ) : (
               <img
-                src={getImage(img)}
+                src={getImage(image)}
                 width="320"
                 height="320"
                 alt="Team avatar"
