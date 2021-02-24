@@ -1,5 +1,7 @@
 {
-  "collect": {
-    "staticDistDir": "dist"
+  "ci": {
+      "collect": {
+        "staticDistDir": "dist"
+      }
   }
 }
