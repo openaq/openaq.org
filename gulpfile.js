@@ -63,55 +63,6 @@ function readPackage() {
 readPackage();
 
 // /////////////////////////////////////////////////////////////////////////////
-// ------------------------- Callable tasks ----------------------------------//
-// ---------------------------------------------------------------------------//
-
-gulp.task('default', ['clean'], function () {
-  prodBuild = true;
-  gulp.start('build');
-});
-
-gulp.task('serve', function () {
-  runSequence(
-    'markdown',
-    ['vendorScripts', 'javascript', 'styles', 'fonts'],
-    function () {
-      browserSync({
-        port: 3000,
-        server: {
-          baseDir: ['.tmp', 'app'],
-          routes: {
-            '/node_modules': './node_modules',
-          },
-          ghostMode: false,
-          middleware: OPENAQ_ADDONS.graphicsMiddleware(fs),
-        },
-      });
-
-      // watch for changes
-      gulp
-        .watch([
-          'app/*.html',
-          'app/assets/graphics/**/*',
-          '.tmp/assets/fonts/**/*',
-        ])
-        .on('change', reload);
-
-      gulp.watch('app/assets/styles/**/*.scss', ['styles']);
-      gulp.watch('app/assets/fonts/**/*', ['fonts']);
-      gulp.watch('app/content/**/*', ['markdown']);
-      gulp.watch('package.json', ['vendorScripts']);
-    }
-  );
-});
-
-gulp.task('clean', function () {
-  return del(['.tmp', 'dist', 'assets/content']).then(function () {
-    $.cache.clearAll();
-  });
-});
-
-// /////////////////////////////////////////////////////////////////////////////
 // ------------------------- Browserify tasks --------------------------------//
 // ------------------- (Not to be called directly) ---------------------------//
 // ---------------------------------------------------------------------------//
@@ -189,20 +140,6 @@ gulp.task('vendorScripts', function () {
 // --------------------------- Helper tasks -----------------------------------//
 // ----------------------------------------------------------------------------//
 
-gulp.task('build', function () {
-  runSequence(
-    'markdown',
-    ['vendorScripts', 'javascript'],
-    ['html', 'images', 'fonts', 'extras'],
-    function () {
-      return gulp
-        .src('dist/**/*')
-        .pipe($.size({ title: 'build', gzip: true }))
-        .pipe(exit());
-    }
-  );
-});
-
 gulp.task('styles', function () {
   return gulp
     .src('app/assets/styles/main.scss')
@@ -243,16 +180,19 @@ gulp.task('styles', function () {
     .pipe(reload({ stream: true }));
 });
 
-gulp.task('html', ['styles'], function () {
-  return gulp
-    .src('app/*.html')
-    .pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.csso()))
-    .pipe($.if(/\.(css|js)$/, rev()))
-    .pipe(revReplace())
-    .pipe(gulp.dest('dist'));
-});
+gulp.task(
+  'html',
+  gulp.series(...['styles'], function () {
+    return gulp
+      .src('app/*.html')
+      .pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
+      .pipe($.if('*.js', $.uglify()))
+      .pipe($.if('*.css', $.csso()))
+      .pipe($.if(/\.(css|js)$/, rev()))
+      .pipe(revReplace())
+      .pipe(gulp.dest('dist'));
+  })
+);
 
 gulp.task('images', function () {
   return gulp
@@ -261,7 +201,7 @@ gulp.task('images', function () {
       $.cache(
         $.imagemin([
           $.imagemin.gifsicle({ interlaced: true }),
-          $.imagemin.jpegtran({ progressive: true }),
+          $.imagemin.mozjpeg({ progressive: true }),
           $.imagemin.optipng({ optimizationLevel: 5 }),
           // don't remove IDs from SVGs, they are often used
           // as hooks for embedding and styling
@@ -309,3 +249,78 @@ gulp.task('markdown', function () {
     )
     .pipe(gulp.dest('app/assets/content'));
 });
+
+// /////////////////////////////////////////////////////////////////////////////
+// ------------------------- Callable tasks ----------------------------------//
+// ---------------------------------------------------------------------------//
+gulp.task('clean', async function () {
+  return del(['.tmp', 'dist', 'assets/content']).then(function () {
+    $.cache.clearAll();
+  });
+});
+
+gulp.task(
+  'serve',
+  gulp.series(
+    'markdown',
+    'vendorScripts',
+    'javascript',
+    'styles',
+    'fonts',
+    function () {
+      browserSync({
+        port: 3000,
+        server: {
+          baseDir: ['.tmp', 'app'],
+          routes: {
+            '/node_modules': './node_modules',
+          },
+          ghostMode: false,
+          middleware: OPENAQ_ADDONS.graphicsMiddleware(fs),
+        },
+      });
+
+      // watch for changes
+      gulp
+        .watch([
+          'app/*.html',
+          'app/assets/graphics/**/*',
+          '.tmp/assets/fonts/**/*',
+        ])
+        .on('change', reload);
+
+      gulp.watch('app/assets/styles/**/*.scss', gulp.series('styles'));
+      gulp.watch('app/assets/fonts/**/*', gulp.series('fonts'));
+      gulp.watch('app/content/**/*', gulp.series('markdown'));
+      gulp.watch('package.json', gulp.series('vendorScripts'));
+    }
+  )
+);
+
+gulp.task(
+  'build',
+  gulp.series(
+    'markdown',
+    ['vendorScripts', 'javascript'],
+    ['html', 'images', 'fonts', 'extras'],
+    function (done) {
+      done()
+      return gulp
+        .src('dist/**/*')
+        .pipe($.size({ title: 'build', gzip: true }))
+        .pipe(exit());
+    }
+  )
+);
+
+gulp.task(
+  'default',
+  gulp.series(
+    'clean',
+    function (done) {
+      prodBuild = true;
+      done();
+    },
+    'build'
+  )
+);

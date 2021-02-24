@@ -16,10 +16,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node.js 10
+      - name: Use Node.js 14
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14
 
       - name: Cache node modules
         uses: actions/cache@v2
