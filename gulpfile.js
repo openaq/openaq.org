@@ -29,7 +29,6 @@ var SassString = require('node-sass').types.String;
 var notifier = require('node-notifier');
 var marked = require('marked');
 var OPENAQ_ADDONS = require('openaq-design-system/gulp-addons');
-var runSequence = require('run-sequence');
 
 // /////////////////////////////////////////////////////////////////////////////
 // --------------------------- Variables -------------------------------------//
@@ -304,7 +303,7 @@ gulp.task(
     ['vendorScripts', 'javascript'],
     ['html', 'images', 'fonts', 'extras'],
     function (done) {
-      done()
+      done();
       return gulp
         .src('dist/**/*')
         .pipe($.size({ title: 'build', gzip: true }))
