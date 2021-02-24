@@ -1,6 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 
+import WorkshopFoldMedia from '/assets/graphics/content/view--community-workshops/workshop-fold-media.jpg';
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
  * see https://reactjs.org/docs/react-without-es6.html
@@ -30,7 +31,7 @@ var WorkshopFold = createReactClass({
 
           <figure className="workshop-fold__media">
             <img
-              src="/assets/graphics/content/view--community-workshops/workshop-fold-media.jpg"
+              src={WorkshopFoldMedia}
               alt="Cover image"
               width="830"
               height="830"

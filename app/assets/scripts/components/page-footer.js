@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { formatThousands } from '../utils/format';
 import createReactClass from 'create-react-class';
 
+import OaqLogoColPos from '/assets/graphics/layout/oaq-logo-col-pos.svg';
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
  * see https://reactjs.org/docs/react-without-es6.html
@@ -29,7 +30,7 @@ var PageFooter = createReactClass({
               <h1 className="page__foot-title">
                 <Link to="/" title="Visit homepage">
                   <img
-                    src="/assets/graphics/layout/oaq-logo-col-pos.svg"
+                    src={OaqLogoColPos}
                     alt="OpenAQ logotype"
                     width="72"
                     height="40"

@@ -6,6 +6,8 @@ import Breakpoint from './breakpoint';
 import SmartLink from './smart-link';
 import NewsBanner from './news-banner';
 
+import OaqLogoColPos from '/assets/graphics/layout/oaq-logo-col-pos.svg';
+
 const subMenus = [
   {
     id: 'open-data',
@@ -248,7 +250,7 @@ class PageHeader extends React.Component {
                 onClick={this.onLinkNavigate}
               >
                 <img
-                  src="/assets/graphics/layout/oaq-logo-col-pos.svg"
+                  src={OaqLogoColPos}
                   alt="OpenAQ logotype"
                   width="72"
                   height="40"

@@ -10,6 +10,7 @@ import ConnectFold from '../components/connect-fold';
 import CommunityCard from '../components/community-card';
 import content from '../../content/content.json';
 import QsState from '../utils/qs-state';
+import StripeCommunityProjects from '/assets/graphics/content/view--community-projects/stripe--community-projects.jpg';
 
 // Values for the filters.
 const filterData = {
@@ -123,6 +124,7 @@ class CommunityProjects extends React.Component {
   renderProjects() {
     const { type, location } = this.state.filter;
 
+    // TODO
     let cards = _(content.projects).values();
 
     // Apply filters if they're set
@@ -208,7 +210,7 @@ class CommunityProjects extends React.Component {
           <figure className="inpage__media inpage__media--stripe media">
             <div className="media__item">
               <img
-                src="/assets/graphics/content/view--community-projects/stripe--community-projects.jpg"
+                src={StripeCommunityProjects}
                 alt="Stripe image"
                 width="2880"
                 height="960"
