@@ -10,6 +10,8 @@ import WorkshopFold from '../components/workshop-fold';
 import content from '../../content/content.json';
 import QsState from '../utils/qs-state';
 
+import StripeCommunityWorkshops from '/assets/graphics/content/view--community-workshops/stripe--community-workshops.jpg';
+
 // Values for the filters.
 const filterData = {
   location: {
@@ -106,6 +108,7 @@ class CommunityWorkshops extends React.Component {
   renderWorkshops() {
     const { location } = this.state.filter;
 
+    // TODO
     let cards = _(content.workshops).sortBy('order').values();
 
     // Apply filters if they're set
@@ -205,7 +208,7 @@ class CommunityWorkshops extends React.Component {
           <figure className="inpage__media inpage__media--stripe media">
             <div className="media__item">
               <img
-                src="/assets/graphics/content/view--community-workshops/stripe--community-workshops.jpg"
+                src={StripeCommunityWorkshops}
                 alt="Stripe image"
                 width="2880"
                 height="960"

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import createReactClass from 'create-react-class';
 
+import OaqIconIllu40JoinCommunity from '/assets/graphics/layout/oaq-icon-illu-40-join-community.svg';
+import OaqIconIllu40Support from '/assets/graphics/layout/oaq-icon-illu-40-support.svg';
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
  * see https://reactjs.org/docs/react-without-es6.html
@@ -27,7 +29,7 @@ var JoinFold = createReactClass({
                 <figure className="card__media">
                   <div className="card__badge">
                     <img
-                      src="/assets/graphics/layout/oaq-icon-illu-40-join-community.svg"
+                      src={OaqIconIllu40JoinCommunity}
                       width="40"
                       height="40"
                       alt="Illustration"
@@ -61,7 +63,7 @@ var JoinFold = createReactClass({
                 <figure className="card__media">
                   <div className="card__badge">
                     <img
-                      src="/assets/graphics/layout/oaq-icon-illu-40-support.svg"
+                      src={OaqIconIllu40Support}
                       width="40"
                       height="40"
                       alt="Illustration"
