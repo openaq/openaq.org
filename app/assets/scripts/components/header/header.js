@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import config from '../../config';
+import CoverHome from '/assets/graphics/content/view--home/cover--home.jpg';
 
 const Tags = styled.div`
   margin: 0.5rem 0;
@@ -147,12 +148,7 @@ export default function Header({
 
       <figure className="inpage__media inpage__media--cover media">
         <div className="media__item">
-          <img
-            src="/assets/graphics/content/view--home/cover--home.jpg"
-            alt="Cover image"
-            width="1440"
-            height="712"
-          />
+          <img src={CoverHome} alt="Cover image" width="1440" height="712" />
         </div>
       </figure>
     </header>
