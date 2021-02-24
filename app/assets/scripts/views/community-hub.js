@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import createReactClass from 'create-react-class';
 
-import testimonials from '../../content/testimonials.json';
+import testimonials from '../../../content/testimonials.json';
 import widont from '../utils/widont';
 import ConnectFold from '../components/connect-fold';
 import Testimonials from '../components/testimonials.js';

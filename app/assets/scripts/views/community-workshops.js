@@ -7,7 +7,7 @@ import c from 'classnames';
 import { Dropdown } from 'openaq-design-system';
 
 import WorkshopFold from '../components/workshop-fold';
-import content from '../../content/*.json';
+import content from '../../../content/*.json';
 import pngImages from '../../graphics/content/view--community-workshops/*.png';
 import jpgImages from '../../graphics/content/view--community-workshops/*.jpg';
 import jpegImages from '../../graphics/content/view--community-workshops/*.jpeg';

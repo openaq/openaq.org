@@ -8,7 +8,7 @@ import { Dropdown } from 'openaq-design-system';
 
 import ConnectFold from '../components/connect-fold';
 import CommunityCard from '../components/community-card';
-import content from '../../content/*.json';
+import content from '../../../content/*.json';
 import pngImages from '../../graphics/content/view--community-projects/projects/**/*.png';
 import jpgImages from '../../graphics/content/view--community-projects/projects/**/*.jpg';
 import jpegImages from '../../graphics/content/view--community-projects/projects/**/*.jpeg';

@@ -14,8 +14,8 @@ import Testimonials from '../../components/testimonials';
 
 import SponsorList from '../../components/sponsor-list';
 
-import sponsors from '../../../content/sponsors.json';
-import testimonials from '../../../content/testimonials.json';
+import sponsors from '../../../../content/sponsors.json';
+import testimonials from '../../../../content/testimonials.json';
 
 import CompareLocationCard from './compare-location-card';
 import StatsCount from './stats-count';

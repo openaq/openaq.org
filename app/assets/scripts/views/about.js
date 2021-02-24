@@ -6,8 +6,8 @@ import JoinFold from '../components/join-fold';
 import SponsorList from '../components/sponsor-list';
 import TeamList from '../components/team-list';
 
-import content from '../../content/*.json';
-import sponsors from '../../content/sponsors.json';
+import content from '../../../content/*.json';
+import sponsors from '../../../content/sponsors.json';
 
 import CoverAbout from '../../graphics/content/view--about/cover--about.jpg';
 import OaqIconIllu48Historical from '../../graphics/layout/oaq-icon-illu-48-historical.svg';
