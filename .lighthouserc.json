@@ -3,6 +3,9 @@
       "collect": {
         "staticDistDir": "dist"
       },
+      "healthcheck": {
+        "fatal": false
+      },
       "assert": {
         "preset": "lighthouse:recommended",
         "assertions": {
