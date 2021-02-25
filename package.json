@@ -19,7 +19,7 @@
     "develop": "parcel -p 3000 app/index.html --open",
     "build": "NODE_ENV=production parcel build app/index.html",
     "serve": "npx http-server -p 3001 dist",
-    "serve:testing": "cross-env DS_ENV=testing npx http-server -p 3000 dist",
+    "serve:testing": "NODE_ENV=testing npx http-server -p 3000 dist",
     "clean": "rm -rf dist .cache",
     "lint": "eslint --ignore-path .gitignore \"**/*.{js,jsx}\"",
     "lint:fix": "eslint --ignore-path .gitignore \"**/*.{js,jsx}\" --fix",
