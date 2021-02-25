@@ -5,7 +5,7 @@
     "affiliation": "Paul Hastings LLP",
     "image": "team/avatar--arvind-jairam.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.704Z",
+    "updatedAt": "2021-02-25T11:09:31.880Z",
     "filename": "arvind-jairam.md"
   },
   "douglas-varley": {
@@ -14,16 +14,16 @@
     "affiliation": "Caplin & Drysdale",
     "image": null,
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.704Z",
+    "updatedAt": "2021-02-25T11:09:31.880Z",
     "filename": "douglas-varley.md"
   },
   "jessica-seddon": {
     "name": "Jessica Seddon, PhD",
     "order": 7,
     "affiliation": "World Resources Institute",
-    "image": null,
+    "image": "team/avatar--jessica-seddon.jpg",
     "body": "",
-    "updatedAt": "2021-02-23T20:39:36.465Z",
+    "updatedAt": "2021-02-25T11:09:31.880Z",
     "filename": "jessica-seddon.md"
   },
   "martin-schultz": {
@@ -32,17 +32,8 @@
     "affiliation": "Forschungszentrum Jülich",
     "image": "team/avatar--martin-schultz.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.704Z",
+    "updatedAt": "2021-02-25T11:09:31.880Z",
     "filename": "martin-schultz.md"
-  },
-  "matthew-whitney": {
-    "name": "Matthew Whitney",
-    "order": 9,
-    "affiliation": "Clean Air Fund",
-    "image": "team/avatar--matthew-whitney.png",
-    "body": "",
-    "updatedAt": "2021-02-23T20:39:36.465Z",
-    "filename": "matthew-whitney.md"
   },
   "michael-brauer": {
     "name": "Michael Brauer, ScD",
@@ -50,7 +41,7 @@
     "affiliation": "The University of British Columbia",
     "image": "team/avatar--michael-brauer.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.880Z",
     "filename": "michael-brauer.md"
   },
   "millie-chu-baird": {
@@ -59,7 +50,7 @@
     "affiliation": "Environmental Defense Fund",
     "image": "team/avatar--millie-chu-baird.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.881Z",
     "filename": "millie-chu-baird.md"
   },
   "olaf-veerman": {
@@ -68,8 +59,26 @@
     "affiliation": "Development Seed",
     "image": "team/avatar--olaf-veerman.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.881Z",
     "filename": "olaf-veerman.md"
+  },
+  "pallavi-pant": {
+    "name": "Pallavi Pant, PhD",
+    "order": 12,
+    "affiliation": "Health Effects Institute",
+    "image": "team/avatar--pallavi-pant.jpg",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.881Z",
+    "filename": "pallavi-pant.md"
+  },
+  "priya-shankar": {
+    "name": "Priya Shankar",
+    "order": 11,
+    "affiliation": "Bloomberg Philanthropies",
+    "image": "team/avatar--priya-shankar.jpg",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.881Z",
+    "filename": "priya-shankar.md"
   },
   "romain-lacombe": {
     "name": "Romain Lacombe",
@@ -77,7 +86,7 @@
     "affiliation": "PlumeLabs",
     "image": "team/avatar--romain-lacombe.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.881Z",
     "filename": "romain-lacombe.md"
   },
   "sarath-guttikunda": {
@@ -86,7 +95,7 @@
     "affiliation": "Urban Emissions",
     "image": "team/avatar--sarath-guttikunda.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.881Z",
     "filename": "sarath-guttikunda.md"
   },
   "tom-lee": {
@@ -95,7 +104,7 @@
     "affiliation": "Mapbox",
     "image": "team/avatar--tom-lee.jpg",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.881Z",
     "filename": "tom-lee.md"
   }
 }

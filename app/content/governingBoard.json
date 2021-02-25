@@ -2,12 +2,21 @@
   "aimee": {
     "name": "Aimee Barciauskas",
     "order": 5,
-    "role": "Technical Advisor",
     "image": "team/avatar--aimee-barciauskas.jpg",
     "contact": "aimee@openaq.org",
     "body": "",
-    "updatedAt": "2021-02-23T20:39:36.466Z",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
     "filename": "aimee.md"
+  },
+  "amrit": {
+    "name": "Amrit Sharma",
+    "order": 4,
+    "role": "Secretary",
+    "image": "team/avatar--amrit-sharma.jpg",
+    "contact": "amrit@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "amrit.md"
   },
   "heidi": {
     "name": "Heidi Yoon",
@@ -16,7 +25,7 @@
     "image": "team/avatar--heidi-yoon.jpg",
     "contact": "heidi@openaq.org",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
     "filename": "heidi.md"
   },
   "jeremy": {
@@ -26,33 +35,26 @@
     "image": "team/avatar--jeremy-taub.jpg",
     "contact": "jeremy@openaq.org",
     "body": "",
-    "updatedAt": "2020-11-03T14:21:51.705Z",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
     "filename": "jeremy.md"
   },
-  "joe": {
-    "name": "Joe Flasher",
+  "matthew-whitney": {
+    "name": "Matthew Whitney",
     "order": 6,
-    "role": "Technical Advisor",
+    "image": "team/avatar--matthew-whitney.png",
+    "contact": "mattw@openaq.org",
     "body": "",
-    "updatedAt": "2021-02-23T20:39:36.466Z",
-    "filename": "joe.md"
-  },
-  "matt": {
-    "name": "Matthew Higgins",
-    "order": 3,
-    "role": "Treasurer",
-    "body": "",
-    "updatedAt": "2021-02-23T20:39:36.466Z",
-    "filename": "matt.md"
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "matthew-whitney.md"
   },
   "robin": {
     "name": "Robin Wilson",
-    "order": 4,
-    "role": "Secretary",
+    "order": 3,
+    "role": "Treasurer",
     "image": "team/avatar--robin-wilson.jpg",
     "contact": "robin@openaq.org",
     "body": "",
-    "updatedAt": "2021-02-23T20:39:36.466Z",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
     "filename": "robin.md"
   }
 }
