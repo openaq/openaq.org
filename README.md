@@ -24,7 +24,7 @@ npm install
 ### Getting started
 
 ```
-$ npm run serve
+$ npm run develop
 ```
 
 Compiles the sass files, javascript, and launches the server making the site available at `http://localhost:3000/`
