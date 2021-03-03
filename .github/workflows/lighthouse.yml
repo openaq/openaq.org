@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install
-        run: npm install && npm install -g @lhci/cli@0.7.x && npm rebuild node-sass
+        run: npm install && npm install -g @lhci/cli@0.7.x
       - name: Build
         run: npm run build
       - name: Lighthouse
