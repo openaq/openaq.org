@@ -9,6 +9,11 @@ jobs:
   lint:
     runs-on: ubuntu-latest
 
+    env:
+      DS_ENV: 'testing'
+      MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+      API: ${{ secrets.API }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2

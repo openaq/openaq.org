@@ -16,6 +16,8 @@ jobs:
 
     env:
       DS_ENV: 'staging'
+      MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+      API: ${{ secrets.API }}
 
     steps:
       - name: Checkout
