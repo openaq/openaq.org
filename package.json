@@ -17,7 +17,7 @@
   "homepage": "https://openaq.org",
   "scripts": {
     "develop": "parcel -p 3000 app/index.html --open",
-    "build": "NODE_ENV=production parcel build app/index.html",
+    "build": "NODE_ENV=production parcel build app/index.html --no-source-maps",
     "serve": "npx serve -l 3001 dist",
     "serve:ci": "NODE_ENV=testing parcel -p 3000 app/index.html",
     "clean": "rm -rf dist .cache",
