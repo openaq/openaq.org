@@ -278,6 +278,8 @@ var About = createReactClass({
                   <p className="fold__main-action">
                     {/* the pdf link is the address where it is stored in our github, see README.md for more info */}
                     <a
+                      // TODO: fix by update name of main branch to main/primary
+                      // eslint-disable-next-line inclusive-language/use-inclusive-words
                       href="https://github.com/openaq/openaq.org/raw/master/app/assets/files/openaq-990-2019.pdf"
                       target="_blank"
                       rel="noreferrer"
@@ -293,6 +295,7 @@ var About = createReactClass({
                 <article className="card card--book">
                   {/* the pdf link is the address where it is stored in our github, see README.md for more info */}
                   <a
+                    // eslint-disable-next-line inclusive-language/use-inclusive-words
                     href="https://github.com/openaq/openaq.org/raw/master/app/assets/files/openaq-990-2019.pdf"
                     target="_blank"
                     rel="noreferrer"
