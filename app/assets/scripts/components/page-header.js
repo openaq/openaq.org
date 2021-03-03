@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import c from 'classnames';
@@ -6,6 +5,8 @@ import c from 'classnames';
 import Breakpoint from './breakpoint';
 import SmartLink from './smart-link';
 import NewsBanner from './news-banner';
+
+import OaqLogoColPos from '../../graphics/layout/oaq-logo-col-pos.svg';
 
 const subMenus = [
   {
@@ -249,7 +250,7 @@ class PageHeader extends React.Component {
                 onClick={this.onLinkNavigate}
               >
                 <img
-                  src="/assets/graphics/layout/oaq-logo-col-pos.svg"
+                  src={OaqLogoColPos}
                   alt="OpenAQ logotype"
                   width="72"
                   height="40"

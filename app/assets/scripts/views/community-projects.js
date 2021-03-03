@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,8 +8,34 @@ import { Dropdown } from 'openaq-design-system';
 
 import ConnectFold from '../components/connect-fold';
 import CommunityCard from '../components/community-card';
-import content from '../../content/content.json';
+import content from '../../../content/*.json';
+import pngImages from '../../graphics/content/view--community-projects/projects/**/*.png';
+import jpgImages from '../../graphics/content/view--community-projects/projects/**/*.jpg';
+import jpegImages from '../../graphics/content/view--community-projects/projects/**/*.jpeg';
+
 import QsState from '../utils/qs-state';
+import StripeCommunityProjects from '../../graphics/content/view--community-projects/stripe--community-projects.jpg';
+
+function getLogo(path) {
+  const filename = path && path.split('logos/')[1]?.split('.')[0];
+  return (
+    filename &&
+    (pngImages.logos?.[filename] ||
+      jpgImages.logos?.[filename] ||
+      jpegImages.logos?.[filename] ||
+      null)
+  );
+}
+function getCover(path) {
+  const filename = path && path.split('covers/')[1]?.split('.')[0];
+  return (
+    filename &&
+    (pngImages.covers?.[filename] ||
+      jpgImages.covers?.[filename] ||
+      jpegImages.covers?.[filename] ||
+      null)
+  );
+}
 
 // Values for the filters.
 const filterData = {
@@ -149,11 +174,16 @@ class CommunityProjects extends React.Component {
             linkTitle="View this community contribution"
             url={o.url}
             imageNode={
-              <img width="256" height="256" src={o.image} alt="Project image" />
+              <img
+                width="256"
+                height="256"
+                src={getCover(o.image)}
+                alt="Project image"
+              />
             }
             type={o.type}
             location={o.location}
-            logo={o.logo}
+            logo={getLogo(o.logo)}
           >
             <div
               className="card__prose"
@@ -209,7 +239,7 @@ class CommunityProjects extends React.Component {
           <figure className="inpage__media inpage__media--stripe media">
             <div className="media__item">
               <img
-                src="/assets/graphics/content/view--community-projects/stripe--community-projects.jpg"
+                src={StripeCommunityProjects}
                 alt="Stripe image"
                 width="2880"
                 height="960"

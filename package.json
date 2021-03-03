@@ -16,10 +16,11 @@
   },
   "homepage": "https://openaq.org",
   "scripts": {
-    "postinstall": "[ -f app/assets/scripts/config/local.js ] || echo 'module.exports = {};' > app/assets/scripts/config/local.js",
-    "serve": "cross-env DS_ENV=development gulp serve",
-    "serve:testing": "cross-env DS_ENV=testing gulp serve",
-    "build": "cross-env NODE_ENV=production gulp",
+    "develop": "parcel -p 3000 app/index.html --open",
+    "build": "NODE_ENV=production parcel build app/index.html --no-source-maps",
+    "serve": "npx serve -l 3001 dist",
+    "serve:ci": "NODE_ENV=testing parcel -p 3000 app/index.html",
+    "clean": "rm -rf dist .cache",
     "lint": "eslint --ignore-path .gitignore \"**/*.{js,jsx}\"",
     "lint:fix": "eslint --ignore-path .gitignore \"**/*.{js,jsx}\" --fix",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
@@ -27,34 +28,12 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run"
   },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "@babel/preset-env",
-            "@babel/preset-react"
-          ]
-        }
-      ],
-      "require-globify",
-      "envify"
-    ]
-  },
   "devDependencies": {
-    "@babel/core": "^7.13.1",
-    "@babel/preset-env": "^7.13.5",
-    "@babel/preset-react": "^7.12.13",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
     "babel-eslint": "^10.1.0",
-    "babelify": "^10.0.0",
-    "browser-sync": "^2.26.14",
-    "browserify": "^16.5.2",
-    "cross-env": "^5.2.1",
     "cypress": "^6.5.0",
-    "del": "^2.2.1",
-    "envify": "^3.4.1",
-    "eslint": "^7.20.0",
+    "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-cypress": "^2.11.2",
@@ -62,47 +41,24 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "gulp": "^4.0.2",
-    "gulp-cache": "^1.1.3",
-    "gulp-csso": "^4.0.1",
-    "gulp-exit": "0.0.2",
-    "gulp-if": "^3.0.0",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-load-plugins": "^2.0.6",
-    "gulp-markdown-to-json": "^1.0.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rev": "^9.0.0",
-    "gulp-rev-replace": "^0.4.3",
-    "gulp-sass": "^4.1.0",
-    "gulp-size": "^3.0.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-useref": "^5.0.0",
-    "gulp-util": "^3.0.7",
-    "jeet": "6.1.4",
-    "marked": "^0.7.0",
-    "node-bourbon": "^4.2.8",
-    "node-notifier": "^8.0.1",
-    "node-sass": "^4.14.1",
-    "prettier": "2.1.2",
-    "require-globify": "^1.4.0",
-    "run-sequence": "^2.2.1",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0",
-    "watchify": "^3.7.0"
+    "node-sass": "^5.0.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "prettier": "^2.1.2",
+    "sass": "^1.32.8"
   },
   "dependencies": {
-    "babel-polyfill": "^6.9.1",
+    "bourbon": "^4.3.4",
     "chart.js": "^2.9.4",
     "chroma-js": "^1.2.1",
     "classnames": "^2.2.5",
     "create-react-class": "^15.7.0",
     "d3": "^4.2.1",
-    "gulp-uglify-es": "^2.0.0",
-    "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.21",
-    "mapbox-gl": "^1.13.1",
-    "moment": "^2.29.1",
+    "jeet": "^7.2.0",
+    "lodash": "^4.17.20",
+    "mapbox-gl": "^1.13.0",
+    "moment": "^2.14.1",
     "openaq-data-format": "github:openaq/openaq-data-format#master",
     "openaq-design-system": "github:openaq/openaq-design-system#feature/v3.2.0",
     "prop-types": "^15.7.2",
@@ -123,7 +79,18 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
     "styled-components": "^5.2.1",
-    "turf-distance": "^3.0.12",
-    "vinyl": "^2.2.1"
+    "turf-distance": "^3.0.12"
+  },
+  "browserslist": {
+    "production": [
+      "last 3 chrome versions",
+      "last 3 firefox versions",
+      "last 3 safari versions"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

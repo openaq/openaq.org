@@ -1,0 +1,68 @@
+{
+  "accra": {
+    "title": "Accra, Ghana",
+    "url": "https://www.dropbox.com/s/mksfchtt9ju7h2m/Public_Sub-Saharan%20Africa%20Workshop%20Report.pdf?dl=0",
+    "order": 1,
+    "image": "assets/graphics/content/view--community-workshops/accra.jpg",
+    "location": "Africa",
+    "date": "May 2018",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.886Z",
+    "filename": "accra.md"
+  },
+  "delhi": {
+    "title": "Delhi, India",
+    "url": "https://medium.com/@openaq/delhi-openaq-workshop-info-materials-and-results-2bd74b88bee6",
+    "order": 2,
+    "image": "assets/graphics/content/view--community-workshops/delhi.jpg",
+    "location": "Asia",
+    "date": "November 2016",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.886Z",
+    "filename": "delhi.md"
+  },
+  "nairobi": {
+    "title": "Nairobi, Kenya",
+    "url": "https://www.dropbox.com/s/mksfchtt9ju7h2m/Public_Sub-Saharan%20Africa%20Workshop%20Report.pdf?dl=0",
+    "order": 4,
+    "image": "assets/graphics/content/view--community-workshops/nairobi.jpg",
+    "location": "Africa",
+    "date": "May 2018",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.887Z",
+    "filename": "nairobi.md"
+  },
+  "pristina": {
+    "title": "Pristina, Kosovo",
+    "url": "https://www.dropbox.com/s/kxvx9fq7oq5bjxh/Kosovo_Public_AQOpenData_Workshop2019_Memo.pdf?dl=0",
+    "order": 5,
+    "image": "assets/graphics/content/view--community-workshops/pristina.jpg",
+    "location": "Europe",
+    "date": "June 2019",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.887Z",
+    "filename": "pristina.md"
+  },
+  "sarajevo": {
+    "title": "Sarajevo, Bosnia",
+    "url": "https://www.dropbox.com/s/436sug0dubutfu6/Report%20from%20the%20Sarajevo%20OpenAQ%20Workshop.pdf?dl=0",
+    "order": 3,
+    "image": "assets/graphics/content/view--community-workshops/sarajevo.jpg",
+    "location": "Europe",
+    "date": "February 2017",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.887Z",
+    "filename": "sarajevo.md"
+  },
+  "ulaanbaatar": {
+    "title": "Ulaanbaatar, Mongolia",
+    "url": "https://medium.com/@openaq/the-ub-openaq-workshop-results-5e9a9829660c",
+    "order": 6,
+    "image": "assets/graphics/content/view--community-workshops/ulaanbaatar.jpg",
+    "location": "Asia",
+    "date": "November 2015",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.887Z",
+    "filename": "ulaanbaatar.md"
+  }
+}

@@ -1,4 +1,3 @@
-'use strict';
 import qs from 'qs';
 import { set, get } from 'lodash';
 

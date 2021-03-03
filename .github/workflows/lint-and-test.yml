@@ -67,5 +67,5 @@ jobs:
       - name: Test End-to-end
         uses: cypress-io/github-action@v2
         with:
-          start: npm run serve:testing
+          start: npm run serve:ci
           wait-on: 'http://localhost:3000'

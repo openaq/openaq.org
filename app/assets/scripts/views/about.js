@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import _ from 'lodash';
 import createReactClass from 'create-react-class';
@@ -7,8 +6,15 @@ import JoinFold from '../components/join-fold';
 import SponsorList from '../components/sponsor-list';
 import TeamList from '../components/team-list';
 
-import content from '../../content/content.json';
-import sponsors from '../../content/sponsors.json';
+import content from '../../../content/*.json';
+import sponsors from '../../../content/sponsors.json';
+
+import CoverAbout from '../../graphics/content/view--about/cover--about.jpg';
+import OaqIconIllu48Historical from '../../graphics/layout/oaq-icon-illu-48-historical.svg';
+import OaqIconIllu48Opensource from '../../graphics/layout/oaq-icon-illu-48-opensource.svg';
+import OaqIconIllu48Community from '../../graphics/layout/oaq-icon-illu-48-community.svg';
+import CardBookMedia from '../../graphics/content/view--about/card-book-media.jpg';
+import OaqLogoColPos from '../../graphics/layout/oaq-logo-col-pos.svg';
 
 const teamData = {
   advisoryBoard: _(content.advisoryBoard).values().sortBy(['order']).value(),
@@ -45,7 +51,7 @@ var About = createReactClass({
           <figure className="inpage__media inpage__media--cover media">
             <div className="media__item">
               <img
-                src="/assets/graphics/content/view--about/cover--about.jpg"
+                src={CoverAbout}
                 alt="Cover image"
                 width="1440"
                 height="712"
@@ -67,7 +73,7 @@ var About = createReactClass({
                       <figure className="card__media">
                         <div className="card__badge">
                           <img
-                            src="/assets/graphics/layout/oaq-icon-illu-48-historical.svg"
+                            src={OaqIconIllu48Historical}
                             width="40"
                             height="40"
                             alt="Illustration"
@@ -96,7 +102,7 @@ var About = createReactClass({
                       <figure className="card__media">
                         <div className="card__badge">
                           <img
-                            src="/assets/graphics/layout/oaq-icon-illu-48-opensource.svg"
+                            src={OaqIconIllu48Opensource}
                             width="40"
                             height="40"
                             alt="Illustration"
@@ -123,7 +129,7 @@ var About = createReactClass({
                       <figure className="card__media">
                         <div className="card__badge">
                           <img
-                            src="/assets/graphics/layout/oaq-icon-illu-48-community.svg"
+                            src={OaqIconIllu48Community}
                             width="40"
                             height="40"
                             alt="Illustration"
@@ -270,22 +276,27 @@ var About = createReactClass({
                     available.
                   </p>
                   <p className="fold__main-action">
+                    {/* the pdf link is the address where it is stored in our github, see README.md for more info */}
                     <a
-                      href="/assets/files/openaq-990-2019.pdf"
+                      // TODO: fix by update name of main branch to main/primary
+                      // eslint-disable-next-line inclusive-language/use-inclusive-words
+                      href="https://github.com/openaq/openaq.org/raw/master/app/assets/files/openaq-990-2019.pdf"
                       target="_blank"
                       rel="noreferrer"
                       className="button-book-download"
                       title="Download"
                     >
-                      <span>Download 2019 Form 990</span>
+                      <span>View 2019 Form 990</span>
                     </a>
                   </p>
                 </div>
               </header>
               <figure className="fold__media">
                 <article className="card card--book">
+                  {/* the pdf link is the address where it is stored in our github, see README.md for more info */}
                   <a
-                    href="/assets/files/openaq-990-2019.pdf"
+                    // eslint-disable-next-line inclusive-language/use-inclusive-words
+                    href="https://github.com/openaq/openaq.org/raw/master/app/assets/files/openaq-990-2019.pdf"
                     target="_blank"
                     rel="noreferrer"
                     className="card__contents"
@@ -300,7 +311,7 @@ var About = createReactClass({
                     <figure className="card__media">
                       <div className="card__thumb">
                         <img
-                          src="/assets/graphics/content/view--about/card-book-media.jpg"
+                          src={CardBookMedia}
                           width="724"
                           height="348"
                           alt="Card media"
@@ -309,7 +320,7 @@ var About = createReactClass({
                     </figure>
                     <footer className="card__footer">
                       <img
-                        src="/assets/graphics/layout/oaq-logo-col-pos.svg"
+                        src={OaqLogoColPos}
                         alt="OpenAQ logotype"
                         width="72"
                         height="40"

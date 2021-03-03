@@ -63,7 +63,7 @@
     overflow: hidden;
 
     li {
-      @include col(6/12, $cycle: 2);
+      @include column(6/12, $cycle: 2);
       margin-top: 0.5rem;
 
       &:nth-child(1),

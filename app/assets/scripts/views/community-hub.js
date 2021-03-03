@@ -1,12 +1,17 @@
-'use strict';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import createReactClass from 'create-react-class';
 
-import testimonials from '../../content/testimonials.json';
+import testimonials from '../../../content/testimonials.json';
 import widont from '../utils/widont';
 import ConnectFold from '../components/connect-fold';
 import Testimonials from '../components/testimonials.js';
+
+import CoverCommunity from '../../graphics/content/view--community-hub/cover--community.jpg';
+import CardParticipateImpact from '../../graphics/content/view--community-hub/card-participate--impact.jpg';
+import CardParticipateWorkshops from '../../graphics/content/view--community-hub/card-participate--workshops.jpg';
+import CardParticipateTools from '../../graphics/content/view--community-hub/card-participate--tools.jpg';
+import CardParticipateDataSources from '../../graphics/content/view--community-hub/card-participate--data-sources.jpg';
 
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
@@ -43,7 +48,7 @@ var CommunityHub = createReactClass({
           <figure className="inpage__media inpage__media--cover media">
             <div className="media__item">
               <img
-                src="/assets/graphics/content/view--community-hub/cover--community.jpg"
+                src={CoverCommunity}
                 alt="Cover image"
                 width="1440"
                 height="710"
@@ -84,7 +89,7 @@ var CommunityHub = createReactClass({
                         >
                           <div className="card__cover">
                             <img
-                              src="/assets/graphics/content/view--community-hub/card-participate--impact.jpg"
+                              src={CardParticipateImpact}
                               width="1080"
                               height="720"
                               alt="Card cover"
@@ -137,7 +142,7 @@ var CommunityHub = createReactClass({
                         >
                           <div className="card__cover">
                             <img
-                              src="/assets/graphics/content/view--community-hub/card-participate--workshops.jpg"
+                              src={CardParticipateWorkshops}
                               width="1080"
                               height="720"
                               alt="Card cover"
@@ -190,7 +195,7 @@ var CommunityHub = createReactClass({
                         >
                           <div className="card__cover">
                             <img
-                              src="/assets/graphics/content/view--community-hub/card-participate--tools.jpg"
+                              src={CardParticipateTools}
                               width="1080"
                               height="720"
                               alt="Card cover"
@@ -245,7 +250,7 @@ var CommunityHub = createReactClass({
                         >
                           <div className="card__cover">
                             <img
-                              src="/assets/graphics/content/view--community-hub/card-participate--data-sources.jpg"
+                              src={CardParticipateDataSources}
                               width="1080"
                               height="720"
                               alt="Card cover"

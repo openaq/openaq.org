@@ -1,4 +1,3 @@
-'use strict';
 import React, { useEffect, useMemo, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
 import fetch from 'isomorphic-fetch';

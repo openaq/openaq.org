@@ -1,0 +1,60 @@
+{
+  "aimee": {
+    "name": "Aimee Barciauskas",
+    "order": 5,
+    "image": "team/avatar--aimee-barciauskas.jpg",
+    "contact": "aimee@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "aimee.md"
+  },
+  "amrit": {
+    "name": "Amrit Sharma",
+    "order": 4,
+    "role": "Secretary",
+    "image": "team/avatar--amrit-sharma.jpg",
+    "contact": "amrit@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "amrit.md"
+  },
+  "heidi": {
+    "name": "Heidi Yoon",
+    "order": 2,
+    "role": "Chair",
+    "image": "team/avatar--heidi-yoon.jpg",
+    "contact": "heidi@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "heidi.md"
+  },
+  "jeremy": {
+    "name": "Jeremy Taub",
+    "order": 1,
+    "role": "Executive Director",
+    "image": "team/avatar--jeremy-taub.jpg",
+    "contact": "jeremy@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "jeremy.md"
+  },
+  "matthew-whitney": {
+    "name": "Matthew Whitney",
+    "order": 6,
+    "image": "team/avatar--matthew-whitney.png",
+    "contact": "mattw@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "matthew-whitney.md"
+  },
+  "robin": {
+    "name": "Robin Wilson",
+    "order": 3,
+    "role": "Treasurer",
+    "image": "team/avatar--robin-wilson.jpg",
+    "contact": "robin@openaq.org",
+    "body": "",
+    "updatedAt": "2021-02-25T11:09:31.882Z",
+    "filename": "robin.md"
+  }
+}

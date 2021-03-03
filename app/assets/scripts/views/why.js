@@ -1,9 +1,14 @@
-'use strict';
 import React from 'react';
 import createReactClass from 'create-react-class';
 
 import widont from '../utils/widont';
 import JoinFold from '../components/join-fold';
+
+import CoverWhy from '../../graphics/content/view--why/cover--why.jpg';
+import FoldTollMedia from '../../graphics/content/view--why/fold-toll-media.jpg';
+import FoldDataAccessMedia from '../../graphics/content/view--why/fold-data-access-media.jpg';
+import FoldHarmonizingMedia from '../../graphics/content/view--why/fold-harmonizing-media.jpg';
+import OaqPollutatsGraph from '../../graphics/content/view--why/oaq-pollutats-graph.png';
 
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
@@ -29,12 +34,7 @@ var Why = createReactClass({
           </div>
           <figure className="inpage__media inpage__media--cover media">
             <div className="media__item">
-              <img
-                src="/assets/graphics/content/view--why/cover--why.jpg"
-                alt="Cover image"
-                width="1440"
-                height="712"
-              />
+              <img src={CoverWhy} alt="Cover image" width="1440" height="712" />
             </div>
           </figure>
         </header>
@@ -91,7 +91,7 @@ var Why = createReactClass({
                 </div>
                 <figure className="fold__media">
                   <img
-                    src="/assets/graphics/content/view--why/fold-toll-media.jpg"
+                    src={FoldTollMedia}
                     alt="Fold media"
                     width="1652"
                     height="972"
@@ -132,7 +132,7 @@ var Why = createReactClass({
               </header>
               <figure className="fold__media">
                 <img
-                  src="/assets/graphics/content/view--why/fold-data-access-media.jpg"
+                  src={FoldDataAccessMedia}
                   alt="Fold media"
                   width="1030"
                   height="1920"
@@ -159,7 +159,7 @@ var Why = createReactClass({
 
               <figure className="fold__media">
                 <img
-                  src="/assets/graphics/content/view--why/fold-harmonizing-media.jpg"
+                  src={FoldHarmonizingMedia}
                   alt="Fold media"
                   width="2222"
                   height="1380"
@@ -180,7 +180,7 @@ var Why = createReactClass({
                 </div>
                 <figure className="infold__media">
                   <img
-                    src="/assets/graphics/content/view--why/oaq-pollutats-graph.png"
+                    src={OaqPollutatsGraph}
                     alt="Graphic: the 7 pollutants we share"
                     width="1134"
                     height="1188"
