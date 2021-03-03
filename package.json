@@ -29,9 +29,13 @@
     "cy:run": "cypress run"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
+    "@cypress/code-coverage": "^3.9.2",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "cypress": "^6.5.0",
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
