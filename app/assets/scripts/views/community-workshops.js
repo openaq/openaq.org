@@ -14,7 +14,7 @@ import jpegImages from '../../graphics/content/view--community-workshops/*.jpeg'
 
 import QsState from '../utils/qs-state';
 
-import StripeCommunityWorkshops from '/assets/graphics/content/view--community-workshops/stripe--community-workshops.jpg';
+import StripeCommunityWorkshops from '../../graphics/content/view--community-workshops/stripe--community-workshops.jpg';
 
 function getImage(path) {
   const filename = path && path.split('workshops/')[1]?.split('.')[0];

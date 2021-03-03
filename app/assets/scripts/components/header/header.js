@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import config from '../../config';
-import CoverHome from '/assets/graphics/content/view--home/cover--home.jpg';
+import CoverHome from '../../../graphics/content/view--home/cover--home.jpg';
 
 const Tags = styled.div`
   margin: 0.5rem 0;

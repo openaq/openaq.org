@@ -14,7 +14,7 @@ import jpgImages from '../../graphics/content/view--community-projects/projects/
 import jpegImages from '../../graphics/content/view--community-projects/projects/**/*.jpeg';
 
 import QsState from '../utils/qs-state';
-import StripeCommunityProjects from '/assets/graphics/content/view--community-projects/stripe--community-projects.jpg';
+import StripeCommunityProjects from '../../graphics/content/view--community-projects/stripe--community-projects.jpg';
 
 function getLogo(path) {
   const filename = path && path.split('logos/')[1]?.split('.')[0];
