@@ -9,7 +9,7 @@ module.exports = {
   consoleMessage: logo,
   mapbox: {
     token: process.env.MAPBOX_ACCESS_TOKEN,
-    baseStyle: process.env.MAPBOX_BASE_STYLES,
+    baseStyle: process.env.MAPBOX_BASE_STYLE,
   },
   api: process.env.API,
   metadata: process.env.METADATA,
