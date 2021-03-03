@@ -20,10 +20,10 @@ import testimonials from '../../../../content/testimonials.json';
 import CompareLocationCard from './compare-location-card';
 import StatsCount from './stats-count';
 
-import CoverHome from '/assets/graphics/content/view--home/cover--home.jpg';
-import OaqIlluHomeStats from '/assets/graphics/layout/oaq-illu-home-stats.svg';
-import FoldWhatWeDoMedia from '/assets/graphics/content/view--home/fold-what-we-do-media.png';
-import FoldCommunityMedia from '/assets/graphics/content/view--home/fold-community-media.png';
+import CoverHome from '../../../graphics/content/view--home/cover--home.jpg';
+import OaqIlluHomeStats from '../../../graphics/layout/oaq-illu-home-stats.svg';
+import FoldWhatWeDoMedia from '../../../graphics/content/view--home/fold-what-we-do-media.png';
+import FoldCommunityMedia from '../../../graphics/content/view--home/fold-community-media.png';
 
 function Home(props) {
   const {

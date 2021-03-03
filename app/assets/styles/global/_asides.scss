@@ -19,7 +19,9 @@
     left: -3rem;
     height: calc(100% - 8rem);
     width: 100%;
-    background: $primary-color url('/assets/graphics/layout/aside-highlight-decoration.jpg') no-repeat left top;
+    background: $primary-color
+      url('../graphics/layout/aside-highlight-decoration.jpg') no-repeat left
+      top;
     background-size: cover;
     content: '';
   }
@@ -44,7 +46,8 @@
   @extend .heading;
   font-size: 1.5rem;
   line-height: 2.25rem;
-  background: transparent url('/assets/graphics/layout/oaq-icon-illu-40-swirl.svg') no-repeat left top;
+  background: transparent url('../graphics/layout/oaq-icon-illu-40-swirl.svg')
+    no-repeat left top;
   padding-top: 3rem;
 
   @include media(medium-up) {

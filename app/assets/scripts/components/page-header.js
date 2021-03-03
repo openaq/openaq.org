@@ -6,7 +6,7 @@ import Breakpoint from './breakpoint';
 import SmartLink from './smart-link';
 import NewsBanner from './news-banner';
 
-import OaqLogoColPos from '/assets/graphics/layout/oaq-logo-col-pos.svg';
+import OaqLogoColPos from '../../graphics/layout/oaq-logo-col-pos.svg';
 
 const subMenus = [
   {

@@ -14,8 +14,8 @@ import OaqIconIllu48Historical from '../../graphics/layout/oaq-icon-illu-48-hist
 import OaqIconIllu48Opensource from '../../graphics/layout/oaq-icon-illu-48-opensource.svg';
 import OaqIconIllu48Community from '../../graphics/layout/oaq-icon-illu-48-community.svg';
 import CardBookMedia from '../../graphics/content/view--about/card-book-media.jpg';
-import OaqLogoColPos from '../../../../node_modules/openaq-design-system/assets/graphics/layout/oaq-logo-col-pos.svg';
-import OpenAQ9902019PDF from '/assets/files/openaq-990-2019.pdf';
+import OaqLogoColPos from '../../graphics/layout/oaq-logo-col-pos.svg';
+import OpenAQ9902019PDF from '../../files/openaq-990-2019.pdf';
 
 const teamData = {
   advisoryBoard: _(content.advisoryBoard).values().sortBy(['order']).value(),

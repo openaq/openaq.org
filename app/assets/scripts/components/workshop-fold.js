@@ -1,7 +1,7 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 
-import WorkshopFoldMedia from '/assets/graphics/content/view--community-workshops/workshop-fold-media.jpg';
+import WorkshopFoldMedia from '../../graphics/content/view--community-workshops/workshop-fold-media.jpg';
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
  * see https://reactjs.org/docs/react-without-es6.html

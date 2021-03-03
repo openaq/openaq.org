@@ -4,11 +4,11 @@ import createReactClass from 'create-react-class';
 import widont from '../utils/widont';
 import JoinFold from '../components/join-fold';
 
-import CoverWhy from '/assets/graphics/content/view--why/cover--why.jpg';
-import FoldTollMedia from '/assets/graphics/content/view--why/fold-toll-media.jpg';
-import FoldDataAccessMedia from '/assets/graphics/content/view--why/fold-data-access-media.jpg';
-import FoldHarmonizingMedia from '/assets/graphics/content/view--why/fold-harmonizing-media.jpg';
-import OaqPollutatsGraph from '/assets/graphics/content/view--why/oaq-pollutats-graph.png';
+import CoverWhy from '../../graphics/content/view--why/cover--why.jpg';
+import FoldTollMedia from '../../graphics/content/view--why/fold-toll-media.jpg';
+import FoldDataAccessMedia from '../../graphics/content/view--why/fold-data-access-media.jpg';
+import FoldHarmonizingMedia from '../../graphics/content/view--why/fold-harmonizing-media.jpg';
+import OaqPollutatsGraph from '../../graphics/content/view--why/oaq-pollutats-graph.png';
 
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
