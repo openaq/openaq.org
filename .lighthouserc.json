@@ -3,6 +3,9 @@
       "collect": {
         "staticDistDir": "dist"
       },
+      "upload": {
+        "target": "temporary-public-storage"
+      },
       "healthcheck": {
         "fatal": false
       },
