@@ -25,10 +25,6 @@ describe('The About Page', () => {
   });
 
   it('provides the Form 990 to download', () => {
-    cy.get('.button-book-download').should(
-      'have.attr',
-      'href',
-      '/assets/files/openaq-990-2019.pdf'
-    );
+    cy.get('.button-book-download').should('have.attr', 'href');
   });
 });

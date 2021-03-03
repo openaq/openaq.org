@@ -4,18 +4,18 @@
 .form__fieldset {
   &--date {
     .form__group {
-      @include col(4/12);
+      @include column(4/12);
       margin-bottom: 0;
     }
 
     @include media(medium-up) {
       .form__legend {
-        @include col(3/12);
+        @include column(3/12);
         margin-bottom: 0;
         margin-top: 1.5rem;
       }
       .form__group {
-        @include col(3/12);
+        @include column(3/12);
       }
     }
   }
@@ -25,13 +25,14 @@
       @extend .visually-hidden;
     }
     .form__group {
-      @include col(4/12);
+      @include column(4/12);
       margin-bottom: 0;
     }
   }
 }
 
-.form--download, .form-vote {
+.form--download,
+.form-vote {
   .form__legend {
     color: $base-color;
   }

@@ -2,7 +2,20 @@ import React, { Component } from 'react';
 import { PropTypes as T } from 'prop-types';
 
 import { environment } from '../config';
+import pngImages from '../../graphics/content/community/*.png';
+import jpgImages from '../../graphics/content/community/*.jpg';
+import jpegImages from '../../graphics/content/community/*.jpeg';
+import placeholder from '../../graphics/content/team/avatar--placeholder.jpg';
 
+function getImage(logo) {
+  const filename = logo.split('community/')[1].split('.')[0];
+  return (
+    pngImages[filename] ||
+    jpgImages[filename] ||
+    jpegImages[filename] ||
+    placeholder
+  );
+}
 class Testimonials extends Component {
   constructor(props) {
     super(props);
@@ -23,15 +36,16 @@ class Testimonials extends Component {
 
     const details = [title, affiliation, location].filter(Boolean).join(' / ');
 
-    const img = image
-      ? `/assets/graphics/content/${image}`
-      : 'https://use.placeimage.app/960x960';
-
     return (
       <li key={testimonial}>
         <blockquote className="testimonial">
           <div className="testimonial__media">
-            <img src={img} width="960" height="960" alt="Image placeholder" />
+            <img
+              src={getImage(image)}
+              width="960"
+              height="960"
+              alt="Image placeholder"
+            />
           </div>
           <div className="testimonial__copy">
             <div className="testimonial__quote">

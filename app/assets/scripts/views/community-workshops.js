@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,8 +7,22 @@ import c from 'classnames';
 import { Dropdown } from 'openaq-design-system';
 
 import WorkshopFold from '../components/workshop-fold';
-import content from '../../content/content.json';
+import content from '../../../content/*.json';
+import pngImages from '../../graphics/content/view--community-workshops/*.png';
+import jpgImages from '../../graphics/content/view--community-workshops/*.jpg';
+import jpegImages from '../../graphics/content/view--community-workshops/*.jpeg';
+
 import QsState from '../utils/qs-state';
+
+import StripeCommunityWorkshops from '../../graphics/content/view--community-workshops/stripe--community-workshops.jpg';
+
+function getImage(path) {
+  const filename = path && path.split('workshops/')[1]?.split('.')[0];
+  return (
+    filename &&
+    (pngImages[filename] || jpgImages[filename] || jpegImages[filename] || null)
+  );
+}
 
 // Values for the filters.
 const filterData = {
@@ -107,6 +120,7 @@ class CommunityWorkshops extends React.Component {
   renderWorkshops() {
     const { location } = this.state.filter;
 
+    // TODO
     let cards = _(content.workshops).sortBy('order').values();
 
     // Apply filters if they're set
@@ -118,7 +132,6 @@ class CommunityWorkshops extends React.Component {
         return true;
       });
     }
-
     cards = cards
       .map(o => {
         return (
@@ -134,7 +147,10 @@ class CommunityWorkshops extends React.Component {
                 <figure className="card__media">
                   <div className="card__cover">
                     <img
-                      src={o.image || 'https://via.placeholder.com/640x320'}
+                      src={
+                        getImage(o.image) ||
+                        'https://via.placeholder.com/640x320'
+                      }
                       width="640"
                       height="320"
                       alt="Card cover"
@@ -206,7 +222,7 @@ class CommunityWorkshops extends React.Component {
           <figure className="inpage__media inpage__media--stripe media">
             <div className="media__item">
               <img
-                src="/assets/graphics/content/view--community-workshops/stripe--community-workshops.jpg"
+                src={StripeCommunityWorkshops}
                 alt="Stripe image"
                 width="2880"
                 height="960"

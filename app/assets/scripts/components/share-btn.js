@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import { Dropdown } from 'openaq-design-system';
 import createReactClass from 'create-react-class';

@@ -213,11 +213,11 @@
     .col-main {
       padding-right: 1rem;
       padding-bottom: 0.5rem;
-      @include col(4/12);
+      @include column(4/12);
     }
 
     .col-sec {
-      @include col(8/12);
+      @include column(8/12);
     }
   }
 

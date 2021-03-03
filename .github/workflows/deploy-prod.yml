@@ -13,6 +13,8 @@ jobs:
 
     env:
       DS_ENV: 'production'
+      MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+      API: ${{ secrets.API }}
 
     steps:
       - name: Checkout

@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { PropTypes as T } from 'prop-types';
 
 import { environment } from '../config';
+import pngImages from '../../graphics/content/sponsors/*.png';
+import jpgImages from '../../graphics/content/sponsors/*.jpg';
+import jpegImages from '../../graphics/content/sponsors/*.jpeg';
+
+function getImage(logo) {
+  const filename = logo.split('/')[1].split('.')[0];
+  return pngImages[filename] || jpgImages[filename] || jpegImages[filename];
+}
 
 class SponsorList extends Component {
   render() {
@@ -16,10 +24,7 @@ class SponsorList extends Component {
               rel="noreferrer"
               href={url}
             >
-              <img
-                src={`/assets/graphics/content/${logo}`}
-                alt={`${name} logo`}
-              />
+              <img src={getImage(logo)} alt={`${name} logo`} />
               <span>{name}</span>
             </a>
           </li>

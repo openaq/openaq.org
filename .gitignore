@@ -37,7 +37,9 @@
 #
 ################################################
 
-app/assets/scripts/config/local.js
+.env*
+!.env.example
+
 app/assets/content/content.json
 
 
@@ -112,6 +114,7 @@ temp
 tmp
 .tmp
 dist
+.cache
 
 ################################################
 # Cypress

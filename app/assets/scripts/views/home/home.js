@@ -14,11 +14,16 @@ import Testimonials from '../../components/testimonials';
 
 import SponsorList from '../../components/sponsor-list';
 
-import sponsors from '../../../content/sponsors.json';
-import testimonials from '../../../content/testimonials.json';
+import sponsors from '../../../../content/sponsors.json';
+import testimonials from '../../../../content/testimonials.json';
 
 import CompareLocationCard from './compare-location-card';
 import StatsCount from './stats-count';
+
+import CoverHome from '../../../graphics/content/view--home/cover--home.jpg';
+import OaqIlluHomeStats from '../../../graphics/layout/oaq-illu-home-stats.svg';
+import FoldWhatWeDoMedia from '../../../graphics/content/view--home/fold-what-we-do-media.png';
+import FoldCommunityMedia from '../../../graphics/content/view--home/fold-community-media.png';
 
 function Home(props) {
   const {
@@ -88,12 +93,7 @@ function Home(props) {
         </div>
         <figure className="inpage__media inpage__media--cover media">
           <div className="media__item">
-            <img
-              src="/assets/graphics/content/view--home/cover--home.jpg"
-              alt="Cover image"
-              width="1440"
-              height="712"
-            />
+            <img src={CoverHome} alt="Cover image" width="1440" height="712" />
           </div>
         </figure>
       </header>
@@ -112,7 +112,7 @@ function Home(props) {
             </header>
             <figure className="fold__media">
               <img
-                src="/assets/graphics/layout/oaq-illu-home-stats.svg"
+                src={OaqIlluHomeStats}
                 width="408"
                 height="80"
                 alt="Illustration"
@@ -146,7 +146,7 @@ function Home(props) {
             </header>
             <figure className="fold__media">
               <img
-                src="/assets/graphics/content/view--home/fold-what-we-do-media.png"
+                src={FoldWhatWeDoMedia}
                 alt="Fold media"
                 width="1246"
                 height="1076"
@@ -189,7 +189,7 @@ function Home(props) {
             </header>
             <figure className="fold__media">
               <img
-                src="/assets/graphics/content/view--home/fold-community-media.png"
+                src={FoldCommunityMedia}
                 alt="Fold media"
                 width="932"
                 height="1128"

@@ -1,33 +1,23 @@
-'use strict';
-var defaultsDeep = require('lodash').defaultsDeep;
 /*
  * App configuration.
  *
- * Uses settings in config/production.js, with any properties set by
- * config/staging.js or config/local.js overriding them depending upon the
- * environment.
- *
- * This file should not be modified.  Instead, modify one of:
- *
- *  - config/production.js
- *      Production settings (base).
- *  - config/staging.js
- *      Overrides to production if ENV is staging.
- *  - config/local.js
- *      Overrides if local.js exists.
- *      This last file is gitignored, so you can safely change it without
- *      polluting the repo.
  */
+var logo = require('./logo');
 
-var configurations = require('./config/*.js', { mode: 'hash' });
-var config = configurations.local || {};
-
-if (process.env.DS_ENV === 'testing') {
-  defaultsDeep(config, configurations.testing);
-}
-if (process.env.DS_ENV === 'staging') {
-  defaultsDeep(config, configurations.staging);
-}
-defaultsDeep(config, configurations.production);
-
-module.exports = config;
+module.exports = {
+  environment: process.env.NODE_ENV,
+  consoleMessage: logo,
+  mapbox: {
+    token: process.env.MAPBOX_ACCESS_TOKEN,
+    baseStyle: 'mapbox://styles/devseed/ciqs29d060000clnr9222bg5x',
+  },
+  api: process.env.API,
+  metadata: 'https://metadata.openaq.org',
+  apiDocs: 'https://docs.openaq.org',
+  feedbackUrl: 'https://forms.gle/rqsAPDSebNTG8PsJ8',
+  dataTypesUrl:
+    // eslint-disable-next-line inclusive-language/use-inclusive-words
+    'https://github.com/openaq/openaq-data-format/blob/master/data-type-definitions.md',
+  newSourceUrl:
+    'https://docs.google.com/forms/d/1Osi0hQN1-2aq8VGrAR337eYvwLCO5VhCa3nC_IK2_No/viewform',
+};

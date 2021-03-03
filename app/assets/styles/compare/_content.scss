@@ -34,7 +34,7 @@
   }
 
   &__location {
-    @include col(12/12);
+    @include column(12/12);
     padding-left: 2rem;
     margin-top: 2rem;
 
@@ -43,25 +43,25 @@
     }
 
     @include media(small-up) {
-      @include col(6/12, $cycle: 2);
+      @include column(6/12, $cycle: 2);
       &:nth-child(2) {
         margin-top: 0;
       }
     }
     @include media(medium-up) {
-      @include col(4/12, $cycle: 3);
+      @include column(4/12, $cycle: 3);
       &:nth-child(3) {
         margin-top: 0;
       }
     }
 
     &--actions {
-      @include col(12/12);
+      @include column(12/12);
       margin-top: 2rem;
       padding-left: 0;
 
       @include media(medium-up) {
-        @include col(4/12);
+        @include column(4/12);
       }
 
       .form__actions .button {
@@ -94,12 +94,11 @@
     small {
       display: block;
     }
-
   }
 
   &__actions {
-    > [class*="button"]:first-child {
-      margin-left: - $global-spacing / 2;
+    > [class*='button']:first-child {
+      margin-left: -$global-spacing / 2;
     }
 
     .button {
@@ -156,7 +155,7 @@
 
 .button-compare-location {
   @extend .button, .button--medium, .button--base-unbounded;
-  color: rgba($base-font-color, 0.80);
+  color: rgba($base-font-color, 0.8);
   margin-left: -($global-spacing / 2);
 
   &::before {
@@ -164,10 +163,8 @@
   }
 }
 
-
 /* Fold: Measurements
    ========================================================================== */
 
 #compare-fold-measurements {
-
 }
