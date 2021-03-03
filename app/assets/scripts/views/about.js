@@ -15,7 +15,6 @@ import OaqIconIllu48Opensource from '../../graphics/layout/oaq-icon-illu-48-open
 import OaqIconIllu48Community from '../../graphics/layout/oaq-icon-illu-48-community.svg';
 import CardBookMedia from '../../graphics/content/view--about/card-book-media.jpg';
 import OaqLogoColPos from '../../graphics/layout/oaq-logo-col-pos.svg';
-import OpenAQ9902019PDF from '../../files/openaq-990-2019.pdf';
 
 const teamData = {
   advisoryBoard: _(content.advisoryBoard).values().sortBy(['order']).value(),
@@ -277,22 +276,27 @@ var About = createReactClass({
                     available.
                   </p>
                   <p className="fold__main-action">
+                    {/* the pdf link is the address where it is stored in our github, see README.md for more info */}
                     <a
-                      href={OpenAQ9902019PDF}
+                      // TODO: fix by update name of main branch to main/primary
+                      // eslint-disable-next-line inclusive-language/use-inclusive-words
+                      href="https://github.com/openaq/openaq.org/raw/master/app/assets/files/openaq-990-2019.pdf"
                       target="_blank"
                       rel="noreferrer"
                       className="button-book-download"
                       title="Download"
                     >
-                      <span>Download 2019 Form 990</span>
+                      <span>View 2019 Form 990</span>
                     </a>
                   </p>
                 </div>
               </header>
               <figure className="fold__media">
                 <article className="card card--book">
+                  {/* the pdf link is the address where it is stored in our github, see README.md for more info */}
                   <a
-                    href={OpenAQ9902019PDF}
+                    // eslint-disable-next-line inclusive-language/use-inclusive-words
+                    href="https://github.com/openaq/openaq.org/raw/master/app/assets/files/openaq-990-2019.pdf"
                     target="_blank"
                     rel="noreferrer"
                     className="card__contents"
