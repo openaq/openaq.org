@@ -37,6 +37,8 @@
 #
 ################################################
 
+.env*
+
 app/assets/scripts/config/local.js
 app/assets/content/content.json
 
