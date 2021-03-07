@@ -13,7 +13,8 @@ module.exports = {
   api: 'https://u50g7n0cbj.execute-api.us-east-1.amazonaws.com/v2', // will eventually be 'https://api.openaq.org/v2'
   metadata: 'https://metadata.openaq.org',
   apiDocs: 'https://docs.openaq.org',
-  feedbackUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdzS-QyPbXRbdJbfdUWE2VLbcnULG-DTW8uyhM6v0WMp0T4yQ/viewform',
+  feedbackUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSdzS-QyPbXRbdJbfdUWE2VLbcnULG-DTW8uyhM6v0WMp0T4yQ/viewform',
   dataTypesUrl:
     // eslint-disable-next-line inclusive-language/use-inclusive-words
     'https://github.com/openaq/openaq-data-format/blob/master/data-type-definitions.md',
