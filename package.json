@@ -100,7 +100,7 @@
     "gulp-uglify-es": "^1.0.4",
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "mapbox-gl": "^1.13.0",
     "moment": "^2.14.1",
     "openaq-data-format": "github:openaq/openaq-data-format#master",
