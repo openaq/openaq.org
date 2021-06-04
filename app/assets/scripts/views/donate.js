@@ -28,7 +28,7 @@ var Donate = createReactClass({
                   <h1 className="fold__title">Donate now to OpenAQ!</h1>
                   <div className="prose prose--responsive">
                     <p>
-                      Help support our mission to end air pollution through air
+                      Help support our mission to achieve clean air through air
                       quality data and community. Donate below or directly with{' '}
                       <a
                         href="https://www.dafdirect.org/DAFDirect/daflink?_dafdirect_settings=NDc1MzI0MTcyXzIxMTFfZDA0ODQ3MzYtOGJkOS00YTJjLWFmOTctM2Q2MGE3YTg4MDU4&designatedText=Z2VuZXJhbCBvcmdhbml6YXRpb25hbCBzdXBwb3J0ICh1bnJlc3RyaWN0ZWQp&amountValue="
@@ -47,8 +47,10 @@ var Donate = createReactClass({
                   <div className="donate-daf">
                     <p>
                       <span>
+                        We are a registered 501(c)(3). If US-based, your
+                        donation is tax deductible. <br></br>
                         If you contribute through a DAF, please{' '}
-                        <a href="info@openaq.org">send us an email</a> so we can
+                        <a href="info@openaq.org">send us an email </a>
                         so we can update the campaign total!
                       </span>
                     </p>
@@ -56,28 +58,27 @@ var Donate = createReactClass({
                 </div>
               </header>
               <figure className="fold__media donate-info-wrapper">
-                <YoutubeEmbed embedId="C66UmEWoPos" />
+                <YoutubeEmbed embedId="J47SsCH0bi0" />
                 <div className="donate-header-info">
                   <h3>Your donation helps support...</h3>
                   <p>
-                    Ongoing administrative as well as platform maintenance costs
-                    to our backend and API that allows us to make data available
-                    free of charge.
-                  </p>
-                  <p>
-                    Integrating new data sources and technologies to the OpenAQ
-                    platform for the global community to access and utilize.
+                    Key programs and initiatives like our Community Ambassador
+                    Program, a 10-month Program designed to train local leaders
+                    on open data and tools to aid their work to fight air
+                    pollution.
                   </p>
                   <p>
                     Development of new tools and enhancements to the OpenAQ
-                    platform so that we can make these available for use free of
-                    charge.
+                    platform to improve access and usability.
                   </p>
                   <p>
-                    Key programs and initiatives like our Community Ambassador
-                    Program, a 10-month Program designed to train local leaders
-                    in the air quality ecosystem in their work to fight air
-                    pollution.
+                    Integration of new data sources and technologies to the
+                    OpenAQ platform to improve coverage and transparency of
+                    global air quality data.
+                  </p>
+                  <p>
+                    Ongoing administrative as well as platform maintenance costs
+                    to ensure the data and tools are available free of charge.
                   </p>
                 </div>
               </figure>
@@ -106,8 +107,8 @@ var Donate = createReactClass({
                     like Farah Kazi, a dedicated air quality advocate in
                     Maharashtra, India. Farah is participating in OpenAQ’s
                     10-month Ambassador Program, a program designed to train
-                    local leaders to open data and leadership in the air quality
-                    ecosystem.
+                    local leaders on open data and leadership to fight air
+                    pollution in their communities.
                   </p>
                   <p className="fold__action">
                     <a
@@ -126,7 +127,7 @@ var Donate = createReactClass({
                     <div className="aside-highlight__prose">
                       <p>
                         <span>“</span>It&apos;s been a great three months since
-                        I joined the OpenAQ Ambassador Program I have been
+                        I joined the OpenAQ Ambassador Program. I have been
                         connected to and have been learning from leaders from
                         across the world that are fighting air inequality from
                         within their communities. OpenAQ through it&apos;s
@@ -156,8 +157,8 @@ var Donate = createReactClass({
                     available for a limited time only! Your purchase will help
                     support our work in democratizing access to air quality data
                     to enable community action to fight air pollution. Please
-                    join us in wearing OpenAQ shirts with pride, and spreading
-                    the word of Clean Air for All!
+                    join us in wearing OpenAQ shirts and spreading the word of
+                    #CleanAirforAll!
                   </p>
                   <p className="fold__action">
                     <a
