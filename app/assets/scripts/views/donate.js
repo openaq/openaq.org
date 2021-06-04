@@ -3,6 +3,8 @@ import React from 'react';
 
 import createReactClass from 'create-react-class';
 
+import ConnectFold from '../components/connect-fold';
+
 import YoutubeEmbed from '../components/youtube-player';
 
 /*
@@ -27,35 +29,55 @@ var Donate = createReactClass({
                   <div className="prose prose--responsive">
                     <p>
                       Help support our mission to end air pollution through air
-                      quality data and community.
+                      quality data and community. Donate below or directly with{' '}
+                      <a
+                        href="https://www.dafdirect.org/DAFDirect/daflink?_dafdirect_settings=NDc1MzI0MTcyXzIxMTFfZDA0ODQ3MzYtOGJkOS00YTJjLWFmOTctM2Q2MGE3YTg4MDU4&designatedText=Z2VuZXJhbCBvcmdhbml6YXRpb25hbCBzdXBwb3J0ICh1bnJlc3RyaWN0ZWQp&amountValue="
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        DAF
+                      </a>
+                      .
                     </p>
                   </div>
                   <div
                     id="give-lively-widget"
                     className="gl-simple-donation-widget"
                   ></div>
+                  <div className="donate-daf">
+                    <p>
+                      <span>
+                        If you contribute through a DAF, please{' '}
+                        <a href="info@openaq.org">send us an email</a> so we can
+                        so we can update the campaign total!
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </header>
               <figure className="fold__media donate-info-wrapper">
                 <YoutubeEmbed embedId="C66UmEWoPos" />
                 <div className="donate-header-info">
-                  <h3>Your donation helps...</h3>
+                  <h3>Your donation helps support...</h3>
                   <p>
-                    Ongoing platform maintenance costs to our backend and API
-                    that allows us to make data available free of charge
+                    Ongoing administrative as well as platform maintenance costs
+                    to our backend and API that allows us to make data available
+                    free of charge.
                   </p>
                   <p>
-                    Integrating new data sources to the OpenAQ platform for the
-                    global community to access and utilize.
+                    Integrating new data sources and technologies to the OpenAQ
+                    platform for the global community to access and utilize.
                   </p>
                   <p>
                     Development of new tools and enhancements to the OpenAQ
-                    platform to make these available for use free of charge
+                    platform so that we can make these available for use free of
+                    charge.
                   </p>
                   <p>
-                    Support community ambassador program, 10-month Program, a
-                    program designed to train local eaders to open data and
-                    leadership in the air quality ecosystem.
+                    Key programs and initiatives like our Community Ambassador
+                    Program, a 10-month Program designed to train local leaders
+                    in the air quality ecosystem in their work to fight air
+                    pollution.
                   </p>
                 </div>
               </figure>
@@ -76,10 +98,11 @@ var Donate = createReactClass({
           <section className="fold fold--type-b" id="donate-fold-story">
             <div className="inner">
               <header className="fold__header">
-                <h1 className="fold__title">Community Ambassador Program</h1>
+                <h1>Community Ambassador Program</h1>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    Funding supports training for inspiring community leaders
+                    Funding helps support programs like OpenAQ’s Community
+                    Ambassador program, training inspiring community leaders
                     like Farah Kazi, a dedicated air quality advocate in
                     Maharashtra, India. Farah is participating in OpenAQ’s
                     10-month Ambassador Program, a program designed to train
@@ -122,14 +145,19 @@ var Donate = createReactClass({
           <section className="fold fold--semi-light fold--type-a">
             <div className="inner">
               <header className="fold__header">
-                <h2 className="fold__title">Wear OpenAQ shirts</h2>
+                <h2>
+                  Wear a cool OpenAQ t-shirt that helps us fight air inequality!
+                </h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
                     This June 2021, in honor of World Environment Day, we would
                     like to celebrate the OpenAQ Community and support efforts
-                    to fight air inequality by selling OpenAQ swag! Please join
-                    us in wearing OpenAQ shirts with pride and spreading the
-                    word of Clean Air for All!
+                    to fight air inequality by releasing some new OpenAQ swag
+                    available for a limited time only! Your purchase will help
+                    support our work in democratizing access to air quality data
+                    to enable community action to fight air pollution. Please
+                    join us in wearing OpenAQ shirts with pride, and spreading
+                    the word of Clean Air for All!
                   </p>
                   <p className="fold__action">
                     <a
@@ -155,7 +183,7 @@ var Donate = createReactClass({
           <section className="fold fold--type-b" id="donate-fold-book">
             <div className="inner">
               <header className="fold__header">
-                <h1 className="fold__title">We are an open book</h1>
+                <h1>We are an open book</h1>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
                     For more information about how funds are used check out our
@@ -222,6 +250,7 @@ var Donate = createReactClass({
               </figure>
             </div>
           </section>
+          <ConnectFold />
         </div>
       </section>
     );
