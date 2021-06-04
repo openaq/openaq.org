@@ -10,9 +10,9 @@ context('Navigation', () => {
 
     cy.get('.global-menu')
       .find('a')
-      .contains('Home')
+      .contains('Donate')
       .parent()
-      .should('have.attr', 'href', '#/');
+      .should('have.attr', 'href', '#/donate');
 
     cy.get('.global-menu')
       .find('a')
