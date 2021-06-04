@@ -65,7 +65,7 @@
     padding-bottom: $global-spacing / 2;
   }
 
-  .card__title {
+  .card__title {    
     &::before {
       display: block;
       font-size: 2rem;

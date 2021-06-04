@@ -3,17 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 import createReactClass from 'create-react-class';
 
-import TeamList from '../components/team-list';
-
 import YoutubeEmbed from '../components/youtube-player';
-
-import content from '../../content/content.json';
-
-const teamData = {
-  advisoryBoard: _(content.advisoryBoard).values().sortBy(['order']).value(),
-  governingBoard: _(content.governingBoard).values().sortBy(['order']).value(),
-  team: _(content.team).values().sortBy(['order']).value(),
-};
 
 /*
  * create-react-class provides a drop-in replacement for the outdated React.createClass,
@@ -64,7 +54,9 @@ var Donate = createReactClass({
                     charge
                   </p>
                   <p>
-                    Support community ambassador program,  10-month Program, a program designed to train local eaders to open data and leadership in the air quality ecosystem.
+                    Support community ambassador program, 10-month Program, a
+                    program designed to train local eaders to open data and 
+                    leadership in the air quality ecosystem.
                   </p>
                 </div>
               </figure>
@@ -92,8 +84,8 @@ var Donate = createReactClass({
                     like Farah Kazi, a dedicated air quality advocate in 
                     Maharashtra, India. Farah is participating in OpenAQ’s 
                     10-month Ambassador Program, a program designed to train 
-                    local leaders to open data and leadership in the air 
-                    quality ecosystem.
+                    local leaders to open data and leadership in the air quality 
+                    ecosystem.
                   </p>
                   <p className="fold__action">
                     <a
@@ -131,9 +123,7 @@ var Donate = createReactClass({
           <section className="fold fold--semi-light fold--type-a">
             <div className="inner">
               <header className="fold__header">
-                <h2 className="fold__title">
-                  Wear OpenAQ shirts
-                </h2>
+                <h2 className="fold__title">Wear OpenAQ shirts</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
                     This June 2021, in honor of World Environment Day, we would
@@ -163,10 +153,7 @@ var Donate = createReactClass({
               </figure>
             </div>
           </section>
-          <section
-            className="fold fold--type-b"
-            id="donate-fold-book"
-          >
+          <section className="fold fold--type-b" id="donate-fold-book">
             <div className="inner">
               <header className="fold__header">
                 <h1 className="fold__title">We are an open book</h1>

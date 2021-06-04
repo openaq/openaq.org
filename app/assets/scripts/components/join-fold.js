@@ -80,13 +80,13 @@ var JoinFold = createReactClass({
                   </div>
                 </div>
                 <footer className="card__footer">
-                  <a
-                    href="mailto:info@openaq.org"
+                  <Link
+                    to="/donate"
                     className="join-card__go-link"
                     title="View more"
                   >
                     <span>Support</span>
-                  </a>
+                  </Link>
                 </footer>
               </div>
             </article>
