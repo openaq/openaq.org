@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import _ from 'lodash';
+
 import createReactClass from 'create-react-class';
 
 import YoutubeEmbed from '../components/youtube-player';
@@ -26,8 +26,8 @@ var Donate = createReactClass({
                   <h1 className="fold__title">Donate now to OpenAQ!</h1>
                   <div className="prose prose--responsive">
                     <p>
-                      Help support our mission to end air pollution through 
-                      air quality data and community.
+                      Help support our mission to end air pollution through air
+                      quality data and community.
                     </p>
                   </div>
                   <div
@@ -41,21 +41,20 @@ var Donate = createReactClass({
                 <div className="donate-header-info">
                   <h3>Your donation helps...</h3>
                   <p>
-                    Ongoing platform maintenance costs to our backend
-                    and API that allows us to make data available free of charge
+                    Ongoing platform maintenance costs to our backend and API
+                    that allows us to make data available free of charge
                   </p>
                   <p>
-                    Integrating new data sources to the OpenAQ
-                    platform for the global community to access and utilize.
+                    Integrating new data sources to the OpenAQ platform for the
+                    global community to access and utilize.
                   </p>
                   <p>
-                    Development of new tools and enhancements to the
-                    OpenAQ platform to make these available for use free of
-                    charge
+                    Development of new tools and enhancements to the OpenAQ
+                    platform to make these available for use free of charge
                   </p>
                   <p>
                     Support community ambassador program, 10-month Program, a
-                    program designed to train local eaders to open data and 
+                    program designed to train local eaders to open data and
                     leadership in the air quality ecosystem.
                   </p>
                 </div>
@@ -74,17 +73,17 @@ var Donate = createReactClass({
           </figure>
         </header>
         <div className="inpage__body">
-        <section className="fold fold--type-b" id="donate-fold-story">
+          <section className="fold fold--type-b" id="donate-fold-story">
             <div className="inner">
               <header className="fold__header">
                 <h1 className="fold__title">Community Ambassador Program</h1>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    Funding supports training for inspiring community leaders 
-                    like Farah Kazi, a dedicated air quality advocate in 
-                    Maharashtra, India. Farah is participating in OpenAQ’s 
-                    10-month Ambassador Program, a program designed to train 
-                    local leaders to open data and leadership in the air quality 
+                    Funding supports training for inspiring community leaders
+                    like Farah Kazi, a dedicated air quality advocate in
+                    Maharashtra, India. Farah is participating in OpenAQ’s
+                    10-month Ambassador Program, a program designed to train
+                    local leaders to open data and leadership in the air quality
                     ecosystem.
                   </p>
                   <p className="fold__action">
@@ -103,15 +102,15 @@ var Donate = createReactClass({
                   <div className="aside-highlight__contents">
                     <div className="aside-highlight__prose">
                       <p>
-                        <span>“</span>It's been a great three months since I
-                        joined the OpenAQ Ambassador Program I have been
+                        <span>“</span>It&apos;s been a great three months since
+                        I joined the OpenAQ Ambassador Program I have been
                         connected to and have been learning from leaders from
                         across the world that are fighting air inequality from
-                        within their communities. OpenAQ through it's
+                        within their communities. OpenAQ through it&apos;s
                         centralized data platform provides access to open air
-                        quality data from around the globe. It's so much easier
-                        now to compare air quality between cities and even
-                        countries.<span>”</span>
+                        quality data from around the globe. It&apos;s so much
+                        easier now to compare air quality between cities and
+                        even countries.<span>”</span>
                       </p>
                       <p className="donate-quote-credit">- Farah Kazi</p>
                     </div>
@@ -159,12 +158,18 @@ var Donate = createReactClass({
                 <h1 className="fold__title">We are an open book</h1>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                  For more information about how funds are used check out our 990 form and the <a
+                    For more information about how funds are used check out our
+                    990 form and the{' '}
+                    <a
+                      // eslint-disable-next-line inclusive-language/use-inclusive-words
                       href="https://github.com/openaq/openaq-info/blob/master/FAQ.md"
                       target="_blank"
                       rel="noreferrer"
                       title="Download"
-                    >FAQs page</a>.
+                    >
+                      FAQs page
+                    </a>
+                    .
                   </p>
                   <p className="fold__main-action">
                     <a
