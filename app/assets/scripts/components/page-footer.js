@@ -97,6 +97,11 @@ var PageFooter = createReactClass({
                     Support our mission
                   </Link>
                 </li>
+                <li>
+                  <Link to="/donate" title="Donate page">
+                    Donate
+                  </Link>
+                </li>
               </ul>
             </div>
 
