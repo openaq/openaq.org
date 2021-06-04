@@ -66,66 +66,6 @@ var Donate = createReactClass({
                   <p>
                     Support community ambassador program,  10-month Program, a program designed to train local eaders to open data and leadership in the air quality ecosystem.
                   </p>
-                  {/* <p>
-                    According to the WHO, more than 90% of the world breathes
-                    unhealthy air and air pollution disproportionately affects
-                    those in developing countries.
-                  </p>
-
-                  <p>
-                    <a
-                      target="_blank"
-                      href="https://openaq.org/#/?utm_source=give-lively&utm_medium=page-copy&utm_campaign=giving-tuesday&_k=jonxpj"
-                    >
-                      OpenAQ
-                    </a>{' '}
-                    is a non-profit focused on fighting air inequality by
-                    providing a{' '}
-                    <a
-                      target="_blank"
-                      href="https://openaq.org/#/locations?utm_source=give-lively&utm_medium=page-copy&utm_campaign=giving-tuesday&_k=sanju7"
-                    >
-                      platform
-                    </a>{' '}
-                    that collects, harmonizes, and surfaces air quality data
-                    from disparate sources around the world.{' '}
-                  </p>
-
-                  <p>
-                    We believe that increasing transparency, coverage, and
-                    access to air quality data can <a
-                      target="_blank"
-                      href="https://medium.com/@openaq/openaq-impact-story-bc1d168d1402"
-                    >
-                      drive policy changes
-                    </a>
-                    . Our data has been used to produce peer-reviewed papers,
-                    apps, and calibrate low-cost sensors.
-                  </p>
-
-                  <p>
-                    For GivingTuesday, our goals are to raise $30,000 in
-                    celebration of our community to help us grow and to raise
-                    awareness around our{' '}
-                    <a
-                      target="_blank"
-                      href="https://medium.com/@openaq/now-accepting-applications-for-the-openaq-community-ambassador-program-c0aee81735d5"
-                    >
-                      community ambassador program.
-                    </a>
-                  </p>
-
-                  <p>
-                    If you contribute through a{' '}
-                    <a
-                      target="_blank"
-                      href="https://www.dafdirect.org/DAFDirect/daflink?_dafdirect_settings=NDc1MzI0MTcyXzIxMTFfZDA0ODQ3MzYtOGJkOS00YTJjLWFmOTctM2Q2MGE3YTg4MDU4&designatedText=Z2VuZXJhbCBvcmdhbml6YXRpb25hbCBzdXBwb3J0ICh1bnJlc3RyaWN0ZWQp&amountValue="
-                    >
-                      DAF
-                    </a>
-                    , please <a href="info@openaq.org">send us an email</a> so
-                    we can update the campaign total!
-                  </p> */}
                 </div>
               </figure>
             </div>
@@ -188,39 +128,6 @@ var Donate = createReactClass({
               </figure>
             </div>
           </section>
-          {/* <section className="fold fold--stacked" id="donate-fold-main-board">
-            <div className="inner">
-              <header className="fold__header">
-                <h1>Community Ambassador Program</h1>
-                <div>
-                  <p>
-                    Funding supports training for inspiring community leaders like Farah Kazi, a dedicated air quality advocate in Maharashtra, India. Farah is participating in OpenAQ’s 10-month Ambassador Program, a program designed to train local leaders to open data and leadership in the air quality ecosystem.
-                  </p>
-                  <div className="fold--semi-light donate-quote-content">
-                    <p>
-                      <i>
-                        <span>“</span>It's been a great three months since I
-                        joined the OpenAQ Ambassador Program I have been
-                        connected to and have been learning from leaders from
-                        across the world that are fighting air inequality from
-                        within their communities. OpenAQ through it's
-                        centralized data platform provides access to open air
-                        quality data from around the globe. It's so much easier
-                        now to compare air quality between cities and even
-                        countries.<span>”</span>
-                      </i>
-                    </p>
-                    <p className="donate-quote-credit">- Farah Kazi</p>
-                  </div>
-                  <p className="fold__action">
-                    <a title="Learn more" className="go-link">
-                      <span>Learn more about this program</span>
-                    </a>
-                  </p>
-                </div>
-              </header>
-            </div>
-          </section> */}
           <section className="fold fold--semi-light fold--type-a">
             <div className="inner">
               <header className="fold__header">
