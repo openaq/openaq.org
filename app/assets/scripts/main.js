@@ -12,6 +12,7 @@ import App from './views/app';
 import Home from './views/home';
 import Why from './views/why';
 import About from './views/about';
+import Donate from './views/donate';
 import CommunityHub from './views/community-hub';
 import CommunityProjects from './views/community-projects';
 import CommunityWorkshops from './views/community-workshops';
@@ -82,6 +83,12 @@ render(
             path="/map"
             component={WorldMap}
             pageClass="page--map"
+          />
+          <Route
+            name="donate"
+            path="/donate"
+            component={Donate}
+            pageClass="page--donate"
           />
           <Route
             name="location"
