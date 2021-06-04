@@ -170,16 +170,6 @@ class PageHeader extends React.Component {
       <ul className="global-menu">
         <li>
           <Link
-            to="/"
-            title="View page"
-            className="global-menu__link"
-            onClick={this.onLinkNavigate}
-          >
-            <span>Home</span>
-          </Link>
-        </li>
-        <li>
-          <Link
             to="/why"
             title="View page"
             className="global-menu__link"
@@ -229,6 +219,17 @@ class PageHeader extends React.Component {
           >
             <span>About us</span>
           </a>
+        </li>
+        <li>
+          <Link
+            to="/donate"
+            title="Donate"
+            className="global-menu__link"
+            rel="noreferrer"
+            onClick={this.onLinkNavigate}
+          >
+            <span>Donate</span>
+          </Link>
         </li>
       </ul>
     );
