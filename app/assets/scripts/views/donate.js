@@ -112,11 +112,11 @@ var Donate = createReactClass({
                   </p>
                   <p className="fold__action">
                     <a
-                      href="https://openaq.medium.com/now-accepting-applications-for-the-openaq-community-ambassador-program-c0aee81735d5"
+                      href="https://openaq.medium.com/announcing-the-inaugural-openaq-community-ambassador-cohort-9707a51380e3"
                       title="Learn more"
                       className="go-link"
                     >
-                      <span>Learn more about this program</span>
+                      <span>Meet all the ambassadors and learn more</span>
                     </a>
                   </p>
                 </div>
