@@ -16,6 +16,7 @@ import Donate from './views/donate';
 import CommunityHub from './views/community-hub';
 import CommunityProjects from './views/community-projects';
 import CommunityWorkshops from './views/community-workshops';
+import Ambassadors from './views/ambassadors';
 import WorldMap from './views/world-map';
 import LocationsHub from './views/locations-hub';
 import LocationItem from './views/location';
@@ -71,6 +72,12 @@ render(
             path="/community/workshops"
             component={CommunityWorkshops}
             pageClass="page--community-workshops"
+          />
+          <Route
+            name="ambassadors"
+            path="/community/ambassadors"
+            component={Ambassadors}
+            pageClass="page--ambassadors page--dark"
           />
           <Route
             name="communityHub"
