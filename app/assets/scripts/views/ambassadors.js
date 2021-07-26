@@ -93,21 +93,11 @@ var Ambassadors = createReactClass({
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Farah Kazi is a Biotechnologist and a former Data
-                              Visualiser. After graduating from Dr. D.Y. Patil
-                              University, Navi Mumbai, she pursued her
-                              post-graduate diploma in Social Communications
-                              Media at SCM Sophia College, University of Mumbai.
-                              Her interest in air pollution stems from when she
-                              began working at IndiaSpend, where she spent a
-                              significant part of her time analysing and
-                              visualising air quality data. She currently works
-                              at Waatavaran, where she undertakes air quality
-                              monitoring studies and builds communication
-                              strategies to initiate both public dialogue and to
-                              advance reforms in policies. Apart from fixating
-                              on numbers and grammar, she reads books and enjoys
-                              cooking.
+                              Farah manages air quality monitoring initiatives
+                              and builds communication strategies to raise
+                              awareness of air pollution and to advance policy
+                              reforms on air quality. She has a background in
+                              biotechnology and data visualization.
                             </p>
                           </div>
                           <AmbassadorCardDetails youtubeEmbedId="J47SsCH0bi0" />
@@ -141,23 +131,10 @@ var Ambassadors = createReactClass({
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Ray is the program director at the Relationship
-                              Centre (@Qendra_M) in Tirana, Albania, an
-                              organization that examines neighborhood planning
-                              through the lens of building safe and healthy
-                              spaces for children and their caregivers, with a
-                              particular focus improving quality of life through
-                              better air quality. She has extensive experience
-                              working with international organizations and local
-                              NGOs focused on environmental protection, human
-                              rights, and social issues that require communities
-                              to come together for solution-building. She has a
-                              background in Urban Planning and Management, which
-                              has helped set a path toward sustainability. In
-                              her free time, she enjoys reading, traveling, and
-                              sitting by the sea. She particularly enjoys
-                              reflecting on the people who have been part of her
-                              work, philosophy, and life.
+                              Ray examines urban neighborhood planning to build
+                              safe and healthy spaces for children and their
+                              caregivers. She has a background in urban planning
+                              and management.
                             </p>
                           </div>
                         </div>
@@ -182,36 +159,20 @@ var Ambassadors = createReactClass({
                             <h1 className="card__title">
                               Josephine Mbandi (Nairobi, Kenya)
                             </h1>
-                            <h3 className="card__project">AfriSTEM</h3>
+                            <h3 className="card__project">
+                              AfriSTEM Connection{' '}
+                            </h3>
                           </div>
                         </header>
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Josephine is an embedded system engineer and a
-                              co-founder of AfriSTEM Connection, a company
-                              working to increase Science, Technology,
-                              Engineering and Mathematics (STEM) and
-                              sustainability awareness for underserved
-                              communities in Africa using emerging technologies.
-                              She works on designs to develop, produce, test and
-                              maintain microprocessor-based computer hardware
-                              system with software that is designed to perform a
-                              dedicated function, either as an independent
-                              system or as a part of a large system. She enjoys
-                              bringing to life sustainable and effective IoT
-                              devices, linking them to easy access for end users
-                              and seeing the data inferenced from them help
-                              shape policy. She is passionate about building a
-                              community of technology abled learners and working
-                              on solutions to solve societal challenges. She
-                              enjoys tinkering with electronics and training
-                              young science enthusiasts in developing digital
-                              solutions. Coming from a small community in an
-                              Arid and Semi-Arid Area (ASAL), she has worked on
-                              projects that help resolve soil health, air
-                              quality monitoring, water management and solar
-                              power harvesting.
+                              Josephine works with communities to design,
+                              develop, test, and maintain low-cost sensors for
+                              air quality monitoring. She has a background in
+                              systems engineering and is passionate about
+                              Science, Technology, Engineering, and Mathematic
+                              (STEM).
                             </p>
                           </div>
                         </div>
@@ -244,26 +205,10 @@ var Ambassadors = createReactClass({
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Melusi works as an air quality specialist in the
-                              city of Durban eThekwini Municipality’s Health
-                              Unit’s Pollution Control and Risk Management
-                              Department where he currently leads the
-                              implementation of the Air Quality Management Plan,
-                              including atmospheric information such emission
-                              inventories, dispersion modeling, health risk
-                              assessments and air pollution mitigation projects.
-                              Prior to joining the municipality, he worked as
-                              the environmental officer to the provincial
-                              department of environmental affairs. Melusi
-                              studied Chemical Engineering as an undergraduate
-                              and obtained Environmental Engineering Hons. and
-                              is currently pursuing a MSc Environmental Science
-                              degree in Air Quality Management. Melusi’s history
-                              with air quality goes a long way, growing up in a
-                              small industrial city where burning coal to stay
-                              warm during the winter was the norm. In his free
-                              time, he enjoys running and spending time outdoors
-                              with his family.
+                              Melusi leads the implementation of the Air Quality
+                              Management Plan for the municipality of Durban. He
+                              has a background in chemical engineering and
+                              environmental engineering and sciences.
                             </p>
                           </div>
                         </div>
@@ -295,32 +240,10 @@ var Ambassadors = createReactClass({
                           <div className="card__prose prose prose--responsive">
                             <p>
                               Aza is the Founder and Director of Breathe
-                              Mongolia — Clean Air Coalition, a grassroots
-                              nonprofit registered in the US and in Mongolia. A
-                              peaceful demonstration against air pollution at
-                              Times Square in New York City turned into a
-                              dedicated team of diverse backgrounds from ten
-                              countries to arm people with resources to end air
-                              pollution in Mongolia. Her team created a
-                              bilingual interactive platform to educate the
-                              public, collaborate with stakeholders, and conduct
-                              watchdog activities on the air pollution
-                              intervention policies of Mongolia. She is a
-                              trained Climate Reality Leader with a certificate
-                              from The SSPH+ Summer School in Public Health
-                              Policy, Economics and Management in Lugano,
-                              Switzerland. She earned two US Presidential
-                              Volunteer Service awards and IBM’s Gold badge for
-                              her volunteer work. Aza currently works at IBM in
-                              New York as an analyst after earning an MBA degree
-                              at Marriott School of Management of Brigham Young
-                              University in the US and a Bachelor of Business at
-                              the University of Technology, Sydney, Australia.
-                              She seeks to use technology and her global
-                              opportunities to utilize top talent for the
-                              betterment of her homeland. When she’s not
-                              working, she loves to dance salsa, learn foreign
-                              languages and travel the world.
+                              Mongolia, a grassroots nonprofit organization
+                              focused on raising awareness of air pollution to
+                              spark policy change. Aza has a background in
+                              public health policy and economics.
                             </p>
                           </div>
                         </div>

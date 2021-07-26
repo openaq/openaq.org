@@ -59,12 +59,12 @@
     .ambassador-photo {
       width: 100%;
       img {
-        padding: 1.5rem 0 0 1.5rem;
+        padding: 1.5rem 0 1.5rem 1.5rem;
       }
       @include media(medium-up) {
         width: 300px;
         img {
-          padding: 2rem 0 0 4rem;
+          padding: 2rem 0 2rem 4rem;
         }
       }
 
