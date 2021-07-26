@@ -74,16 +74,16 @@ render(
             pageClass="page--community-workshops"
           />
           <Route
+            name="ambassadors"
+            path="/community/ambassadors"
+            component={Ambassadors}
+            pageClass="page--ambassadors page--dark"
+          />
+          <Route
             name="communityHub"
             path="/community"
             component={CommunityHub}
             pageClass="page--community-hub page--dark"
-          />
-          <Route
-            name="ambassadors"
-            path="/ambassadors"
-            component={Ambassadors}
-            pageClass="page--ambassadors page--dark"
           />
           <Route
             name="map"

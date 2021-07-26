@@ -60,6 +60,14 @@ var Ambassadors = createReactClass({
             <div className="inner">
               <header className="fold__header">
                 <h1 className="fold__title">2021 Ambassador Cohort</h1>
+                <h1 classNama="fold__subtitle">
+                  To read more about the 2021 Community Ambassadors, please
+                  visit our{' '}
+                  <a href="https://openaq.medium.com/announcing-the-inaugural-openaq-community-ambassador-cohort-9707a51380e3">
+                    blog post
+                  </a>
+                  {'.'}
+                </h1>
               </header>
               <ul className="participate-list">
                 <li>
@@ -320,18 +328,6 @@ var Ambassadors = createReactClass({
                     </div>
                   </article>
                 </li>
-                <li>
-                  <div className="ambassador-read-more">
-                    <h2>
-                      To read more about the 2021 Community Ambassadors, please
-                      visit our{' '}
-                      <a href="https://openaq.medium.com/announcing-the-inaugural-openaq-community-ambassador-cohort-9707a51380e3">
-                        blog post
-                      </a>
-                      .
-                    </h2>
-                  </div>
-                </li>
               </ul>
             </div>
           </section>
@@ -359,7 +355,7 @@ var Ambassadors = createReactClass({
               </header>
               <figure className="fold__media">
                 <img
-                  src="/assets/graphics/content/ambassadors/ambassadors_workshops_filter.jpeg"
+                  src="/assets/graphics/content/ambassadors/ambassadors_workshops.jpeg"
                   alt="Fold media"
                   width="1060"
                   height="906"
@@ -381,7 +377,7 @@ var Ambassadors = createReactClass({
               </header>
               <figure className="fold__media">
                 <img
-                  src="/assets/graphics/content/ambassadors/ambassadors_community_feature_filter.jpeg"
+                  src="/assets/graphics/content/ambassadors/ambassadors_community_feature.jpeg"
                   alt="Fold media"
                   width="1060"
                   height="906"
@@ -402,7 +398,7 @@ var Ambassadors = createReactClass({
               </header>
               <figure className="fold__media">
                 <img
-                  src="/assets/graphics/content/ambassadors/ambassadors_development_opportunities_filters.jpeg"
+                  src="/assets/graphics/content/ambassadors/ambassadors_development_opportunities.jpeg"
                   alt="Fold media"
                   width="1060"
                   height="906"
@@ -424,7 +420,7 @@ var Ambassadors = createReactClass({
               </header>
               <figure className="fold__media">
                 <img
-                  src="/assets/graphics/content/ambassadors/ambassadors_workshops_monthly_sessions_filter.jpeg"
+                  src="/assets/graphics/content/ambassadors/ambassadors_workshops_monthly_sessions.jpeg"
                   alt="Fold media"
                   width="1060"
                   height="906"
@@ -445,7 +441,7 @@ var Ambassadors = createReactClass({
               </header>
               <figure className="fold__media">
                 <img
-                  src="/assets/graphics/content/ambassadors/ambassadors_data_toolkit_filter.jpeg"
+                  src="/assets/graphics/content/ambassadors/ambassadors_data_toolkit.jpeg"
                   alt="Fold media"
                   width="1060"
                   height="906"
@@ -458,7 +454,9 @@ var Ambassadors = createReactClass({
             <div className="inner">
               <header className="connect-fold__header">
                 <h1 className="connect-fold__title">
-                  Ready to become the next<br/>OpenAQ Community Ambassador?
+                  Ready to become the next
+                  <br />
+                  OpenAQ Community Ambassador?
                 </h1>
                 <h3 className="connect-fold__subtitle">
                   If you are interested in applying to become an OpenAQ
@@ -477,7 +475,7 @@ var Ambassadors = createReactClass({
                 </div>
               </header>
             </div>
-        </section>
+          </section>
         </div>
       </section>
     );
