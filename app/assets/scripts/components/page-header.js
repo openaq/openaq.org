@@ -69,7 +69,7 @@ const subMenus = [
         url: '/community/workshops',
       },
       {
-        title: 'Ambassadors',
+        title: 'Ambassador Program',
         description:
           'Global leadership program to amplify community-driven air quality initiatives.',
         className: null,

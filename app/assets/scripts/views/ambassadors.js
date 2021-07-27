@@ -31,7 +31,9 @@ var Ambassadors = createReactClass({
         <header className="inpage__header inpage__header--jumbo">
           <div className="inner">
             <div className="inpage__headline">
-              <h1 className="inpage__title">Ambassador Program</h1>
+              <h1 className="inpage__title">
+                OpenAQ Community Ambassador Program
+              </h1>
               <div className="inpage__introduction">
                 <p>
                   The OpenAQ Ambassador Program is a leadership program designed
@@ -56,18 +58,21 @@ var Ambassadors = createReactClass({
           </figure>
         </header>
         <div className="inpage__body">
-          <section className="fold" id="ambassador-fold-participate">
+          <section
+            className="fold ambassador-fold"
+            id="ambassador-fold-participate"
+          >
             <div className="inner">
               <header className="fold__header">
                 <h1 className="fold__title">2021 Ambassador Cohort</h1>
-                <h1 classNama="fold__subtitle">
+                <h3 classNama="fold__subtitle">
                   To read more about the 2021 Community Ambassadors, please
                   visit our{' '}
                   <a href="https://openaq.medium.com/announcing-the-inaugural-openaq-community-ambassador-cohort-9707a51380e3">
                     blog post
                   </a>
                   {'.'}
-                </h1>
+                </h3>
               </header>
               <ul className="participate-list">
                 <li>
@@ -75,9 +80,9 @@ var Ambassadors = createReactClass({
                     <div className="card__contents">
                       <div className="ambassador-photo">
                         <img
-                          src="/assets/graphics/content/ambassadors/ambassador_farah_kazi_crop.jpeg"
+                          src="/assets/graphics/content/ambassadors/ambassador_farah_kazi_square.jpeg"
                           width="300"
-                          height="auto"
+                          height="300"
                           alt="Card cover"
                         />
                       </div>
@@ -87,7 +92,7 @@ var Ambassadors = createReactClass({
                             <h1 className="card__title">
                               Farah Kazi (Mumbai, India)
                             </h1>
-                            <h3 className="card__project">Waataravan</h3>
+                            <p className="card__project">Waataravan</p>
                           </div>
                         </header>
                         <div className="card__body">
@@ -100,7 +105,10 @@ var Ambassadors = createReactClass({
                               biotechnology and data visualization.
                             </p>
                           </div>
-                          <AmbassadorCardDetails youtubeEmbedId="J47SsCH0bi0" />
+                          <AmbassadorCardDetails
+                            linkedIn="https://www.linkedin.com/in/farah-kazi/"
+                            youtubeEmbedId="J47SsCH0bi0"
+                          />
                         </div>
                       </div>
                     </div>
@@ -111,9 +119,9 @@ var Ambassadors = createReactClass({
                     <div className="card__contents">
                       <div className="ambassador-photo">
                         <img
-                          src="/assets/graphics/content/ambassadors/ambassador_ray_koci_crop.jpeg"
+                          src="/assets/graphics/content/ambassadors/ambassador_ray_koci_square.jpg"
                           width="300"
-                          height="auto"
+                          height="300"
                           alt="Card cover"
                         />
                       </div>
@@ -123,9 +131,7 @@ var Ambassadors = createReactClass({
                             <h1 className="card__title">
                               Ray Koci (Tirana, Albania)
                             </h1>
-                            <h3 className="card__project">
-                              Qendra Marrëdhënie
-                            </h3>
+                            <p className="card__project">Qendra Marrëdhënie</p>
                           </div>
                         </header>
                         <div className="card__body">
@@ -137,6 +143,7 @@ var Ambassadors = createReactClass({
                               and management.
                             </p>
                           </div>
+                          <AmbassadorCardDetails linkedIn="https://www.linkedin.com/in/ray-k-00b8a5b7/" />
                         </div>
                       </div>
                     </div>
@@ -147,9 +154,9 @@ var Ambassadors = createReactClass({
                     <div className="card__contents">
                       <div className="ambassador-photo">
                         <img
-                          src="/assets/graphics/content/ambassadors/ambassador_josephine_mbandi_crop.png"
+                          src="/assets/graphics/content/ambassadors/ambassador_josephine_mbandi_square.jpg"
                           width="300"
-                          height="auto"
+                          height="300"
                           alt="Card cover"
                         />
                       </div>
@@ -159,9 +166,9 @@ var Ambassadors = createReactClass({
                             <h1 className="card__title">
                               Josephine Mbandi (Nairobi, Kenya)
                             </h1>
-                            <h3 className="card__project">
+                            <p className="card__project">
                               AfriSTEM Connection{' '}
-                            </h3>
+                            </p>
                           </div>
                         </header>
                         <div className="card__body">
@@ -175,6 +182,10 @@ var Ambassadors = createReactClass({
                               (STEM).
                             </p>
                           </div>
+                          <AmbassadorCardDetails
+                            linkedIn="https://www.linkedin.com/in/josephine-mwikali-3124711b/"
+                            youtubeEmbedId="sOGG6sM6p64"
+                          />
                         </div>
                       </div>
                     </div>
@@ -185,9 +196,9 @@ var Ambassadors = createReactClass({
                     <div className="card__contents">
                       <div className="ambassador-photo">
                         <img
-                          src="/assets/graphics/content/ambassadors/ambassador_melusi_molefe_crop.png"
+                          src="/assets/graphics/content/ambassadors/ambassador_melusi_molefe_square.jpg"
                           width="300"
-                          height="auto"
+                          height="300"
                           alt="Card cover"
                         />
                       </div>
@@ -197,9 +208,9 @@ var Ambassadors = createReactClass({
                             <h1 className="card__title">
                               Melusi Molefe (Durban, South Africa)
                             </h1>
-                            <h3 className="card__project">
+                            <p className="card__project">
                               City of Durban Air Pollution Management
-                            </h3>
+                            </p>
                           </div>
                         </header>
                         <div className="card__body">
@@ -211,6 +222,7 @@ var Ambassadors = createReactClass({
                               environmental engineering and sciences.
                             </p>
                           </div>
+                          <AmbassadorCardDetails linkedIn="https://www.linkedin.com/in/modise-molefe-00333180/" />
                         </div>
                       </div>
                     </div>
@@ -221,9 +233,9 @@ var Ambassadors = createReactClass({
                     <div className="card__contents">
                       <div className="ambassador-photo">
                         <img
-                          src="/assets/graphics/content/ambassadors/ambassador_aza_tsogtsaikhan_crop.jpeg"
+                          src="/assets/graphics/content/ambassadors/ambassador_aza_tsogtsaikhan_square.jpeg"
                           width="300"
-                          height="auto"
+                          height="300"
                           alt="Card cover"
                         />
                       </div>
@@ -231,9 +243,9 @@ var Ambassadors = createReactClass({
                         <header className="card__header">
                           <div className="card__headline">
                             <h1 className="card__title">
-                              Azjargal Tsogtsaikhan(Ulaanbaatar, Mongolia)
+                              Azjargal Tsogtsaikhan (Ulaanbaatar, Mongolia)
                             </h1>
-                            <h3 className="card__project">Breathe Mongolia</h3>
+                            <p className="card__project">Breathe Mongolia</p>
                           </div>
                         </header>
                         <div className="card__body">
@@ -255,24 +267,38 @@ var Ambassadors = createReactClass({
             </div>
           </section>
 
-          <section className="fold fold--semi-light fold--type-a">
-            <header className="fold__header">
-              <h1 className="fold__title">
-                OpenAQ Community Ambassador Curriculum Overview
-              </h1>
-            </header>
+          <section
+            id="ambassador-fold-curriculum"
+            className="fold fold--semi-light fold--type-a ambassador-fold"
+          >
+            <div className="inner">
+              <header className="fold__header curriculum__header">
+                <h1 className="fold__title">
+                  OpenAQ Community Ambassador Curriculum Overview
+                </h1>
+                <h3 classNama="fold__subtitle">
+                  The ambassadors will participate in an opening orientation
+                  where the cohort will connect with one another virtually,
+                  learn about their respective fields, and begin to dive into
+                  their roles as OpenAQ Community Ambassadors. The program
+                  consists of exciting opportunities to grow professionally and
+                  learn about the role of open air quality data on a global
+                  scale including:
+                </h3>
+              </header>
+            </div>
             <div className="inner">
               <header className="fold__header ambassador-details">
                 <h2>Monthly Education Sessions</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    The ambassadors will engage in readings, guest lectures,
+                    The ambassadors engage in readings, guest lectures,
                     workshops, and seminars focused on pertinent air
                     quality-related topics including open air quality data,
                     public health analysis, low-cost sensor monitoring, and air
-                    quality philanthropy. Each month, there will be a guest
-                    speaker who will share their expertise and engage in an
-                    interactive tutorial with the ambassadors.
+                    quality philanthropy. Each month, there are guest speakers
+                    who share their expertise and engage in an interactive
+                    tutorial with the ambassadors.
                   </p>
                 </div>
               </header>
@@ -291,10 +317,11 @@ var Ambassadors = createReactClass({
                 <h2>Community Feature</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    An opportunity to be featured share an overview of the
-                    ambassador’s work and air quality challenges and
-                    opportunities to connect with various funding organizations
-                    and other professional networks.
+                    Ambassadors have an opportunity to share and highlight their
+                    work on air quality as part of a “Community Feature”. This
+                    feature includes a short video, social media coverage, and
+                    will spark opportunities to connect with various
+                    professional networks, including funding organizations.
                   </p>
                 </div>
               </header>
@@ -313,9 +340,10 @@ var Ambassadors = createReactClass({
                 <h2>Professional Development Opportunities</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    Opportunities to speak at international conferences and
-                    workshops and be featured as a monthly community leader
-                    highlighting the ambassador’s work and priority areas.
+                    Ambassadors have opportunities to speak at international
+                    conferences and workshops and be featured as a monthly
+                    community leader highlighting the ambassador’s work and
+                    priority areas.
                   </p>
                 </div>
               </header>
@@ -334,10 +362,10 @@ var Ambassadors = createReactClass({
                 <h2>Community Air Quality Workshops</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    Each ambassador will be trained to conduct multi-stakeholder
-                    workshops in their community, with the goal to
-                    collaboratively identify challenges, brainstorm solutions,
-                    and develop a tangible action plan to fight air pollution.
+                    Each ambassador conducts multi-stakeholder workshops in
+                    their community, with the goal to collaboratively identify
+                    challenges, brainstorm solutions, and develop a tangible
+                    action plan to fight air pollution.
                   </p>
                 </div>
               </header>
@@ -356,7 +384,7 @@ var Ambassadors = createReactClass({
                 <h2>Air Quality Data Toolkit</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    Each ambassador will develop a step-by-step guide and
+                    Each ambassador develops a step-by-step guide and
                     utilization application of the data available on OpenAQ to
                     help improve air quality in diverse ways.
                   </p>
@@ -377,7 +405,7 @@ var Ambassadors = createReactClass({
             <div className="inner">
               <header className="connect-fold__header">
                 <h1 className="connect-fold__title">
-                  Ready to become the next
+                  Interested in becoming the next
                   <br />
                   OpenAQ Community Ambassador?
                 </h1>
