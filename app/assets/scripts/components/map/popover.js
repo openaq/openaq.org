@@ -23,9 +23,9 @@ export default function Popover({
   currentPage,
   selectedLocations,
   handleLocationSelection,
+  popupFunction,
 }) {
   const [{ fetched, fetching, error, data }, setState] = useState(defaultState);
-
   useEffect(() => {
     const fetchData = () => {
       setState(state => ({ ...state, fetching: true, error: null }));
@@ -112,7 +112,6 @@ export default function Popover({
                   </strong>
                 </p>
               )}
-
               {data.sources && (
                 <div style={{ display: `flex`, gap: `0.5rem` }}>
                   Source: <SourcesList sources={data.sources} />
@@ -121,18 +120,32 @@ export default function Popover({
               {!isDisplayingSelectionTools && (
                 <ul className="popover__actions">
                   {/*
-                Using `a` instead of `Link` because these are rendered outside
-                the router context and `Link` needs that context to work.
-              */}
-                  <li>
-                    <a
-                      href={`#/compare/${encodeURIComponent(locationId)}`}
-                      className="button button--primary-bounded"
-                      title={`Compare ${data.name} with other locations`}
-                    >
-                      Compare
-                    </a>
-                  </li>
+                  Using `a` instead of `Link` because these are rendered outside
+                  the router context and `Link` needs that context to work.
+                  */}
+                  {popupFunction !== undefined ? (
+                    <li>
+                      <span
+                        onClick={() => {
+                          popupFunction(locationId);
+                        }}
+                        className="button button--primary-bounded"
+                        title={`Compare ${data.name} with other locations`}
+                      >
+                        Add to Compare
+                      </span>
+                    </li>
+                  ) : (
+                    <li>
+                      <a
+                        href={`#/compare/${encodeURIComponent(locationId)}`}
+                        className="button button--primary-bounded"
+                        title={`Compare ${data.name} with other locations`}
+                      >
+                        Compare
+                      </a>
+                    </li>
+                  )}
                   {locationId !== currentPage && (
                     <li>
                       <a
@@ -183,6 +196,7 @@ Popover.propTypes = {
   isDisplayingSelectionTools: T.bool,
   selectedLocations: T.object,
   handleLocationSelection: T.func,
+  popupFunction: T.func,
 };
 
 Popover.defaultProps = {

@@ -98,11 +98,12 @@ var Ambassadors = createReactClass({
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Farah manages air quality monitoring initiatives
-                              and builds communication strategies to raise
-                              awareness of air pollution and to advance policy
-                              reforms on air quality. She has a background in
-                              biotechnology and data visualization.
+                              Farah is Leads of Campaigns at Waataravan, where
+                              she manages air quality monitoring initiatives and
+                              builds communication strategies to raise awareness
+                              of air pollution and to advance policy reforms on
+                              air quality. She has a background in biotechnology
+                              and data visualization.
                             </p>
                           </div>
                           <AmbassadorCardDetails
@@ -137,8 +138,10 @@ var Ambassadors = createReactClass({
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Ray examines urban neighborhood planning to build
-                              safe and healthy spaces for children and their
+                              Ray is Program Director at Qendra Marrëdhënie
+                              where she examines air quality from an urban
+                              neighborhood planning perspective to build safe
+                              and healthy spaces for children and their
                               caregivers. She has a background in urban planning
                               and management.
                             </p>
@@ -174,12 +177,13 @@ var Ambassadors = createReactClass({
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Josephine works with communities to design,
-                              develop, test, and maintain low-cost sensors for
-                              air quality monitoring. She has a background in
-                              systems engineering and is passionate about
-                              Science, Technology, Engineering, and Mathematic
-                              (STEM).
+                              Josephine is Co-founder and Technical Lead at
+                              AfriSTEM Connection, where she works with
+                              communities to design, develop, test, and maintain
+                              low-cost sensors for air quality monitoring. She
+                              has a background in systems engineering and is
+                              passionate about Science, Technology, Engineering,
+                              and Mathematic (STEM).
                             </p>
                           </div>
                           <AmbassadorCardDetails
@@ -216,10 +220,14 @@ var Ambassadors = createReactClass({
                         <div className="card__body">
                           <div className="card__prose prose prose--responsive">
                             <p>
-                              Melusi leads the implementation of the Air Quality
-                              Management Plan for the municipality of Durban. He
-                              has a background in chemical engineering and
-                              environmental engineering and sciences.
+                              Melusi is a Meteorologist at ​​eThekwini
+                              Municipality, where he leads the implementation of
+                              the Air Quality Management Plan, Air Quality
+                              Impact Assessment, and Air Pollution Health Risk
+                              Assessment for ​​eThekwini Municipality, in
+                              Durban. He has a background in chemical
+                              engineering and environmental engineering and
+                              sciences.
                             </p>
                           </div>
                           <AmbassadorCardDetails linkedIn="https://www.linkedin.com/in/modise-molefe-00333180/" />
@@ -258,6 +266,7 @@ var Ambassadors = createReactClass({
                               public health policy and economics.
                             </p>
                           </div>
+                          <AmbassadorCardDetails linkedIn="https://www.linkedin.com/in/azats/" />
                         </div>
                       </div>
                     </div>
@@ -277,13 +286,12 @@ var Ambassadors = createReactClass({
                   OpenAQ Community Ambassador Curriculum Overview
                 </h1>
                 <h3 classNama="fold__subtitle">
-                  The ambassadors will participate in an opening orientation
-                  where the cohort will connect with one another virtually,
-                  learn about their respective fields, and begin to dive into
-                  their roles as OpenAQ Community Ambassadors. The program
-                  consists of exciting opportunities to grow professionally and
-                  learn about the role of open air quality data on a global
-                  scale including:
+                  The ambassadors participate in an opening orientation where
+                  the cohort connects with one another virtually, learn about
+                  their respective fields, and begin to dive into their roles as
+                  OpenAQ Community Ambassadors. The program consists of exciting
+                  opportunities to grow professionally and learn about the role
+                  of open air quality data on a global scale including:
                 </h3>
               </header>
             </div>
@@ -319,9 +327,10 @@ var Ambassadors = createReactClass({
                   <p>
                     Ambassadors have an opportunity to share and highlight their
                     work on air quality as part of a “Community Feature”. This
-                    feature includes a short video, social media coverage, and
-                    will spark opportunities to connect with various
-                    professional networks, including funding organizations.
+                    feature includes a short video and social media coverage, as
+                    well as opportunities to connect with various professional
+                    networks, including mission-aligned organizations and
+                    funders.
                   </p>
                 </div>
               </header>
@@ -340,10 +349,13 @@ var Ambassadors = createReactClass({
                 <h2>Professional Development Opportunities</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    Ambassadors have opportunities to speak at international
-                    conferences and workshops and be featured as a monthly
-                    community leader highlighting the ambassador’s work and
-                    priority areas.
+                    Ambassadors have public speaking opportunities at
+                    international conferences and workshops and have the option
+                    to work with a mentor to support their air quality-related
+                    projects and programs. The ambassador cohort is also a
+                    valuable resource for support, and we encourage ambassadors
+                    to build connections and support one another in their
+                    respective work.
                   </p>
                 </div>
               </header>
@@ -384,9 +396,11 @@ var Ambassadors = createReactClass({
                 <h2>Air Quality Data Toolkit</h2>
                 <div className="fold__teaser prose prose--responsive">
                   <p>
-                    Each ambassador develops a step-by-step guide and
-                    utilization application of the data available on OpenAQ to
-                    help improve air quality in diverse ways.
+                    Each ambassador develops a tailored step-by-step guide on
+                    how to use data available on the OpenAQ Platform. These
+                    toolkits will be made available publicly so that diverse
+                    stakeholders can utilize open data to enhance their air
+                    quality initiatives.
                   </p>
                 </div>
               </header>

@@ -189,7 +189,7 @@ export function fetchCompareLocationMeasurements(
     dispatch(requestCompareLocationMeasurements(index));
 
     let data = null;
-    let limit = 1000;
+    let limit = 3000;
     const fetcher = function (page) {
       let qs = buildAPIQS({
         spatial: 'location',
@@ -201,11 +201,11 @@ export function fetchCompareLocationMeasurements(
         date_from: startDate,
         date_to: endDate,
       });
-      // console.log('fetchCompareLocationMeasurements', `${config.api}/measurements?${qs}`);
 
       fetch(`${config.api}/averages?${qs}`)
         .then(response => {
           if (response.status >= 400) {
+            console.log('BADDD RESPONSE', response);
             throw new Error('Bad response');
           }
           return response.json();

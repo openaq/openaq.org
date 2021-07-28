@@ -4,6 +4,7 @@ export const iconMatch = [
   ['get', 'sensorType'],
   'low-cost sensor',
   'square',
+  // 'none',
   'reference grade',
   'circle',
   'circle', // fallback
