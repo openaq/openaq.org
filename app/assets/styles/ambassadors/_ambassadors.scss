@@ -158,7 +158,7 @@
   
     .card__body {
       @include media(medium-up) {
-        padding: $global-spacing ($global-spacing * 4) ($global-spacing * 1) 0;
+        padding: 0 ($global-spacing * 4) ($global-spacing * 1) 0;
       }
     }
   

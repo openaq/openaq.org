@@ -9,7 +9,9 @@ export default function AmbassadorCardDetails({ youtubeEmbedId, linkedIn }) {
       {linkedIn ? (
         <div>
           <p>
-            <a href={linkedIn}>LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" href={linkedIn}>
+              LinkedIn
+            </a>
           </p>
         </div>
       ) : (
