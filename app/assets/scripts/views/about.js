@@ -285,7 +285,7 @@ var About = createReactClass({
               <figure className="fold__media">
                 <article className="card card--book">
                   <a
-                    href="/assets/files/openaq-990-2019.pdf"
+                    href="/assets/files/openaq-990-2020.pdf"
                     target="_blank"
                     rel="noreferrer"
                     className="card__contents"
