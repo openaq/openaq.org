@@ -85,9 +85,6 @@ export function findLineByLeastSquares(values_x, values_y) {
   var sum_yy = 0;
   var count = 0;
 
-  /*
-   * We'll use those variables for faster read/write access.
-   */
   var x = 0;
   var y = 0;
   var values_length = values_x.length;

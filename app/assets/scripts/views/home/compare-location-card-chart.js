@@ -13,7 +13,7 @@ export default function CompareLocationCardChart(props) {
   // accurate comparison.
   const dateFormat = 'YYYY/MM/DD HH:mm:ss';
   const userNow = moment().format(dateFormat);
-  const weekAgo = moment().subtract(21, 'days').format(dateFormat);
+  const weekAgo = moment().subtract(7, 'days').format(dateFormat);
 
   // Prepare data.
   const chartData = useMemo(
@@ -39,7 +39,7 @@ export default function CompareLocationCardChart(props) {
   const yMax = d3.max(chartData, o => o.value) || 0;
 
   // 1 Week.
-  const xRange = [moment().subtract(21, 'days').toDate(), moment().toDate()];
+  const xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
 
   if (!chartData.length) return null;
 

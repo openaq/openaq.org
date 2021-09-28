@@ -33,7 +33,6 @@ export function addPopover(
     }
 
     var features = map.queryRenderedFeatures();
-    console.log('features', features);
     window.featuress = features;
 
     let lngLat = typeof coordinates[0] === 'number' ? coordinates : e.lngLat;
