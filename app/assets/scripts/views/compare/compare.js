@@ -129,7 +129,7 @@ function Compare(props) {
     _fetchCompareLocationIfNeeded(index, loc).then(res => {
       if (!res.error) {
         const toDate = moment.utc();
-        const fromDate = toDate.clone().subtract(21, 'days');
+        const fromDate = toDate.clone().subtract(8, 'days');
         const locId = res.json.id;
         _fetchCompareLocationMeasurements(
           index,
