@@ -1,15 +1,20 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
 import qs from 'qs';
+import * as turf from '@turf/turf';
 
-import CompareLocation from './compare-location';
-import CompareLocationSelector from './compare-location-selector';
-import ParameterSelector from './parameter-selector';
-import AvailabilityMessage from './availability-message';
-import CompareBrushChart from './compare-brush-chart';
+import CompareLocationSelector from '../compare/compare-location-selector';
+import CompareSpatialSensors from '../compare/compare-spatial-sensors';
+import CompareLocation from '../compare/compare-location';
+import ParameterSelector from '../compare/parameter-selector';
+import AvailabilityMessage from '../compare/availability-message';
+import CompareBrushChart from '../compare/compare-brush-chart';
+import CompareStatistics from '../compare/compare-statistics';
+
+import CollocationMap from './collocation-map';
 
 import {
   fetchBaseData,
@@ -27,7 +32,7 @@ import {
 } from '../../actions/action-creators';
 import { PM25_PARAMETER_ID } from '../../utils/constants';
 
-function Compare(props) {
+function Collocate(props) {
   const {
     match,
     location,
@@ -52,6 +57,10 @@ function Compare(props) {
     _selectCompareArea,
     _selectCompareLocation,
   } = props;
+
+  // Use to trigger finding nearby sensors in mapbox
+  const [triggerCollocate, setTriggerCollocate] = useState(false);
+  const [nearbySensors, setNearbySensors] = useState([]);
 
   useEffect(() => {
     if (!parameters) {
@@ -86,7 +95,7 @@ function Compare(props) {
 
   const onParameterSelect = parameter => {
     const locsUrl = getLocIds().map(encodeURIComponent).join('/');
-    history.push(`/compare/${locsUrl}?parameter=${parameter}`);
+    history.push(`/collocate/${locsUrl}?parameter=${parameter}`);
   };
 
   const onLocationRemove = index => {
@@ -96,7 +105,7 @@ function Compare(props) {
       .map(encodeURIComponent)
       .join('/');
 
-    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+    history.push(`/collocate/${locsUrl}?parameter=${activeParameterData.id}`);
   };
 
   const onCompareOptSelect = (key, value) => {
@@ -115,14 +124,14 @@ function Compare(props) {
     }
   };
 
-  const onCompareOptionsConfirm = () => {
+  const onCompareOptionsConfirm = locationId => {
     _cancelCompareOptions();
 
-    const locsUrl = [...getLocIds(), compareSelectOpts.location]
+    const locsUrl = [...getLocIds(), locationId]
       .map(encodeURIComponent)
       .join('/');
 
-    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+    history.push(`/collocate/${locsUrl}?parameter=${activeParameterData.id}`);
   };
 
   const fetchLocationData = (index, loc) => {
@@ -176,7 +185,7 @@ function Compare(props) {
 
   return (
     <section className="inpage">
-      <header className="inpage__header">
+      <header className="inpage__header choose-sensors-wrapper">
         <div className="inner">
           <div className="inpage__headline">
             <h1 className="inpage__title">Compare locations</h1>
@@ -184,16 +193,7 @@ function Compare(props) {
 
           <div className="compare">
             <ul className="compare__location-list">
-              {locs.map((o, i) => (
-                <CompareLocation
-                  locationIndex={i}
-                  countries={countries}
-                  onRemove={onLocationRemove}
-                  location={o}
-                  key={i}
-                />
-              ))}
-              {locs.length < 3 && (
+              {locs.length === 0 && (
                 <CompareLocationSelector
                   status={compareSelectOpts.status}
                   country={compareSelectOpts.country}
@@ -208,10 +208,85 @@ function Compare(props) {
                   onCancel={_cancelCompareOptions}
                 />
               )}
+              {locs.map((o, i) => (
+                <CompareLocation
+                  locationIndex={i}
+                  countries={countries}
+                  onRemove={onLocationRemove}
+                  location={o}
+                  key={i}
+                />
+              ))}
+              {locs.length === 1 &&
+                locs.length &&
+                compareLoc.length > 0 &&
+                compareLoc[0].data &&
+                compareLoc[0].data.coordinates && (
+                  <CompareSpatialSensors
+                    nearbySensors={nearbySensors}
+                    onCompareOptionsConfirm={onCompareOptionsConfirm}
+                    setTriggerCollocate={setTriggerCollocate}
+                    triggerCollocate={triggerCollocate}
+                  >
+                    <CompareLocationSelector
+                      status={compareSelectOpts.status}
+                      country={compareSelectOpts.country}
+                      area={compareSelectOpts.area}
+                      location={compareSelectOpts.location}
+                      locationsByCountry={locationsByCountry}
+                      selectedLocations={selectedLocations}
+                      countries={countries}
+                      onLocationAdd={_selectCompareOptions}
+                      onOptSelect={onCompareOptSelect}
+                      onConfirm={onCompareOptionsConfirm}
+                      onCancel={_cancelCompareOptions}
+                    />
+                  </CompareSpatialSensors>
+                )}
             </ul>
           </div>
         </div>
       </header>
+      <div className="inpage__body">
+        {locs.length &&
+          compareLoc.length > 0 &&
+          compareLoc[0].data &&
+          compareLoc[0].data.coordinates && (
+            <CollocationMap
+              locationId={compareLoc[0].data.id}
+              center={[
+                compareLoc[0].data.coordinates.longitude,
+                compareLoc[0].data.coordinates.latitude,
+              ]}
+              parameters={compareLoc[0].data.parameters}
+              initialActiveParameter={compareLoc[0].data.parameters[0]}
+              // trigger a mapbox render query
+              popupFunction={locationId => {
+                onCompareOptionsConfirm(locationId);
+              }}
+              triggerCollocate={triggerCollocate}
+              findNearbySensors={features => {
+                console.log(features);
+                const from = turf.point([
+                  compareLoc[0].data.coordinates.longitude,
+                  compareLoc[0].data.coordinates.latitude,
+                ]);
+                const newFeatures = [];
+                features.forEach(feature => {
+                  const to = turf.point(feature.geometry.coordinates);
+                  const options = { units: 'miles' };
+                  const distance = turf.distance(from, to, options);
+                  feature.distance = distance;
+                  if (distance !== 0) {
+                    newFeatures.push(feature);
+                  }
+                });
+                console.log('setNearbySensors', newFeatures);
+                setNearbySensors(newFeatures);
+              }}
+            />
+          )}
+      </div>
       <div className="inpage__body">
         {activeParameterData && locs.length ? (
           <section className="fold" id="compare-fold-measurements">
@@ -230,6 +305,13 @@ function Compare(props) {
                   />
                 </div>
               </header>
+              <div className="fold__body">
+                <CompareStatistics
+                  activeParam={activeParameterData}
+                  compareMeasurements={compareMeasurements}
+                  compareLocations={compareLoc}
+                />
+              </div>
               <div className="fold__body">
                 <CompareBrushChart
                   activeParam={activeParameterData}
@@ -250,7 +332,7 @@ function Compare(props) {
   );
 }
 
-Compare.propTypes = {
+Collocate.propTypes = {
   _fetchBaseData: T.func,
   _fetchCompareLocationIfNeeded: T.func,
   _removeCompareLocation: T.func,
@@ -320,4 +402,4 @@ function dispatcher(d) {
   };
 }
 
-module.exports = connect(selector, dispatcher)(Compare);
+module.exports = connect(selector, dispatcher)(Collocate);

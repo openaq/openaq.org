@@ -13,7 +13,7 @@ export default function CompareBrushChart(props) {
 
   const dateFormat = 'YYYY/MM/DD HH:mm:ss';
   const userNow = moment().format(dateFormat);
-  const weekAgo = moment().subtract(7, 'days').format(dateFormat);
+  const weekAgo = moment().subtract(30, 'days').format(dateFormat);
 
   // Prepare data.
   const chartData = useMemo(() => {
@@ -56,7 +56,8 @@ export default function CompareBrushChart(props) {
   const yMax = d3.max(chartData || [], r => d3.max(r, o => o.value)) || 0;
 
   // 1 Week.
-  const xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
+  // 3 weeks
+  const xRange = [moment().subtract(21, 'days').toDate(), moment().toDate()];
 
   // Only show the "no results" message if measurements have loaded.
   const fetchedMeasurements = compareMeasurements.filter(

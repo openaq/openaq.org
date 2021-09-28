@@ -6,11 +6,14 @@ import MeasurementsLayer from '../../components/map/measurements-layer';
 import LocationLayer from '../../components/map/location-layer';
 import Legend from '../../components/map/legend';
 
-export default function NearbyLocations({
+export default function CollocationMap({
   locationId,
   center,
   parameters,
   initialActiveParameter,
+  triggerCollocate,
+  findNearbySensors,
+  popupFunction,
 }) {
   const [activeParameter, setActiveParameter] = useState(
     initialActiveParameter
@@ -21,17 +24,20 @@ export default function NearbyLocations({
   };
 
   return (
-    <section className="fold" id="location-fold-nearby">
+    <section className="fold collocate-map" id="location-fold-nearby">
       <div className="inner">
-        <header className="fold__header">
-          <h1 className="fold__title">Nearby locations</h1>
-        </header>
         <div className="fold__body">
-          <MapComponent scrollZoomDisabled={false} center={center}>
+          <MapComponent
+            scrollZoomDisabled={true}
+            center={center}
+            triggerCollocate={triggerCollocate}
+            activeParameter={activeParameter.parameterId}
+            findNearbySensors={findNearbySensors}
+          >
             <LocationsSource activeParameter={activeParameter.parameterId}>
               <MeasurementsLayer
                 activeParameter={activeParameter.parameterId}
-                center={center}
+                popupFunction={popupFunction}
               />
               <LocationLayer
                 activeParameter={activeParameter.parameterId}
@@ -50,11 +56,14 @@ export default function NearbyLocations({
   );
 }
 
-NearbyLocations.propTypes = {
+CollocationMap.propTypes = {
   locationId: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   parameters: PropTypes.array,
   city: PropTypes.string,
   country: PropTypes.string,
   initialActiveParameter: PropTypes.object,
+  triggerCollocate: PropTypes.func,
+  findNearbySensors: PropTypes.func,
+  popupFunction: PropTypes.func,
 };

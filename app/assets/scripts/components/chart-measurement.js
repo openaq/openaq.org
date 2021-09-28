@@ -46,7 +46,6 @@ var ChartMeasurement = createReactClass({
     if (this.props.compressed) {
       this.chart.type('compressed');
     }
-
     d3.select(this.containerRef).call(this.chart);
   },
 

@@ -91,6 +91,7 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "@turf/turf": "^6.5.0",
     "babel-polyfill": "^6.9.1",
     "chart.js": "^2.9.4",
     "chroma-js": "^1.2.1",

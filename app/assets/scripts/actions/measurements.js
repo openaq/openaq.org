@@ -67,7 +67,7 @@ export function fetchMeasurements(location, startDate, endDate) {
         date_to: endDate,
       });
 
-      // console.log('fetchMeasurements url', `${config.api}/measurements?${qs}`);
+      console.log('fetchMeasurements url', `${config.api}/measurements?${qs}`);
 
       fetch(`${config.api}/measurements?${qs}`)
         .then(response => {

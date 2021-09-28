@@ -21,18 +21,18 @@ export default function MeasurementsLayer({
   country,
   map,
   sourceId,
+  popupFunction,
 }) {
   let match = useRouteMatch();
-
   const { getMaxColorValue } = useContext(ParameterContext);
 
   const countryFilter = ['==', ['get', 'country'], country];
   useEffect(() => {
+    console.log('measurements layer', sourceId, activeParameter);
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
     if (!map.hasImage('circle')) map.addImage('circle', circle, { sdf: true });
 
     const maxColorValue = getMaxColorValue(activeParameter);
-
     map.addLayer({
       id: `${activeParameter}-outline`,
       source: sourceId,
@@ -71,7 +71,8 @@ export default function MeasurementsLayer({
       map,
       `${activeParameter}-layer`,
       match.params.id,
-      activeParameter
+      activeParameter,
+      popupFunction
     );
 
     //  DEBUGGING HELPER: shows properties on hover
@@ -108,4 +109,5 @@ MeasurementsLayer.propTypes = {
   country: PropTypes.string,
   sourceId: PropTypes.string,
   map: PropTypes.object,
+  center: PropTypes.array,
 };

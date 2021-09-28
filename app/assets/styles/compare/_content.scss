@@ -122,6 +122,12 @@
   font-size: 0.875rem;
 }
 
+.compare-statistics {
+  p {
+    margin: 0.25rem 0;
+  }
+}
+
 .compare-marker {
   display: inline-block;
   &::before {
