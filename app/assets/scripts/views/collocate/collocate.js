@@ -267,7 +267,6 @@ function Collocate(props) {
               triggerCollocate={triggerCollocate}
               findNearbySensors={features => {
                 console.log(features);
-                console.log(turf);
                 const from = turf.point([
                   compareLoc[0].data.coordinates.longitude,
                   compareLoc[0].data.coordinates.latitude,
@@ -278,7 +277,7 @@ function Collocate(props) {
                   const options = { units: 'miles' };
                   const distance = turf.distance(from, to, options);
                   feature.distance = distance;
-                  if (distance < 50) {
+                  if (distance !== 0) {
                     newFeatures.push(feature);
                   }
                 });
