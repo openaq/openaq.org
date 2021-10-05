@@ -16,8 +16,8 @@ describe('The About Page', () => {
     cy.get('.principles-list .card--principle').should('have.length', 3);
   });
 
-  it('renders 21 team and board members', () => {
-    cy.get('.team-list .team-member').should('have.length', 21);
+  it('renders 19 team and board members', () => {
+    cy.get('.team-list .team-member').should('have.length', 19);
   });
 
   it('renders 20 sponsors', () => {
