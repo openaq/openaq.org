@@ -56,6 +56,7 @@ export default function CompareBrushChart(props) {
   const yMax = d3.max(chartData || [], r => d3.max(r, o => o.value)) || 0;
 
   // 1 Week.
+  // 3 weeks
   const xRange = [moment().subtract(7, 'days').toDate(), moment().toDate()];
 
   // Only show the "no results" message if measurements have loaded.

@@ -52,7 +52,7 @@ var PageFooter = createReactClass({
                 </li>
                 <li>
                   <a
-                    href="https://tinyurl.com/joinopenaqslack"
+                    href="https://openaq-slackin.herokuapp.com"
                     className="connect-menu__link--slack"
                     title="View Slack"
                     target="_blank"

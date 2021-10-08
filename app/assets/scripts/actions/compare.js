@@ -201,7 +201,6 @@ export function fetchCompareLocationMeasurements(
         date_from: startDate,
         date_to: endDate,
       });
-      // console.log('fetchCompareLocationMeasurements', `${config.api}/measurements?${qs}`);
 
       fetch(`${config.api}/averages?${qs}`)
         .then(response => {

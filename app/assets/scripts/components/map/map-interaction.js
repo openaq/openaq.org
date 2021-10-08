@@ -4,7 +4,13 @@ import mapbox from 'mapbox-gl';
 
 import Popover from './popover';
 
-export function addPopover(map, layerId, locationId, activeParameter) {
+export function addPopover(
+  map,
+  layerId,
+  locationId,
+  activeParameter,
+  popupFunction
+) {
   // Change the cursor to a pointer when the mouse is over the layer.
   map.on('mouseenter', layerId, function () {
     map.getCanvas().style.cursor = 'pointer';
@@ -17,7 +23,6 @@ export function addPopover(map, layerId, locationId, activeParameter) {
 
   const openPopup = e => {
     let popoverElement = document.createElement('div');
-
     var coordinates = e.features[0].geometry.coordinates.slice();
 
     // Ensure that if the map is zoomed out such that multiple
@@ -27,13 +32,16 @@ export function addPopover(map, layerId, locationId, activeParameter) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    let lngLat = typeof coordinates[0] === 'number' ? coordinates : e.lngLat;
+    var features = map.queryRenderedFeatures();
+    window.featuress = features;
 
+    let lngLat = typeof coordinates[0] === 'number' ? coordinates : e.lngLat;
     ReactDOM.render(
       <Popover
         activeParameter={activeParameter}
         locationId={e.features[0].properties.locationId}
         currentPage={parseInt(locationId, 10)}
+        popupFunction={popupFunction}
       />,
       popoverElement
     );

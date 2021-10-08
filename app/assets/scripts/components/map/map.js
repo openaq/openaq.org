@@ -5,10 +5,27 @@ import mapbox from 'mapbox-gl';
 import { ParameterProvider } from '../../context/parameter-context';
 import config from '../../config';
 
-export default function Map({ center, bbox, scrollZoomDisabled, children }) {
+export default function Map({
+  center,
+  bbox,
+  scrollZoomDisabled,
+  children,
+  activeParameter,
+  triggerCollocate,
+  findNearbySensors,
+}) {
   const containerRef = useRef();
 
   const [map, setMap] = useState(null);
+
+  useEffect(() => {
+    if (map !== null) {
+      var features = map.queryRenderedFeatures({
+        layers: [`${activeParameter}-layer`],
+      });
+      findNearbySensors(features);
+    }
+  }, [triggerCollocate]);
 
   useEffect(() => {
     mapbox.accessToken = config.mapbox.token;
@@ -32,11 +49,17 @@ export default function Map({ center, bbox, scrollZoomDisabled, children }) {
       }
 
       if (center) {
-        m.flyTo({ center, zoom: 15 });
+        m.jumpTo({ center, zoom: 8 });
       } else if (bbox) {
         m.fitBounds(bbox, { padding: 20, maxZoom: 18 });
       }
     });
+
+    var scale = new mapbox.ScaleControl({
+      maxWidth: 200,
+      unit: 'imperial',
+    });
+    m.addControl(scale);
 
     return () => {
       if (map) {
@@ -70,4 +93,8 @@ Map.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]),
+  // TODO: move these elsewhere or make required
+  activeParameter: PropTypes.string,
+  triggerCollocate: PropTypes.bool,
+  findNearbySensors: PropTypes.func,
 };

@@ -25,6 +25,7 @@ import Country from './views/country';
 import ProjectsHub from './views/projects-hub';
 import Project from './views/project';
 import Compare from './views/compare';
+import Collocate from './views/collocate';
 
 const logger = createLogger({
   level: 'info',
@@ -126,6 +127,12 @@ render(
             path="/compare/:loc1?/:loc2?/:loc3?"
             component={Compare}
             pageClass="page--compare"
+          />
+          <Route
+            name="country"
+            path="/collocate/:loc1?/:loc2?/:loc3?"
+            component={Collocate}
+            pageClass="page--collocate"
           />
           <Route
             name="projectsHub"

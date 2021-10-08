@@ -5,7 +5,7 @@ import moment from 'moment';
 export default function AvailabilityMessage(props) {
   const { activeParam, compareLocations } = props;
   // Prepare data.
-  const weekAgo = moment().subtract(7, 'days').toISOString();
+  const weekAgo = moment().subtract(21, 'days').toISOString();
   const messages = compareLocations
     .filter(o => o.fetched && !o.fetching && o.data)
     .map(o => {

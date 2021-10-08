@@ -27,10 +27,11 @@ export default function NearbyLocations({
           <h1 className="fold__title">Nearby locations</h1>
         </header>
         <div className="fold__body">
-          <MapComponent center={center}>
+          <MapComponent scrollZoomDisabled={false} center={center}>
             <LocationsSource activeParameter={activeParameter.parameterId}>
               <MeasurementsLayer
                 activeParameter={activeParameter.parameterId}
+                center={center}
               />
               <LocationLayer
                 activeParameter={activeParameter.parameterId}
