@@ -53,6 +53,22 @@ export default function Map({
       } else if (bbox) {
         m.fitBounds(bbox, { padding: 20, maxZoom: 18 });
       }
+
+      if (m !== null) {
+        var features = m.queryRenderedFeatures({
+          layers: [`${activeParameter}-layer`],
+        });
+        findNearbySensors(features);
+      }
+    });
+
+    m.on('move', () => {
+      if (m !== null) {
+        var features = m.queryRenderedFeatures({
+          layers: [`${activeParameter}-layer`],
+        });
+        findNearbySensors(features);
+      }
     });
 
     var scale = new mapbox.ScaleControl({
@@ -94,7 +110,7 @@ Map.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
   ]),
   // TODO: move these elsewhere or make required
-  activeParameter: PropTypes.string,
+  activeParameter: PropTypes.number,
   triggerCollocate: PropTypes.bool,
   findNearbySensors: PropTypes.func,
 };

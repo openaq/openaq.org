@@ -117,7 +117,6 @@ function Compare(props) {
 
   const onCompareOptionsConfirm = () => {
     _cancelCompareOptions();
-
     const locsUrl = [...getLocIds(), compareSelectOpts.location]
       .map(encodeURIComponent)
       .join('/');

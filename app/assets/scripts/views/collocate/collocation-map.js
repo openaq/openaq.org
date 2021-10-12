@@ -63,7 +63,7 @@ CollocationMap.propTypes = {
   city: PropTypes.string,
   country: PropTypes.string,
   initialActiveParameter: PropTypes.object,
-  triggerCollocate: PropTypes.func,
+  triggerCollocate: PropTypes.bool,
   findNearbySensors: PropTypes.func,
   popupFunction: PropTypes.func,
 };

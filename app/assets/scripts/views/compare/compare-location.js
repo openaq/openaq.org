@@ -12,7 +12,6 @@ import { NO_CITY } from '../../utils/constants';
 
 export default function CompareLocation(props) {
   const { locationIndex, location, countries, onRemove } = props;
-
   if (location.fetching) {
     return (
       <li className="compare__location">
@@ -39,13 +38,17 @@ export default function CompareLocation(props) {
       <h2 className="compare__title">
         <Link to={`/location/${encodeURIComponent(d.id)}`}>
           <span className={c('compare-marker', kl[locationIndex])}>
-            {d.name}
+            Sensor #{locationIndex + 1}
           </span>
         </Link>{' '}
-        <small>
-          in {d.city || NO_CITY}, {countryData?.name}
-        </small>
+        <small className="compare-location-name">{d.name}</small>
       </h2>
+      <p className="compare-location-place">
+        in {d.city || NO_CITY}, {countryData?.name}
+      </p>
+      <p className="compare-sensor-type">
+        Sensor Type: <strong>{d.sensorType}</strong>
+      </p>
       <p className="compare-parameters">
         Reporting: {d.parameters.map(p => p.displayName).join(', ')}
       </p>
