@@ -124,7 +124,17 @@ function Collocate(props) {
     }
   };
 
-  const onCompareOptionsConfirm = locationId => {
+  const onCompareOptionsConfirm = () => {
+    _cancelCompareOptions();
+
+    const locsUrl = [...getLocIds(), compareSelectOpts.location]
+      .map(encodeURIComponent)
+      .join('/');
+
+    history.push(`/collocate/${locsUrl}?parameter=${activeParameterData.id}`);
+  };
+
+  const onCompareSpatialOptionsConfirm = locationId => {
     _cancelCompareOptions();
 
     const locsUrl = [...getLocIds(), locationId]
@@ -138,7 +148,7 @@ function Collocate(props) {
     _fetchCompareLocationIfNeeded(index, loc).then(res => {
       if (!res.error) {
         const toDate = moment.utc();
-        const fromDate = toDate.clone().subtract(21, 'days');
+        const fromDate = toDate.clone().subtract(7, 'days');
         const locId = res.json.id;
         _fetchCompareLocationMeasurements(
           index,
@@ -190,7 +200,6 @@ function Collocate(props) {
           <div className="inpage__headline">
             <h1 className="inpage__title">Compare locations</h1>
           </div>
-
           <div className="compare">
             <ul className="compare__location-list">
               {locs.length === 0 && (
@@ -217,19 +226,21 @@ function Collocate(props) {
                   key={i}
                 />
               ))}
-              {locs.length === 1 &&
-                locs.length &&
+              {locs.length < 3 &&
                 compareLoc.length > 0 &&
                 compareLoc[0].data &&
                 compareLoc[0].data.coordinates && (
                   <CompareSpatialSensors
+                    compareLocations={compareLoc}
                     nearbySensors={nearbySensors}
-                    onCompareOptionsConfirm={onCompareOptionsConfirm}
+                    onCompareSpatialOptionsConfirm={
+                      onCompareSpatialOptionsConfirm
+                    }
                     setTriggerCollocate={setTriggerCollocate}
                     triggerCollocate={triggerCollocate}
                   >
                     <CompareLocationSelector
-                      status={compareSelectOpts.status}
+                      status={'selecting'}
                       country={compareSelectOpts.country}
                       area={compareSelectOpts.area}
                       location={compareSelectOpts.location}
@@ -248,44 +259,53 @@ function Collocate(props) {
         </div>
       </header>
       <div className="inpage__body">
-        {locs.length &&
+        {locs.length === 0 ? (
+          <section className="fold" id="compare-fold-measurements">
+            <div className="inner">
+              <header className="fold__header">
+                <h3>Add a sensor above to get started.</h3>
+              </header>
+            </div>
+          </section>
+        ) : (
           compareLoc.length > 0 &&
           compareLoc[0].data &&
           compareLoc[0].data.coordinates && (
-            <CollocationMap
-              locationId={compareLoc[0].data.id}
-              center={[
-                compareLoc[0].data.coordinates.longitude,
-                compareLoc[0].data.coordinates.latitude,
-              ]}
-              parameters={compareLoc[0].data.parameters}
-              initialActiveParameter={compareLoc[0].data.parameters[0]}
-              // trigger a mapbox render query
-              popupFunction={locationId => {
-                onCompareOptionsConfirm(locationId);
-              }}
-              triggerCollocate={triggerCollocate}
-              findNearbySensors={features => {
-                console.log(features);
-                const from = turf.point([
+            <div>
+              <CollocationMap
+                locationId={compareLoc[0].data.id}
+                center={[
                   compareLoc[0].data.coordinates.longitude,
                   compareLoc[0].data.coordinates.latitude,
-                ]);
-                const newFeatures = [];
-                features.forEach(feature => {
-                  const to = turf.point(feature.geometry.coordinates);
-                  const options = { units: 'miles' };
-                  const distance = turf.distance(from, to, options);
-                  feature.distance = distance;
-                  if (distance !== 0) {
-                    newFeatures.push(feature);
-                  }
-                });
-                console.log('setNearbySensors', newFeatures);
-                setNearbySensors(newFeatures);
-              }}
-            />
-          )}
+                ]}
+                parameters={compareLoc[0].data.parameters}
+                initialActiveParameter={compareLoc[0].data.parameters[0]}
+                // trigger a mapbox render query
+                popupFunction={locationId => {
+                  onCompareSpatialOptionsConfirm(locationId);
+                }}
+                triggerCollocate={triggerCollocate}
+                findNearbySensors={features => {
+                  const from = turf.point([
+                    compareLoc[0].data.coordinates.longitude,
+                    compareLoc[0].data.coordinates.latitude,
+                  ]);
+                  const newFeatures = [];
+                  features.forEach(feature => {
+                    const to = turf.point(feature.geometry.coordinates);
+                    const options = { units: 'miles' };
+                    const distance = turf.distance(from, to, options);
+                    feature.distance = distance;
+                    if (distance !== 0) {
+                      newFeatures.push(feature);
+                    }
+                  });
+                  setNearbySensors(newFeatures);
+                }}
+              />
+            </div>
+          )
+        )}
       </div>
       <div className="inpage__body">
         {activeParameterData && locs.length ? (

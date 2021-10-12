@@ -73,7 +73,9 @@ export function mode(numbers) {
  * @return {Array} The range of the specified numbers.
  */
 export function range(numbers) {
-  numbers.sort();
+  numbers = numbers.sort(function (a, b) {
+    return a - b;
+  });
   return [numbers[0], numbers[numbers.length - 1]];
 }
 

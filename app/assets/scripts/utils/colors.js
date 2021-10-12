@@ -99,7 +99,7 @@ export function generateLegendStops(parameter) {
   }));
 
   // Customize first and last labels.
-  stops[0].label = '0' + parameter.preferredUnit;
+  stops[0].label = '0' + parameter.unit;
   stops[stops.length - 1].label += '+';
 
   return stops;

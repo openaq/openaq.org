@@ -112,7 +112,6 @@ const ColorScaleLegend = ({
   onParamSelection,
 }) => {
   const scaleStops = generateLegendStops(activeParameter);
-
   const colorWidth = 100 / scaleStops.length;
 
   return (
