@@ -28,7 +28,6 @@ export default function MeasurementsLayer({
 
   const countryFilter = ['==', ['get', 'country'], country];
   useEffect(() => {
-    console.log('measurements layer', sourceId, activeParameter);
     if (!map.hasImage('square')) map.addImage('square', square, { sdf: true });
     if (!map.hasImage('circle')) map.addImage('circle', circle, { sdf: true });
 
