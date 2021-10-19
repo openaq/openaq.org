@@ -271,13 +271,13 @@ var About = createReactClass({
                   </p>
                   <p className="fold__main-action">
                     <a
-                      href="/assets/files/openaq-990-2019.pdf"
+                      href="/assets/files/openaq-990-2020.pdf"
                       target="_blank"
                       rel="noreferrer"
                       className="button-book-download"
                       title="Download"
                     >
-                      <span>Download 2019 Form 990</span>
+                      <span>Download 2020 Form 990</span>
                     </a>
                   </p>
                 </div>
@@ -293,7 +293,7 @@ var About = createReactClass({
                   >
                     <header className="card__header">
                       <div className="card__headline">
-                        <p className="card__subtitle">2019</p>
+                        <p className="card__subtitle">2020</p>
                         <h1 className="card__title">Form 990</h1>
                       </div>
                     </header>
