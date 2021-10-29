@@ -31,7 +31,6 @@ var ChartMeasurement = createReactClass({
   },
 
   componentDidMount: function () {
-    // console.log('ChartMeasurement componentDidMount');
     // Debounce event.
     this.onWindowResize = _.debounce(this.onWindowResize, 200);
 
@@ -50,13 +49,11 @@ var ChartMeasurement = createReactClass({
   },
 
   componentWillUnmount: function () {
-    // console.log('ChartMeasurement componentWillUnmount');
     window.removeEventListener('resize', this.onWindowResize);
     this.chart.destroy();
   },
 
   componentDidUpdate: function (prevProps /* prevState */) {
-    // console.log('ChartMeasurement componentDidUpdate');
     this.chart.pauseUpdate();
     if (prevProps.data !== this.props.data) {
       this.chart.data(this.props.data);

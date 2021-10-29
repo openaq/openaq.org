@@ -1,15 +1,20 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { PropTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
 import qs from 'qs';
+import * as turf from '@turf/turf';
 
-import CompareLocation from './compare-location';
 import CompareLocationSelector from './compare-location-selector';
+import CompareSpatialSensors from './compare-spatial-sensors';
+import CompareLocation from './compare-location';
 import ParameterSelector from './parameter-selector';
 import AvailabilityMessage from './availability-message';
 import CompareBrushChart from './compare-brush-chart';
+import CompareStatistics from './compare-statistics';
+
+import CompareMap from './compare-map';
 
 import {
   fetchBaseData,
@@ -52,6 +57,10 @@ function Compare(props) {
     _selectCompareArea,
     _selectCompareLocation,
   } = props;
+
+  // Use to trigger finding nearby sensors in mapbox
+  const [triggerCompareSearch, setTriggerCompareSearch] = useState(false);
+  const [nearbySensors, setNearbySensors] = useState([]);
 
   useEffect(() => {
     if (!parameters) {
@@ -125,11 +134,21 @@ function Compare(props) {
     history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
   };
 
+  const onCompareSpatialOptionsConfirm = locationId => {
+    _cancelCompareOptions();
+
+    const locsUrl = [...getLocIds(), locationId]
+      .map(encodeURIComponent)
+      .join('/');
+
+    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+  };
+
   const fetchLocationData = (index, loc) => {
     _fetchCompareLocationIfNeeded(index, loc).then(res => {
       if (!res.error) {
         const toDate = moment.utc();
-        const fromDate = toDate.clone().subtract(8, 'days');
+        const fromDate = toDate.clone().subtract(7, 'days');
         const locId = res.json.id;
         _fetchCompareLocationMeasurements(
           index,
@@ -176,24 +195,14 @@ function Compare(props) {
 
   return (
     <section className="inpage">
-      <header className="inpage__header">
+      <header className="inpage__header choose-sensors-wrapper">
         <div className="inner">
           <div className="inpage__headline">
             <h1 className="inpage__title">Compare locations</h1>
           </div>
-
           <div className="compare">
             <ul className="compare__location-list">
-              {locs.map((o, i) => (
-                <CompareLocation
-                  locationIndex={i}
-                  countries={countries}
-                  onRemove={onLocationRemove}
-                  location={o}
-                  key={i}
-                />
-              ))}
-              {locs.length < 3 && (
+              {locs.length === 0 && (
                 <CompareLocationSelector
                   status={compareSelectOpts.status}
                   country={compareSelectOpts.country}
@@ -208,10 +217,96 @@ function Compare(props) {
                   onCancel={_cancelCompareOptions}
                 />
               )}
+              {locs.map((o, i) => (
+                <CompareLocation
+                  locationIndex={i}
+                  countries={countries}
+                  onRemove={onLocationRemove}
+                  location={o}
+                  key={i}
+                />
+              ))}
+              {locs.length < 3 &&
+                compareLoc.length > 0 &&
+                compareLoc[0].data &&
+                compareLoc[0].data.coordinates && (
+                  <CompareSpatialSensors
+                    compareLocations={compareLoc}
+                    nearbySensors={nearbySensors}
+                    onCompareSpatialOptionsConfirm={
+                      onCompareSpatialOptionsConfirm
+                    }
+                    setTriggerCompareSearch={setTriggerCompareSearch}
+                    triggerCompareSearch={triggerCompareSearch}
+                  >
+                    <CompareLocationSelector
+                      status={'selecting'}
+                      country={compareSelectOpts.country}
+                      area={compareSelectOpts.area}
+                      location={compareSelectOpts.location}
+                      locationsByCountry={locationsByCountry}
+                      selectedLocations={selectedLocations}
+                      countries={countries}
+                      onLocationAdd={_selectCompareOptions}
+                      onOptSelect={onCompareOptSelect}
+                      onConfirm={onCompareOptionsConfirm}
+                      onCancel={_cancelCompareOptions}
+                    />
+                  </CompareSpatialSensors>
+                )}
             </ul>
           </div>
         </div>
       </header>
+      <div className="inpage__body">
+        {locs.length === 0 ? (
+          <section className="fold" id="compare-fold-measurements">
+            <div className="inner">
+              <header className="fold__header">
+                <h3>Add a sensor above to get started.</h3>
+              </header>
+            </div>
+          </section>
+        ) : (
+          compareLoc.length > 0 &&
+          compareLoc[0].data &&
+          compareLoc[0].data.coordinates && (
+            <div>
+              <CompareMap
+                locationId={compareLoc[0].data.id}
+                center={[
+                  compareLoc[0].data.coordinates.longitude,
+                  compareLoc[0].data.coordinates.latitude,
+                ]}
+                parameters={compareLoc[0].data.parameters}
+                initialActiveParameter={compareLoc[0].data.parameters[0]}
+                // trigger a mapbox render query
+                popupFunction={locationId => {
+                  onCompareSpatialOptionsConfirm(locationId);
+                }}
+                triggerCompareSearch={triggerCompareSearch}
+                findNearbySensors={features => {
+                  const from = turf.point([
+                    compareLoc[0].data.coordinates.longitude,
+                    compareLoc[0].data.coordinates.latitude,
+                  ]);
+                  const newFeatures = [];
+                  features.forEach(feature => {
+                    const to = turf.point(feature.geometry.coordinates);
+                    const options = { units: 'miles' };
+                    const distance = turf.distance(from, to, options);
+                    feature.distance = distance;
+                    if (distance !== 0) {
+                      newFeatures.push(feature);
+                    }
+                  });
+                  setNearbySensors(newFeatures);
+                }}
+              />
+            </div>
+          )
+        )}
+      </div>
       <div className="inpage__body">
         {activeParameterData && locs.length ? (
           <section className="fold" id="compare-fold-measurements">
@@ -230,6 +325,13 @@ function Compare(props) {
                   />
                 </div>
               </header>
+              <div className="fold__body">
+                <CompareStatistics
+                  activeParam={activeParameterData}
+                  compareMeasurements={compareMeasurements}
+                  compareLocations={compareLoc}
+                />
+              </div>
               <div className="fold__body">
                 <CompareBrushChart
                   activeParam={activeParameterData}

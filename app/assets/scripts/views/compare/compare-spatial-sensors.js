@@ -5,9 +5,10 @@ import moment from 'moment';
 export default function CompareSpatialSensors(props) {
   const {
     nearbySensors,
-    triggerCollocate,
-    setTriggerCollocate,
-    onCompareOptionsConfirm,
+    triggerCompareSearch,
+    setTriggerCompareSearch,
+    onCompareSpatialOptionsConfirm,
+    compareLocations,
     children,
   } = props;
 
@@ -17,9 +18,10 @@ export default function CompareSpatialSensors(props) {
   const SORT_BY_LAST_UPDATED = 'last updated';
   const SORT_BY_PROXIMITY = 'proximity';
 
-  // menuState = 0 -> choose between search options
-  // menuState = 1 -> select sensor via query
-  // menuState = 2 -> list nearby sensors (reference grade monitor vs LCS)
+  // menuState = 0 -> click add sensor
+  // menuState = 2 -> select sensor via query
+  // menuState = 3 -> list nearby sensors (reference grade monitor vs LCS)
+
   const [menuState, setMenuState] = useState(0);
   const [filterType, setFilterType] = useState(FILTER_TYPE_REFERENCE_GRADE);
   const [sortType, setSortType] = useState(SORT_BY_PROXIMITY);
@@ -40,193 +42,160 @@ export default function CompareSpatialSensors(props) {
 
   return (
     <>
-      {menuState !== 0 && (
-        <>
+      {menuState === 2 && (
+        <div className="search-back-button">
+          <button
+            type="button"
+            className="button button--small button--primary-unbounded"
+            onClick={() => {
+              setTriggerCompareSearch(!triggerCompareSearch);
+              setMenuState(3);
+            }}
+          >
+            Search for sensor using map.
+          </button>
+        </div>
+      )}
+      {menuState === 0 ? (
+        <li
+          className="compare__location compare__location--actions"
+          key="actions"
+        >
+          <button
+            type="button"
+            className="button-compare-location"
+            onClick={() => {
+              setTriggerCompareSearch(!triggerCompareSearch);
+              setMenuState(3);
+            }}
+          >
+            Add Location
+          </button>
+        </li>
+      ) : menuState === 2 ? (
+        children
+      ) : (
+        <li className="compare__location location_selector location_selector_spatial">
           <div className="search-back-button">
             <button
               type="button"
               className="button button--small button--primary-unbounded"
               onClick={() => {
-                setMenuState(0);
-              }}
-            >
-              Back
-            </button>
-          </div>
-        </>
-      )}
-      {menuState === 0 ? (
-        <li className="compare__location location_selector">
-          <h4>Search for new sensor to compare.</h4>
-          <p>
-            Select a sensor from the list or from the map below. Move map to
-            view more sensors.
-          </p>
-          <div>
-            <a
-              className="button button--capsule button--primary"
-              title="View the locations page with data"
-              onClick={() => {
-                setTriggerCollocate(!triggerCollocate);
                 setMenuState(2);
               }}
             >
-              List nearby sensors on map
-            </a>
-            <p style={{ margin: '0.5rem' }}>or</p>
-            <a
-              className="button button--capsule button--primary"
-              title="Query for sensor"
-              onClick={() => {
-                setMenuState(1);
-              }}
-            >
-              Search for sensor
-            </a>
-          </div>
-        </li>
-      ) : menuState === 1 ? (
-        children
-      ) : (
-        <li className="compare__location location_selector">
-          <h4>
-            {filterType === FILTER_TYPE_REFERENCE_GRADE
-              ? 'Nearby reference-grade monitors'
-              : 'Nearby low-cost sensors'}
-          </h4>
-          <div>
-            Filter type: {filterType}{' '}
-            <a onClick={toggleFilterType}>[ change ]</a>
+              Search for sensor via query.
+            </button>
           </div>
           <div>
-            Sort by: {sortType} <a onClick={toggleSortType}>[ change ]</a>
-          </div>
-          <div>
-            {filterType === FILTER_TYPE_REFERENCE_GRADE ? (
-              <div>
-                <div>
-                  {
-                    nearbySensors.filter(
-                      sensor =>
-                        sensor.properties.sensorType === 'reference grade'
-                    ).length
-                  }{' '}
-                  sensors found
-                  <a
+            {['reference grade', 'low-cost sensor'].map((sensorType, index) => {
+              if (
+                filterType === FILTER_TYPE_REFERENCE_GRADE &&
+                sensorType !== 'reference grade'
+              ) {
+                return <div key={index}></div>;
+              }
+              if (
+                filterType === FILTER_TYPE_LOW_COST_SENSOR &&
+                sensorType !== 'low-cost sensor'
+              ) {
+                return <div key={index}></div>;
+              }
+              return (
+                <div key={sensorType}>
+                  <div>
+                    <strong>
+                      {
+                        nearbySensors.filter(
+                          sensor => sensor.properties.sensorType === sensorType
+                        ).length
+                      }{' '}
+                      {sensorType} sensors found{' '}
+                      <a
+                        onClick={() => {
+                          toggleFilterType();
+                          setTriggerCompareSearch(!triggerCompareSearch);
+                        }}
+                      >
+                        [ change type ]
+                      </a>
+                    </strong>
+                  </div>
+                  <div>
+                    Sort by: {sortType}{' '}
+                    <a
+                      onClick={() => {
+                        toggleSortType();
+                        setTriggerCompareSearch(!triggerCompareSearch);
+                      }}
+                    >
+                      [ change sort type ]
+                    </a>
+                  </div>
+                  <div>(Distance from Sensor #1)</div>
+                  <div
                     onClick={() => {
-                      setTriggerCollocate(!triggerCollocate);
+                      setTriggerCompareSearch(!triggerCompareSearch);
                     }}
                   >
-                    {' '}
-                    [ Refresh search ]
-                  </a>
-                </div>
-                {nearbySensors.filter(
-                  sensor => sensor.properties.sensorType === 'reference grade'
-                ).length > 0 ? (
-                  <div className="collocation-sensors-list">
-                    {nearbySensors
-                      .filter(
-                        sensor =>
-                          sensor.properties.sensorType === 'reference grade'
-                      )
-                      .sort((a, b) => {
-                        if (sortType === SORT_BY_PROXIMITY) {
-                          return a.distance - b.distance;
-                        } else {
-                          return moment(b.properties.lastUpdated).diff(
-                            moment(a.properties.lastUpdated)
-                          );
-                        }
-                      })
-                      .map((sensor, index) => (
-                        <div
-                          className="collocate-sensor"
-                          onClick={() => {
-                            onCompareOptionsConfirm(
-                              sensor.properties.locationId
+                    <a>[ Refresh list from map ]</a>
+                  </div>
+                  {nearbySensors.filter(
+                    sensor => sensor.properties.sensorType === sensorType
+                  ).length > 0 ? (
+                    <div className="compare-sensors-list">
+                      {nearbySensors
+                        .filter(sensor => {
+                          return sensor.properties.sensorType === sensorType;
+                        })
+                        .filter(sensor => {
+                          // filter out sensors that are already being compared
+                          let returnSensor = true;
+                          compareLocations.forEach(loc => {
+                            if (loc.data) {
+                              if (sensor.properties.locationId === loc.data.id)
+                                returnSensor = false;
+                            }
+                          });
+                          return returnSensor;
+                        })
+                        .sort((a, b) => {
+                          if (sortType === SORT_BY_PROXIMITY) {
+                            return a.distance - b.distance;
+                          } else {
+                            return moment(b.properties.lastUpdated).diff(
+                              moment(a.properties.lastUpdated)
                             );
-                          }}
-                          key={index}
-                        >
-                          <span>{sensor.distance.toFixed(2)} miles away</span>,
-                          updated{' '}
-                          {moment(sensor.properties.lastUpdated).fromNow()}.
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <div className="collocation-sensors-list">
-                    <p>
-                      No reference grade monitors were found within the map
-                      view. Try moving the map or changing the parameter.
-                    </p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div>
-                <div>
-                  {
-                    nearbySensors.filter(
-                      sensor =>
-                        sensor.properties.sensorType !== 'reference grade'
-                    ).length
-                  }{' '}
-                  sensors found
-                  <a
-                    onClick={() => {
-                      setTriggerCollocate(!triggerCollocate);
-                    }}
-                  >
-                    {' '}
-                    [ Refresh search ]
-                  </a>
+                          }
+                        })
+                        .map((sensor, index) => (
+                          <div
+                            className="compare-sensor"
+                            onClick={() => {
+                              setMenuState(0);
+                              onCompareSpatialOptionsConfirm(
+                                sensor.properties.locationId
+                              );
+                            }}
+                            key={index}
+                          >
+                            <span>{sensor.distance.toFixed(2)} miles away</span>
+                            , updated{' '}
+                            {moment(sensor.properties.lastUpdated).fromNow()}.
+                          </div>
+                        ))}
+                    </div>
+                  ) : (
+                    <div className="compare-sensors-list">
+                      <div className="compare-sensor">
+                        No {sensorType}s were found within the map view. Try
+                        moving the map or changing the parameter.
+                      </div>
+                    </div>
+                  )}
                 </div>
-                {nearbySensors.filter(
-                  sensor => sensor.properties.sensorType !== 'reference grade'
-                ).length > 0 ? (
-                  <div className="collocation-sensors-list">
-                    {nearbySensors
-                      .filter(
-                        sensor =>
-                          sensor.properties.sensorType !== 'reference grade'
-                      )
-                      .sort((a, b) => {
-                        if (sortType === SORT_BY_PROXIMITY) {
-                          return a.distance - b.distance;
-                        } else {
-                          return moment(b.properties.lastUpdated).diff(
-                            moment(a.properties.lastUpdated)
-                          );
-                        }
-                      })
-                      .map((sensor, index) => (
-                        <div
-                          className="collocate-sensor"
-                          onClick={() => {
-                            onCompareOptionsConfirm(
-                              sensor.properties.locationId
-                            );
-                          }}
-                          key={index}
-                        >
-                          <span>{sensor.distance.toFixed(2)} miles away</span>,
-                          updated{' '}
-                          {moment(sensor.properties.lastUpdated).fromNow()}.
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <div className="collocation-sensors-list">
-                    <p>
-                      No low-cost sensors were found within the map view. Try
-                      moving the map or changing the parameter.
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
+              );
+            })}
           </div>
         </li>
       )}
@@ -236,8 +205,10 @@ export default function CompareSpatialSensors(props) {
 
 CompareSpatialSensors.propTypes = {
   nearbySensors: T.array,
-  triggerCollocate: T.func,
-  setTriggerCollocate: T.func,
-  onCompareOptionsConfirm: T.func,
+  compareLocations: T.array,
+  triggerCompareSearch: T.bool,
+  setTriggerCompareSearch: T.func,
+  onOptSelect: T.func,
+  onCompareSpatialOptionsConfirm: T.func,
   children: any,
 };

@@ -28,7 +28,7 @@ describe('The About Page', () => {
     cy.get('.button-book-download').should(
       'have.attr',
       'href',
-      '/assets/files/openaq-990-2019.pdf'
+      '/assets/files/openaq-990-2020.pdf'
     );
   });
 });

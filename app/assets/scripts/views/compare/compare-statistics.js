@@ -1,8 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { PropTypes as T } from 'prop-types';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import _ from 'lodash';
 
+import c from 'classnames';
 import config from '../../config';
 import InfoMessage from '../../components/info-message';
 import {
@@ -18,6 +20,8 @@ export default function CompareStatistics(props) {
   const dateFormat = 'YYYY/MM/DD HH:mm:ss';
   const userNow = moment().format(dateFormat);
   const weekAgo = moment().subtract(30, 'days').format(dateFormat);
+
+  const [correlationSensors, setCorrelationSensors] = useState([0, 1]);
 
   const findPairs = (chartDataOrigin, chartDataReference) => {
     const pairs = {
@@ -79,30 +83,30 @@ export default function CompareStatistics(props) {
       .value();
   }, [activeParam.name, compareMeasurements, compareLocations]);
 
+  const formatFloats = n => {
+    return isNaN(n) ? 'n/a' : parseFloat(n).toFixed(2);
+  };
+
   const chartStats = useMemo(() => {
     const stats = {
-      origin: {},
-      reference: {},
+      data: {},
       leastSquares: {},
     };
-    if (chartData.length > 0) {
-      stats['origin'].mean = mean(chartData[0].map(data => data.value)).toFixed(
-        2
+
+    for (let i = 0; i < chartData.length; i++) {
+      stats.data[i] = {
+        mean: mean(chartData[i].map(data => data.value)),
+        mode: mode(chartData[i].map(data => data.value)),
+        median: median(chartData[i].map(data => data.value)),
+        range: range(chartData[i].map(data => data.value)),
+      };
+    }
+
+    if (chartData.length > 1) {
+      stats['pairs'] = findPairs(
+        chartData[correlationSensors[0] % chartData.length],
+        chartData[correlationSensors[1] % chartData.length]
       );
-      stats['origin'].mode = mode(chartData[0].map(data => data.value));
-      stats['origin'].median = median(chartData[0].map(data => data.value));
-      stats['origin'].range = range(chartData[0].map(data => data.value));
-    }
-    if (chartData.length > 1) {
-      stats['reference'].mean = mean(
-        chartData[1].map(data => data.value)
-      ).toFixed(2);
-      stats['reference'].mode = mode(chartData[1].map(data => data.value));
-      stats['reference'].median = median(chartData[1].map(data => data.value));
-      stats['reference'].range = range(chartData[1].map(data => data.value));
-    }
-    if (chartData.length > 1) {
-      stats['pairs'] = findPairs(chartData[0], chartData[1]);
       stats['leastSquares'] = findLineByLeastSquares(
         stats['pairs'].x,
         stats['pairs'].y
@@ -110,7 +114,7 @@ export default function CompareStatistics(props) {
     }
     window.chartStats = stats;
     return stats;
-  }, [chartData]);
+  }, [chartData, correlationSensors]);
 
   // Only show the "no results" message if measurements have loaded.
   const fetchedMeasurements = compareMeasurements.filter(
@@ -135,62 +139,121 @@ export default function CompareStatistics(props) {
         </InfoMessage>
       );
     }
+    const kl = [
+      'compare-marker--st',
+      'compare-marker--nd',
+      'compare-marker--rd',
+    ];
 
     return (
       <div className="compare-statistics">
-        {chartData.length > 0 && (
-          <div style={{ width: '300px', float: 'left' }}>
-            <h4>{compareLocations[0].data.name}:</h4>
-            <p>Count: {chartData[0].length}</p>
-            <p>Mean: {chartStats['origin'].mean}</p>
-            <p>Median: {chartStats['origin'].median.toFixed(2)}</p>
-            <p>Mode: {chartStats['origin'].mode[0]}</p>
-            <p>
-              Range: min: {chartStats['origin'].range[0]}, max:{' '}
-              {chartStats['origin'].range[1]}
-            </p>
-          </div>
-        )}
+        {chartData.map((data, index) => {
+          return (
+            <div className={'compare-statistics-block'} key={index}>
+              <h3 className="compare-statistics-location">
+                {compareLocations[index].data !== undefined && (
+                  <Link
+                    to={`/location/${encodeURIComponent(
+                      compareLocations[index].data.id
+                    )}`}
+                  >
+                    <span className={c('compare-marker', kl[index])}>
+                      Sensor #{index + 1}
+                    </span>{' '}
+                  </Link>
+                )}
+              </h3>
+              <p>{compareLocations[index].data.name}</p>
+              <p className="compare-sensor-type">
+                Sensor Type: {compareLocations[index].data.sensorType}
+              </p>
+              <p>Count: {data.length}</p>
+              {data.length > 0 && (
+                <div>
+                  <p>Mean: {formatFloats(chartStats.data[index].mean)}</p>
+                  <p>Median: {formatFloats(chartStats.data[index].median)}</p>
+                  <p>Mode: {formatFloats(chartStats.data[index].mode[0])}</p>
+                  <p>
+                    Range: min: {formatFloats(chartStats.data[index].range[0])},
+                    max: {formatFloats(chartStats.data[index].range[1])}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
         {chartData.length > 1 && (
-          <div style={{ width: '300px', float: 'left' }}>
-            <h4>{compareLocations[1].data.name}:</h4>
-            <p>Count: {chartData[1].length}</p>
-            <p>Mean: {chartStats['reference'].mean}</p>
-            <p>Median: {chartStats['reference'].median.toFixed(2)}</p>
-            <p>Mode: {chartStats['reference'].mode[0]}</p>
-            <p>
-              Range: min: {chartStats['reference'].range[0]}, max:{' '}
-              {chartStats['reference'].range[1]}
-            </p>
-          </div>
-        )}
-        {chartData.length > 1 && (
-          <>
+          <div className={'compare-statistics-block'}>
             {chartStats['leastSquares'] !== undefined && (
-              <div>
-                <h4>Line by least squares</h4>
+              <div className="compare-correlation">
+                <h3>Correlation</h3>
+                {chartData.length > 2 ? (
+                  <p>
+                    Sensor #{(correlationSensors[0] % chartData.length) + 1}{' '}
+                    <a
+                      onClick={() => {
+                        setCorrelationSensors([
+                          (correlationSensors[0] % chartData.length) + 1,
+                          correlationSensors[1],
+                        ]);
+                      }}
+                    >
+                      [change]
+                    </a>{' '}
+                    and
+                    <br />
+                    Sensor #{(correlationSensors[1] % chartData.length) +
+                      1}{' '}
+                    <a
+                      onClick={() => {
+                        setCorrelationSensors([
+                          correlationSensors[0],
+                          (correlationSensors[1] + 1) % chartData.length,
+                        ]);
+                      }}
+                    >
+                      [change]
+                    </a>
+                  </p>
+                ) : (
+                  <p>
+                    Sensor #{(correlationSensors[0] % chartData.length) + 1} and
+                    Sensor #{(correlationSensors[1] % chartData.length) + 1}{' '}
+                  </p>
+                )}
+                <strong>
+                  <p>Line by least squares</p>
+                </strong>
                 <p>
-                  {chartStats['leastSquares'].m !== undefined && (
+                  {chartStats['leastSquares'].m !== undefined ? (
                     <>
-                      y = {chartStats['leastSquares'].m.toFixed(3)} x +{' '}
-                      {chartStats['leastSquares'].b.toFixed(3)}
+                      y = {formatFloats(chartStats['leastSquares'].m)} x +{' '}
+                      {formatFloats(chartStats['leastSquares'].b)}
                     </>
+                  ) : (
+                    'n/a'
                   )}
                 </p>
-                <h4>Correlelation </h4>
+                <strong>
+                  <p>Correlation factor</p>
+                </strong>
                 <p>
-                  {chartStats['leastSquares'].r !== undefined && (
-                    <>r = {chartStats['leastSquares'].r.toFixed(3)}</>
+                  {chartStats['leastSquares'].r !== undefined ? (
+                    <>r = {formatFloats(chartStats['leastSquares'].r)}</>
+                  ) : (
+                    'n/a'
                   )}
                 </p>
                 <p>
-                  {chartStats['leastSquares'].r2 !== undefined && (
-                    <>r^2 = {chartStats['leastSquares'].r2.toFixed(3)}</>
+                  {chartStats['leastSquares'].r2 !== undefined ? (
+                    <>r^2 = {formatFloats(chartStats['leastSquares'].r2)}</>
+                  ) : (
+                    'n/a'
                   )}
                 </p>
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
     );
