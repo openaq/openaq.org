@@ -6,12 +6,12 @@ import MeasurementsLayer from '../../components/map/measurements-layer';
 import LocationLayer from '../../components/map/location-layer';
 import Legend from '../../components/map/legend';
 
-export default function CollocationMap({
+export default function CompareMap({
   locationId,
   center,
   parameters,
   initialActiveParameter,
-  triggerCollocate,
+  triggerCompareSearch,
   findNearbySensors,
   popupFunction,
 }) {
@@ -24,13 +24,13 @@ export default function CollocationMap({
   };
 
   return (
-    <section className="fold collocate-map" id="location-fold-nearby">
+    <section className="fold compare-map" id="location-fold-nearby">
       <div className="inner">
         <div className="fold__body">
           <MapComponent
             scrollZoomDisabled={true}
             center={center}
-            triggerCollocate={triggerCollocate}
+            triggerCompareSearch={triggerCompareSearch}
             activeParameter={activeParameter.parameterId}
             findNearbySensors={findNearbySensors}
           >
@@ -56,14 +56,14 @@ export default function CollocationMap({
   );
 }
 
-CollocationMap.propTypes = {
+CompareMap.propTypes = {
   locationId: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   parameters: PropTypes.array,
   city: PropTypes.string,
   country: PropTypes.string,
   initialActiveParameter: PropTypes.object,
-  triggerCollocate: PropTypes.bool,
+  triggerCompareSearch: PropTypes.bool,
   findNearbySensors: PropTypes.func,
   popupFunction: PropTypes.func,
 };

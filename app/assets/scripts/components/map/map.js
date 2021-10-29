@@ -11,7 +11,7 @@ export default function Map({
   scrollZoomDisabled,
   children,
   activeParameter,
-  triggerCollocate,
+  triggerCompareSearch,
   findNearbySensors,
 }) {
   const containerRef = useRef();
@@ -25,7 +25,7 @@ export default function Map({
       });
       findNearbySensors(features);
     }
-  }, [triggerCollocate]);
+  }, [triggerCompareSearch]);
 
   useEffect(() => {
     mapbox.accessToken = config.mapbox.token;
@@ -95,6 +95,6 @@ Map.propTypes = {
   ]),
   // TODO: move these elsewhere or make required
   activeParameter: PropTypes.number,
-  triggerCollocate: PropTypes.bool,
+  triggerCompareSearch: PropTypes.bool,
   findNearbySensors: PropTypes.func,
 };

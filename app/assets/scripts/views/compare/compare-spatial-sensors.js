@@ -5,8 +5,8 @@ import moment from 'moment';
 export default function CompareSpatialSensors(props) {
   const {
     nearbySensors,
-    triggerCollocate,
-    setTriggerCollocate,
+    triggerCompareSearch,
+    setTriggerCompareSearch,
     onCompareSpatialOptionsConfirm,
     compareLocations,
     children,
@@ -48,7 +48,7 @@ export default function CompareSpatialSensors(props) {
             type="button"
             className="button button--small button--primary-unbounded"
             onClick={() => {
-              setTriggerCollocate(!triggerCollocate);
+              setTriggerCompareSearch(!triggerCompareSearch);
               setMenuState(3);
             }}
           >
@@ -65,7 +65,7 @@ export default function CompareSpatialSensors(props) {
             type="button"
             className="button-compare-location"
             onClick={() => {
-              setTriggerCollocate(!triggerCollocate);
+              setTriggerCompareSearch(!triggerCompareSearch);
               setMenuState(3);
             }}
           >
@@ -114,7 +114,7 @@ export default function CompareSpatialSensors(props) {
                       <a
                         onClick={() => {
                           toggleFilterType();
-                          setTriggerCollocate(!triggerCollocate);
+                          setTriggerCompareSearch(!triggerCompareSearch);
                         }}
                       >
                         [ change type ]
@@ -126,7 +126,7 @@ export default function CompareSpatialSensors(props) {
                     <a
                       onClick={() => {
                         toggleSortType();
-                        setTriggerCollocate(!triggerCollocate);
+                        setTriggerCompareSearch(!triggerCompareSearch);
                       }}
                     >
                       [ change sort type ]
@@ -135,7 +135,7 @@ export default function CompareSpatialSensors(props) {
                   <div>(Distance from Sensor #1)</div>
                   <div
                     onClick={() => {
-                      setTriggerCollocate(!triggerCollocate);
+                      setTriggerCompareSearch(!triggerCompareSearch);
                     }}
                   >
                     <a>[ Refresh list from map ]</a>
@@ -143,7 +143,7 @@ export default function CompareSpatialSensors(props) {
                   {nearbySensors.filter(
                     sensor => sensor.properties.sensorType === sensorType
                   ).length > 0 ? (
-                    <div className="collocation-sensors-list">
+                    <div className="compare-sensors-list">
                       {nearbySensors
                         .filter(sensor => {
                           return sensor.properties.sensorType === sensorType;
@@ -170,9 +170,8 @@ export default function CompareSpatialSensors(props) {
                         })
                         .map((sensor, index) => (
                           <div
-                            className="collocate-sensor"
+                            className="compare-sensor"
                             onClick={() => {
-                              console.log(sensor, index);
                               setMenuState(0);
                               onCompareSpatialOptionsConfirm(
                                 sensor.properties.locationId
@@ -187,8 +186,8 @@ export default function CompareSpatialSensors(props) {
                         ))}
                     </div>
                   ) : (
-                    <div className="collocation-sensors-list">
-                      <div className="collocate-sensor">
+                    <div className="compare-sensors-list">
+                      <div className="compare-sensor">
                         No {sensorType}s were found within the map view. Try
                         moving the map or changing the parameter.
                       </div>
@@ -207,8 +206,8 @@ export default function CompareSpatialSensors(props) {
 CompareSpatialSensors.propTypes = {
   nearbySensors: T.array,
   compareLocations: T.array,
-  triggerCollocate: T.bool,
-  setTriggerCollocate: T.func,
+  triggerCompareSearch: T.bool,
+  setTriggerCompareSearch: T.func,
   onOptSelect: T.func,
   onCompareSpatialOptionsConfirm: T.func,
   children: any,
