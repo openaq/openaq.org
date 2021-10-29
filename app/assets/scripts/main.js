@@ -124,15 +124,15 @@ render(
           />
           <Route
             name="country"
-            path="/compare/:loc1?/:loc2?/:loc3?"
+            path="/collocate/:loc1?/:loc2?/:loc3?"
             component={Compare}
-            pageClass="page--compare"
+            pageClass="page--collocate"
           />
           <Route
             name="country"
-            path="/collocate/:loc1?/:loc2?/:loc3?"
-            component={Collocate}
-            pageClass="page--collocate"
+            path="/compare/:loc1?/:loc2?/:loc3?"
+            component={Compare}
+            pageClass="page--compare"
           />
           <Route
             name="projectsHub"

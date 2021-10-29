@@ -16,6 +16,65 @@
   .fold > .inner {
     grid-template-columns: 1fr;
   }
+
+  .choose-sensors-wrapper {
+    padding: 6rem 0 3rem;
+  }
+
+  .refresh-sensors {
+    margin: 0.25rem 0;
+  }
+
+  .compare-sensors-list {
+    box-shadow: inset 0px -3px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 0.6rem;
+    background-color: #efefef;
+    padding: 0.25rem 1.2rem;
+    max-width: 400px;
+    max-height: 80px;
+    overflow-y: scroll;
+    margin-right: 3%;
+    position: absolute;
+    float: left;
+    transition: max-height 0.15s ease-in;
+    p {
+      margin: 0;
+    }
+    &:hover {
+      box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+      height: inherit;
+      max-height: 600px;
+      transition: max-height 0.15s ease-out;
+    }
+  }
+
+  .location_selector {
+    h4 {
+      margin-bottom: 0.25rem;
+    }
+    padding-bottom: 1rem;
+  }
+
+  .location_selector_spatial {
+    padding: 0;
+    margin-top: 0;
+  }
+
+  .compare-sensor {
+    margin: 0.2rem 0;
+    cursor: pointer;
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .compare-map {
+    padding-top: 0;
+  }
+}
+
+.search-back-button .button {
+  padding: 0.5rem 0;
 }
 
 %list-reset {
@@ -100,13 +159,12 @@
     position: relative;
     line-height: 1.75rem;
     margin-bottom: 0.25rem;
-    margin-top: 0.2rem;
+
     small {
       display: block;
     }
 
   }
-
   &__actions {
     > [class*="button"]:first-child {
       margin-left: - $global-spacing / 2;
