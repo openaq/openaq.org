@@ -151,15 +151,17 @@ export default function CompareStatistics(props) {
           return (
             <div className={'compare-statistics-block'} key={index}>
               <h3 className="compare-statistics-location">
-                <Link
-                  to={`/location/${encodeURIComponent(
-                    compareLocations[index].data.id
-                  )}`}
-                >
-                  <span className={c('compare-marker', kl[index])}>
-                    Sensor #{index + 1}
-                  </span>
-                </Link>{' '}
+                {compareLocations[index].data !== undefined && (
+                  <Link
+                    to={`/location/${encodeURIComponent(
+                      compareLocations[index].data.id
+                    )}`}
+                  >
+                    <span className={c('compare-marker', kl[index])}>
+                      Sensor #{index + 1}
+                    </span>{' '}
+                  </Link>
+                )}
               </h3>
               <p>{compareLocations[index].data.name}</p>
               <p className="compare-sensor-type">

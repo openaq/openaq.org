@@ -88,18 +88,18 @@ export default function CompareSpatialSensors(props) {
             </button>
           </div>
           <div>
-            {['reference grade', 'low-cost sensor'].map(sensorType => {
+            {['reference grade', 'low-cost sensor'].map((sensorType, index) => {
               if (
                 filterType === FILTER_TYPE_REFERENCE_GRADE &&
                 sensorType !== 'reference grade'
               ) {
-                return <></>;
+                return <div key={index}></div>;
               }
               if (
                 filterType === FILTER_TYPE_LOW_COST_SENSOR &&
                 sensorType !== 'low-cost sensor'
               ) {
-                return <></>;
+                return <div key={index}></div>;
               }
               return (
                 <div key={sensorType}>
@@ -111,21 +111,41 @@ export default function CompareSpatialSensors(props) {
                         ).length
                       }{' '}
                       {sensorType} sensors found{' '}
-                      <a onClick={toggleFilterType}>[ change type ]</a>
+                      <a
+                        onClick={() => {
+                          toggleFilterType();
+                          setTriggerCollocate(!triggerCollocate);
+                        }}
+                      >
+                        [ change type ]
+                      </a>
                     </strong>
                   </div>
                   <div>
                     Sort by: {sortType}{' '}
-                    <a onClick={toggleSortType}>[ change sort type ]</a>
+                    <a
+                      onClick={() => {
+                        toggleSortType();
+                        setTriggerCollocate(!triggerCollocate);
+                      }}
+                    >
+                      [ change sort type ]
+                    </a>
                   </div>
                   <div>(Distance from Sensor #1)</div>
+                  <div
+                    onClick={() => {
+                      setTriggerCollocate(!triggerCollocate);
+                    }}
+                  >
+                    <a>[ Refresh list from map ]</a>
+                  </div>
                   {nearbySensors.filter(
                     sensor => sensor.properties.sensorType === sensorType
                   ).length > 0 ? (
                     <div className="collocation-sensors-list">
                       {nearbySensors
                         .filter(sensor => {
-                          console.log(sensor.properties.sensorType);
                           return sensor.properties.sensorType === sensorType;
                         })
                         .filter(sensor => {
@@ -168,10 +188,10 @@ export default function CompareSpatialSensors(props) {
                     </div>
                   ) : (
                     <div className="collocation-sensors-list">
-                      <p>
+                      <div className="collocate-sensor">
                         No {sensorType}s were found within the map view. Try
                         moving the map or changing the parameter.
-                      </p>
+                      </div>
                     </div>
                   )}
                 </div>
