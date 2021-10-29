@@ -33,7 +33,7 @@ export default function Map({
       container: containerRef.current,
       style: config.mapbox.baseStyle,
       zoom: 1,
-      center: [0, 0],
+      center: [0, 0]
     });
 
     m.addControl(new mapbox.NavigationControl());
@@ -52,22 +52,6 @@ export default function Map({
         m.jumpTo({ center, zoom: 8 });
       } else if (bbox) {
         m.fitBounds(bbox, { padding: 20, maxZoom: 18 });
-      }
-
-      if (m !== null) {
-        var features = m.queryRenderedFeatures({
-          layers: [`${activeParameter}-layer`],
-        });
-        findNearbySensors(features);
-      }
-    });
-
-    m.on('move', () => {
-      if (m !== null) {
-        var features = m.queryRenderedFeatures({
-          layers: [`${activeParameter}-layer`],
-        });
-        findNearbySensors(features);
       }
     });
 
