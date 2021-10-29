@@ -233,7 +233,7 @@ export default function CompareStatistics(props) {
                   )}
                 </p>
                 <strong>
-                  <p>Correlelation factor</p>
+                  <p>Correlation factor</p>
                 </strong>
                 <p>
                   {chartStats['leastSquares'].r !== undefined ? (
