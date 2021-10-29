@@ -33,7 +33,7 @@ export default function Map({
       container: containerRef.current,
       style: config.mapbox.baseStyle,
       zoom: 1,
-      center: [0, 0]
+      center: [0, 0],
     });
 
     m.addControl(new mapbox.NavigationControl());

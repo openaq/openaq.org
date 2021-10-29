@@ -151,7 +151,7 @@ export default function CompareStatistics(props) {
           return (
             <div className={'compare-statistics-block'} key={index}>
               <h3 className="compare-statistics-location">
-                {compareLocations[index].data !== undefined && 
+                {compareLocations[index].data !== undefined && (
                   <Link
                     to={`/location/${encodeURIComponent(
                       compareLocations[index].data.id
@@ -161,7 +161,7 @@ export default function CompareStatistics(props) {
                       Sensor #{index + 1}
                     </span>{' '}
                   </Link>
-                }
+                )}
               </h3>
               <p>{compareLocations[index].data.name}</p>
               <p className="compare-sensor-type">
