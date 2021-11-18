@@ -63,11 +63,7 @@ CompareMap.propTypes = {
   city: PropTypes.string,
   country: PropTypes.string,
   initialActiveParameter: PropTypes.object,
-<<<<<<< HEAD:app/assets/scripts/views/compare/compare-map.js
   triggerCompareSearch: PropTypes.bool,
-=======
-  triggerCollocate: PropTypes.bool,
->>>>>>> 0debe86f (Adds UX improvements to comparison page):app/assets/scripts/views/collocate/collocation-map.js
   findNearbySensors: PropTypes.func,
   popupFunction: PropTypes.func,
 };

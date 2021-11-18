@@ -151,7 +151,6 @@ export default function CompareStatistics(props) {
           return (
             <div className={'compare-statistics-block'} key={index}>
               <h3 className="compare-statistics-location">
-<<<<<<< HEAD
                 {compareLocations[index].data !== undefined && (
                   <Link
                     to={`/location/${encodeURIComponent(
@@ -163,17 +162,6 @@ export default function CompareStatistics(props) {
                     </span>{' '}
                   </Link>
                 )}
-=======
-                <Link
-                  to={`/location/${encodeURIComponent(
-                    compareLocations[index].data.id
-                  )}`}
-                >
-                  <span className={c('compare-marker', kl[index])}>
-                    Sensor #{index + 1}
-                  </span>
-                </Link>{' '}
->>>>>>> 0debe86f (Adds UX improvements to comparison page)
               </h3>
               <p>{compareLocations[index].data.name}</p>
               <p className="compare-sensor-type">
@@ -248,10 +236,14 @@ export default function CompareStatistics(props) {
                 </p>
                 <strong>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <p>Correlation factor</p>
 =======
                   <p>Correlelation factor</p>
 >>>>>>> 0debe86f (Adds UX improvements to comparison page)
+=======
+                  <p>Correlation factor</p>
+>>>>>>> 63542a43 (fixed "Correlation" spelling typo)
                 </strong>
                 <p>
                   {chartStats['leastSquares'].r !== undefined ? (
