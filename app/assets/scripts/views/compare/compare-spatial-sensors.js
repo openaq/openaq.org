@@ -5,8 +5,13 @@ import moment from 'moment';
 export default function CompareSpatialSensors(props) {
   const {
     nearbySensors,
+<<<<<<< HEAD
     triggerCompareSearch,
     setTriggerCompareSearch,
+=======
+    triggerCollocate,
+    setTriggerCollocate,
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
     onCompareSpatialOptionsConfirm,
     compareLocations,
     children,
@@ -48,7 +53,11 @@ export default function CompareSpatialSensors(props) {
             type="button"
             className="button button--small button--primary-unbounded"
             onClick={() => {
+<<<<<<< HEAD
               setTriggerCompareSearch(!triggerCompareSearch);
+=======
+              setTriggerCollocate(!triggerCollocate);
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
               setMenuState(3);
             }}
           >
@@ -65,7 +74,11 @@ export default function CompareSpatialSensors(props) {
             type="button"
             className="button-compare-location"
             onClick={() => {
+<<<<<<< HEAD
               setTriggerCompareSearch(!triggerCompareSearch);
+=======
+              setTriggerCollocate(!triggerCollocate);
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
               setMenuState(3);
             }}
           >
@@ -88,18 +101,30 @@ export default function CompareSpatialSensors(props) {
             </button>
           </div>
           <div>
+<<<<<<< HEAD
             {['reference grade', 'low-cost sensor'].map((sensorType, index) => {
+=======
+            {['reference grade', 'low-cost sensor'].map(sensorType => {
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
               if (
                 filterType === FILTER_TYPE_REFERENCE_GRADE &&
                 sensorType !== 'reference grade'
               ) {
+<<<<<<< HEAD
                 return <div key={index}></div>;
+=======
+                return <></>;
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
               }
               if (
                 filterType === FILTER_TYPE_LOW_COST_SENSOR &&
                 sensorType !== 'low-cost sensor'
               ) {
+<<<<<<< HEAD
                 return <div key={index}></div>;
+=======
+                return <></>;
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
               }
               return (
                 <div key={sensorType}>
@@ -111,6 +136,7 @@ export default function CompareSpatialSensors(props) {
                         ).length
                       }{' '}
                       {sensorType} sensors found{' '}
+<<<<<<< HEAD
                       <a
                         onClick={() => {
                           toggleFilterType();
@@ -119,10 +145,14 @@ export default function CompareSpatialSensors(props) {
                       >
                         [ change type ]
                       </a>
+=======
+                      <a onClick={toggleFilterType}>[ change type ]</a>
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
                     </strong>
                   </div>
                   <div>
                     Sort by: {sortType}{' '}
+<<<<<<< HEAD
                     <a
                       onClick={() => {
                         toggleSortType();
@@ -146,6 +176,18 @@ export default function CompareSpatialSensors(props) {
                     <div className="compare-sensors-list">
                       {nearbySensors
                         .filter(sensor => {
+=======
+                    <a onClick={toggleSortType}>[ change sort type ]</a>
+                  </div>
+                  <div>(Distance from Sensor #1)</div>
+                  {nearbySensors.filter(
+                    sensor => sensor.properties.sensorType === sensorType
+                  ).length > 0 ? (
+                    <div className="collocation-sensors-list">
+                      {nearbySensors
+                        .filter(sensor => {
+                          console.log(sensor.properties.sensorType);
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
                           return sensor.properties.sensorType === sensorType;
                         })
                         .filter(sensor => {
@@ -170,8 +212,14 @@ export default function CompareSpatialSensors(props) {
                         })
                         .map((sensor, index) => (
                           <div
+<<<<<<< HEAD
                             className="compare-sensor"
                             onClick={() => {
+=======
+                            className="collocate-sensor"
+                            onClick={() => {
+                              console.log(sensor, index);
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
                               setMenuState(0);
                               onCompareSpatialOptionsConfirm(
                                 sensor.properties.locationId
@@ -186,11 +234,19 @@ export default function CompareSpatialSensors(props) {
                         ))}
                     </div>
                   ) : (
+<<<<<<< HEAD
                     <div className="compare-sensors-list">
                       <div className="compare-sensor">
                         No {sensorType}s were found within the map view. Try
                         moving the map or changing the parameter.
                       </div>
+=======
+                    <div className="collocation-sensors-list">
+                      <p>
+                        No {sensorType}s were found within the map view. Try
+                        moving the map or changing the parameter.
+                      </p>
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
                     </div>
                   )}
                 </div>
@@ -206,8 +262,13 @@ export default function CompareSpatialSensors(props) {
 CompareSpatialSensors.propTypes = {
   nearbySensors: T.array,
   compareLocations: T.array,
+<<<<<<< HEAD
   triggerCompareSearch: T.bool,
   setTriggerCompareSearch: T.func,
+=======
+  triggerCollocate: T.bool,
+  setTriggerCollocate: T.func,
+>>>>>>> 0debe86f (Adds UX improvements to comparison page)
   onOptSelect: T.func,
   onCompareSpatialOptionsConfirm: T.func,
   children: any,

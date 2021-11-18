@@ -6,15 +6,15 @@ import _ from 'lodash';
 import qs from 'qs';
 import * as turf from '@turf/turf';
 
-import CompareLocationSelector from './compare-location-selector';
-import CompareSpatialSensors from './compare-spatial-sensors';
-import CompareLocation from './compare-location';
-import ParameterSelector from './parameter-selector';
-import AvailabilityMessage from './availability-message';
-import CompareBrushChart from './compare-brush-chart';
-import CompareStatistics from './compare-statistics';
+import CompareLocationSelector from '../compare/compare-location-selector';
+import CompareSpatialSensors from '../compare/compare-spatial-sensors';
+import CompareLocation from '../compare/compare-location';
+import ParameterSelector from '../compare/parameter-selector';
+import AvailabilityMessage from '../compare/availability-message';
+import CompareBrushChart from '../compare/compare-brush-chart';
+import CompareStatistics from '../compare/compare-statistics';
 
-import CompareMap from './compare-map';
+import CollocationMap from './collocation-map';
 
 import {
   fetchBaseData,
@@ -32,7 +32,7 @@ import {
 } from '../../actions/action-creators';
 import { PM25_PARAMETER_ID } from '../../utils/constants';
 
-function Compare(props) {
+function Collocate(props) {
   const {
     match,
     location,
@@ -59,7 +59,7 @@ function Compare(props) {
   } = props;
 
   // Use to trigger finding nearby sensors in mapbox
-  const [triggerCompareSearch, setTriggerCompareSearch] = useState(false);
+  const [triggerCollocate, setTriggerCollocate] = useState(false);
   const [nearbySensors, setNearbySensors] = useState([]);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ function Compare(props) {
 
   const onParameterSelect = parameter => {
     const locsUrl = getLocIds().map(encodeURIComponent).join('/');
-    history.push(`/compare/${locsUrl}?parameter=${parameter}`);
+    history.push(`/collocate/${locsUrl}?parameter=${parameter}`);
   };
 
   const onLocationRemove = index => {
@@ -105,7 +105,7 @@ function Compare(props) {
       .map(encodeURIComponent)
       .join('/');
 
-    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+    history.push(`/collocate/${locsUrl}?parameter=${activeParameterData.id}`);
   };
 
   const onCompareOptSelect = (key, value) => {
@@ -126,11 +126,12 @@ function Compare(props) {
 
   const onCompareOptionsConfirm = () => {
     _cancelCompareOptions();
+
     const locsUrl = [...getLocIds(), compareSelectOpts.location]
       .map(encodeURIComponent)
       .join('/');
 
-    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+    history.push(`/collocate/${locsUrl}?parameter=${activeParameterData.id}`);
   };
 
   const onCompareSpatialOptionsConfirm = locationId => {
@@ -140,7 +141,7 @@ function Compare(props) {
       .map(encodeURIComponent)
       .join('/');
 
-    history.push(`/compare/${locsUrl}?parameter=${activeParameterData.id}`);
+    history.push(`/collocate/${locsUrl}?parameter=${activeParameterData.id}`);
   };
 
   const fetchLocationData = (index, loc) => {
@@ -235,8 +236,8 @@ function Compare(props) {
                     onCompareSpatialOptionsConfirm={
                       onCompareSpatialOptionsConfirm
                     }
-                    setTriggerCompareSearch={setTriggerCompareSearch}
-                    triggerCompareSearch={triggerCompareSearch}
+                    setTriggerCollocate={setTriggerCollocate}
+                    triggerCollocate={triggerCollocate}
                   >
                     <CompareLocationSelector
                       status={'selecting'}
@@ -271,7 +272,7 @@ function Compare(props) {
           compareLoc[0].data &&
           compareLoc[0].data.coordinates && (
             <div>
-              <CompareMap
+              <CollocationMap
                 locationId={compareLoc[0].data.id}
                 center={[
                   compareLoc[0].data.coordinates.longitude,
@@ -283,7 +284,7 @@ function Compare(props) {
                 popupFunction={locationId => {
                   onCompareSpatialOptionsConfirm(locationId);
                 }}
-                triggerCompareSearch={triggerCompareSearch}
+                triggerCollocate={triggerCollocate}
                 findNearbySensors={features => {
                   const from = turf.point([
                     compareLoc[0].data.coordinates.longitude,
@@ -351,7 +352,7 @@ function Compare(props) {
   );
 }
 
-Compare.propTypes = {
+Collocate.propTypes = {
   _fetchBaseData: T.func,
   _fetchCompareLocationIfNeeded: T.func,
   _removeCompareLocation: T.func,
@@ -421,4 +422,4 @@ function dispatcher(d) {
   };
 }
 
-module.exports = connect(selector, dispatcher)(Compare);
+module.exports = connect(selector, dispatcher)(Collocate);
