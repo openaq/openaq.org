@@ -235,15 +235,7 @@ export default function CompareStatistics(props) {
                   )}
                 </p>
                 <strong>
-<<<<<<< HEAD
-<<<<<<< HEAD
                   <p>Correlation factor</p>
-=======
-                  <p>Correlelation factor</p>
->>>>>>> 0debe86f (Adds UX improvements to comparison page)
-=======
-                  <p>Correlation factor</p>
->>>>>>> 63542a43 (fixed "Correlation" spelling typo)
                 </strong>
                 <p>
                   {chartStats['leastSquares'].r !== undefined ? (

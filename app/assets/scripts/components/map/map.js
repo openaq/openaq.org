@@ -95,10 +95,6 @@ Map.propTypes = {
   ]),
   // TODO: move these elsewhere or make required
   activeParameter: PropTypes.number,
-<<<<<<< HEAD
   triggerCompareSearch: PropTypes.bool,
-=======
-  triggerCollocate: PropTypes.bool,
->>>>>>> 0debe86f (Adds UX improvements to comparison page)
   findNearbySensors: PropTypes.func,
 };
