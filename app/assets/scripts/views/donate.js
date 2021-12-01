@@ -58,7 +58,7 @@ var Donate = createReactClass({
                 </div>
               </header>
               <figure className="fold__media donate-info-wrapper">
-                <YoutubeEmbed embedId="J47SsCH0bi0" />
+                <YoutubeEmbed embedId="FntU6TXpb2g" />
                 <div className="donate-header-info">
                   <h3>Your donation helps support...</h3>
                   <p>
