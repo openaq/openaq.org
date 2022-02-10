@@ -82,7 +82,7 @@
     "marked": "^0.7.0",
     "node-bourbon": "^4.2.8",
     "node-notifier": "^8.0.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "prettier": "2.1.2",
     "require-globify": "^1.4.0",
     "run-sequence": "^2.2.1",
