@@ -12,8 +12,8 @@ describe('The About Page', () => {
     cy.get('h1');
   });
 
-  it('renders 3 principles', () => {
-    cy.get('.principles-list .card--principle').should('have.length', 3);
+  it('renders 5 principles', () => {
+    cy.get('.principles-list .card--principle').should('have.length', 5);
   });
 
   it('renders 19 team and board members', () => {
