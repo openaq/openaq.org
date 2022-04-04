@@ -79,7 +79,7 @@
     "gulp-useref": "^3.1.0",
     "gulp-util": "^3.0.7",
     "jeet": "6.1.4",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "node-bourbon": "^4.2.8",
     "node-notifier": "^8.0.1",
     "node-sass": "^7.0.0",
