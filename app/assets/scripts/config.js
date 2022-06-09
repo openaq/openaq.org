@@ -30,5 +30,4 @@ if (process.env.DS_ENV === 'staging') {
   defaultsDeep(config, configurations.staging);
 }
 
-
 module.exports = config;
