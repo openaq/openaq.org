@@ -5,6 +5,6 @@
 
 module.exports = {
   environment: 'staging',
-  api: 'https://api.openaq.org/v2',
+  api: 'https://staging.openaq.org/v2',
   metadata: 'https://metadata.openaq-staging.org',
 };
