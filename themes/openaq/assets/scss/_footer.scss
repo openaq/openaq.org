@@ -1,0 +1,42 @@
+@use 'openaq-design-system/variables';
+
+.footer {
+  position: relative;
+  height: 250px;
+  width: 100vw;
+  background-color: variables.$lavender180;
+  display: flex;
+  align-items: center;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 150px;
+  }
+
+  .sub-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 54px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    border-top: 1px solid variables.$sky120;
+    padding: 0 150px;
+
+    @media (max-width: 800px) {
+      & {
+        flex-direction: column;
+        padding: 0 80px;
+        justify-content: center;
+        align-items: center;
+        .copyright {
+          order: 1;
+        }
+      }
+    }
+  }
+}

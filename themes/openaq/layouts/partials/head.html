@@ -1,0 +1,12 @@
+<head>
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+    {{ template "_internal/schema.html" . }}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    {{ $options := (dict "transpiler" "dartsass" "outputStyle" "compressed") }}
+    {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    <title>{{ .Site.Title }}</title>
+ </head>

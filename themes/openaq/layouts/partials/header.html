@@ -1,0 +1,40 @@
+<header class="header">
+    <nav class="nav">
+        <ul class="nav-list">
+            <li>
+                <a href="/">
+                    <img src="/svg/logo.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a class="nav__item" href="#">Explore the data</a>
+            </li>
+            <li>
+                <a href="/why-air-quality" class="nav__item{{ if eq .Section "why-air-quality" }} nav__item--active{{ end }}">Why air quality</a></li>
+            <li>
+                <a href="/why-open-data" class="nav__item{{ if eq .Section "why-open-data" }} nav__item--active{{ end }}">Why open data</a>
+            </li>
+            <li>
+                <a href="/partners" class="nav__item{{ if eq .Section "partners" }} nav__item--active{{ end }}">Partners</a>
+            </li>
+            <li class="dropdown"><a href="#" aria-haspopup="true" class="nav__item">Developers</a>
+                <ul class="submenu"  aria-label="submenu">
+                    <li class="submenu__item"><a class="nav__item" href="/about">API Overview</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="https://docs.openaq.org">Developer Documentation</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="/case-studies">Case Studies</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="/team">Help</a></li>
+                </ul>
+                </li>
+            <li class="dropdown"><a href="#" aria-haspopup="true" class="nav__item">About</a>
+                <ul class="submenu" aria-label="submenu">
+                    <li class="submenu__item"><a class="nav__item" href="/about">About OpenAQ</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="/about/news">News</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="/case-studies">Case Studies</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="/about/technology">Technology</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="/about/team">Team</a></li>
+                    <li class="submenu__item"><a class="nav__item" href="/about/reporting">Reporting</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
