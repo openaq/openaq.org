@@ -1,0 +1,23 @@
+name: deploy hugo
+on:
+  push:
+    branches:
+      - hugo
+jobs:
+  deploy:
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      
+      - name: install dart-sass-embedded
+        run: wget https://github.com/sass/dart-sass-embedded/releases/download/1.56.1/sass_embedded-1.56.1-linux-x64.tar.gz && tar -xvzf sass_embedded-1.56.1-linux-x64.tar.gz -C /usr/bin/
+
+      - name: Install npm dependencies
+        run: yarn install
+      
+      - name: Build
+        uses: jakejarvis/hugo-build-action@v0.89.2
+        with:
+          args: --minify
