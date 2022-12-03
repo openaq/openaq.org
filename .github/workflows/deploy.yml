@@ -16,5 +16,3 @@ jobs:
       
       - name: Build
         uses: russbiggs/hugo-build-action@master
-        with:
-          args: --minify
