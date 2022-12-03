@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ partial "breadcrumbs" . }}
+<div class="news-content">
+    
+    <div class="bubble-lg"></div>
+    <div class="bubble-sm"></div>
+
+    <div class="news-content-container">
+        <div>
+            <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
+            <div class="items"></div>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+
+{{ define "scripts" }}
+{{ $js := resources.Get "js/news.js" | js.Build }}
+<script src="{{ $js.RelPermalink }}" defer></script>
+
+{{ end }}
