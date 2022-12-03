@@ -5,8 +5,6 @@
   "repository": "https://github.com/openaq/openaq.org.git",
   "author": "OpenAQ <dev@openaq.org>",
   "dependencies": {
-    "hugo": "^0.0.3",
-    "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
-    "sass": "^1.56.1"
+    "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0"
   }
 }
