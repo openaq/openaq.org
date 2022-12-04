@@ -23,14 +23,20 @@
 
 .hero-section {
   @include landing-section();
-  justify-content: space-between;
+  justify-content: space-around;
   display: flex;
 
   .hero-title {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-
-    margin: 0 auto;
+    gap: 40px;
+    margin: 60px 0 0 0;
     width: 400px;
+
+    .learn-more-btn {
+      width: fit-content;
+    }
   }
 }
 
@@ -65,6 +71,10 @@
       flex-direction: column;
       gap: 30px;
       width: 280px;
+
+      .icon-btn {
+        width: fit-content;
+      }
     }
   }
 
@@ -132,10 +142,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 70%;
 
     .search-input {
       @include mixins.box-shadow;
-      width: 550px;
+      width: 100%;
     }
   }
 
