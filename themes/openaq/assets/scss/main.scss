@@ -10,6 +10,7 @@
 @use 'footer';
 @use 'header' as h;
 @use 'partners';
+@use 'news';
 
 @mixin landing-section {
   display: flex;
@@ -208,53 +209,4 @@
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-}
-
-.news-content {
-  display: flex;
-  justify-content: center;
-  position: relative;
-
-  .breadcrumb {
-    margin: 6px 0 0 150px;
-  }
-
-  .news-content-container {
-    width: 800px;
-  }
-
-  .bubble-lg {
-    position: absolute;
-    left: -132px;
-    top: 0px;
-  }
-
-  .bubble-sm {
-    position: absolute;
-    top: 250px;
-    left: 46px;
-  }
-}
-
-.items {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  margin: 40px 0 100px 0;
-}
-
-.news-item {
-  display: flex;
-  align-items: flex-start;
-
-  .news-date {
-    margin: 5px;
-    flex: 1;
-  }
-
-  .news-content {
-    display: flex;
-    flex-direction: column;
-    flex: 5;
-  }
 }
