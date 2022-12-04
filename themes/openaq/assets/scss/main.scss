@@ -11,6 +11,7 @@
 @use 'header' as h;
 @use 'partners';
 @use 'news';
+@use 'explore-banner';
 
 @mixin landing-section {
   display: flex;
