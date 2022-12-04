@@ -1,6 +1,6 @@
 <article class="partner-card">
     <div class="partner-card__img">
-        <img src="https://via.placeholder.com/250x50" alt="">
+        <img src="/{{ .Params.img }}" alt="{{ .Title }}">
     </div>
-    <p class="partner-card__body">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <p class="partner-card__body">{{ .Summary| truncate 150 }}</p>
 </article>

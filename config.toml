@@ -12,3 +12,6 @@ copyright = "{year} OpenAQ. All rights reserved."
   [[module.mounts]]
     source = "./node_modules/openaq-design-system/scss/"
     target = "assets/scss/openaq-design-system"
+  [[module.mounts]]
+    source = "content/uploads/"
+    target = "assets/"

@@ -9,6 +9,7 @@
 @use 'openaq-design-system/inputs/index.scss' as inputs;
 @use 'footer';
 @use 'header' as h;
+@use 'partners';
 
 @mixin landing-section {
   display: flex;
@@ -255,106 +256,5 @@
     display: flex;
     flex-direction: column;
     flex: 5;
-  }
-}
-
-.partners-content {
-  position: relative;
-
-  .bubble-lg {
-    z-index: -1;
-    position: absolute;
-    left: -132px;
-    top: 0px;
-  }
-
-  .bubble-sm {
-    z-index: -1;
-    position: absolute;
-    left: 46px;
-    top: 260px;
-  }
-
-  &-container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 800px;
-  }
-}
-
-.partners-section {
-  .partners-grid {
-    margin: 40px 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 36px;
-    row-gap: 40px;
-
-    .partner-card {
-      background-color: white;
-      display: flex;
-      height: 180px;
-      border: 1px solid variables.$smoke10;
-      border-radius: 22px;
-      padding: 20px 0;
-
-      &__img {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-        padding: 0 20px;
-
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-
-      &__body {
-        @include mixins.body5;
-        display: flex;
-        flex: 1;
-        padding: 0 30px;
-        border-left: 1px solid variables.$smoke10;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  }
-}
-
-.funders-section {
-  .funders-grid {
-    margin: 40px 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 36px;
-    row-gap: 40px;
-
-    .funders-card {
-      background-color: white;
-
-      display: flex;
-      height: 180px;
-      width: 180px;
-      border: 1px solid variables.$smoke10;
-      border-radius: 22px;
-      padding: 20px 0;
-
-      &__img {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-        padding: 0 16px;
-
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-    }
   }
 }
