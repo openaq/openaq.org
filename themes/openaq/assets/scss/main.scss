@@ -12,6 +12,7 @@
 @use 'partners';
 @use 'news';
 @use 'explore-banner';
+@use 'community-banner';
 
 @mixin landing-section {
   display: flex;
