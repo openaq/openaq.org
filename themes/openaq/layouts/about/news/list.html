@@ -18,7 +18,8 @@
 
 
 {{ define "scripts" }}
-{{ $js := resources.Get "js/news.js" | js.Build }}
-<script src="{{ $js.RelPermalink }}" defer></script>
+{{ $js := resources.Get "js/news.js" | js.Build | resources.Minify }}
+{{ $secureJS := $js | resources.Fingerprint "sha512" }}
+<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" defer></script>
 
 {{ end }}
