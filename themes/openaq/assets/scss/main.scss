@@ -215,14 +215,19 @@
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
+.why-air-quality-page {
+  height: 25px;
+  width: 800px;
+  left: 0px;
+  top: 603px;
+  border-radius: nullpx;
+}
 
 .why-air-quality-content {
   h1 {
     @include mixins.heading2;
+    //make the text color text-sky-120
     color: variables.$sky120;
-  }
-
-  p {
-    color: blue;
+    // @include mixins.text-sky-120;
   }
 }
