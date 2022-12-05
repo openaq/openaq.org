@@ -14,7 +14,7 @@
     {{ $options := (dict "transpiler" "dartsass" "outputStyle" "compressed") }}
     {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options}}
     {{ $secureStyle := $style | resources.Fingerprint "sha512" }}
-    <link rel="stylesheet" href="{{ $secureStyle.RelPermalink }}">
-    
+    <link rel="stylesheet" href="{{ $secureStyle.RelPermalink }}" integrity="{{ $secureStyle.Data.Integrity }}">
+
     <title>{{ .Site.Title }}</title>
  </head>
