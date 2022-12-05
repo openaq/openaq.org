@@ -1,12 +1,16 @@
 {{ define "main" }}
 {{ partial "breadcrumbs" . }}
 
+<div class="why-air-quality-content">
+  <div class="bubble-lg"></div>
+  <div class="why-air-quality-content-container">
+    <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
+    <article class="why-air-quality-body">
+      {{ .Content }}
+      </article>
+  </div>
+</div>
 
-<h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
-
-<article class="why-air-quality-content">
-  {{ .Content }}
-  </article>
 {{ partial "social-banner" . }}
 {{ partial "explore-banner" . }}
 {{ end }}
