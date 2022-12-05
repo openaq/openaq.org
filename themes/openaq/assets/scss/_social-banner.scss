@@ -1,6 +1,6 @@
 @use 'openaq-design-system/variables';
 
-.community-banner {
+.social-banner {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -14,14 +14,10 @@
     display: flex;
     gap: 80px;
 
-    .community-overview {
-      flex: 1;
-    }
-
-    .community-participate {
+    .social-section {
       display: flex;
 
-      gap: 36px;
+      gap: 26px;
       flex: 1;
 
       &-description {
@@ -30,22 +26,6 @@
         justify-content: space-between;
         gap: 36px;
 
-        .btn {
-          width: fit-content;
-        }
-      }
-    }
-
-    .community-support {
-      display: flex;
-      flex: 1;
-      gap: 36px;
-
-      &-description {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 36px;
         .btn {
           width: fit-content;
         }

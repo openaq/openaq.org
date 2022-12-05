@@ -13,6 +13,7 @@
 @use 'news';
 @use 'explore-banner';
 @use 'community-banner';
+@use 'social-banner';
 
 @mixin landing-section {
   display: flex;
