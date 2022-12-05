@@ -1,0 +1,75 @@
+@use 'openaq-design-system/variables';
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+
+.help-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.tab {
+  width: 90%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid variables.$smoke10;
+
+  input {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  &:hover {
+    border: 1px solid variables.$ocean100;
+    border-radius: 12px;
+  }
+
+  &-label {
+    @include mixins.subtitle2;
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 20px;
+    cursor: pointer;
+  }
+
+  &-content {
+    max-height: 0;
+    padding: 0 1em;
+    background: white;
+    transition: all 0.35s;
+  }
+  &-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    font-size: 0.75em;
+    background: variables.$sky120;
+    cursor: pointer;
+    &:hover {
+      background: darken(variables.$sky120, 10%);
+    }
+  }
+}
+
+input:checked {
+  + .tab-label {
+    border-radius: 12px 12px 0 0;
+    background: variables.$sky120;
+    color: white;
+    .expand-icon {
+      transform: rotate(180deg);
+    }
+  }
+  ~ .tab-content {
+    max-height: 100vh;
+    padding: 1em;
+  }
+}
