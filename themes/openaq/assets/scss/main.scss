@@ -15,6 +15,7 @@
 @use 'community-banner';
 @use 'social-banner';
 @use 'help';
+@use 'team';
 
 @mixin landing-section {
   display: flex;

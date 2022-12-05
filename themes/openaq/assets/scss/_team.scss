@@ -1,0 +1,69 @@
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'openaq-design-system/variables';
+
+@mixin person-card($name, $color) {
+  .#{$name}-card {
+    border-radius: 22px;
+
+    &:hover {
+      @include mixins.box-shadow;
+    }
+
+    &__img {
+    }
+
+    &__description {
+      border-top: 6px solid $color;
+      padding: 0 12px 12px 12px;
+
+      .person-name {
+        @include mixins.subtitle2;
+        margin: 14px 0 6px 0;
+      }
+
+      .person-title {
+        @include mixins.subtitle3;
+        color: $color;
+        margin: 6px 0;
+      }
+
+      .person-bio {
+        @include mixins.body4;
+        margin: 12px 0;
+      }
+
+      .person-social {
+        display: flex;
+        gap: 18px;
+      }
+    }
+  }
+}
+
+.team-content {
+  display: flex;
+  justify-content: center;
+}
+
+.team-content-container {
+  width: 800px;
+}
+
+.team-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 22px;
+  row-gap: 22px;
+}
+
+.team-card {
+  @include person-card('team', variables.$sky100);
+}
+
+.board-card {
+  @include person-card('board', variables.$lavender120);
+}
+
+.advisor-card {
+  @include person-card('advisor', variables.$ocean120);
+}

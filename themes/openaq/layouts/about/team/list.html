@@ -1,6 +1,29 @@
 {{ define "main" }}
 {{ partial "breadcrumbs" . }}
 
+
+<div class="team-content">
+    <div class="team-content-container">
+        <h1 class="type-display-1 gradient-title">Team</h1>
+        <section class="team-section">
+            {{ range $index, $page := where .Pages "Params.group" "team" }} 
+            {{.Render "team-card"}} 
+            {{ end }}
+        </section>
+        <h1 class="type-display-1 gradient-title">Board</h1>
+        <section class="board-section">
+           
+
+        </section>
+        <h1 class="type-display-1 gradient-title">Advisors</h1>
+        <section class="advisor-section">
+            
+
+        </section>
+    </div>
+
+</div>
+
 {{ partial "community-banner" . }}
 {{ partial "explore-banner" . }}
 {{ end }}
