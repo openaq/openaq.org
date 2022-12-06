@@ -16,6 +16,7 @@
 @use 'social-banner';
 @use 'help';
 @use 'team';
+@use 'why-air-quality';
 
 @mixin landing-section {
   display: flex;
@@ -214,79 +215,6 @@
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-}
-
-.why-air-quality-content {
-  display: flex;
-  justify-content: center;
-  position: relative;
-
-  .bubble-lg {
-    z-index: -1;
-    position: absolute;
-    left: -132px;
-    top: 0px;
-  }
-
-  .bubble-sm {
-    z-index: -1;
-    position: absolute;
-    left: 46px;
-    top: 260px;
-  }
-
-  &-container {
-    width: 800px;
-
-    .why-air-quality-body {
-      h1,
-      h2,
-      h3,
-      h4 {
-        @include mixins.heading2;
-        color: variables.$sky120;
-        margin: 40px 0;
-      }
-
-      a {
-        @include mixins.link2;
-      }
-      p {
-        @include mixins.body2;
-        margin: 20px 0 0 0;
-      }
-      img {
-        width: 100%;
-        height: auto;
-        border-radius: 22px;
-        margin: 20px 0 0 0;
-      }
-    }
-  }
-
-  @media (max-width: 1000px) {
-    & {
-      .bubble-lg {
-        z-index: -1;
-        position: absolute;
-        right: -132px;
-        left: auto;
-        top: -150px;
-      }
-
-      .bubble-sm {
-        z-index: -1;
-        position: absolute;
-        right: 4px;
-        left: auto;
-
-        top: 120px;
-      }
-      &-container {
-        width: 90%;
-      }
-    }
-  }
 }
 
 .social-links {
