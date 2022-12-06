@@ -1,0 +1,14 @@
+<article class="initiative-card">
+    <img src="" alt="" class="initiative-card__img">
+    <div class="initiative-description">
+        <h2 class="inititiative-description__title">{{ .Title }}</h2>
+        <div class="initiative-description__body">
+            {{ .Content }}
+        </div>
+        <div class="initiative-tags">
+            {{ range .Params.tags }}
+            <a href="#" class="chip-base-data">{{ . }}</a>
+            {{ end }}
+        </div>
+    </div>
+</article>

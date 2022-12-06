@@ -1,0 +1,61 @@
+@use 'openaq-design-system/variables';
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+
+.initiative-content {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  margin: 0 0 40px 0;
+
+  .bubble-lg {
+    position: absolute;
+    left: -132px;
+    top: 0px;
+  }
+
+  .bubble-sm {
+    position: absolute;
+    top: 250px;
+    left: 46px;
+  }
+
+  &-container {
+    width: 800px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 40px;
+  }
+}
+
+.initiative-card {
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  border: 1px solid variables.$smoke10;
+  border-radius: 22px;
+
+  &__img {
+    flex: 2;
+  }
+
+  .initiative-description {
+    flex: 3;
+
+    .initiative-description__title {
+      @include mixins.heading2;
+    }
+
+    .initiative-description__body {
+      * {
+        @include mixins.body1;
+        color: variables.$smoke100;
+      }
+    }
+
+    .initiative-tags {
+      padding: 10px 20px;
+      display: flex;
+      gap: 12px;
+    }
+  }
+}
