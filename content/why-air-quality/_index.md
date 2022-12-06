@@ -9,13 +9,6 @@ Air quality is a critical issue that affects the health and well-being of indivi
 
 Ensuring good air quality is essential for protecting both human health and the environment. This is why organizations like openaq.org are working to provide access to air quality data and to raise awareness about the importance of clean air.
 
-* foo 
-* bar
-* baz
-
-
-1. first thing 
-2. second thing
 
 
 # Why air quality
@@ -30,9 +23,12 @@ In addition to its impacts on human health, poor air quality can also harm the e
 
 In conclusion, air quality is a critical issue that deserves our attention and action. By working together, we can ensure that the air we breathe is clean and healthy, and that we are protecting the environment for future generations.
 
-![ ](https://images.pexels.com/photos/775417/pexels-photo-775417.jpeg?auto=compress&cs=tinysrgb&w=800)
+![ ](https://images.pexels.com/photos/3902732/pexels-photo-3902732.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
 
 # How OpenAQ helps
 
-Mi tincidunt elit, id quisque ligula ac diam, amet. Vel etiam suspendisse morbi eleifend faucibus eget vestibulum felis. Dictum quis montes, sit sit. Tellus aliquam enim urna, etiam. Mauris posuere vulputate arcu amet, vitae nisi, tellus tincidunt. At feugiat sapien varius id.
-Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum, nulla odio nisl vitae. In aliquet pellentesque aenean hac vestibulum turpis mi bibendum diam. Tempor integer aliquam in vitae malesuada fringilla.
+- Sagittis et eu at elementum, quis in. 
+- Proin praesent volutpat egestas sociis sit lorem nunc nunc sit. 
+- Eget diam curabitur mi ac. 
+- Auctor rutrum lacus malesuada massa ornare et. Vulputate consectetur ac 
+
