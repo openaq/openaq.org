@@ -40,6 +40,11 @@
         @include mixins.body2;
         margin: 20px 0 0 0;
       }
+
+      ul {
+        @include mixins.body2;
+        margin: 20px 0 0 15px;
+      }
       img {
         width: 100%;
         height: auto;
