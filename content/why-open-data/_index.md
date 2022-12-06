@@ -2,7 +2,7 @@
 title = "Why open data?"
 +++
 
-# Free as in freedom
+# Free, as in freedom
 Open data refers to data that is freely available to access, use, and share without any legal, technological, or social restrictions. There are several reasons why open data is important and valuable to individuals, organizations, and society as a whole.
 
 ![ ](https://images.pexels.com/photos/3975572/pexels-photo-3975572.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)

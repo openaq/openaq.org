@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{ partial "breadcrumbs" . }}
+
+<div class="why-air-quality-content">
+    <div class="bubble-lg"></div>
+    <div class="bubble-sm"></div>
+  <div class="why-air-quality-content-container">
+    <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
+    <article class="why-air-quality-body">
+      {{ .Content }}
+      </article>
+
+      <!-- this is where two related case-studies cards will go side by side. -->
+      
+      <a href="/case-studies"><button class="icon-btn btn-primary">
+        Explore all case studies
+        <span class="material-symbols-outlined"> arrow_forward </span>
+        </button>
+      </a>
+
+      <div class="social-links">        
+        <button class="icon-btn btn-secondary js-copy-button">
+          <span class="js-copy-button__text">Copy link</span>
+          <span class="material-symbols-outlined"> content_copy </span>
+        </button>
+        <a href="https://www.facebook.com/openaq/" class="social-circle">
+            <img src="/svg/facebook.svg" alt="facebook">
+        </a>
+        <a href="https://twitter.com/openaq" class="social-circle"><img src="/svg/twitter.svg" alt="twitter"></a>
+        <a href="https://www.linkedin.com/company/openaq" class="social-circle"><img src="/svg/linkedin.svg" alt="linkedin"></a>
+    </div>
+  </div>
+</div>
+
+{{ partial "social-banner" . }}
+{{ partial "explore-banner" . }}
+{{ end }}
+
+{{ define "scripts" }}
+{{ $js := resources.Get "js/copy-to-clipboard.js" | js.Build | resources.Minify }}
+{{ $secureJS := $js | resources.Fingerprint "sha512" }}
+<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" defer></script>
+{{ end }}
