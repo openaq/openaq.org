@@ -1,13 +1,12 @@
 <article class="team-card">
-    <img src="{{ .Params.img }}" alt="" class="team-card__img">
-    <div class="team-card__description">
-        <h2 class="person-name">{{ .Params.name}}</h2>
-        <h3 class="person-title">{{ .Params.position }}</h3>
-        <p class="person-bio">
-            {{ .Summary }}
-        </p>
-        <div class="person-social">
-            
-        </div>
-    </div>
+    <a href="{{ .Permalink }}">
+        <img src="{{ .Params.img }}" alt="" class="team-card__img" />
+        <div class="team-card__description">
+            <h2 class="person-name">{{ .Params.name}}</h2>
+            <h3 class="person-title">{{ .Params.position }}</h3>
+            <p class="person-bio">{{ .Summary | truncate 300 }}</p>
+    </a>
+    {{ .Render "person-social" }}
+
+  </div>
 </article>

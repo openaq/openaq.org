@@ -1,3 +1,21 @@
 {{ define "main" }}
+{{ partial "breadcrumbs" . }}
 
+<div class="person-content">
+    <div class="bubble-lg"></div>
+    <div class="bubble-sm"></div>
+    <div class="person-content-container">
+        <article class="person">
+            <img src="" alt="" class="person__img">
+            <div class="person-description">
+                <h1 class="person-name gradient-title">{{ .Params.name }}</h1>
+                <h2 class="person-title">{{ .Params.position }}</h2>
+                {{ .Render "person-social" }}
+                <div class="person-bio">{{.Content}}</div>
+            </div>
+        </article>
+    </div>
+</div>
+{{ partial "community-banner" . }}
+{{ partial "explore-banner" . }}
 {{ end }}

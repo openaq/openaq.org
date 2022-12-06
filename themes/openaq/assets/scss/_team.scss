@@ -5,10 +5,6 @@
   .#{$name}-card {
     border-radius: 22px;
 
-    &:hover {
-      @include mixins.box-shadow;
-    }
-
     &__img {
     }
 
@@ -29,35 +25,37 @@
 
       .person-bio {
         @include mixins.body4;
+        text-decoration: none;
         margin: 12px 0;
-      }
-
-      .person-social {
-        display: flex;
-        gap: 18px;
       }
     }
   }
 }
 
+.person-social {
+  display: flex;
+  gap: 18px;
+  align-content: flex-start;
+}
+
 .team-content {
   display: flex;
   justify-content: center;
+
+  .team-content-container {
+    width: 800px;
+
+    @media (max-width: 800px) {
+      width: 600px;
+    }
+
+    @media (max-width: 600px) {
+      width: 300px;
+    }
+  }
 }
 
-.team-content-container {
-  width: 800px;
-
-  @media (max-width: 800px) {
-    width: 600px;
-  }
-
-  @media (max-width: 600px) {
-    width: 300px;
-  }
-}
-
-.team-section {
+.person-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 22px;
@@ -72,14 +70,67 @@
   }
 }
 
-.team-card {
-  @include person-card('team', variables.$sky100);
+@include person-card('team', variables.$sky100);
+
+@include person-card('board', variables.$lavender120);
+
+@include person-card('advisor', variables.$ocean120);
+
+.team-card:hover {
+  @include mixins.box-shadow;
 }
 
-.board-card {
-  @include person-card('board', variables.$lavender120);
-}
+.person-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 100px 0;
 
-.advisor-card {
-  @include person-card('advisor', variables.$ocean120);
+  .bubble-lg {
+    position: absolute;
+    left: -132px;
+    top: 0px;
+  }
+
+  .bubble-sm {
+    position: absolute;
+    top: 250px;
+    left: 46px;
+  }
+
+  &-container {
+    width: 800px;
+
+    .person {
+      .person-description {
+        border-top: 6px solid variables.$sky100;
+
+        .person-name {
+          @include mixins.display1;
+          margin: 40px 0 0 0;
+        }
+
+        .person-title {
+          @include mixins.heading1;
+          color: variables.$sky120;
+          margin: 0 0 40px 0;
+        }
+        .person-bio {
+          margin: 40px 0;
+
+          h1,
+          h2,
+          h3,
+          h4 {
+            color: variables.$sky120;
+            @include mixins.heading2;
+          }
+
+          p {
+            @include mixins.body2;
+          }
+        }
+      }
+    }
+  }
 }

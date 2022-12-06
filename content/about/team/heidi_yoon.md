@@ -1,9 +1,8 @@
 +++
 type = "about/team"
-title = 'Chris Hagerbaumer'
-name = 'Chris Hagerbaumer'
-position = 'Executive Director'
-group = 'team'
+name = 'Heidi Yoon'
+position = 'Chair'
+group = 'board'
 weight = 1
 email = 'chris@openaq.org'
 linkedin = 'https://example.com'
