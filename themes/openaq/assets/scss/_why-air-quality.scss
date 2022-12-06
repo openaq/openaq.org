@@ -36,6 +36,7 @@
       a {
         @include mixins.link2;
       }
+
       p {
         @include mixins.body2;
         margin: 20px 0 0 0;
@@ -45,6 +46,7 @@
         @include mixins.body2;
         margin: 20px 0 0 15px;
       }
+
       img {
         width: 100%;
         height: auto;
