@@ -18,6 +18,7 @@
 @use 'help';
 @use 'team';
 @use 'initiatives';
+@use 'why-air-quality';
 
 @mixin landing-section {
   display: flex;
@@ -217,72 +218,10 @@
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
-.why-air-quality-page {
-  height: 25px;
-  width: 800px;
-  left: 0px;
-  top: 603px;
-  border-radius: nullpx;
-}
-
-.why-air-quality-content {
-  display: flex;
-  justify-content: center;
-  position: relative;
-
-  .bubble-lg {
-    position: absolute;
-    left: -132px;
-    top: 0;
-  }
-
-  .bubble-sm {
-  }
-
-  &-container {
-    width: 800px;
-
-    .why-air-quality-body {
-      h1,
-      h2,
-      h3,
-      h4 {
-        @include mixins.heading2;
-        color: variables.$sky120;
-        margin: 40px 0;
-      }
-
-      a {
-        @include mixins.link2;
-      }
-
-      img {
-        width: 100%;
-        height: auto;
-        border-radius: 22px;
-      }
-    }
-  }
-
-  @media (max-width: 1000px) {
-    & {
-      .bubble-lg {
-        position: absolute;
-        left: auto;
-        z-index: -1;
-        right: -132px;
-        top: -200px;
-      }
-
-      &-container {
-        width: 90%;
-      }
-    }
-  }
-}
 
 .social-links {
-  margin: 12px 0;
+  margin: 40px 0;
+  // margin: 12px 0;
   display: flex;
   gap: 12px;
 
