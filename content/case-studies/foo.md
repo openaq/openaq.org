@@ -1,7 +1,8 @@
 +++
 title = 'AQAI'
-tags = ['Community']
-featured_image = 'https://via.placeholder.com/450x300'
+tags = ['API', 'Community']
+category = "developer"
+featured_image = "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 +++
 
 # Raising awareness for the community

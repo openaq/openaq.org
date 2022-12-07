@@ -46,6 +46,7 @@
   background: #ffffff;
   border: 1px solid variables.$smoke10;
   border-radius: 22px;
+  overflow: hidden;
 
   &:hover {
     @include mixins.box-shadow;
