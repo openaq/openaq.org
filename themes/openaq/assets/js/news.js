@@ -1,9 +1,16 @@
 (async () => {
-    const res = await fetch('http://localhost:8000/');
+    const list = document.querySelector('.items');
+    const res = await fetch('http://localhost:8000/').catch(() =>  {
+        const errorHtml = `
+        <span class="type-header-1">
+            Failed to fetch news items. Visit OpenAQ on <a href="https://openaq.medium.com/">Medium
+        </span>`;
+        list.insertAdjacentHTML('beforeend', errorHtml);
+        return;
+    });
     const feed = await res.text();
     const data = new window.DOMParser().parseFromString(feed, "text/xml");
     const items = data.querySelectorAll("item");
-    const list = document.querySelector('.items');
     for (const item of items) {
         const title = item.querySelector("title").innerHTML.match(/\<\!\[CDATA\[(.*)\]{2}\>/)
         const publicationDate = new Date(item.querySelector("pubDate").innerHTML)
