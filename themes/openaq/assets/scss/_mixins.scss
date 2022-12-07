@@ -1,0 +1,45 @@
+@mixin bubbles($top: 0) {
+  .bubbles-container {
+    position: absolute;
+    width: 100vw;
+    height: 295px;
+    pointer-events: none;
+
+    .bubbles {
+      position: relative;
+      top: $top;
+
+      .bubble-lg {
+        position: absolute;
+        top: 0;
+        left: -132px;
+      }
+
+      .bubble-sm {
+        position: absolute;
+        top: 250px;
+        left: 53px;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      & {
+        .bubbles {
+          .bubble-lg {
+            position: absolute;
+            top: -230px;
+            left: auto;
+            right: -100px;
+          }
+
+          .bubble-sm {
+            position: absolute;
+            top: 0px;
+            left: auto;
+            right: 85px;
+          }
+        }
+      }
+    }
+  }
+}
