@@ -14,17 +14,23 @@
   </span>
   {{ end }}
   <li  {{ if eq .p1 .p2 }}aria-current="page"{{ end }} >
-	<a href="{{ .p1.Permalink }}" class="type-body-3{{ if eq .p1 .p2 }} text-sky-120{{ end }}"> 
+    {{ $slice := slice "Tags" "Categories" }}
+    {{ $scratch := newScratch }}
+    {{ if in $slice .p1.Title }}
+      {{ $scratch.Set "title" "Case studies" }}
+      {{ $scratch.Set "link" "/case-studies" }}
+    {{ else }}
+    {{ $scratch.Set "title" .p1.Title }}
+    {{ $scratch.Set "link" .p1.Permalink }}
+    {{end }}
+	<a 
+    href="{{ $scratch.Get "link"}}" class="type-body-3{{ if eq .p1 .p2 }} text-sky-120{{ end }}"> 
     {{ if .p1.IsHome }}  
     <span class="material-symbols-outlined">
       home
       </span>
     {{ else }}
-    {{ if eq .p1.Title "Tags" }}
-    Case studies
-    {{ else }}
-    {{ .p1.Title }}
-    {{end }}
+      {{ $scratch.Get "title"}}
     {{ end }}
   </a>
   </li>
