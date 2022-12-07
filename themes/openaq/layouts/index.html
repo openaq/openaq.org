@@ -22,24 +22,9 @@
 
 <section class="case-studies-section">
     <div class="cards">
-        <article class="card">
-            <img class="card__img" src="https://via.placeholder.com/300x225" alt="">
-            <div class="card__body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo dolor earum dicta natus nobis ut repellendus vel voluptate quibusdam optio consequatur, voluptas a laborum? Repellendus id veniam est laborum.</p>
-            </div>
-        </article>
-        <article class="card">
-            <img class="card__img" src="https://via.placeholder.com/300x225" alt="">
-            <div class="card__body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo dolor earum dicta natus nobis ut repellendus vel voluptate quibusdam optio consequatur, voluptas a laborum? Repellendus id veniam est laborum.</p>
-            </div>
-        </article>
-        <article class="card">
-            <img class="card__img" src="https://via.placeholder.com/300x225" alt="">
-            <div class="card__body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quo dolor earum dicta natus nobis ut repellendus vel voluptate quibusdam optio consequatur, voluptas a laborum? Repellendus id veniam est laborum.</p>
-            </div>
-        </article>
+        {{ range $index, $page := where (where .Site.RegularPages "Type" "case-studies") "Params.featured" "==" true | first 3 }}
+            {{ partial "case-study-card" . }}
+        {{ end }}
     </div>
 
 </section>

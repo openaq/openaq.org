@@ -1,10 +1,8 @@
 +++
 title = 'AQAI'
-tags = ['API', 'Community']
+tags = ['API']
 categories = ['Developer']
 featured_image = 'https://via.placeholder.com/450x300'
-
-featured = true
 +++
 
 # Raising awareness for the community

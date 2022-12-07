@@ -19,6 +19,7 @@
 @use 'team';
 @use 'initiatives';
 @use 'why-air-quality';
+@use 'case-studies';
 
 @mixin landing-section {
   display: flex;

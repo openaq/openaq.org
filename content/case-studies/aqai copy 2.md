@@ -2,7 +2,7 @@
 title = 'AQAI'
 tags = ['API', 'Community']
 categories = ['Developer']
-featured_image = 'https://via.placeholder.com/450x300'
+featured_image = 'https://images.pexels.com/photos/3280130/pexels-photo-3280130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 
 featured = true
 +++

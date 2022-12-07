@@ -1,0 +1,10 @@
+<div class="case-studies-content">
+    <div class="case-studies-content-container">
+        <h1 class="type-display-1 gradient-title">Case Studies</h1>
+        <div class="case-studies-grid">
+            {{ range .Pages }}
+                {{ partial "case-study-card" . }}
+            {{ end }}
+        </div>
+    </div>
+</div>

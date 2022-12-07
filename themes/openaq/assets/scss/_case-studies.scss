@@ -1,0 +1,69 @@
+@use 'openaq-design-system/variables';
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+
+.case-studies-content {
+  display: flex;
+  justify-content: center;
+
+  &-container {
+    width: 1000px;
+
+    .case-studies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 20px;
+      column-gap: 20px;
+      margin: 40px 0;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    & {
+      &-container {
+        width: 600px;
+
+        .case-studies-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    & {
+      &-container {
+        width: 300px;
+
+        .case-studies-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    }
+  }
+}
+
+.case-study-card {
+  background: #ffffff;
+  border: 1px solid variables.$smoke10;
+  border-radius: 22px;
+
+  &:hover {
+    @include mixins.box-shadow;
+  }
+
+  &__img {
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
+  }
+
+  &__body {
+    padding: 20px;
+
+    .case-study-description {
+      @include mixins.body2;
+      padding: 10px 0;
+      color: variables.$smoke100;
+    }
+  }
+}

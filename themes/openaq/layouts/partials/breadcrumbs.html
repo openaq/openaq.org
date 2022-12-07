@@ -20,7 +20,11 @@
       home
       </span>
     {{ else }}
+    {{ if eq .p1.Title "Tags" }}
+    Case studies
+    {{ else }}
     {{ .p1.Title }}
+    {{end }}
     {{ end }}
   </a>
   </li>

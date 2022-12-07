@@ -1,0 +1,20 @@
+<article class="case-study-card">
+    <a href="{{ .Permalink }}">
+    <div>
+        <img src="{{.Params.featured_image}}" class="case-study-card__img" alt="">
+    </div>
+    </a>
+    <div class="case-study-card__body">
+        <a href="{{ .Permalink }}">
+        <h2 class="type-heading-2">{{ .Title }}</h2>
+        <div class="case-study-description">
+            {{ .Summary | truncate 200 }}
+        </div>
+        </a>
+        <div class="case-study-tags">
+            {{ range .Params.tags }}
+                {{ partial "tag-chip" . }}
+            {{ end }}
+        </div>
+    </div>
+</article>

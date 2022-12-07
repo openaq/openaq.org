@@ -6,8 +6,8 @@
             {{ .Content }}
         </div>
         <div class="initiative-tags">
-            {{ range .Params.tags }}
-            <a href="#" class="chip-base-data">{{ . }}</a>
+            {{ range .Params.topics }}
+            <span href="#" class="chip-brand">{{ . }}</span>
             {{ end }}
         </div>
     </div>
