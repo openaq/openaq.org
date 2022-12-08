@@ -2,8 +2,8 @@
 {{ partial "breadcrumbs" . }}
 
 <div class="initiative-content">
-    <div class="bubble-lg"></div>
-    <div class="bubble-sm"></div>
+    {{ partial "bubbles" }}
+
     <div class="initiative-content-container">
         <h1 class="type-display-1 gradient-title">Initiatives</h1>
         {{ range .Pages }}

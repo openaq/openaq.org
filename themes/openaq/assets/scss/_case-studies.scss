@@ -1,9 +1,12 @@
 @use 'openaq-design-system/variables';
 @use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'mixins' as local-mixins;
 
 .case-studies-content {
   display: flex;
   justify-content: center;
+  position: relative;
+  @include local-mixins.bubbles();
 
   &-container {
     width: 1000px;

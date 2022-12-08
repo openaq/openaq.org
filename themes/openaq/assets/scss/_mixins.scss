@@ -1,13 +1,13 @@
-@mixin bubbles($top: 0) {
+@mixin bubbles($top: 0, $mobile-position: 'right') {
   .bubbles-container {
     position: absolute;
     width: 100vw;
     height: 295px;
     pointer-events: none;
+    top: #{$top}px;
 
     .bubbles {
       position: relative;
-      top: $top;
 
       .bubble-lg {
         position: absolute;
@@ -24,19 +24,28 @@
 
     @media (max-width: 1000px) {
       & {
+        @if $mobile-position == 'left' {
+          top: -275px;
+          left: -30px;
+        }
         .bubbles {
           .bubble-lg {
             position: absolute;
-            top: -230px;
-            left: auto;
-            right: -100px;
+            @if $mobile-position == 'right' {
+              top: -200px;
+              left: auto;
+              right: -140px;
+            }
           }
 
           .bubble-sm {
             position: absolute;
-            top: 0px;
-            left: auto;
-            right: 85px;
+
+            @if $mobile-position == 'right' {
+              top: 50px;
+              left: auto;
+              right: 15px;
+            }
           }
         }
       }

@@ -1,7 +1,11 @@
+@use 'mixins' as local-mixins;
+
 .news-content {
   display: flex;
   justify-content: center;
   position: relative;
+
+  @include local-mixins.bubbles();
 
   .breadcrumb {
     margin: 6px 0 0 150px;
@@ -9,18 +13,7 @@
 
   .news-content-container {
     width: 800px;
-  }
-
-  .bubble-lg {
-    position: absolute;
-    left: -132px;
-    top: 0px;
-  }
-
-  .bubble-sm {
-    position: absolute;
-    top: 250px;
-    left: 46px;
+    z-index: 2;
   }
 }
 

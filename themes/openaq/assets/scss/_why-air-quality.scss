@@ -7,11 +7,11 @@
   justify-content: center;
   position: relative;
 
-  @include local-mixins.bubbles(200);
+  @include local-mixins.bubbles();
 
   &-container {
     width: 800px;
-
+    z-index: 2;
     .why-air-quality-body {
       h1,
       h2,
