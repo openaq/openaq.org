@@ -45,6 +45,10 @@
     padding: 0 1em;
     background: white;
     transition: all 0.35s;
+
+    p {
+      margin: 0;
+    }
   }
   &-close {
     display: flex;
