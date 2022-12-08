@@ -43,7 +43,7 @@ test.describe('landing page navigation', () => {
   
   test('learn how openaq works button navigates', async ({ page }) => {
     await page.locator('body > main > section.technology-section > div.technology-section-blurb > div > a').click();
-    await expect(page).toHaveURL(`${baseUrl}/developers/api-overview`);
+    await expect(page).toHaveURL(`${baseUrl}/developers/api-overview/`);
   })
 
   test('explore the data button navigates', async ({ page }) => {
@@ -52,9 +52,19 @@ test.describe('landing page navigation', () => {
   })
 
   test('learn about openaq api button navigates', async ({ page }) => {
-    await page.locator('body > main > section.search-section > div.search-section-blurb > div > a').click();
+    await page.locator('body > main > section.api-section > div.api-section-blurb > div > a').click();
     await expect(page).toHaveURL('https://docs.openaq.org/docs');
   })
+
+  test('api chip navigates', async ({ page }) => {
+    await page.locator('body > main > section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-data').click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/api/`);
+  });
+
+  test('community chip navigates', async ({ page }) => {
+    await page.locator('body > main > section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-interactive').click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/community/`);
+  });
 
 });
 
@@ -278,3 +288,63 @@ test.describe('footer navigation', () => {
 
 });
 
+test.describe('social banner navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`${baseUrl}/why-air-quality/`);
+  });
+
+  test('page responds HTTP 200', async () => {
+    const context = await request.newContext();
+    const response = await context.get(`${baseUrl}/why-air-quality/`);
+    expect(response.ok()).toBeTruthy();
+  });
+
+  test('github follow button navigates', async ({ page }) => {
+    await page
+      .locator('body > main > section.social-banner > div.social-banner-content > div:nth-child(1) > div.social-section-description > a')
+      .click();
+    await expect(page).toHaveURL('https://github.com/openaq');
+  });
+
+  test('twitter follow button navigates', async ({ page }) => {
+    await page
+      .locator('body > main > section.social-banner > div.social-banner-content > div:nth-child(3) > div.social-section-description > a')
+      .click();
+    await expect(page).toHaveURL('https://twitter.com/openaq');
+  });
+  
+  test('slack join button navigates', async ({ page }) => {
+    await page
+      .locator('body > main > section.social-banner > div.social-banner-content > div:nth-child(2) > div.social-section-description > a')
+      .click();
+    await expect(page).toHaveURL('https://openaq.slack.com/join/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw#/shared-invite/email');
+  });
+
+});
+
+test.describe('community banner navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`${baseUrl}/case-studies/`);
+  });
+
+  test('page responds HTTP 200', async () => {
+    const context = await request.newContext();
+    const response = await context.get(`${baseUrl}/case-studies/`);
+    expect(response.ok()).toBeTruthy();
+  });
+
+  test('participate button navigates', async ({ page }) => {
+    await page
+      .locator('body > main > section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > button')
+      .click();
+    await expect(page).toHaveURL('mailto:info@openaq.org');
+  });
+
+  test('support button navigates', async ({ page }) => {
+    await page
+      .locator('body > main > section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > button')
+      .click();
+    await expect(page).toHaveURL('https://secure.givelively.org/donate/openaq-inc/');
+  });
+
+});
