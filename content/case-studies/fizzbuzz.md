@@ -3,6 +3,8 @@ title = 'fizzbuzz'
 tags = ['API']
 category = ["developer"]
 featured_image = "https://images.pexels.com/photos/3719037/pexels-photo-3719037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+featured = true
+
 +++
 
 # Raising awareness for the community
