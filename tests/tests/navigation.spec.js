@@ -21,13 +21,18 @@ test.describe('landing page navigation', () => {
 
 
   test('featured case studies card navigates', async ({ page }) => {
-    await page.locator('body > main > section.case-studies-section > div > article > a').click();
-    await expect(page).toHaveURL(`{baseURL}/case-studies/*`);
+    const cards = await page.$$('.case-study-card');
+    for (const card of cards) {
+      const slug = await card.getAttribute('data-card-slug');
+      await page.locator(`[data-card-slug=${slug}]`).click();
+      await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}`);
+    }
+
   })
   
   test('learn how openaq works button navigates', async ({ page }) => {
     await page.locator('body > main > section.technology-section > div.technology-section-blurb > div > a').click();
-    await expect(page).toHaveURL(`{baseUrl}/developers/api-overview`);
+    await expect(page).toHaveURL(`${baseUrl}/developers/api-overview`);
   })
 
   test('explore the data button navigates', async ({ page }) => {

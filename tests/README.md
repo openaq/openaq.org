@@ -10,7 +10,7 @@ This section contains the end-to-end testing of the website using the [Playwrigh
 Using Node v16 install the packages using yarn:
 
 ```sh
-yarn install
+yarn install && yarn playwright install
 ```
 
 Before testing ensure the Hugo development server is running the site on port 1313 (default)
