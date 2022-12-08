@@ -21,6 +21,7 @@
 @use 'case-studies';
 @use 'policy-page';
 @use 'single-article';
+@use 'reporting';
 
 @mixin landing-section {
   display: flex;

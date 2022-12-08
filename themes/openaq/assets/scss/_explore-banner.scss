@@ -24,16 +24,4 @@
     object-fit: cover;
     width: 100%;
   }
-
-  @media (max-width: 800px) {
-    & {
-      .bubble-lg {
-        display: none;
-      }
-
-      .bubble-sm {
-        display: none;
-      }
-    }
-  }
 }

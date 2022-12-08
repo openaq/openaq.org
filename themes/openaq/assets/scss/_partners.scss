@@ -93,23 +93,6 @@
 
   @media (max-width: 800px) {
     & {
-      .bubble-lg {
-        z-index: -1;
-        position: absolute;
-        right: -132px;
-        left: auto;
-        top: -150px;
-      }
-
-      .bubble-sm {
-        z-index: -1;
-        position: absolute;
-        right: 4px;
-        left: auto;
-
-        top: 120px;
-      }
-
       &-container {
         width: auto;
         align-items: center;

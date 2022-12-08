@@ -1,0 +1,46 @@
+@use 'mixins' as local-mixins;
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'openaq-design-system/variables';
+
+.reporting-content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  @include local-mixins.bubbles();
+  margin: 0 0 100px 0;
+
+  &-container {
+    width: 800px;
+    .reporting-grid {
+      margin: 60px 0 0 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 60px;
+      row-gap: 80px;
+
+      .reporting-item {
+        &__title {
+          margin: 20px 0;
+          @include mixins.heading1;
+          color: variables.$sky120;
+        }
+
+        &__description {
+          @include mixins.body2;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    & {
+      &-container {
+        width: 90%;
+
+        .reporting-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    }
+  }
+}
