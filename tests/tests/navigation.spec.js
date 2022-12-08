@@ -25,7 +25,7 @@ test.describe('landing page navigation', () => {
     for (const card of cards) {
       const slug = await card.getAttribute('data-card-slug');
       await page.locator(`[data-card-slug=${slug}]`).click();
-      await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}`);
+      await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
     }
 
   })
