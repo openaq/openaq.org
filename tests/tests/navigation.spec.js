@@ -187,7 +187,7 @@ test.describe('header navigation', () => {
     await page.locator(
       '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(3) > a'
     ).click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/`);
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/developer/`);
   });
 
   test('developers > help navigates', async ({ page }) => {
@@ -255,6 +255,26 @@ test.describe('footer navigation', () => {
 
   // insert subscribe test here
 
-  
+  test('fb icon navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(1)')
+      .click();
+    await expect(page).toHaveURL('https://www.facebook.com/openaq/');
+  });
+
+  test('twitter icon navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(2)')
+      .click();
+    await expect(page).toHaveURL('https://twitter.com/openaq');
+  });
+
+  test('linkedIn icon navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(3)')
+      .click();
+    await expect(page).toHaveURL('https://www.linkedin.com/company/openaq');
+  });
 
 });
+
