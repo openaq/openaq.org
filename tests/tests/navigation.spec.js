@@ -76,11 +76,32 @@ test.describe('header navigation', () => {
     await expect(page).toHaveURL(`${baseUrl}`);
   });
 
-  test('explore the data navigates', async ({ page }) => {
+  test('explore the data tab navigates', async ({ page }) => {
     await page
       .locator('.header > nav > ul > li:nth-child(2) > a')
       .click();
     await expect(page).toHaveURL('https://explore.openaq.org');
+  });
+
+  test('why air quality tab navigates', async ({ page }) => {
+    await page
+      .locator('.header > nav > ul > li:nth-child(3) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/why-air-quality/`);
+  });
+
+  test('why open data tab navigates', async ({ page }) => {
+    await page
+      .locator('.header > nav > ul > li:nth-child(4) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/why-open-data/`);
+  });
+
+  test('partner tab navigates', async ({ page }) => {
+    await page
+      .locator('.header > nav > ul > li:nth-child(5) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/partners/`);
   });
 
   test('about hover displays dropdown', async ({ page }) => {
@@ -97,4 +118,143 @@ test.describe('header navigation', () => {
     ).click();
     await expect(page).toHaveURL(`${baseUrl}/about/`);
   });
+
+  test('about > news navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(7) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(2) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/about/news/`);
+  });
+
+  test('about > case studies navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(7) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(3) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/`);
+  });
+
+  test('about > technology navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(7) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(4) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/about/technology/`);
+  });
+
+  test('about > team navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(7) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(5) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/about/team/`);
+  });
+
+  test('about > reporting navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(7) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(6) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/about/reporting/`);
+  });
+
+  test('developers hover displays dropdown', async ({ page }) => {
+    const developerSubmenu = await page.locator('.header > nav > ul > li:nth-child(6) > ul.submenu');
+    await expect(developerSubmenu).toBeVisible({visible:false});
+    await page.hover('.header > nav > ul > li:nth-child(6) > a');
+    await expect(developerSubmenu).toBeVisible();
+  });
+
+  test('developers > api overview navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(6) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(1) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/developers/api-overview/`);
+  });
+
+  test('developers > developer documentation navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(6) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(2) > a'
+    ).click();
+    await expect(page).toHaveURL('https://docs.openaq.org/docs');
+  });
+
+  test('developers > case studies navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(6) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(3) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/`);
+  });
+
+  test('developers > help navigates', async ({ page }) => {
+    await page.hover('.header > nav > ul > li:nth-child(6) > a');
+    await page.locator(
+      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(4) > a'
+    ).click();
+    await expect(page).toHaveURL(`${baseUrl}/developers/help/`);
+  });
+  
+});
+
+test.describe('footer navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`${baseUrl}`);
+  });
+
+  test('page responds HTTP 200', async () => {
+    const context = await request.newContext();
+    const response = await context.get(`${baseUrl}`);
+    expect(response.ok()).toBeTruthy();
+  });
+
+  test('home tab navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(1)')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/`);
+  });
+
+  test('explore tab navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(2)')
+      .click();
+    await expect(page).toHaveURL('https://explore.openaq.org/');
+  });  
+
+  test('partners tab navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(3)')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/partners/`);
+  }); 
+
+  test('api tab navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(4)')
+      .click();
+    await expect(page).toHaveURL('https://docs.openaq.org/docs');
+  });
+
+  test('about tab navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(5)')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/about/`);
+  });
+
+  test('help tab navigates', async ({ page }) => {
+    await page
+      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(6)')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/developers/help/`);
+  });
+
+  // insert subscribe test here
+
+  
+
 });
