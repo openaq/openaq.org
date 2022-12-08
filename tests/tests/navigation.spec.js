@@ -20,14 +20,25 @@ test.describe('landing page navigation', () => {
   });
 
 
-  test('featured case studies card navigates', async ({ page }) => {
-    const cards = await page.$$('.case-study-card');
-    for (const card of cards) {
-      const slug = await card.getAttribute('data-card-slug');
-      await page.locator(`[data-card-slug=${slug}]`).click();
-      await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
-    }
+  test('first featured case studies card navigates', async ({ page }) => {
+    const featureCard = page.locator('div.cards > article.case-study-card:nth-child(1)')
+    const slug = await featureCard.getAttribute('data-card-slug');
+    await page.locator(`[data-card-slug=${slug}]`).click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
+  })
+  
+  test('second featured case studies card navigates', async ({ page }) => {
+    const featureCard = page.locator('div.cards > article.case-study-card:nth-child(2)')
+    const slug = await featureCard.getAttribute('data-card-slug');
+    await page.locator(`[data-card-slug=${slug}]`).click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
+  })
 
+  test('third featured case studies card navigates', async ({ page }) => {
+    const featureCard = page.locator('div.cards > article.case-study-card:nth-child(3)')
+    const slug = await featureCard.getAttribute('data-card-slug');
+    await page.locator(`[data-card-slug=${slug}]`).click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
   })
   
   test('learn how openaq works button navigates', async ({ page }) => {
