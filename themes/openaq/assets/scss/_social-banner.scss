@@ -1,13 +1,16 @@
 @use 'openaq-design-system/variables';
+@use 'mixins' as local-mixins;
 
 .social-banner {
   display: flex;
+  position: relative;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 430px;
   width: 100vw;
   background-color: variables.$lavender120;
+  @include local-mixins.bubbles(160, 'left');
 
   &-content {
     max-width: 850px;

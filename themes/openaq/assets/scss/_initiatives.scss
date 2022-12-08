@@ -1,25 +1,16 @@
 @use 'openaq-design-system/variables';
 @use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'mixins' as local-mixins;
 
 .initiative-content {
   display: flex;
   position: relative;
   justify-content: center;
   margin: 0 0 40px 0;
-
-  .bubble-lg {
-    position: absolute;
-    left: -132px;
-    top: 0px;
-  }
-
-  .bubble-sm {
-    position: absolute;
-    top: 250px;
-    left: 46px;
-  }
+  @include local-mixins.bubbles();
 
   &-container {
+    z-index: 2;
     width: 800px;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
