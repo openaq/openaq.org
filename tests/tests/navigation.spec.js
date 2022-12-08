@@ -19,6 +19,27 @@ test.describe('landing page navigation', () => {
     await expect(page).toHaveURL(`${baseUrl}/about/`);
   });
 
+
+  test('featured case studies card navigates', async ({ page }) => {
+    await page.locator('body > main > section.case-studies-section > div > article > a').click();
+    await expect(page).toHaveURL(`{baseURL}/case-studies/*`);
+  })
+  
+  test('learn how openaq works button navigates', async ({ page }) => {
+    await page.locator('body > main > section.technology-section > div.technology-section-blurb > div > a').click();
+    await expect(page).toHaveURL(`{baseUrl}/developers/api-overview`);
+  })
+
+  test('explore the data button navigates', async ({ page }) => {
+    await page.locator('body > main > section.search-section > div.search-section-blurb > div > a').click();
+    await expect(page).toHaveURL(`https://explore.openaq.org`);
+  })
+
+  test('learn about openaq api button navigates', async ({ page }) => {
+    await page.locator('body > main > section.search-section > div.search-section-blurb > div > a').click();
+    await expect(page).toHaveURL(`https://docs.openaq.docs`);
+  })
+
 });
 
 test.describe('header navigation', () => {
