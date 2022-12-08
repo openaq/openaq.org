@@ -2,17 +2,18 @@
 @use 'openaq-design-system/variables';
 @use 'mixins' as local-mixins;
 
-.why-air-quality-content {
+.single-article-content {
   display: flex;
   justify-content: center;
   position: relative;
+  margin: 0 0 100px 0;
 
   @include local-mixins.bubbles();
 
   &-container {
     width: 800px;
     z-index: 2;
-    .why-air-quality-body {
+    .single-article-body {
       h1,
       h2,
       h3,
@@ -47,22 +48,6 @@
 
   @media (max-width: 1000px) {
     & {
-      .bubble-lg {
-        z-index: -1;
-        position: absolute;
-        right: -132px;
-        left: auto;
-        top: -150px;
-      }
-
-      .bubble-sm {
-        z-index: -1;
-        position: absolute;
-        right: 4px;
-        left: auto;
-
-        top: 120px;
-      }
       &-container {
         width: 90%;
       }

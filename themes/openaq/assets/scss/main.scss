@@ -18,9 +18,9 @@
 @use 'help';
 @use 'team';
 @use 'initiatives';
-@use 'why-air-quality';
 @use 'case-studies';
 @use 'policy-page';
+@use 'single-article';
 
 @mixin landing-section {
   display: flex;

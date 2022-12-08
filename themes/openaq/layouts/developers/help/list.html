@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ partial "breadcrumbs" . }}
-  <h1>About OpenAQ</h1>
+  <h1 class="type-display-1 gradient-title">Help & FAQ</h1>
     {{ range $index, $topic := where .Site.RegularPages "Section" "developers" }}
     <section class="help-items">
         <div class="tab">
@@ -17,4 +17,6 @@
           </div>
     </section>
     {{ end }}
+{{ partial "explore-banner" . }}
+
 {{ end }}  

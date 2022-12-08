@@ -1,6 +1,16 @@
 {{ define "main" }}
 {{ partial "breadcrumbs" . }}
 
-  <h1>Technology at OpenAQ</h1>
-  {{ .Content }}
-{{ end }}  
+<div class="single-article-content">
+  {{ partial "bubbles" }}
+  <div class="single-article-content-container">
+    <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
+    <article class="single-article-body">
+      {{ .Content }}
+    </article>
+  </div>
+</div>
+
+{{ partial "community-banner" . }}
+{{ partial "explore-banner" . }}
+{{ end }}
