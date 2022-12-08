@@ -20,6 +20,7 @@
 @use 'initiatives';
 @use 'why-air-quality';
 @use 'case-studies';
+@use 'policy-page';
 
 @mixin landing-section {
   display: flex;
