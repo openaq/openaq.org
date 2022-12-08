@@ -37,12 +37,12 @@ test.describe('landing page navigation', () => {
 
   test('explore the data button navigates', async ({ page }) => {
     await page.locator('body > main > section.search-section > div.search-section-blurb > div > a').click();
-    await expect(page).toHaveURL(`https://explore.openaq.org`);
+    await expect(page).toHaveURL('https://explore.openaq.org');
   })
 
   test('learn about openaq api button navigates', async ({ page }) => {
     await page.locator('body > main > section.search-section > div.search-section-blurb > div > a').click();
-    await expect(page).toHaveURL(`https://docs.openaq.docs`);
+    await expect(page).toHaveURL('https://docs.openaq.org/docs');
   })
 
 });
