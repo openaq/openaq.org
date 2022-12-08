@@ -1,7 +1,7 @@
 +++
-title = 'AQAI'
-tags = ['API', 'Community']
-category = "developer"
+title = 'foo'
+tags = ['Community']
+category = ["developer"]
 featured_image = "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 +++
 

@@ -1,8 +1,8 @@
 +++
 title = 'AQAI'
 tags = ['API', 'Community']
-categories = ['Developer']
-featured_image = 'https://images.pexels.com/photos/3280130/pexels-photo-3280130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+categories = ['developer']
+featured_image = 'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 
 featured = true
 +++

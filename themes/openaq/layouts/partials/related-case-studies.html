@@ -1,5 +1,5 @@
 <div class="related-case-studies">
- {{ range .Site.RegularPages.Related . | first 2 }}
+ {{ range .Site.RegularPages.Related . | shuffle | first 2 }}
  {{ partial "case-study-card" . }}
  {{ end }}
 </div>
