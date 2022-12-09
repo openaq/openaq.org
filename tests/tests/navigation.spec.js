@@ -19,53 +19,91 @@ test.describe('landing page navigation', () => {
     await expect(page).toHaveURL(`${baseUrl}/about/`);
   });
 
+  test('first featured case studies card navigates', async ({
+    page,
+  }) => {
+    const featureCard = page.locator(
+      'div.cards > article.case-study-card:nth-child(1)'
+    );
+    const slug = await featureCard.getAttribute('data-card-slug');
+    await page.locator(`[data-card-slug=${slug}]`).click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
+  });
 
-  test('first featured case studies card navigates', async ({ page }) => {
-    const featureCard = page.locator('div.cards > article.case-study-card:nth-child(1)')
+  test('second featured case studies card navigates', async ({
+    page,
+  }) => {
+    const featureCard = page.locator(
+      'div.cards > article.case-study-card:nth-child(2)'
+    );
     const slug = await featureCard.getAttribute('data-card-slug');
     await page.locator(`[data-card-slug=${slug}]`).click();
     await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
-  })
-  
-  test('second featured case studies card navigates', async ({ page }) => {
-    const featureCard = page.locator('div.cards > article.case-study-card:nth-child(2)')
-    const slug = await featureCard.getAttribute('data-card-slug');
-    await page.locator(`[data-card-slug=${slug}]`).click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
-  })
+  });
 
-  test('third featured case studies card navigates', async ({ page }) => {
-    const featureCard = page.locator('div.cards > article.case-study-card:nth-child(3)')
+  test('third featured case studies card navigates', async ({
+    page,
+  }) => {
+    const featureCard = page.locator(
+      'div.cards > article.case-study-card:nth-child(3)'
+    );
     const slug = await featureCard.getAttribute('data-card-slug');
     await page.locator(`[data-card-slug=${slug}]`).click();
     await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
-  })
-  
-  test('learn how openaq works button navigates', async ({ page }) => {
-    await page.locator('section.technology-section > div.technology-section-blurb > div > a').click();
-    await expect(page).toHaveURL(`${baseUrl}/developers/api-overview/`);
-  })
+  });
+
+  test('learn how openaq works button navigates', async ({
+    page,
+  }) => {
+    await page
+      .locator(
+        'section.technology-section > div.technology-section-blurb > div > a'
+      )
+      .click();
+    await expect(page).toHaveURL(
+      `${baseUrl}/developers/api-overview/`
+    );
+  });
 
   test('explore the data button navigates', async ({ page }) => {
-    await page.locator('section.search-section > div.search-section-blurb > div > a').click();
+    await page
+      .locator(
+        'section.search-section > div.search-section-blurb > div > a'
+      )
+      .click();
     await expect(page).toHaveURL('https://explore.openaq.org');
-  })
+  });
 
-  test('learn about openaq api button navigates', async ({ page }) => {
-    await page.locator('section.api-section > div.api-section-blurb > div > a').click();
+  test('learn about openaq api button navigates', async ({
+    page,
+  }) => {
+    await page
+      .locator(
+        'section.api-section > div.api-section-blurb > div > a'
+      )
+      .click();
     await expect(page).toHaveURL('https://docs.openaq.org/docs');
-  })
+  });
 
   test('api chip navigates', async ({ page }) => {
-    await page.locator('section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-data').click();
+    await page
+      .locator(
+        'section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-data'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/case-studies/api/`);
   });
 
   test('community chip navigates', async ({ page }) => {
-    await page.locator('section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-interactive').click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/community/`);
+    await page
+      .locator(
+        'section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-interactive'
+      )
+      .click();
+    await expect(page).toHaveURL(
+      `${baseUrl}/case-studies/community/`
+    );
   });
-
 });
 
 test.describe('header navigation', () => {
@@ -115,99 +153,128 @@ test.describe('header navigation', () => {
   });
 
   test('about hover displays dropdown', async ({ page }) => {
-    const aboutSubmenu = await page.locator('.header > nav > ul > li:nth-child(7) > ul.submenu');
-    await expect(aboutSubmenu).toBeVisible({visible:false});
+    const submenu = page.locator(
+      '.header > nav > ul > li:nth-child(7) > ul.submenu'
+    );
+    await expect(submenu).toBeVisible({ visible: false });
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
-    await expect(aboutSubmenu).toBeVisible();
+    await expect(submenu).toBeVisible();
   });
 
   test('about > about openaq navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(1) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(1) > a'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/about/`);
   });
 
   test('about > news navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(2) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(2) > a'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/about/news/`);
   });
 
   test('about > case studies navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(3) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(3) > a'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/case-studies/`);
   });
 
   test('about > technology navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(4) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(4) > a'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/about/technology/`);
   });
 
   test('about > team navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(5) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(5) > a'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/about/team/`);
   });
 
   test('about > reporting navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(6) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(6) > a'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/about/reporting/`);
   });
 
   test('developers hover displays dropdown', async ({ page }) => {
-    const developerSubmenu = await page.locator('.header > nav > ul > li:nth-child(6) > ul.submenu');
-    await expect(developerSubmenu).toBeVisible({visible:false});
+    const submenu = page.locator(
+      '.header > nav > ul > li:nth-child(6) > ul.submenu'
+    );
+    await expect(submenu).toBeVisible({ visible: false });
     await page.hover('.header > nav > ul > li:nth-child(6) > a');
-    await expect(developerSubmenu).toBeVisible();
+    await expect(submenu).toBeVisible();
   });
 
   test('developers > api overview navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(6) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(1) > a'
-    ).click();
-    await expect(page).toHaveURL(`${baseUrl}/developers/api-overview/`);
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(1) > a'
+      )
+      .click();
+    await expect(page).toHaveURL(
+      `${baseUrl}/developers/api-overview/`
+    );
   });
 
-  test('developers > developer documentation navigates', async ({ page }) => {
+  test('developers > developer documentation navigates', async ({
+    page,
+  }) => {
     await page.hover('.header > nav > ul > li:nth-child(6) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(2) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(2) > a'
+      )
+      .click();
     await expect(page).toHaveURL('https://docs.openaq.org/docs');
   });
 
   test('developers > case studies navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(6) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(3) > a'
-    ).click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/developer/`);
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(3) > a'
+      )
+      .click();
+    await expect(page).toHaveURL(
+      `${baseUrl}/case-studies/developer/`
+    );
   });
 
   test('developers > help navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(6) > a');
-    await page.locator(
-      '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(4) > a'
-    ).click();
+    await page
+      .locator(
+        '.header > nav > ul > li:nth-child(6) > ul > li:nth-child(4) > a'
+      )
+      .click();
     await expect(page).toHaveURL(`${baseUrl}/developers/help/`);
   });
-  
 });
 
 test.describe('footer navigation', () => {
@@ -223,42 +290,54 @@ test.describe('footer navigation', () => {
 
   test('home tab navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(1)')
+      .locator(
+        '.footer > div.footer__content > section.nav-section > nav > a:nth-child(1)'
+      )
       .click();
     await expect(page).toHaveURL(`${baseUrl}/`);
   });
 
   test('explore tab navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(2)')
+      .locator(
+        '.footer > div.footer__content > section.nav-section > nav > a:nth-child(2)'
+      )
       .click();
     await expect(page).toHaveURL('https://explore.openaq.org/');
-  });  
+  });
 
   test('partners tab navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(3)')
+      .locator(
+        '.footer > div.footer__content > section.nav-section > nav > a:nth-child(3)'
+      )
       .click();
     await expect(page).toHaveURL(`${baseUrl}/partners/`);
-  }); 
+  });
 
   test('api tab navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(4)')
+      .locator(
+        '.footer > div.footer__content > section.nav-section > nav > a:nth-child(4)'
+      )
       .click();
     await expect(page).toHaveURL('https://docs.openaq.org/docs');
   });
 
   test('about tab navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(5)')
+      .locator(
+        '.footer > div.footer__content > section.nav-section > nav > a:nth-child(5)'
+      )
       .click();
     await expect(page).toHaveURL(`${baseUrl}/about/`);
   });
 
   test('help tab navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(6)')
+      .locator(
+        '.footer > div.footer__content > section.nav-section > nav > a:nth-child(6)'
+      )
       .click();
     await expect(page).toHaveURL(`${baseUrl}/developers/help/`);
   });
@@ -267,26 +346,33 @@ test.describe('footer navigation', () => {
 
   test('fb icon navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(1)')
+      .locator(
+        '.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(1)'
+      )
       .click();
     await expect(page).toHaveURL('https://www.facebook.com/openaq/');
   });
 
   test('twitter icon navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(2)')
+      .locator(
+        '.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(2)'
+      )
       .click();
     await expect(page).toHaveURL('https://twitter.com/openaq');
   });
 
   test('linkedIn icon navigates', async ({ page }) => {
     await page
-      .locator('.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(3)')
+      .locator(
+        '.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(3)'
+      )
       .click();
-      
-    expect(page.url()).toContain('https://www.linkedin.com/company/openaq');
-  });
 
+    expect(page.url()).toContain(
+      'https://www.linkedin.com/company/openaq'
+    );
+  });
 });
 
 test.describe('social banner navigation', () => {
@@ -302,25 +388,32 @@ test.describe('social banner navigation', () => {
 
   test('github follow button navigates', async ({ page }) => {
     await page
-      .locator('section.social-banner > div.social-banner-content > div:nth-child(1) > div.social-section-description > a')
+      .locator(
+        'section.social-banner > div.social-banner-content > div:nth-child(1) > div.social-section-description > a'
+      )
       .click();
     await expect(page).toHaveURL('https://github.com/openaq');
   });
 
   test('twitter follow button navigates', async ({ page }) => {
     await page
-      .locator('section.social-banner > div.social-banner-content > div:nth-child(3) > div.social-section-description > a')
+      .locator(
+        'section.social-banner > div.social-banner-content > div:nth-child(3) > div.social-section-description > a'
+      )
       .click();
     await expect(page).toHaveURL('https://twitter.com/openaq');
   });
-  
+
   test('slack join button navigates', async ({ page }) => {
     await page
-      .locator('section.social-banner > div.social-banner-content > div:nth-child(2) > div.social-section-description > a')
+      .locator(
+        'section.social-banner > div.social-banner-content > div:nth-child(2) > div.social-section-description > a'
+      )
       .click();
-    await expect(page).toHaveURL('https://openaq.slack.com/join/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw#/shared-invite/email');
+    await expect(page).toHaveURL(
+      'https://openaq.slack.com/join/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw#/shared-invite/email'
+    );
   });
-
 });
 
 test.describe('community banner navigation', () => {
@@ -335,19 +428,23 @@ test.describe('community banner navigation', () => {
   });
 
   test('participate button navigates', async ({ page }) => {
-    const locator =  page
-      .locator('section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > a')
-    const href = await locator.getAttribute('href')
+    const locator = page.locator(
+      'section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > a'
+    );
+    const href = await locator.getAttribute('href');
     expect(href).toBe('mailto:info@openaq.org');
   });
 
   test('support button navigates', async ({ page }) => {
     await page
-      .locator('section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > a')
+      .locator(
+        'section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > a'
+      )
       .click();
-    await expect(page).toHaveURL('https://secure.givelively.org/donate/openaq-inc/');
+    await expect(page).toHaveURL(
+      'https://secure.givelively.org/donate/openaq-inc/'
+    );
   });
-
 });
 
 test.describe('about > team navigation', () => {
@@ -362,15 +459,23 @@ test.describe('about > team navigation', () => {
   });
 
   test('team member cards navigates', async ({ page }) => {
-    const cards = await page.locator('.team-card')
+    const cards = page.locator('.team-card');
     const count = await cards.count();
     for (let i = 1; i < count; i++) {
       // just get the first name of the team member, lowercase
-      const person = await page.locator(`body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a > h2`).innerText();
+      const person = await page
+        .locator(
+          `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a > h2`
+        )
+        .innerText();
       const name = person.split(' ')[0].toLowerCase();
-      await page.locator(`body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a`).click();
+      await page
+        .locator(
+          `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a`
+        )
+        .click();
       await expect(page).toHaveURL(`${baseUrl}/about/team/${name}/`);
-      } 
+    }
   });
 });
 // end of test
