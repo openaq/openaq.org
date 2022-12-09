@@ -349,3 +349,28 @@ test.describe('community banner navigation', () => {
   });
 
 });
+
+test.describe('about > team navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`${baseUrl}/about/team/`);
+  });
+
+  test('page responds HTTP 200', async () => {
+    const context = await request.newContext();
+    const response = await context.get(`${baseUrl}/about/team/`);
+    expect(response.ok()).toBeTruthy();
+  });
+
+  test('team member cards navigates', async ({ page }) => {
+    const cards = await page.locator('.team-card')
+    const count = await cards.count();
+    for (let i = 1; i < count; i++) {
+      // just get the first name of the team member, lowercase
+      const person = await page.locator(`body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a > h2`).innerText();
+      const name = person.split(' ')[0].toLowerCase();
+      await page.locator(`body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a`).click();
+      await expect(page).toHaveURL(`${baseUrl}/about/team/${name}/`);
+      } 
+  });
+});
+// end of test
