@@ -42,27 +42,27 @@ test.describe('landing page navigation', () => {
   })
   
   test('learn how openaq works button navigates', async ({ page }) => {
-    await page.locator('body > main > section.technology-section > div.technology-section-blurb > div > a').click();
+    await page.locator('section.technology-section > div.technology-section-blurb > div > a').click();
     await expect(page).toHaveURL(`${baseUrl}/developers/api-overview/`);
   })
 
   test('explore the data button navigates', async ({ page }) => {
-    await page.locator('body > main > section.search-section > div.search-section-blurb > div > a').click();
+    await page.locator('section.search-section > div.search-section-blurb > div > a').click();
     await expect(page).toHaveURL('https://explore.openaq.org');
   })
 
   test('learn about openaq api button navigates', async ({ page }) => {
-    await page.locator('body > main > section.api-section > div.api-section-blurb > div > a').click();
+    await page.locator('section.api-section > div.api-section-blurb > div > a').click();
     await expect(page).toHaveURL('https://docs.openaq.org/docs');
   })
 
   test('api chip navigates', async ({ page }) => {
-    await page.locator('body > main > section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-data').click();
+    await page.locator('section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-data').click();
     await expect(page).toHaveURL(`${baseUrl}/case-studies/api/`);
   });
 
   test('community chip navigates', async ({ page }) => {
-    await page.locator('body > main > section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-interactive').click();
+    await page.locator('section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-interactive').click();
     await expect(page).toHaveURL(`${baseUrl}/case-studies/community/`);
   });
 
@@ -223,42 +223,42 @@ test.describe('footer navigation', () => {
 
   test('home tab navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(1)')
+      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(1)')
       .click();
     await expect(page).toHaveURL(`${baseUrl}/`);
   });
 
   test('explore tab navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(2)')
+      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(2)')
       .click();
     await expect(page).toHaveURL('https://explore.openaq.org/');
   });  
 
   test('partners tab navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(3)')
+      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(3)')
       .click();
     await expect(page).toHaveURL(`${baseUrl}/partners/`);
   }); 
 
   test('api tab navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(4)')
+      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(4)')
       .click();
     await expect(page).toHaveURL('https://docs.openaq.org/docs');
   });
 
   test('about tab navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(5)')
+      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(5)')
       .click();
     await expect(page).toHaveURL(`${baseUrl}/about/`);
   });
 
   test('help tab navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.nav-section > nav > a:nth-child(6)')
+      .locator('.footer > div.footer__content > section.nav-section > nav > a:nth-child(6)')
       .click();
     await expect(page).toHaveURL(`${baseUrl}/developers/help/`);
   });
@@ -267,21 +267,21 @@ test.describe('footer navigation', () => {
 
   test('fb icon navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(1)')
+      .locator('.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(1)')
       .click();
     await expect(page).toHaveURL('https://www.facebook.com/openaq/');
   });
 
   test('twitter icon navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(2)')
+      .locator('.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(2)')
       .click();
     await expect(page).toHaveURL('https://twitter.com/openaq');
   });
 
   test('linkedIn icon navigates', async ({ page }) => {
     await page
-      .locator('body > footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(3)')
+      .locator('.footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(3)')
       .click();
       
     expect(page.url()).toContain('https://www.linkedin.com/company/openaq');
@@ -302,21 +302,21 @@ test.describe('social banner navigation', () => {
 
   test('github follow button navigates', async ({ page }) => {
     await page
-      .locator('body > main > section.social-banner > div.social-banner-content > div:nth-child(1) > div.social-section-description > a')
+      .locator('section.social-banner > div.social-banner-content > div:nth-child(1) > div.social-section-description > a')
       .click();
     await expect(page).toHaveURL('https://github.com/openaq');
   });
 
   test('twitter follow button navigates', async ({ page }) => {
     await page
-      .locator('body > main > section.social-banner > div.social-banner-content > div:nth-child(3) > div.social-section-description > a')
+      .locator('section.social-banner > div.social-banner-content > div:nth-child(3) > div.social-section-description > a')
       .click();
     await expect(page).toHaveURL('https://twitter.com/openaq');
   });
   
   test('slack join button navigates', async ({ page }) => {
     await page
-      .locator('body > main > section.social-banner > div.social-banner-content > div:nth-child(2) > div.social-section-description > a')
+      .locator('section.social-banner > div.social-banner-content > div:nth-child(2) > div.social-section-description > a')
       .click();
     await expect(page).toHaveURL('https://openaq.slack.com/join/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw#/shared-invite/email');
   });
@@ -336,14 +336,14 @@ test.describe('community banner navigation', () => {
 
   test('participate button navigates', async ({ page }) => {
     const locator =  page
-      .locator('body > main > section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > a')
+      .locator('section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > a')
     const href = await locator.getAttribute('href')
     expect(href).toBe('mailto:info@openaq.org');
   });
 
   test('support button navigates', async ({ page }) => {
     await page
-      .locator('body > main > section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > a')
+      .locator('section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > a')
       .click();
     await expect(page).toHaveURL('https://secure.givelively.org/donate/openaq-inc/');
   });
