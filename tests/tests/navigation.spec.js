@@ -462,20 +462,14 @@ test.describe('about > team navigation', () => {
     const cards = page.locator('.team-card');
     const count = await cards.count();
     for (let i = 1; i < count; i++) {
-      // just get the first name of the team member, lowercase
-      const person = await page
-        .locator(
-          `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a > h2`
-        )
-        .innerText();
-      const name = person.split(' ')[0].toLowerCase();
-      await page
-        .locator(
-          `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i}) > div > a`
-        )
-        .click();
-      await expect(page).toHaveURL(`${baseUrl}/about/team/${name}/`);
+      const teamCard = await page
+      .locator(
+        `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i})`
+        );
+      const slug = await teamCard.getAttribute('data-team-slug');
+      await page.locator(`[data-team-slug=${slug}]`).click();
+      await expect(page).toHaveURL(`${baseUrl}/about/team/${slug}/`);
     }
   });
 });
-// end of test
+// end of tests

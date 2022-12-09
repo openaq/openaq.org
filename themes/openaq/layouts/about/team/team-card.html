@@ -1,4 +1,4 @@
-<article class="team-card">
+<article class="team-card" data-team-slug="{{ .File.BaseFileName | urlize }}">
     <a href="{{ .Permalink }}">
         <img src="{{ .Params.img }}" alt="" class="team-card__img" />
         <div class="team-card__description">
