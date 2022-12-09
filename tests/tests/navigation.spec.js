@@ -472,4 +472,64 @@ test.describe('about > team navigation', () => {
     }
   });
 });
+
+test.describe('bread crumb team navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`${baseUrl}/about/team/chris/`);
+  });
+
+  test('page responds HTTP 200', async () => {
+    const context = await request.newContext();
+    const response = await context.get(`${baseUrl}`);
+    expect(response.ok()).toBeTruthy();
+  });
+
+  test('team crumb navigates', async ({ page }) => {
+    await page
+      .locator('body > main > ol > li:nth-child(5) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/about/team/`);
+  });
+
+  test('about crumb navigates', async ({ page }) => {
+    await page
+      .locator('body > main > ol > li:nth-child(3) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/about/`);
+  });
+
+  test('home icon crumb navigates', async ({ page }) => {
+    await page
+      .locator('body > main > ol > li:nth-child(1) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}`);
+  });
+});
+
+test.describe('bread crumb case-studies navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`${baseUrl}/case-studies/developer/`);
+  });
+
+  test('page responds HTTP 200', async () => {
+    const context = await request.newContext();
+    const response = await context.get(`${baseUrl}`);
+    expect(response.ok()).toBeTruthy();
+  });
+
+  test('case-studies crumb navigates', async ({ page }) => {
+    await page
+      .locator('body > main > ol > li:nth-child(3) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}/case-studies/`);
+  });
+
+  test('develeoper home icon crumb navigates', async ({ page }) => {
+    await page
+      .locator('body > main > ol > li:nth-child(1) > a')
+      .click();
+    await expect(page).toHaveURL(`${baseUrl}`);
+  });
+});
+
 // end of tests
