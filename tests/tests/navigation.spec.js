@@ -283,7 +283,8 @@ test.describe('footer navigation', () => {
     await page
       .locator('body > footer > div.footer__content > section.contact-section > div.social-links > a:nth-child(3)')
       .click();
-    await expect(page).toHaveURL('https://www.linkedin.com/company/openaq');
+      
+    expect(page.url()).toContain('https://www.linkedin.com/company/openaq');
   });
 
 });
@@ -334,15 +335,15 @@ test.describe('community banner navigation', () => {
   });
 
   test('participate button navigates', async ({ page }) => {
-    await page
-      .locator('body > main > section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > button')
-      .click();
-    await expect(page).toHaveURL('mailto:info@openaq.org');
+    const locator =  page
+      .locator('body > main > section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > a')
+    const href = await locator.getAttribute('href')
+    expect(href).toBe('mailto:info@openaq.org');
   });
 
   test('support button navigates', async ({ page }) => {
     await page
-      .locator('body > main > section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > button')
+      .locator('body > main > section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > a')
       .click();
     await expect(page).toHaveURL('https://secure.givelively.org/donate/openaq-inc/');
   });
