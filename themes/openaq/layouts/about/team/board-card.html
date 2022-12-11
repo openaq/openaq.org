@@ -1,5 +1,9 @@
 <article class="board-card">
+    {{if isset .Params "img"}}
     <img src="{{ .Params.img }}" alt="" class="board-card__img" />
+    {{ else}}
+    {{ partial "img-placeholder" }}
+    {{ end }}
     <div class="board-card__description">
       <h2 class="person-name">{{ .Params.name}}</h2>
       <h3 class="person-title">
@@ -9,7 +13,7 @@
           Member at large
         {{ end }}
       </h3>
-      <p class="person-bio">{{ .Summary | truncate 300 }}</p>
+      <p class="person-bio">{{ .Summary | truncate 350 }}</p>
       <div class="person-social">
         {{with .Params.twitter}}
         <a href="{{ . }}">

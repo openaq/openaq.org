@@ -133,3 +133,19 @@
     }
   }
 }
+
+.person-image-placeholder {
+  position: relative;
+  overflow: hidden;
+  height: 238px;
+
+  .bubble-md {
+    position: absolute;
+    bottom: -14px;
+  }
+
+  .bubble-sm {
+    position: absolute;
+    bottom: -14px;
+  }
+}
