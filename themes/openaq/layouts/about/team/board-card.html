@@ -1,6 +1,10 @@
 <article class="board-card">
-    {{if isset .Params "img"}}
-    <img src="{{ .Params.img }}" alt="" class="board-card__img" />
+    {{if isset .Params "image"}}
+    {{ with .Params.image }}
+    {{ $imageResource := ($.Site.GetPage "section" "uploads").Resources.GetMatch (strings.TrimPrefix "/uploads/" . ) }}
+    {{ $resized := $imageResource.Fill "400x400 webp q100 picture"  }}
+    <img src="{{ $resized.RelPermalink }}"  alt="" class="board-card__img" />
+    {{ end }}
     {{ else}}
     {{ partial "img-placeholder" }}
     {{ end }}

@@ -8,10 +8,19 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     &__img {
       width: 100%;
       height: auto;
+    }
+
+    & > a {
+      display: flex;
+      &__img {
+        width: 100%;
+        height: auto;
+      }
     }
 
     &__description {
@@ -41,7 +50,17 @@
 .person-social {
   display: flex;
   gap: 18px;
+  align-items: center;
   align-content: flex-start;
+
+  a {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 15px;
+    }
+  }
 }
 
 .team-content {
@@ -101,6 +120,14 @@
     width: 800px;
 
     .person {
+      display: flex;
+      flex-direction: column;
+
+      &__img {
+        width: 300px;
+        height: auto;
+      }
+
       .person-description {
         border-top: 6px solid variables.$sky100;
 
@@ -137,7 +164,8 @@
 .person-image-placeholder {
   position: relative;
   overflow: hidden;
-  height: 238px;
+  width: 252px;
+  height: 252px;
 
   .bubble-md {
     position: absolute;

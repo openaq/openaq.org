@@ -8,20 +8,20 @@
     <div class="team-content-container">
         <h1 class="type-display-1 gradient-title">Team</h1>
         <section class="person-grid">
-            {{ range $index, $page := where .Pages "Params.group" "team" }} 
+            {{ range sort (where .Pages "Params.group" "team") ".Weight" }} 
             {{.Render "team-card"}} 
             {{ end }}
         </section>
         <h1 class="type-display-1 gradient-title">Board</h1>
         <section class="person-grid">
-            {{ range $index, $page := where .Pages "Params.group" "board" }} 
+            {{ range where .Pages "Params.group" "board" }} 
             {{.Render "board-card"}} 
             {{ end }}
 
         </section>
         <h1 class="type-display-1 gradient-title">Advisors</h1>
         <section class="person-grid">
-            {{ range $index, $page := where .Pages "Params.group" "advisor" }} 
+            {{ range where .Pages "Params.group" "advisor" }} 
             {{.Render "advisor-card"}} 
             {{ end }}
         </section>

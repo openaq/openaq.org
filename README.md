@@ -21,3 +21,13 @@ To use dart-sass with Hugo, install [dart-sass-embedded](https://github.com/sass
     ```
 
 Dart Sass will now be discoverable by Hugo.
+
+
+
+## Content Guidance
+
+### Team photos
+
+Team portraits should be uploaded at least at 400px by 400px png image. The portrait should include the subjects head and full shoulders down to mid-chest level. After resizing, use [remove.bg](https://remove.bg) to remove the background to create a transparent background around the subject.
+
+
