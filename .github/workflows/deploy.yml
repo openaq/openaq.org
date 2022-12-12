@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - hugo1
+      - hugo
 jobs:
   deploy:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
