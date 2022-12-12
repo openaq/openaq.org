@@ -15,4 +15,4 @@ jobs:
       
       - name: Build
         uses: majesticio/hugo-dart-action@master
-        # one more try
+        # updated action
