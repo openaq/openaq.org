@@ -7,7 +7,7 @@ rel="noopener noreferrer"
 {{ end }}
 <article class="funders-card">
     <div class="funders-card__img">
-      <img src="/{{ .Params.img }}" alt="" />
+      {{ partial "funder-image" (dict "context" . "global" $ )  }}
     </div>
 
 </article>

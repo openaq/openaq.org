@@ -7,7 +7,7 @@ rel="noopener noreferrer"
 {{ end }}
 <article class="partner-card">
     <div class="partner-card__img">
-        <img src="/{{ .Params.img }}" alt="{{ .Title }}">
+        {{ partial "partner-image" (dict "context" . "global" $ )  }}
     </div>
     <p class="partner-card__body">{{ .Summary| truncate 150 }}</p>
 

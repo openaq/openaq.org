@@ -1,6 +1,6 @@
 <article class="team-card" data-team-slug="{{ .File.BaseFileName | urlize }}">
     <a href="{{ .Permalink }}">
-        {{ partial  "card-image" (dict "context" . "global" $ "class" "team-card") }}
+        {{ partial  "person-image" (dict "context" . "global" $ "class" "team-card") }}
         <div class="team-card__description">
             <h2 class="person-name">{{ .Params.name}}</h2>
             <h3 class="person-title">{{ .Params.position }}</h3>

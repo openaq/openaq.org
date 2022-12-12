@@ -1,7 +1,7 @@
 +++
 title = 'Environmental Defense Fund'
 group = 'partner'
-img = 'uploads/edf.webp'
+image = '/uploads/edf.png'
 homepage = 'https://www.edf.org/'
 +++
 

@@ -28,6 +28,6 @@ Dart Sass will now be discoverable by Hugo.
 
 ### Team photos
 
-Team portraits should be uploaded at least at 400px by 400px png image. The portrait should include the subjects head and full shoulders down to mid-chest level. After resizing, use [remove.bg](https://remove.bg) to remove the background to create a transparent background around the subject.
+Team portraits should be uploaded as a squaure image of least at 400px by 400px png. The portrait should include the subjects head and full shoulders down to mid-chest level. After resizing, use [remove.bg](https://remove.bg) to remove the background to create a transparent background around the subject.
 
 

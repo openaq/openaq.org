@@ -1,7 +1,7 @@
 +++
 title = 'Clean Air Fund'
 group = 'funder'
-img = 'uploads/caf.webp'
+image = '/uploads/caf.png'
 homepage = 'https://www.cleanairfund.org/'
 +++
 
