@@ -2,7 +2,7 @@
 type = "about/team"
 name = 'Matt Whitney'
 group = 'board'
-weight = 2
+weight = 4
 email = 'matt@openaq.org'
 +++
 
