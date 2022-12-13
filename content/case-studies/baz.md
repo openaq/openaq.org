@@ -2,7 +2,7 @@
 title = 'baz'
 tags = ['API']
 category = ["developer"]
-featured_image = "/uploads/baz.jpg"
+featured_image = "/uploads/baz.webp"
 +++
 
 # Raising awareness for the community

@@ -2,7 +2,7 @@
 title = 'foo'
 tags = ['Community']
 category = ["developer"]
-featured_image = "/uploads/foo.jpg"
+featured_image = "/uploads/foo.webp"
 featured = true
 
 +++
