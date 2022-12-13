@@ -2,7 +2,8 @@
 title = 'baz'
 tags = ['API']
 category = ["developer"]
-featured_image = "/uploads/baz.webp"
+featured_image = "/uploads/bar.jpeg"
+
 +++
 
 # Raising awareness for the community

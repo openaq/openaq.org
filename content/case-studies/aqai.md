@@ -2,7 +2,7 @@
 title = 'AQAI'
 tags = ['API', 'Community']
 categories = ['developer']
-featured_image = '/uploads/aqai.jpg'
+featured_image = '/uploads/aqai.jpeg'
 
 featured = true
 +++

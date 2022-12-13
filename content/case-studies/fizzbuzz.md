@@ -2,7 +2,7 @@
 title = 'fizzbuzz'
 tags = ['API']
 category = ["developer"]
-featured_image = "/uploads/fizzbuzz.webp"
+featured_image = "/uploads/bar.jpeg"
 featured = true
 
 +++

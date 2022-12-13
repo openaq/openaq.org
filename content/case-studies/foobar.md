@@ -2,7 +2,8 @@
 title = 'foobar'
 tags = ['Community']
 category = ["developer"]
-featured_image = "/uploads/foobar.webp"
+featured_image = "/uploads/bar.jpeg"
+
 +++
 
 # Raising awareness for the community

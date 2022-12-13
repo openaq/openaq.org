@@ -2,7 +2,7 @@
 title = 'bar'
 tags = ['API', 'Community']
 category = ["developer"]
-featured_image = "/uploads/bar.jpg"
+featured_image = "/uploads/bar.jpeg"
 +++
 
 # Raising awareness for the community
