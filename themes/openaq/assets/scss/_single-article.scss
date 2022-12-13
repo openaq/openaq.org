@@ -1,0 +1,61 @@
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'openaq-design-system/variables';
+@use 'mixins' as local-mixins;
+
+.single-article-content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 0 0 100px 0;
+
+  @include local-mixins.bubbles();
+
+  &-container {
+    width: 800px;
+    z-index: 2;
+    .single-article-body {
+      h1,
+      h2,
+      h3,
+      h4 {
+        @include mixins.heading2;
+        color: variables.$sky120;
+        margin: 40px 0;
+      }
+
+      a {
+        @include mixins.link2;
+      }
+
+      p {
+        @include mixins.body2;
+        margin: 20px 0 0 0;
+      }
+
+      ul {
+        @include mixins.body2;
+        margin: 20px 0 0 15px;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 22px;
+        margin: 20px 0 0 0;
+      }
+    }
+  }
+
+  @media (max-width: 1000px) {
+    & {
+      &-container {
+        width: 90%;
+      }
+    }
+  }
+}
+
+.explore-more-btn {
+  width: fit-content;
+  margin: 40px 0 0 0;
+}

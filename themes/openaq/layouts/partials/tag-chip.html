@@ -1,0 +1,19 @@
+{{ $tag := newScratch }}
+{{ if eq (. | lower) "api" }}
+    {{ $tag.Set "class" "chip-base-data" }}
+    {{ $tag.Set "icon" "data_object" }}
+{{ else if eq (. | lower) "community" }}
+    {{ $tag.Set "class" "chip-base-interactive" }}
+    {{ $tag.Set "icon" "diversity_3" }}
+{{ else }}
+    {{ $tag.Set "class" "chip-brand" }}
+    {{ $tag.Set "icon" "note" }}
+{{ end }}
+<a 
+class="{{ $tag.Get "class" }}"
+href="/case-studies/{{ . | urlize }}">
+    {{ . }}
+    <span class="material-symbols-outlined">
+        {{$tag.Get "icon" }}
+    </span>
+</a>

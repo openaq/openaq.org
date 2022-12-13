@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ partial "breadcrumbs" . }}
+
+<div class="initiative-content">
+    {{ partial "bubbles" }}
+
+    <div class="initiative-content-container">
+        <h1 class="type-display-1 gradient-title">Initiatives</h1>
+        {{ range .Pages }}
+            {{ .Render "initiative-card" }}
+        {{ end }}
+    </div>
+</div>
+
+{{ partial "community-banner" . }}
+{{ partial "explore-banner" . }}
+{{ end }}

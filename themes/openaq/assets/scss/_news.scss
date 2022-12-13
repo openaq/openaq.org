@@ -1,0 +1,41 @@
+@use 'mixins' as local-mixins;
+
+.news-content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  @include local-mixins.bubbles();
+
+  .breadcrumb {
+    margin: 6px 0 0 150px;
+  }
+
+  .news-content-container {
+    width: 800px;
+    z-index: 2;
+  }
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 40px 0 100px 0;
+}
+
+.news-item {
+  display: flex;
+  align-items: flex-start;
+
+  .news-date {
+    margin: 5px;
+    flex: 1;
+  }
+
+  .news-content {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+  }
+}

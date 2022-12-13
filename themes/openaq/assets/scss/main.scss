@@ -1,0 +1,246 @@
+@use 'openaq-design-system/header';
+@use 'openaq-design-system/buttons';
+@use 'openaq-design-system/cards';
+@use 'openaq-design-system/variables';
+@use 'openaq-design-system/utilities/index.scss' as utils;
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'openaq-design-system/bubbles';
+@use 'openaq-design-system/resets';
+@use 'openaq-design-system/chips';
+@use 'openaq-design-system/inputs/index.scss' as inputs;
+@use 'footer';
+@use 'header' as h;
+@use 'partners';
+@use 'news';
+@use 'explore-banner';
+@use 'community-banner';
+@use 'social-banner';
+@use 'help';
+@use 'team';
+@use 'initiatives';
+@use 'case-studies';
+@use 'policy-page';
+@use 'single-article';
+@use 'reporting';
+
+@mixin landing-section {
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 800px) {
+    & {
+      flex-direction: column;
+    }
+  }
+}
+
+.hero-section {
+  @include landing-section();
+  justify-content: space-around;
+  display: flex;
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    margin: 60px 0 0 0;
+    width: 400px;
+
+    .learn-more-btn {
+      width: fit-content;
+    }
+  }
+}
+
+.case-studies-section {
+  @include landing-section();
+  gap: 20px;
+  justify-content: center;
+  padding: 50px 0;
+
+  .cards {
+    display: flex;
+    gap: 40px;
+    width: 940px;
+  }
+}
+
+@mixin panel($color) {
+  @include landing-section();
+  position: relative;
+  height: 500px;
+
+  &-blurb {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    background-color: $color;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 280px;
+
+      .icon-btn {
+        width: fit-content;
+      }
+    }
+  }
+
+  &__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 2;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 800px) {
+    & {
+      height: auto;
+    }
+
+    &-blurb {
+      &__content {
+        width: 350px;
+      }
+    }
+  }
+}
+
+.technology-section {
+  @include panel(variables.$sky120);
+
+  .bubble-sm {
+    position: absolute;
+    top: 138px;
+    left: 46px;
+  }
+
+  .bubble-lg {
+    position: absolute;
+    top: -111px;
+    left: -132px;
+  }
+
+  @media (max-width: 800px) {
+    .bubble-sm {
+      top: -20px;
+      left: 19px;
+    }
+
+    .bubble-lg {
+      z-index: -1;
+      top: -40px;
+      left: -132px;
+    }
+  }
+}
+
+.search-section {
+  @include panel(variables.$lavender120);
+
+  .explore-input-link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+
+    .search-input {
+      @include mixins.box-shadow;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    &__img {
+      order: 1;
+    }
+  }
+}
+
+.api-section {
+  @include panel(variables.$smoke120);
+}
+
+.page-404 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px - 250px);
+
+  .bubble-lg {
+    z-index: -1;
+    position: absolute;
+    left: -100px;
+    top: 30px;
+  }
+
+  .bubble-sm {
+    z-index: -1;
+
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  align-items: center;
+
+  li {
+    display: inline-block;
+  }
+}
+
+.gradient-title {
+  background-color: variables.$lavender100;
+  background-image: linear-gradient(
+    92deg,
+    variables.$sky120 0%,
+    variables.$lavender100 10%
+  );
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.social-links {
+  margin: 12px 0;
+  display: flex;
+  gap: 12px;
+
+  .social-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    border: 1px solid variables.$smoke30;
+    border-radius: 100%;
+  }
+}
+
+.related-case-studies {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+}

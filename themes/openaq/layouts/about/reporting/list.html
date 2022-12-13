@@ -1,0 +1,63 @@
+{{ define "main" }} {{ partial "breadcrumbs" . }}
+<div class="reporting-content">
+  {{ partial "bubbles" }}
+
+  <div class="reporting-content-container">
+    <h1 class="type-display-1 gradient-title">Reporting</h1>
+    <div class="reporting-grid">
+      <div class="reporting-item">
+        <h2 class="reporting-item__title">Form 990</h2>
+        <p class="reporting-title__description">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Magnam officiis laudantium adipisci, impedit sapiente, et
+          nobis id nam nesciunt optio eos eius aut dolores quam
+          reiciendis omnis asperiores architecto voluptatibus?
+        </p>
+        <div>
+          <select class="select" name="" id=""></select><button class="download-990 btn btn-secondary">Download</button>
+        </div>
+      </div>
+      <div class="reporting-item">
+        <h2 class="reporting-item__title">Audits</h2>
+        <p class="reporting-title__description">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Magnam officiis laudantium adipisci, impedit sapiente, et
+          nobis id nam nesciunt optio eos eius aut dolores quam
+          reiciendis omnis asperiores architecto voluptatibus?
+        </p>
+        <div>
+          <select class="select" name="" id=""></select><button class="download-audit btn btn-secondary">Download</button>
+        </div>
+      </div>
+      <div class="reporting-item">
+        <h2 class="reporting-item__title">Bylaws</h2>
+        <p class="reporting-title__description">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Magnam officiis laudantium adipisci, impedit sapiente, et
+          nobis id nam nesciunt optio eos eius aut dolores quam
+          reiciendis omnis asperiores architecto voluptatibus?
+        </p>
+        <div>
+          <button class="download-bylaws btn btn-secondary">Download</button>
+        </div>
+      </div>
+
+      <div class="reporting-item">
+        <h2 class="reporting-item__title">Policies</h2>
+        <p class="reporting-title__description">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Magnam officiis laudantium adipisci, impedit sapiente, et
+          nobis id nam nesciunt optio eos eius aut dolores quam
+          reiciendis omnis asperiores architecto voluptatibus?
+        </p>
+        <div>
+          <button class="download-policy btn btn-secondary">Download</button>
+        </div>
+      </div>
+    </div>
+    <div class="ceritifications-grid"></div>
+  </div>
+</div>
+
+{{ partial "community-banner" . }} {{ partial "explore-banner" . }} {{
+end }}

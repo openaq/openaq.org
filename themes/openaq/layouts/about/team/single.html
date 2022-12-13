@@ -1,0 +1,24 @@
+{{ define "main" }}
+{{ partial "breadcrumbs" . }}
+
+<div class="person-content">
+    {{ partial "bubbles" }}
+    <div class="person-content-container">
+        <article class="person">
+            {{ with .Params.image }}
+            {{ $imageResource := ($.Site.GetPage "section" "uploads").Resources.GetMatch (strings.TrimPrefix "/uploads/" . ) }}
+            {{ $resized := $imageResource.Resize "400x400 webp q100 picture"  }}
+            <img src="{{ $resized.RelPermalink }}"  alt="" class="person__img" />
+            {{ end }}
+            <div class="person-description">
+                <h1 class="person-name gradient-title">{{ .Params.name }}</h1>
+                <h2 class="person-title">{{ .Params.position }}</h2>
+                {{ .Render "person-social" }}
+                <div class="person-bio">{{.Content}}</div>
+            </div>
+        </article>
+    </div>
+</div>
+{{ partial "community-banner" . }}
+{{ partial "explore-banner" . }}
+{{ end }}

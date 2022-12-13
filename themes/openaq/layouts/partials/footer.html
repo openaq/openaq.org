@@ -1,0 +1,38 @@
+<footer class="footer">
+    <div class="footer__content">
+        <section class="nav-section">
+            <img src="/svg/logo_white.svg" alt="" class="footer-logo">
+            <nav class="footer-nav">
+                <a class="type-navigation-2 text-white" href="/">Home</a>
+                <a class="type-navigation-2 text-white" href="https://explore.openaq.org">Explore</a>
+                <a class="type-navigation-2 text-white" href="/partners">Partners</a>
+                <a class="type-navigation-2 text-white" href="https://docs.openaq.org/docs">API</a>
+                <a class="type-navigation-2 text-white" href="/about">About</a>
+                <a class="type-navigation-2 text-white" href="/developers/help">Help</a>
+            </nav>
+        </section>
+        <section class="contact-section">
+            <span class="type-subtitle-3 text-white">Stay up to date</span>
+            <div class="subscribe-form">
+                <input type="text" class="text-input" placeholder="Enter your email"><button class="btn btn-primary">Subscribe</button>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/openaq/" class="social-circle">
+                    <img src="/svg/facebook.svg" alt="facebook">
+                </a>
+                <a href="https://twitter.com/openaq" class="social-circle"><img src="/svg/twitter.svg" alt="twitter"></a>
+                <a href="https://www.linkedin.com/company/openaq" class="social-circle"><img src="/svg/linkedin.svg" alt="linkedin"></a>
+            </div>
+        </section>
+
+    </div>
+    <div class="sub-footer">
+        <span class="copyright text-white type-body-4">&#169; {{ replace .Site.Copyright "{year}" now.Year }}</span>
+        <nav class="sub-footer-nav">
+            <a class="type-body-4 text-white" href="/terms/">Terms</a>
+            <a class="type-body-4 text-white" href="/privacy/">Privacy</a>
+            <a class="type-body-4 text-white" href="/cookies/">Cookies</a>
+        </nav>
+    </div>
+
+</footer>

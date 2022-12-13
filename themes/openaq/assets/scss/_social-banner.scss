@@ -1,0 +1,51 @@
+@use 'openaq-design-system/variables';
+@use 'mixins' as local-mixins;
+
+.social-banner {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 430px;
+  width: 100vw;
+  background-color: variables.$lavender120;
+  @include local-mixins.bubbles(160, 'left');
+
+  &-content {
+    max-width: 850px;
+    display: flex;
+    gap: 80px;
+
+    .social-section {
+      display: flex;
+
+      gap: 26px;
+      flex: 1;
+
+      &-description {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 36px;
+
+        .btn {
+          width: fit-content;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    & {
+      height: auto;
+      padding: 40px 32px;
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+      }
+    }
+  }
+}

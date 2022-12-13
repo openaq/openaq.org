@@ -1,40 +1,33 @@
-# OpenAQ
+# OpenAQ.org website
 
-OpenAQ is a community of scientists, software developers and lovers of open environmental data. OpenAQ is building an open, real-time database that provides programmatic and historical access to air quality data.
+## Development
 
-## Development environment
+The website is built using [Hugo](https://gohugo.io) for content management and static site generation.
 
-Requirements:
 
-- [git](https://git-scm.com)
-- [nvm](https://github.com/creationix/nvm)
+For styles SCSS is used with the [openaq-design-system]() SCSS library. Dart Sass is required to compile SCSS and must be installed and available in PATH for Hugo to access.
 
-Clone this repository locally and activate the required Node.js version:
+To use dart-sass with Hugo, install [dart-sass-embedded](https://github.com/sass/dart-sass-embedded) as follows:
 
-```
-nvm install
-```
+1. Download the binary to match your platform from the releases page: https://github.com/sass/dart-sass-embedded/releases
 
-Install module dependencies:
+2. Place the downloaded binary in the desired directory on your system. e.g. ~/bin/sass_embedded
 
-```
-npm install
-```
+3. Add the path to the binary to your system's PATH:
 
-### Getting started
+    .zshrc
+    ```
+    export PATH="${HOME}/bin/sass_embedded:${PATH}"
+    ```
 
-```
-$ npm run serve
-```
+Dart Sass will now be discoverable by Hugo.
 
-Compiles the sass files, javascript, and launches the server making the site available at `http://localhost:3000/`
-The system will watch files and execute tasks whenever one of them changes.
-The site will automatically refresh since it is bundled with livereload.
 
-### Other commands
 
-Compile the sass files, javascript... Use this instead of `npm run serve` if you don't want to watch.
+## Content Guidance
 
-```
-$ npm run build
-```
+### Team photos
+
+Team portraits should be uploaded as a squaure image of least at 400px by 400px png. The portrait should include the subjects head and full shoulders down to mid-chest level. After resizing, use [remove.bg](https://remove.bg) to remove the background to create a transparent background around the subject.
+
+

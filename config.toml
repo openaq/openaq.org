@@ -1,0 +1,17 @@
+baseURL = 'https://openaq.org/'
+languageCode = 'en-us'
+title = 'OpenAQ'
+theme = 'openaq'
+copyright = "{year} OpenAQ. All rights reserved."
+
+[permalinks]
+  categories = "/case-studies/:slug/"
+  tags = "/case-studies/:slug/"
+
+[module]
+  [[module.mounts]]
+    source = "./node_modules/openaq-design-system/scss/"
+    target = "assets/scss/openaq-design-system"
+  [[module.mounts]]
+    source = "content/uploads/"
+    target = "assets/"

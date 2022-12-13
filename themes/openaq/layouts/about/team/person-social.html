@@ -1,0 +1,23 @@
+<div class="person-social">
+    {{with .Params.twitter}}
+    <a href="{{ . | safeURL }}">
+      <img src="/svg/twitter_sm.svg" alt="twitter icon">
+    </a>
+    {{end}} 
+    {{with .Params.linkedin}}
+    <a href="{{ . | safeURL }}">
+      <img src="/svg/linkedin_sm.svg" alt="">
+    </a>
+    {{end}} 
+    {{with .Params.github}}
+    <a href="{{ . | safeURL }}">
+      <img src="/svg/github_sm.svg" alt="">
+    </a>
+    {{end}}
+
+    {{with .Params.email}}
+    <a href="mailto:{{ . | safeURL }}">
+        <img src="/svg/mail.svg" alt="">
+    </a>
+    {{end}}
+  </div>

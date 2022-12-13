@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{ partial "breadcrumbs" . }}
+<div class="partners-content">
+    {{ partial "bubbles" }}
+
+    <div class="partners-content-container">
+    <section class="partners-section">
+        <h1 class="type-display-1 gradient-title">Partners</h1>
+        <div class="partners-grid">
+            {{ range $index, $page := where .Pages "Params.group" "partner" }} 
+            {{ .Render "partner-card"}} 
+            {{ end }}   
+        </div>
+    </section>
+    <section class="funders-section">
+        <h1 class="type-display-1 gradient-title">Funders</h1>
+        <div class="funders-grid">
+            {{ range $index, $page := where .Pages "Params.group" "funder" }} 
+            {{ .Render "funder-card"}} 
+            {{ end }}
+
+        </div>
+    </section>
+</div>
+</div>
+{{ partial "community-banner" . }}
+{{ partial "explore-banner" . }}
+
+{{ end }}

@@ -1,0 +1,116 @@
+@use 'openaq-design-system/variables';
+@use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'mixins' as local-mixins;
+
+.partners-content {
+  position: relative;
+  @include local-mixins.bubbles();
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 800px;
+    z-index: 2;
+
+    .partners-section {
+      .partners-grid {
+        margin: 40px 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 36px;
+        row-gap: 40px;
+
+        .partner-card {
+          background-color: white;
+          display: flex;
+          height: 180px;
+          width: 390px;
+          border: 1px solid variables.$smoke10;
+          border-radius: 22px;
+          padding: 20px 0;
+
+          &__img {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+
+          &__body {
+            @include mixins.body5;
+            display: flex;
+            flex: 1;
+            padding: 0 40px;
+            border-left: 1px solid variables.$smoke10;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+
+    .funders-section {
+      .funders-grid {
+        margin: 40px 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 36px;
+        row-gap: 40px;
+
+        .funders-card {
+          background-color: white;
+
+          display: flex;
+          height: 180px;
+          width: 180px;
+          border: 1px solid variables.$smoke10;
+          border-radius: 22px;
+          padding: 20px 0;
+
+          &__img {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            padding: 0 16px;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    & {
+      &-container {
+        width: auto;
+        align-items: center;
+        .partners-section {
+          .partners-grid {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+
+        .funders-section {
+          .funders-grid {
+            grid-template-columns: repeat(2, 1fr);
+
+            .funders-card {
+            }
+          }
+        }
+      }
+    }
+  }
+}
