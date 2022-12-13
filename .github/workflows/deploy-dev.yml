@@ -17,6 +17,8 @@ jobs:
       
       - name: Build
         uses: openaq/hugo-docker@main
+        with:
+          args: --baseUrl https://openaq-staging.org
 
       - uses: jakejarvis/s3-sync-action@master
         with:
