@@ -41,10 +41,6 @@
   padding: 0;
 }
 
-.nav-list > li {
-  overflow: hidden;
-}
-
 .menu-button-container {
   display: none;
   height: 100%;
@@ -86,6 +82,7 @@
     opacity: 1;
     display: block;
   }
+
   &__item {
     height: 24px;
     margin: 12px;
@@ -144,6 +141,10 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+
+    & > li {
+      overflow: hidden;
+    }
   }
 
   .dropdown {
