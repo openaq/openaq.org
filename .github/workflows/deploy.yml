@@ -14,5 +14,4 @@ jobs:
         run: yarn install
       
       - name: Build
-        uses: majesticio/hugo-dart-action-bot@master
-        # updated action
+        uses: openaq/hugo-docker@main
