@@ -24,6 +24,7 @@
 
     @media (max-width: 1000px) {
       & {
+        z-index: -1;
         @if $mobile-position == 'left' {
           top: -275px;
           left: -30px;
