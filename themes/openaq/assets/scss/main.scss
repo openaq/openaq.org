@@ -120,31 +120,6 @@
 
 .technology-section {
   @include panel(variables.$sky120);
-
-  .bubble-sm {
-    position: absolute;
-    top: 138px;
-    left: 46px;
-  }
-
-  .bubble-lg {
-    position: absolute;
-    top: -111px;
-    left: -132px;
-  }
-
-  @media (max-width: 800px) {
-    .bubble-sm {
-      top: -20px;
-      left: 19px;
-    }
-
-    .bubble-lg {
-      z-index: -1;
-      top: -40px;
-      left: -132px;
-    }
-  }
 }
 
 .search-section {
@@ -204,6 +179,10 @@
 
   li {
     display: inline-block;
+  }
+
+  @media (max-width: 800px) {
+    margin: 40px 0 30px 0;
   }
 }
 

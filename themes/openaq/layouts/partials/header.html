@@ -1,40 +1,51 @@
 <header class="header">
-    <nav class="nav">
-        <ul class="nav-list">
-            <li>
-                <a href="/">
-                    <img src="/svg/logo.svg" alt="">
-                </a>
+    <div class="header-contents">
+    <a href="/" class="header-logo">
+        <img src="/svg/logo.svg" alt="">
+    </a>
+    <div class="spacer"></div>
+    <nav class="nav">    
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'>
+        <span class="material-symbols-outlined">
+            menu
+            </span>
+    </div>
+    </label>
+    <ul class="nav-list">
+        <li>
+            <a class="nav__item" href="https://explore.openaq.org">Explore the data</a>
+        </li>
+        <li>
+            <a href="/why-air-quality" class="nav__item{{ if eq .Section "why-air-quality" }} nav__item--active{{ end }}">Why air quality</a></li>
+        <li>
+            <a href="/why-open-data" class="nav__item{{ if eq .Section "why-open-data" }} nav__item--active{{ end }}">Why open data</a>
+        </li>
+        <li>
+            <a href="/partners" class="nav__item{{ if eq .Section "partners" }} nav__item--active{{ end }}">Partners</a>
+        </li>
+        <li class="dropdown"><a href="/developers/api-overview/" aria-haspopup="true" class="nav__item{{ if eq .Section "developers" }} nav__item--active{{ end }}">Developers</a>
+            <ul class="submenu"  aria-label="submenu">
+                <li class="submenu__item"><a class="nav__item" href="/developers/api-overview/">API Overview</a></li>
+                <li class="submenu__item"><a class="nav__item" href="https://docs.openaq.org">Developer Documentation</a></li>
+                <li class="submenu__item"><a class="nav__item" href="/case-studies/developer/">Case Studies</a></li>
+                <li class="submenu__item"><a class="nav__item" href="/developers/help/">Help</a></li>
+            </ul>
             </li>
-            <li>
-                <a class="nav__item" href="https://explore.openaq.org">Explore the data</a>
-            </li>
-            <li>
-                <a href="/why-air-quality" class="nav__item{{ if eq .Section "why-air-quality" }} nav__item--active{{ end }}">Why air quality</a></li>
-            <li>
-                <a href="/why-open-data" class="nav__item{{ if eq .Section "why-open-data" }} nav__item--active{{ end }}">Why open data</a>
-            </li>
-            <li>
-                <a href="/partners" class="nav__item{{ if eq .Section "partners" }} nav__item--active{{ end }}">Partners</a>
-            </li>
-            <li class="dropdown"><a href="/developers/api-overview/" aria-haspopup="true" class="nav__item">Developers</a>
-                <ul class="submenu"  aria-label="submenu">
-                    <li class="submenu__item"><a class="nav__item" href="/developers/api-overview/">API Overview</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="https://docs.openaq.org">Developer Documentation</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="/case-studies/developer/">Case Studies</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="/developers/help/">Help</a></li>
-                </ul>
-                </li>
-            <li class="dropdown"><a href="/about/" aria-haspopup="true" class="nav__item">About</a>
-                <ul class="submenu" aria-label="submenu">
-                    <li class="submenu__item"><a class="nav__item" href="/about/">About OpenAQ</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="/about/news">News</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="/case-studies/">Case Studies</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="/about/technology/">Technology</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="/about/team/">Team</a></li>
-                    <li class="submenu__item"><a class="nav__item" href="/about/reporting/">Reporting</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+        <li class="dropdown"><a href="/about/" aria-haspopup="true" class="nav__item">About</a>
+            <ul class="submenu" aria-label="submenu">
+                <li class="submenu__item"><a class="nav__item" href="/about/">About OpenAQ</a></li>
+                <li class="submenu__item"><a class="nav__item" href="/about/news">News</a></li>
+                <li class="submenu__item"><a class="nav__item" href="/case-studies/">Case Studies</a></li>
+                <li class="submenu__item"><a class="nav__item" href="/about/technology/">Technology</a></li>
+                <li class="submenu__item"><a class="nav__item" href="/about/team/">Team</a></li>
+                <li class="submenu__item"><a class="nav__item" href="/about/reporting/">Reporting</a></li>
+            </ul>
+        </li>
+    </ul>
+    
+</nav>
+    <a href="" class="btn btn-primary donate-btn">Donate</a>
+    </div>
 </header>

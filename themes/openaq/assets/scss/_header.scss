@@ -1,6 +1,25 @@
 @use 'openaq-design-system/variables';
 @use 'openaq-design-system/mixins/index.scss' as mixins;
 
+.header {
+  padding: 0 40px;
+  z-index: 1000;
+}
+.header-contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.spacer {
+  display: none;
+}
+
+#menu-toggle {
+  display: none;
+}
+
 .nav {
   &__item {
     @include mixins.navigation1;
@@ -16,9 +35,34 @@
 
 .nav-list {
   display: flex;
-  list-style: none;
-  justify-items: center;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list > li {
+  overflow: hidden;
+}
+
+.menu-button-container {
+  display: none;
+  height: 100%;
+  width: 30px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
 }
 
 .submenu {
@@ -62,5 +106,116 @@
       border: 1px solid #eaecf0;
       border-radius: 12px;
     }
+  }
+}
+
+@media (max-width: 1000px) {
+  $header-height: 60px;
+
+  .header {
+    height: $header-height;
+  }
+
+  .spacer {
+    display: block;
+    order: 3;
+  }
+
+  .header-logo {
+    order: 2;
+  }
+  .nav {
+    order: 1;
+  }
+
+  .donate-btn {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: flex;
+  }
+  .nav-list {
+    position: absolute;
+    top: 0;
+    margin-top: $header-height;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dropdown {
+    position: relative;
+    background-color: white;
+
+    &:hover {
+      .submenu {
+        z-index: 1000;
+        display: flex;
+        border: none;
+        border-radius: 0;
+      }
+    }
+
+    & > a {
+      display: none;
+    }
+
+    & {
+      .submenu {
+        background-color: white;
+        visibility: visible;
+        position: static;
+        margin: 0;
+        opacity: 1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        &:hover {
+          display: flex;
+        }
+
+        &__item {
+          display: flex;
+          height: auto;
+          width: 100%;
+          margin: 0;
+          justify-content: center;
+          border: 1px solid #eaecf0;
+        }
+      }
+    }
+  }
+
+  #menu-toggle ~ .nav-list > li {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #menu-toggle:checked ~ .nav-list > li {
+    border: 1px solid variables.$smoke10;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .nav-list > li {
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+    background-color: white;
+  }
+  .nav-list > li:not(:last-child) {
+    border-bottom: 1px solid #444;
   }
 }
