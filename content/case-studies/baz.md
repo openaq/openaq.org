@@ -2,7 +2,8 @@
 title = 'baz'
 tags = ['API']
 category = ["developer"]
-featured_image = "https://images.pexels.com/photos/109919/pexels-photo-109919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+featured_image = "/uploads/bar.jpeg"
+
 +++
 
 # Raising awareness for the community

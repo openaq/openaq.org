@@ -2,7 +2,7 @@
 title = 'bar'
 tags = ['API', 'Community']
 category = ["developer"]
-featured_image = "https://images.pexels.com/photos/1000444/pexels-photo-1000444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+featured_image = "/uploads/bar.jpeg"
 +++
 
 # Raising awareness for the community

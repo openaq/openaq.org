@@ -1,8 +1,6 @@
 <article class="case-study-card" data-card-slug="{{ .LinkTitle | urlize }}">
     <a href="{{ .Permalink }}">
-    <div>
-        <img src="{{.Params.featured_image}}" class="case-study-card__img" alt="">
-    </div>
+        {{ partial "case-study-card-image" (dict "context" . "global" $) }}
     </a>
     <div class="case-study-card__body">
         <a href="{{ .Permalink }}">

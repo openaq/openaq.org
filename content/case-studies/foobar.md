@@ -2,7 +2,8 @@
 title = 'foobar'
 tags = ['Community']
 category = ["developer"]
-featured_image = "https://images.pexels.com/photos/325521/pexels-photo-325521.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+featured_image = "/uploads/bar.jpeg"
+
 +++
 
 # Raising awareness for the community
