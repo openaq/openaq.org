@@ -14,5 +14,5 @@ jobs:
         run: yarn install
       
       - name: Build
-        uses: jakejarvis/hugo-build-action@v0.89.2
+        uses: majesticio/hugo-dart-action-bot@master
         # updated action
