@@ -23,6 +23,10 @@
 @use 'single-article';
 @use 'reporting';
 
+.main {
+  overflow: hidden;
+}
+
 @mixin landing-section {
   display: flex;
   flex-direction: row;
@@ -32,6 +36,10 @@
       flex-direction: column;
     }
   }
+}
+
+a {
+  text-decoration: none;
 }
 
 .hero-section {
