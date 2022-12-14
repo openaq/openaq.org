@@ -3,13 +3,14 @@
 @use 'mixins' as local-mixins;
 
 .partners-content {
+  display: flex;
   position: relative;
+  justify-content: center;
   @include local-mixins.bubbles();
 
   &-container {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     width: 800px;
     z-index: 2;
 
@@ -94,7 +95,7 @@
   @media (max-width: 800px) {
     & {
       &-container {
-        width: auto;
+        width: 600px;
         align-items: center;
         .partners-section {
           .partners-grid {
@@ -102,9 +103,52 @@
           }
         }
 
+        .partners-section {
+          align-items: center;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+        }
+
         .funders-section {
+          align-items: center;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
           .funders-grid {
             grid-template-columns: repeat(2, 1fr);
+
+            .funders-card {
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    & {
+      &-container {
+        width: 300px;
+        align-items: center;
+        .partners-section {
+          .partners-grid {
+            grid-template-columns: repeat(1, 1fr);
+
+            .partner-card {
+              width: 300px;
+              border: none;
+
+              &__body {
+                display: none;
+              }
+            }
+          }
+        }
+
+        .funders-section {
+          .funders-grid {
+            grid-template-columns: repeat(1, 1fr);
 
             .funders-card {
             }
