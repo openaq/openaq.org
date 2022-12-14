@@ -16,7 +16,7 @@ jobs:
         run: yarn install
       
       - name: Build
-        uses: openaq/hugo-docker@main
+        uses: openaq/hugo-build-action@main
         with:
           args: --baseUrl https://openaq-staging.org
 
