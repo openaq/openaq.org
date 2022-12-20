@@ -5,7 +5,10 @@ group = 'board'
 position = 'Secretary'
 weight = 3
 email = 'amrit@openaq.org'
+twitter = 'https://www.twitter.com/amrit_sharma'
+linkedin = 'https://www.linkedin.com/in/amritsharma'
+image = '/uploads/amrit_sharma.png'
 
 +++
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Amrit Sharma is a Developer Advocate in Toronto at ecobee, a Canadian smart home company that invented the world's first smart thermostat. He was Software Engineer at Thomson Reuters, is a published journalist, and created the Emoji Air Pollution Map and Smokey, the friendly air quality chatbot.
