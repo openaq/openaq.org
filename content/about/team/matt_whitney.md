@@ -3,7 +3,6 @@ type = "about/team"
 name = 'Matt Whitney'
 group = 'board'
 weight = 4
-email = 'matt@openaq.org'
 image = '/uploads/matt_whitney.png'
 linkedin = 'https://www.linkedin.com/in/matt-whitney-a6395265/'
 twitter = 'https://twitter.com/mattwhitney10'
