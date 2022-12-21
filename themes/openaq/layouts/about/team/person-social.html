@@ -4,6 +4,11 @@
       <img src="/svg/twitter_sm.svg" alt="twitter icon">
     </a>
     {{end}} 
+    {{with .Params.mastadon}}
+    <a href="{{ . | safeURL }}">
+      <img src="/svg/mastadon.svg" alt="">
+    </a>
+    {{end}} 
     {{with .Params.linkedin}}
     <a href="{{ . | safeURL }}">
       <img src="/svg/linkedin_sm.svg" alt="">
