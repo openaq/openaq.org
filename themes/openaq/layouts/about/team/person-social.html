@@ -25,4 +25,19 @@
         <img src="/svg/mail.svg" alt="">
     </a>
     {{end}}
+    {{with .Params.google_scholar}}
+    <a href="{{ . | safeURL }}">
+      <img src="/svg/google_scholar.svg" alt="">
+    </a>
+    {{end}} 
+    {{with .Params.orcid}}
+    <a href="{{ . | safeURL }}">
+      <img src="/svg/orcid.svg" alt="">
+    </a>
+    {{end}} 
+    {{with .Params.researchgate}}
+    <a href="{{ . | safeURL }}">
+      <img src="/svg/research_gate.svg" alt="">
+    </a>
+    {{end}} 
   </div>

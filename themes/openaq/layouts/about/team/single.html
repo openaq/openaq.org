@@ -14,6 +14,9 @@
                 <h1 class="person-name gradient-title">{{ .Params.name }}</h1>
                 <h2 class="person-title">{{ .Params.position }}</h2>
                 {{ .Render "person-social" }}
+                {{ with .Params.quote }}
+                    <p class="person-quote">{{.}}</p>
+                {{ end }}
                 <div class="person-bio">{{.Content}}</div>
             </div>
         </article>

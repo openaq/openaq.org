@@ -141,6 +141,12 @@
           color: variables.$sky120;
           margin: 0 0 40px 0;
         }
+
+        .person-quote {
+          @include mixins.subtitle2;
+          margin: 40px 0;
+        }
+
         .person-bio {
           margin: 40px 0;
 
@@ -154,6 +160,7 @@
 
           p {
             @include mixins.body2;
+            margin: 15px 0;
           }
         }
       }

@@ -5,6 +5,12 @@ position = 'Strategic Partnerships Director'
 group = 'team'
 image = '/uploads/colleen_rosales.png'
 weight = 3
+twitter = 'https://twitter.com/colleenesterase'
+linkedin = 'https://www.linkedin.com/in/colleen-marciel-rosales/'
+researchgate = 'https://www.researchgate.net/profile/Colleen_Marciel_Rosales'
+orcid = 'https://orcid.org/0000-0002-8925-8352'
+google_scholar = 'https://scholar.google.com/citations?user=Z9VntzsAAAAJ&hl=en&oi=ao'
+email = 'colleen@openaq.org'
 +++
 
 Colleen builds strategic relationships with air quality stakeholders worldwide—introducing people to the OpenAQ platform, spurring data-informed projects that advance clean air objectives, and supporting partnerships across sectors and geographies.
