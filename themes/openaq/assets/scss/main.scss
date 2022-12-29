@@ -276,6 +276,11 @@ a {
     height: 40px;
     border: 1px solid variables.$smoke30;
     border-radius: 100%;
+
+    img {
+      width: 18px;
+      height: auto;
+    }
   }
 }
 
