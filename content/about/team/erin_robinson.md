@@ -8,4 +8,4 @@ email = 'erin@openaq.org'
 image = '/uploads/erin_robinson.png'
 +++
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Erin is the CEO and co-founder of Metadata Game Changers which champions good data management practices working with academic and government clients. She was the Executive Director for the Earth Science Information Partners (ESIP) where she cultivated the Air Quality Cluster to promote standard data practices across organizations. 

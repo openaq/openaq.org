@@ -6,9 +6,7 @@ position = 'Executive Director'
 group = 'team'
 weight = 1
 email = 'chris@openaq.org'
-linkedin = 'https://example.com'
-twitter = 'https://example.com'
-github = 'https://github.com'
+linkedin = 'https://www.linkedin.com/in/chrishagerbaumer/'
 image = '/uploads/chris_hagerbaumer.png'
 quote = '"What happens to any of us, anywhere in the world, had better be the business of all of us." -Mamie Till'
 +++
