@@ -30,7 +30,7 @@
       home
       </span>
     {{ else }}
-      {{ $scratch.Get "title"}}
+      {{ $scratch.Get "title"  | title}}
     {{ end }}
   </a>
   </li>
