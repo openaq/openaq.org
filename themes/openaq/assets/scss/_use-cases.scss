@@ -2,7 +2,7 @@
 @use 'openaq-design-system/mixins/index.scss' as mixins;
 @use 'mixins' as local-mixins;
 
-.case-studies-content {
+.use-cases-content {
   display: flex;
   justify-content: center;
   position: relative;
@@ -11,7 +11,7 @@
   &-container {
     width: 1000px;
 
-    .case-studies-grid {
+    .use-cases-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       row-gap: 20px;
@@ -25,7 +25,7 @@
       &-container {
         width: 600px;
 
-        .case-studies-grid {
+        .use-cases-grid {
           grid-template-columns: repeat(2, 1fr);
         }
       }
@@ -37,7 +37,7 @@
       &-container {
         width: 300px;
 
-        .case-studies-grid {
+        .use-cases-grid {
           grid-template-columns: repeat(1, 1fr);
         }
       }
@@ -45,7 +45,7 @@
   }
 }
 
-.case-study-card {
+.use-case-card {
   background: #ffffff;
   border: 1px solid variables.$smoke10;
   border-radius: 22px;
@@ -63,7 +63,7 @@
   &__body {
     padding: 20px;
 
-    .case-study-description {
+    .use-case-description {
       @include mixins.body2;
       padding: 10px 0;
       color: variables.$smoke100;

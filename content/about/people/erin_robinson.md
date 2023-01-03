@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Erin Robinson'
 position = 'Treasurer'
 group = 'board'

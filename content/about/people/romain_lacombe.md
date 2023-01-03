@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Romain Lacombe'
 position = 'PlumeLabs'
 group = 'advisor'

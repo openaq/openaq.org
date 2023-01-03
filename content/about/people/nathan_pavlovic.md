@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Nathan Pavlovic'
 group = 'board'
 weight = 5

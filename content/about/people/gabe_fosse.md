@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Gabe Fosse'
 position = 'Data Analyst & Developer'
 group = 'team'

@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Douglas Varley, JD'
 position = 'Caplin & Drysdale'
 group = 'advisor'

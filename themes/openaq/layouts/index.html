@@ -19,10 +19,10 @@
 
 
 
-<section class="case-studies-section">
-    <div class="featured-case-studies">
-        {{ range $index, $page := where (where .Site.RegularPages "Type" "case-studies") "Params.featured" "==" true | first 3 }}
-            {{ partial "case-study-card" . }}
+<section class="use-cases-section">
+    <div class="featured-use-cases">
+        {{ range $index, $page := where (where .Site.RegularPages "Type" "use-cases") "Params.featured" "==" true | first 3 }}
+            {{ partial "use-case-card" . }}
         {{ end }}
     </div>
 

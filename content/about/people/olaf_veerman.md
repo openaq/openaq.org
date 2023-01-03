@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Olaf Veerman'
 position = 'Development Seed'
 group = 'advisor'

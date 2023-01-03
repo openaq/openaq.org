@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Dr. Colleen Marciel F. Rosales'
 position = 'Strategic Partnerships Director'
 group = 'team'

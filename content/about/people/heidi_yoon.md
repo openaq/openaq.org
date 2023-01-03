@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Heidi Yoon'
 position = 'Chair'
 group = 'board'

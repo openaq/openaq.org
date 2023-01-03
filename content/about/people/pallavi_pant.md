@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Pallavi Pant, PhD'
 position = 'Health Effects Institute'
 group = 'advisor'

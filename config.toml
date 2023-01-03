@@ -5,8 +5,8 @@ theme = 'openaq'
 copyright = "{year} OpenAQ. All rights reserved."
 
 [permalinks]
-  categories = "/case-studies/:slug/"
-  tags = "/case-studies/:slug/"
+  categories = "/use-cases/:slug/"
+  tags = "/use-cases/:slug/"
 
 [module]
   [[module.mounts]]

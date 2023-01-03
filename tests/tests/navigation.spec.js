@@ -201,14 +201,14 @@ test.describe('header navigation', () => {
     await expect(page).toHaveURL(`${baseUrl}/about/technology/`);
   });
 
-  test('about > team navigates', async ({ page }) => {
+  test('about > people navigates', async ({ page }) => {
     await page.hover('.header > nav > ul > li:nth-child(7) > a');
     await page
       .locator(
         '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(5) > a'
       )
       .click();
-    await expect(page).toHaveURL(`${baseUrl}/about/team/`);
+    await expect(page).toHaveURL(`${baseUrl}/about/people/`);
   });
 
   test('about > reporting navigates', async ({ page }) => {
@@ -447,14 +447,14 @@ test.describe('community banner navigation', () => {
   });
 });
 
-test.describe('about > team navigation', () => {
+test.describe('about > people navigation', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${baseUrl}/about/team/`);
+    await page.goto(`${baseUrl}/about/people/`);
   });
 
   test('page responds HTTP 200', async () => {
     const context = await request.newContext();
-    const response = await context.get(`${baseUrl}/about/team/`);
+    const response = await context.get(`${baseUrl}/about/people/`);
     expect(response.ok()).toBeTruthy();
   });
 
@@ -468,14 +468,14 @@ test.describe('about > team navigation', () => {
         );
       const slug = await teamCard.getAttribute('data-team-slug');
       await page.locator(`[data-team-slug=${slug}]`).click();
-      await expect(page).toHaveURL(`${baseUrl}/about/team/${slug}/`);
+      await expect(page).toHaveURL(`${baseUrl}/about/people/${slug}/`);
     }
   });
 });
 
-test.describe('bread crumb team navigation', () => {
+test.describe('bread crumb people navigation', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${baseUrl}/about/team/chris/`);
+    await page.goto(`${baseUrl}/about/people/chris/`);
   });
 
   test('page responds HTTP 200', async () => {
@@ -484,11 +484,11 @@ test.describe('bread crumb team navigation', () => {
     expect(response.ok()).toBeTruthy();
   });
 
-  test('team crumb navigates', async ({ page }) => {
+  test('people crumb navigates', async ({ page }) => {
     await page
       .locator('body > main > ol > li:nth-child(5) > a')
       .click();
-    await expect(page).toHaveURL(`${baseUrl}/about/team/`);
+    await expect(page).toHaveURL(`${baseUrl}/about/people/`);
   });
 
   test('about crumb navigates', async ({ page }) => {

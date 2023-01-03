@@ -18,7 +18,7 @@
 @use 'help';
 @use 'team';
 @use 'initiatives';
-@use 'case-studies';
+@use 'use-cases';
 @use 'policy-page';
 @use 'single-article';
 @use 'reporting';
@@ -62,13 +62,13 @@ a {
   }
 }
 
-.case-studies-section {
+.use-cases-section {
   @include landing-section();
   gap: 20px;
   justify-content: center;
   padding: 50px 0;
 
-  .featured-case-studies {
+  .featured-use-cases {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 40px;
@@ -77,7 +77,7 @@ a {
 
   @media (max-width: 1000px) {
     & {
-      .featured-case-studies {
+      .featured-use-cases {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         column-gap: 40px;
@@ -91,7 +91,7 @@ a {
     justify-content: center;
     align-items: center;
     & {
-      .featured-case-studies {
+      .featured-use-cases {
         display: grid;
 
         grid-template-columns: repeat(1, 1fr);
@@ -285,7 +285,7 @@ a {
   }
 }
 
-.related-case-studies {
+.related-use-cases {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;

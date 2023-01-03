@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Amrit Sharma'
 group = 'board'
 position = 'Secretary'

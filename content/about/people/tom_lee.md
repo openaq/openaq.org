@@ -1,5 +1,5 @@
 +++
-type = "about/team"
+type = "about/people"
 name = 'Tom Lee'
 position = 'Mapbox'
 group = 'advisor'
