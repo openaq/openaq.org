@@ -27,20 +27,20 @@
         </li>
         <li class="dropdown"><a href="/developers/api-overview/" aria-haspopup="true" class="nav__item{{ if eq .Section "developers" }} nav__item--active{{ end }}">Developers</a>
             <ul class="submenu"  aria-label="submenu">
-                <li class="submenu__item"><a class="nav__item" href="/developers/api-overview/">API Overview</a></li>
-                <li class="submenu__item"><a class="nav__item" href="https://docs.openaq.org">Developer Documentation</a></li>
-                <li class="submenu__item"><a class="nav__item" href="/use-cases/developer/">Use Cases</a></li>
-                <li class="submenu__item"><a class="nav__item" href="/developers/help/">Help</a></li>
+                <li class="submenu__item"><a class="nav__item api-overview-nav" href="/developers/api-overview/">API Overview</a></li>
+                <li class="submenu__item"><a class="nav__item documentation-nav" href="https://docs.openaq.org">Developer Documentation</a></li>
+                <li class="submenu__item"><a class="nav__item dev-use-case-nav" href="/use-cases/developer/">Use Cases</a></li>
+                <li class="submenu__item"><a class="nav__item help-nav" href="/developers/help/">Help</a></li>
             </ul>
             </li>
-        <li class="dropdown"><a href="/about/" aria-haspopup="true" class="nav__item about-tab{{ if eq .Section "about" }} nav__item--active{{ end }}">About</a>
-            <ul class="submenu about-submenu" aria-label="submenu">
-                <li class="submenu__item"><a class="nav__item" href="/about/">About Us</a></li>
-                <li class="submenu__item"><a class="nav__item" href="/about/initiatives/">Initiatives</a></li>
-                <li class="submenu__item"><a class="nav__item" href="/about/people/">People</a></li>
+        <li class="dropdown"><a href="/about/" aria-haspopup="true" class="nav__item{{ if eq .Section "about" }} nav__item--active{{ end }}">About</a>
+            <ul class="submenu" aria-label="submenu">
+                <li class="submenu__item"><a class="nav__item about-nav" href="/about/">About Us</a></li>
+                <li class="submenu__item"><a class="nav__item initiatives-nav" href="/about/initiatives/">Initiatives</a></li>
+                <li class="submenu__item"><a class="nav__item people-nav" href="/about/people/">People</a></li>
                 <li class="submenu__item"><a class="nav__item" href="/about/news">Blog</a></li>
-                <li class="submenu__item"><a class="nav__item" href="/use-cases/">Use Cases</a></li>
-                <li class="submenu__item"><a class="nav__item" href="/about/reporting/">Reporting</a></li>
+                <li class="submenu__item"><a class="nav__item use-cases-nav" href="/use-cases/">Use Cases</a></li>
+                <li class="submenu__item"><a class="nav__item reporting-nav" href="/about/reporting/">Reporting</a></li>
             </ul>
         </li>
     </ul>
