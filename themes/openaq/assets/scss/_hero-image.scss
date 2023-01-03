@@ -1,0 +1,54 @@
+@use 'openaq-design-system/variables' as variables;
+@use 'openaq-design-system/mixins/index' as mixins;
+
+.hero-image {
+  position: relative;
+  width: 700px;
+  height: 700px;
+
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+  }
+
+  .active-marker {
+    @include mixins.box-shadow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 170px;
+    top: 490px;
+    width: 38px;
+    height: 38px;
+    border-radius: 100%;
+    background-color: variables.$lavender80;
+    border: 6px solid variables.$ocean60;
+
+    span {
+      @include mixins.body5;
+      color: white;
+    }
+  }
+
+  .bubble-lg {
+    position: absolute;
+    bottom: 30px;
+    left: -20px;
+  }
+
+  .bubble-sm {
+    position: absolute;
+    top: 65px;
+    left: 43px;
+  }
+
+  .bubble-md {
+    position: absolute;
+    top: 65px;
+    right: -70px;
+  }
+}
