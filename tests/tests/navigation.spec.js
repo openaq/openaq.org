@@ -23,33 +23,33 @@ test.describe('landing page navigation', () => {
     page,
   }) => {
     const featureCard = page.locator(
-      'div.cards > article.case-study-card:nth-child(1)'
+      'body > main > section.use-cases-section > div > article:nth-child(1)'
     );
     const slug = await featureCard.getAttribute('data-card-slug');
     await page.locator(`[data-card-slug=${slug}]`).click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
+    await expect(page).toHaveURL(`${baseUrl}/use-cases/${slug}/`);
   });
 
   test('second featured case studies card navigates', async ({
     page,
   }) => {
     const featureCard = page.locator(
-      'div.cards > article.case-study-card:nth-child(2)'
+      'body > main > section.use-cases-section > div > article:nth-child(2)'
     );
     const slug = await featureCard.getAttribute('data-card-slug');
     await page.locator(`[data-card-slug=${slug}]`).click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
+    await expect(page).toHaveURL(`${baseUrl}/use-cases/${slug}/`);
   });
 
   test('third featured case studies card navigates', async ({
     page,
   }) => {
     const featureCard = page.locator(
-      'div.cards > article.case-study-card:nth-child(3)'
+      'body > main > section.use-cases-section > div > article:nth-child(3)'
     );
     const slug = await featureCard.getAttribute('data-card-slug');
     await page.locator(`[data-card-slug=${slug}]`).click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/${slug}/`);
+    await expect(page).toHaveURL(`${baseUrl}/use-cases/${slug}/`);
   });
 
   test('learn how openaq works button navigates', async ({
@@ -91,7 +91,7 @@ test.describe('landing page navigation', () => {
         'section.case-studies-section > div > article:nth-child(1) > div > div > a.chip-base-data'
       )
       .click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/api/`);
+    await expect(page).toHaveURL(`${baseUrl}/use-cases/api/`);
   });
 
   test('community chip navigates', async ({ page }) => {
@@ -101,7 +101,7 @@ test.describe('landing page navigation', () => {
       )
       .click();
     await expect(page).toHaveURL(
-      `${baseUrl}/case-studies/community/`
+      `${baseUrl}/use-cases/community/`
     );
   });
 });
@@ -119,45 +119,45 @@ test.describe('header navigation', () => {
 
   test('home logo navigates', async ({ page }) => {
     await page
-      .locator('.header > nav > ul > li:nth-child(1) > a')
+      .locator('.header-logo')
       .click();
     await expect(page).toHaveURL(`${baseUrl}`);
   });
 
   test('explore the data tab navigates', async ({ page }) => {
     await page
-      .locator('.header > nav > ul > li:nth-child(2) > a')
+      .locator('.explore-data-tab')
       .click();
     await expect(page).toHaveURL('https://explore.openaq.org');
   });
 
   test('why air quality tab navigates', async ({ page }) => {
     await page
-      .locator('.header > nav > ul > li:nth-child(3) > a')
+      .locator('.air-quality-tab')
       .click();
     await expect(page).toHaveURL(`${baseUrl}/why-air-quality/`);
   });
 
   test('why open data tab navigates', async ({ page }) => {
     await page
-      .locator('.header > nav > ul > li:nth-child(4) > a')
+      .locator('.open-data-tab')
       .click();
     await expect(page).toHaveURL(`${baseUrl}/why-open-data/`);
   });
 
-  test('partner tab navigates', async ({ page }) => {
+  test('partners tab navigates', async ({ page }) => {
     await page
-      .locator('.header > nav > ul > li:nth-child(5) > a')
+      .locator('.partners-tab')
       .click();
     await expect(page).toHaveURL(`${baseUrl}/partners/`);
   });
-
+// this needs work
   test('about hover displays dropdown', async ({ page }) => {
     const submenu = page.locator(
-      '.header > nav > ul > li:nth-child(7) > ul.submenu'
+      '.about-submenu'
     );
     await expect(submenu).toBeVisible({ visible: false });
-    await page.hover('.header > nav > ul > li:nth-child(7) > a');
+    await page.hover('.about-submenu');
     await expect(submenu).toBeVisible();
   });
 

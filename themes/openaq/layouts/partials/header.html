@@ -15,15 +15,15 @@
     </label>
     <ul class="nav-list">
         <li>
-            <a class="nav__item" href="https://explore.openaq.org">Explore the data</a>
+            <a class="nav__item explore-data-tab" href="https://explore.openaq.org">Explore the data</a>
         </li>
         <li>
-            <a href="/why-air-quality" class="nav__item{{ if eq .Section "why-air-quality" }} nav__item--active{{ end }}">Why air quality?</a></li>
+            <a href="/why-air-quality" class="nav__item air-quality-tab{{ if eq .Section "why-air-quality" }} nav__item--active{{ end }}">Why air quality?</a></li>
         <li>
-            <a href="/why-open-data" class="nav__item{{ if eq .Section "why-open-data" }} nav__item--active{{ end }}">Why open data?</a>
+            <a href="/why-open-data" class="nav__item open-data-tab{{ if eq .Section "why-open-data" }} nav__item--active{{ end }}">Why open data?</a>
         </li>
         <li>
-            <a href="/partners" class="nav__item{{ if eq .Section "partners" }} nav__item--active{{ end }}">Partners</a>
+            <a href="/partners" class="nav__item partners-tab{{ if eq .Section "partners" }} nav__item--active{{ end }}">Partners</a>
         </li>
         <li class="dropdown"><a href="/developers/api-overview/" aria-haspopup="true" class="nav__item{{ if eq .Section "developers" }} nav__item--active{{ end }}">Developers</a>
             <ul class="submenu"  aria-label="submenu">
@@ -33,8 +33,8 @@
                 <li class="submenu__item"><a class="nav__item" href="/developers/help/">Help</a></li>
             </ul>
             </li>
-        <li class="dropdown"><a href="/about/" aria-haspopup="true" class="nav__item{{ if eq .Section "about" }} nav__item--active{{ end }}">About</a>
-            <ul class="submenu" aria-label="submenu">
+        <li class="dropdown"><a href="/about/" aria-haspopup="true" class="nav__item about-tab{{ if eq .Section "about" }} nav__item--active{{ end }}">About</a>
+            <ul class="submenu about-submenu" aria-label="submenu">
                 <li class="submenu__item"><a class="nav__item" href="/about/">About Us</a></li>
                 <li class="submenu__item"><a class="nav__item" href="/about/initiatives/">Initiatives</a></li>
                 <li class="submenu__item"><a class="nav__item" href="/about/people/">People</a></li>
