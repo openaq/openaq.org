@@ -2,35 +2,23 @@
 title = "Why air quality?"
 +++
 
+Air pollution is the fourth leading risk factor for early death and the leading environmental cause of death worldwide, contributing to 1 out of 8 global deaths and over 7 million deaths annually worldwide as estimated by the World Health Organization. Up to 99% of us are breathing polluted air, cutting lives short by an average of 2.2 years worldwide. 
 
-Air quality is a critical issue that affects the health and well-being of individuals and communities around the world. Poor air quality can have a range of negative impacts on human health, including respiratory problems, cardiovascular disease, and cancer. It can also exacerbate existing health conditions, such as asthma. [google](https://google.com)
+Air pollution impacts our health in many ways, even starting when we're in the womb. The burden is unequal, with some people being far more vulnerable and some breathing far more polluted air. For example, children are particularly susceptible to air pollution’s insidious effects—they breathe more rapidly than adults, taking in more polluted air and are proportionally exposed at higher levels due to their small bodies and developing organs. In a 2018 report, Air Pollution and Child Health, WHO estimated outdoor and indoor air pollution resulted in 543,000 deaths in children under the age of 5 years in 2016.
 
-![ ](https://images.pexels.com/photos/775417/pexels-photo-775417.jpeg?auto=compress&cs=tinysrgb&w=800)
+Another example are marginalized communities across the globe that face worse outcomes in many areas of life, including poorer health driven by disproportionate exposure to air pollution, due to colonialism and racism.
 
-Ensuring good air quality is essential for protecting both human health and the environment. This is why organizations like openaq.org are working to provide access to air quality data and to raise awareness about the importance of clean air.
+![](/uploads/smokestacks.webp)
 
+## Air Quality Data
 
+Despite the urgency of confronting this global challenge, only 61% of governments worldwide produce air quality data, leaving over 1 billion citizens without access to fundamental information that could protect them from the harmful effects of air pollution.
 
-# Why air quality
+Reliable data on air pollution are fundamental to understanding and taking corrective action to improve air quality. Air quality data underpin all actions on air pollution. They tell us how much pollution is in the air we breathe. They predict how air pollution will change in space and time. They shape our understanding of how air pollution impacts human health, climate change, ecological health and economic well-being. 
 
-By promoting transparency and accountability, openaq.org helps individuals and communities make informed decisions about their health and the health of their environment.
+![](/uploads/pm25alert.webp)
 
-### Poor Air Quality has a significant impact on health
+Air quality data serve as an important foundation for the design, implementation, enforcement and assessment of the effectiveness of pollution control policies. Access to air quality data is critical for public, private and civil society initiatives to improve the air we breathe. Accurate, timely and sustained monitoring provides the evidence needed to develop targeted solutions to air pollution. 
 
-In addition to its impacts on human health, poor air quality can also harm the environment. Polluted air can damage plants and animals, and can even harm entire ecosystems. This can have significant economic consequences, as it can reduce crop yields and harm agricultural productivity. Additionally, poor air quality can impact tourism and other industries that depend on clean air and natural beauty.  
-
-## Inequality increases with worsening air quality
-
-In conclusion, air quality is a critical issue that deserves our attention and action. By working together, we can ensure that the air we breathe is clean and healthy, and that we are protecting the environment for future generations.
-
-![ ](https://images.pexels.com/photos/3902732/pexels-photo-3902732.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam aliquam, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec aliquam aliquam, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.
-
-# How OpenAQ helps
-
-- Sagittis et eu at elementum, quis in. 
-- Proin praesent volutpat egestas sociis sit lorem nunc nunc sit. 
-- Eget diam curabitur mi ac. 
-- Auctor rutrum lacus malesuada massa ornare et. Vulputate consectetur ac 
+![](/uploads/monitor.webp)
 

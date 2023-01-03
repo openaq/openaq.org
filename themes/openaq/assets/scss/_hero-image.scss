@@ -6,6 +6,34 @@
   width: 700px;
   height: 700px;
 
+  .detail-card {
+    @include mixins.box-shadow;
+    top: 50px;
+    left: 320px;
+    position: absolute;
+    border-radius: 16px;
+    width: 280px;
+    height: 570px;
+    background-color: white;
+    border: 6px solid variables.$ocean10;
+    overflow: hidden;
+
+    &__header {
+      background-color: variables.$sky120;
+      padding: 10px 20px;
+    }
+
+    &-section {
+      padding: 14px 20px;
+      border-bottom: 1px dashed variables.$smoke30;
+    }
+    &-section-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      row-gap: 12px;
+    }
+  }
+
   &__img {
     position: absolute;
     top: 0;
