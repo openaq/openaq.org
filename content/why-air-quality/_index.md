@@ -22,3 +22,10 @@ Air quality data serve as an important foundation for the design, implementation
 
 ![](/uploads/monitor.webp)
 
+## How OpenAQ Helps
+
+Anyone can use the OpenAQ platform for free to find out what air quality data monitoring is occurring in or near their community and use that information to advocate for increased monitoring where needed. 
+
+Likewise, anyone can use the data platform or the Explorer Tool for analysis, from basic interpretations to in-depth analyses using the API. 
+
+For organizations deploying air quality monitors, OpenAQ can ingest and share the data from these projects on the OpenAQ platform to ensure data is broadly accessible.
