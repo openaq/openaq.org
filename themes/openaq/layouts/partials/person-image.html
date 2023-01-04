@@ -4,7 +4,7 @@
     {{ with .context.Params.image }}
         {{ $imageResource := ($global.Site.GetPage "section" "uploads").Resources.GetMatch (strings.TrimPrefix "/uploads/" . ) }}
         {{ $resized := $imageResource.Fit "400x400 webp q95 picture"  }}
-        <img src="{{ $resized.RelPermalink }}"  alt="" class="{{ $class }}__img" />
+        <img src="{{ $resized.RelPermalink }}" width="252" height="252"  alt="" class="{{ $class }}__img" loading="lazy"/>
     {{ end }}
 {{ else }}
     {{ partial "img-placeholder" }}
