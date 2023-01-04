@@ -70,3 +70,9 @@
     }
   }
 }
+
+.relative-header {
+  @include mixins.heading2;
+  color: variables.$sky120;
+  margin: 40px 0;
+}

@@ -7,29 +7,23 @@ featured_image = '/uploads/aqai.jpeg'
 featured = true
 +++
 
-# Raising awareness for the community
+AQAI is using the OpenAQ platform to develop a machine learning predictive model for air quality showing child population density against regions with pollutant concentrations above WHO-recommended limits. 
 
-A community-based organization (CBO) called "Clean Air for All" is using OpenAQ's API to access real-time air quality data for their city. The organization's goal is to improve air quality in their community by educating residents about the sources of air pollution and encouraging them to take action to reduce it.
+AQAI, one of nine startups (out of 450 applicants) awarded investment funding from the UNICEF Venture Fund in 2022  
 
-![ ](https://images.pexels.com/photos/1131868/pexels-photo-1131868.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+## The Problem 
 
-Clean Air for All is using the OpenAQ API to access data on air pollutant levels in their city, including levels of particulate matter, nitrogen dioxide, and ozone. The organization is using this data to create maps and visualizations that show the concentration of these pollutants in different parts of the city. This information is then shared with community members through the organization's website and social media channels, along with tips and advice on how to reduce exposure to air pollution.
+Children are particularly susceptible to air pollution’s insidious effects. They breathe more rapidly than adults, taking in more polluted air. Due to having smaller bodies, they are proportionally exposed at higher levels. Their developing organs are more vulnerable to pollution. And due to their height, they are face level with pollutants that settle lower in the air and pollutants, such as vehicle exhaust, emitted close to the ground. 
 
-# Playing it by the numbers
+## The Solution
 
-The organization is also using the OpenAQ API to track changes in air quality over time, and to identify areas of the city where air pollution levels are particularly high. This information is used to target outreach and education efforts, as well as to advocate for policies and programs that can improve air quality in those areas.
+Christina Last and Prithviraj Pramanik met working on air quality data for UNICEF, the UN agency responsible for providing humanitarian and developmental aid to children worldwide. Recognizing that they could apply data science to support children’s health, Prithviraj and Christina founded AQAI (based in India) to evaluate exposure to particulate matter in places where there is a low density of air quality sensors. The tool leverages artificial intelligence and machine learning, fusing together real-time satellite imagery and ground-based sensing to replace stale air quality data being used in health impact assessments. AQAI is working alongside UNICEF Belize and is exploring opportunities with UNICEF Mongolia to model pollution exposure for children and schools.
 
-![ ](https://images.pexels.com/photos/688835/pexels-photo-688835.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+## How OpenAQ Helped
 
-Clean Air for All is seeing positive results from their use of the OpenAQ API. The organization's outreach efforts are increasing awareness of air pollution and its impact on health, and community members are taking action to reduce their own contributions to air pollution. As a result, air quality in the city is improving, and the organization is playing a key role in this positive change.
+According to Christina, “OpenAQ’s data aggregation platform has made our work possible. We ingest historic and real-time information from OpenAQ globally, allowing us to predict local pollution concentrations to inform our work with UNICEF country offices.” Prithviraj points out the harmonization and ease of data acquisition from OpenAQ via the API, which gave them the ability to focus more on downstream tasks rather than the tedium of looking for these data themselves. “Structured air quality data is hard to acquire from global agencies that follow diverse API structures for querying. When we initially started the exploratory data analysis, OpenAQ simplified the data acquisition from federal regulatory monitors.”
 
-# They came to play
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+## For More Information
 
-## Further reading
-
-- [OpenAQ API](https://docs.openaq.org/)
-- [OpenAQ API](https://docs.openaq.org/)
-- [OpenAQ API](https://docs.openaq.org/)
-
-### Related
+* Read the long-version blog: UNICEF Venture Fund-backed Startup Building Global Air Pollution Model to Map Children’s Exposure to Air Pollution
+* Listen to the Turing Podcast: Data Science for Social Good: Predicting air pollution in a post-COVID world? featuring Christina Last, Prithviraj Pramanik and Dr. Subhabrata Majumdar

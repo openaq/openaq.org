@@ -24,9 +24,15 @@
   background: #ffffff;
   border: 1px solid variables.$smoke10;
   border-radius: 22px;
+  gap: 20px;
+  padding: 20px;
 
-  &__img {
+  &-img {
     flex: 2;
+
+    img {
+      max-width: 100%;
+    }
   }
 
   .initiative-description {
