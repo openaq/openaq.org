@@ -1,4 +1,4 @@
-<article class="team-card" data-team-slug="{{ .File.BaseFileName | urlize }}">
+<article class="team-card" data-testid="{{ .File.BaseFileName | urlize }}">
     <a href="{{ .Permalink }}">
         {{ partial  "person-image" (dict "context" . "global" $ "class" "team-card") }}
         <div class="team-card__description">

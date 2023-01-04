@@ -192,16 +192,6 @@ test.describe('header navigation', () => {
     await expect(page).toHaveURL(`${baseUrl}/use-cases/`);
   });
 
-  // test('about > technology navigates', async ({ page }) => {
-  //   await page.hover('.header > nav > ul > li:nth-child(7) > a');
-  //   await page
-  //     .locator(
-  //       '.header > nav > ul > li:nth-child(7) > ul > li:nth-child(4) > a'
-  //     )
-  //     .click();
-  //   await expect(page).toHaveURL(`${baseUrl}/about/technology/`);
-  // });
-
   test('about > people navigates', async ({ page }) => {
     await page.hover('body > header > div > nav > ul > li:nth-child(6) > a');
     await page
@@ -438,7 +428,7 @@ test.describe('social banner navigation', () => {
   test('github follow button navigates', async ({ page }) => {
     await page
       .locator(
-        'section.social-banner > div.social-banner-content > div:nth-child(1) > div.social-section-description > a'
+        '.social-banner-gh'
       )
       .click();
     await expect(page).toHaveURL('https://github.com/openaq');
@@ -447,7 +437,7 @@ test.describe('social banner navigation', () => {
   test('twitter follow button navigates', async ({ page }) => {
     await page
       .locator(
-        'section.social-banner > div.social-banner-content > div:nth-child(3) > div.social-section-description > a'
+        '.social-banner-twitter'
       )
       .click();
     await expect(page).toHaveURL('https://twitter.com/openaq');
@@ -456,7 +446,7 @@ test.describe('social banner navigation', () => {
   test('slack join button navigates', async ({ page }) => {
     await page
       .locator(
-        'section.social-banner > div.social-banner-content > div:nth-child(2) > div.social-section-description > a'
+        '.social-banner-slack'
       )
       .click();
     await expect(page).toHaveURL(
@@ -467,18 +457,18 @@ test.describe('social banner navigation', () => {
 
 test.describe('community banner navigation', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${baseUrl}/case-studies/`);
+    await page.goto(`${baseUrl}/use-cases/`);
   });
 
   test('page responds HTTP 200', async () => {
     const context = await request.newContext();
-    const response = await context.get(`${baseUrl}/case-studies/`);
+    const response = await context.get(`${baseUrl}/use-cases/`);
     expect(response.ok()).toBeTruthy();
   });
 
   test('participate button navigates', async ({ page }) => {
     const locator = page.locator(
-      'section.community-banner > div.community-banner-content > div.community-participate > div.community-participate-description > a'
+      '.community-banner-participate'
     );
     const href = await locator.getAttribute('href');
     expect(href).toBe('mailto:info@openaq.org');
@@ -487,7 +477,7 @@ test.describe('community banner navigation', () => {
   test('support button navigates', async ({ page }) => {
     await page
       .locator(
-        'section.community-banner > div.community-banner-content > div.community-support > div.community-support-description > a'
+        '.community-banner-support'
       )
       .click();
     await expect(page).toHaveURL(
@@ -503,7 +493,7 @@ test.describe('about > people navigation', () => {
 
   test('page responds HTTP 200', async () => {
     const context = await request.newContext();
-    const response = await context.get(`${baseUrl}/about/people/`);
+    const response = await context.get(`${baseUrl}`);
     expect(response.ok()).toBeTruthy();
   });
 
@@ -511,12 +501,13 @@ test.describe('about > people navigation', () => {
     const cards = page.locator('.team-card');
     const count = await cards.count();
     for (let i = 1; i < count; i++) {
-      const teamCard = await page
-      .locator(
-        `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i})`
+      await page.goto(`${baseUrl}/about/people/`);
+      const teamCard = page
+        .locator(
+          `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i})`
         );
-      const slug = await teamCard.getAttribute('data-team-slug');
-      await page.locator(`[data-team-slug=${slug}]`).click();
+      let slug = await teamCard.getAttribute('data-testid');
+      await page.getByTestId(`${slug}`).getByRole('link').first().click();
       await expect(page).toHaveURL(`${baseUrl}/about/people/${slug}/`);
     }
   });
@@ -524,7 +515,7 @@ test.describe('about > people navigation', () => {
 
 test.describe('bread crumb people navigation', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${baseUrl}/about/people/chris/`);
+    await page.goto(`${baseUrl}/about/people/chris_hagerbaumer/`);
   });
 
   test('page responds HTTP 200', async () => {
@@ -555,9 +546,9 @@ test.describe('bread crumb people navigation', () => {
   });
 });
 
-test.describe('bread crumb case-studies navigation', () => {
+test.describe('bread crumb use-cases navigation', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${baseUrl}/case-studies/developer/`);
+    await page.goto(`${baseUrl}/use-cases/developer/`);
   });
 
   test('page responds HTTP 200', async () => {
@@ -566,19 +557,20 @@ test.describe('bread crumb case-studies navigation', () => {
     expect(response.ok()).toBeTruthy();
   });
 
-  test('case-studies crumb navigates', async ({ page }) => {
+  test('use-cases crumb navigates', async ({ page }) => {
     await page
       .locator('body > main > ol > li:nth-child(3) > a')
       .click();
-    await expect(page).toHaveURL(`${baseUrl}/case-studies/`);
+    await expect(page).toHaveURL(`${baseUrl}/use-cases/`);
   });
 
-  test('develeoper home icon crumb navigates', async ({ page }) => {
+  test('developer home icon crumb navigates', async ({ page }) => {
     await page
       .locator('body > main > ol > li:nth-child(1) > a')
       .click();
     await expect(page).toHaveURL(`${baseUrl}`);
   });
+  
 });
 
 // end of tests
