@@ -152,7 +152,6 @@ test.describe('header navigation', () => {
     await expect(page).toHaveURL(`${baseUrl}/partners/`);
   });
 
-// this needs work
   test('about hover displays dropdown', async ({ page }) => {
     const submenu = page.locator(
       'body > header > div > nav > ul > li:nth-child(6) > ul.submenu'
@@ -413,7 +412,6 @@ test.describe('footer navigation', () => {
   });
 });
 
-///
 test.describe('social banner navigation', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${baseUrl}/why-air-quality/`);

@@ -1,4 +1,4 @@
-<article class="use-case-card" data-card-slug="{{ .LinkTitle | urlize }}">
+<article class="use-case-card" data-card-slug="{{ .File.BaseFileName | urlize }}">
     <a href="{{ .Permalink }}">
         {{ partial "use-case-card-image" (dict "context" . "global" $) }}
     </a>
