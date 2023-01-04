@@ -1,4 +1,6 @@
+<h3 class="relative-header">Related</h3>
 <div class="related-use-cases">
+
  {{ range .Site.RegularPages.Related . | shuffle | first 2 }}
  {{ partial "use-case-card" . }}
  {{ end }}

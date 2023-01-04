@@ -13,12 +13,11 @@
         </div>
     </section>
     <section class="funders-section">
-        <h1 class="type-display-1 gradient-title">Funders</h1>
+        <h1 class="type-display-1 gradient-title">Funders & In-kind Supporters</h1>
         <div class="funders-grid">
             {{ range $index, $page := where .Pages "Params.group" "funder" }} 
             {{ .Render "funder-card"}} 
             {{ end }}
-
         </div>
     </section>
 </div>
