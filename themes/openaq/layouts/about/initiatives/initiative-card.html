@@ -1,16 +1,21 @@
+{{/*  font and title color changing @Russ  */}}
 <article class="initiative-card">
     <div class="initiative-card-img">
-        {{ partial "initiative-card-image" (dict "context" . "global" $) }}
-    </div>
-    <div class="initiative-description">
-        <h2 class="inititiative-description__title">{{ .Title }}</h2>
-        <div class="initiative-description__body">
-            {{ .Summary | truncate 300 " read more..." }}
+            <a href="{{ .Permalink }}">
+                {{ partial "initiative-card-image" (dict "context" . "global" $ "class" "initiative-card") }}
+            </a>
         </div>
-        <div class="initiative-tags">
-            {{ range .Params.topics }}
-            <span href="#" class="chip-brand">{{ . }}</span>
-            {{ end }}
+        <div class="initiative-description">
+            <a href="{{ .Permalink }}">
+                <h2 class="inititiative-description__title">{{ .Title }}</h2>
+                <div class="initiative-description__body">
+                    {{ .Summary | truncate 300 " read more..." }}
+                </div>
+            </a>
+            <div class="initiative-tags">
+                {{ range .Params.topics }}
+                <span href="#" class="chip-brand">{{ . }}</span>
+                {{ end }}
+            </div>
         </div>
-    </div>
-</article>
+    </article>

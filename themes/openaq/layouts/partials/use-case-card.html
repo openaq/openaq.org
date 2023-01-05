@@ -4,10 +4,10 @@
     </a>
     <div class="use-case-card__body">
         <a href="{{ .Permalink }}">
-        <h2 class="type-heading-2">{{ .Title }}</h2>
-        <div class="use-case-description">
-            {{ .Summary | truncate 220 " ... read more" }}
-        </div>
+            <h2 class="type-heading-2">{{ .Title }}</h2>
+            <div class="use-case-description">
+                {{ .Summary | truncate 220 " ... read more" }}
+            </div>
         </a>
         <div class="use-case-tags">
             {{ range .Params.tags }}
