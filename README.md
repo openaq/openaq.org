@@ -5,7 +5,7 @@
 The website is built using [Hugo](https://gohugo.io) for content management and static site generation.
 
 
-For styles SCSS is used with the [openaq-design-system]() SCSS library. Dart Sass is required to compile SCSS and must be installed and available in PATH for Hugo to access.
+For styles SCSS is used with the [openaq-design-system](https://github.com/openaq/openaq-design-system) SCSS library. Dart Sass is required to compile SCSS and must be installed and available in PATH for Hugo to access.
 
 To use dart-sass with Hugo, install [dart-sass-embedded](https://github.com/sass/dart-sass-embedded) as follows:
 

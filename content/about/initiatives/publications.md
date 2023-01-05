@@ -2,6 +2,7 @@
 type = "about/initiatives"
 title = 'Publications'
 topics = ['Community']
+featured_image = '/uploads/data_landscape_2022.png'
 +++
 
 

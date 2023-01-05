@@ -2,6 +2,6 @@
 {{ $title :=  .context.Title }}
 {{ with .context.Params.featured_image }}
     {{ $imageResource := ($global.Site.GetPage "section" "uploads").Resources.GetMatch (strings.TrimPrefix "/uploads/" . ) }}
-    {{ $resized := $imageResource.Fill "600x400 webp q55 picture"  }}
-    <img src="{{ $resized.RelPermalink }}" class="use-case-card__img" alt="{{ $title }}"/>
+    {{ $resized := $imageResource.Fill "600x400 Center webp q55 picture"  }}
+        <img src="{{ $resized.RelPermalink }}" class="use-case-card__img" alt="{{ $title }}"/>
 {{ end }}

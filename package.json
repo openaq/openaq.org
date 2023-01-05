@@ -6,5 +6,6 @@
   "author": "OpenAQ <dev@openaq.org>",
   "dependencies": {
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0"
-  }
+  },
+  "devDependencies": {}
 }

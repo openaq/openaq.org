@@ -55,12 +55,17 @@
     @include mixins.box-shadow;
   }
 
+  a:nth-child(1) {
+    flex: 1;
+  }
+
   &__img {
     width: 100%;
     height: auto;
   }
 
   &__body {
+    flex: 2;
     padding: 20px;
 
     .use-case-description {

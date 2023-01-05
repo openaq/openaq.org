@@ -2,7 +2,7 @@
 title = 'AQAI'
 tags = ['API', 'Community']
 categories = ['developer']
-featured_image = '/uploads/aqai.jpeg'
+featured_image = '/uploads/aqai.png'
 
 featured = true
 +++
@@ -18,6 +18,8 @@ Children are particularly susceptible to air pollution’s insidious effects. Th
 ## The Solution
 
 Christina Last and Prithviraj Pramanik met working on air quality data for UNICEF, the UN agency responsible for providing humanitarian and developmental aid to children worldwide. Recognizing that they could apply data science to support children’s health, Prithviraj and Christina founded AQAI (based in India) to evaluate exposure to particulate matter in places where there is a low density of air quality sensors. The tool leverages artificial intelligence and machine learning, fusing together real-time satellite imagery and ground-based sensing to replace stale air quality data being used in health impact assessments. AQAI is working alongside UNICEF Belize and is exploring opportunities with UNICEF Mongolia to model pollution exposure for children and schools.
+
+![](/uploads/aqai_dashboard.gif)
 
 ## How OpenAQ Helped
 
