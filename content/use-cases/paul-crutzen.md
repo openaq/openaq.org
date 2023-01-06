@@ -1,7 +1,7 @@
 +++
 title = 'Paul Crutzen Publication Awardee'
 tags = ['API', 'Community']
-featured_image = "/uploads/paul-crutzen.webp"
+featured_image = "/uploads/openaq-map.webp"
 featured = true
 
 +++
