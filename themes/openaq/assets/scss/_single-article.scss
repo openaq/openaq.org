@@ -21,14 +21,16 @@
         color: variables.$sky120;
         margin: 40px 0;
       }
+
       h2 {
         @include mixins.heading3;
         color: variables.$sky120;
         margin: 20px 0;
       }
+
       h3,
       h4 {
-        @include mixins.heading4;
+        @include mixins.subtitle3;
         color: variables.$sky120;
         margin: 20px 0;
       }
