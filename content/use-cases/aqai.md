@@ -27,5 +27,5 @@ According to Christina, “OpenAQ’s data aggregation platform has made our wor
 
 ## For More Information
 
-* Read the long-version blog: UNICEF Venture Fund-backed Startup Building Global Air Pollution Model to Map Children’s Exposure to Air Pollution
-* Listen to the Turing Podcast: Data Science for Social Good: Predicting air pollution in a post-COVID world? featuring Christina Last, Prithviraj Pramanik and Dr. Subhabrata Majumdar
+* Read the long-version blog: [UNICEF Venture Fund-backed Startup Building Global Air Pollution Model to Map Children’s Exposure to Air Pollution](https://medium.com/@openaq/openaq-use-case-unicef-venture-fund-backed-startup-building-global-air-pollution-model-to-map-f4cd69416634)
+* Listen to the Turing Podcast: [Data Science for Social Good: Predicting air pollution in a post-COVID world?](https://turing.podbean.com/e/solve-for-good-is-the-air-harming-children-s-health/) featuring Christina Last, Prithviraj Pramanik and Dr. Subhabrata Majumdar

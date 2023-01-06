@@ -36,13 +36,13 @@ OpenAQ publishes the only global assessment of whether and how national governme
 
 See our [Vision, Mission and Organizational Values](#values), which include our **commitment to equity, diversity and inclusion**.
 
-See our [2022-2025 Strategic Direction](), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities. ***(link to the abbreviated designed version)***
+See our [2022-2025 Strategic Direction](), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
 
 {{< youtube FntU6TXpb2g >}}
     
 
 
-Read our origin story. ***(I’ve drafted this and am getting feedback from Christa and Joe. Will publish it as a blog and we can link to it on Medium.)***
+[Read our origin story.]()
 
 OpenAQ is a U.S.-based nonprofit. We were incorporated in 2015 in Washington, DC and gained tax-exempt 501(c)(3) status in 2018. Our team works remotely. 
 

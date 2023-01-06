@@ -27,6 +27,6 @@ Sh\*\*t! I Smoke is a mobile app that compares air pollution to cigarette smokin
 The Sh\*\*t! I Smoke app relies on real-time air pollution data accessed from the OpenAQ Data Platform and AQICN. Its developers are grateful to OpenAQ for making air quality data freely available and are adamant advocates for the provision of open data by governments around the world.
 
 ## For More Information
-* Read the long-version blog: App Raises Awareness by Translating Air Pollution Into Cigarettes Smoked
-* Find out how many cigarettes you are unwillingly smoking at Sh**t! I Smoke.
-* Read one of the articles written when the app was first released: Bloomberg: How Much Are You ‘Smoking’ by Breathing Urban Air?
+* Read the long-version blog: [App Raises Awareness by Translating Air Pollution Into Cigarettes Smoked](https://medium.com/@openaq/app-raises-awareness-by-translating-air-pollution-into-cigarettes-smoked-d08cfc66c3c)
+* Find out how many cigarettes you are unwillingly smoking at [Sh**t! I Smoke](https://shootismoke.app/).
+* Read one of the articles written when the app was first released: [Bloomberg: How Much Are You ‘Smoking’ by Breathing Urban Air?](https://www.bloomberg.com/news/articles/2018-04-25/the-app-that-translates-air-pollution-into-cigarettes)
