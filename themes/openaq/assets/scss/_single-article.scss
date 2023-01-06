@@ -16,17 +16,23 @@
     .single-article-body {
       margin: 40px 0;
 
-      h1,
-      h2 {
+      h1 {
         @include mixins.heading2;
         color: variables.$sky120;
         margin: 40px 0;
       }
-      h3,
-      h4 {
+
+      h2 {
         @include mixins.heading3;
         color: variables.$sky120;
-        margin: 40px 0;
+        margin: 20px 0;
+      }
+
+      h3,
+      h4 {
+        @include mixins.subtitle3;
+        color: variables.$sky120;
+        margin: 20px 0;
       }
 
       a {
