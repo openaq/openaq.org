@@ -16,7 +16,7 @@ Researchers Christoph A. Keller, Mathew J. Evans, K. Emma Knowland, Christa A. H
 
 A lack of centralized data, a lack of directly comparable data, gaps in data coverage, and paywalls on data impede air quality researchers’ ability to get directly to the question they are trying to answer–in this case, whether COVID-19 restrictions impacted surface concentrations of nitrogen dioxide and ozone globally. 
 
-![](/uploads/global-impact-covid.png)
+{{< figure src="/uploads/global-impact-covid.png" title=" Global impact of COVID-19 restrictions on the surface concentrations of nitrogen dioxide and ozone" >}}
 
 ## The Solution
 

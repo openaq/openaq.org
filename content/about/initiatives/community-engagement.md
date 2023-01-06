@@ -7,7 +7,7 @@ featured_image = '/uploads/community-hands.webp'
 
 Because data has value only if it is used, OpenAQ introduces potential new users to our data platform and equips users of all abilities with tools to access, understand and use the data. We train groups on how to use the platform, with a focus on reaching potential users who are less data proficient, who are starting out in the air quality space (e.g., early-career scientists), and who are working to reduce air pollution in vulnerable communities. 
 
-![](/uploads/community-hands.webp)
+![](/uploads/ambassadors_workshops.webp)
 
 We actively build relationships with people and organizations concerned about air quality, public health and climate change. Key stakeholders include community-based and other civil society organizations; governments and intergovernmental organizations; journalists and other communicators; educators; app developers and technology companies.
 

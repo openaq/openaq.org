@@ -15,7 +15,8 @@ Through the interactive training, the Community Ambassadors become inspired and 
 
 OpenAQ piloted the Community Ambassador Program in 2021, providing practical skill building to five young professionals hailing from Albania, India, Kenya, Mongolia and South Africa and working in diverse sectors pertaining to air quality, including air quality management, urban development, journalism, city government, engineering, and community organizing. Their positive feedback, and what they achieved after completing the program, led us to the decision to establish a regular Community Ambassador Program, starting in 2023.
 
-![](/uploads/free_man.webp)
+![](/uploads/ambassadors_workshops_monthly_sessions.webp)
+
 
 The ultimate goal of this program is to increase data fluency among air quality advocates living in some of the most polluted regions on the planet so that they are (1) better equipped to advocate for clean air in their communities, (2) able to facilitate greater data openness and transparency from data producers in their region and country, and (3) able to train others to use data for good.
 

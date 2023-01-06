@@ -22,6 +22,7 @@ Air pollution is largely invisible. Most people don’t realize that it’s the 
 
 Sh\*\*t! I Smoke is a mobile app that compares air pollution to cigarette smoking. Concerned about air pollution since being exposed to serious levels in his youth, software developer Amaury Martiny got the idea to create the app when he discovered a formula developed by Berkeley Earth that translates the health impacts of air pollution into the equivalent health impacts of cigarette smoking. The Sh**t! I Smoke app connects the Berkeley Earth rule of thumb that one cigarette per day is the rough equivalent of a PM2.5 level of 22 μg/m3 to open air quality data around the world to show how, by simply breathing, most of us are inhaling the equivalent of a pack of cigarettes (and often more) each month.
 
+
 ## How OpenAQ Helped
 
 The Sh\*\*t! I Smoke app relies on real-time air pollution data accessed from the OpenAQ Data Platform and AQICN. Its developers are grateful to OpenAQ for making air quality data freely available and are adamant advocates for the provision of open data by governments around the world.
