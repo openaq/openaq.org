@@ -1,5 +1,5 @@
 +++
-title = "Cookies"
+title = "Cookie Policy"
 +++
 
 ## OpenAQ.org

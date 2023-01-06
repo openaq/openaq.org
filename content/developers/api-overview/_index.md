@@ -9,7 +9,7 @@ OpenAQ is the world's largest free and open source platform for air quality data
 
 ## API
 
-
+The best way to access data on the OpenAQ platform is through the OpenAQ REST API. The API allows programmatic and 
 
 
 To learn more about how to use the OpenAQ API to query data visit [docs.openaq.org](https://doc.openaq.org).
