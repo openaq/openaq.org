@@ -10,7 +10,7 @@ OpenAQ’s core function is to make air quality data universally accessible and 
 
 This work involves maintaining and strategically increasing data coverage, particularly in low- and middle-income countries and environmental justice communities. We actively seek data produced by reference-grade monitors and air sensors (aka, low-cost sensors) run by governments, research institutions, community organizations, companies and individuals across the globe.
 
-![](/uploads/data-pipeline.webp)
+![](/uploads/fold-harmonizing-media.webp)
 
 To achieve the best platform possible, OpenAQ develops our technology with the following core values:
 - ***Open***: Anyone can access the data for free.
