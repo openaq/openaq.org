@@ -59,16 +59,13 @@ We serve a wide range of users from the public, private and NGO sectors:
 
 This work wouldn't be possible without those who monitor air quality and share their data openly on our platform. Thank you, data producers!
 
+# Additional Resources
+
 OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [Click here](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) to view our 2022 report, *Open Air Quality Data: The Global Landscape*.
 
-See our [Vision, Mission and Organizational Values](#values), which include our **commitment to equity, diversity and inclusion**.
+See our [2022-2025 Strategic Direction]()<!-- insert -->, which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
 
-See our [2022-2025 Strategic Direction](), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
-
-    
-
-
-[Read our origin story.]()
+[Read our origin story.]()<!-- insert -->
 
 OpenAQ is a U.S.-based nonprofit. We were incorporated in 2015 in Washington, DC and gained tax-exempt 501(c)(3) status in 2018. Our team works remotely. 
 
