@@ -8,5 +8,9 @@
         </main>
         {{- partial "footer.html" . -}}
         {{- block "scripts" . }}{{- end}}
+        {{ $js := resources.Get "js/plausible-base.js" | js.Build | resources.Minify }}
+        {{ $secureJS := $js | resources.Fingerprint "sha512" }}
+        <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" defer></script>
+        {{- block "plausible-scripts" . }}{{- end}}
     </body>
 </html>

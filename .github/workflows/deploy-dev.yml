@@ -18,7 +18,7 @@ jobs:
       - name: Build
         uses: openaq/hugo-build-action@main
         with:
-          args: --baseUrl https://openaq-staging.org
+          args: --config config.dev.toml
 
       - uses: jakejarvis/s3-sync-action@master
         with:
