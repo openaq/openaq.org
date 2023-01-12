@@ -1,43 +1,43 @@
 <div class="person-social">
     {{with .Params.twitter}}
     <a href="{{ . | safeURL }}">
-      <img src="/svg/twitter_sm.svg" alt="twitter icon">
+      <img src="/svg/twitter_sm.svg" height="13" width="15" alt="twitter icon">
     </a>
     {{end}} 
     {{with .Params.mastadon}}
     <a href="{{ . | safeURL }}">
-      <img src="/svg/mastadon.svg" alt="">
+      <img src="/svg/mastadon.svg" height="15" width="15" alt="mastodon icon">
     </a>
     {{end}} 
     {{with .Params.linkedin}}
     <a href="{{ . | safeURL }}">
-      <img src="/svg/linkedin_sm.svg" alt="">
+      <img src="/svg/linkedin_sm.svg"  height="15" width="15" alt="linkedin icon">
     </a>
     {{end}} 
     {{with .Params.github}}
     <a href="{{ . | safeURL }}">
-      <img src="/svg/github_sm.svg" alt="">
+      <img src="/svg/github_sm.svg"  height="15" width="15" alt="github icon">
     </a>
     {{end}}
 
     {{with .Params.email}}
     <a href="mailto:{{ . | safeURL }}">
-        <img src="/svg/mail.svg" alt="">
+        <img src="/svg/mail.svg"  height="15" width="15" alt="email icon">
     </a>
     {{end}}
     {{with .Params.google_scholar}}
     <a href="{{ . | safeURL }}">
-      <img src="/svg/google_scholar.svg" alt="">
+      <img src="/svg/google_scholar.svg" height="15" width="15" alt="google scholar icon">
     </a>
     {{end}} 
     {{with .Params.orcid}}
     <a href="{{ . | safeURL }}">
-      <img src="/svg/orcid.svg" alt="">
+      <img src="/svg/orcid.svg"  height="15" width="15" alt="orcid icon">
     </a>
     {{end}} 
     {{with .Params.researchgate}}
     <a href="{{ . | safeURL }}">
-      <img src="/svg/research_gate.svg" alt="">
+      <img src="/svg/research_gate.svg" height="15" width="15" alt="research gate icon">
     </a>
     {{end}} 
   </div>

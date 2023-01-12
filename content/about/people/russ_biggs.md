@@ -11,4 +11,4 @@ email = 'russ@openaq.org'
 
 +++
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Russ Biggs joined OpenAQ as director of technology October 2021. He leads the development and strategic direction of the OpenAQ data platform and tools. Prior to OpenAQ, Russ worked in open data and open source technology. His work has included developing open source tools for transportation and mobility with SharedStreets, managed data collection projects for Humanitarian OpenStreetMap Team (HOT) and consulted with a number of other organizations promoting open data. A classical archaeologist by training, Russ has worked extensively in data management and digital data collection in cultural resource management as well as archaeological field projects in Sicily and Southern Italy. 
