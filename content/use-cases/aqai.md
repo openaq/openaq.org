@@ -4,7 +4,7 @@ tags = ['API', 'Community']
 categories = ['developer']
 featured_image = '/uploads/aqai.png'
 
-featured = true
+featured = false
 +++
 
 AQAI is using the OpenAQ platform to develop a machine learning predictive model for air quality showing child population density against regions with pollutant concentrations above WHO-recommended limits. 
