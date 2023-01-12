@@ -9,7 +9,7 @@ featured = false
 
 AQAI is using the OpenAQ platform to develop a machine learning predictive model for air quality showing child population density against regions with pollutant concentrations above WHO-recommended limits. 
 
-AQAI, one of nine startups (out of 450 applicants) awarded investment funding from the UNICEF Venture Fund in 2022  
+AQAI is one of nine startups (out of 450 applicants) awarded investment funding from the UNICEF Venture Fund in 2022.  
 
 ## The Problem 
 

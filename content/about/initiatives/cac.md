@@ -1,6 +1,6 @@
 +++
 type = "about/initiatives"
-title = 'Clean Air Catalyst'
+title = 'Partnership Project: Clean Air Catalyst'
 topics = ['API', 'Community']
 featured_image = '/uploads/cac_logo.png'
 +++

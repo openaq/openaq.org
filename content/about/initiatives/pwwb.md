@@ -1,6 +1,6 @@
 +++
 type = "about/initiatives"
-title = 'Predicting What We Breathe Partnership'
+title = 'Partnership Project: Predicting What We Breathe'
 topics = ['API', 'Community']
 featured_image = '/uploads/city_of_la_logo.png'
 +++

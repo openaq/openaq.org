@@ -1,5 +1,5 @@
 +++
-title = 'Paul Crutzen Publication Awardee'
+title = 'Paul Crutzen Publication Awardees'
 tags = ['API', 'Community']
 featured_image = "/uploads/openaq-map.webp"
 featured = true
@@ -7,9 +7,9 @@ featured = true
 +++
 
 
-Harmonized air quality measurements from the OpenAQ platform aid researchers who were awarded the 2021 Paul Crutzen Publication Award by the journal Atmospheric Chemistry and Physics.
+Harmonized air quality measurements from the OpenAQ platform aided researchers who were awarded the 2021 Paul Crutzen Publication Award by the journal Atmospheric Chemistry and Physics.  
 
-Researchers Christoph A. Keller, Mathew J. Evans, K. Emma Knowland, Christa A. Hasenkopf, Sruti Modekurty, Robert A. Lucchesi, Tomohiro Oda, Bruno B. Franca, Felipe C. Mandarino, M. Valeria Díaz Suárez, Robert G. Ryan, Luke H. Fakes, and Steven Pawson
+The awardees include Christoph A. Keller, Mathew J. Evans, K. Emma Knowland, Christa A. Hasenkopf, Sruti Modekurty, Robert A. Lucchesi, Tomohiro Oda, Bruno B. Franca, Felipe C. Mandarino, M. Valeria Díaz Suárez, Robert G. Ryan, Luke H. Fakes, and Steven Pawson.
 
 
 ## The Problem 

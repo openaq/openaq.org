@@ -9,7 +9,7 @@ featured = true
 
 The Sh**t I Smoke! mobile app uses data from the OpenAQ platform to demonstrate the severity of air pollution by comparing it to cigarette smoking.
 
-Sh**t I Smoke! app developers Amaury Martiny and Marcelo Coelho
+Sh**t I Smoke! was developed by Amaury Martiny and Marcelo Coelho.  
  
 ## The Problem
 
