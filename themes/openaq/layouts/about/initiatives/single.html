@@ -8,8 +8,9 @@
       <h1 class="type-heading-2 gradient-title">More initiatives</h1>
     
       {{ $currentPage := . }}
+      {{ $shuffledPages := shuffle .Parent.Pages }}
       <ul>
-        {{ range .Parent.Pages }}
+        {{ range $shuffledPages }}
           {{ if ne .Permalink $currentPage.Permalink }}
             <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
           {{ end }}
