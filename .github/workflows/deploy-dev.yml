@@ -11,12 +11,14 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
+        run: chown root:root .
       
       - name: Install npm dependencies
         run: yarn install
       
       - name: Build
         uses: openaq/hugo-build-action@main
+        run: chown root:root .
         with:
           args: --config config.dev.toml
 
