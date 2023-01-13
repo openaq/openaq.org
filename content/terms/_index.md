@@ -36,7 +36,7 @@ Your access to and use of the Service is conditioned on Your acceptance of and c
 
 By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.
 
-You represent that you are over the age of 18. The Company does not permit those under 18 to use the Service.
+By accessing, previewing, or otherwise using the Service in any manner, you represent and warrant that you have sufficient legal capacity to enter into this Agreement or, if you lack such capacity (for instance, if you are a minor), that you have obtained parental or guardian consent to do so. You represent and warrant that you have read, understand, and agree to abide by these Terms and any applicable Additional Terms, and that you have read, understand the data collection and use practices set forth in the Privacy Policy.
 
 Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company. Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service.
 
@@ -90,13 +90,7 @@ If You have any concern or dispute about the Service, You agree to first try to 
 If You are a European Union consumer, You will benefit from any mandatory provisions of the law of the country in which you are resident in.
 
 
-# United States Legal Compliance
-
-You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a “terrorist supporting” country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.
-
-
 # Severability and Waiver
-
 
 ## Severability
 
