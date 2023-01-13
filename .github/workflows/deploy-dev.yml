@@ -9,6 +9,9 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     runs-on: ubuntu-20.04
     steps:
+      - name: Fix git safe.directory in container
+        run: mkdir -p /home/runner/work/_temp/_github_home && printf "[safe]\n\tdirectory = /github/workspace" > /home/runner/work/_temp/_github_home/.gitconfig
+      
       - name: Git checkout
         uses: actions/checkout@v2
       
