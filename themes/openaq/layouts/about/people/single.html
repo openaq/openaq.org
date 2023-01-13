@@ -8,7 +8,7 @@
             {{ with .Params.image }}
             {{ $imageResource := ($.Site.GetPage "section" "uploads").Resources.GetMatch (strings.TrimPrefix "/uploads/" . ) }}
             {{ $resized := $imageResource.Resize "400x400 webp q100 picture"  }}
-            <img src="{{ $resized.RelPermalink }}"  alt="" class="person__img" />
+            <img src="{{ $resized.RelPermalink }}" width="300" height="300" alt="{{ .Params.name }}" class="person__img" />
             {{ end }}
             <div class="person-description">
                 <h1 class="person-name gradient-title">{{ .Params.name }}</h1>
