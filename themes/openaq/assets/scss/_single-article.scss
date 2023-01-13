@@ -14,7 +14,7 @@
     width: 800px;
     z-index: 2;
     .single-article-body {
-      margin: 40px 0;
+      margin: 20px 0 60px 0;
 
       h1 {
         @include mixins.heading2;
@@ -47,6 +47,16 @@
       ul {
         @include mixins.body2;
         margin: 20px 0 0 15px;
+      }
+
+      hr {
+        margin: 40px 0;
+        border: 0;
+        border-bottom: 1px dashed variables.$smoke30;
+      }
+
+      div:has(iframe) {
+        margin: 20px 0;
       }
 
       img {
