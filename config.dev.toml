@@ -8,10 +8,8 @@ copyright = "{year} OpenAQ. All rights reserved."
   categories = "/use-cases/:slug/"
   tags = "/use-cases/:slug/"
    
-[params.plausible]
-  enable = true
-  gitstar = false
-  domain = "openaq-staging.org"
+[params]
+  plausibleDomain = "openaq-staging.org"
 
 [module]
   [[module.mounts]]

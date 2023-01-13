@@ -4,8 +4,6 @@ title = 'OpenAQ'
 theme = 'openaq'
 copyright = "{year} OpenAQ. All rights reserved."
 
-
-
 [permalinks]
   categories = "/use-cases/:slug/"
   tags = "/use-cases/:slug/"
