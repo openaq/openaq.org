@@ -7,7 +7,7 @@ copyright = "{year} OpenAQ. All rights reserved."
 [permalinks]
   categories = "/use-cases/:slug/"
   tags = "/use-cases/:slug/"
-   
+
 [params]
   plausibleDomain = "openaq-staging.org"
 
