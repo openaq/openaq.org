@@ -5,6 +5,10 @@
     {{ partial "bubbles" }}
     <div class="policy-content-container">
         <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
+        {{ with .GitInfo }}
+        {{ $date := .AuthorDate.Local.Format "January 2, 2006" }}
+        <span class="type-body-1">Last updated: January 06, 2023</span>
+        {{ end }}
         {{ .Content }}
     </div>
   
