@@ -3,6 +3,8 @@ languageCode = 'en-us'
 title = 'OpenAQ'
 theme = 'openaq'
 copyright = "{year} OpenAQ. All rights reserved."
+enableGitInfo = true
+
 
 [permalinks]
   categories = "/use-cases/:slug/"
