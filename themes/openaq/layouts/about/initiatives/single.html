@@ -4,9 +4,19 @@
   {{ partial "bubbles" }}
   <div class="single-article-content-container">
     <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
-    <article class="single-article-body">{{ .Content }}</article>
-
-    {{ partial "related-use-cases" . }}
+    <article class="single-article-body">{{ .Content }}
+      <h1 class="type-heading-2 gradient-title">More initiatives</h1>
+    
+      {{ $currentPage := . }}
+      <ul>
+        {{ range .Parent.Pages }}
+          {{ if ne .Permalink $currentPage.Permalink }}
+            <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        {{ end }}
+      </ul>
+      
+    </article>
   </div>
 </div>
 
