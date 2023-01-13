@@ -18,5 +18,3 @@ copyright = "{year} OpenAQ. All rights reserved."
   [[module.mounts]]
     source = "content/uploads/"
     target = "assets/"
-  [[module.imports]]
-    path = "github.com/divinerites/plausible-hugo"
