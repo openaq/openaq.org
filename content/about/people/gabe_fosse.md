@@ -5,16 +5,15 @@ position = 'Data Analyst & Developer'
 group = 'team'
 image = '/uploads/gabe_fosse.png'
 weight = 4
-quote = '"The only true limitation is the one you set for yourself." - Gabriel Fosse'
+quote = '"Believe in yourself and you are halfway there." -Theodore Roosevelt'
 github = 'https://github.com/majesticio'
 linkedin = 'https://www.linkedin.com/in/gabriel-fosse'
 twitter = 'https://twitter.com/GabeOpenAQ'
 email = 'gabe@openaq.org'
 +++
 
-Gabriel Fosse is a data analyst and developer for OpenAQ, an organization dedicated to improving global air quality through open data and open-source technology. With a background in IoT and data science, Gabriel is well-equipped to handle the complex data sets and systems that are integral to OpenAQ's mission.
+Gabe Fosse joined OpenAQ in August 2022 as a data analyst and developer. In his role at OpenAQ, Gabe works to uncover insights and trends in the organization's vast repository of air quality data. He is also responsible for developing and maintaining the systems that enable OpenAQ to gather and disseminate this data to the public.  As a data scientist and IoT developer, Gabe brings over 10 years of experience across the public and private sectors specializing in neural networks, data systems automation, and environmental technology development.
 
-In addition to his work at OpenAQ, Gabriel has also gained valuable experience as a civic and environmental technologist. He has worked on various projects that aim to use technology to address social and environmental issues, such as reducing crime using machine learning and optimizing water conservation efforts. Gabriel's passion for using technology to make a positive impact on the world is evident in all of his work, and he brings this same level of dedication to his role at OpenAQ.
+Prior to OpenAQ, Gabe has a distinguished background in IoT development with a particular focus on utilizing technology for public safety and smart city planning for the City of Albuquerque. Furthermore, he collaborated with Technology Solution Labs to create an award winning civic technology web application, which employs machine learning to enhance enrollment in Head Start preschool programs for the New Mexico Early Childhood Education and Care Department. In addition, Gabe has also honed his skills as an XR developer with immersive design studios, as well as drone cinematography for film productions by Netflix and Sony.
 
-In his role at OpenAQ, Gabriel works to uncover insights and trends in the organization's vast repository of air quality data. He is also responsible for developing and maintaining the systems that enable OpenAQ to gather and disseminate this data to the public. With his expertise and dedication, Gabriel is a valuable asset to the team and is helping to make a positive impact on air quality around the world.
-
+Gabe earned his bachelor’s degree in Music Performance from the University of New Mexico with certificates in Cinematography, Data Science, Penetration Testing, and IoT Development. In his spare time, he enjoys performing as a Flamenco guitarist and dance accompanist at home and internationally.
