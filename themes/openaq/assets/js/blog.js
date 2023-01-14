@@ -1,6 +1,6 @@
 (async () => {
     const list = document.querySelector('.items');
-    const res = await fetch('https://medium.openaq.org/').catch(() =>  {
+    const res = await fetch('https://medium.openaq.org').catch(() =>  {
         const errorHtml = `
         <span class="type-header-1">
             Failed to fetch blog items. Visit OpenAQ on <a href="https://openaq.medium.com/">Medium
@@ -11,12 +11,18 @@
     const feed = await res.text();
     const data = new window.DOMParser().parseFromString(feed, "text/xml");
     const items = data.querySelectorAll("item");
+    let year;
     for (const item of items) {
         const title = item.querySelector("title").innerHTML.match(/\<\!\[CDATA\[(.*)\]{2}\>/)
         const publicationDate = new Date(item.querySelector("pubDate").innerHTML)
         const content = item.getElementsByTagName('content:encoded')
         const link = item.getElementsByTagName('link')[0].innerHTML
-        const html = `<a href="${link}" target="_blank" rel="noreferrer noopener"><article class="blog-item">
+        let html = '';
+        if (publicationDate.getFullYear() != year) {
+            html += `<h1 class="type-header-1 text-sky-120">${publicationDate.getFullYear()}</h1>`;
+            year = publicationDate.getFullYear();
+        }
+        html += `<a href="${link}" target="_blank" rel="noreferrer noopener"><article class="blog-item">
         <span class="blog-date type-header-3">${publicationDate.toLocaleDateString('en-us', { month:"long", day:"numeric"})}</span>
         <div class="blog-content">
         <div><h5 class="type-subtitle-1 text-sky-120">${title[1]}</h5></div>
@@ -24,6 +30,6 @@
         </div>
         </div>
         </article></a>`
-        list.insertAdjacentHTML('beforeend',html);
+        list.insertAdjacentHTML('beforeend', html);
     }
 })();
