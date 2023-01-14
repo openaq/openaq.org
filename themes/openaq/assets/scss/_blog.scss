@@ -1,6 +1,6 @@
 @use 'mixins' as local-mixins;
 
-.news-content {
+.blog-content {
   display: flex;
   justify-content: center;
   position: relative;
@@ -11,7 +11,7 @@
     margin: 6px 0 0 150px;
   }
 
-  .news-content-container {
+  .blog-content-container {
     width: 800px;
     z-index: 2;
   }
@@ -24,16 +24,16 @@
   margin: 40px 0 100px 0;
 }
 
-.news-item {
+.blog-item {
   display: flex;
   align-items: flex-start;
 
-  .news-date {
+  .blog-date {
     margin: 5px;
     flex: 1;
   }
 
-  .news-content {
+  .blog-content {
     display: flex;
     flex-direction: column;
     flex: 5;

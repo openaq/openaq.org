@@ -1,11 +1,11 @@
 {{ define "main" }}
 {{ partial "breadcrumbs" . }}
-<div class="news-content">
+<div class="blog-content">
     
     {{ partial "bubbles" }}
 
 
-    <div class="news-content-container">
+    <div class="blog-content-container">
         <div>
             <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
             <div class="items"></div>
@@ -18,7 +18,7 @@
 
 
 {{ define "scripts" }}
-{{ $js := resources.Get "js/news.js" | js.Build | resources.Minify }}
+{{ $js := resources.Get "js/blog.js" | js.Build | resources.Minify }}
 {{ $secureJS := $js | resources.Fingerprint "sha512" }}
 <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" defer></script>
 
