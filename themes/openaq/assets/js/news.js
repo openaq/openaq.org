@@ -1,6 +1,6 @@
 (async () => {
     const list = document.querySelector('.items');
-    const res = await fetch('http://localhost:8000/').catch(() =>  {
+    const res = await fetch('https://medium.openaq.org/').catch(() =>  {
         const errorHtml = `
         <span class="type-header-1">
             Failed to fetch news items. Visit OpenAQ on <a href="https://openaq.medium.com/">Medium
