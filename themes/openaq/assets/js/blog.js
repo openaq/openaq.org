@@ -15,7 +15,7 @@
         const title = item.querySelector("title").innerHTML.match(/\<\!\[CDATA\[(.*)\]{2}\>/)
         const publicationDate = new Date(item.querySelector("pubDate").innerHTML)
         const content = item.getElementsByTagName('content:encoded')
-        const link = item.getElementsByTagName('link').innerHTML
+        const link = item.getElementsByTagName('link')[0].innerHTML
         const html = `<a href="${link}" target="_blank" rel="noreferrer noopener"><article class="blog-item">
         <span class="blog-date type-header-3">${publicationDate.toLocaleDateString('en-us', { month:"long", day:"numeric"})}</span>
         <div class="blog-content">
