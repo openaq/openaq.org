@@ -1,10 +1,10 @@
 {{ $tag := newScratch }}
 {{ if eq (. | lower) "api" }}
     {{ $tag.Set "class" "chip-base-data" }}
-    {{ $tag.Set "icon" "data_object" }}
+    {{ $tag.Set "icon" "data_object--ocean120" }}
 {{ else if eq (. | lower) "community" }}
     {{ $tag.Set "class" "chip-base-interactive" }}
-    {{ $tag.Set "icon" "diversity_3" }}
+    {{ $tag.Set "icon" "diversity--lavender100" }}
 {{ else }}
     {{ $tag.Set "class" "chip-brand" }}
     {{ $tag.Set "icon" "note" }}
@@ -13,7 +13,7 @@
 class="{{ $tag.Get "class" }}"
 href="/use-cases/{{ . | urlize }}">
     {{ . }}
-    <span class="material-symbols-outlined">
-        {{$tag.Get "icon" }}
+    <span class="chip-icon">
+        <img src="/icons/{{$tag.Get "icon" }}.svg" alt="icon">
     </span>
 </a>

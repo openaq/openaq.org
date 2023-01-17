@@ -8,9 +8,9 @@
   {{ else if not .p1.IsHome }}
     {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
   {{ end }}
-  {{ if not .p1.IsHome }}  
-  <span class="material-symbols-outlined text-smoke-100">
-    chevron_right
+  {{ if not .p1.IsHome }}
+  <span class="google-icon">
+    <img src="/icons/chevron_right--smoke100.svg" alt="icon">
   </span>
   {{ end }}
   <li  {{ if eq .p1 .p2 }}aria-current="page"{{ end }} >
@@ -26,9 +26,9 @@
 	<a 
     href="{{ $scratch.Get "link"}}" class="type-body-3{{ if eq .p1 .p2 }} text-sky-120{{ end }}"> 
     {{ if .p1.IsHome }}  
-    <span class="material-symbols-outlined">
-      home
-      </span>
+    <span class="google-icon">
+      <img src="/icons/home-icon--ocean120.svg" alt="icon">
+    </span>
     {{ else }}
       {{ $scratch.Get "title"  | title}}
     {{ end }}
