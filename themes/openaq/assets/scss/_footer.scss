@@ -29,10 +29,13 @@
     }
 
     .contact-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
       .subscribe-form {
         display: flex;
         gap: 10px;
-        margin-top: 12px;
       }
     }
   }
