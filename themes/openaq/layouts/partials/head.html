@@ -16,8 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&di" rel="stylesheet">
     
     {{ $options := (dict "transpiler" "dartsass" "outputStyle" "compressed") }}
-    {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options}}
-    {{ $secureStyle := $style | resources.Fingerprint "sha512" }}
+    {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options | resources.PostCSS}}
+    {{ $secureStyle := $style | resources.Fingerprint "sha512" | resources.PostProcess }}
     <link rel="stylesheet" href="{{ $secureStyle.RelPermalink }}" integrity="{{ $secureStyle.Data.Integrity }}">
 
     <title>{{ .Site.Title }}</title>
