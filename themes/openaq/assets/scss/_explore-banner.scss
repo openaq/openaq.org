@@ -15,6 +15,7 @@
     .search-input {
       @include mixins.box-shadow;
       width: 100%;
+      line-height: 22px;
     }
   }
 

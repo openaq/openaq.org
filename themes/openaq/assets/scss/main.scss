@@ -208,6 +208,7 @@ a {
     .search-input {
       @include mixins.box-shadow;
       width: 100%;
+      line-height: 22px;
     }
   }
 
@@ -294,10 +295,4 @@ a {
       height: auto;
     }
   }
-}
-
-.related-use-cases {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 20px;
 }

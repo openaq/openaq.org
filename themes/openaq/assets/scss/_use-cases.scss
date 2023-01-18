@@ -76,8 +76,24 @@
   }
 }
 
-.relative-header {
+.related-header {
   @include mixins.heading2;
   color: variables.$sky120;
   margin: 40px 0;
+}
+
+.related-use-cases {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+
+  @media (max-width: 800px) {
+    & {
+      max-width: 400px;
+      margin: 0 auto;
+      grid-template-columns: repeat(1, 1fr);
+      column-gap: 0;
+      row-gap: 20px;
+    }
+  }
 }
