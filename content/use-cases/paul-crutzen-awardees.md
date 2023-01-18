@@ -16,7 +16,7 @@ The awardees include Christoph A. Keller, Mathew J. Evans, K. Emma Knowland, Chr
 
 A lack of centralized data, a lack of directly comparable data, gaps in data coverage, and paywalls on data impede air quality researchers’ ability to get directly to the question they are trying to answer–in this case, whether COVID-19 restrictions impacted surface concentrations of nitrogen dioxide and ozone globally. 
 
-{{< figure src="/uploads/global-impact-covid.png" title=" Global impact of COVID-19 restrictions on the surface concentrations of nitrogen dioxide and ozone" >}}
+{{< figure src="/uploads/impact-covid.webp" title= "OpenAQ served as an essential resource for the authors of this award-winning paper that tackled the global impact of COVID-19 restrictions on the surface concentrations of nitrogen dioxide and ozone. Image courtesy of Keller, et. al and Atmos. Chem. Phys." >}}
 
 ## The Solution
 

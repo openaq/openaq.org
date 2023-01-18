@@ -15,5 +15,5 @@ OpenAQ publishes the only global assessment of whether and how national governme
 
 *Open Air Quality Data: The Global State of Play 2020*  
 [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)  
-[Full report]()
+[Full report](https://openaq.org/assets/files/2020_OpenData_StateofPlay.pdf)
 

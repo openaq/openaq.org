@@ -9,8 +9,8 @@ featured = true
 
 
 The Bloomberg Green scoreboard shows which cities have the unhealthiest air, using data from the OpenAQ platform.
-
-![](/uploads/scoreboard.webp)  
+ 
+{{< figure src="/uploads/scoreboard.webp" title= "A screenshot of the live air pollution scoreboard on the Bloomberg Green website." >}} 
 
 Data are needed to slow and stop climate change. Measuring how far we have to go to arrest greenhouse gases and how successful we have been so far informs what climate change solutions to focus on. It also builds support for climate action
 
