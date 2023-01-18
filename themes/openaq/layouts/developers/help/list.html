@@ -1,12 +1,18 @@
 {{ define "main" }}
 {{ partial "breadcrumbs" . }}
+
+
+<div class="help-content">
+  {{ partial "bubbles" }}
+
+  <div class="help-content-container">
   <h1 class="type-display-1 gradient-title">Help & FAQ</h1>
     {{ range $index, $topic := where .Site.RegularPages "Section" "developers" }}
     <section class="help-items">
         <div class="tab">
             <input type="checkbox" id="chck{{$index}}">
             <label class="tab-label" for="chck{{$index}}">
-              {{.Title}} {{.Section}}
+              {{.Title}}
               <span class="material-symbols-outlined expand-icon">
                   expand_more
                   </span>
@@ -14,9 +20,11 @@
             <div class="tab-content">
                 {{ .Content }}
             </div>
-          </div>
+        </div>
     </section>
     {{ end }}
+  </div>
+</div>
 {{ partial "explore-banner" . }}
 
 {{ end }}  

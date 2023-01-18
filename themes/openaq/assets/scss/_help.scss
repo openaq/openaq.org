@@ -1,5 +1,20 @@
 @use 'openaq-design-system/variables';
 @use 'openaq-design-system/mixins/index.scss' as mixins;
+@use './mixins' as local-mixins;
+
+.help-content {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  margin: 0 0 40px 0;
+  @include local-mixins.bubbles();
+
+  &-container {
+    width: 1000px;
+    z-index: 2;
+    margin: 0 0 120px 0;
+  }
+}
 
 .help-items {
   display: flex;
