@@ -62,6 +62,15 @@ a {
       width: fit-content;
     }
   }
+
+  @media (max-width: 1000px) {
+    & {
+      .hero-title {
+        margin: 60px 40px 0 40px;
+        width: auto;
+      }
+    }
+  }
 }
 
 .use-cases-section {

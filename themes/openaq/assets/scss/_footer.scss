@@ -69,6 +69,14 @@
     }
   }
 
+  @media (max-width: 1000px) {
+    & {
+      &__content {
+        padding: 0 15px;
+      }
+    }
+  }
+
   @media (max-width: 800px) {
     & {
       box-sizing: border-box;
