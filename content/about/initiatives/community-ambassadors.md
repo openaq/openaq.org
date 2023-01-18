@@ -2,14 +2,14 @@
 type = "about/initiatives"
 title = 'Community Ambassador Program'
 topics = ['Community']
-featured_image = '/uploads/lmic-map.webp'
+featured_image = '/uploads/lmic_map.webp'
 +++
 
 The OpenAQ Community Ambassador Program is a leadership training program designed for emerging air quality leaders in low- and middle-income countries. The program focuses on training these air quality advocates to utilize air quality monitoring data in support of community action to fight air pollution.
 
 The program includes a comprehensive curriculum on ambient air pollution, air quality monitoring, data transparency, data access, data analysis, participatory research and community engagement. 
 
-![](/uploads/lmic-map.webp)
+![](/uploads/lmic_map.webp)
 
 Through the interactive training, the Community Ambassadors become inspired and empowered to accelerate air pollution mitigation in communities throughout their region. As they engage with local governments, companies and community organizations, they are able to underscore the need for open data, holding air quality data producers accountable to data transparency, a critical component of successful collective action to reduce air and climate pollution. 
 

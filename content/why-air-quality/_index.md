@@ -2,13 +2,24 @@
 title = "Why air quality?"
 +++
 
-Air pollution is the fourth leading risk factor for early death and the leading environmental cause of death worldwide, contributing to 1 out of 8 global deaths and over 7 million deaths annually worldwide as estimated by the World Health Organization. Up to 99% of us are breathing polluted air, cutting lives short by an average of 2.2 years worldwide. 
+Air pollution is the fourth leading risk factor for early death and the leading environmental cause of death worldwide, contributing to over 7 million (1 out of 8) deaths, as estimated by the World Health Organization. Up to 99% of us are breathing polluted air, cutting lives short by an average of 2.2 years across the globe.
 
-Air pollution impacts our health in many ways, even starting when we're in the womb. The burden is unequal, with some people being far more vulnerable and some breathing far more polluted air. For example, children are particularly susceptible to air pollution’s insidious effects—they breathe more rapidly than adults, taking in more polluted air and are proportionally exposed at higher levels due to their small bodies and developing organs. In a 2018 report, Air Pollution and Child Health, WHO estimated outdoor and indoor air pollution resulted in 543,000 deaths in children under the age of 5 years in 2016.
+Air pollution impacts our health in many ways, starting when we’re in the womb. Air pollution impacts practically every organ in the body and is associated with acute and chronic cardiovasculatory and  respiratory illnesses, as well as increased incidence of lung cancer, diabetes, and poor birth outcomes.
 
-Another example are marginalized communities across the globe that face worse outcomes in many areas of life, including poorer health driven by disproportionate exposure to air pollution, due to colonialism and racism.
+The burden of air pollution is unequal, with some people being far more vulnerable and some breathing far more polluted air. For example, children are particularly susceptible to air pollution’s insidious effects—they breathe more rapidly than adults, taking in more polluted air, and are proportionally exposed at higher levels due to their small bodies and developing organs. A WHO report, Air Pollution and Child Health, estimated that outdoor and indoor air pollution resulted in 543,000 deaths in children under the age of 5 years in 2016.
 
 ![](/uploads/smokestacks.webp)
+
+Marginalized communities are also unfairly burdened. Not only is the air they breathe typically more polluted, but they are also more susceptible to air pollution due to experiencing other poor health conditions caused by the broader social and environmental context in which they live. Structural racism and the legacy of colonialism play a large role in creating these health conditions and allowing for higher levels of exposure. 
+
+Addressing air pollution has many benefits above and beyond better health. 
+- A more stable climate: Several pollutants both harm health directly and warm the planet. And because fossil fuels are not only the major source of greenhouse gases, but also a primary source of air pollution, reducing fossil fuel consumption is a win-win proposition. 
+- Improved food security: Cleaner air improves crop yields.
+- Healthier ecosystems, plants, and animals: Air pollutants contaminate not only air, but also water and soil. Reducing air pollution therefore supports ecosystems broadly, allowing them to perform services that support all living beings.
+- Greater social equity: Reducing air pollution has even greater positive impacts for people who are disadvantaged socioeconomically and/or are disproportionately exposed.
+- Stronger economies: Cleaner air results in a healthier, longer-lived workforce.
+- Clearer views: Smog reduces visibility.
+- Preservation of culturally significant buildings and monuments: Certain air pollutants form acid rain that not only harms living beings, but also degrades certain building materials.
 
 ## Air Quality Data
 
@@ -24,7 +35,7 @@ Air quality data serve as an important foundation for the design, implementation
 
 ## How OpenAQ Helps
 
-Anyone can use the OpenAQ platform for free to find out what air quality data monitoring is occurring in or near their community and use that information to advocate for increased monitoring where needed. 
+Anyone can use the OpenAQ platform for free to find out what air quality data monitoring is occurring in or near their community and use that information to advocate for increased monitoring where needed and to advocate for air pollution solutions.
 
 Likewise, anyone can use the data platform or the Explorer Tool for analysis, from basic interpretations to in-depth analyses using the API. 
 
