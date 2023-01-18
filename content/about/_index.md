@@ -79,9 +79,6 @@ OpenAQ was founded in service to those who are harmed by air pollution. As an en
 #### Transparency & Trust 
 As an open data organization, transparency is embedded in the OpenAQ ethos. We share air quality data openly and freely, making their origins clear, so that users can trust their accuracy. We are transparent about our organizational goals and decision-making processes. Our organizational commitment to transparency is key to demonstrating integrity and to building trusting relationships necessary to achieve change. For organizational financials and policies, see [Reporting](/about/reporting/).
 
-# Working with OpenAQ
-
-OpenAQ is a small, but mighty, team of thought-partners that takes pride in our work and values lightheartedness and camaraderie. [Follow us on Medium](https://openaq.medium.com/) to learn of job opportunities.
 
 
 

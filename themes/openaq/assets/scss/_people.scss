@@ -63,15 +63,21 @@
   }
 }
 
-.team-content {
+.people-content {
   display: flex;
   justify-content: center;
   position: relative;
   @include local-mixins.bubbles();
 
-  .team-content-container {
+  .people-content-container {
     width: 800px;
     z-index: 2;
+    margin: 0 0 120px 0;
+
+    .section-header {
+      @include mixins.display1;
+      margin: 40px 0;
+    }
 
     @media (max-width: 800px) {
       width: 600px;
@@ -88,6 +94,7 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 22px;
   row-gap: 22px;
+  margin: 20px 0;
 
   @media (max-width: 800px) {
     grid-template-columns: repeat(2, 1fr);

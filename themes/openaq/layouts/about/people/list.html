@@ -2,29 +2,38 @@
 {{ partial "breadcrumbs" . }}
 
 
-<div class="team-content">
+<div class="people-content">
     {{ partial "bubbles" }}
 
-    <div class="team-content-container">
-        <h1 class="type-display-1 gradient-title">Team</h1>
+    <div class="people-content-container">
+        <h1 class="section-header gradient-title">Team</h1>
+        <p class="type-body-2">
+            The OpenAQ Team implements the day-to-day work of the organization, striving to meet the needs of those who contribute to, use and benefit from the OpenAQ Platform. Based in the U.S., we work remotely.
+        </p>
         <section class="person-grid">
             {{ range sort (where .Pages "Params.group" "team") ".Weight" }} 
             {{.Render "team-card"}} 
             {{ end }}
         </section>
-        <h1 class="type-display-1 gradient-title">Board</h1>
+        <h1 class="section-header gradient-title">Board</h1>
+        <p class="type-body-2">
+            The OpenAQ Governing Board stewards the organization, focusing on high-level strategy, oversight and accountability. Members serve as ambassadors and advocates for OpenAQ.
+        </p>
         <section class="person-grid">
             {{ range where .Pages "Params.group" "board" }} 
             {{.Render "board-card"}} 
             {{ end }}
 
         </section>
-        <h1 class="type-display-1 gradient-title">Advisors</h1>
+        <h1 class="section-header gradient-title">Advisors</h1>
+        <p class="type-body-2">Members of the OpenAQ Advisory Board provide strategic advice and are enthusiastic advocates for OpenAQ in their respective fields and communities.</p>
         <section class="person-grid">
             {{ range where .Pages "Params.group" "advisor" }} 
             {{.Render "advisor-card"}} 
             {{ end }}
         </section>
+        <h2 class="type-heading-2">Working with OpenAQ</h2>
+        <p class="type-body-2">OpenAQ is a small, but mighty, team of thought-partners that takes pride in our work and values lightheartedness and camaraderie. Follow us on <a class="type-link-2" href="https://openaq.medium.com">Medium</a> to learn of job opportunities.</p>
     </div>
 
 </div>
