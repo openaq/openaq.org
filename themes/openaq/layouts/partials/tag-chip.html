@@ -13,9 +13,9 @@
     {{ $tag.Set "icon" "newspaper--mantis120" }}
 {{ else if eq (. | lower) "climate" }}
     {{ $tag.Set "class" "climate-chip" }}
-    {{ $tag.Set "icon" "climate--corn100" }}
+    {{ $tag.Set "icon" "climate--corn120" }}
 {{ else }}
-    {{ $tag.Set "class" "climate-chip" }}
+    {{ $tag.Set "class" "chip-base-data" }}
     {{ $tag.Set "icon" "help--smoke100" }}
 {{ end }}
 

@@ -1,6 +1,6 @@
 +++
 title = 'Paul Crutzen Publication Awardees'
-tags = ['API', 'Community', 'Climate']
+tags = ['API', 'Community']
 featured_image = "/uploads/openaq-map.webp"
 featured = true
 

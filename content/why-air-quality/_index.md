@@ -25,9 +25,7 @@ Addressing air pollution has many benefits above and beyond better health.
 
 ## Air Quality Data
 
-Despite the urgency of confronting this global challenge, only 61% of governments worldwide produce air quality data, leaving over 1 billion citizens without access to fundamental information that could protect them from the harmful effects of air pollution.
-
-![](/uploads/pm25alert.webp)  
+Despite the urgency of confronting this global challenge, only 61% of governments worldwide produce air quality data, leaving over 1 billion citizens without access to fundamental information that could protect them from the harmful effects of air pollution.  
 
 Reliable data on air pollution are fundamental to understanding and taking corrective action to improve air quality. Air quality data underpin all actions on air pollution. They tell us how much pollution is in the air we breathe. They predict how air pollution will change in space and time. They shape our understanding of how air pollution impacts human health, climate change, ecological health and economic well-being. 
 
