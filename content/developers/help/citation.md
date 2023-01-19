@@ -4,8 +4,7 @@ title = "How should I cite OpenAQ in a publication, presentation etc?"
 weight = 6
 +++
 
-Suggested Citations for OpenAQ:
-
+When you use OpenAQ and its tools to access air quality data, we highly encourage attributions both to the original data provider and OpenAQ. Suggested citations:
 
 If data provider is known (via metadata): 
 ```
