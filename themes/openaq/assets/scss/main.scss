@@ -296,3 +296,11 @@ a {
     }
   }
 }
+
+.media-chip {
+  @include mixins.chip(variables.$mantes);
+}
+
+.climate-chip {
+  @include mixins.chip(variables.$corns);
+}

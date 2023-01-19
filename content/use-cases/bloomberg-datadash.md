@@ -1,6 +1,6 @@
 +++
 title = 'Bloomberg DataDash'
-tags = ['API', 'Community']
+tags = ['API', 'Community', 'Media']
 categories = ['developer']
 featured_image = '/uploads/scoreboard.webp'
 

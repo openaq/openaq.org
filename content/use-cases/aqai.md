@@ -1,6 +1,6 @@
 +++
 title = 'AQAI'
-tags = ['API', 'Community']
+tags = ['API', 'Community', 'Health']
 categories = ['developer']
 featured_image = '/uploads/aqai.png'
 

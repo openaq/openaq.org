@@ -1,6 +1,6 @@
 +++
 title = 'Sh**t I Smoke!'
-tags = ['API']
+tags = ['API', 'Health']
 category = ["developer"]
 featured_image = "/uploads/shootismoke.png"
 featured = true
