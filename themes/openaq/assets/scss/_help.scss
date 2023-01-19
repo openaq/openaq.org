@@ -1,5 +1,6 @@
 @use 'openaq-design-system/variables';
 @use 'openaq-design-system/mixins/index.scss' as mixins;
+@use 'openaq-design-system/utilities/index.scss' as utilities;
 @use './mixins' as local-mixins;
 
 .help-content {
@@ -56,13 +57,28 @@
   }
 
   &-content {
-    max-height: 0;
+    height: 0;
     padding: 0 1em;
     background: white;
     transition: all 0.35s;
 
+    h1 {
+      @include mixins.heading1(variables.$sky120);
+      margin: 0 0 10px 0;
+    }
+
+    h2 {
+      @include mixins.heading2(variables.$sky120);
+      margin: 0 0 10px 0;
+    }
+
+    h3 {
+      @include mixins.heading3(variables.$sky120);
+      margin: 0 0 10px 0;
+    }
+
     p {
-      margin: 0;
+      margin: 0 0 20px 0;
     }
   }
   &-close {
@@ -88,7 +104,7 @@ input:checked {
     }
   }
   ~ .tab-content {
-    max-height: 100vh;
+    height: auto;
     padding: 1em;
   }
 }
