@@ -2,6 +2,7 @@
 type = "about/people"
 name = 'Russ Biggs'
 position = 'Director of Technology'
+image = '/uploads/russ_biggs.png'
 group = 'team'
 weight = 2
 github = 'https://github.com/russbiggs'
