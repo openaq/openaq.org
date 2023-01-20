@@ -44,13 +44,13 @@ This work wouldn't be possible without those who monitor air quality and share t
 
 As a mission-driven organization without a profit motive, OpenAQ advocates for transparent, publicly accessible air quality data and for more monitoring (especially where people are most vulnerable). 
 
-OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [Click here](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) to view our 2022 report, Open Air Quality Data: The Global Landscape.  
+OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [Click here](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) to view our 2022 report, *Open Air Quality Data: The Global Landscape*.  
 
 ---
 
 # Vision, Mission and Values
 
-See our [2022-2025 Strategic Direction]()<!-- insert -->, which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
+See our [2022-2025 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ+Strategic+Direction-Abbreviated.pdf), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
 
 ## Vision
 OpenAQ envisions a world where everyone breathes healthy air, enabled by universal access to data.
@@ -75,7 +75,7 @@ To realize our mission, OpenAQ must be diverse and inclusive. Our focus on diver
 OpenAQ was founded in service to those who are harmed by air pollution. As an environmental tech nonprofit, we are dedicated to the public good, not private or financial gain. We think strategically and holistically about how we can have the most impact; maintain a positive, hopeful outlook; and run our data platform and organization sustainably so that we can exist as long as we are needed. 
 
 #### Transparency & Trust 
-As an open data organization, transparency is embedded in the OpenAQ ethos. We share air quality data openly and freely, making their origins clear, so that users can trust their accuracy. We are transparent about our organizational goals and decision-making processes. Our organizational commitment to transparency is key to demonstrating integrity and to building trusting relationships necessary to achieve change. For organizational financials and policies, see [Reporting](/about/reporting/).
+As an open data organization, transparency is embedded in the OpenAQ ethos. We share air quality data openly and freely, making their origins clear, so that users can trust their accuracy. We are transparent about our organizational goals and decision-making processes. Our organizational commitment to transparency is key to demonstrating integrity and to building trusting relationships necessary to achieve change. For organizational financials and policies, see [Legal & Policies](/about/legal/).
 
 
 

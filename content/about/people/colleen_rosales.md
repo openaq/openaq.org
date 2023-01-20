@@ -13,7 +13,7 @@ google_scholar = 'https://scholar.google.com/citations?user=Z9VntzsAAAAJ&hl=en&o
 email = 'colleen@openaq.org'
 +++
 
-Colleen joined OpenAQ in August 2022. At OpenAQ, Colleen builds strategic relationships with air quality stakeholders worldwide—introducing people to the OpenAQ platform, spurring data-informed projects that advance clean air objectives, and supporting partnerships across sectors and geographies.
+Colleen joined OpenAQ August 2022. At OpenAQ, Colleen builds strategic relationships with air quality stakeholders worldwide—introducing people to the OpenAQ platform, spurring data-informed projects that advance clean air objectives, and supporting partnerships across sectors and geographies.
 
 Colleen has a Ph.D. in Environmental Science from Indiana University and has over ten years of experience in indoor and outdoor air pollution. Besides her scientific work, which includes publications in Science Advances and Nature Communications, Colleen is skilled in data analysis and programming, project management, digital communications and technical writing, and relationship building. Colleen uses dual technical and leadership skills to serve as a fulcrum point for the growth of OpenAQ.
 
