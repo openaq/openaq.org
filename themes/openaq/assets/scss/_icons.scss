@@ -13,6 +13,7 @@
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+  transform: translateY(-1px);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
@@ -42,5 +43,11 @@
   height: 24px;
   width: 24px;
   background-image: url(/icons/arrow-forward--white.svg);
+  background-repeat: no-repeat;
+}
+.content-copy-icon--ocean120 {
+  height: 24px;
+  width: 24px;
+  background-image: url(/icons/content-copy--ocean120.svg);
   background-repeat: no-repeat;
 }
