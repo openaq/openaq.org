@@ -1,4 +1,8 @@
 (async () => {
+
+    const placeholder = document.querySelector('.placeholder-item');
+    // placeholder is used to ensure classes are not purged by purgecss
+    placeholder.remove() 
     const list = document.querySelector('.items');
     const res = await fetch('https://medium.openaq.org').catch(() =>  {
         const errorHtml = `
