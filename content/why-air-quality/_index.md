@@ -15,17 +15,17 @@ Marginalized communities are also unfairly burdened. Not only is the air they br
 ![](/uploads/smokestacks.webp)
 
 Addressing air pollution has many benefits above and beyond better health. 
-- A more stable climate: Several pollutants both harm health directly and warm the planet. And because fossil fuels are not only the major source of greenhouse gases, but also a primary source of air pollution, reducing fossil fuel consumption is a win-win proposition. 
-- Improved food security: Cleaner air improves crop yields.
-- Healthier ecosystems, plants, and animals: Air pollutants contaminate not only air, but also water and soil. Reducing air pollution therefore supports ecosystems broadly, allowing them to perform services that support all living beings.
-- Greater social equity: Reducing air pollution has even greater positive impacts for people who are disadvantaged socioeconomically and/or are disproportionately exposed.
-- Stronger economies: Cleaner air results in a healthier, longer-lived workforce.
-- Clearer views: Smog reduces visibility.
-- Preservation of culturally significant buildings and monuments: Certain air pollutants form acid rain that not only harms living beings, but also degrades certain building materials.
+- **A more stable climate**: Several pollutants both harm health directly and warm the planet. And because fossil fuels are not only the major source of greenhouse gases, but also a primary source of air pollution, reducing fossil fuel consumption is a win-win proposition. 
+- **Improved food security**: Cleaner air improves crop yields.
+- **Healthier ecosystems, plants, and animals**: Air pollutants contaminate not only air, but also water and soil. Reducing air pollution therefore supports ecosystems broadly, allowing them to perform services that support all living beings.
+- **Greater social equity**: Reducing air pollution has even greater positive impacts for people who are disadvantaged socioeconomically and/or are disproportionately exposed.
+- **Stronger economies**: Cleaner air results in a healthier, longer-lived workforce.
+- **Clearer views**: Smog reduces visibility.
+- **Preservation of culturally significant buildings and monuments**: Certain air pollutants form acid rain that not only harms living beings, but also degrades certain building materials.
 
 ## Air Quality Data
 
-Despite the urgency of confronting this global challenge, only 61% of governments worldwide produce air quality data, leaving over 1 billion citizens without access to fundamental information that could protect them from the harmful effects of air pollution.  
+Despite the urgency of confronting this global challenge, only 61% of governments worldwide produce air quality data, leaving over 1 billion people without access to fundamental information that could protect them from the harmful effects of air pollution.  
 
 Reliable data on air pollution are fundamental to understanding and taking corrective action to improve air quality. Air quality data underpin all actions on air pollution. They tell us how much pollution is in the air we breathe. They predict how air pollution will change in space and time. They shape our understanding of how air pollution impacts human health, climate change, ecological health and economic well-being. 
 
@@ -38,6 +38,6 @@ Air quality data serve as an important foundation for the design, implementation
 
 Anyone can use the OpenAQ platform for free to find out what air quality data monitoring is occurring in or near their community and use that information to advocate for increased monitoring where needed and to advocate for air pollution solutions.
 
-Likewise, anyone can use the data platform or the Explorer Tool for analysis, from basic interpretations to in-depth analyses using the API. 
+Likewise, anyone can use the data platform or the OpenAQ Explorer Tool for analysis, from basic interpretations to in-depth analyses using the API. 
 
 For organizations deploying air quality monitors, OpenAQ can ingest and share the data from these projects on the OpenAQ platform to ensure data is broadly accessible.
