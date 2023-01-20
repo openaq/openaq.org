@@ -1,4 +1,4 @@
 +++
-type = "about/reporting"
+type = "about/legal"
 title = "Reporting"
 +++

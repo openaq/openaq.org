@@ -3,66 +3,72 @@
   {{ partial "bubbles" }}
 
   <div class="reporting-content-container">
-    <h1 class="type-display-1 gradient-title">Financial</h1>
+    <h1 class="type-display-1 gradient-title">Legal and Policy Documents</h1>
     <div class="reporting-grid">
       <div class="reporting-item">
-        <h2 class="reporting-item__title">Form 990</h2>
-        <p class="reporting-title__description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Magnam officiis laudantium adipisci, impedit sapiente, et
-          nobis id nam nesciunt optio eos eius aut dolores quam
-          reiciendis omnis asperiores architecto voluptatibus?
+        <h2 class="reporting-item__title">Financial</h2>
+        <p class="reporting-item__description">
+          Financial documents including IRS Form 990 and Financial audits.
         </p>
-        <div>
-          <select class="select" name="" id="">
-              <option value=""></option>
+        <div class="download-section">
+          <select name="financial-downloads" id="financial-downloads" class="select js-financial-select">
+              <option value="/forms/OpenAQ+Form+990+CY+2021+Public.pdf" selected>IRS Form 990 2021</option>
+              <option value="/forms/OpenAQ+2021+%26+2020+Financial+Statements+%26+Auditors'+Report.pdf">Audited Financials FY 2020 & 2021</option>
 
-          </select><button class="download-990 btn btn-secondary">Download</button>
+          </select><button class="download-financial btn btn-secondary js-download-financial-btn">Download</button>
         </div>
       </div>
       <div class="reporting-item">
         <h2 class="reporting-item__title">Bylaws</h2>
-        <p class="reporting-title__description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Magnam officiis laudantium adipisci, impedit sapiente, et
-          nobis id nam nesciunt optio eos eius aut dolores quam
-          reiciendis omnis asperiores architecto voluptatibus?
+        <p class="reporting-item__description">
+          The Bylaws that dictate the operation of OpenAQ as an organization.
         </p>
-        <div>
-          <button class="download-audit btn btn-secondary">Download</button>
+        <div class="download-section">
+          <div></div>
+          <a href="https://documents.openaq.org/policy/OpenAQ+Bylaws+2022.pdf" class="download-audit btn btn-secondary" >Download</a>
         </div>
       </div>
       <div class="reporting-item">
         <h2 class="reporting-item__title">Incorporation</h2>
-        <p class="reporting-title__description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Magnam officiis laudantium adipisci, impedit sapiente, et
-          nobis id nam nesciunt optio eos eius aut dolores quam
-          reiciendis omnis asperiores architecto voluptatibus?
+        <p class="reporting-item__description">
+          Documents pertaining to the incorporation and non-profit status of OpenAQ.
         </p>
-        <div>
-          <select class="select" name="" id=""></select><button class="download-bylaws btn btn-secondary">Download</button>
+        <div class="download-section">
+          <select name="incorporation-download-select" id="incorporation-download-select" class="select js-incorporation-select">
+            <option value="/forms/OpenAQ+Certificate+of+Incorporation.pdf" selected>Certificate of Incorporation</option>
+            <option value="/forms/OpenAQ+IRS+Determination+Letter+2018-09-21.pdf">IRS Determination Letter of 501(c)(3) Status</option>
+        </select>
+        <button class="download-incorporation btn btn-secondary js-download-incorporation-btn">Download</button>
         </div>
       </div>
 
       <div class="reporting-item">
         <h2 class="reporting-item__title">Policies</h2>
-        <p class="reporting-title__description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Magnam officiis laudantium adipisci, impedit sapiente, et
-          nobis id nam nesciunt optio eos eius aut dolores quam
-          reiciendis omnis asperiores architecto voluptatibus?
+        <p class="reporting-item__description">
+          Documents pertaining to policies for OpenAQ opreations and employees 
         </p>
-        <div>
-          <button class="download-policy btn btn-secondary">Download</button>
+        <div class="download-section">
+          <select name="policy-download-select" id="policy-download-select" class="select js-policy-select">
+            <option value="/policy/OpenAQ+Child+Safeguard+and+Protection+Policy.pdf" selected>Child Safeguard and Protection</option>
+            <option value="/policy/OpenAQ+Code+of+Conduct.pdf">Code of Conduct </option>
+            <option value="/policy/OpenAQ+COI+Policy.pdf">Conflict of Interest </option>
+        </select>
+          <button class="download-policy btn btn-secondary js-download-policy-btn">Download</button>
         </div>
       </div>
     </div>
     <div class="ceritifications-grid">
-      
+      <a href="https://www.guidestar.org/profile/shared/49986605-4410-4ce1-b0cd-ab4bb5955075" target="_blank"><img src="https://widgets.guidestar.org/TransparencySeal/9732592" /></a>
     </div>
   </div>
 </div>
 
 {{ partial "community-banner" . }} {{ partial "explore-banner" . }} {{
 end }}
+
+{{ define "scripts" }}
+{{ $js := resources.Get "js/legal-downloads.js" | js.Build | resources.Minify }}
+{{ $secureJS := $js | resources.Fingerprint "sha512" }}
+<script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" defer></script>
+
+{{ end }}

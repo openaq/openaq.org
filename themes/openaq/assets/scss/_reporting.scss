@@ -27,8 +27,21 @@
 
         &__description {
           @include mixins.body2;
+          margin: 20px 0;
+        }
+
+        .download-section {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          column-gap: 20px;
         }
       }
+    }
+
+    .ceritifications-grid {
+      margin: 80px 0 20px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 
