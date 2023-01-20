@@ -46,8 +46,6 @@ As a mission-driven organization without a profit motive, OpenAQ advocates for t
 
 OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [Click here](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) to view our 2022 report, Open Air Quality Data: The Global Landscape.  
 
-If you share our vision of a world where everyone breathes healthy air, enabled by universal access to data, [please support our work](https://secure.givelively.org/donate/openaq-inc/).
-
 ---
 
 # Vision, Mission and Values

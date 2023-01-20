@@ -2,7 +2,7 @@
     {{ $name := shuffle (slice "hatay" "jakarta" "mumbai") | first 1  }}
     {{ $image := index ($name) 0 }}
     <img class="explore-banner__img" src="/img/{{$image}}.webp" alt="">
-    <a href="" class="explore-banner__input-link">
+    <a href="https://explore.openaq.org" class="explore-banner__input-link">
         <input type="text" class="search-input" placeholder="Search for air quality data">
     </a>
 </section>
