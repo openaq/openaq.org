@@ -4,7 +4,7 @@ title = "What pollutants are available on OpenAQ?"
 weight = 1
 +++
 
-OpenAQ gathers measurements across a range of pollutants. Some of the pollutants currently in the OpenAQ database include:
+The OpenAQ database currently ingests the following pollutant data, with a focus on:
 
 * PM1 - particulate matter 1 microns (μm)
 * PM2.5 - particulate matter 2.5 microns (μm)
@@ -19,6 +19,9 @@ OpenAQ gathers measurements across a range of pollutants. Some of the pollutants
 * SO₂ - Sulfur dioxide gas
 * CH₄ - Methane gas
 * CO₂ - Carbon dioxide gas
+
+## Units of measurement
+Measurements of pollutants are reported in a variety of units depending on how the data is reported from the original data provider. Units are not normalized in the OpenAQ system with the exception of converting ppm (part-per million) to ppb (parts-per billion). Volume units are not converted to mass units, nor vice versa, they are served as originally reported.
 
 ### Particulate Matter (PM)
 Many terms are frequently associated with suspended matter in the air (i.e., airborne particles)—particulate matter (PM) is one of these terms. The subscript for “PM,” for example, “PM2.5” or “PM10” refers to a specific size fraction, which are described based on “aerodynamic diameter,”—the diameter of the particle in question under the assumption that the particle is a sphere, as equivalent to the diameter of a hypothetical spherical particle with a density of 1 g cm−3, assuming that both particles have equal terminal velocity. 
@@ -57,7 +60,3 @@ Molecular formula: CH4. Methane is a primary component of natural gas; emission 
 
 ### Carbon Dioxide
 Molecular formula: CO2. Carbon dioxide is a greenhouse gas. It is formed from the respiration of animals and humans, combustion of fuels and fermentation. Plants use carbon dioxide in photosynthesis. Anthropogenic uses include refrigerant (“dry ice”), a component in fire extinguishers, beverage carbonation, and inflation of miscellaneous materials.
-
-
-## Units of measurement
-Measurements of pollutants are reported in a variety of units depending on how the data is reported from the original data provider. Units are not normalized in the OpenAQ system with the exception of converting ppm (part-per million) to ppb (parts-per billion). Volume units are not converted to mass units, nor vice versa, they are served as originally reported.
