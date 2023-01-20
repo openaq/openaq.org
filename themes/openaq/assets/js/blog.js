@@ -26,8 +26,8 @@
         html += `<a href="${link}" target="_blank" rel="noreferrer noopener"><article class="blog-item">
         <span class="blog-date type-header-3">${publicationDate.toLocaleDateString('en-us', { month:"long", day:"numeric"})}</span>
         <div class="blog-content">
-        <div><h5 class="type-subtitle-1 text-sky-120">${title[1]}</h5></div>
-        <div><p class="type-body-2">${content.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 250)}...</p>
+        <div class="blog-content__title"><h5 class="type-subtitle-1 text-sky-120">${title[1]}</h5></div>
+        <div class="blog-content__body"><p class="type-body-2">${content.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 250)}...</p>
         </div>
         </div>
         </article></a>`
