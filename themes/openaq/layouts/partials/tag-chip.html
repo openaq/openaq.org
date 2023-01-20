@@ -1,7 +1,7 @@
 {{ $tag := newScratch }}
 {{ if eq (. | lower) "api" }}
     {{ $tag.Set "class" "chip-base-data" }}
-    {{ $tag.Set "icon" "data_object--ocean120" }}
+    {{ $tag.Set "icon" "data-object--ocean120" }}
 {{ else if eq (. | lower) "community" }}
     {{ $tag.Set "class" "chip-base-interactive" }}
     {{ $tag.Set "icon" "diversity--lavender100" }}

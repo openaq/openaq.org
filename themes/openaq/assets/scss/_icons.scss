@@ -14,6 +14,7 @@
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
   vertical-align: middle;
 }
@@ -30,6 +31,7 @@
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+  transform: translateY(-1px);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
