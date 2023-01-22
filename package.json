@@ -98,7 +98,7 @@
     "classnames": "^2.2.5",
     "create-react-class": "^15.7.0",
     "d3": "^4.2.1",
-    "gulp-uglify-es": "^1.0.4",
+    "gulp-uglify-es": "^3.0.0",
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.20",
