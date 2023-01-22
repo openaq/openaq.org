@@ -97,7 +97,7 @@
     "chroma-js": "^1.2.1",
     "classnames": "^2.2.5",
     "create-react-class": "^15.7.0",
-    "d3": "^4.2.1",
+    "d3": "^7.8.2",
     "gulp-uglify-es": "^1.0.4",
     "history": "^4.10.1",
     "isomorphic-fetch": "^2.2.1",
