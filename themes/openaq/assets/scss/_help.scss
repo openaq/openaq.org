@@ -15,6 +15,22 @@
     z-index: 2;
     margin: 0 0 120px 0;
   }
+
+  @media (max-width: 1000px) {
+    & {
+      &-container {
+        width: 800px;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    & {
+      &-container {
+        width: 400px;
+      }
+    }
+  }
 }
 
 .help-items {
