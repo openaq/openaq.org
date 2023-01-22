@@ -60,7 +60,7 @@ By providing universal access to air quality data, we empower a global community
 
 ## Values
 #### Community & Collaboration
-OpenAQ is part of a broad community of air quality changemakers. Our role is to provide the data needed to make change and to empower individuals and organizations to access, understand and use these data. We collaborate with anyone who shares our vision of a world where everyone breathes clean air, and we serve as a connector, linking organizations and individuals who can benefit from sharing knowledghug oe and skills. We communicate openly and directly. We recognize and applaud the achievements of everyone in the field.
+OpenAQ is part of a broad community of air quality changemakers. Our role is to provide the data needed to make change and to empower individuals and organizations to access, understand and use these data. We collaborate with anyone who shares our vision of a world where everyone breathes clean air, and we serve as a connector, linking organizations and individuals who can benefit from sharing knowledge and skills. We communicate openly and directly. We recognize and applaud the achievements of everyone in the field.
 
 #### Equity, Diversity & Inclusion
 At OpenAQ, we recognize that marginalized communities across the globe face worse outcomes in many areas of life due to colonialism and racism, including poorer health driven by disproportionate exposure to air pollution. By providing universal access to air quality data, OpenAQ empowers a global community of changemakers to solve this issue of air inequality. To do this, we… 
