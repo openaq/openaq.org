@@ -6,7 +6,7 @@ weight = 4
 
 The OpenAQ platform is built of a number of components.
 
-## Explorer Applicaiton
+## Explorer Application
 
 
 ## API
