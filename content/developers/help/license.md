@@ -1,7 +1,7 @@
 +++
 type = "developers/help"
 title = "What is the license for data on OpenAQ?"
-weight = 6
+weight = 4
 +++
 
 Air quality data is factual in nature, and in some jurisdictions may not be subject to copyright or other protections, limiting its use or distribution. However, in some jurisdictions, copyright and/or laws and regulations may apply to some of the data on the OpenAQ platform.

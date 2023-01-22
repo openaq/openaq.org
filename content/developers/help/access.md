@@ -1,14 +1,8 @@
 +++
 type = "developers/help"
-title = "How to access data from the OpenAQ platform"
-weight = 4
+title = "How can the OpenAQ Platform be accessed?"
+weight = 1
 +++
 
-The OpenAQ platform is built of a number of components.
 
-## Explorer Application
-
-
-## API
-
-
+OpenAQ provides a REST API for programmatic access of the entire data set. Bulk data downloads are also available via Amazon Web Services S3 object storage downloads. OpenAQ also provides an interactive web application for browsing and searching the database from a graphical user interface.
