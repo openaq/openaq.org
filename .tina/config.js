@@ -20,21 +20,85 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
+        label: "use-cases",
+        name: "use_cases",
+        path: "content/use-cases",
         fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
           {
             type: "rich-text",
             name: "body",
-            label: "Body",
+            label: "Body of Document",
+            description: "This is the markdown body",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        label: "Team",
+        name: "team",
+        path: "content/about/team",
+        fields: [
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body of Document",
+            description: "This is the markdown body",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        label: "Pages",
+        name: "pages",
+        path: "content",
+        fields: [
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body of Document",
+            description: "This is the markdown body",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        label: "Uploads",
+        name: "uploads",
+        path: "content/uploads",
+        fields: [
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body of Document",
+            description: "This is the markdown body",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        label: "Partners",
+        name: "partners",
+        path: "content/partners",
+        fields: [
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body of Document",
+            description: "This is the markdown body",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        label: "About",
+        name: "about",
+        path: "content/about",
+        fields: [
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body of Document",
+            description: "This is the markdown body",
             isBody: true,
           },
         ],
