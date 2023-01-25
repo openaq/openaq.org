@@ -2,7 +2,6 @@
 type = "about/people"
 name = 'Nathan Pavlovic'
 group = 'board'
-weight = 5
 email = 'nathan@openaq.org'
 mastadon = 'https://fediscience.org/@N_pavlovic'
 linkedin = 'https://www.linkedin.com/in/nathanpavlovic/'

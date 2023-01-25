@@ -3,7 +3,6 @@ type = "about/people"
 name = 'Amrit Sharma'
 group = 'board'
 position = 'Secretary'
-weight = 3
 email = 'amrit@openaq.org'
 twitter = 'https://www.twitter.com/amrit_sharma'
 linkedin = 'https://www.linkedin.com/in/amritsharma'

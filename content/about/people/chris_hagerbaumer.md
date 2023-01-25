@@ -4,7 +4,6 @@ title = 'Chris Hagerbaumer'
 name = 'Chris Hagerbaumer'
 position = 'Executive Director'
 group = 'team'
-weight = 1
 email = 'chris@openaq.org'
 linkedin = 'https://www.linkedin.com/in/chrishagerbaumer/'
 image = '/uploads/chris_hagerbaumer.png'

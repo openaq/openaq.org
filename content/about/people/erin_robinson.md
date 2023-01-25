@@ -3,7 +3,6 @@ type = "about/people"
 name = 'Erin Robinson'
 position = 'Treasurer'
 group = 'board'
-weight = 2
 email = 'erin@openaq.org'
 image = '/uploads/erin_robinson.png'
 +++

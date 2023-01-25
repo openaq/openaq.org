@@ -4,7 +4,6 @@ name = 'Gabe Fosse'
 position = 'Data Analyst & Developer'
 group = 'team'
 image = '/uploads/gabe_fosse.png'
-weight = 4
 quote = '"Believe in yourself and you are halfway there." -Theodore Roosevelt'
 github = 'https://github.com/majesticio'
 linkedin = 'https://www.linkedin.com/in/gabriel-fosse'

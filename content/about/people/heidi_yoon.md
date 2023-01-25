@@ -3,7 +3,6 @@ type = "about/people"
 name = 'Heidi Yoon'
 position = 'Chair'
 group = 'board'
-weight = 1
 email = 'heidi@openaq.org'
 linkedin = 'https://www.linkedin.com/in/yheidiyoon'
 twitter = 'https://twitter.com/AreteYoon'

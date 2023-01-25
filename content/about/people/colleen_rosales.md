@@ -4,7 +4,6 @@ name = 'Dr. Colleen Marciel F. Rosales'
 position = 'Strategic Partnerships Director'
 group = 'team'
 image = '/uploads/colleen_rosales.png'
-weight = 3
 twitter = 'https://twitter.com/colleenesterase'
 linkedin = 'https://www.linkedin.com/in/colleen-marciel-rosales/'
 researchgate = 'https://www.researchgate.net/profile/Colleen_Marciel_Rosales'
