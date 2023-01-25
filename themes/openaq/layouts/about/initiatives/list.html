@@ -6,9 +6,9 @@
 
     <div class="initiative-content-container">
         <h1 class="type-display-1 gradient-title">Initiatives</h1>
-        {{ range .Pages }}
-            {{ .Render "initiative-card" }}
-        {{ end }}
+        {{ range (sort (where .Data.Pages "Weight" ">" 0) "Weight" "asc") }}
+        {{ .Render "initiative-card" }}
+            {{ end }}
     </div>
 </div>
 

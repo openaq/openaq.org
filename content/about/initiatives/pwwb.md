@@ -3,6 +3,7 @@ type = "about/initiatives"
 title = 'Partnership Project: Predicting What We Breathe'
 topics = ['API', 'Community']
 featured_image = '/uploads/city_of_la_logo.png'
+weight = 6
 +++
 
 [Predicting What We Breathe](https://airquality.lacity.org/) is a partnership between the City of Los Angeles, California State University Los Angeles and OpenAQ. Funded by NASA, the project has developed a forecasting algorithm for air pollution based on time-series measurements of satellite and ground-level air quality data along with machine learning. The tool has reached an accuracy rate of 80-93% compared to ground data alone.

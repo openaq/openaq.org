@@ -1,8 +1,9 @@
 +++
 type = "about/initiatives"
-title = 'OpenAQ Data Platform: Providing Air Quality Data and Spurring Use'
+title = 'OpenAQ Data Platform: Providing Air Quality Data'
 topics = ['API', 'Community']
 featured_image = '/uploads/openaq-logo.png'
+weight = 1
 +++
 
 OpenAQ’s core function is to make air quality data universally accessible and easy to use. To that end, we work to ingest, aggregate, harmonize and share data on our data platform while ensuring its trustworthiness, reliability and resiliency. Our data platform provides interoperable, temporally fine, real-time and historical data. 

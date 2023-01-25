@@ -3,6 +3,7 @@ type = "about/initiatives"
 title = 'Community Engagement'
 topics = ['API', 'Community']
 featured_image = '/uploads/map-hands.jpg'
+weight = 2
 +++
 
 Because data has value only if it is used, OpenAQ introduces potential new users to our data platform and equips users of all abilities with tools to access, understand and use the data. We train groups on how to use the platform, with a focus on reaching potential users who are less data proficient, who are starting out in the air quality space (e.g., early-career scientists), and who are working to reduce air pollution in vulnerable communities. 
