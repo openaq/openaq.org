@@ -1,6 +1,5 @@
 +++
 type = "about/people"
-title = 'Chris Hagerbaumer'
 name = 'Chris Hagerbaumer'
 position = 'Executive Director'
 group = 'team'
