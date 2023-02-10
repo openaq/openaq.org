@@ -4,14 +4,8 @@
   "version": "1.0.0",
   "repository": "https://github.com/openaq/openaq.org.git",
   "author": "OpenAQ <dev@openaq.org>",
-  "scripts": {
-    "dev": "tinacms dev -c \"hugo server -D\"",
-    "build": "tinacms build && hugo"
-  },
   "dependencies": {
-    "@tinacms/cli": "^1.0.6",
-    "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
-    "tinacms": "^1.1.3"
+    "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",

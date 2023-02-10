@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: openaq/openaq.org
+  branch: netlify-cms
+media_folder: content/uploads
+public_folder: /
+collections:
+  - name: 'about'
+    label: 'About Us'
+    folder: 'content/about'
+    format: 
+      - toml-frontmatter: true
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'initiatives'
+    label: 'Initiatives'
+    folder: 'content/about/initiatives'
+    format: 
+      - toml-frontmatter: true
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Type', name: 'title', widget: 'string', default: 'about/initiatives', required: true }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Topics', name: 'topics', widget: 'list' }
+      - { label: 'Featured Image', name: 'featured_image', widget: 'image' }
+      - { label: 'Weight', name: 'weight', widget: 'number' }
+  - name: 'people'
+    label: 'People'
+    folder: 'content/about/people'
+    format: 
+      - toml-frontmatter: true
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Type', name: 'title', widget: 'string', default: 'about/people', required: true }
+      - { label: 'Name', name: 'name', widget: 'string', required: true }
+      - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor"]}
+      - { label: 'Position', name: 'position', widget: 'string', required: true }
+      - { label: 'Email', name: 'email', widget: 'string' }
+      - { label: 'Twitter', name: 'twitter', widget: 'string' }
+      - { label: 'Linkedin', name: 'linkedin', widget: 'string' }
+      - { label: 'Mastadon', name: 'mastadon', widget: 'string' }
+      - { label: 'Github', name: 'github', widget: 'string' }
+      - { label: 'Research Gate', name: 'researchgate', widget: 'string' }
+      - { label: 'Orcid', name: 'orcid', widget: 'string' }
+      - { label: 'Google Scholar', name: 'google_scholar', widget: 'string' }
+      - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Country', name: 'country', widget: 'string' }
+
