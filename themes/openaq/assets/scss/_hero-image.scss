@@ -91,4 +91,24 @@
     top: 65px;
     right: -70px;
   }
+
+  @media (max-width: 800px) {
+    & {
+      width: 700px;
+      height: 1000px;
+
+      .active-marker {
+        top: 250px;
+        left: 165px;
+      }
+      &__img {
+        height: 800px;
+      }
+
+      .detail-card {
+        left: calc(50% - 280px);
+        top: 320px;
+      }
+    }
+  }
 }
