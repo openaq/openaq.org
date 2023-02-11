@@ -14,6 +14,7 @@ enableGitInfo = true
 
 [params]
   plausibleDomain = "openaq.org"
+  images = ['/img/site-feature-image.webp']
 
 [module]
   [[module.mounts]]
