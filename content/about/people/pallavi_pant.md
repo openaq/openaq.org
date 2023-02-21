@@ -1,7 +1,7 @@
 +++
 type = "about/people"
 name = 'Pallavi Pant, PhD'
-position = 'Health Effects Institute'
+position = 'Member at large'
 group = 'board'
 image = '/uploads/pallavi_pant.png'
 country = 'United States'
