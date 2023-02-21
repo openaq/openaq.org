@@ -8,8 +8,7 @@ collections:
   - name: 'about'
     label: 'About Us'
     folder: 'content/about'
-    format: 
-      - toml-frontmatter: true
+    format: 'toml-frontmatter'
     create: false
     slug: '{{slug}}'
     editor:
@@ -20,25 +19,24 @@ collections:
   - name: 'initiatives'
     label: 'Initiatives'
     folder: 'content/about/initiatives'
-    format: 
-      - toml-frontmatter: true
-    create: false
+    format: 'toml-frontmatter'
+    create: true
     slug: '{{slug}}'
     editor:
       preview: true
     fields:
-      - { label: 'Type', name: 'title', widget: 'string', default: 'about/initiatives', required: true }
+      - { label: 'Type', name: 'type', widget: 'string', default: 'about/initiatives', required: true }
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Topics', name: 'topics', widget: 'list' }
+      - { label: 'Body', name: 'body', widget: 'markdown'}
       - { label: 'Featured Image', name: 'featured_image', widget: 'image' }
       - { label: 'Weight', name: 'weight', widget: 'number' }
   - name: 'people'
     label: 'People'
     folder: 'content/about/people'
-    format: 
-      - toml-frontmatter: true
-    create: false
-    slug: '{{slug}}'
+    format: 'toml-frontmatter'
+    create: true
+    path: '{{slug}}'
     editor:
       preview: true
     fields:
@@ -46,6 +44,7 @@ collections:
       - { label: 'Name', name: 'name', widget: 'string', required: true }
       - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor"]}
       - { label: 'Position', name: 'position', widget: 'string', required: true }
+      - { label: 'Biography', name: 'body', widget: 'markdown'}
       - { label: 'Email', name: 'email', widget: 'string' }
       - { label: 'Twitter', name: 'twitter', widget: 'string' }
       - { label: 'Linkedin', name: 'linkedin', widget: 'string' }
