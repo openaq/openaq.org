@@ -40,8 +40,8 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: 'Type', name: 'title', widget: 'string', default: 'about/people', required: true }
-      - { label: 'Name', name: 'name', widget: 'string', required: true }
+      - { label: 'Type', name: 'type', widget: 'string', default: 'about/people', required: true }
+      - { label: 'Title', name: 'title', widget: 'string', required: true }
       - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor"]}
       - { label: 'Position', name: 'position', widget: 'string', required: true }
       - { label: 'Biography', name: 'body', widget: 'markdown'}
