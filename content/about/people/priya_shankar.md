@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Priya Shankar'
+type = 'about/people'
+title = 'Priya Shankar'
 position = 'Bloomberg Philanthropies'
 group = 'advisor'
 image = '/uploads/priya-shankar.png'

@@ -1,6 +1,6 @@
 +++
 type = "about/people"
-name = 'Chris Hagerbaumer'
+title = 'Chris Hagerbaumer'
 position = 'Executive Director'
 group = 'team'
 email = 'chris@openaq.org'

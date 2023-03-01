@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Erin Robinson'
+type = 'about/people'
+title = 'Erin Robinson'
 position = 'Treasurer'
 group = 'board'
 email = 'erin@openaq.org'

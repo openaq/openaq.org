@@ -5,14 +5,14 @@
     {{ partial "bubbles" }}
     <div class="person-content-container">
         <article class="person">
-            {{ $name := .Params.name }}
+            {{ $name := .Title }}
             {{ with .Params.image }}
             {{ $imageResource := ($.Site.GetPage "section" "uploads").Resources.GetMatch (strings.TrimPrefix "/uploads/" . ) }}
             {{ $resized := $imageResource.Resize "400x400 webp q100 picture"  }}
             <img src="{{ $resized.RelPermalink }}" width="300" height="300" alt="{{ $name }}" class="person__img" />
             {{ end }}
             <div class="person-description">
-                <h1 class="person-name gradient-title">{{ .Params.name }}</h1>
+                <h1 class="person-name gradient-title">{{ .Title }}</h1>
                 <h2 class="person-title">{{ .Params.position }}</h2>
                 {{ .Render "person-social" }}
                 {{ with .Params.quote }}

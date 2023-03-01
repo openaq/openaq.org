@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Heidi Yoon'
+type = 'about/people'
+title = 'Heidi Yoon'
 position = 'Chair'
 group = 'board'
 email = 'heidi@openaq.org'

@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Olaf Veerman'
+type = 'about/people'
+title = 'Olaf Veerman'
 position = 'Development Seed'
 group = 'advisor'
 image = '/uploads/olaf_veerman.png'

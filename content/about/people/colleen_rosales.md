@@ -1,6 +1,6 @@
 +++
 type = "about/people"
-name = 'Dr. Colleen Marciel F. Rosales'
+title = 'Dr. Colleen Marciel F. Rosales'
 position = 'Strategic Partnerships Director'
 group = 'team'
 image = '/uploads/colleen_rosales.png'

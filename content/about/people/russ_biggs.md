@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Russ Biggs'
+type = 'about/people'
+title = 'Russ Biggs'
 position = 'Director of Technology'
 image = '/uploads/russ_biggs.png'
 group = 'team'
