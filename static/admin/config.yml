@@ -16,6 +16,115 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'why-open-data'
+    label: 'Why Open Data?'
+    folder: 'content/why-open-data'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'why-air-quality'
+    label: 'Why Air Quality?'
+    folder: 'content/why-air-quality'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'privacy'
+    label: 'Privacy Policy'
+    folder: 'content/privacy'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'cookies'
+    label: 'Cookie Policy'
+    folder: 'content/cookies'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'terms'
+    label: 'Terms and Conditions'
+    folder: 'content/terms'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'platform-overview'
+    label: 'Platform overview'
+    folder: 'content/developers/platform-overview'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Type', name: 'type', widget: 'string', default: 'developers/platform-overview'}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'help'
+    label: 'FAQ'
+    folder: 'content/developers/help'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Type', name: 'type', widget: 'string', default: 'developers/help'}
+      - { label: 'Weight', name: 'weight', widget: 'number'}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'partners'
+    label: 'Partners'
+    folder: 'content/partners'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Group', name: 'group', widget: 'string'}
+      - { label: 'Image', name: 'image', widget: 'image'}
+      - { label: 'Homepage', name: 'homepage', widget: 'string', pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"]}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'use-cases'
+    label: 'Use Cases'
+    folder: 'content/use-cases'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Tags', name: 'tags', widget: 'list'}
+      - {label:  'Categories', name: 'categories', widget: 'list' }
+      - { label: 'Featured image', name: 'featured_image', widget: 'image'}
+      - { label: 'Featured?', name: 'featured', wdiget: 'boolean' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
   - name: 'initiatives'
     label: 'Initiatives'
     folder: 'content/about/initiatives'
