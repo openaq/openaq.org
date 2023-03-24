@@ -1,7 +1,7 @@
 <article class="advisor-card">
   {{ partial  "person-image" (dict "context" . "global" $ "class" "advisor-card") }}
     <div class="advisor-card__description">
-      <h2 class="person-name">{{ .Params.name}}</h2>
+      <h2 class="person-name">{{ .Params.title}}</h2>
       <h3 class="person-title">{{ .Params.position }}</h3>
       <p class="person-bio">{{ .Params.country }}</p>
     </div>

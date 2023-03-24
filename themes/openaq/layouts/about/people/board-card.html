@@ -1,7 +1,7 @@
 <article class="board-card">
   {{ partial  "person-image" (dict "context" . "global" $ "class" "board-card") }}
     <div class="board-card__description">
-      <h2 class="person-name">{{ .Params.name}}</h2>
+      <h2 class="person-name">{{ .Params.title}}</h2>
       <h3 class="person-title">
         {{ if isset .Params "position" }}
           {{ .Params.position }}

@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Romain Lacombe'
+type = 'about/people'
+title = 'Romain Lacombe'
 position = 'PlumeLabs'
 group = 'advisor'
 image = '/uploads/romaine_lacombe.png'

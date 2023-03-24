@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Nathan Pavlovic'
+type = 'about/people'
+title = 'Nathan Pavlovic'
 group = 'board'
 email = 'nathan@openaq.org'
 mastadon = 'https://fediscience.org/@N_pavlovic'

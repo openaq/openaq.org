@@ -1,5 +1,5 @@
 +++
-type = "about/people"
+type = 'about/people'
 name = 'Matt Whitney'
 group = 'board'
 image = '/uploads/matt_whitney.png'

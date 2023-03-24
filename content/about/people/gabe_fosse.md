@@ -1,6 +1,6 @@
 +++
-type = "about/people"
-name = 'Gabe Fosse'
+type = 'about/people'
+title = 'Gabe Fosse'
 position = 'Data Analyst & Developer'
 group = 'team'
 image = '/uploads/gabe_fosse.png'

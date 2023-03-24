@@ -1,0 +1,168 @@
+backend:
+  name: github
+  repo: openaq/openaq.org
+  branch: netlify-cms
+publish_mode: editorial_workflow
+media_folder: content/uploads
+public_folder: /
+collections:
+  - name: 'about'
+    label: 'About Us'
+    folder: 'content/about'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'why-open-data'
+    label: 'Why Open Data?'
+    folder: 'content/why-open-data'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'why-air-quality'
+    label: 'Why Air Quality?'
+    folder: 'content/why-air-quality'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'privacy'
+    label: 'Privacy Policy'
+    folder: 'content/privacy'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'cookies'
+    label: 'Cookie Policy'
+    folder: 'content/cookies'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'terms'
+    label: 'Terms and Conditions'
+    folder: 'content/terms'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'platform-overview'
+    label: 'Platform overview'
+    folder: 'content/developers/platform-overview'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Type', name: 'type', widget: 'string', default: 'developers/platform-overview'}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'help'
+    label: 'FAQ'
+    folder: 'content/developers/help'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Type', name: 'type', widget: 'string', default: 'developers/help'}
+      - { label: 'Weight', name: 'weight', widget: 'number'}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'partners'
+    label: 'Partners'
+    folder: 'content/partners'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Group', name: 'group', widget: 'string'}
+      - { label: 'Image', name: 'image', widget: 'image'}
+      - { label: 'Homepage', name: 'homepage', widget: 'string', pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"]}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'use-cases'
+    label: 'Use Cases'
+    folder: 'content/use-cases'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Tags', name: 'tags', widget: 'select', options: ["api", "media", "community", "health"]}
+      - { label: 'Categories', name: 'categories', widget: 'select', options: ["developer"]}
+      - { label: 'Featured image', name: 'featured_image', widget: 'image'}
+      - { label: 'Featured?', name: 'featured', wdiget: 'boolean' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'initiatives'
+    label: 'Initiatives'
+    folder: 'content/about/initiatives'
+    format: 'toml-frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Type', name: 'type', widget: 'string', default: 'about/initiatives', required: true }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Topics', name: 'topics', widget: 'list' }
+      - { label: 'Body', name: 'body', widget: 'markdown'}
+      - { label: 'Featured Image', name: 'featured_image', widget: 'image' }
+      - { label: 'Weight', name: 'weight', widget: 'number' }
+  - name: 'people'
+    label: 'People'
+    folder: 'content/about/people'
+    format: 'toml-frontmatter'
+    create: true
+    path: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Type', name: 'type', widget: 'string', default: 'about/people', required: true }
+      - { label: 'Name', name: 'title', widget: 'string', required: true }
+      - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor"]}
+      - { label: 'Position', name: 'position', widget: 'string', required: true }
+      - { label: 'Biography', name: 'body', widget: 'markdown'}
+      - { label: 'Email', name: 'email', widget: 'string' }
+      - { label: 'Twitter', name: 'twitter', widget: 'string' }
+      - { label: 'Linkedin', name: 'linkedin', widget: 'string' }
+      - { label: 'Mastadon', name: 'mastadon', widget: 'string' }
+      - { label: 'Github', name: 'github', widget: 'string' }
+      - { label: 'Research Gate', name: 'researchgate', widget: 'string' }
+      - { label: 'Orcid', name: 'orcid', widget: 'string' }
+      - { label: 'Google Scholar', name: 'google_scholar', widget: 'string' }
+      - { label: 'Image', name: 'image', widget: 'image' }
+      - { label: 'Country', name: 'country', widget: 'string' }
+
