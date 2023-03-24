@@ -5,7 +5,7 @@
   "repository": "https://github.com/openaq/openaq.org.git",
   "author": "OpenAQ <dev@openaq.org>",
   "dependencies": {
-    "@tinacms/cli": "^1.0.6",
+    "@tinacms/cli": "^1.0.9",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
     "playwright": "^1.30.0",
     "tinacms": "^1.1.3"
