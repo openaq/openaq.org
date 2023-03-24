@@ -2,6 +2,7 @@ backend:
   name: github
   repo: openaq/openaq.org
   branch: netlify-cms
+publish_mode: editorial_workflow
 media_folder: content/uploads
 public_folder: /
 collections:
@@ -120,8 +121,8 @@ collections:
       preview: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Tags', name: 'tags', widget: 'list'}
-      - {label:  'Categories', name: 'categories', widget: 'list' }
+      - { label: 'Tags', name: 'tags', widget: 'select', options: ["api", "media", "community", "health"]}
+      - { label: 'Categories', name: 'categories', widget: 'select', options: ["developer"]}
       - { label: 'Featured image', name: 'featured_image', widget: 'image'}
       - { label: 'Featured?', name: 'featured', wdiget: 'boolean' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
