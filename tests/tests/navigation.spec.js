@@ -1,6 +1,6 @@
 // @ts-check
 const { test, expect, request } = require('@playwright/test');
-
+// const baseUrl = 'https://openaq.org';
 const baseUrl = 'http://localhost:1313';
 
 test.describe('landing page navigation', () => {
@@ -61,7 +61,7 @@ test.describe('landing page navigation', () => {
       )
       .click();
     await expect(page).toHaveURL(
-      `${baseUrl}/developers/api-overview/`
+      `${baseUrl}/developers/platform-overview/`
     );
   });
 
@@ -74,15 +74,17 @@ test.describe('landing page navigation', () => {
     await expect(page).toHaveURL('https://explore.openaq.org');
   });
 
-  test('learn about openaq api button navigates', async ({
-    page,
-  }) => {
-    await page
-      .locator(
-        'section.api-section > div.api-section-blurb > div > a'
-      )
-      .click();
-    await expect(page).toHaveURL('https://docs.openaq.org/docs');
+  test('learn about openaq api button navigates', async ({ page }) => {
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'), 
+      await page
+        .locator(
+          'section.api-section > div.api-section-blurb > div > a'
+        )
+        .click()
+    ]);
+    await newPage.waitForLoadState();
+    expect(newPage.url()).toBe('https://docs.openaq.org/docs');
   });
 
   test('api chip navigates', async ({ page }) => {
@@ -93,15 +95,15 @@ test.describe('landing page navigation', () => {
       .click();
     await expect(page).toHaveURL(`${baseUrl}/use-cases/api/`);
   });
-
-  test('community chip navigates', async ({ page }) => {
+  // needs refinement
+  test('media chip navigates', async ({ page }) => {
     await page
       .locator(
-        'section.use-cases-section > div > article:nth-child(1) > div > div > a.chip-base-interactive'
+        'section.use-cases-section > div > article:nth-child(1) > div > div > a.media-chip'
       )
       .click();
     await expect(page).toHaveURL(
-      `${baseUrl}/use-cases/community/`
+      `${baseUrl}/use-cases/media/`
     );
   });
 });
@@ -201,14 +203,14 @@ test.describe('header navigation', () => {
     await expect(page).toHaveURL(`${baseUrl}/about/people/`);
   });
 
-  test('about > reporting navigates', async ({ page }) => {
+  test('about > legal page navigates', async ({ page }) => {
     await page.hover('body > header > div > nav > ul > li:nth-child(6) > a');
     await page
       .locator(
         '.reporting-nav'
       )
       .click();
-    await expect(page).toHaveURL(`${baseUrl}/about/reporting/`);
+    await expect(page).toHaveURL(`${baseUrl}/about/legal/`);
   });
 
   test('developers hover displays dropdown', async ({ page }) => {
@@ -220,7 +222,7 @@ test.describe('header navigation', () => {
     await expect(submenu).toBeVisible();
   });
 
-  test('developers > api overview navigates', async ({ page }) => {
+  test('developers > platform-overview navigates', async ({ page }) => {
     await page.hover('body > header > div > nav > ul > li:nth-child(5) > a');
     await page
       .locator(
@@ -228,7 +230,7 @@ test.describe('header navigation', () => {
       )
       .click();
     await expect(page).toHaveURL(
-      `${baseUrl}/developers/api-overview/`
+      `${baseUrl}/developers/platform-overview/`
     );
   });
 
@@ -296,15 +298,6 @@ test.describe('footer navigation', () => {
     await expect(page).toHaveURL('https://explore.openaq.org/');
   });
 
-  test('partners tab navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.footer-partners'
-      )
-      .click();
-    await expect(page).toHaveURL(`${baseUrl}/partners/`);
-  });
-
   test('api tab navigates', async ({ page }) => {
     await page
       .locator(
@@ -346,67 +339,93 @@ test.describe('footer navigation', () => {
   // footer social links
 
   test('slack icon navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.slack-nav'
-      )
-      .click();
-    await expect(page).toHaveURL('https://openaq.slack.com/join/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw#/shared-invite/email');
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.slack-nav'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    expect(newPage.url()).toBe('https://openaq.slack.com/join/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw#/shared-invite/email');
   });
 
   test('fb icon navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.fb-nav'
-      )
-      .click();
-    await expect(page).toHaveURL('https://www.facebook.com/openaq/');
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.fb-nav'
+        )
+        .click()
+        ]);
+    await expect(newPage.url()).toBe('https://www.facebook.com/openaq/');
   });
 
   test('youtube icon navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.youtube-nav'
-      )
-      .click();
-    await expect(page).toHaveURL('https://www.youtube.com/@openaq4768');
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.youtube-nav'
+        )
+        .click()
+        ]);
+      await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe('https://www.youtube.com/@openaq4768');
   });
 
   test('twitter icon navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.twitter-nav'
-      )
-      .click();
-    await expect(page).toHaveURL('https://twitter.com/openaq');
+    const [newPage] = await Promise.all([
+        page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.twitter-nav'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe('https://twitter.com/openaq');
   });
 
   test('medium icon navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.medium-nav'
-      )
-      .click();
-    await expect(page).toHaveURL('https://openaq.medium.com/');
+    const [newPage] = await Promise.all([
+        page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.medium-nav'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe('https://openaq.medium.com/');
   });
 
   test('github icon navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.github-nav'
-      )
-      .click();
-    await expect(page).toHaveURL('https://github.com/openaq');
+    const [newPage] = await Promise.all([
+          page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.github-nav'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe('https://github.com/openaq');
   });
 
   test('linkedIn icon navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.linkedIn-nav'
-      )
-      .click();
-
-    expect(page.url()).toContain(
+    const [newPage] = await Promise.all([
+            page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.linkedIn-nav'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    expect(newPage.url()).toBe(
       'https://www.linkedin.com/company/openaq'
     );
   });
@@ -424,30 +443,42 @@ test.describe('social banner navigation', () => {
   });
 
   test('github follow button navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.social-banner-gh'
-      )
-      .click();
-    await expect(page).toHaveURL('https://github.com/openaq');
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.social-banner-gh'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe('https://github.com/openaq');
   });
 
   test('twitter follow button navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.social-banner-twitter'
-      )
-      .click();
-    await expect(page).toHaveURL('https://twitter.com/openaq');
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.social-banner-twitter'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe('https://twitter.com/openaq');
   });
 
   test('slack join button navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.social-banner-slack'
-      )
-      .click();
-    await expect(page).toHaveURL(
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.social-banner-slack'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe(
       'https://openaq.slack.com/join/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw#/shared-invite/email'
     );
   });
@@ -473,12 +504,16 @@ test.describe('community banner navigation', () => {
   });
 
   test('support button navigates', async ({ page }) => {
-    await page
-      .locator(
-        '.community-banner-support'
-      )
-      .click();
-    await expect(page).toHaveURL(
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'),
+      await page
+        .locator(
+          '.community-banner-support'
+        )
+        .click()
+        ]);
+    await newPage.waitForLoadState();
+    await expect(newPage.url()).toBe(
       'https://secure.givelively.org/donate/openaq-inc/'
     );
   });
@@ -502,7 +537,7 @@ test.describe('about > people navigation', () => {
       await page.goto(`${baseUrl}/about/people/`);
       const teamCard = page
         .locator(
-          `body > main > div > div.team-content-container > section:nth-child(2) > article:nth-child(${i})`
+          `.people-content-container > section:nth-child(3) > article:nth-child(${i})`
         );
       let slug = await teamCard.getAttribute('data-testid');
       await page.getByTestId(`${slug}`).getByRole('link').first().click();
