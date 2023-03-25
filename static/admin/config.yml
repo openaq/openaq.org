@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: openaq/openaq.org
-  branch: netlify-cms
+  branch: main
 publish_mode: editorial_workflow
 media_folder: content/uploads
 public_folder: /
