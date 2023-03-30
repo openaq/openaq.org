@@ -5,8 +5,6 @@ topics = ['Community']
 featured_image = '/uploads/lmic_map.webp'
 weight = 3
 +++
-> ### We have begun taking applications for the [**2023 Community Ambassador Cohort!**](https://openaq.medium.com/2023-openaq-community-ambassador-program-d219f94d0b5e)
-
 
 The OpenAQ Community Ambassador Program is a leadership training program designed for emerging air quality leaders in low- and middle-income countries. The program focuses on training these air quality advocates to utilize air quality monitoring data in support of community action to fight air pollution.
 
