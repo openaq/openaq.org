@@ -1,6 +1,6 @@
 +++
 title = 'Observable'
-group = 'funder'
+group = 'sponsor'
 image = '/uploads/observable.png'
 homepage = 'https://observablehq.com/'
 +++

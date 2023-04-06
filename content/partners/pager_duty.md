@@ -1,6 +1,6 @@
 +++
 title = 'PagerDuty'
-group = 'funder'
+group = 'sponsor'
 image = '/uploads/pager_duty_logo.png'
 homepage = 'https://www.pagerduty.com/'
 +++

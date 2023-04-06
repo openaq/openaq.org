@@ -4,6 +4,22 @@
     {{ partial "bubbles" }}
 
     <div class="partners-content-container">
+    <section class="funders-section">
+        <h1 class="type-display-1 gradient-title">Air Sensor Partners</h1>
+        <div class="funders-grid">
+            {{ range $index, $page := where .Pages "Params.group" "air-sensor-partner" }} 
+            {{ .Render "funder-card"}} 
+            {{ end }}   
+        </div>
+    </section>
+    <section class="funders-section">
+        <h1 class="type-display-1 gradient-title">Corporate Sponsors</h1>
+        <div class="funders-grid">
+            {{ range $index, $page := where .Pages "Params.group" "sponsor" }} 
+            {{ .Render "funder-card"}} 
+            {{ end }}   
+        </div>
+    </section>
     <section class="partners-section">
         <h1 class="type-display-1 gradient-title">Partners</h1>
         <div class="partners-grid">
@@ -13,7 +29,7 @@
         </div>
     </section>
     <section class="funders-section">
-        <h1 class="type-display-1 gradient-title">Funders & In-kind Supporters</h1>
+        <h1 class="type-display-1 gradient-title">Funders</h1>
         <div class="funders-grid">
             {{ range $index, $page := where .Pages "Params.group" "funder" }} 
             {{ .Render "funder-card"}} 
