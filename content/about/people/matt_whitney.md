@@ -1,6 +1,6 @@
 +++
 type = 'about/people'
-name = 'Matt Whitney'
+title = 'Matt Whitney'
 group = 'board'
 image = '/uploads/matt_whitney.png'
 linkedin = 'https://www.linkedin.com/in/matt-whitney-a6395265/'

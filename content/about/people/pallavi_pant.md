@@ -1,6 +1,6 @@
 +++
 type = "about/people"
-name = 'Pallavi Pant, PhD'
+title = 'Pallavi Pant, PhD'
 position = 'Member at large'
 group = 'board'
 image = '/uploads/pallavi_pant.png'
