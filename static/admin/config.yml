@@ -153,17 +153,17 @@ collections:
     fields:
       - { label: 'Type', name: 'type', widget: 'string', default: 'about/people', required: true }
       - { label: 'Name', name: 'title', widget: 'string', required: true }
-      - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor"]}
+      - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor"], required: true }
       - { label: 'Position', name: 'position', widget: 'string', required: true }
-      - { label: 'Biography', name: 'body', widget: 'markdown'}
-      - { label: 'Email', name: 'email', widget: 'string' }
-      - { label: 'Twitter', name: 'twitter', widget: 'string' }
-      - { label: 'Linkedin', name: 'linkedin', widget: 'string' }
-      - { label: 'Mastadon', name: 'mastadon', widget: 'string' }
-      - { label: 'Github', name: 'github', widget: 'string' }
-      - { label: 'Research Gate', name: 'researchgate', widget: 'string' }
-      - { label: 'Orcid', name: 'orcid', widget: 'string' }
-      - { label: 'Google Scholar', name: 'google_scholar', widget: 'string' }
-      - { label: 'Image', name: 'image', widget: 'image' }
-      - { label: 'Country', name: 'country', widget: 'string' }
+      - { label: 'Biography', name: 'body', widget: 'markdown', required: true }
+      - { label: 'Email', name: 'email', widget: 'string', required: false  }
+      - { label: 'Twitter', name: 'twitter', widget: 'string', required: false }
+      - { label: 'Linkedin', name: 'linkedin', widget: 'string', required: false  }
+      - { label: 'Mastadon', name: 'mastadon', widget: 'string', required: false  }
+      - { label: 'Github', name: 'github', widget: 'string', required: false  }
+      - { label: 'Research Gate', name: 'researchgate', widget: 'string', required: false  }
+      - { label: 'Orcid', name: 'orcid', widget: 'string', required: false  }
+      - { label: 'Google Scholar', name: 'google_scholar', widget: 'string', required: false  }
+      - { label: 'Image', name: 'image', widget: 'image', required: true }
+      - { label: 'Country', name: 'country', widget: 'string', required: false }
 
