@@ -2,6 +2,7 @@ backend:
   name: github
   repo: openaq/openaq.org
   branch: main
+  base_url: https://oauth.openaq.org
 publish_mode: editorial_workflow
 media_folder: content/uploads
 public_folder: /
