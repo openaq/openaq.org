@@ -1,6 +1,6 @@
 +++
+title = "How accurate are data on the OpenAQ platform?"
 type = "developers/help"
-title = "How accurate is data on the OpenAQ platform?"
 weight = 8
 +++
 
