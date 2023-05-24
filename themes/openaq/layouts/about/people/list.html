@@ -32,6 +32,15 @@
             {{.Render "advisor-card"}} 
             {{ end }}
         </section>
+        <h1 class="section-header gradient-title">Ambassadors</h1>
+        <p class="type-body-2">
+            Together with OpenAQ, the Community Ambassadors commit to advocating for data transparency and contribute to the collective action against air pollution.
+        </p>
+        <section class="person-grid">
+            {{ range sort (where .Pages "Params.group" "ambassadors") ".Weight" }} 
+            {{.Render "ambassador-card"}} 
+            {{ end }}
+        </section>
         <h1 class="section-header gradient-title">Working with OpenAQ</h1>
         <p class="type-body-2">OpenAQ is a small, but mighty, team of thought-partners that takes pride in our work and values lightheartedness and camaraderie. Follow us on <a class="type-link-2" href="https://openaq.medium.com">Medium</a> to learn of job opportunities.</p>
     </div>
