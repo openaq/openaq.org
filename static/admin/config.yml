@@ -153,7 +153,7 @@ collections:
     fields:
       - { label: 'Type', name: 'type', widget: 'string', default: 'about/people', required: true }
       - { label: 'Name', name: 'title', widget: 'string', required: true }
-      - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor"], required: true }
+      - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor", "ambassadors"], required: true }
       - { label: 'Position', name: 'position', widget: 'string', required: true }
       - { label: 'Biography', name: 'body', widget: 'markdown', required: true }
       - { label: 'Email', name: 'email', widget: 'string', required: false  }
