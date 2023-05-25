@@ -1,6 +1,7 @@
 +++
 type = "about/people"
-title = 'Engr. Luciano Lamaita'
+honorific = 'Engr.'
+title = 'Luciano Lamaita'
 position = 'Ambassador'
 group = 'ambassadors'
 email = ''

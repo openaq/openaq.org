@@ -1,6 +1,7 @@
 +++
 type = "about/people"
-title = 'Dr. Rebeca Monroy Torres'
+honorific = 'Dr.'
+title = 'Rebeca Monroy Torres'
 position = 'Ambassador'
 group = 'ambassadors'
 email = ''

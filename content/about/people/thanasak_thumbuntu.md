@@ -1,6 +1,7 @@
 +++
 type = "about/people"
-title = "Major Thanasak Thumbuntu"
+honorific = 'Major'
+title = "Thanasak Thumbuntu"
 group = "ambassadors"
 position = "Ambassador"
 email = ""

@@ -1,6 +1,7 @@
 +++
 type = "about/people"
-title = 'Dr. Malkia Moraa Abuga'
+honorific = 'Dr.'
+title = 'Malkia Moraa Abuga'
 position = 'Ambassador'
 group = 'ambassadors'
 email = ''
