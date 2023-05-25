@@ -1,5 +1,5 @@
 +++
-position = "Community Ambassador"
+position = "Ambassador"
 instagram = "https://www.instagram.com/abid0mar/"
 type = "about/people"
 title = "Abid Omar"
