@@ -1,14 +1,14 @@
 +++
 type = "about/people"
-title = 'Engr. Luciano Lamaita'
-position = 'Ambassador'
-group = 'ambassadors'
-email = ''
-linkedin = 'https://www.linkedin.com/in/llamaita/'
-twitter = 'https://twitter.com/lemeit'
-researchgate = 'https://www.researchgate.net/profile/Luciano-Lamaita'
-image = '/uploads/luciano-lamaita.png'
-country = 'Saladillo, Buenos Aires Province, Argentina'
+title = "Engr. Luciano Lamaita"
+group = "ambassadors"
+position = "Ambassador"
+email = ""
+twitter = "https://twitter.com/lemeit"
+linkedin = "https://www.linkedin.com/in/llamaita/"
+researchgate = "https://www.researchgate.net/profile/Luciano-Lamaita"
+image = "luciano-no-bkg.png"
+country = "Saladillo, Buenos Aires Province, Argentina"
 +++
 
 As a technical advisor, Luciano specializes in scientific and technological outreach and transfer in CIC-PBA, a government organization focused on training professionals and conducting research for practical solutions through R&D and Innovation. Currently, Luciano also teaches physics and chemistry at rural high schools in his hometown.
