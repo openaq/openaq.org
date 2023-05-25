@@ -4,8 +4,10 @@ backend:
   branch: main
   base_url: https://oauth.openaq.org
 publish_mode: editorial_workflow
-media_folder: content/uploads
-public_folder: /
+media_folder: "content/uploads"
+public_folder: "/uploads"
+media_folder_relative: true
+public_folder_relative: true
 collections:
   - name: 'about'
     label: 'About Us'
