@@ -4,7 +4,7 @@ title = "Theresa Igwe Ewona"
 group = "ambassadors"
 position = "Ambassador"
 email = ""
-linkedin = "https://www.linkedin.com/in/thanasak-thumbuntu-ab1170118/ "
+linkedin = ""
 image = "/uploads/theresa-igwe-ewona.png"
 country = "Calabar, Nigeria"
 +++
