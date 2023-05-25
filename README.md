@@ -2,7 +2,7 @@
 
 ## Development
 
-The website is built using [Hugo](https://gohugo.io) for content management and static site generation. Tina is used for a headless CMS.
+The website is built using [Hugo](https://gohugo.io) for content management and static site generation. Netlify Decap CMS is used for a headless sontent management.
 
 
 For styles SCSS is used with the [openaq-design-system](https://github.com/openaq/openaq-design-system) SCSS library. Dart Sass is required to compile SCSS and must be installed and available in PATH for Hugo to access.
