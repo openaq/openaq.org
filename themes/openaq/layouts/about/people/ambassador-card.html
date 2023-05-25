@@ -3,7 +3,6 @@
         {{ partial  "person-image" (dict "context" . "global" $ "class" "team-card") }}
         <div class="team-card__description">
             <h2 class="person-name">{{ .Title }}</h2>
-            <h3 class="person-title">{{ .Params.position }}</h3>
             <p class="person-bio">{{ .Params.country }}</p>
             <p class="person-bio">{{ .Summary | truncate 300 }}</p>
     </a>
