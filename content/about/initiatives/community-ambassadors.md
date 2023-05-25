@@ -1,8 +1,8 @@
 +++
 type = "about/initiatives"
-title = 'Community Ambassador Program'
-topics = ['Community']
-featured_image = '/uploads/lmic_map.webp'
+title = "Community Ambassador Program"
+topics = ["Community"]
+featured_image = "/uploads/ambassador-world-map.png"
 weight = 3
 +++
 
