@@ -2,7 +2,7 @@
 type = "about/initiatives"
 title = "Community Ambassador Program"
 topics = ["Community"]
-featured_image = "/ambassador-world-map.png"
+featured_image = "/uploads/ambassadors.webp"
 weight = 3
 +++
 
