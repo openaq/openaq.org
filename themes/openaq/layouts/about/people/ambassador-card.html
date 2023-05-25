@@ -2,7 +2,7 @@
     <a href="{{ .Permalink }}">
         {{ partial  "person-image" (dict "context" . "global" $ "class" "team-card") }}
         <div class="team-card__description">
-            <h2 class="person-name">{{ .Title }}</h2>
+            <h2 class="person-name">{{ with .Params.honorific }}{{ . }} {{ end }}{{ .Title }}</h2>
             <p class="person-bio">{{ .Params.country }}</p>
             <p class="person-bio">{{ .Summary | truncate 300 }}</p>
     </a>

@@ -152,6 +152,7 @@ collections:
       preview: true
     fields:
       - { label: 'Type', name: 'type', widget: 'string', default: 'about/people', required: true }
+      - { label: 'Honorific (optional)', name: 'honorific', widget: 'string', required: false }
       - { label: 'Name', name: 'title', widget: 'string', required: true }
       - { label: 'Group', name: 'group', widget: 'select', options: ["team", "board", "advisor", "ambassadors"], required: true }
       - { label: 'Position', name: 'position', widget: 'string', required: true }
