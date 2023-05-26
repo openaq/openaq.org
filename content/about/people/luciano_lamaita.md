@@ -8,7 +8,7 @@ email = ""
 twitter = "https://twitter.com/lemeit"
 linkedin = "https://www.linkedin.com/in/llamaita/"
 researchgate = "https://www.researchgate.net/profile/Luciano-Lamaita"
-image = "/uploads/luciano-lamaita.png"
+image = "/uploads/luciano-pic.png"
 country = "Saladillo, Buenos Aires Province, Argentina"
 +++
 As a technical advisor, Luciano specializes in scientific and technological outreach and transfer in CIC-PBA, a government organization focused on training professionals and conducting research for practical solutions through R&D and Innovation. Currently, Luciano also teaches physics and chemistry at rural high schools in his hometown.
