@@ -149,7 +149,7 @@ collections:
     folder: 'content/about/people'
     format: 'toml-frontmatter'
     create: true
-    path: '{{slug}}'
+    slug: '{{slug}}'
     editor:
       preview: true
     fields:
