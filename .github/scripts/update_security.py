@@ -1,7 +1,7 @@
 from datetime import datetime
 import re
 
-with open("../themes/openaq/static/.well-known/security.txt", "r+") as f:
+with open("themes/openaq/static/.well-known/security.txt", "r+") as f:
     data = f.read()
     dt = datetime.now()
     if dt.month == 1:
