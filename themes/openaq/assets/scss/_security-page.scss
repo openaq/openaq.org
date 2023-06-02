@@ -1,0 +1,13 @@
+@use 'mixins' as local-mixins;
+
+.security-policy-content {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  @include local-mixins.bubbles();
+
+  &-container {
+    width: 800px;
+    min-height: 100vh;
+  }
+}
