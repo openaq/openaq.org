@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ partial "breadcrumbs" . }}
+
+<div class="security-policy-content">
+    {{ partial "bubbles" }}
+    <div class="security-policy-content-container">
+        <h1 class="type-display-1 gradient-title">{{ .Title }}</h1>
+        {{ with .GitInfo }}
+        {{ $date := .AuthorDate.Local.Format "January 2, 2006" }}
+        <p class="type-body-1">Last updated: {{ $date }}</p>
+        {{ end }}
+        {{ .Content }}
+    </div>
+</div>
+{{ partial "community-banner" . }}
+{{ partial "explore-banner" . }}
+{{ end }}
