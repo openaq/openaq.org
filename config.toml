@@ -5,6 +5,12 @@ theme = 'openaq'
 copyright = "{year} OpenAQ. All rights reserved."
 enableGitInfo = true
 
+[frontmatter]
+  date = ['date', 'publishDate', 'lastmod']
+  expiryDate = ['expiryDate']
+  lastmod = [':git', 'lastmod', 'date', 'publishDate']
+  publishDate = ['publishDate', 'date']
+
 [build]
   writeStats = true
 
