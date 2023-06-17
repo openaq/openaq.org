@@ -20,15 +20,21 @@
 
 .initiative-card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background: #ffffff;
   border: 1px solid variables.$smoke10;
   border-radius: 22px;
   gap: 20px;
   padding: 20px;
 
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
   &-img {
     flex: 2;
+    display: flex;
+    justify-content: center;
 
     img {
       max-width: 100%;
