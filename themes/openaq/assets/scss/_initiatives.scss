@@ -33,6 +33,8 @@
 
   &-img {
     flex: 2;
+    display: flex;
+    justify-content: center;
 
     img {
       max-width: 100%;
