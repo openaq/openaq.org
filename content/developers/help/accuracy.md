@@ -3,13 +3,11 @@ title = "How accurate are data on the OpenAQ platform?"
 type = "developers/help"
 weight = 8
 +++
-
-
 OpenAQ is a data aggregator. We aggregate data from a variety of instruments that measure air pollution and share the pollutant measurements without modification (other than standardizing the format, e.g., converting disparate ppb to ppm). We also share metadata (descriptors that describe each instrument, such as data provider, type of instrument, company producing the instrument, and location). Sharing pollutant measurements without modification allows end users to apply their preferred correction methods; it also allows end users to compare the actual performance of air sensors with reference monitors. 
 
-Reference monitors (aka “government monitors,” “reference-grade monitors,” “research-grade monitors”) are the gold standard [1]. They produce very high quality, accurate data that can be used to develop and enforce regulations. Data from air sensors (aka “low-cost sensors”) vary in accuracy due to such factors as technology used, differences in validation and calibration efforts, and different weather conditions and pollution environments. Despite being less accurate than reference monitors, air sensors play an important role in advancing understanding of air quality. Because they are lower in cost, portable, and generally easier to use than reference monitors, they can be deployed more easily and can support citizen science, in particular. 
+Reference monitors (aka “government monitors,” “reference-grade monitors,” “research-grade monitors”) are the gold standard \[1]. They produce very high quality, accurate data that can be used to develop and enforce regulations. Data from air sensors (aka “low-cost sensors”) vary in accuracy due to such factors as technology used, differences in validation and calibration efforts, and different weather conditions and pollution environments. Despite being less accurate than reference monitors, air sensors play an important role in advancing understanding of air quality. Because they are lower in cost, portable, and generally easier to use than reference monitors, they can be deployed more easily and can support citizen science, in particular. 
 
-We urge anyone analyzing air sensor data to review available information on the performance of the air sensors producing the data, as well as environmental conditions that could impact measurements. Of particular note, recent studies highlight limitations in air sensors’ ability to measure PM2.5-10 and PM10 [2–8]. 
+We urge anyone analyzing air sensor data to review available information on the performance of the air sensors producing the data, as well as environmental conditions that could impact measurements. Of particular note, recent studies highlight limitations in air sensors’ ability to measure greater than PM2.5 (notated as PM 2.5-10 and PM10) \[2–8].
 
 If using air sensor data to educate, inform, advocate, or evaluate, limitations must be understood and corrections must be applied whenever possible.
 
@@ -24,12 +22,11 @@ References:
 7. Demanega, I., Mujan, I., Singer, B. C., Anđelković, A. S., Babich, F., & Licina, D. (2021). Performance assessment of low-cost environmental monitors and single sensors under variable indoor air quality and thermal conditions. Building and Environment, 187, 107415. https://doi.org/10.1016/j.buildenv.2020.107415 
 8. Manikonda, A., Zíková, N., Hopke, P. K., & Ferro, A. R. (2016). Laboratory assessment of low-cost PM monitors. Journal of Aerosol Science, 102, 29-40. https://doi.org/10.1016/j.jaerosci.2016.08.010 
 
-
 Additional Resources:
 
 Barkjohn, K.K.; Holder, A.L.; Frederick, S.G.; Clements, A.L. Correction and Accuracy of PurpleAir PM2.5 Measurements for Extreme Wildfire Smoke. Sensors 2022, 22, 9669. https://doi.org/10.3390/s22249669
 
-Jaffe, D., Miller, C., Thompson, K., Nelson, M., Finley, B., Ouimette, J., and Andrews, E.: An evaluation of the U.S. EPA’s correction equation for Purple Air Sensor data in smoke, dust and wintertime urban pollution events, Atmos. Meas. Tech. Discuss. [preprint], https://doi.org/10.5194/amt-2022-265, in review, 2022.
+Jaffe, D., Miller, C., Thompson, K., Nelson, M., Finley, B., Ouimette, J., and Andrews, E.: An evaluation of the U.S. EPA’s correction equation for Purple Air Sensor data in smoke, dust and wintertime urban pollution events, Atmos. Meas. Tech. Discuss. \[preprint], https://doi.org/10.5194/amt-2022-265, in review, 2022.
 
 Hagan, D. and Kroll, J.H. (2020). Assessing the accuracy of low-cost optical particle sensors using a physics-based approach. Atmospheric Measurement Techniques, 13, 6343-6355. https://doi.org/10.5194/amt-13-6343-2020 
 
@@ -41,5 +38,4 @@ Kosmopoulos, G., Salamalikis, V., Pandis, S. N., Yannopoulos, P., Bloutsos, A. A
 
 Diez, S., Lacy, S. E., Bannan, T. J., Flynn, M., Gardiner, T., Harrison, D., Marsden, N., Martin, N. A., Read, K., and Edwards, P. M.: Air pollution measurement errors: is your data fit for purpose?, Atmos. Meas. Tech., 15, 4091–4105, https://doi.org/10.5194/amt-15-4091-2022, 2022. 
 
-
-US EPA (2022). How to Use Air Sensors: The Enhanced Air Sensor Guidebook. https://www.epa.gov/air-sensor-toolbox/how-use-air-sensors-air-sensor-guidebook 
+US EPA (2022). How to Use Air Sensors: The Enhanced Air Sensor Guidebook. https://www.epa.gov/air-sensor-toolbox/how-use-air-sensors-air-sensor-guidebook
