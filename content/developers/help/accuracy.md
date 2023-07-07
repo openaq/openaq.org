@@ -7,7 +7,7 @@ OpenAQ is a data aggregator. We aggregate data from a variety of instruments tha
 
 Reference monitors (aka “government monitors,” “reference-grade monitors,” “research-grade monitors”) are the gold standard \[1]. They produce very high quality, accurate data that can be used to develop and enforce regulations. Data from air sensors (aka “low-cost sensors”) vary in accuracy due to such factors as technology used, differences in validation and calibration efforts, and different weather conditions and pollution environments. Despite being less accurate than reference monitors, air sensors play an important role in advancing understanding of air quality. Because they are lower in cost, portable, and generally easier to use than reference monitors, they can be deployed more easily and can support citizen science, in particular. 
 
-We urge anyone analyzing air sensor data to review available information on the performance of the air sensors producing the data, as well as environmental conditions that could impact measurements. Of particular note, recent studies highlight limitations in air sensors’ ability to measure greater than PM2.5 (notated as PM 2.5-10 and PM10) \[2–8].
+We urge anyone analyzing air sensor data to review available information on the performance of the air sensors producing the data, as well as environmental conditions that could impact measurements. Of particular note, recent studies highlight limitations in air sensors’ ability to measure greater than PM2.5 (notated as PM 2.5-10 and PM10) \[2–9].
 
 If using air sensor data to educate, inform, advocate, or evaluate, limitations must be understood and corrections must be applied whenever possible.
 
@@ -21,6 +21,7 @@ References:
 6. Levy Zamora, M., Xiong, F., Gentner, D., Kerkez, B., Kohrman-Glaser, J., & Koehler, K. (2018). Field and laboratory evaluations of the low-cost plantower particulate matter Sensor. Environmental science & technology, 53(2), 838-849. https://doi.org/10.1021/acs.est.8b05174 
 7. Demanega, I., Mujan, I., Singer, B. C., Anđelković, A. S., Babich, F., & Licina, D. (2021). Performance assessment of low-cost environmental monitors and single sensors under variable indoor air quality and thermal conditions. Building and Environment, 187, 107415. https://doi.org/10.1016/j.buildenv.2020.107415 
 8. Manikonda, A., Zíková, N., Hopke, P. K., & Ferro, A. R. (2016). Laboratory assessment of low-cost PM monitors. Journal of Aerosol Science, 102, 29-40. https://doi.org/10.1016/j.jaerosci.2016.08.010 
+9. C﻿lements, A., Duvall, R. (2019). ORD SPEAR Program: Air Quality Sensors. https://www.epa.gov/sites/default/files/2020-01/documents/airsensor_evaluation_duvall_0.pdf
 
 Additional Resources:
 
