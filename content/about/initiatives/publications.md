@@ -13,6 +13,8 @@ OpenAQ publishes the only global assessment of whether and how national governme
 *Open Air Quality Data: The Global Landscape 2022*  
 [Summary](https://bit.ly/3uOSZXu)  
 [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)
+[Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)
+[Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)
 
 *Open Air Quality Data: The Global State of Play 2020*  
 [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)  
