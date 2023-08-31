@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 
       
       - name: Install npm dependencies
         run: yarn install
