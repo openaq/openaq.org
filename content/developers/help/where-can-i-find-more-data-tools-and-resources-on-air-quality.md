@@ -10,9 +10,7 @@ weight = 8
 * Awesome List: <https://github.com/openaq/awesome-air-quality> 
 * Open Sustainable Technology’s list of open source tools in the area of climate change, energy, biodiversity and natural resources. Air quality-specific sources: <https://opensustain.tech/#air-quality> 
 * AQICN provides open Air Quality Index data: <https://aqicn.org/map/world> 
-* Some private air sensor firms share a limited amount of air quality data with the public. Check the air sensor firm’s website.
-
-
+* Some private air sensor firms share air quality data with the public. Check the air sensor firm’s website for what is available and their conditions.
 
 **Resources for Developing an Air Sensor Project** 
 
