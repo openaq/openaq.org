@@ -1,7 +1,7 @@
 +++
 type = "about/people"
 title = 'Pallavi Pant, PhD'
-position = 'Member at large'
+position = 'Chair'
 group = 'board'
 image = '/uploads/pallavi_pant.png'
 country = 'United States'
