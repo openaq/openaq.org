@@ -47,7 +47,7 @@ For organizations deploying air quality monitors, OpenAQ can ingest and share th
 
 \[3] [Air Quality Life Index 2023](https://aqli.epic.uchicago.edu/the-index/), Energy Policy Institute at University of Chicago
 
-\[4] [Health Impact of Air Pollution](https://www.lung.org/research/sota/health-risks)
+\[4] [Health Impact of Air Pollution](https://www.lung.org/research/sota/health-risks), American Lung Association
 
 \[5] [Air Pollution and Child Health](https://iris.who.int/bitstream/handle/10665/275545/WHO-CED-PHE-18.01-eng.pdf?ua=1), World Health Organization
 
