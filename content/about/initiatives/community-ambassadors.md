@@ -5,6 +5,8 @@ topics = ["Community"]
 featured_image = "/uploads/ambassador-world-map.png"
 weight = 3
 +++
+***We are now accepting applications for our 2024 cohort! Read more and apply [here](https://bit.ly/2024-OpenAQ-CommAmbInfo).***
+
 The OpenAQ Community Ambassador Program is a leadership training program designed for emerging air quality leaders in low- and middle-income countries. The program focuses on training these air quality advocates to utilize air quality monitoring data in support of community action to fight air pollution.
 
 The program includes a comprehensive curriculum on ambient air pollution, air quality monitoring, data transparency, data access, data analysis, participatory research and community engagement. 
