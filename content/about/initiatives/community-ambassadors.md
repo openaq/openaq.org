@@ -5,9 +5,6 @@ topics = ["Community"]
 featured_image = "/uploads/ambassador-world-map.png"
 weight = 3
 +++
-{{< highlight >}}
-**We are now accepting applications for our 2024 cohort!** Read more and apply [here](https://bit.ly/2024-OpenAQ-CommAmbInfo). Applications close February 21, 2024.
-{{< /highlight >}}
 
 The OpenAQ Community Ambassador Program is a leadership training program designed for emerging air quality leaders in low- and middle-income countries. The program focuses on training these air quality advocates to utilize air quality monitoring data in support of community action to fight air pollution.
 
