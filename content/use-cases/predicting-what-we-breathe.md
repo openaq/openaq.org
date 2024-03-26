@@ -1,6 +1,6 @@
 +++
 title = "Predicting What We Breathe"
-tags = "community"
+tags = "health"
 categories = "developer"
 featured_image = "/uploads/pwwb-aq-la-city-website.png"
 featured = "Predicting What We Breathe (PWWB) as integrated in the City of Los Angeles' air quality website."
