@@ -19,7 +19,7 @@ OpenAQ piloted the Community Ambassador Program in 2021, providing practical ski
 
 The ultimate goal of this program is to increase data fluency among air quality advocates living in some of the most polluted regions on the planet so that they are (1) better equipped to advocate for clean air in their communities, (2) able to facilitate greater data openness and transparency from data producers in their region and country, and (3) able to train others to use data for good.
 
-O﻿ur 2024 Community Ambassador Cohort
+O﻿ur [2024 Community Ambassador Cohort](https://openaq.medium.com/introducing-our-2024-openaq-community-ambassadors-fee4cb5f5f98)
 
 O﻿ur [2023 Community Ambassador Cohort](https://openaq.medium.com/introducing-our-2023-openaq-community-ambassadors-b2014a38534e)
 
