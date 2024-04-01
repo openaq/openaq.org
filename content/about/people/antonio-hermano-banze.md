@@ -1,6 +1,6 @@
 +++
 type = "about/people"
-title = "Antonio Hermano Banze"
+title = "António Hermano Banze"
 group = "ambassadors"
 position = "Ambassador"
 twitter = "https://twitter.com/Antonio_H_Banze"
