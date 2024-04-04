@@ -1,14 +1,10 @@
 +++
-type = "developers/api-overview"
 title = "Platform overview"
+type = "developers/api-overview"
 +++
-
-
-OpenAQ is the world's largest free and open-source platform for ground-level ambient air quality data. To gather and harmonize the world's air quality data, OpenAQ searches and scrapes hundreds of data sources to extract and store data. OpenAQ gathers physical measurements, not aggregated values such as AQIs (Air Quality Indexes).
-
+OpenAQ is the world’s largest open-source, open-access platform for ground-level ambient air quality data.To gather and harmonize the world's air quality data, OpenAQ searches and scrapes hundreds of data sources to extract and store data. OpenAQ gathers physical measurements, not aggregated values such as AQIs (Air Quality Indexes).
 
 ![openaq platform diagram](/uploads/platform_diagram.webp)
-
 
 # Open Source
 
@@ -24,12 +20,10 @@ For programmatic users, the best way to access data on the OpenAQ platform is th
 
 To learn more about how to use the OpenAQ API to query data visit [docs.openaq.org](https://docs.openaq.org).
 
-
-## OpenAQ Explorer 
+## OpenAQ Explorer
 
 The OpenAQ Explorer is an interactive web application that makes exploring the OpenAQ database easy.
 
 ![openaq explorer](/uploads/explorer_screenshot.webp)
 
-
-Visit the OpenAQ Explorer at [https://explore.openaq.org](https://explore.openaq.org).
+Visit the OpenAQ Explorer at <https://explore.openaq.org>.
