@@ -1,7 +1,7 @@
 +++
 title = "Why open data?"
 +++
-OpenAQ was founded on the principle that access to air quality data should be open, free, and accessible. Open data are data that can be freely used, reused, and redistributed by anyone. 
+OpenAQ was founded on the principle that people have a right to know what they are breathing and should be able to freely access, use, reuse, and redistribute air quality data.
 
 ![](../uploads/openlock.webp)
 
