@@ -5,7 +5,7 @@ group = "ambassadors"
 position = "Ambassador"
 linkedin = "https://www.linkedin.com/in/aminathmaiha/"
 image = "/uploads/maiha.png"
-country = "Male’, Maldives"
+country = "Malé, Maldives"
 +++
 <!--StartFragment-->
 
