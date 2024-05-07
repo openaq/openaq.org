@@ -5,6 +5,7 @@ group = "ambassadors"
 position = "Ambassador"
 linkedin = "https://www.linkedin.com/in/safiya-cummings/"
 image = "/uploads/safiya.png"
+country = "Piarco, Trinidad and Tobago"
 +++
 <!--StartFragment-->
 
