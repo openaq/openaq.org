@@ -160,7 +160,7 @@ collections:
       - { label: 'Position', name: 'position', widget: 'string', required: true }
       - { label: 'Biography', name: 'body', widget: 'markdown', required: true }
       - { label: 'Email', name: 'email', widget: 'string', required: false  }
-      - { label: 'Twitter', name: 'twitter', widget: 'string', required: false }
+      - { label: 'X', name: 'x', widget: 'string', required: false }
       - { label: 'Linkedin', name: 'linkedin', widget: 'string', required: false  }
       - { label: 'Mastadon', name: 'mastadon', widget: 'string', required: false  }
       - { label: 'Github', name: 'github', widget: 'string', required: false  }

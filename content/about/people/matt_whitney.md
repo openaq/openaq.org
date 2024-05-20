@@ -4,7 +4,7 @@ title = 'Matt Whitney'
 group = 'board'
 image = '/uploads/matt_whitney.png'
 linkedin = 'https://www.linkedin.com/in/matt-whitney-a6395265/'
-twitter = 'https://twitter.com/mattwhitney10'
+x = 'https://x.com/mattwhitney10'
 email = 'matt@openaq.org'
 
 +++

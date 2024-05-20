@@ -4,7 +4,7 @@ title = 'Amrit Sharma'
 group = 'board'
 position = 'Secretary'
 email = 'amrit@openaq.org'
-twitter = 'https://www.twitter.com/amrit_sharma'
+x = 'https://x.com/amrit_sharma'
 linkedin = 'https://www.linkedin.com/in/amritsharma'
 image = '/uploads/amrit_sharma.png'
 +++

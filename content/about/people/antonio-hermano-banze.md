@@ -3,7 +3,7 @@ type = "about/people"
 title = "António Hermano Banze"
 group = "ambassadors"
 position = "Ambassador"
-twitter = "https://twitter.com/Antonio_H_Banze"
+x = "https://x.com/Antonio_H_Banze"
 image = "/uploads/antonio.png"
 country = "Maputo, Mozambique"
 +++

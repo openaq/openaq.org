@@ -376,17 +376,17 @@ test.describe('footer navigation', () => {
     await expect(newPage.url()).toBe('https://www.youtube.com/@openaq4768');
   });
 
-  test('twitter icon navigates', async ({ page }) => {
+  test('x icon navigates', async ({ page }) => {
     const [newPage] = await Promise.all([
         page.waitForEvent('popup'),
       await page
         .locator(
-          '.twitter-nav'
+          '.x-nav'
         )
         .click()
         ]);
     await newPage.waitForLoadState();
-    await expect(newPage.url()).toBe('https://twitter.com/openaq');
+    await expect(newPage.url()).toBe('https://x.com/openaq');
   });
 
   test('medium icon navigates', async ({ page }) => {
@@ -455,17 +455,17 @@ test.describe('social banner navigation', () => {
     await expect(newPage.url()).toBe('https://github.com/openaq');
   });
 
-  test('twitter follow button navigates', async ({ page }) => {
+  test('x follow button navigates', async ({ page }) => {
     const [newPage] = await Promise.all([
       page.waitForEvent('popup'),
       await page
         .locator(
-          '.social-banner-twitter'
+          '.social-banner-x'
         )
         .click()
         ]);
     await newPage.waitForLoadState();
-    await expect(newPage.url()).toBe('https://twitter.com/openaq');
+    await expect(newPage.url()).toBe('https://x.com/openaq');
   });
 
   test('slack join button navigates', async ({ page }) => {

@@ -4,8 +4,8 @@
     const headerDocsLink = document.querySelector('.js-header-docs-link');
     headerDocsLink.addEventListener('click', () => plausible('onClickHeaderDocsLink'));
     // footer section
-    const footerTwitterLink = document.querySelector('.js-footer-twitter-link');
-    footerTwitterLink.addEventListener('click', () => plausible('onClickFooterTwitterLink'));
+    const footerXLink = document.querySelector('.js-footer-x-link');
+    footerXLink.addEventListener('click', () => plausible('onClickFooterXLink'));
     const footerGithubLink = document.querySelector('.js-footer-github-link');
     footerGithubLink.addEventListener('click', () => plausible('onClickFooterGithubLink'));
     const footerSlackLink = document.querySelector('.js-footer-slack-link');
