@@ -14,6 +14,7 @@ weight = 8
 * Open-source daily fine particulate matter (PM2.5) datasets at a 10 km resolution for India from 2005 to 2023 \[non-peer-reviewed]: https://doi.org/10.5281/zenodo.10807119
 * O﻿penAir R package for data analysis and visualization: https://bookdown.org/david_carslaw/openair/
 * Downloadble U.S. Oil Refinery Fenceline Monitoring Data through Refinery Air Watch: https://www.refineryairwatch.org/
+* List of satellite data for environmental justice from NASA HAQAST: https://haqast.org/ej/
 * Some private air sensor firms share air quality data with the public. Check the air sensor firm’s website for what is available and their conditions.
 
 **Resources for Developing an Air Sensor Project** 
