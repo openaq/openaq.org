@@ -8,8 +8,7 @@ weight = 8
 **Tools and Repositories**
 
 * Awesome List: <https://github.com/openaq/awesome-air-quality> 
-* Open Sustainable Technology’s list of open-source tools in the area of climate change, energy, biodiversity and natural resources. Air quality-specific sources: <https://opensustain.tech/#air-quality> 
-* [](https://www.epa.gov/air-sensor-toolbox)
+* Open Sustainable Technology’s list of open-source tools in the area of climate change, energy, biodiversity and natural resources. Air quality-specific sources: <https://opensustain.tech/#air-quality> [](https://www.epa.gov/air-sensor-toolbox)
 * AQICN provides open Air Quality Index data: <https://aqicn.org/map/world> 
 * Open-source daily fine particulate matter (PM2.5) datasets at a 10 km resolution for India from 2005 to 2023 \[non-peer-reviewed]: https://doi.org/10.5281/zenodo.10807119
 * O﻿penAir R package for data analysis and visualization: https://bookdown.org/david_carslaw/openair/
