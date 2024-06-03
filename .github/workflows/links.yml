@@ -25,7 +25,7 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v1
         with:
-            args: --base ./public
+            args: --base ./public './**/*.html'
 
       - name: Create Issue From File
         if: env.lychee_exit_code != 0
