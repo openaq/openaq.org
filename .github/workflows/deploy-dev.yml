@@ -13,7 +13,7 @@ jobs:
         run: mkdir -p /home/runner/work/_temp/_github_home && printf "[safe]\n\tdirectory = /github/workspace" > /home/runner/work/_temp/_github_home/.gitconfig
       
       - name: Git checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       
       - name: Install npm dependencies
         run: yarn install
