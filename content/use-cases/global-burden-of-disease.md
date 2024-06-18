@@ -1,7 +1,7 @@
 +++
 title = "Global Burden of Disease"
-tags = "health"
-categories = "developer"
+tags = ["health"]
+categories = ["developer"]
 featured_image = "/uploads/gbd-cover.png"
 featured = "false"
 +++
