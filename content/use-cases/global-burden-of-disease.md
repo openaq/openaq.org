@@ -11,8 +11,6 @@ The GBD is led by the Institute of Health Metrics and Evaluation (IHME), housed 
 
 One environmental risk factor considered in the GBD is air pollution, including ambient and household particulate matter (PM) pollution, as well as ambient ozone pollution. OpenAQ has served as a key data source for information on PM2.5, PM10 and NO2. In 2021, OpenAQ contributed annual average concentrations for select reference grade stations worldwide.
 
-![]( "High blood pressure, and smoking were the two leading risk factors for early death and poor health in 2021.")
-
 Many free, open-access, high-grade research and high-profile reports–that ultimately inform policy and practice–are produced from the GBD reports, such as reports produced by the [World Bank](http://hdl.handle.net/10986/25013), [](https://www.stateofglobalair.org/)[Organisation for Economic Co-operation and Development (OECD)](https://www.oecd.org/health/UNIATF-OECD-Brochure.pdf), [Our World in Data](https://ourworldindata.org/grapher/disease-burden-by-region), and Health Effects Institute's [State of Global Air (SoGA)](https://www.stateofglobalair.org/).
 
 The most recent GBD estimates, released in May 2024, are available online. View and explore data on air pollution as a health risk and issue in the interactive GBD website [here](https://www.healthdata.org/research-analysis/health-risks-issues/air-pollution) and explore other GBD data and tools [here](https://www.healthdata.org/research-analysis/gbd-data). 
