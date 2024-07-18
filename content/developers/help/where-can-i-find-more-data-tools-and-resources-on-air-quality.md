@@ -26,5 +26,7 @@ weight = 8
 * Environmental Defense Fund: [Making the invisible visible: A guide for mapping hyperlocal air pollution to drive clean air action](https://www.edf.org/sites/default/files/content/making-the-invisible-visible.pdf)
 * South Coast AQMD/Sonoma Technology: [Community in Action: A Comprehensive Guidebook on Air Quality Sensors](http://www.aqmd.gov/docs/default-source/aq-spec/star-grant/community-in-action-guidebook-on-air-quality-sensors-(appendices-only).pdf)[](https://www.c40knowledgehub.org/s/article/Making-the-invisible-visible-A-guide-for-mapping-hyperlocal-air-pollution-to-drive-clean-air-action?language=en_US)
 * A﻿ir Sensor Performance Metrics: <https://www.epa.gov/air-sensor-toolbox/evaluation-emerging-air-sensor-performance> 
+* UNEP and WMO report on integrating air sensors to enhance air quality applications: https://wmo.int/publication-series/integrating-low-cost-sensor-systems-and-networks-enhance-air-quality-applications
+* U.S. Government Accountability Office's Air Quality Sensors: Policy Options to Help Address Implementation Challenges: https://www.gao.gov/products/gao-24-106393
 
 <!--EndFragment-->
