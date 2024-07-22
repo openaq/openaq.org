@@ -2,13 +2,13 @@
 title = "OpenAQ DMCA (copyright infringement) policy"
 +++
 
-**1.Third-Party Data Policy**
+1. **Third-Party Data Policy**
 
 OpenAQ aggregates third-party air quality data, including user-contributed data. It is our policy to only publish data: (1) that is in the public domain, (2) for which we have a license from the copyright owner, or (3) that we have determined we are authorized to publish under the fair use doctrine or a similar legal principle.
 
 If an OpenAQ employee, board member, or community member learns that data being hosted by OpenAQ may infringe the rights of a third party, they should bring it to the immediate attention of the Executive Director.
 
-**2. Reports of Copyright Infringement: User-Contributed Content**
+2. **Reports of Copyright Infringement: User-Contributed Content**
 
 Section 512 of the Digital Millennium Copyright Act (DMCA) protects publishers of user-contributed content from infringement claims, provided that the publisher complies with certain procedural requirements for responding to infringement notices received from copyright holders and counter-notifications from users. It is OpenAQ’s policy to respond to all infringement notifications regarding user-contributed content according to the procedures in this section.
 
