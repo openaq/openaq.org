@@ -53,6 +53,17 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'dmca'
+    label: 'DMCA Policy'
+    folder: 'content/dmca'
+    format: 'toml-frontmatter'
+    create: false
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
   - name: 'cookies'
     label: 'Cookie Policy'
     folder: 'content/cookies'
