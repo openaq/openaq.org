@@ -1,5 +1,5 @@
 +++
-title = "OpenAQ DMCA (copyright infringement) policy"
+title = "OpenAQ DMCA (Copyright Infringement) Policy"
 +++
 
 1. **Third-Party Data Policy**
