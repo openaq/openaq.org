@@ -21,6 +21,34 @@ The ultimate goal of this program is to increase data fluency among air quality 
 
 O﻿ur [2024 Community Ambassador Cohort](https://openaq.medium.com/introducing-our-2024-openaq-community-ambassadors-fee4cb5f5f98)
 
+* Ravkat Mukhtarov (Almaty, Kazakhstan)
+* Kostadin Kostadinov (Plovdiv, Bulgaria)
+* Tatiana Melissa Kwenkeu Tondji (Douala, Cameroon)
+* António H. Banze (Maputo, Mozambique)
+* Sapana Bhujel (Kathmandu, Nepal)
+* Aminath Maiha Hameed (Malé, Maldives)
+* Rakib Hossain (Dhaka, Bangladesh)
+* Safiya Cummings (Piarco, Trinidad and Tobago)
+* Rafaela Borth (Florianópolis, Brazil)
+* Victor John Magtulis (Iloilo, Philippines)
+
 O﻿ur [2023 Community Ambassador Cohort](https://openaq.medium.com/introducing-our-2023-openaq-community-ambassadors-b2014a38534e)
 
+* Abid Omar (Karachi, Pakistan)
+* Alexandru Luchiian (Cluj-Napoca, Romania)
+* Ikromjon Mamadov (Khujand, Tajikistan)
+* Jihan Fauziah Hamdi (Jakarta, Indonesia)
+* Luciano, Lamaita (Saladillo, Argentina)
+* Malkia Abuga, Ph.D. (Nairobi, Kenya)
+* Nurzhan Chunueva (Bishkek, Kyrgyzstan)
+* Rebeca Monroy-Torres, Ph.D. (Guanajuato, Mexico)
+* Thanasak Thumbuntu (Bangkok, Thailand)
+* Theresa Igwe (Calabar, Nigeria)
+
 Our [2021 Community Ambassador Cohort](https://openaq.medium.com/announcing-the-inaugural-openaq-community-ambassador-cohort-9707a51380e3)
+
+* Farah Kazi (India)
+* Azjargal (Aza) Tsogtsaikhan - (Mongolia)
+* Melusi Molefe (Durban, South Africa)
+* Ray Koçi (Tirana, Albania)
+* Josephine Mbandi (Nairobi, Kenya)
