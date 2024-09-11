@@ -222,7 +222,23 @@ a {
 }
 
 .api-section {
+  @include panel(variables.$sky120);
+
+  @media (max-width: 800px) {
+    &__img {
+      order: 1;
+    }
+  }
+}
+
+.aqi-hub-section {
   @include panel(variables.$smoke120);
+
+  @media (max-width: 800px) {
+    &__img {
+      order: 1;
+    }
+  }
 }
 
 .page-404 {

@@ -2,7 +2,7 @@
 
 .footer {
   height: 250px;
-  width: 100vw;
+  width: 100%;
   background-color: variables.$lavender180;
   align-items: center;
   color: white;
@@ -14,6 +14,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 150px;
+    gap: 20px;
 
     .nav-section {
       .footer-logo {
@@ -41,7 +42,7 @@
   }
 
   .sub-footer {
-    width: 100vw;
+    width: 100%;
     height: 54px;
     display: flex;
     flex-direction: row;
