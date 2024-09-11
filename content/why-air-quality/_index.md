@@ -45,18 +45,10 @@ For organizations deploying air quality monitors, OpenAQ can ingest and share th
 
 [^2]: [World Health Organization: Air Pollution](https://www.who.int/health-topics/air-pollution#tab=tab_1)
 
-<<<<<<< HEAD
-\[3] [Air Quality Life Index 2024](https://aqli.epic.uchicago.edu/news/air-pollution-remains-the-greatest-external-risk-to-human-health-as-most-countries-fail-to-set-or-meet-their-own-standards-for-clean-air/?mc_cid=70fac43a52&mc_eid=a14722961c), Energy Policy Institute at University of Chicago
-=======
-[^3]: [Air Quality Life Index 2023](https://aqli.epic.uchicago.edu/the-index/), Energy Policy Institute at University of Chicago
->>>>>>> c94375bc (aqi hub and css fixes)
+[^3]: [Air Quality Life Index 2024](https://aqli.epic.uchicago.edu/news/air-pollution-remains-the-greatest-external-risk-to-human-health-as-most-countries-fail-to-set-or-meet-their-own-standards-for-clean-air/?mc_cid=70fac43a52&mc_eid=a14722961c), Energy Policy Institute at University of Chicago
 
 [^4]: [Health Impact of Air Pollution](https://www.lung.org/research/sota/health-risks), American Lung Association
 
 [^5]: [Air Pollution and Child Health](https://iris.who.int/bitstream/handle/10665/275545/WHO-CED-PHE-18.01-eng.pdf?ua=1), World Health Organization
 
-<<<<<<< HEAD
-\[6] [Open Air Quality Data: The Global Landscape 2022](https://openaq.org/about/initiatives/publications/), OpenAQ
-=======
 [^6]: [Open Air Quality Data: The Global Landscape 2022](https://openaq.org/about/initiatives/publications/), OpenAQ
->>>>>>> c94375bc (aqi hub and css fixes)
