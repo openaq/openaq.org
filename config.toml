@@ -5,6 +5,12 @@ theme = 'openaq'
 copyright = "{year} OpenAQ. All rights reserved."
 enableGitInfo = true
 
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [goldmark]
+    [Extensions]
+      footnote = true
+
 [frontmatter]
   date = ['date', 'publishDate', 'lastmod']
   expiryDate = ['expiryDate']
