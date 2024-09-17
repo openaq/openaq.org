@@ -1,7 +1,7 @@
 +++
 title = "Why air quality?"
 +++
-Air pollution is the fourth leading risk factor for early death and the leading environmental cause of death worldwide, contributing to nearly 7 million (1 out of 9) deaths in 2019 [^1]. Up to 99% of us are breathing polluted air [^2], cutting lives short by an average of 1.9 years across the globe [^3].
+Air pollution is the 2nd leading risk factor for death and the leading environmental contributor to death worldwide, contributing to more than 8 million deaths in 2021 [^1]. Up to 99% of us are breathing polluted air [^2], cutting lives short by an average of 1.9 years across the globe [^3].
 
 Air pollution impacts our health in many ways, starting when we’re in the womb. Air pollution impacts practically every organ in the body and is associated with acute and chronic cardiovasculatory and  respiratory illnesses, as well as increased incidence of lung cancer, diabetes, and poor birth outcomes. [^4]
 
@@ -41,7 +41,7 @@ For organizations deploying air quality monitors, OpenAQ can ingest and share th
 
 **R﻿eferences**
 
-[^1]: [State of Global AIr: Global Health Impacts of Air Pollution](https://www.stateofglobalair.org/health/global#Millions-deaths), Health Effects Institute and Institute for Health Metrics and Evaluation’s Global Burden of Disease project
+[^1]: [State of Global AIr: Global Health Impacts of Air Pollution](https://www.stateofglobalair.org/resources/report/state-global-air-report-2024), Health Effects Institute and Institute for Health Metrics and Evaluation’s Global Burden of Disease project
 
 [^2]: [World Health Organization: Air Pollution](https://www.who.int/health-topics/air-pollution#tab=tab_1)
 
