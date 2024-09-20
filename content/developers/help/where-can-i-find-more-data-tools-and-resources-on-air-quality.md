@@ -9,7 +9,10 @@ weight = 8
 
 * Awesome List: <https://github.com/openaq/awesome-air-quality> 
 * O﻿penAir R package for data analysis and visualization: https://bookdown.org/david_carslaw/openair/
+* Air Quality Index Hub, an OpenAQ resource dedicated to deepening the public's understanding of their own AQI and AQIs worldwide: https://aqihub.info/ 
+* AQMx Resource Exchange Library, a Climate & Clean Air Coalition resource for air quality managers, which links to many air quality databases: https://aqmx.org/
 * Open Sustainable Technology’s list of open-source tools in the area of climate change, energy, biodiversity and natural resources. Air quality-specific sources: <https://opensustain.tech/#air-quality> 
+* Environmental Defense Fund's CLEAR Collaborative Air Quality Data Directory: https://www.clearcollab.org/data-directory/
 * List of satellite data for environmental justice from NASA HAQAST: https://haqast.org/ej/ [](https://www.epa.gov/air-sensor-toolbox)
 * Open-source daily fine particulate matter (PM2.5) datasets for India 
 
