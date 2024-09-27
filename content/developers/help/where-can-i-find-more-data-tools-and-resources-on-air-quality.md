@@ -19,6 +19,7 @@ weight = 8
   * 10 km resolution, from 2005 to 2023 \[non-peer-reviewed]: https://doi.org/10.5281/zenodo.10807119
   * 2017-2022, archived ~500 continuous ambient air quality monitoring stations, daily scale: https://doi.org/10.34770/xtje-mj26
 * Downloadable U.S. Oil Refinery Fenceline Monitoring Data through Refinery Air Watch: https://www.refineryairwatch.org/ 
+* Open-source dataset for a long-term multi-city commercial air sensors study (Diez, et al.): https://doi.org/10.1038/s41597-024-03767-2
 * AQICN provides open Air Quality Index data: <https://aqicn.org/map/world> 
 * Some private air sensor firms share air quality data with the public. Check the air sensor firm’s website for what is available and their conditions.
 
