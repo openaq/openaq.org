@@ -10,6 +10,9 @@ enableGitInfo = true
   [goldmark]
     [Extensions]
       footnote = true
+      
+[markup.goldmark.renderer]
+  unsafe= true
 
 [frontmatter]
   date = ['date', 'publishDate', 'lastmod']

@@ -1,0 +1,50 @@
+@use 'openaq-design-system/variables' as variables;
+
+.sponsorship-table {
+  border-collapse: collapse;
+  thead {
+    background-color: variables.$smoke10;
+    height: 50px;
+    color: variables.$sky100;
+
+    tr {
+      th {
+        margin: 0 auto;
+      }
+    }
+  }
+  table,
+  th,
+  td {
+    padding: 15px;
+    border: 2px solid variables.$smoke30;
+  }
+}
+
+.benefits-table {
+  border-collapse: collapse;
+  thead {
+    background-color: variables.$smoke10;
+    height: 50px;
+    color: variables.$sky100;
+
+    tr {
+      th {
+        margin: 0 auto;
+      }
+    }
+  }
+  table,
+  th,
+  td {
+    padding: 12px;
+    border: 2px solid variables.$smoke30;
+
+    ul {
+      li {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+  }
+}
