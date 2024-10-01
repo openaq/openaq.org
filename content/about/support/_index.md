@@ -1,6 +1,6 @@
 +++
-type = "about/support"
-title = "Support us"
+type = "about/sponsor"
+title = "Sponsor us"
 +++
 
 
@@ -21,7 +21,6 @@ Sponsors play a critical role in sustaining the world’s largest open-source ai
 | Chief Champion | starting at $20,000 |
 {{</table>}}
 
-
 ## Menu of Benefits
 
 We work with you to customize your sponsorship benefits based on your marketing
@@ -41,7 +40,6 @@ benefits.
 | $20,000 minimum sponsorship | Publicity above | Benefits above | <ul><li>Benefits above</li> <li> Opportunity to engage your employees and/or your favorite organization or academic institution in an air quality data hackathon</li></ul> |
 | $ amount mutually determined |  |  | Direct technical assistance around the OpenAQ Platform |
 {{</table>}}
-
 
 We look forward to discussing these opportunities with you.
 
