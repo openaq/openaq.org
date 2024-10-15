@@ -5,6 +5,8 @@ theme = 'openaq'
 copyright = "{year} OpenAQ. All rights reserved."
 enableGitInfo = true
 
+[sitemap]
+
 [markup]
   defaultMarkdownHandler = "goldmark"
   [goldmark]
