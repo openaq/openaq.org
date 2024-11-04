@@ -23,7 +23,7 @@ References:
 8. Manikonda, A., Zíková, N., Hopke, P. K., & Ferro, A. R. (2016). Laboratory assessment of low-cost PM monitors. Journal of Aerosol Science, 102, 29-40. https://doi.org/10.1016/j.jaerosci.2016.08.010 
 9. C﻿lements, A., Duvall, R. (2019). ORD SPEAR Program: Air Quality Sensors. https://www.epa.gov/sites/default/files/2020-01/documents/airsensor_evaluation_duvall_0.pdf
 
-Additional Resources:
+**Additional Resources on Correction Algorithms for Air Sensor Data:**
 
 Barkjohn, K.K.; Holder, A.L.; Frederick, S.G.; Clements, A.L. Correction and Accuracy of PurpleAir PM2.5 Measurements for Extreme Wildfire Smoke. Sensors 2022, 22, 9669. https://doi.org/10.3390/s22249669
 
