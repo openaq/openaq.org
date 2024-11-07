@@ -18,8 +18,6 @@ weight = 8
 
   * 10 km resolution, from 2005 to 2023 \[non-peer-reviewed]: https://doi.org/10.5281/zenodo.10807119
   * 2017-2022, archived ~500 continuous ambient air quality monitoring stations, daily scale: https://doi.org/10.34770/xtje-mj26
-
-
 * Downloadable U.S. Oil Refinery Fenceline Monitoring Data through Refinery Air Watch: https://www.refineryairwatch.org/ 
 * Open-source dataset for a long-term multi-city commercial air sensors study (Diez, et al.): https://doi.org/10.1038/s41597-024-03767-2
 * AQICN provides open Air Quality Index data: <https://aqicn.org/map/world> 
@@ -34,5 +32,6 @@ weight = 8
 * A﻿ir Sensor Performance Metrics: <https://www.epa.gov/air-sensor-toolbox/evaluation-emerging-air-sensor-performance> 
 * UNEP and WMO report on integrating air sensors to enhance air quality applications: https://wmo.int/publication-series/integrating-low-cost-sensor-systems-and-networks-enhance-air-quality-applications
 * U.S. Government Accountability Office's Air Quality Sensors: Policy Options to Help Address Implementation Challenges: https://www.gao.gov/products/gao-24-106393
+* Barkjohn, et al. (2024) Air Quality Sensor Experts Convene: Current Quality Assurance Considerations for Credible Data. https://doi.org/10.1021/acsestair.4c00125
 
 <!--EndFragment-->
