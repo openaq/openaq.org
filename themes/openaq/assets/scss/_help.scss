@@ -70,6 +70,9 @@
     justify-content: space-between;
     padding: 22px 20px;
     cursor: pointer;
+    svg {
+      fill: rgb(0, 0, 0);
+    }
   }
 
   &-content {
@@ -115,7 +118,8 @@ input:checked {
     border-radius: 12px 12px 0 0;
     background: variables.$sky120;
     color: white;
-    .expand-icon {
+    svg {
+      fill: rgb(255, 255, 255);
       transform: rotate(180deg);
     }
   }
