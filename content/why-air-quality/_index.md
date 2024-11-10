@@ -5,7 +5,7 @@ Air pollution is the 2nd leading risk factor for death and the leading environme
 
 Air pollution impacts our health in many ways, starting when we’re in the womb. Air pollution impacts practically every organ in the body and is associated with acute and chronic cardiovasculatory and  respiratory illnesses, as well as increased incidence of lung cancer, diabetes, and poor birth outcomes. [^4]
 
-The burden of air pollution is unequal, with some people being far more vulnerable and some breathing far more polluted air. For example, children are particularly susceptible to air pollution’s insidious effects—they breathe more rapidly than adults, taking in more polluted air, and are proportionally exposed at higher levels due to their small bodies and developing organs. A WHO report estimated that outdoor and indoor air pollution resulted in 543,000 deaths in children under the age of 5 years in 2016. [^5]
+The burden of air pollution is unequal, with some people being far more vulnerable and some breathing far more polluted air. For example, children are particularly susceptible to air pollution’s insidious effects—they breathe more rapidly than adults, taking in more polluted air, and are proportionally exposed at higher levels due to their small bodies and developing organs. Every single day, around 2,000 children under the age of 5 die from breathing polluted air. [^5]
 
 Marginalized communities are also unfairly burdened. Not only is the air they breathe typically more polluted, but they are also more susceptible to air pollution due to experiencing other poor health conditions caused by the broader social and environmental context in which they live. Structural racism and the legacy of colonialism play a large role in creating these health conditions and allowing for higher levels of exposure.
 
@@ -49,6 +49,6 @@ For organizations deploying air quality monitors, OpenAQ can ingest and share th
 
 [^4]: [Health Impact of Air Pollution](https://www.lung.org/research/sota/health-risks), American Lung Association
 
-[^5]: [Air Pollution and Child Health](https://iris.who.int/bitstream/handle/10665/275545/WHO-CED-PHE-18.01-eng.pdf?ua=1), World Health Organization
+[^5]: [Clean Air, Healthy Children](https://www.unicef.org/reports/clean-air-healthy-children-agenda-action)[](https://iris.who.int/bitstream/handle/10665/275545/WHO-CED-PHE-18.01-eng.pdf?ua=1), UNICEF
 
 [^6]: [Open Air Quality Data: The Global Landscape 2022](https://openaq.org/about/initiatives/publications/), OpenAQ
