@@ -7,10 +7,10 @@ This section contains the end-to-end testing of the website using the [Playwrigh
 
 ## Development
 
-Using Node v16 install the packages using yarn:
+Using Node v20 install the packages using npm:
 
 ```sh
-yarn install && yarn playwright install
+npm install && npm playwright install
 ```
 
 Before testing ensure the Hugo development server is running the site on port 1313 (default)
@@ -18,15 +18,11 @@ Before testing ensure the Hugo development server is running the site on port 13
 Once the installation has finished run the tests using:
 
 ```
-yarn playwright test
+npm playwright test
 ```
 
 To run the tests with tracing enabled run 
 
 ```sh
-yarn playwright test --trace on
+npm playwright test --trace on
 ```
-
-
-
-
