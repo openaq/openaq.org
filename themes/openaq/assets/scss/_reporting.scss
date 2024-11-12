@@ -11,6 +11,19 @@
 
   &-container {
     width: 800px;
+
+    .policies-section {
+      .policies-title {
+        @include mixins.heading1;
+        color: variables.$sky120;
+      }
+
+      ul {
+        @include mixins.body1;
+        margin: 20px 0 0 15px;
+      }
+    }
+
     .reporting-grid {
       margin: 60px 0 0 0;
       display: grid;
