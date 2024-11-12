@@ -4,6 +4,11 @@
       <img src="/svg/X_logo.svg" height="13" width="15" alt="X icon">
     </a>
     {{end}} 
+    {{with .Params.bluesky}}
+    <a href="{{ . | safeURL }}" target="_blank" rel="noreferrer noopener">
+      <img src="/svg/bluesky_logo.svg" height="15" width="15" alt="bluesky icon">
+    </a>
+    {{end}} 
     {{with .Params.mastadon}}
     <a href="{{ . | safeURL }}" target="_blank" rel="noreferrer noopener">
       <img src="/svg/mastadon.svg" height="15" width="15" alt="mastodon icon">
