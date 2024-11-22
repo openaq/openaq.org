@@ -40,3 +40,7 @@ enableGitInfo = true
   [[module.mounts]]
     source = "content/uploads/"
     target = "assets/"
+
+[privacy]
+  [privacy.youtube]
+    privacyEnhanced = true
