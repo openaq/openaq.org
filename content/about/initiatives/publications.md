@@ -15,13 +15,11 @@ Our most recent biennial assessment (2024) found that:
 
 Since our last assessment in 2022, there has been a small increase in the number of countries that have begun to monitor or that are publishing data in a more transparent manner. Because many countries are constrained by lack of resources, the report calls upon funders to support less-resourced governments that are keen to monitor air quality and share data. 
 
-![](/uploads/data_landscape_2022.png)
+![](/uploads/landscape-report-cover.png)
 
 *Open Air Quality Data: The Global Landscape 2024*
 
 Full report available as of December 9, 2024
-
-
 
 *Open Air Quality Data: The Global Landscape 2022*\
 [Summary](https://bit.ly/3uOSZXu)\
