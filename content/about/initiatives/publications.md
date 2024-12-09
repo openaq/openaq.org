@@ -17,15 +17,15 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 ![](/uploads/landscape-report-cover.png)
 
-*Open Air Quality Data: The Global Landscape 2024*
+### *Current Report on the Global Landscape of Open Air Quality Data*
 
-Full report available as of December 9, 2024
+*Open Air Quality Data: The Global Landscape 2024*
 
 [Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
 [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
-*PREVIOUS REPORTS:*
+### *Previous Reports on the Global Landscape of Open Air Quality Data*
 
 *Open Air Quality Data: The Global Landscape 2022*\
 [Summary](https://bit.ly/3uOSZXu)\
