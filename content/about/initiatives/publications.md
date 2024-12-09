@@ -11,9 +11,9 @@ Our most recent biennial assessment (2024) found that:
 
 * 36% of countries, representing a cumulative population of nearly one billion people, are not currently monitoring air quality. Most of these countries are low-income or lower-income countries.
 * In the most populated countries without a national government air quality monitoring program, air pollution is one of the top 7 risk factors for death and disability.
-* Barely over one-quarter of countries provide full and easy public access to maximally useful air quality data, impeding clean air progress. 
+* Barely over one-quarter of countries provide full and easy public access to maximally useful air quality data, impeding clean air progress.
 
-Since our last assessment in 2022, there has been a small increase in the number of countries that have begun to monitor or that are publishing data in a more transparent manner. Because many countries are constrained by lack of resources, the report calls upon funders to support less-resourced governments that are keen to monitor air quality and share data. 
+Since our last assessment in 2022, there has been a small increase in the number of countries that have begun to monitor or that are publishing data in a more transparent manner. Because many countries are constrained by lack of resources, the report calls upon funders to support less-resourced governments that are keen to monitor air quality and share data.
 
 ![](/uploads/landscape-report-cover.png)
 
@@ -21,7 +21,9 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 Full report available as of December 9, 2024
 
+[Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
+[Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
 *PREVIOUS REPORTS:*
 
