@@ -17,7 +17,7 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 ![](/uploads/landscape-report-cover.png)
 
-## *Current Report on the Global Landscape of Open Air Quality Data*
+### *Current Report on the Global Landscape of Open Air Quality Data*
 
 *Open Air Quality Data: The Global Landscape 2024*
 
@@ -25,9 +25,7 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
-
-
-## *Previous Reports on the Global Landscape of Open Air Quality Data*
+### *Previous Reports on the Global Landscape of Open Air Quality Data*
 
 *Open Air Quality Data: The Global Landscape 2022*\
 [Summary](https://bit.ly/3uOSZXu)\
