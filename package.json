@@ -1,18 +1,25 @@
 {
-  "name": "openaq.org",
-  "private": "true",
-  "version": "1.0.0",
-  "repository": "https://github.com/openaq/openaq.org.git",
-  "author": "OpenAQ <dev@openaq.org>",
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
   "dependencies": {
+    "astro": "^5.1.1",
+    "autoprefixer": "^10.4.20",
+    "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
-    "playwright": "^1.30.0"
+    "sass": "^1.83.0"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0",
-    "autoprefixer": "^10.4.13",
-    "cssnano": "^5.1.14",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0"
+    "cssnano": "^7.0.6",
+    "postcss": "^8.4.49",
+    "stylelint": "^16.12.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-config-standard-scss": "^14.0.0"
   }
 }

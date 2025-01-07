@@ -1,0 +1,47 @@
+@use 'openaq-design-system/scss/variables';
+@use 'openaq-design-system/scss/mixins/index.scss' as mixins;
+
+@mixin person-card($name, $color) {
+  .#{$name}-card {
+    border-radius: 22px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &__img {
+      width: 100%;
+      height: auto;
+    }
+
+    & > a {
+      display: flex;
+      &__img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &__description {
+      border-top: 6px solid $color;
+      padding: 0 12px 12px 12px;
+
+      .person-name {
+        @include mixins.subtitle2;
+        margin: 14px 0 6px 0;
+      }
+
+      .person-title {
+        @include mixins.subtitle3;
+        color: $color;
+        margin: 6px 0;
+      }
+
+      .person-bio {
+        @include mixins.body4;
+        text-decoration: none;
+        margin: 12px 0;
+      }
+    }
+  }
+}

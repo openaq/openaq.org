@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import StaffCard from '../../../components/people/StaffCard.astro';
+import type { CollectionEntry } from 'astro:content';
+import PageLayout from '../../../layouts/PageLayout.astro';
+const allStaff = await getCollection('staff');
+
+const socials = (staff: CollectionEntry<'staff'>) => {
+  return {
+    email: staff.data.email,
+    x: staff.data.x,
+    mastadon: staff.data.mastadon,
+    linkedin: staff.data.linkedin,
+    github: staff.data.github,
+    orcid: staff.data.orcid,
+    researchGate: staff.data.researchGate,
+    googleScholar: staff.data.googleScholar,
+    bluesky: staff.data.bluesky,
+  };
+};
+
+const sortByName = (a: CollectionEntry<'staff'>, b: CollectionEntry<'staff'>) => a.data.name.localeCompare(b.data.name)
+---
+
+<style lang="scss">
+  .person-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 22px;
+    row-gap: 22px;
+    margin: 20px 0;
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>
+
+<PageLayout>
+  <h1 class="gradient-title">Team</h1>
+  <p>
+    The OpenAQ Team implements the day-to-day work of the organization, striving
+    to meet the needs of those who contribute to, use and benefit from the
+    OpenAQ Platform. Based in the U.S., we work remotely.
+  </p>
+  <section class="person-grid">
+    {
+      allStaff
+        .sort(sortByName)
+        .map((staff) => (
+          <StaffCard
+            name={staff.data.name}
+            url={`/about/people/${staff.id}/`}
+            position={staff.data.position}
+            data={staff.body}
+            socials={socials(staff)}
+            portrait={staff.data.image}
+          />
+        ))
+    }
+  </section>
+</PageLayout>

@@ -1,0 +1,44 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Bubbles from "../components/Bubbles.astro";
+const { pageTitle } = Astro.props;
+
+
+import '../styles/main.scss';
+---
+
+<style lang="scss">
+	.main {
+
+    position: relative;
+
+	.content {
+		width: 800px;
+		margin: 0 auto;
+
+		z-index: 2;
+	}
+	}
+
+</style>
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
+	<main class="main">
+
+    <slot />
+</div>
+	</main>
+    <Footer />
+  </body>
+</html>

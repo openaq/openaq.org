@@ -1,7 +1,0 @@
-{{ $global := .global}}
-{{ $title :=  .context.Title }}
-{{ with .context.Params.featured_image }}
-    {{ $imageResource := ($global.Site.GetPage "section" "uploads").Resources.GetMatch (strings.TrimPrefix "/uploads/" . ) }}
-    {{ $resized := $imageResource.Resize "350x webp q65 picture"  }}
-    <img src="{{ $resized.RelPermalink }}" class="initiative-card-img" alt="{{ $title }}"/>
-{{ end }}

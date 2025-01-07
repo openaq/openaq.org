@@ -1,33 +1,48 @@
-# OpenAQ.org website
+# Astro Starter Kit: Basics
 
-## Development
+```sh
+npm create astro@latest -- --template basics
+```
 
-The website is built using [Hugo](https://gohugo.io) for content management and static site generation. Netlify Decap is used for a headless CMS.
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
 
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-For styles SCSS is used with the [openaq-design-system](https://github.com/openaq/openaq-design-system) SCSS library. Dart Sass is required to compile SCSS and must be installed and available in PATH for Hugo to access.
+![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-To use dart-sass with Hugo, install [dart-sass-embedded](https://github.com/sass/dart-sass-embedded) as follows:
+## 🚀 Project Structure
 
-1. Download the binary to match your platform from the releases page: https://github.com/sass/dart-sass-embedded/releases
+Inside of your Astro project, you'll see the following folders and files:
 
-2. Place the downloaded binary in the desired directory on your system. e.g. ~/bin/sass_embedded
+```text
+/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-3. Add the path to the binary to your system's PATH:
+To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
-    .zshrc
-    ```
-    export PATH="${HOME}/bin/sass_embedded:${PATH}"
-    ```
+## 🧞 Commands
 
-Dart Sass will now be discoverable by Hugo.
+All commands are run from the root of the project, from a terminal:
 
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## 👀 Want to learn more?
 
-## Content Guidance
-
-### Team photos
-
-Team portraits should be uploaded as a squaure image of least at 400px by 400px png. The portrait should include the subjects head and full shoulders down to mid-chest level. After resizing, use [remove.bg](https://remove.bg) to remove the background to create a transparent background around the subject.
-
-
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

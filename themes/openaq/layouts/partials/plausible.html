@@ -1,7 +1,0 @@
-{{ if hugo.IsProduction }}
-    <link rel="preconnect" href="https://plausible.io">
-    <script defer  data-domain="{{ .Site.Params.plausibleDomain }}" src="https://plausible.io/js/plausible.js" ></script>
-    {{ $js := resources.Get "js/plausible-init.js" | js.Build | resources.Minify }}
-    {{ $secureJS := $js | resources.Fingerprint "sha512" }}
-    <script type="text/javascript" src="{{ $secureJS.Permalink }}" integrity="{{ $secureJS.Data.Integrity }}" defer></script>
-{{ end }}
