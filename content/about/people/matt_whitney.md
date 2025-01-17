@@ -2,7 +2,7 @@
 type = "about/people"
 title = "Matt Whitney"
 group = "board"
-position = "board"
+position = "Member at large"
 email = "matt@openaq.org"
 x = "https://x.com/mattwhitney10"
 linkedin = "https://www.linkedin.com/in/matt-whitney-a6395265/"
