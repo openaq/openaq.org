@@ -13,7 +13,7 @@ Three core objectives drive the technical direction of the OpenAQ platform:
 
 3. Spur greater use of air quality data by introducing potential users to the platform and how it can be used
 
-## Objectives for 2025
+## Roadmap for 2025
 
 ### 1 Tools
 
@@ -27,7 +27,7 @@ Three core objectives drive the technical direction of the OpenAQ platform:
 
 * Develop and release an upload tool to more easily allow contributions from small projects.  
 
-* Acquire new and regain lost government-produced data prioritizing:  
+* Acquire new and regain lost government-produced data, prioritizing:  
 
   * India  
   * Brazil  
@@ -39,3 +39,5 @@ Three core objectives drive the technical direction of the OpenAQ platform:
 ### 3 Outreach and Documentation
 
 * Improve documentation sites (API documentations site, Python documentation, R documentation and CLI documentation) with more examples of how to use the platform for common use cases.
+
+This roadmap was largely informed by the OpenAQ community through outreach and the results of our [Community Survey](https://openaq.medium.com/the-2024-openaq-community-survey-results-71d0d8f42ff7). To keep up with OpenAQ news sign up for our [quarterly newsletter](https://link.openaq.org/newsletter) and make your voice heard by participating in upcoming community surveys.
