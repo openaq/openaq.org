@@ -13,7 +13,7 @@ This work involves maintaining and strategically increasing data coverage, parti
 
 To achieve the best platform possible, OpenAQ develops our technology with the following core values:
 
-* ***Open***: Anyone can access the data for free for non-commercial uses.
+* ***Open***: Anyone can access the data for free.
 * ***Open-Source***: We believe in transparency. You can see the underlying code.
 * ***Comprehensive***: We continually seek new sources of data around the globe to build a complete map.
 * ***Accessible***: We build tools for a variety of users.
