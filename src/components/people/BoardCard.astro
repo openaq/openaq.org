@@ -1,37 +1,38 @@
 ---
-import SocialIcons from "./SocialIcons.astro"
+import SocialIcons from "./SocialIcons.astro";
 
+import { Image } from "astro:assets";
 
-const { name, position, url, data, socials, image } = Astro.props
+const { name, position, data, socials, portrait } = Astro.props;
 
-
-import { Image } from 'astro:assets';
-
-
-const summary = (bio: string, length = 300): string => {
-    if (bio.length <= length) return bio;
-    return bio.substring(0, bio.lastIndexOf(" ", length)) + '...';
-}
+// const summary = (bio: string, length = 300): string => {
+//   if (bio.length <= length) return bio;
+//   return bio.substring(0, bio.lastIndexOf(" ", length)) + "...";
+// };
 ---
+
 <style lang="scss">
-    @use 'openaq-design-system/scss/variables';
-    @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
 
+  @use "./person-card" as *;
 
-    @use './person-card' as *;
-
-    @include person-card('team', variables.$sky100);
-  </style>
+  @include person-card("team", variables.$lavender120);
+</style>
 
 <article class="team-card">
-    <a href={ url }>
-        <Image class="person-image" src={image} height={252} width={252} alt={ name } />
+  <Image
+    class="person-image"
+    src={portrait}
+    height={252}
+    width={252}
+    alt={name}
+  />
 
-        <div class="team-card__description">
-            <h2 class="person-name">{ name }</h2>
-            <h3 class="person-title">{ position }</h3>
-            <p class="person-bio">{summary(data)}</p>
-            <SocialIcons {...socials}/>
-    </a>
+  <div class="team-card__description">
+    <h2 class="person-name">{name}</h2>
+    <h3 class="person-title">{position}</h3>
+    <p class="person-bio">{data}</p>
+    <SocialIcons {...socials} />
   </div>
 </article>

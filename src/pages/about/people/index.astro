@@ -1,25 +1,30 @@
 ---
-import { getCollection } from 'astro:content';
-import StaffCard from '../../../components/people/StaffCard.astro';
-import type { CollectionEntry } from 'astro:content';
-import PageLayout from '../../../layouts/PageLayout.astro';
-const allStaff = await getCollection('staff');
+import { getCollection } from "astro:content";
+import StaffCard from "../../../components/people/StaffCard.astro";
+import type { CollectionEntry } from "astro:content";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import BoardCard from "../../../components/people/BoardCard.astro";
+const allStaff = await getCollection("staff");
+const allBoard = await getCollection("board");
 
-const socials = (staff: CollectionEntry<'staff'>) => {
+type CollectionName = "staff" | "board";
+
+const socials = (entry: CollectionEntry<CollectionName>) => {
   return {
-    email: staff.data.email,
-    x: staff.data.x,
-    mastadon: staff.data.mastadon,
-    linkedin: staff.data.linkedin,
-    github: staff.data.github,
-    orcid: staff.data.orcid,
-    researchGate: staff.data.researchGate,
-    googleScholar: staff.data.googleScholar,
-    bluesky: staff.data.bluesky,
+    email: entry.data.email,
+    x: entry.data.x,
+    mastadon: entry.data.mastadon,
+    linkedin: entry.data.linkedin,
+    github: entry.data.github,
+    orcid: entry.data.orcid,
+    researchGate: entry.data.researchGate,
+    googleScholar: entry.data.googleScholar,
+    bluesky: entry.data.bluesky,
   };
 };
 
-const sortByName = (a: CollectionEntry<'staff'>, b: CollectionEntry<'staff'>) => a.data.name.localeCompare(b.data.name)
+const sortByName = (a: CollectionEntry<"staff">, b: CollectionEntry<"staff">) =>
+  a.data.name.localeCompare(b.data.name);
 ---
 
 <style lang="scss">
@@ -61,6 +66,26 @@ const sortByName = (a: CollectionEntry<'staff'>, b: CollectionEntry<'staff'>) =>
             portrait={staff.data.image}
           />
         ))
+    }
+  </section>
+  <h1 class="gradient-title">Board</h1>
+  <p>
+    The OpenAQ Governing Board stewards the organization, focusing on high-level
+    strategy, oversight and accountability. Members serve as ambassadors and
+    advocates for OpenAQ. The Executive Director serves as CEO of the Governing
+    Board.
+  </p>
+  <section class="person-grid">
+    {
+      allBoard.map((board) => (
+        <BoardCard
+          name={board.data.name}
+          position={board.data.position}
+          data={board.body}
+          socials={socials(board)}
+          portrait={board.data.image}
+        />
+      ))
     }
   </section>
 </PageLayout>
