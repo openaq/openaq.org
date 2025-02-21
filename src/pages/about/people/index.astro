@@ -23,8 +23,10 @@ const socials = (entry: CollectionEntry<CollectionName>) => {
   };
 };
 
-const sortByName = (a: CollectionEntry<"staff">, b: CollectionEntry<"staff">) =>
-  a.data.name.localeCompare(b.data.name);
+const sortByName = (
+  a: CollectionEntry<CollectionName>,
+  b: CollectionEntry<CollectionName>
+) => a.data.name.localeCompare(b.data.name);
 ---
 
 <style lang="scss">
@@ -77,15 +79,17 @@ const sortByName = (a: CollectionEntry<"staff">, b: CollectionEntry<"staff">) =>
   </p>
   <section class="person-grid">
     {
-      allBoard.map((board) => (
-        <BoardCard
-          name={board.data.name}
-          position={board.data.position}
-          data={board.body}
-          socials={socials(board)}
-          portrait={board.data.image}
-        />
-      ))
+      allBoard
+        .sort(sortByName)
+        .map((board) => (
+          <BoardCard
+            name={board.data.name}
+            position={board.data.position}
+            data={board.body}
+            socials={socials(board)}
+            portrait={board.data.image}
+          />
+        ))
     }
   </section>
 </PageLayout>
