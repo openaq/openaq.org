@@ -4,10 +4,12 @@ import StaffCard from "../../../components/people/StaffCard.astro";
 import type { CollectionEntry } from "astro:content";
 import PageLayout from "../../../layouts/PageLayout.astro";
 import BoardCard from "../../../components/people/BoardCard.astro";
+import AdvisorCard from "../../../components/people/AdvisorCard.astro";
 const allStaff = await getCollection("staff");
 const allBoard = await getCollection("board");
+const allAdvisors = await getCollection("advisors");
 
-type CollectionName = "staff" | "board";
+type CollectionName = "staff" | "board" | "advisors";
 
 const socials = (entry: CollectionEntry<CollectionName>) => {
   return {
@@ -88,6 +90,27 @@ const sortByName = (
             data={board.body}
             socials={socials(board)}
             portrait={board.data.image}
+          />
+        ))
+    }
+  </section>
+  <h1>Advisors</h1>
+  <p>
+    Members of the OpenAQ Advisory Board provide strategic advice and are
+    enthusiastic advocates for OpenAQ in their respective fields and
+    communities.
+  </p>
+  <section class="person-grid">
+    {
+      allAdvisors
+        .sort(sortByName)
+        .map((advisor) => (
+          <AdvisorCard
+            name={advisor.data.name}
+            position={advisor.data.position}
+            data={advisor.body}
+            socials={socials(advisor)}
+            portrait={advisor.data.image}
           />
         ))
     }
