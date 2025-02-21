@@ -1,14 +1,7 @@
 ---
-// import SocialIcons from "./SocialIcons.astro";
-
-const { name, position, portrait, country } = Astro.props;
-
 import { Image } from "astro:assets";
 
-// const summary = (bio: string, length = 300): string => {
-//   if (bio.length <= length) return bio;
-//   return bio.substring(0, bio.lastIndexOf(" ", length)) + "...";
-// };
+const { name, position, portrait, data } = Astro.props;
 ---
 
 <style lang="scss">
@@ -20,7 +13,7 @@ import { Image } from "astro:assets";
   @include person-card("team", variables.$ocean120);
 </style>
 
-<article class="advisor-card">
+<article class="team-card">
   <Image
     class="person-image"
     src={portrait}
@@ -28,9 +21,9 @@ import { Image } from "astro:assets";
     width={252}
     alt={name}
   />
-  <div class="advisor-card__description">
+  <div class="team-card__description">
     <h2 class="person-name">{name}</h2>
     <h3 class="person-title">{position}</h3>
-    <p class="person-bio">{country}</p>
+    <p class="person-bio">{data}</p>
   </div>
 </article>
