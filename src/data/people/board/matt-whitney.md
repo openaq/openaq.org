@@ -2,7 +2,7 @@
 name: "Matt Whitney"
 position: "Member at large"
 email: "matt@openaq.org"
-image: "../../../assets/images/matt_whitney.png"
+image: "@assets/images/matt_whitney.png"
 linkedin: "https://www.linkedin.com/in/matt-whitney-a6395265/"
 x: "https://x.com/mattwhitney10"
 ---

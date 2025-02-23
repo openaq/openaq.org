@@ -10,7 +10,7 @@ github : "https://github.com/colleenrosales"
 researchGate : "https://www.researchgate.net/profile/Colleen_Marciel_Rosales"
 orcid : "https://orcid.org/0000-0002-8925-8352"
 googleScholar : "https://scholar.google.com/citations?user:Z9VntzsAAAAJ&hl:en&oi:ao"
-image : "../../../assets/images/colleen_rosales.png"
+image : "@assets/images/colleen_rosales.png"
 ---
 
 Colleen joined OpenAQ August 2022. At OpenAQ, Colleen builds strategic relationships with air quality stakeholders worldwide—introducing people to the OpenAQ platform, spurring data-informed projects that advance clean air objectives, and supporting partnerships across sectors and geographies.

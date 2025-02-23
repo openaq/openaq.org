@@ -4,7 +4,7 @@ position : 'Executive Director'
 group : 'team'
 email : 'chris@openaq.org'
 linkedin : 'https://www.linkedin.com/in/chrishagerbaumer/'
-image : '../../../assets/images/chris_hagerbaumer.png'
+image : '@assets/images/chris_hagerbaumer.png'
 quote : '"What happens to any of us, anywhere in the world, had better be the business of all of us." -Mamie Till'
 ---
 

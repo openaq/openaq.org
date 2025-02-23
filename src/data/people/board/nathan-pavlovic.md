@@ -2,7 +2,7 @@
 name: "Nathan Pavlovic"
 position: "Member at large"
 email: "nathan@openaq.org"
-image: "../../../assets/images/nathan_pavlovic.png"
+image: "@assets/images/nathan_pavlovic.png"
 linkedin: "https://www.linkedin.com/in/nathanpavlovic/"
 mastadon: "https://fediscience.org/@N_pavlovic"
 ---

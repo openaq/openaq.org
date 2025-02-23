@@ -1,7 +1,7 @@
 ---
 name: "Priya Shankar"
 position: "Bloomberg Philanthropies"
-image: "../../../assets/images/priya_shankar.png"
+image: "@assets/images/priya_shankar.png"
 ---
 
 United States

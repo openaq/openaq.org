@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import InitiativesLayout from '../../../layouts/InitiativesLayout.astro';
+import InitiativesLayout from '@layouts/InitiativesLayout.astro';
 
 export async function getStaticPaths() {
   const initiatives = await getCollection('initiatives');

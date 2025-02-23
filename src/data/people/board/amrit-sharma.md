@@ -2,7 +2,7 @@
 name: "Amrit Sharma"
 position: "Secretary"
 email: "amrit@openaq.org"
-image: "../../../assets/images/amrit_sharma.png"
+image: "@assets/images/amrit_sharma.png"
 linkedin: "https://www.linkedin.com/in/amritsharma"
 x: "https://x.com/amrit_sharma"
 ---
