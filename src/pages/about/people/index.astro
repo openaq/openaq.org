@@ -5,11 +5,13 @@ import type { CollectionEntry } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import BoardCard from "@components/people/BoardCard.astro";
 import AdvisorCard from "@components/people/AdvisorCard.astro";
+import AmbassadorCard from "@components/people/AmbassadorCard.astro";
 const allStaff = await getCollection("staff");
 const allBoard = await getCollection("board");
 const allAdvisors = await getCollection("advisors");
+const allAmbassadors = await getCollection("ambassadors");
 
-type CollectionName = "staff" | "board" | "advisors";
+type CollectionName = "staff" | "board" | "advisors" | "ambassadors";
 
 const socials = (entry: CollectionEntry<CollectionName>) => {
   return {
@@ -111,6 +113,32 @@ const sortByName = (
             data={advisor.body}
             socials={socials(advisor)}
             portrait={advisor.data.image}
+          />
+        ))
+    }
+  </section>
+
+  <h1 class="gradient-title">Community Ambassadors</h1>
+  <p>
+    Together with OpenAQ, Community Ambassadors commit to advocating for data
+    transparency and contribute to the collective action against air pollution.
+    Meet the 2024 cohort below, and learn more about the program <a href=""
+      >here</a
+    >.
+  </p>
+  <section class="person-grid">
+    {
+      allAmbassadors
+        .sort(sortByName)
+        .map((ambassador) => (
+          <AmbassadorCard
+            name={ambassador.data.name}
+            country={ambassador.data.country}
+            url={`/about/people/${ambassador.id}/`}
+            position={ambassador.data.position}
+            data={ambassador.body}
+            socials={socials(ambassador)}
+            portrait={ambassador.data.image}
           />
         ))
     }

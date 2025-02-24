@@ -66,4 +66,24 @@ const advisors = defineCollection({
     }),
 });
 
-export const collections = { initiatives, staff, board, advisors };
+const ambassadors = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/data/people/ambassadors" }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      position: z.string(),
+      country: z.string(),
+      email: z.string().email().optional(),
+      image: image(),
+      bluesky: z.string().url().optional(),
+      linkedin: z.string().url().optional(),
+      github: z.string().url().optional(),
+      x: z.string().url().optional(),
+      mastadon: z.string().url().optional(),
+      orcid: z.string().url().optional(),
+      researchGate: z.string().url().optional(),
+      googleScholar: z.string().url().optional(),
+    }),
+});
+
+export const collections = { initiatives, staff, board, advisors, ambassadors };

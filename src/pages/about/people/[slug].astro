@@ -1,30 +1,34 @@
 ---
-import { getCollection, render, type CollectionEntry } from 'astro:content';
-import PageLayout from '@layouts/PageLayout.astro';
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
 
-import SocialIcons from '@components/people/SocialIcons.astro';
+import SocialIcons from "@components/people/SocialIcons.astro";
 
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
+
+type CollectionName = "staff" | "ambassadors";
 
 export async function getStaticPaths() {
-  const staff = await getCollection('staff');
-  return staff.map((person) => ({
+  const staff = await getCollection("staff");
+  const ambassadors = await getCollection("ambassadors");
+
+  return [...staff, ...ambassadors].map((person) => ({
     params: { slug: person.id },
     props: { person },
   }));
 }
 
-const socials = (staff: CollectionEntry<'staff'>) => {
+const socials = (entry: CollectionEntry<CollectionName>) => {
   return {
-    email: staff.data.email,
-    x: staff.data.x,
-    mastadon: staff.data.mastadon,
-    linkedin: staff.data.linkedin,
-    github: staff.data.github,
-    orcid: staff.data.orcid,
-    researchGate: staff.data.researchGate,
-    googleScholar: staff.data.googleScholar,
-    bluesky: staff.data.bluesky,
+    email: entry.data.email,
+    x: entry.data.x,
+    mastadon: entry.data.mastadon,
+    linkedin: entry.data.linkedin,
+    github: entry.data.github,
+    orcid: entry.data.orcid,
+    researchGate: entry.data.researchGate,
+    googleScholar: entry.data.googleScholar,
+    bluesky: entry.data.bluesky,
   };
 };
 
@@ -34,8 +38,8 @@ const { Content } = await render(person);
 ---
 
 <style lang="scss">
-  @use 'openaq-design-system/scss/variables' as variables;
-  @use 'openaq-design-system/scss/mixins/index' as mixins;
+  @use "openaq-design-system/scss/variables" as variables;
+  @use "openaq-design-system/scss/mixins/index" as mixins;
 
   .person-content {
     width: 800px;
