@@ -1,6 +1,6 @@
 ---
 title: "Fast Forward"
 group: "partner"
-image: "@assets/images/fastforward_wordmark-l_blue.png"
+image: "@assets/images/fast_forward_logo.png"
 homepage: "https://www.ffwd.org/"
 ---

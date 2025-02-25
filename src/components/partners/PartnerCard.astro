@@ -1,0 +1,39 @@
+---
+const {
+  name,
+  position,
+  url,
+  data,
+  socials,
+  portrait,
+  country,
+  title,
+  homepage,
+} = Astro.props;
+
+import { Image } from "astro:assets";
+---
+
+<!-- <style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  @use "./person-card" as *;
+
+  @include person-card("team", variables.$sky100);
+
+  .team-card:hover {
+    @include mixins.box-shadow;
+  }
+</style> -->
+<article class="partners-card">
+  <a href={homepage} target="_blank" rel="noopener noreferrer">
+    <Image
+      class="partner-image"
+      src={portrait}
+      height={252}
+      width={252}
+      alt={title}
+    />
+  </a>
+</article>

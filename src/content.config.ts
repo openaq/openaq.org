@@ -2,6 +2,17 @@ import { defineCollection, z } from "astro:content";
 
 import { glob } from "astro/loaders";
 
+const partners = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/data/partners" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      name: z.string().optional(),
+      homepage: z.string().url(),
+    })
+});
+
 const initiatives = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/data/initiatives" }),
   schema: ({ image }) =>
@@ -90,4 +101,4 @@ const ambassadors = defineCollection({
     }),
 });
 
-export const collections = { initiatives, staff, board, advisors, ambassadors };
+export const collections = { partners, initiatives, staff, board, advisors, ambassadors };
