@@ -24,5 +24,7 @@ const { pageTitle } = Astro.props;
         <div class="content">
         <h1 class="type-display-1 gradient-title">{pageTitle}</h1>
         <slot />
+
         </div>  
+        <slot name="banner" slot="banner" />
       </BaseLayout>

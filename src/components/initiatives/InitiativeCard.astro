@@ -3,32 +3,78 @@
 
 import { Image } from "astro:assets";
 
-const { title, portrait, name, url } = Astro.props;
+const { name, image, url, body } = Astro.props;
 ---
 
-<!-- 
 <style lang="scss">
-  //   @use "openaq-design-system/scss/variables";
-  //   @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+    @use "openaq-design-system/scss/variables";
+    @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+.initiative-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid variables.$smoke10;
+  border-radius: 22px;
+  gap: 20px;
+  padding: 20px;
 
-  //   @use "./initiative-card" as *;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 
-  //   @include initiative-card("initiative", variables.$lavender120);
-</style> -->
+  &-img {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .initiative-description {
+    flex: 3;
+
+    .initiative-description__title {
+      @include mixins.heading2;
+    }
+
+    .initiative-description__body {
+      * {
+        @include mixins.body1;
+        color: variables.$smoke100;
+      }
+    }
+
+    .initiative-tags {
+      padding: 10px 20px;
+      display: flex;
+      gap: 12px;
+    }
+  }
+}
+
+</style>
 <article class="initiative-card">
-  <a href={url}>
-    <Image
-      class="initiative-card-image"
-      src={portrait}
-      height={252}
-      width={252}
-      alt=""
-    />
-
-    <div class="initiative-description">
-      <h2 class="initiative-description__title">{title}</h2>
-      <!-- <h3 class="person-title">{position}</h3>
-    <p class="person-bio">{data}</p> -->
+    <div class="initiative-card-img">
+        <a href="">
+            <Image
+            class="initiative-card-image"
+            src={image}
+            height={252}
+            width={252}
+            alt="{name}"
+          />
+        </a>
     </div>
-  </a>
+        <div class="initiative-description">
+            <h2 class="inititiative-description__title">{ name }</h2>
+            <div class="initiative-description__body">
+                <a href="">
+                    {body}
+                </a>
+            </div>
+        </div>
 </article>
+
+

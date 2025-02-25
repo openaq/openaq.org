@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+
+const { name, url, image, body } = Astro.props;
+---
+<style lang="scss">
+  @use 'openaq-design-system/scss/variables';
+  @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
+
+    .partner-info-card {
+        background-color: white;
+        display: flex;
+        height: 180px;
+        width: 390px;
+        border: 1px solid variables.$smoke10;
+        border-radius: 22px;
+        padding: 10px 0;
+
+        &__img {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+
+        img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        
+        }
+        &__body {
+            @include mixins.body5;
+            display: flex;
+            flex: 1;
+            padding: 0 20px;
+            border-left: 1px solid variables.$smoke10;
+            align-items: center;
+            justify-content: center;
+          }
+    }
+</style>
+
+<a
+href={url}
+target="_blank"
+rel="noopener noreferrer"
+>
+<article class="partner-info-card">
+    <div class="partner-info-card__img">
+        <Image src={image} alt={name} />
+    </div>
+    <p class="partner-info-card__body">{body}</p>
+
+</article>
+</a>

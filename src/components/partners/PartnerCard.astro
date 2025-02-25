@@ -1,39 +1,40 @@
 ---
-const {
-  name,
-  position,
-  url,
-  data,
-  socials,
-  portrait,
-  country,
-  title,
-  homepage,
-} = Astro.props;
+const { name, url, image} = Astro.props;
 
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
 ---
 
-<!-- <style lang="scss">
-  @use "openaq-design-system/scss/variables";
-  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+<style lang="scss">
+  @use 'openaq-design-system/scss/variables';
+  @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
 
-  @use "./person-card" as *;
+  .partner-card {
+    background-color: white;
+    display: flex;
+    height: 180px;
+    width: 180px;
+    border: 1px solid variables.$smoke10;
+    border-radius: 22px;
+    padding: 20px 0;
 
-  @include person-card("team", variables.$sky100);
+    &__img {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      padding: 0 16px;
 
-  .team-card:hover {
-    @include mixins.box-shadow;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
-</style> -->
-<article class="partners-card">
-  <a href={homepage} target="_blank" rel="noopener noreferrer">
-    <Image
-      class="partner-image"
-      src={portrait}
-      height={252}
-      width={252}
-      alt={title}
-    />
-  </a>
+</style>
+<article class="partner-card">
+  <div class="partner-card__img">
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      <Image src={image} alt={name} />
+    </a>
+  </div>
 </article>

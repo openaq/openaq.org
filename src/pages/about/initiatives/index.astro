@@ -1,20 +1,18 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
-import { Content } from "../../data/initiatives.md";
 import { getCollection } from "astro:content";
 import InitiativeCard from "@components/initiatives/InitiativeCard.astro";
 import type { CollectionEntry } from "astro:content";
-console.log("🚀 Page is loading...");
+
 const allInitiatives = await getCollection("initiatives");
-console.log("✅ All initiatives:", allInitiatives);
 
 const sortByName = (
   a: CollectionEntry<"initiatives">,
   b: CollectionEntry<"initiatives">
-) => a.data.title.localeCompare(b.data.title);
+) => a.data.name.localeCompare(b.data.name);
 ---
 
-<!-- <style lang="scss">
+<style lang="scss">
   .initiative-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -22,7 +20,7 @@ const sortByName = (
     width: 800px;
     z-index: 2;
   }
-</style> -->
+</style>
 <PageLayout>
   <h1 class="gradient-title">Initiatives</h1>
   <section class="initiative-grid">
@@ -31,10 +29,9 @@ const sortByName = (
         .sort(sortByName)
         .map((initiative) => (
           <InitiativeCard
-            url={`/about/people/${initiative.id}/`}
             name={initiative.data.name}
-            title={initiative.data.title}
-            portrait={initiative.data.image}
+            image={initiative.data.image}
+            body={initiative.body}
           />
         ))
     }

@@ -1,5 +1,5 @@
 ---
-title: "OpenAQ Data Platform: Providing Air Quality Data"
+name: "OpenAQ Data Platform: Providing Air Quality Data"
 image: "@assets/images/openaq-logo.png"
 ---
 

@@ -1,0 +1,118 @@
+---
+
+import Bubbles from "@components/Bubbles.astro";
+
+import StructuredData from '@assets/svg/data-structured.svg';
+import VolunteerActivism from '@assets/svg/volunteer_activism.svg';
+
+
+---
+
+
+<style lang="scss">
+  @use 'openaq-design-system/scss/variables';
+  @use 'openaq-design-system/scss/utilities';
+  @use 'openaq-design-system/scss/buttons';
+  @use '../styles/mixins.scss' as local-mixins;
+
+.community-banner {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 430px;
+  width: 100%;
+  background-color: variables.$lavender120;
+  @include local-mixins.bubbles(160, 'left');
+
+  &-content {
+    max-width: 850px;
+    display: flex;
+    gap: 80px;
+
+    .community-overview {
+      flex: 1;
+    }
+
+    .community-participate {
+      display: flex;
+
+      gap: 36px;
+      flex: 1;
+
+      &-description {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 36px;
+
+        .btn {
+          width: fit-content;
+        }
+      }
+    }
+
+    .community-support {
+      display: flex;
+      flex: 1;
+      gap: 36px;
+
+      &-description {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 36px;
+        .btn {
+          width: fit-content;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    & {
+      height: auto;
+      padding: 40px 32px;
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+      }
+    }
+  }
+}
+
+</style>
+
+<section class="community-banner">
+    <Bubbles />
+
+    <div class="community-banner-content">
+        <div class="community-overview">
+            <span class="type-heading-1 text-white">
+                Join a community that believes everyone has the right to clean air.
+            </span>
+        </div>
+        <div class="community-participate">
+            <div>
+                <StructuredData width={48} height={48} fill="#fff"/>
+            </div>
+            <div class="community-participate-description">
+
+                <span class="type-subtitle-1 text-white">Be a data source, a data consumer or a platform builder.</span>
+                <a href="mailto:info@openaq.org" class="btn btn-secondary community-banner-participate">Participate</a>
+            </div>
+        </div>
+        <div class="community-support">
+            <div>
+                <VolunteerActivism width={48} height={48} fill="#fff"/>
+            </div>
+            <div class="community-support-description">
+                <span class="type-subtitle-1 text-white">Contribute to our fight against air inequality.</span>
+                <a href="https://secure.givelively.org/donate/openaq-inc/" class="btn btn-secondary community-banner-support" target="_blank" rel="noreferrer noopener">Support</a>
+            </div>
+        </div>
+    </div>
+</section>
