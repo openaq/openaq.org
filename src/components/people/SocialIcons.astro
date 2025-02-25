@@ -1,6 +1,15 @@
 ---
-
-const {x, bluesky, mastadon, linkedin, github, email, googleScholar, orcid, researchGate} = Astro.props;
+const {
+  x,
+  bluesky,
+  mastadon,
+  linkedin,
+  github,
+  email,
+  googleScholar,
+  orcid,
+  researchGate,
+} = Astro.props;
 
 const emailHref = `mailto:${email}`;
 
@@ -16,68 +25,103 @@ import MailLogo from '@assets/svg/mail.svg';
 ---
 
 <style lang="scss">
-    .person-social {
-        display: flex;
-        gap: 18px;
-        align-items: center;
-        align-content: flex-start;
+  .person-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    align-content: flex-start;
 
-        a {
-            display: flex;
-            align-items: centerś
-        }
+    a {
+      display: flex;
+      align-items: centerś;
     }
+  }
 </style>
 
 <div class="person-social">
-    { email ? 
-        <a href={emailHref}>
-            <MailLogo height={12} width={15}/>
-        </a> : ""}
+  {
+    email ? (
+      <a href={emailHref}>
+        <MailLogo height={12} width={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
 
-{ linkedin ? 
-    <a href={linkedin} target="_blank" rel="noreferrer noopener">
-        <LinkedinLogo size={15}/>
-    </a>
-    : ""}
+  {
+    linkedin ? (
+      <a href={linkedin} target="_blank" rel="noreferrer noopener">
+        <LinkedinLogo size={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
 
-{ github ? 
-    <a href={github} target="_blank" rel="noreferrer noopener">
-        <GithubLogo size={15}/>
-    </a>
-    : ""}
-    {x ? 
-         <a href={x} target="_blank" rel="noreferrer noopener">
-            <XLogo size={15}/>
-    </a>
-     : 
-     
-     ''}
+  {
+    github ? (
+      <a href={github} target="_blank" rel="noreferrer noopener">
+        <GithubLogo size={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
+  {
+    x ? (
+      <a href={x} target="_blank" rel="noreferrer noopener">
+        <XLogo size={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
 
-    { bluesky ? 
-    <a href={bluesky} target="_blank" rel="noreferrer noopener">
-        <BlueskyLogo size={15}/>
-    </a>: ""} 
-    { mastadon ? 
-    <a href={mastadon} target="_blank" rel="noreferrer noopener">
-        <MastadonLogo  size={15}/>
-    </a>: ""}
+  {
+    bluesky ? (
+      <a href={bluesky} target="_blank" rel="noreferrer noopener">
+        <BlueskyLogo size={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
+  {
+    mastadon ? (
+      <a href={mastadon} target="_blank" rel="noreferrer noopener">
+        <MastadonLogo size={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
 
-
-
-    { googleScholar ? 
-    <a href={googleScholar} target="_blank" rel="noreferrer noopener">
-        <GoogleScholarLogo size={15}/>
-    </a>
-    : ""}
-    { orcid ? 
-    <a href={orcid} target="_blank" rel="noreferrer noopener">
+  {
+    googleScholar ? (
+      <a href={googleScholar} target="_blank" rel="noreferrer noopener">
+        <GoogleScholarLogo size={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
+  {
+    orcid ? (
+      <a href={orcid} target="_blank" rel="noreferrer noopener">
         <OrcidLogo size={15} />
-    </a>
-    : ""}
-    { researchGate ? 
-    <a href={researchGate} target="_blank" rel="noreferrer noopener">
-        <ResearchGateLogo size={15}/>
-    </a>
-    : ""}
-  </div>
+      </a>
+    ) : (
+      ''
+    )
+  }
+  {
+    researchGate ? (
+      <a href={researchGate} target="_blank" rel="noreferrer noopener">
+        <ResearchGateLogo size={15} />
+      </a>
+    ) : (
+      ''
+    )
+  }
+</div>

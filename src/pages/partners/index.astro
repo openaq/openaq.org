@@ -5,6 +5,7 @@ import type { CollectionEntry } from 'astro:content';
 import PartnerCard from '@components/partners/PartnerCard.astro';
 import PartnerInfoCard from '@components/partners/PartnerInfoCard.astro';
 import CommunityBanner from '@components/CommunityBanner.astro';
+import ExplorerBanner from '@components/ExplorerBanner.astro';
 
 const allPartners = await getCollection('partners');
 const allAirSensors = await getCollection('airsensors');
@@ -110,5 +111,6 @@ const sortByName = (
     </div>
   </section>
   <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
 </PageLayout>
 
