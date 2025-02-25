@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-const { name, position, portrait, data } = Astro.props;
+const { name, position, portrait, data, country } = Astro.props;
 ---
 
 <style lang="scss">
@@ -24,6 +24,6 @@ const { name, position, portrait, data } = Astro.props;
   <div class="team-card__description">
     <h2 class="person-name">{name}</h2>
     <h3 class="person-title">{position}</h3>
-    <p class="person-bio">{data}</p>
+    <p class="person-bio">{country}</p>
   </div>
 </article>

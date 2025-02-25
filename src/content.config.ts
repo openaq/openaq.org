@@ -53,6 +53,7 @@ const advisors = defineCollection({
     z.object({
       name: z.string(),
       position: z.string(),
+      country: z.string(),
       email: z.string().email().optional(),
       image: image(),
       bluesky: z.string().url().optional(),
