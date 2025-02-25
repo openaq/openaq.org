@@ -1,6 +1,8 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
+import CommunityBanner from '@components/CommunityBanner.astro';
+import ExplorerBanner from '@components/ExplorerBanner.astro';
 
 import SocialIcons from "@components/people/SocialIcons.astro";
 
@@ -129,4 +131,6 @@ const { Content } = await render(person);
       </div>
     </article>
   </div>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
 </PageLayout>
