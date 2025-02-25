@@ -4,4 +4,5 @@ image: "@assets/images/cams-net.png"
 url: "https://camsnet.org/"
 ---
 
-foo
+CAMS-Net is an international “network of networks” that focuses on the usage and
+application of low-cost sensor air quality data.

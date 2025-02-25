@@ -3,4 +3,6 @@ name: "Earth Science Information Partners (ESIP)"
 image: "@assets/images/esip-logo.png"
 url: "https://www.esipfed.org/"
 ---
-foo
+
+ESIP is a community of partner organizations and volunteers that address global
+Earth science data across disciplines.
