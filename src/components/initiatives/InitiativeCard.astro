@@ -1,0 +1,34 @@
+---
+// import SocialIcons from "./SocialIcons.astro";
+
+import { Image } from "astro:assets";
+
+const { title, portrait, name, url } = Astro.props;
+---
+
+<!-- 
+<style lang="scss">
+  //   @use "openaq-design-system/scss/variables";
+  //   @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  //   @use "./initiative-card" as *;
+
+  //   @include initiative-card("initiative", variables.$lavender120);
+</style> -->
+<article class="initiative-card">
+  <a href={url}>
+    <Image
+      class="initiative-card-image"
+      src={portrait}
+      height={252}
+      width={252}
+      alt=""
+    />
+
+    <div class="initiative-description">
+      <h2 class="initiative-description__title">{title}</h2>
+      <!-- <h3 class="person-title">{position}</h3>
+    <p class="person-bio">{data}</p> -->
+    </div>
+  </a>
+</article>

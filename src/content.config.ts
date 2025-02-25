@@ -4,9 +4,12 @@ import { glob } from "astro/loaders";
 
 const initiatives = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/data/initiatives" }),
-  schema: z.object({
-    title: z.string(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      name: z.string().optional(),
+    })
 });
 
 const staff = defineCollection({

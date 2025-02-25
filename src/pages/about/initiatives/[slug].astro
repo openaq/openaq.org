@@ -1,11 +1,12 @@
 ---
-import { getCollection, render } from 'astro:content';
-import InitiativesLayout from '@layouts/InitiativesLayout.astro';
+import { getCollection, render } from "astro:content";
+import InitiativesLayout from "@layouts/InitiativesLayout.astro";
 
 export async function getStaticPaths() {
-  const initiatives = await getCollection('initiatives');
-  return initiatives.map(initiative => ({
-    params: { slug: initiative.id }, props: { initiative },
+  const initiatives = await getCollection("initiatives");
+  return initiatives.map((initiative) => ({
+    params: { slug: initiative.id },
+    props: { initiative },
   }));
 }
 
