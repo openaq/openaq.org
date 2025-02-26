@@ -2,6 +2,23 @@ import { defineCollection, z } from 'astro:content';
 
 import { glob } from 'astro/loaders';
 
+const whyOpenData = defineCollection({
+  loader: glob({ pattern: ['*.md'], base: 'src/data/why-open-data/why-open-data' }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      image: image(),
+    }),
+});
+
+const whyAirQuality = defineCollection({
+  loader: glob({ pattern: ['*.md'], base: 'src/data/why-air-quality/why-air-quality' }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      image: image(),
+    }),
+});
 
 const cookies = defineCollection({
   loader: glob({ pattern: ['*.md'], base: 'src/data/cookies' }),
@@ -138,6 +155,8 @@ const ambassadors = defineCollection({
 });
 
 export const collections = {
+  whyOpenData,
+  whyAirQuality,
   cookies,
   funders,
   airsensors,
