@@ -16,21 +16,22 @@ dayjs.extend(utc);
 
 const cookies = await getEntry('cookies', 'index');
 if (!cookies) {
-  throw new Error('Could not cookies');
+  throw new Error('Could not find cookies');
 }
 const { Content, remarkPluginFrontmatter } = await render(cookies);
 
-
+console.log(remarkPluginFrontmatter)
 const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
   .utc()
-  .format("HH:mm:ss DD MMMM YYYY UTC");
-  console.log(lastModified)
+  .format("DD MMMM YYYY");
 ---
+
+
 
 <PageLayout>
     <section class="cookies-section">
     <h1 class="gradient-title">Cookie policy</h1>
-        <p class="type-body-1">Last updated: {{ lastModified }}</p>
+        <p class="type-body-1">Last updated: { lastModified }</p>
         <Content />
     </section>
   <CommunityBanner slot="banner" />

@@ -5,6 +5,8 @@ import HeroImage from '@components/HeroImage.astro';
 import { Image } from 'astro:assets';
 import Hero from '@assets/images/hero.webp'
 
+import codeSnippet from '@assets/images/r-code-snippet.png';
+
 ---
 
 <style lang="scss">
@@ -330,7 +332,10 @@ a {
 
 <section class="api-section">
     <div class="api-section__img">
-        <img src="img/code_snippet.webp" alt="">
+      <Image
+        src={codeSnippet}
+        alt="code snippet of openaq R package"
+      />
     </div>
     <div class="api-section-blurb">
         <div class="api-section-blurb__content">
