@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import InitiativesLayout from "@layouts/InitiativesLayout.astro";
-import { Image } from "astro:assets";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
 
@@ -17,98 +16,7 @@ const { initiative } = Astro.props;
 const { Content } = await render(initiative);
 ---
 
-<style lang="scss">
-  @use "openaq-design-system/scss/variables";
-  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
-  // @use "openaq-design-system/mixins/index.scss" as mixins;
 
-  .single-article-content {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin: 0 0 100px 0;
-
-    // @include local-mixins.bubbles();
-
-    &-container {
-      width: 800px;
-      z-index: 2;
-      .single-article-body {
-        margin: 20px 0 60px 0;
-
-        h1 {
-          @include mixins.heading2;
-          color: variables.$sky120;
-          margin: 40px 0;
-        }
-
-        h2 {
-          @include mixins.heading3;
-          color: variables.$sky120;
-          margin: 20px 0;
-        }
-
-        h3,
-        h4 {
-          @include mixins.subtitle3;
-          color: variables.$sky120;
-          margin: 20px 0;
-        }
-
-        a {
-          @include mixins.link2;
-        }
-
-        p {
-          @include mixins.body2;
-          margin: 20px 0 0 0;
-        }
-
-        ul {
-          @include mixins.body2;
-          margin: 20px 0 0 15px;
-        }
-
-        hr {
-          margin: 40px 0;
-          border: 0;
-          border-bottom: 1px dashed variables.$smoke30;
-        }
-
-        div:has(iframe) {
-          margin: 20px 0;
-        }
-
-        img {
-          width: 100%;
-          height: auto;
-          border-radius: 22px;
-          margin: 20px 0 0 0;
-        }
-      }
-    }
-
-    @media (max-width: 1000px) {
-      & {
-        &-container {
-          width: 80%;
-        }
-      }
-    }
-  }
-
-  .explore-more-btn {
-    width: fit-content;
-    margin: 40px 0 0 0;
-  }
-</style>
-<InitiativesLayout frontmatter={initiative.data}>
-  <div class="single-article-content">
-    <article class="single-article-content-container">
-      <div class="single-article-body">
-        <h1 class="gradient-title">{initiative.data.name}</h1>
-        <p><Content /></p>
-      </div>
-    </article>
-  </div>
-</InitiativesLayout>
+<SingleArticleLayout frontmatter={initiative.data} name={initiative.data.name}>
+  <Content /> 
+</SingleArticleLayout>
