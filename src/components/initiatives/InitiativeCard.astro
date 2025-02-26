@@ -4,77 +4,78 @@
 import { Image } from "astro:assets";
 
 const { name, image, url, body } = Astro.props;
+
+const summary = (bio: string, length = 300): string => {
+  if (bio.length <= length) return bio;
+  return bio.substring(0, bio.lastIndexOf(" ", length)) + " ";
+};
 ---
 
 <style lang="scss">
-    @use "openaq-design-system/scss/variables";
-    @use "openaq-design-system/scss/mixins/index.scss" as mixins;
-.initiative-card {
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  border: 1px solid variables.$smoke10;
-  border-radius: 22px;
-  gap: 20px;
-  padding: 20px;
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-  }
-
-  &-img {
-    flex: 2;
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+  .initiative-card {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid variables.$smoke10;
+    border-radius: 22px;
+    gap: 20px;
+    padding: 20px;
 
-    img {
-      max-width: 100%;
-    }
-  }
-
-  .initiative-description {
-    flex: 3;
-
-    .initiative-description__title {
-      @include mixins.heading2;
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
     }
 
-    .initiative-description__body {
-      * {
-        @include mixins.body1;
-        color: variables.$smoke100;
+    &-img {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        height: auto;
       }
     }
 
-    .initiative-tags {
-      padding: 10px 20px;
-      display: flex;
-      gap: 12px;
+    .initiative-description {
+      flex: 3;
+
+      .initiative-description__title {
+        @include mixins.heading2;
+      }
+
+      .initiative-description__body {
+        * {
+          @include mixins.body1;
+          color: variables.$smoke100;
+        }
+      }
+
+      .initiative-tags {
+        padding: 10px 20px;
+        display: flex;
+        gap: 12px;
+      }
     }
   }
-}
-
 </style>
 <article class="initiative-card">
-    <div class="initiative-card-img">
-        <a href="">
-            <Image
-            class="initiative-card-image"
-            src={image}
-            height={252}
-            width={252}
-            alt="{name}"
-          />
-        </a>
+  <div class="initiative-card-img">
+    <a href={url}>
+      <Image
+        class="initiative-card-image"
+        src={image}
+        height={252}
+        width={252}
+        alt={name}
+      />
+    </a>
+  </div>
+  <div class="initiative-description">
+    <h2 class="initiative-description__title">{name}</h2>
+    <div class="initiative-description__body">
+      <p>{summary(body)}<a href={url}>read more..</a></p>
     </div>
-        <div class="initiative-description">
-            <h2 class="inititiative-description__title">{ name }</h2>
-            <div class="initiative-description__body">
-                <a href="">
-                    {body}
-                </a>
-            </div>
-        </div>
+  </div>
 </article>
-
-

@@ -1,30 +1,26 @@
 ---
-import PageLayout from '@layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import PartnerCard from '@components/partners/PartnerCard.astro';
-import PartnerInfoCard from '@components/partners/PartnerInfoCard.astro';
-import CommunityBanner from '@components/CommunityBanner.astro';
-import ExplorerBanner from '@components/ExplorerBanner.astro';
+import PageLayout from "@layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import PartnerCard from "@components/partners/PartnerCard.astro";
+import PartnerInfoCard from "@components/partners/PartnerInfoCard.astro";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
 
-const allPartners = await getCollection('partners');
-const allAirSensors = await getCollection('airsensors');
-const allCorporates = await getCollection('corporate')
-const allFunders = await getCollection('funders')
-type CollectionName = "partners" | "airsensors" | "corporate" | "funders" ;
-
+const allPartners = await getCollection("partners");
+const allAirSensors = await getCollection("airsensors");
+const allCorporates = await getCollection("corporate");
+const allFunders = await getCollection("funders");
+type CollectionName = "partners" | "airsensors" | "corporate" | "funders";
 
 const sortByName = (
   a: CollectionEntry<CollectionName>,
   b: CollectionEntry<CollectionName>
 ) => a.data.name.localeCompare(b.data.name);
-
-
-
 ---
 
 <style lang="scss">
-      .partners-grid {
+  .partners-grid {
     margin: 40px 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -40,8 +36,7 @@ const sortByName = (
   }
 </style>
 <PageLayout>
-    <section class="air-sensors-section">
-
+  <section class="air-sensors-section">
     <h1 class="gradient-title">Air sensor partners</h1>
     <div class="partners-grid">
       {
@@ -55,10 +50,9 @@ const sortByName = (
             />
           ))
       }
-      </div>
-    </section>
-    <section class="corporate-sponsors-section">
-
+    </div>
+  </section>
+  <section class="corporate-sponsors-section">
     <h1 class="gradient-title">Corporate sponsors</h1>
     <div class="partners-grid">
       {
@@ -72,45 +66,42 @@ const sortByName = (
             />
           ))
       }
-      </div>
-    </section>
+    </div>
+  </section>
 
   <h1 class="gradient-title">Partners</h1>
   <section class="partners-section">
-
-  <div class="partners-info-grid">
-    {
-      allPartners
-        .sort(sortByName)
-        .map((partner) => (
-          <PartnerInfoCard
-            name={partner.data.name}
-            image={partner.data.image}
-            url={partner.data.url}
-            body={partner.body}
-          />
-        ))
-    }
+    <div class="partners-info-grid">
+      {
+        allPartners
+          .sort(sortByName)
+          .map((partner) => (
+            <PartnerInfoCard
+              name={partner.data.name}
+              image={partner.data.image}
+              url={partner.data.url}
+              body={partner.body}
+            />
+          ))
+      }
     </div>
   </section>
   <section class="funders-section">
-
-  <h1 class="gradient-title">Funders</h1>
-  <div class="partners-grid">
-    {
-      allFunders
-        .sort(sortByName)
-        .map((partner) => (
-          <PartnerCard
-            name={partner.data.name}
-            image={partner.data.image}
-            url={partner.data.url}
-          />
-        ))
-    }
+    <h1 class="gradient-title">Funders</h1>
+    <div class="partners-grid">
+      {
+        allFunders
+          .sort(sortByName)
+          .map((partner) => (
+            <PartnerCard
+              name={partner.data.name}
+              image={partner.data.image}
+              url={partner.data.url}
+            />
+          ))
+      }
     </div>
   </section>
   <CommunityBanner slot="banner" />
   <ExplorerBanner slot="banner-low" />
 </PageLayout>
-

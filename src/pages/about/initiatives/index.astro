@@ -3,6 +3,8 @@ import PageLayout from "@layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import InitiativeCard from "@components/initiatives/InitiativeCard.astro";
 import type { CollectionEntry } from "astro:content";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
 
 const allInitiatives = await getCollection("initiatives");
 
@@ -23,6 +25,7 @@ const sortByName = (
 </style>
 <PageLayout>
   <h1 class="gradient-title">Initiatives</h1>
+
   <section class="initiative-grid">
     {
       allInitiatives
@@ -32,8 +35,11 @@ const sortByName = (
             name={initiative.data.name}
             image={initiative.data.image}
             body={initiative.body}
+            url={`/about/initiatives/${initiative.id}`}
           />
         ))
     }
   </section>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
 </PageLayout>
