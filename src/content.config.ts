@@ -2,6 +2,14 @@ import { defineCollection, z } from 'astro:content';
 
 import { glob } from 'astro/loaders';
 
+
+const cookies = defineCollection({
+  loader: glob({ pattern: ['*.md'], base: 'src/data/cookies' }),
+  schema: () =>
+    z.object({
+    }),
+})
+
 const funders = defineCollection({
   loader: glob({ pattern: ['*.md'], base: 'src/data/partners/funders' }),
   schema: ({ image }) =>
@@ -130,6 +138,7 @@ const ambassadors = defineCollection({
 });
 
 export const collections = {
+  cookies,
   funders,
   airsensors,
   partners,

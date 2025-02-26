@@ -1,0 +1,38 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+import { getEntry, render } from 'astro:content';
+
+
+import PageLayout from '@layouts/PageLayout.astro';
+import CommunityBanner from '@components/CommunityBanner.astro';
+import ExplorerBanner from '@components/ExplorerBanner.astro';
+
+
+
+
+dayjs.extend(utc);
+
+const cookies = await getEntry('cookies', 'index');
+if (!cookies) {
+  throw new Error('Could not cookies');
+}
+const { Content, remarkPluginFrontmatter } = await render(cookies);
+
+
+const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
+  .utc()
+  .format("HH:mm:ss DD MMMM YYYY UTC");
+  console.log(lastModified)
+---
+
+<PageLayout>
+    <section class="cookies-section">
+    <h1 class="gradient-title">Cookie policy</h1>
+        <p class="type-body-1">Last updated: {{ lastModified }}</p>
+        <Content />
+    </section>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</PageLayout>

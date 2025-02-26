@@ -11,6 +11,7 @@
   "dependencies": {
     "astro": "^5.3.1",
     "autoprefixer": "^10.4.20",
+    "dayjs": "^1.11.13",
     "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
     "sass": "^1.83.0"
