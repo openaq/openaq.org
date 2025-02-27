@@ -1,7 +1,8 @@
 ---
-import CommunityBanner from "@components/CommunityBanner.astro";
-import ExplorerBanner from "@components/ExplorerBanner.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Breadcrumb from '@components/Breadcrumb.astro';
+import Bubbles from '@components/Bubbles.astro';
+
 const { frontmatter, name } = Astro.props;
 ---
 
@@ -88,6 +89,9 @@ const { frontmatter, name } = Astro.props;
 </style>
 
 <BaseLayout pageTitle={frontmatter.title}>
+  <Breadcrumb />
+
+  <Bubbles />
   <div class="single-article-content">
     <article class="single-article-content-container">
       <h1 class="gradient-title">{name}</h1>

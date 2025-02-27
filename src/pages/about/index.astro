@@ -1,9 +1,8 @@
 ---
-import PageLayout from "@layouts/PageLayout.astro";
-import { Content } from "../../data/about.md";
+import { Content, frontmatter } from "../../data/about.md";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 ---
 
-<PageLayout>
-    <h1 class="gradient-title">About us</h1>
+<SingleArticleLayout frontmatter={frontmatter} name="About us">
     <Content />
-</PageLayout>
+</SingleArticleLayout>
