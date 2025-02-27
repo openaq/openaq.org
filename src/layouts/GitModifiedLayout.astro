@@ -3,7 +3,16 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Breadcrumb from '@components/Breadcrumb.astro';
 import Bubbles from '@components/Bubbles.astro';
 
-const { pageTitle } = Astro.props;
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+
+const { pageTitle, frontmatter } = Astro.props;
+
+const lastModified = dayjs(frontmatter.lastModified)
+  .utc()
+  .format('DD MMMM YYYY');
 ---
 
 <style lang="scss">
@@ -17,11 +26,10 @@ const { pageTitle } = Astro.props;
 
 <BaseLayout>
   <Breadcrumb />
-
   <Bubbles />
-
   <div class="content">
     <h1 class="type-display-1 gradient-title">{pageTitle}</h1>
+    <p class="type-body-1">Last updated: {lastModified}</p>
     <slot />
   </div>
   <slot name="banner" slot="banner" />

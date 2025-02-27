@@ -5,16 +5,16 @@ import CommunityBanner from '@components/CommunityBanner.astro';
 import ExplorerBanner from '@components/ExplorerBanner.astro';
 import GitModifiedLayout from "@layouts/GitModifiedLayout.astro";
 
-const cookies = await getEntry('policies', 'cookies');
-if (!cookies) {
-  throw new Error('Could not find cookies');
+const dmca = await getEntry('policies', 'dmca');
+if (!dmca) {
+  throw new Error('Could not find dmca');
 }
-const { Content, remarkPluginFrontmatter } = await render(cookies);
+const { Content, remarkPluginFrontmatter } = await render(dmca);
 
 ---
 
 
-<GitModifiedLayout pageTitle={"Cookie policy"}, frontmatter={ remarkPluginFrontmatter }>
+<GitModifiedLayout pageTitle={remarkPluginFrontmatter.title}, frontmatter={ remarkPluginFrontmatter }>
     <Content />
     <CommunityBanner slot="banner" />
     <ExplorerBanner slot="banner-low" />

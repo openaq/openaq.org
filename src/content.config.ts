@@ -10,9 +10,11 @@ const sponsors = defineCollection({
     }),
 });
 
-const cookies = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/cookies" }),
-  schema: () => z.object({}),
+const policies = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/data/policies" }),
+  schema: () => z.object({
+    title: z.string()
+  }),
 });
 
 const funders = defineCollection({
@@ -157,7 +159,7 @@ const usecases = defineCollection({
 
 export const collections = {
   sponsors,
-  cookies,
+  policies,
   funders,
   airsensors,
   partners,
