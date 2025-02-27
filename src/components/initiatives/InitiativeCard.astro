@@ -5,9 +5,18 @@ import { Image } from "astro:assets";
 
 const { name, image, url, body } = Astro.props;
 
+const sanitizeMarkdown = (text: string): string => {
+  text = text.replace(/!\[.*?\]\(.*?\)/g, "");
+
+  text = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
+
+  return text;
+};
+
 const summary = (bio: string, length = 300): string => {
-  if (bio.length <= length) return bio;
-  return bio.substring(0, bio.lastIndexOf(" ", length)) + " ";
+  const cleanText = sanitizeMarkdown(bio);
+  if (cleanText.length <= length) return cleanText;
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
 };
 ---
 
