@@ -2,6 +2,14 @@ import { defineCollection, z } from 'astro:content';
 
 import { glob } from 'astro/loaders';
 
+const sponsors = defineCollection({
+  loader: glob({ pattern: ['*.md'], base: 'src/data/sponsor' }),
+  schema: () =>
+    z.object({
+      // name: z.string(),
+    }),
+});
+
 const whyOpenData = defineCollection({
   loader: glob({ pattern: ['*.md'], base: 'src/data/why-open-data/why-open-data' }),
   schema: ({ image }) =>
@@ -155,6 +163,7 @@ const ambassadors = defineCollection({
 });
 
 export const collections = {
+  sponsors,
   whyOpenData,
   whyAirQuality,
   cookies,
