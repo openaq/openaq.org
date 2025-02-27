@@ -1,23 +1,21 @@
 ---
-import PageLayout from '@layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
-import CommunityBanner from '@components/CommunityBanner.astro';
-import ExplorerBanner from '@components/ExplorerBanner.astro';
-import { getEntry } from 'astro:content';
-import { render } from 'astro:content';
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import { getEntry } from "astro:content";
+import { render } from "astro:content";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 
-const sponsors = await getEntry('sponsors', 'sponsor');
+const sponsors = await getEntry("sponsors", "sponsor");
 
 if (!sponsors) {
-  throw new Error('Could not find sponsors');
+  throw new Error("Could not find sponsors");
 }
 
 const { Content } = await render(sponsors);
 ---
 
 <style lang="scss">
-
-@use 'openaq-design-system/scss/variables' as variables;
+  @use "openaq-design-system/scss/variables" as variables;
 
   .sponsor-grid {
     display: grid;
@@ -39,14 +37,14 @@ const { Content } = await render(sponsors);
           }
         }
       }
-      table,
-      th,
-      td {
+      :global(table),
+      :global(th),
+      :global(td) {
         padding: 12px;
         border: 2px solid variables.$smoke30;
 
-        ul {
-          li {
+        :global(ul) {
+          :global(li) {
             font-size: 16px;
             font-weight: 400;
           }
@@ -59,7 +57,7 @@ const { Content } = await render(sponsors);
     }
   }
 </style>
-<PageLayout>
+<SingleArticleLayout frontmatter={sponsors?.data}>
   <h1 class="gradient-title">Sponsor us</h1>
 
   <section class="sponsor-grid">
@@ -67,4 +65,4 @@ const { Content } = await render(sponsors);
   </section>
   <CommunityBanner slot="banner" />
   <ExplorerBanner slot="banner-low" />
-</PageLayout>
+</SingleArticleLayout>
