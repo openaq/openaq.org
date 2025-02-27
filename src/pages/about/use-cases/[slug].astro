@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from "astro:content";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+
+export async function getStaticPaths() {
+  const usecases = await getCollection("usecases");
+  return usecases.map((usecase) => ({
+    params: { slug: usecase.id },
+    props: { usecase },
+  }));
+}
+
+const { usecase } = Astro.props;
+const { Content } = await render(usecase);
+---
+
+<SingleArticleLayout
+  frontmatter={usecase.data}
+  name={usecase.data.title}
+  image={usecase.data.image}
+>
+  <Content />
+</SingleArticleLayout>
