@@ -3,7 +3,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const sponsors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/sponsor" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/sponsor" }),
   schema: () =>
     z.object({
       // name: z.string(),
@@ -11,14 +11,14 @@ const sponsors = defineCollection({
 });
 
 const policies = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/policies" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/policies" }),
   schema: () => z.object({
     title: z.string()
   }),
 });
 
 const funders = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/partners/funders" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/partners/funders" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -28,7 +28,7 @@ const funders = defineCollection({
 });
 
 const corporate = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/partners/corporate" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/partners/corporate" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -38,7 +38,7 @@ const corporate = defineCollection({
 });
 
 const airsensors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/partners/airsensors" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/partners/airsensors" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -48,7 +48,7 @@ const airsensors = defineCollection({
 });
 
 const partners = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/partners/partners" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/partners/partners" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -58,7 +58,7 @@ const partners = defineCollection({
 });
 
 const initiatives = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/initiatives" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/initiatives" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -67,7 +67,7 @@ const initiatives = defineCollection({
 });
 
 const staff = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/people/staff" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/people/staff" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -86,7 +86,7 @@ const staff = defineCollection({
 });
 
 const board = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/people/board" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/people/board" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -105,7 +105,7 @@ const board = defineCollection({
 });
 
 const advisors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/people/advisors" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/people/advisors" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -125,7 +125,7 @@ const advisors = defineCollection({
 });
 
 const ambassadors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/people/ambassadors" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/people/ambassadors" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -145,7 +145,7 @@ const ambassadors = defineCollection({
 });
 
 const usecases = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/data/use-cases/" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/use-cases/" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),

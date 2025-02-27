@@ -1,9 +1,7 @@
 ---
 
 import BaseLayout from '@layouts/BaseLayout.astro';
-
-
-
+import Bubbles from '@components/Bubbles.astro';
 ---
 
 <style lang="scss">
@@ -18,27 +16,12 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   justify-content: center;
   min-height: calc(100vh - 80px);
 
-  .bubble-lg {
-    z-index: -1;
-    position: absolute;
-    left: -100px;
-    top: 30px;
-  }
-
-  .bubble-sm {
-    z-index: -1;
-
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-  }
 }
 
 </style>
 <BaseLayout>
 <section class="page-404">
-    <div class="bubble-lg"></div>
-    <div class="bubble-sm"></div>
+    <Bubbles />
     <h1 class="type-heading-1">Uh oh! we can't find the page you've requested</h1>
 </section>
 </BaseLayout>
