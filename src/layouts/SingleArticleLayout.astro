@@ -91,7 +91,10 @@ const { frontmatter, name } = Astro.props;
       <h1 class="gradient-title">{name}</h1>
       <div class="single-article-body">
         <slot />
+
       </div>
     </article>
   </div>
+  <slot name="banner" slot="banner" />
+  <slot name="banner-low" slot="banner-low" />
 </BaseLayout>

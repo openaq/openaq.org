@@ -1,7 +1,9 @@
 ---
-import PageLayout from "@layouts/PageLayout.astro";
+import SocialBanner from "@components/SocialBanner.astro";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 ---
 
-<PageLayout>
+<SingleArticleLayout>
     <h1 class="gradient-title">Why air quality?</h1>
-</PageLayout>
+    <SocialBanner slot="banner" />
+</SingleArticleLayout>

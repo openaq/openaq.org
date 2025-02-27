@@ -8,7 +8,6 @@ Sponsors play a critical role in sustaining the world’s largest open-source ai
 
 ## Sponsorship Levels
 
-<table "sponsorship-table">
 | Sponsorship Level | Annual Sponsorship Amount in USD |
 | :---- | :---- |
 | Distinguished Devotee | starting at $1,000 |
@@ -26,7 +25,6 @@ and business objectives. Each benefit requires a minimum level of support and is
 available within the span of one year. We are happy to discuss other potential
 benefits.
 
-<table "benefits-table">
 
 |                              | Publicity                                                                                                                                                                                                        | Community Engagement                                                                                                                       | Direct Engagement                                                                                                                                                          |
 | :--------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -38,7 +36,6 @@ benefits.
 | $20,000 minimum sponsorship  | Publicity above                                                                                                                                                                                                  | Benefits above                                                                                                                             | <ul><li>Benefits above</li> <li> Opportunity to engage your employees and/or your favorite organization or academic institution in an air quality data hackathon</li></ul> |
 | $ amount mutually determined |                                                                                                                                                                                                                  |                                                                                                                                            | Direct technical assistance around the OpenAQ Platform                                                                                                                     |
 
-</table>
 
 We look forward to discussing these opportunities with you.
 
