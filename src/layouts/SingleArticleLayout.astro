@@ -1,100 +1,98 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayout from '@layouts/BaseLayout.astro';
 const { frontmatter, name } = Astro.props;
 ---
 
 <style lang="scss">
-    @use "openaq-design-system/scss/variables";
-    @use "openaq-design-system/scss/mixins/index.scss" as mixins;
-  
-    .single-article-content {
-      display: flex;
-      justify-content: center;
-      position: relative;
-      margin: 0 0 100px 0;
-    
-      &-container {
-        width: 800px;
-        z-index: 2;
-        .single-article-body {
-          margin: 20px 0 60px 0;
-  
-          h1 {
-            @include mixins.heading2;
-            color: variables.$sky120;
-            margin: 40px 0;
-          }
-  
-          h2 {
-            @include mixins.heading3;
-            color: variables.$sky120;
-            margin: 20px 0;
-          }
-  
-          h3,
-          h4 {
-            @include mixins.subtitle3;
-            color: variables.$sky120;
-            margin: 20px 0;
-          }
-  
-          a {
-            @include mixins.link2;
-          }
-  
-          p {
-            @include mixins.body2;
-            margin: 20px 0 0 0;
-          }
-  
-          ul {
-            @include mixins.body2;
-            margin: 20px 0 0 15px;
-          }
-  
-          hr {
-            margin: 40px 0;
-            border: 0;
-            border-bottom: 1px dashed variables.$smoke30;
-          }
-  
-          div:has(iframe) {
-            margin: 20px 0;
-          }
-  
+  @use 'openaq-design-system/scss/variables';
+  @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
 
-           img {
-            width: 100%;
-            height: auto;
-            border-radius: 22px;
-            margin: 20px 0 0 0;
-          }
-          
+  .single-article-content {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 0 100px 0;
+
+    &-container {
+      width: 800px;
+      z-index: 2;
+      .single-article-body {
+        margin: 20px 0 60px 0;
+
+        :global(h1) {
+          @include mixins.heading2;
+          color: variables.$sky120;
+          margin: 40px 0;
         }
-      }
-  
-      @media (max-width: 1000px) {
-        & {
-          &-container {
-            width: 80%;
-          }
+
+        :global(h2) {
+          @include mixins.heading3;
+          color: variables.$sky120;
+          margin: 20px 0;
+        }
+
+        :global(h3,
+        h4) {
+          @include mixins.subtitle3;
+          color: variables.$sky120;
+          margin: 20px 0;
+        }
+
+        :global(a) {
+          @include mixins.link2;
+        }
+
+        :global(p) {
+          @include mixins.body2;
+          margin: 20px 0 0 0;
+        }
+
+        :global(ul) {
+          @include mixins.body2;
+          margin: 20px 0 0 15px;
+        }
+
+        :global(hr) {
+          margin: 40px 0;
+          border: 0;
+          border-bottom: 1px dashed variables.$smoke30;
+        }
+
+        :global(img) {
+          width: 100%;
+          height: auto;
+          border-radius: 22px;
+          margin: 20px 0 0 0;
+        }
+
+        :global(div:has(iframe)) {
+          margin: 20px 0;
         }
       }
     }
-  
-    .explore-more-btn {
-      width: fit-content;
-      margin: 40px 0 0 0;
+
+    @media (max-width: 1000px) {
+      & {
+        &-container {
+          width: 80%;
+        }
+      }
     }
-  </style>
+  }
+
+  .explore-more-btn {
+    width: fit-content;
+    margin: 40px 0 0 0;
+  }
+</style>
 
 <BaseLayout pageTitle={frontmatter.title}>
-    <div class="single-article-content">
-        <article class="single-article-content-container">
-          <h1 class="gradient-title">{name}</h1>
-          <div class="single-article-body">
-            <slot />
-          </div>
-        </article>
+  <div class="single-article-content">
+    <article class="single-article-content-container">
+      <h1 class="gradient-title">{name}</h1>
+      <div class="single-article-body">
+        <slot />
       </div>
+    </article>
+  </div>
 </BaseLayout>
