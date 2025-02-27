@@ -10,13 +10,15 @@
   },
   "dependencies": {
     "astro": "^5.3.1",
+    "astro-purgecss": "^5.2.0",
     "autoprefixer": "^10.4.20",
     "dayjs": "^1.11.13",
     "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
-    "vite-plugin-solid-svg": "^0.8.1",
+    "purgecss": "^7.0.2",
     "remove-markdown": "^0.6.0",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "vite-plugin-solid-svg": "^0.8.1"
   },
   "devDependencies": {
     "cssnano": "^7.0.6",

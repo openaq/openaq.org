@@ -3,10 +3,13 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroImage from '@components/HeroImage.astro';
 
 import { Image } from 'astro:assets';
-import Hero from '@assets/images/hero.webp'
 
+import aqiHubImg from '@assets/images/aqi-hub.png';
 import codeSnippet from '@assets/images/r-code-snippet.png';
+import datapipelineImg from '@assets/images/data-pipeline.png';
+import nairobiImg from '@assets/images/nairobi.jpg'
 
+import dataPipeline from '@assets/svg/data-pipeline.svg';
 ---
 
 <style lang="scss">
@@ -280,7 +283,7 @@ a {
         </div>
     </div>
     <div class="technology-section__img">
-        <img src="svg/data-pipeline.svg" alt="">
+      <Image src={dataPipeline} alt={"OpenAQ data pipeline diagram"} />
     </div>
 </section>
 
@@ -291,8 +294,7 @@ a {
         <a href="https://explore.openaq.org" class="explore-input-link">
             <input type="text" class="search-input" placeholder="Search for air quality data">
         </a>
-        <img src="img/campobasso.webp" alt="">
-
+        <Image src={nairobiImg} alt={"Map of Nairobi, Kenya"} />
     </div>
     <div class="search-section-blurb">
         <div class="search-section-blurb__content">
@@ -323,7 +325,7 @@ a {
     </div>    
     <div class="aqi-hub-section__img">
         <div>
-            <img src="img/aqi_hub.webp" alt="">
+          <Image src={aqiHubImg} alt={"AQI Hub logo"} />
         </div>
     </div>
 </section>
