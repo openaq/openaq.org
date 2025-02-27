@@ -14,6 +14,7 @@
     "dayjs": "^1.11.13",
     "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
+    "remove-markdown": "^0.6.0",
     "sass": "^1.83.0"
   },
   "devDependencies": {
