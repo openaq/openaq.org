@@ -6,7 +6,7 @@ OpenAQ is an environmental tech nonprofit. We aggregate and harmonize open air q
 
 Anyone can explore the data via [OpenAQ Explorer](https://explore.openaq.org/), an interactive web application. For programmatic access via the API or to create custom lists on OpenAQ Explorer, [user registration](https://explore.openaq.org/login)[](https://docs.openaq.org/docs/getting-started) is required. See also our [AQI Hub](https://aqihub.info/), a first-of-its-kind website to navigate air quality indexes across the world.
 
-{{< youtube FntU6TXpb2g >}}
+<iframe src="https://www.youtube-nocookie.com/embed/FntU6TXpb2g" style="width:100%; height:100%;" allowfullscreen title="YouTube Video"></iframe>
 
 OpenAQ was the first to aggregate disparate ground-level ambient air quality data on a centralized open-source platform, making it findable, accessible, interoperable and reusable. We started with real-time and historical data from reference-grade government monitors in 2015 and began ingesting data from air sensors starting in 2021. Our platform remains the largest **open-source** air quality data platform in the world. Read more about OpenAQ's start in our [origin story.](https://openaq.medium.com/the-openaq-origin-story-31e0ce904529)
 
