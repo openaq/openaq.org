@@ -1,34 +1,22 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
-import { glob } from 'astro/loaders';
+import { glob } from "astro/loaders";
 
-const whyOpenData = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/why-open-data/why-open-data' }),
-  schema: ({ image }) =>
+const sponsors = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/data/sponsor" }),
+  schema: () =>
     z.object({
-      name: z.string(),
-      image: image(),
-    }),
-});
-
-const whyAirQuality = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/why-air-quality/why-air-quality' }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      image: image(),
+      // name: z.string(),
     }),
 });
 
 const cookies = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/cookies' }),
-  schema: () =>
-    z.object({
-    }),
-})
+  loader: glob({ pattern: ["*.md"], base: "src/data/cookies" }),
+  schema: () => z.object({}),
+});
 
 const funders = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/partners/funders' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/partners/funders" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -38,7 +26,7 @@ const funders = defineCollection({
 });
 
 const corporate = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/partners/corporate' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/partners/corporate" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -48,7 +36,7 @@ const corporate = defineCollection({
 });
 
 const airsensors = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/partners/airsensors' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/partners/airsensors" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -58,7 +46,7 @@ const airsensors = defineCollection({
 });
 
 const partners = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/partners/partners' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/partners/partners" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -68,7 +56,7 @@ const partners = defineCollection({
 });
 
 const initiatives = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/initiatives' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/initiatives" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -77,7 +65,7 @@ const initiatives = defineCollection({
 });
 
 const staff = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/people/staff' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/people/staff" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -96,7 +84,7 @@ const staff = defineCollection({
 });
 
 const board = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/people/board' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/people/board" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -115,7 +103,7 @@ const board = defineCollection({
 });
 
 const advisors = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/people/advisors' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/people/advisors" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -135,7 +123,7 @@ const advisors = defineCollection({
 });
 
 const ambassadors = defineCollection({
-  loader: glob({ pattern: ['*.md'], base: 'src/data/people/ambassadors' }),
+  loader: glob({ pattern: ["*.md"], base: "src/data/people/ambassadors" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -154,9 +142,21 @@ const ambassadors = defineCollection({
     }),
 });
 
+const usecases = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/data/use-cases/" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      url: z.string(),
+      tags: z.array(z.string()),
+      categories: z.array(z.string()).optional(),
+      image: image(),
+      featured: z.boolean(),
+    }),
+});
+
 export const collections = {
-  whyOpenData,
-  whyAirQuality,
+  sponsors,
   cookies,
   funders,
   airsensors,
@@ -167,4 +167,5 @@ export const collections = {
   board,
   advisors,
   ambassadors,
+  usecases,
 };

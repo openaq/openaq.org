@@ -3,11 +3,16 @@
 
 import { Image } from "astro:assets";
 
+import removeMarkdown from 'remove-markdown';
+
 const { name, image, url, body } = Astro.props;
 
-const summary = (bio: string, length = 300): string => {
-  if (bio.length <= length) return bio;
-  return bio.substring(0, bio.lastIndexOf(" ", length)) + " ";
+const summary = (content: string, length = 300): string => {
+  const cleanText = removeMarkdown(content, {
+    useImgAltText: false
+  });
+  if (cleanText.length <= length) return cleanText;
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
 };
 ---
 

@@ -1,0 +1,11 @@
+---
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
+import SocialBanner from "@components/SocialBanner.astro";
+
+import { Content, frontmatter } from "../data/why-air-quality.md";
+---
+
+<SingleArticleLayout frontmatter={frontmatter} name={frontmatter.name}>
+  <Content />
+  <SocialBanner slot="banner" />
+</SingleArticleLayout>

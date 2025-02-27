@@ -1,4 +1,6 @@
 ---
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 const { frontmatter, name } = Astro.props;
 ---
@@ -94,4 +96,6 @@ const { frontmatter, name } = Astro.props;
       </div>
     </article>
   </div>
+  <slot name="banner" slot="banner" />
+  <slot name="banner-low" slot="banner-low" />
 </BaseLayout>
