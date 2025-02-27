@@ -1,4 +1,6 @@
 ---
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 const { frontmatter, name } = Astro.props;
 ---
@@ -91,7 +93,6 @@ const { frontmatter, name } = Astro.props;
       <h1 class="gradient-title">{name}</h1>
       <div class="single-article-body">
         <slot />
-
       </div>
     </article>
   </div>
