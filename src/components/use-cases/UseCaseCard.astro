@@ -1,0 +1,73 @@
+---
+// import SocialIcons from "./SocialIcons.astro";
+
+import Chip from "@components/Chip.astro";
+import { Image } from "astro:assets";
+
+const { url, name, title, tags, categories, image, featured, data, body } =
+  Astro.props;
+
+const summary = (bio: string, length = 230): string => {
+  if (bio.length <= length) return bio;
+  return bio.substring(0, bio.lastIndexOf(" ", length)) + " read more...";
+};
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  .use-case-card {
+    background: #ffffff;
+    border: 1px solid variables.$smoke10;
+    border-radius: 22px;
+    overflow: hidden;
+
+    &:hover {
+      @include mixins.box-shadow;
+    }
+
+    a:nth-child(1) {
+      flex: 1;
+    }
+
+    &__img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    &__body {
+      flex: 2;
+      padding: 20px;
+
+      .use-case-description {
+        @include mixins.body2;
+        padding: 10px 0;
+        color: variables.$smoke100;
+      }
+      .use-case-description__title {
+        @include mixins.heading2;
+      }
+    }
+  }
+</style>
+<article class="use-case-card">
+  <a href={url}>
+    <Image
+      class="use-case-card__img"
+      src={image}
+      height={252}
+      width={252}
+      alt=""
+    />
+  </a>
+
+  <div class="use-case-card__body">
+    <a href={url}>
+      <h2 class="use-case-description__title">{name}</h2>
+      <div class="use-case-description">{summary(body)}</div>
+    </a>
+  </div>
+  <Chip />
+</article>

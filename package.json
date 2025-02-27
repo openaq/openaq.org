@@ -14,7 +14,8 @@
     "dayjs": "^1.11.13",
     "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "vite-plugin-solid-svg": "^0.8.1"
   },
   "devDependencies": {
     "cssnano": "^7.0.6",
