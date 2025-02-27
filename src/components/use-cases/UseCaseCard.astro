@@ -1,7 +1,7 @@
 ---
 // import SocialIcons from "./SocialIcons.astro";
 
-import Chip from "@components/Chip.astro";
+// import Chip from "@components/Chip.astro";
 import { Image } from "astro:assets";
 
 const { url, name, title, tags, categories, image, featured, data, body } =
@@ -69,5 +69,5 @@ const summary = (bio: string, length = 230): string => {
       <div class="use-case-description">{summary(body)}</div>
     </a>
   </div>
-  <Chip />
+  <!-- <Chip /> -->
 </article>
