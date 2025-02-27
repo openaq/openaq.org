@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
 const { frontmatter, name } = Astro.props;
 ---
 
 <style lang="scss">
-  @use 'openaq-design-system/scss/variables';
-  @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
 
   .single-article-content {
     display: flex;
@@ -31,8 +31,7 @@ const { frontmatter, name } = Astro.props;
           margin: 20px 0;
         }
 
-        :global(h3,
-        h4) {
+        :global(h3, h4) {
           @include mixins.subtitle3;
           color: variables.$sky120;
           margin: 20px 0;
