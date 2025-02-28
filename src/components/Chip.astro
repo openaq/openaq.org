@@ -1,106 +1,120 @@
 ---
-import DataObjectIcon from "@assets/images/data_object.svg";
-import HealthIcon from "@assets/images/health.svg";
-import DiversityIcon from "@assets/images/diversity.svg";
-import NewspaperIcon from "@assets/images/newspaper.svg";
+import DataObjectIcon from "@assets/svg/data_object.svg";
+import HealthIcon from "@assets/svg/health.svg";
+import DiversityIcon from "@assets/svg/diversity.svg";
+import NewspaperIcon from "@assets/svg/newspaper.svg";
 
 const { tag } = Astro.props;
 
-let icon;
-let iconClass = ""
+let IconComponent;
+let iconClass = "";
 
 switch (tag) {
-  case 'api':
-    icon = <DataObjectIcon />;
-    iconClass = 'api-icon';
+  case "API":
+    IconComponent = DataObjectIcon;
+    iconClass = "api-icon";
     break;
-  case 'community':
-    icon = <DiversityIcon />;
-    iconClass = 'diversity-icon'
+  case "Community":
+    IconComponent = DiversityIcon;
+    iconClass = "diversity-icon";
     break;
-  case 'health':
-    icon = <HealthIcon />;
-    iconClass = 'health-icon'
+  case "Health":
+    IconComponent = HealthIcon;
+    iconClass = "health-icon";
     break;
-  case 'media':
-    icon = <NewspaperIcon />;
-    iconClass = 'newspaper-icon'
+  case "Media":
+    IconComponent = NewspaperIcon;
+    iconClass = "media-icon";
     break;
-
-
 }
-
 ---
 
-<style>
+<style lang="scss">
   .chip-wrapper {
-  }
-  .chip-icon {
-    width: 16px;
-    height: 16px;
-    font-weight: normal;
-    font-style: normal;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    transform: translateY(-1px);
-    -webkit-font-smoothing: antialiased;
-    font-feature-settings: "liga";
-    -webkit-font-feature-settings: "liga";
-    vertical-align: middle;
-  }
-
-  .chip-base-data {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    height: 44px;
-    width: auto;
+    display: flex;
     align-items: center;
-    background-color: #e6f8f8;
-    border-radius: 100px;
-    color: #30363c;
-    color: #33a3a1;
-    display: inline-flex;
-    font-family:
-      Space Grotesk,
-      sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    gap: 10px;
-    margin: 0;
-    padding: 11.5px 20px;
-    text-decoration: none;
-  }
 
-  .diversity-icon {
-    color: #dedafb;
-  }
+    .chip-base-data {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #e6f8f8;
+      border-radius: 100px;
+      color: #30363c;
+      color: #33a3a1;
+      display: flex;
+      align-items: center;
+      font-family:
+        Space Grotesk,
+        sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      gap: 10px;
+      margin: 0;
+      padding: 11.5px 20px;
+      text-decoration: none;
 
-  .health-icon {
-    color: #eef7ff;
-  }
+      .chip-icon {
+        width: 16px;
+        height: 16px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        transform: translateY(-4px);
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings: "liga";
+        -webkit-font-feature-settings: "liga";
+        vertical-align: middle;
+      }
+    }
 
-  .media-icon {
-    color: #e3f3e3;
-  }
+    .diversity-icon {
+      background-color: #dedafb;
+      color: #584dae;
+      svg {
+        fill: #584dae;
+      }
+    }
 
-  .api-icon {
-    color: #e6f8f8;
-  }
+    .health-icon {
+      background-color: #eef7ff;
+      color: #1e64ab;
+      svg {
+        fill: #1e64ab;
+      }
+    }
 
-  .
+    .media-icon {
+      background-color: #e3f3e3;
+      color: #669537;
+
+      svg {
+        fill: #669537;
+      }
+    }
+
+    .api-icon {
+      background-color: #e6f8f8;
+      color: #37a5a3;
+
+      svg {
+        fill: #37a5a3;
+      }
+    }
+  }
 </style>
 
 <div class="chip-wrapper">
-  <a href="" class="chip-base-data">
-    <span class=`chip-icon ${iconClass}`>
-      {icon}
-    </span>
+  <a href="" class={`chip-base-data ${iconClass}`}>
     <span>{tag}</span>
+    <span class="iconClass chip-icon">
+      {IconComponent && <IconComponent />}
+    </span>
   </a>
 </div>
