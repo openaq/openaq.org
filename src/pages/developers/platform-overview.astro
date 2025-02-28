@@ -1,6 +1,7 @@
 ---
 import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 import SocialBanner from "@components/SocialBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
 
 import { Content, frontmatter } from "@content/developers/platform-overview.md";
 ---
@@ -8,4 +9,5 @@ import { Content, frontmatter } from "@content/developers/platform-overview.md";
 <SingleArticleLayout frontmatter={frontmatter} name={frontmatter.name}>
   <Content />
   <SocialBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
 </SingleArticleLayout>
