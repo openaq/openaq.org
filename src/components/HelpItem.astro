@@ -1,5 +1,8 @@
 ---
-const { title, body } = Astro.props;
+import { render } from "astro:content";
+const { title, help } = Astro.props;
+
+const { Content } = await render(help);
 ---
 
 <style lang="scss">
@@ -120,8 +123,9 @@ const { title, body } = Astro.props;
         <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
       </svg>
     </label>
+
     <div class="tab-content">
-      {body}
+      <Content />
     </div>
   </div>
 </section>

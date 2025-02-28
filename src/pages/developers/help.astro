@@ -46,11 +46,7 @@ const allFAQs = await getCollection("help");
   <div class="help-content">
     <div class="help-content-container">
       <h1 class="type-display-1 gradient-title">Help & FAQ</h1>
-      {
-        allFAQs.map((FAQ) => (
-          <HelpItem title={FAQ.data.title} body={FAQ.body} />
-        ))
-      }
+      {allFAQs.map((FAQ) => <HelpItem title={FAQ.data.title} help={FAQ} />)}
     </div>
   </div>
 </PageLayout>
