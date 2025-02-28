@@ -1,15 +1,16 @@
 ---
-// import SocialIcons from "./SocialIcons.astro";
-
-// import Chip from "@components/Chip.astro";
+import Chip from "@components/Chip.astro";
 import { Image } from "astro:assets";
+import removeMarkdown from "remove-markdown";
 
-const { url, name, title, tags, categories, image, featured, data, body } =
-  Astro.props;
+const { url, name, image, body, tags } = Astro.props;
 
-const summary = (bio: string, length = 230): string => {
-  if (bio.length <= length) return bio;
-  return bio.substring(0, bio.lastIndexOf(" ", length)) + " read more...";
+const summary = (content: string, length = 300): string => {
+  const cleanText = removeMarkdown(content, {
+    useImgAltText: false,
+  });
+  if (cleanText.length <= length) return cleanText;
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
 };
 ---
 
@@ -66,8 +67,16 @@ const summary = (bio: string, length = 230): string => {
   <div class="use-case-card__body">
     <a href={url}>
       <h2 class="use-case-description__title">{name}</h2>
-      <div class="use-case-description">{summary(body)}</div>
+      <div class="use-case-description">{summary(body)} read more...</div>
     </a>
   </div>
-  <!-- <Chip /> -->
+  {
+    tags && (
+      <div class="tags">
+        {tags.map((tag: string) => (
+          <Chip tag={tag} url={url} />
+        ))}
+      </div>
+    )
+  }
 </article>

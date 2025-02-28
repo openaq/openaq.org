@@ -1,7 +1,7 @@
 ---
 title: "Global Burden of Disease"
 url: https://openaq.org/use-cases/global-burden-of-disease/
-tags: ["health"]
+tags: ["Health"]
 categories: ["developer"]
 image: "@assets/images/gbd-cover.png"
 featured: false
