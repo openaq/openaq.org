@@ -79,3 +79,23 @@ import CopyIcon from "@assets/svg/copy.svg";
     <LinkedInLogo width="20" height="20" />
   </a>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.querySelector(".js-copy-button");
+    const buttonText = document.querySelector(
+      ".js-copy-button__text"
+    ) as HTMLSpanElement;
+
+    button?.addEventListener("click", () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        if (buttonText) {
+          buttonText.innerText = "Copied!";
+          setTimeout(() => {
+            if (buttonText) buttonText.innerText = "Copy link";
+          }, 1000);
+        }
+      });
+    });
+  });
+</script>
