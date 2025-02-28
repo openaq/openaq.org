@@ -17,6 +17,7 @@ const summary = (content: string, length = 300): string => {
 <style lang="scss">
   @use "openaq-design-system/scss/variables";
   @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+  @use "openaq-design-system/scss/utilities/index.scss" as utilities;
 
   .use-case-card {
     background: #ffffff;
@@ -40,7 +41,7 @@ const summary = (content: string, length = 300): string => {
 
     &__body {
       flex: 2;
-      padding: 20px;
+      padding: 0 20px;
 
       .use-case-description {
         @include mixins.body2;
@@ -50,6 +51,12 @@ const summary = (content: string, length = 300): string => {
       .use-case-description__title {
         @include mixins.heading2;
       }
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 20px;
     }
   }
 </style>

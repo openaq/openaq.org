@@ -1,7 +1,7 @@
 ---
 title: "C40 Cities"
 url: "https://openaq.org/use-cases/c40-cities/"
-tags: ["community"]
+tags: ["Community"]
 categories: ["developer"]
 image: "@assets/images/pdi_medell_n_160927_0188.jpg"
 featured: true

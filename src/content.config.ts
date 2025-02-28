@@ -12,9 +12,10 @@ const sponsors = defineCollection({
 
 const policies = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/policies" }),
-  schema: () => z.object({
-    title: z.string()
-  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
 });
 
 const funders = defineCollection({
@@ -157,6 +158,14 @@ const usecases = defineCollection({
     }),
 });
 
+const help = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/developers/help" }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
 export const collections = {
   sponsors,
   policies,
@@ -170,4 +179,5 @@ export const collections = {
   advisors,
   ambassadors,
   usecases,
+  help,
 };
