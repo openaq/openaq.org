@@ -11,6 +11,8 @@ The Bloomberg Green scoreboard shows which cities have the unhealthiest air, usi
 
 ![A screenshot of the live air pollution scoreboard on the Bloomberg Green website](@assets/images/scoreboard.webp)
 
+_A screenshot of the live air pollution scoreboard on the Bloomberg Green website_
+
 Data are needed to slow and stop climate change. Measuring how far we have to go to arrest greenhouse gases and how successful we have been so far informs what climate change solutions to focus on. It also builds support for climate action
 
 The BloombergDataDash, launched in 2020, is a live climate scoreboard for the world that shares data on arctic sea ice, air pollution, tree loss, real-time power mix, renewable investment, carbon clock, greenhouse emissions, and global temperature.
