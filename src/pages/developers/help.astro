@@ -25,6 +25,14 @@ const allFAQs = await getCollection("help");
       margin: 0 0 120px 0;
     }
 
+    .help-items {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      padding: 20px 0;
+    }
+
     @media (max-width: 1000px) {
       & {
         &-container {
@@ -46,7 +54,9 @@ const allFAQs = await getCollection("help");
   <div class="help-content">
     <div class="help-content-container">
       <h1 class="type-display-1 gradient-title">Help & FAQ</h1>
-      {allFAQs.map((FAQ) => <HelpItem title={FAQ.data.title} help={FAQ} />)}
+      <section class="help-items">
+        {allFAQs.map((FAQ) => <HelpItem title={FAQ.data.title} FAQ={FAQ} />)}
+      </section>
     </div>
   </div>
 </PageLayout>
