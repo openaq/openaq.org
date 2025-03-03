@@ -102,7 +102,7 @@ const url = Astro.url;
       <h1 class="gradient-title">{name}</h1>
       <div class="single-article-body">
         <slot />
-        <CopyLink slot="share-buttons" url={url} />
+        <CopyLink url={url} />
       </div>
     </article>
   </div>

@@ -233,6 +233,9 @@ import Logo from "@assets/logo.svg";
         }
       }
     }
+    #menu-toggle:checked ~ .nav-list {
+      display: flex;
+    }
 
     #menu-toggle ~ .nav-list > li {
       height: 0;
@@ -351,9 +354,8 @@ import Logo from "@assets/logo.svg";
           >
           <ul class="submenu" aria-label="submenu">
             <li class="submenu__item">
-              <a
-                class="nav__item api-overview-nav"
-                href="/developers/roadmap/">Roadmap</a
+              <a class="nav__item api-overview-nav" href="/developers/roadmap/"
+                >Roadmap</a
               >
             </li>
             <li class="submenu__item">

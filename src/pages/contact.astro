@@ -1,0 +1,48 @@
+---
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Bubbles from "@components/Bubbles.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import SocialBanner from "@components/SocialBanner.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  .contact-content {
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    &-container {
+      width: 800px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+</style>
+<BaseLayout>
+  <Breadcrumb />
+  <div class="contact-content">
+    <Bubbles />
+    <div class="contact-content-container">
+      <div>
+        <h2 class="type-header-2">Mailing address</h2>
+        <p>
+          OpenAQ<br />
+          4301 50th Street NW<br />
+          Suite 300 PMB 1046<br />
+          Washington, DC 20016-4364
+        </p>
+      </div>
+      <div>
+        <h2 class="type-header-2">Email</h2>
+        <a class="type-link-1" href="mailto:info@openaq.org">info@openaq.org</a>
+      </div>
+    </div>
+  </div>
+  <SocialBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</BaseLayout>
