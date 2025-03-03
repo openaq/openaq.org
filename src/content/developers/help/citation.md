@@ -6,23 +6,19 @@ When you use OpenAQ and its tools to access air quality data, we request attribu
 
 If data provider is known (via metadata):
 
-```
-Data Provider. (202X). Dataset Title (if known). OpenAQ API Available from: https://api.openaq.org
-```
+<pre>Data Provider. (202X). Dataset Title (if known). OpenAQ API Available from: https://api.openaq.org</pre>
 
 General OpenAQ citation:
 
-```
-OpenAQ, Inc. (202X). OpenAQ API Available from: https://openaq.org
-```
+<pre>OpenAQ, Inc. (202X). OpenAQ API Available from: https://openaq.org</pre>
 
 If using [bibtex](http://www.bibtex.org/). For author include OpenAQ and any data providers from metadata in accordance with source license.
 
-```
- @misc{OpenAQ,
-   author = {{ OpenAQ }},
-   title = {{Retrieved from https://api.openaq.org }},
-   howpublished = "\url{ https://api.openaq.org }",
-   year = {2023},
- }
-```
+<pre>
+@misc{OpenAQ,
+  author = {{ OpenAQ }},
+  title = {{Retrieved from https://api.openaq.org }},
+  howpublished = "\url{ https://api.openaq.org }",
+  year = {2023},
+}
+</pre>

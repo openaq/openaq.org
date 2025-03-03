@@ -1,8 +1,8 @@
 ---
 import { render } from "astro:content";
-const { title, help } = Astro.props;
+const { title, FAQ } = Astro.props;
 
-const { Content } = await render(help);
+const { Content } = await render(FAQ);
 ---
 
 <style lang="scss">
@@ -10,14 +10,6 @@ const { Content } = await render(help);
   @use "openaq-design-system/scss/mixins/index.scss" as mixins;
   @use "openaq-design-system/scss/utilities/index.scss" as utilities;
   @use "../styles/mixins.scss" as local-mixins;
-
-  .help-items {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    padding: 20px 0;
-  }
 
   .tab {
     width: 90%;
@@ -108,24 +100,22 @@ const { Content } = await render(help);
   }
 </style>
 
-<section class="help-items">
-  <div class="tab">
-    <input type="checkbox" id={title} />
-    <label class="tab-label" for={title}>
-      {title}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="24"
-        viewBox="0 0 24 24"
-        width="24"
-      >
-        <path d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
-      </svg>
-    </label>
+<div class="tab">
+  <input type="checkbox" id={title} />
+  <label class="tab-label" for={title}>
+    {title}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
+    </svg>
+  </label>
 
-    <div class="tab-content">
-      <Content />
-    </div>
+  <div class="tab-content">
+    <Content />
   </div>
-</section>
+</div>
