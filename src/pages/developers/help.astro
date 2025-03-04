@@ -6,18 +6,16 @@ import { getCollection } from "astro:content";
 const allFAQs = await getCollection("help");
 ---
 
-<style>
+<style lang="scss">
   @use "openaq-design-system/scss/variables";
   @use "openaq-design-system/scss/mixins/index.scss" as mixins;
   @use "openaq-design-system/scss/utilities/index.scss" as utilities;
-  @use "./mixins" as local-mixins;
 
   .help-content {
     display: flex;
     position: relative;
     justify-content: center;
     margin: 0 0 40px 0;
-    @include local-mixins.bubbles();
 
     &-container {
       width: 1000px;
