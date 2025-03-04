@@ -3,26 +3,23 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 const { pageTitle } = Astro.props;
 
-
-import '../styles/main.scss';
+import "../styles/main.scss";
 import CommunityBanner from "@components/CommunityBanner.astro";
 ---
 
 <style lang="scss">
-	.main {
-
+  .main {
     position: relative;
+    overflow: hidden;
 
-	.content {
-		width: 800px;
-		margin: 0 auto;
+    .content {
+      width: 800px;
+      margin: 0 auto;
 
-		z-index: 2;
-	}
-	}
-
+      z-index: 2;
+    }
+  }
 </style>
-
 
 <html lang="en">
   <head>
@@ -34,10 +31,9 @@ import CommunityBanner from "@components/CommunityBanner.astro";
   </head>
   <body>
     <Header />
-	<main class="main">
-
-    <slot/>
-	  </main>
+    <main class="main">
+      <slot />
+    </main>
     <slot name="banner" />
     <slot name="banner-low" />
 

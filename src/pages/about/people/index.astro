@@ -42,13 +42,16 @@ const sortByName = (
     column-gap: 22px;
     row-gap: 22px;
     margin: 20px 0;
+    overflow: hidden;
 
     @media (max-width: 800px) {
       grid-template-columns: repeat(2, 1fr);
+      width: 530px;
     }
 
     @media (max-width: 600px) {
       grid-template-columns: repeat(1, 1fr);
+      width: 250px;
     }
   }
 </style>
