@@ -16,7 +16,9 @@ const sortByName = (
 
 <style lang="scss">
   .use-cases-content-container {
-    width: 1000px;
+    width: 800px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   .use-cases-grid {
@@ -24,12 +26,13 @@ const sortByName = (
     grid-template-columns: repeat(3, 1fr);
     row-gap: 20px;
     column-gap: 20px;
-    margin: 40px 0;
+    justify-content: center;
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
     @media (max-width: 600px) {
       grid-template-columns: repeat(1, 1fr);
-    }
-    @media (max-width: 1000px) {
-      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
