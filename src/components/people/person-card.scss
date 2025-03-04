@@ -1,5 +1,5 @@
-@use 'openaq-design-system/scss/variables';
-@use 'openaq-design-system/scss/mixins/index.scss' as mixins;
+@use "openaq-design-system/scss/variables";
+@use "openaq-design-system/scss/mixins/index.scss" as mixins;
 
 @mixin person-card($name, $color) {
   .#{$name}-card {
@@ -16,6 +16,8 @@
 
     & > a {
       display: flex;
+      flex-direction: column;
+
       &__img {
         width: 100%;
         height: auto;
