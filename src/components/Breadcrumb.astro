@@ -34,6 +34,7 @@ const breadcrumbs = urlPathToObject(pathname);
 
 <style lang="scss">
     @use 'openaq-design-system/scss/utilities/types.scss';
+    @use "openaq-design-system/scss/utilities";
 
     .breadcrumb {
         display: flex;
@@ -48,5 +49,5 @@ const breadcrumbs = urlPathToObject(pathname);
 
 <ol class="breadcrumb">
     <a href="/"><HomeIcon size={24} fill="#34a3a1"/></a>
-    {Object.entries(breadcrumbs).map(([path, name]) => <ChevronRight size={24} fill="#7e8c9a"/> <a href={`/${path}`}>{name}</a> )}
+    {Object.entries(breadcrumbs).map(([path, name]) => <ChevronRight size={24} fill="#7e8c9a"/> <a class={`type-body-3 ${path === Object.keys(breadcrumbs).pop() ? "text-sky-120" : ""}`} href={`/${path}`}>{name}</a> )}
 </ol>
