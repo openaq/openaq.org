@@ -1,4 +1,5 @@
 ---
+title: "Aminath Maiha Hameed"
 name: "Aminath Maiha Hameed"
 position: "Ambassador"
 image: "@assets/images/maiha.png"

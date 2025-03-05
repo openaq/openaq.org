@@ -1,4 +1,5 @@
 ---
+title: "Nathan Pavlovic"
 name: "Nathan Pavlovic"
 position: "Member at large"
 email: "nathan@openaq.org"

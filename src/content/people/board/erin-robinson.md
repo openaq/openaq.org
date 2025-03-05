@@ -1,4 +1,5 @@
 ---
+title: "Erin Robinson"
 name: "Erin Robinson"
 position: "Treasurer"
 email: "erin@openaq.org"

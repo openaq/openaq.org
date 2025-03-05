@@ -1,4 +1,5 @@
 ---
+title: "Victor John Magtulis"
 name: "Victor John Magtulis"
 country: "Iloilo City, Philippines"
 position: "Ambassador"

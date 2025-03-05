@@ -1,4 +1,5 @@
 ---
+title: "Amrit Sharma"
 name: "Amrit Sharma"
 position: "Secretary"
 email: "amrit@openaq.org"

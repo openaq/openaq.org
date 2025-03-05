@@ -1,4 +1,5 @@
 ---
+title: "Safiya Cummings"
 name: "Safiya Cummings"
 country: "Piarco, Trinidad and Tobago"
 position: "Ambassador"

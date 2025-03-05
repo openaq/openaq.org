@@ -1,4 +1,5 @@
 ---
+title: "Matt Whitney"
 name: "Matt Whitney"
 position: "Member at large"
 email: "matt@openaq.org"
