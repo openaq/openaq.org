@@ -2,7 +2,6 @@
 title: "Colleen Marciel F. Rosales"
 type: "about/people"
 honorific: "Dr."
-name: "Colleen Marciel F. Rosales"
 group: "team"
 position: "Strategic Partnerships Director"
 email: "colleen@openaq.org"

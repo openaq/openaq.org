@@ -1,6 +1,5 @@
 ---
 title: "Erin Robinson"
-name: "Erin Robinson"
 position: "Treasurer"
 email: "erin@openaq.org"
 image: "@assets/images/erin_robinson.png"

@@ -16,7 +16,7 @@ type CollectionName = "partners" | "airsensors" | "corporate" | "funders";
 const sortByName = (
   a: CollectionEntry<CollectionName>,
   b: CollectionEntry<CollectionName>
-) => a.data.name.localeCompare(b.data.name);
+) => a.data.title.localeCompare(b.data.title);
 ---
 
 <style lang="scss">
@@ -61,7 +61,7 @@ const sortByName = (
           .sort(sortByName)
           .map((partner) => (
             <PartnerCard
-              name={partner.data.name}
+              title={partner.data.title}
               image={partner.data.image}
               url={partner.data.url}
             />
@@ -77,7 +77,7 @@ const sortByName = (
           .sort(sortByName)
           .map((partner) => (
             <PartnerCard
-              name={partner.data.name}
+              title={partner.data.title}
               image={partner.data.image}
               url={partner.data.url}
             />
@@ -94,7 +94,7 @@ const sortByName = (
           .sort(sortByName)
           .map((partner) => (
             <PartnerInfoCard
-              name={partner.data.name}
+              title={partner.data.title}
               image={partner.data.image}
               url={partner.data.url}
               body={partner.body}
@@ -111,7 +111,7 @@ const sortByName = (
           .sort(sortByName)
           .map((partner) => (
             <PartnerCard
-              name={partner.data.name}
+              title={partner.data.title}
               image={partner.data.image}
               url={partner.data.url}
             />

@@ -1,6 +1,5 @@
 ---
 title: "Pallavi Pant"
-name: "Pallavi Pant"
 position: "Chair"
 email: pallavi@openaq.org
 image: "@assets/images/pallavi_pant.png"

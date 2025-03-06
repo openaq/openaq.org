@@ -1,6 +1,5 @@
 ---
 title: "António Hermano Banze"
-name: "António Hermano Banze"
 position: "Ambassador"
 image: "@assets/images/antonio.png"
 x: "https://x.com/Antonio_H_Banze"

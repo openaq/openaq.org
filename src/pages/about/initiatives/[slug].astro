@@ -16,7 +16,9 @@ const { initiative } = Astro.props;
 const { Content } = await render(initiative);
 ---
 
-
-<SingleArticleLayout frontmatter={initiative.data} name={initiative.data.name}>
-  <Content /> 
+<SingleArticleLayout
+  frontmatter={initiative.data}
+  title={initiative.data.title}
+>
+  <Content />
 </SingleArticleLayout>

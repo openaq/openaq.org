@@ -1,6 +1,5 @@
 ---
 title: "Rafaela Chiminelli Borth"
-name: "Rafaela Chiminelli Borth"
 country: "Florianópolis, Brazil"
 position: "Ambassador"
 image: "@assets/images/rafa.png"

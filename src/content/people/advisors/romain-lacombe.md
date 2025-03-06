@@ -1,5 +1,4 @@
 ---
-name: "Romain Lacombe"
 title: "Romain Lacombe"
 position: "PlumeLabs"
 image: "@assets/images/romaine_lacombe.png"

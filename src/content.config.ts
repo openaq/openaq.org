@@ -22,7 +22,7 @@ const funders = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/funders" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -32,7 +32,7 @@ const corporate = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/corporate" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -42,7 +42,7 @@ const airsensors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/airsensors" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -52,7 +52,7 @@ const partners = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/partners" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -62,7 +62,7 @@ const initiatives = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/initiatives" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
     }),
 });
@@ -72,7 +72,6 @@ const staff = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      name: z.string(),
       position: z.string(),
       email: z.string().email(),
       image: image(),
@@ -92,7 +91,6 @@ const board = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      name: z.string(),
       position: z.string(),
       email: z.string().email(),
       image: image(),
@@ -111,7 +109,6 @@ const advisors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/people/advisors" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
       title: z.string(),
       position: z.string(),
       country: z.string(),
@@ -133,7 +130,6 @@ const ambassadors = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      name: z.string(),
       position: z.string(),
       country: z.string(),
       email: z.string().email().optional(),

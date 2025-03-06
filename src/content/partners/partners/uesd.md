@@ -1,5 +1,5 @@
 ---
-name: "UESD"
+title: "UESD"
 image: "@assets/images/uesd.webp"
 url: "https://www.uesd.edu.gh/"
 ---

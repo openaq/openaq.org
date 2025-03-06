@@ -1,5 +1,5 @@
 ---
-name: "Love My Air"
+title: "Love My Air"
 image: "@assets/images/love-my-air-logo-alpha.png"
 url: "https://denver.lovemyair.com/"
 ---

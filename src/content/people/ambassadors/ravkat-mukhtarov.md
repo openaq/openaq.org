@@ -1,6 +1,5 @@
 ---
 title: "Ravkat Mukhtarov"
-name: "Ravkat Mukhtarov"
 country: "Almaty, Kazakhstan"
 position: "Ambassador"
 image: "@assets/images/ravkat.png"

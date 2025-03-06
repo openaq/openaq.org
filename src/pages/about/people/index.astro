@@ -32,7 +32,7 @@ const socials = (entry: CollectionEntry<CollectionName>) => {
 const sortByName = (
   a: CollectionEntry<CollectionName>,
   b: CollectionEntry<CollectionName>
-) => a.data.name.localeCompare(b.data.name);
+) => a.data.title.localeCompare(b.data.title);
 ---
 
 <style lang="scss">
@@ -69,7 +69,7 @@ const sortByName = (
         .sort(sortByName)
         .map((staff) => (
           <StaffCard
-            name={staff.data.name}
+            title={staff.data.title}
             url={`/about/people/${staff.id}/`}
             position={staff.data.position}
             data={staff.body}
@@ -92,7 +92,7 @@ const sortByName = (
         .sort(sortByName)
         .map((board) => (
           <BoardCard
-            name={board.data.name}
+            title={board.data.title}
             position={board.data.position}
             data={board.body}
             socials={socials(board)}
@@ -113,7 +113,7 @@ const sortByName = (
         .sort(sortByName)
         .map((advisor) => (
           <AdvisorCard
-            name={advisor.data.name}
+            title={advisor.data.title}
             position={advisor.data.position}
             country={advisor.data.country}
             data={advisor.body}
@@ -138,7 +138,7 @@ const sortByName = (
         .sort(sortByName)
         .map((ambassador) => (
           <AmbassadorCard
-            name={ambassador.data.name}
+            title={ambassador.data.title}
             country={ambassador.data.country}
             url={`/about/people/${ambassador.id}/`}
             position={ambassador.data.position}

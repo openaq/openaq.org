@@ -6,10 +6,10 @@ const { pageTitle } = Astro.props;
 import "../styles/main.scss";
 import CommunityBanner from "@components/CommunityBanner.astro";
 
-const ogImageUrl = new URL(
-  `/og/${Astro.props.id.replace(/\.\w+$/, ".png")}`,
-  Astro.site
-);
+// const ogImageUrl = new URL(
+//   `/og/${Astro.props.id.replace(/\.\w+$/, ".png")}`,
+//   Astro.site
+// );
 ---
 
 <style lang="scss">
@@ -31,7 +31,7 @@ const ogImageUrl = new URL(
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- <link rel="sitemap" href="/sitemap-index.xml" /> -->
-    <meta property="og:image" content={ogImageUrl} />
+    <!-- <meta property="og:image" content={ogImageUrl} /> -->
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
