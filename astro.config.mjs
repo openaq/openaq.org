@@ -4,8 +4,6 @@ import { remarkModifiedTime } from "./remark-modified-time.mjs";
 
 import purgecss from "astro-purgecss";
 
-import sitemap from "@astrojs/sitemap";
-
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
@@ -21,5 +19,5 @@ export default defineConfig({
 
   site: "https://openaq.org/",
 
-  integrations: [purgecss(), sitemap()],
+  integrations: [purgecss()],
 });
