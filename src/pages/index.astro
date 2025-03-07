@@ -40,9 +40,10 @@ import CommunityBanner from "@components/CommunityBanner.astro";
 
   .hero-section {
     @include landing-section();
-    justify-content: space-around;
-    display: flex;
-
+    & {
+      justify-content: space-around;
+      display: flex;
+    }
     .hero-title {
       display: flex;
       flex-direction: column;
@@ -68,10 +69,11 @@ import CommunityBanner from "@components/CommunityBanner.astro";
 
   .use-cases-section {
     @include landing-section();
-    gap: 20px;
-    justify-content: center;
-    padding: 50px 0;
-
+    & {
+      gap: 20px;
+      justify-content: center;
+      padding: 50px 0;
+    }
     .featured-use-cases {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -109,10 +111,11 @@ import CommunityBanner from "@components/CommunityBanner.astro";
 
   @mixin panel($color) {
     @include landing-section();
-    position: relative;
-    height: 500px;
-    color: white;
-
+    & {
+      position: relative;
+      height: 500px;
+      color: white;
+    }
     &-blurb {
       flex: 1;
       display: flex;
