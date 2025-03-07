@@ -10,6 +10,7 @@ const { Content } = await render(FAQ);
   @use "openaq-design-system/scss/mixins/index.scss" as mixins;
   @use "openaq-design-system/scss/utilities/index.scss" as utilities;
   @use "../styles/mixins.scss" as local-mixins;
+  @use "sass:color";
 
   .tab {
     width: 90%;
@@ -78,7 +79,7 @@ const { Content } = await render(FAQ);
       background: variables.$sky120;
       cursor: pointer;
       &:hover {
-        background: darken(variables.$sky120, 10%);
+        background: color.adjust(variables.$sky120, $lightness: 10%);
       }
     }
   }
