@@ -6,7 +6,7 @@ const sponsors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/sponsor" }),
   schema: () =>
     z.object({
-      // name: z.string(),
+      title: z.string(),
     }),
 });
 
