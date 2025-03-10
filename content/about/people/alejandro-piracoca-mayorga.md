@@ -3,7 +3,7 @@ type = "about/people"
 title = "Alejandro Piracoca"
 group = "ambassadors"
 position = "Ambassador"
-linkedin = "www.linkedin.com/in/alejandro-piracoca-mayorga"
+linkedin = "https://linkedin.com/in/alejandro-piracoca-mayorga"
 image = "/uploads/alejandro-no-bkg.png"
 country = "Bogotá D.C, Colombia"
 +++
