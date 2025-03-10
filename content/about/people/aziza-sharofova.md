@@ -4,7 +4,8 @@ title = "Aziza Sharofova"
 group = "ambassadors"
 position = "Ambassador"
 linkedin = "https://www.linkedin.com/in/aziza-sharofova-0185b9226"
-image = "/uploads/openaq-logo.png"
+image = "/uploads/aziza-no-bkg.png"
+country = "Tashkent, Uzbekistan"
 +++
 Aziza Sharofova is an environmental engineer with many years of experience in the environmental field. Having started in the private sector developing EIA projects, she devoted more than seven years to state ecological expertise, assessing the impact of industrial facilities on nature.
 
