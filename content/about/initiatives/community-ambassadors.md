@@ -9,7 +9,7 @@ The OpenAQ Community Ambassador Program is a leadership training program designe
 
 The program includes a comprehensive curriculum on ambient air pollution, air quality monitoring, data transparency, data access, data analysis, participatory research and community engagement. 
 
-![2023 OpenAQ Community Ambassador Cohort](/uploads/team-map.png "2023 OpenAQ Community Ambassadors")
+![2025 OpenAQ Community Ambassador Cohort](/uploads/2025-team-map-2.png "2025 OpenAQ Community Ambassadors")
 
 Through the interactive training, the Community Ambassadors become inspired and empowered to accelerate air pollution mitigation in communities throughout their region. As they engage with local governments, companies and community organizations, they are able to underscore the need for open data, holding air quality data producers accountable to data transparency, a critical component of successful collective action to reduce air and climate pollution. 
 
@@ -18,6 +18,21 @@ OpenAQ piloted the Community Ambassador Program in 2021, providing practical ski
 {{< figure src="/uploads/ambassadors_workshops_monthly_sessions.webp" title= "OpenAQ co-founder Christa Hasenkopf in a workshop in Accra, Ghana in May 2018." >}}  
 
 The ultimate goal of this program is to increase data fluency among air quality advocates living in some of the most polluted regions on the planet so that they are (1) better equipped to advocate for clean air in their communities, (2) able to facilitate greater data openness and transparency from data producers in their region and country, and (3) able to train others to use data for good.
+
+O﻿ur [2025 Community Ambassador Cohort](https://openaq.medium.com/introducing-our-2025-openaq-community-ambassadors-77759e47cf97)
+
+* Aziza Sharofova (Tashkent, Uzbekistan)
+* Dhouha Ouerfelli (Tunis, Tunisia)
+* Naaima Ben Kadour (Ben Guerir, Morocco)
+* Saikou Camara (Banjul, Gambia)
+* Elizabeth Kiconco (Kampala, Uganda)
+* Oscar Umwanzisiwemuremyi (Kigali, Rwanda)
+* Anshika Kansal (New Delhi, India)
+* Ashik S V (Bangalore, India)
+* Doroti Cuestas (Lima, Peru)
+* Alejandro Piracoca (Bogota, Colombia)
+
+
 
 O﻿ur [2024 Community Ambassador Cohort](https://openaq.medium.com/introducing-our-2024-openaq-community-ambassadors-fee4cb5f5f98)
 
