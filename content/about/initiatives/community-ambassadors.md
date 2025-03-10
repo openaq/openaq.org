@@ -30,9 +30,7 @@ O﻿ur [2025 Community Ambassador Cohort](https://openaq.medium.com/introducing-
 * Anshika Kansal (New Delhi, India)
 * Ashik S V (Bangalore, India)
 * Doroti Cuestas (Lima, Peru)
-* Alejandro Piracoca (Bogota, Colombia)
-
-
+* Alejandro Piracoca (Bogotá, Colombia)
 
 O﻿ur [2024 Community Ambassador Cohort](https://openaq.medium.com/introducing-our-2024-openaq-community-ambassadors-fee4cb5f5f98)
 
