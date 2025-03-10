@@ -166,6 +166,49 @@ const help = defineCollection({
     }),
 });
 
+const singlePages = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/singlePages" }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
+const about = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/about" }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
+const landingPages = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/aboutLandingPages" }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
+const developers = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/developerSinglePages" }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
+const peopleLandingPage = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/peopleLandingPage" }),
+  schema: () =>
+    z.object({
+      staffIntro: z.string(),
+      advisorIntro: z.string(),
+      boardIntro: z.string(),
+      ambassadorIntro: z.string(),
+    }),
+});
+
 export const collections = {
   sponsors,
   policies,
@@ -180,4 +223,9 @@ export const collections = {
   ambassadors,
   usecases,
   help,
+  singlePages,
+  about,
+  peopleLandingPage,
+  landingPages,
+  developers,
 };

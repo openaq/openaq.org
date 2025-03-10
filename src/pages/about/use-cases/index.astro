@@ -5,6 +5,7 @@ import type { CollectionEntry } from "astro:content";
 import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
 import UseCaseCard from "@components/use-cases/UseCaseCard.astro";
+import { frontmatter } from "@content/landingPages/use-cases.md";
 
 const allUseCases = await getCollection("usecases");
 
@@ -38,7 +39,7 @@ const sortByName = (
 </style>
 <PageLayout>
   <div class="use-cases-content-container">
-    <h1 class="gradient-title">Use Cases</h1>
+    <h1 class="gradient-title">{frontmatter.title}</h1>
 
     <section class="use-cases-grid">
       {

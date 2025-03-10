@@ -5,7 +5,7 @@ import InitiativeCard from "@components/initiatives/InitiativeCard.astro";
 import type { CollectionEntry } from "astro:content";
 import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
-
+import { frontmatter } from "@content/landingPages/initiatives.md";
 const allInitiatives = await getCollection("initiatives");
 
 const sortByName = (
@@ -27,7 +27,7 @@ const sortByName = (
   }
 </style>
 <PageLayout>
-  <h1 class="gradient-title">Initiatives</h1>
+  <h1 class="gradient-title">{frontmatter.title}</h1>
 
   <section class="initiative-grid">
     {
