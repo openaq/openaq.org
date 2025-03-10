@@ -1,6 +1,6 @@
 +++
 type = "about/people"
-title = "Alejandro Piracoca Mayorga"
+title = "Alejandro Piracoca"
 group = "ambassadors"
 position = "Ambassador"
 linkedin = "www.linkedin.com/in/alejandro-piracoca-mayorga"
