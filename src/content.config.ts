@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 
 const sponsors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/sponsor" }),
@@ -199,7 +199,7 @@ const developers = defineCollection({
 });
 
 const people = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/peopleLandingPage" }),
+  loader: file("src/content/people/index.md"),
   schema: () =>
     z.object({
       staffIntro: z.string(),
