@@ -13,7 +13,7 @@ export async function GET() {
   const help = await getCollection("help");
   const singlePages = await getCollection("singlePages");
   const about = await getCollection("about");
-  const peopleLandingPage = await getCollection("peopleLandingPage");
+  const peopleLandingPage = await getCollection("people");
   const partners = await getCollection("partners");
   const airsensors = await getCollection("airsensors");
   const funders = await getCollection("funders");
@@ -29,20 +29,43 @@ export async function GET() {
     | "help"
     | "singlePages"
     | "about"
-    | "peopleLandingPage"
+    | "people"
     | "partners"
     | "airsensors"
     | "funders"
     | "corporate"
     | "landingPages";
 
+  const parentSlugs = {
+    staff: "about/people/",
+    ambassadors: "about/people/",
+    initiatives: "about/",
+    policies: "",
+    usecases: "about/use-cases",
+    help: "developers/",
+    singlePages: "",
+    about: "",
+    people: "about/",
+    partners: "partners",
+    airsensors: "partners",
+    corporate: "partners",
+    funders: "partners",
+    landingPages: "about/",
+  };
+
+  const getParentSlug = (collection: CollectionName): string => {
+    return parentSlugs[collection];
+  };
+
   const entryMap = async (entry: CollectionEntry<CollectionName>) => {
     const { remarkPluginFrontmatter } = await render(entry);
     const { collection, id } = entry;
     const { lastModified } = remarkPluginFrontmatter;
     return {
-      slug: `${collection}/${id}`,
+      slug: id,
+      collection,
       lastModified,
+      parentSlug: getParentSlug(collection),
     };
   };
 
@@ -66,11 +89,47 @@ export async function GET() {
   const buildUrlEntry = ({
     lastModified,
     slug,
+    collection,
+    parentSlug,
   }: {
     lastModified: string;
-    slug: string;
+    slug?: string;
+    collection: string;
+    parentSlug?: string;
   }) => {
-    const url = new URL(slug, siteUrl);
+    let fullSlug = siteUrl;
+
+    if (collection === "people" && peopleLandingPage.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}${collection}`;
+    } else if (collection === "ambassadors" && ambassadorEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}${slug}`;
+    } else if (collection === "singlePages" && singlePageEntries.length > 0) {
+      fullSlug = `${fullSlug}${slug}`;
+    } else if (collection === "staff" && staffEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}${slug}`;
+    } else if (collection === "initiatives" && initiativeEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}${collection}/${slug}`;
+    } else if (collection === "policies" && policiesEntries.length > 0) {
+      fullSlug = `${fullSlug}${slug}`;
+    } else if (collection === "usecases" && usecaseEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
+    } else if (collection === "help" && helpEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}${collection}/${slug}`;
+    } else if (collection === "about" && aboutEntries.length > 0) {
+      fullSlug = `${fullSlug}${slug}`;
+    } else if (collection === "partners" && partners.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
+    } else if (collection === "airsensors" && airsensors.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
+    } else if (collection === "corporate" && corporateEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
+    } else if (collection === "funders" && funderEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
+    } else if (collection === "landingPages" && landingPageEntries.length > 0) {
+      fullSlug = `${fullSlug}${parentSlug}${collection}`;
+    }
+
+    const url = new URL(fullSlug);
     return `<url>
     <loc>${url.href}</loc>
   
@@ -86,8 +145,6 @@ export async function GET() {
       <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url><loc>${siteUrl}</loc></url>
-      <url><loc>${siteUrl}posts/</loc></url>
-
 
   ${staffEntries.map(buildUrlEntry).join("\n")}
   ${ambassadorEntries.map(buildUrlEntry).join("\n")}

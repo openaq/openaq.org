@@ -198,7 +198,7 @@ const developers = defineCollection({
     }),
 });
 
-const peopleLandingPage = defineCollection({
+const people = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/peopleLandingPage" }),
   schema: () =>
     z.object({
@@ -225,7 +225,7 @@ export const collections = {
   help,
   singlePages,
   about,
-  peopleLandingPage,
+  people,
   landingPages,
   developers,
 };
