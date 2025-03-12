@@ -13,7 +13,7 @@ export async function GET() {
   const help = await getCollection("help");
   const singlePages = await getCollection("singlePages");
   const about = await getCollection("about");
-  const peopleLandingPage = await getCollection("people");
+  const peopleIndex = await getCollection("peopleIndex");
   const partners = await getCollection("partners");
   const airsensors = await getCollection("airsensors");
   const funders = await getCollection("funders");
@@ -29,7 +29,7 @@ export async function GET() {
     | "help"
     | "singlePages"
     | "about"
-    | "people"
+    | "peopleIndex"
     | "partners"
     | "airsensors"
     | "funders"
@@ -45,7 +45,7 @@ export async function GET() {
     help: "developers/",
     singlePages: "",
     about: "",
-    people: "about/",
+    peopleIndex: "about/",
     partners: "partners",
     airsensors: "partners",
     corporate: "partners",
@@ -81,9 +81,7 @@ export async function GET() {
   const initiativeEntries = await Promise.all(initiatives.map(entryMap));
   const policiesEntries = await Promise.all(policies.map(entryMap));
   const singlePageEntries = await Promise.all(singlePages.map(entryMap));
-  const peopleLandingPageEntries = await Promise.all(
-    peopleLandingPage.map(entryMap)
-  );
+  const peopleIndexEntries = await Promise.all(peopleIndex.map(entryMap));
   const usecaseEntries = await Promise.all(usecases.map(entryMap));
 
   const buildUrlEntry = ({
@@ -99,7 +97,7 @@ export async function GET() {
   }) => {
     let fullSlug = siteUrl;
 
-    if (collection === "people" && peopleLandingPage.length > 0) {
+    if (collection === "people" && peopleIndex.length > 0) {
       fullSlug = `${fullSlug}${parentSlug}${collection}`;
     } else if (collection === "ambassadors" && ambassadorEntries.length > 0) {
       fullSlug = `${fullSlug}${parentSlug}${slug}`;
@@ -145,7 +143,7 @@ export async function GET() {
       <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url><loc>${siteUrl}</loc></url>
-  ${peopleLandingPageEntries.map(buildUrlEntry).join("\n")}
+  ${peopleIndexEntries.map(buildUrlEntry).join("\n")}
   ${staffEntries.map(buildUrlEntry).join("\n")}
   ${ambassadorEntries.map(buildUrlEntry).join("\n")}
   ${partnerEntries.map(buildUrlEntry).join("\n")}

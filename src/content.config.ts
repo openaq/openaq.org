@@ -198,14 +198,47 @@ const developers = defineCollection({
     }),
 });
 
-const people = defineCollection({
-  loader: file("src/content/people/index.md"),
+const peopleIndex = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/peopleIndex" }),
   schema: () =>
     z.object({
       staffIntro: z.string(),
       advisorIntro: z.string(),
       boardIntro: z.string(),
       ambassadorIntro: z.string(),
+    }),
+});
+
+const legal = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/legal" }),
+  schema: () =>
+    z.object({
+      financialTitle: z.string(),
+      financialDescription: z.string(),
+      bylawsTitle: z.string(),
+      bylawsDescription: z.string(),
+      incorporationTitle: z.string(),
+      incorporationDescription: z.string(),
+      policiesTitle: z.string(),
+      policiesDescription: z.string(),
+    }),
+});
+
+const homepage = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/index.md" }),
+  schema: () =>
+    z.object({
+      heroTitle: z.string(),
+      heroTitleLavender: z.string(),
+      heroDescription: z.string(),
+      technologyCardTitle: z.string(),
+      technologlyCardDescription: z.string(),
+      searchCardTitle: z.string(),
+      searchCardDescription: z.string(),
+      aqiHubCardTitle: z.string(),
+      aqiHubCardDescription: z.string(),
+      apiCardTitle: z.string(),
+      apiCardDescription: z.string(),
     }),
 });
 
@@ -225,7 +258,9 @@ export const collections = {
   help,
   singlePages,
   about,
-  people,
+  peopleIndex,
   landingPages,
   developers,
+  legal,
+  homepage,
 };
