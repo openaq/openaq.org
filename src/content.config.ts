@@ -166,14 +166,6 @@ const help = defineCollection({
     }),
 });
 
-const singlePages = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/singlePages" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
-});
-
 const about = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/about" }),
   schema: () =>
@@ -182,16 +174,11 @@ const about = defineCollection({
     }),
 });
 
-const landingPages = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/aboutLandingPages" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
-});
-
 const developers = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/developerSinglePages" }),
+  loader: glob({
+    pattern: ["*.md"],
+    base: "src/content/developers/singleDevPages",
+  }),
   schema: () =>
     z.object({
       title: z.string(),
@@ -199,7 +186,7 @@ const developers = defineCollection({
 });
 
 const peopleIndex = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/peopleIndex" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/people/peopleIndex" }),
   schema: () =>
     z.object({
       staffIntro: z.string(),
@@ -242,6 +229,50 @@ const homepage = defineCollection({
     }),
 });
 
+const initiativesIndex = defineCollection({
+  loader: glob({
+    pattern: ["*.md"],
+    base: "src/content/initiatives/initiativesIndex/",
+  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
+const usecaseIndex = defineCollection({
+  loader: glob({
+    pattern: ["*.md"],
+    base: "src/content/use-cases/use-casesIndex/",
+  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
+const whyOpenData = defineCollection({
+  loader: glob({
+    pattern: ["*.md"],
+    base: "src/content/why-open-data/",
+  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
+const whyAirQuality = defineCollection({
+  loader: glob({
+    pattern: ["*.md"],
+    base: "src/content/why-air-quality/",
+  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
 export const collections = {
   sponsors,
   policies,
@@ -256,11 +287,13 @@ export const collections = {
   ambassadors,
   usecases,
   help,
-  singlePages,
   about,
   peopleIndex,
-  landingPages,
   developers,
   legal,
   homepage,
+  initiativesIndex,
+  usecaseIndex,
+  whyAirQuality,
+  whyOpenData,
 };

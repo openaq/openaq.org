@@ -8,7 +8,7 @@ import ExplorerBanner from "@components/ExplorerBanner.astro";
 import BoardCard from "@components/people/BoardCard.astro";
 import AdvisorCard from "@components/people/AdvisorCard.astro";
 import AmbassadorCard from "@components/people/AmbassadorCard.astro";
-import { frontmatter } from "@content/people/index.md";
+import { frontmatter } from "@content/people/peopleIndex/index.md";
 const allStaff = await getCollection("staff");
 const allBoard = await getCollection("board");
 const allAdvisors = await getCollection("advisors");

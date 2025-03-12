@@ -6,22 +6,29 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "playwright test"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.3.1",
     "astro-purgecss": "^5.2.0",
     "autoprefixer": "^10.4.20",
+    "axios": "^1.8.3",
     "dayjs": "^1.11.13",
     "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
     "purgecss": "^7.0.2",
     "remove-markdown": "^0.6.0",
     "sass": "^1.83.0",
-    "vite-plugin-solid-svg": "^0.8.1"
+    "vite-plugin-solid-svg": "^0.8.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "@types/axios": "^0.9.36",
+    "@types/node": "^22.13.10",
+    "@types/xml2js": "^0.4.14",
     "cssnano": "^7.0.6",
     "postcss": "^8.4.49",
     "stylelint": "^16.12.0",
