@@ -11,14 +11,16 @@ export async function GET() {
   const policies = await getCollection("policies");
   const usecases = await getCollection("usecases");
   const help = await getCollection("help");
-  const singlePages = await getCollection("singlePages");
   const about = await getCollection("about");
   const peopleIndex = await getCollection("peopleIndex");
   const partners = await getCollection("partners");
   const airsensors = await getCollection("airsensors");
   const funders = await getCollection("funders");
   const corporate = await getCollection("corporate");
-  const landingPages = await getCollection("landingPages");
+  const initiativesIndex = await getCollection("initiativesIndex");
+  const usecaseIndex = await getCollection("usecaseIndex");
+  const whyOpenData = await getCollection("whyOpenData");
+  const whyAirQuality = await getCollection("whyAirQuality");
 
   type CollectionName =
     | "staff"
@@ -27,34 +29,38 @@ export async function GET() {
     | "policies"
     | "usecases"
     | "help"
-    | "singlePages"
     | "about"
     | "peopleIndex"
     | "partners"
     | "airsensors"
     | "funders"
     | "corporate"
-    | "landingPages";
+    | "initiativesIndex"
+    | "usecaseIndex"
+    | "whyOpenData"
+    | "whyAirQuality";
 
-  const parentSlugs = {
-    staff: "about/people/",
-    ambassadors: "about/people/",
-    initiatives: "about/",
-    policies: "",
-    usecases: "about/use-cases",
-    help: "developers/",
-    singlePages: "",
-    about: "",
-    peopleIndex: "about/",
-    partners: "partners",
-    airsensors: "partners",
-    corporate: "partners",
-    funders: "partners",
-    landingPages: "about/",
+  const routes = {
+    staff: ["about", "people"],
+    ambassadors: ["about", "people"],
+    initiatives: ["about", "initiatives"],
+    policies: [],
+    usecases: ["about", "use-cases"],
+    help: ["developers", "help"],
+    whyAirQuality: [],
+    whyOpenData: [],
+    about: [],
+    peopleIndex: ["about"],
+    partners: ["partners"],
+    airsensors: ["partners", "airsensors"],
+    corporate: ["partners"],
+    funders: ["partners"],
+    usecaseIndex: ["about"],
+    initiativesIndex: ["about"],
   };
 
-  const getParentSlug = (collection: CollectionName): string => {
-    return parentSlugs[collection];
+  const getRoute = (collection: CollectionName): string[] => {
+    return routes[collection];
   };
 
   const entryMap = async (entry: CollectionEntry<CollectionName>) => {
@@ -63,16 +69,14 @@ export async function GET() {
     const { lastModified } = remarkPluginFrontmatter;
     return {
       slug: id,
-      collection,
       lastModified,
-      parentSlug: getParentSlug(collection),
+      route: getRoute(collection),
     };
   };
 
   const helpEntries = await Promise.all(help.map(entryMap));
   const staffEntries = await Promise.all(staff.map(entryMap));
   const ambassadorEntries = await Promise.all(ambassadors.map(entryMap));
-  const landingPageEntries = await Promise.all(landingPages.map(entryMap));
   const aboutEntries = await Promise.all(about.map(entryMap));
   const partnerEntries = await Promise.all(partners.map(entryMap));
   const airsensorEntries = await Promise.all(airsensors.map(entryMap));
@@ -80,54 +84,35 @@ export async function GET() {
   const corporateEntries = await Promise.all(corporate.map(entryMap));
   const initiativeEntries = await Promise.all(initiatives.map(entryMap));
   const policiesEntries = await Promise.all(policies.map(entryMap));
-  const singlePageEntries = await Promise.all(singlePages.map(entryMap));
   const peopleIndexEntries = await Promise.all(peopleIndex.map(entryMap));
   const usecaseEntries = await Promise.all(usecases.map(entryMap));
+  const initiativeIndexEntries = await Promise.all(
+    initiativesIndex.map(entryMap)
+  );
+  const usecaseIndexEntries = await Promise.all(usecaseIndex.map(entryMap));
+  const whyOpenDataEntries = await Promise.all(whyOpenData.map(entryMap));
+  const whyAirQualityEntries = await Promise.all(whyAirQuality.map(entryMap));
+
+  const buildPath = (paths: string[], slug: string) => {
+    const fullPath = [...paths, slug].join("/");
+
+    const url = new URL(fullPath, siteUrl);
+    return url;
+  };
 
   const buildUrlEntry = ({
     lastModified,
     slug,
-    collection,
-    parentSlug,
+    route,
   }: {
     lastModified: string;
     slug?: string;
-    collection: string;
-    parentSlug?: string;
+    route?: string[];
   }) => {
-    let fullSlug = siteUrl;
+    if (!slug || !route) return;
 
-    if (collection === "people" && peopleIndex.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}${collection}`;
-    } else if (collection === "ambassadors" && ambassadorEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}${slug}`;
-    } else if (collection === "singlePages" && singlePageEntries.length > 0) {
-      fullSlug = `${fullSlug}${slug}`;
-    } else if (collection === "staff" && staffEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}${slug}`;
-    } else if (collection === "initiatives" && initiativeEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}${collection}/${slug}`;
-    } else if (collection === "policies" && policiesEntries.length > 0) {
-      fullSlug = `${fullSlug}${slug}`;
-    } else if (collection === "usecases" && usecaseEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
-    } else if (collection === "help" && helpEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}${collection}/${slug}`;
-    } else if (collection === "about" && aboutEntries.length > 0) {
-      fullSlug = `${fullSlug}${slug}`;
-    } else if (collection === "partners" && partners.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
-    } else if (collection === "airsensors" && airsensors.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
-    } else if (collection === "corporate" && corporateEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
-    } else if (collection === "funders" && funderEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}/${slug}`;
-    } else if (collection === "landingPages" && landingPageEntries.length > 0) {
-      fullSlug = `${fullSlug}${parentSlug}${collection}`;
-    }
+    const url = buildPath(route, slug);
 
-    const url = new URL(fullSlug);
     return `<url>
     <loc>${url.href}</loc>
   
@@ -143,21 +128,7 @@ export async function GET() {
       <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url><loc>${siteUrl}</loc></url>
-  ${peopleIndexEntries.map(buildUrlEntry).join("\n")}
-  ${staffEntries.map(buildUrlEntry).join("\n")}
-  ${ambassadorEntries.map(buildUrlEntry).join("\n")}
-  ${partnerEntries.map(buildUrlEntry).join("\n")}
-  ${funderEntries.map(buildUrlEntry).join("\n")}
-  ${corporateEntries.map(buildUrlEntry).join("\n")}
-  ${airsensorEntries.map(buildUrlEntry).join("\n")}
-  ${helpEntries.map(buildUrlEntry).join("\n")}
-  ${partnerEntries.map(buildUrlEntry).join("\n")}
-  ${usecaseEntries.map(buildUrlEntry).join("\n")}
-  ${landingPageEntries.map(buildUrlEntry).join("\n")}
-  ${initiativeEntries.map(buildUrlEntry).join("\n")}
-  ${policiesEntries.map(buildUrlEntry).join("\n")}
-  ${aboutEntries.map(buildUrlEntry).join("\n")}
-  ${singlePageEntries.map(buildUrlEntry).join("\n")}
+
 
 
   </urlset>  `.trim();
@@ -168,3 +139,24 @@ export async function GET() {
     },
   });
 }
+// GOOD TO GO
+// ${initiativeEntries.map(buildUrlEntry).join("\n")}
+//${whyAirQualityEntries.map(buildUrlEntry).join("\n")}
+// ${whyOpenDataEntries.map(buildUrlEntry).join("\n")}
+//${initiativeIndexEntries.map(buildUrlEntry).join("\n")}
+//${aboutEntries.map(buildUrlEntry).join("\n")}
+
+// FAILING
+//  ${peopleIndexEntries.map(buildUrlEntry).join("\n")}
+//${airsensorEntries.map(buildUrlEntry).join("\n")}
+//${staffEntries.map(buildUrlEntry).join("\n")}
+// ${ambassadorEntries.map(buildUrlEntry).join("\n")}
+// ${partnerEntries.map(buildUrlEntry).join("\n")}
+//${funderEntries.map(buildUrlEntry).join("\n")}
+//${helpEntries.map(buildUrlEntry).join("\n")}
+// ${usecaseEntries.map(buildUrlEntry).join("\n")}
+//${policiesEntries.map(buildUrlEntry).join("\n")}
+// ${usecaseIndexEntries.map(buildUrlEntry).join("\n")}
+// ${corporateEntries.map(buildUrlEntry).join("\n")}
+// ${partnerEntries.map(buildUrlEntry).join("\n")}
+//
