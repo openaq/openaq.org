@@ -46,7 +46,7 @@ export async function GET() {
     ambassadors: ["about", "people"],
     initiatives: ["about", "initiatives"],
     policies: [],
-    usecases: ["use-cases"],
+    usecases: ["about", "use-cases"],
     whyAirQuality: [],
     whyOpenData: [],
     about: [],

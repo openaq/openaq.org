@@ -17,34 +17,19 @@ async function getSitemapUrls(): Promise<string[]> {
 }
 
 async function checkUrl(url: string): Promise<number> {
-  try {
-    const response = await axios.get(url);
-
-    console.log(`${url} - ${response.status}`);
+    const response = await axios.get(url, {
+      validateStatus: (status) => {
+        return status >= 200 && status < 500;
+      }
+    });
     return response.status;
-  } catch (error) {
-    console.error(`Failed to fetch ${url}`, error);
-    return 404;
-  }
 }
-test("test sitemap url working", async () => {
-  const urls = await getSitemapUrls();
-  const results = await Promise.all(
-    urls.map(async (url) => {
-      const status = await checkUrl(url);
-      return { url, status };
-    })
-  );
 
-  const failedUrls = results.filter((result) => result.status !== 200);
-  const successfulUrls = results.filter((result) => result.status === 200);
+const urls = await getSitemapUrls();
 
-  if (successfulUrls.length > 0) {
-    console.log("The urls that works", successfulUrls);
-  }
-  if (failedUrls.length > 0) {
-    console.log("The urls that has been failing", failedUrls);
-  }
-
-  expect(failedUrls).toEqual([]);
-});
+for (const url of urls) {
+  test(`test sitemap ${url} working`, async () => {
+    const status = await checkUrl(url);
+    expect(status).toBe(200)
+  })
+}

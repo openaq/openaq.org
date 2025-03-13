@@ -7,6 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "test-build": "astro build --site http://localhost:4321",
     "test": "playwright test"
   },
   "dependencies": {
