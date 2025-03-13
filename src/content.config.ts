@@ -196,6 +196,28 @@ const peopleIndex = defineCollection({
     }),
 });
 
+const partnersIndex = defineCollection({
+  loader: glob({
+    pattern: ["*.md"],
+    base: "src/content/partners/partnersIndex",
+  }),
+  schema: () =>
+    z.object({
+      airsensorsTitle: z.string(),
+      fundersTitle: z.string(),
+      corporateTitle: z.string(),
+      partnersTitle: z.string(),
+    }),
+});
+
+const helpIndex = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/developers/helpIndex" }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
 const legal = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/legal" }),
   schema: () =>
@@ -296,4 +318,6 @@ export const collections = {
   usecaseIndex,
   whyAirQuality,
   whyOpenData,
+  helpIndex,
+  partnersIndex,
 };

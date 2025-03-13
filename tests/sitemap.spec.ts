@@ -16,33 +16,35 @@ async function getSitemapUrls(): Promise<string[]> {
   return urls.map((urlObj) => urlObj.loc[0]);
 }
 
-// async function checkUrls(urls: any) {
-//   return await Promise.all(
-//     urls.map(async (url: string) => {
-//       try {
-//         const response = await axios.get(url);
-//         console.log(`${url} - ${response.status}`);
-//         return { url, status: response.status };
-//       } catch (error) {
-//         console.error(`${url} - Failed`, error);
-//         return { url, status: "Failed" };
-//       }
-//     })
-//   );
-// }
-
 async function checkUrl(url: string): Promise<number> {
-  const response = await axios.get(url);
-  console.error(`Failed to fetch ${url}:`, Error);
-  console.log(`${url} - ${response.status}`);
-  return response.status;
+  try {
+    const response = await axios.get(url);
+
+    console.log(`${url} - ${response.status}`);
+    return response.status;
+  } catch (error) {
+    console.error(`Failed to fetch ${url}`, error);
+    return 404;
+  }
 }
 test("test sitemap url working", async () => {
   const urls = await getSitemapUrls();
-  await Promise.all(
+  const results = await Promise.all(
     urls.map(async (url) => {
       const status = await checkUrl(url);
-      expect(status).toBe(200);
+      return { url, status };
     })
   );
+
+  const failedUrls = results.filter((result) => result.status !== 200);
+  const successfulUrls = results.filter((result) => result.status === 200);
+
+  if (successfulUrls.length > 0) {
+    console.log("The urls that works", successfulUrls);
+  }
+  if (failedUrls.length > 0) {
+    console.log("The urls that has been failing", failedUrls);
+  }
+
+  expect(failedUrls).toEqual([]);
 });
