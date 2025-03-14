@@ -52,7 +52,7 @@ export async function GET() {
     about: [],
     peopleIndex: ["about"],
     partners: ["partners"],
-    usecaseIndex: [],
+    usecaseIndex: ["about"],
     initiativesIndex: ["about"],
     homepage: [],
     legal: ["about"],
@@ -146,6 +146,7 @@ ${homepageEntries.map(buildUrlEntry).join("\n")}
 ${partnersIndexEntries.map(buildUrlEntry).join("\n")}
 ${helpIndexEntries.map(buildUrlEntry).join("\n")}
 ${developersEntries.map(buildUrlEntry).join("\n")}
+${ambassadorEntries.map(buildUrlEntry).join("\n")}
 
 
   </urlset>  `.trim();
