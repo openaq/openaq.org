@@ -1,6 +1,14 @@
 import { defineCollection, z } from "astro:content";
 
-import { file, glob } from "astro/loaders";
+import { glob } from "astro/loaders";
+
+const contact = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/contact" }),
+  schema: () =>
+    z.object({
+      // name: z.string(),
+    }),
+});
 
 const sponsors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/sponsor" }),
@@ -320,4 +328,5 @@ export const collections = {
   whyOpenData,
   helpIndex,
   partnersIndex,
+  contact,
 };

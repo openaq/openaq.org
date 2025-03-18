@@ -21,6 +21,8 @@ export async function GET() {
   const helpIndex = await getCollection("helpIndex");
   const partnersindex = await getCollection("partnersIndex");
   const developers = await getCollection("developers");
+  const sponsors = await getCollection("sponsors");
+  const contact = await getCollection("contact");
 
   type CollectionName =
     | "staff"
@@ -39,7 +41,9 @@ export async function GET() {
     | "homepage"
     | "helpIndex"
     | "developers"
-    | "partnersIndex";
+    | "sponsors"
+    | "partnersIndex"
+    | "contact";
 
   const routes = {
     staff: ["about", "people"],
@@ -59,6 +63,8 @@ export async function GET() {
     helpIndex: ["developers"],
     partnersIndex: [],
     developers: ["developers"],
+    sponsors: ["about"],
+    contact: [],
   };
 
   const getRoute = (collection: CollectionName): string[] => {
@@ -94,6 +100,8 @@ export async function GET() {
   const partnersIndexEntries = await Promise.all(partnersindex.map(entryMap));
   const legalEntries = await Promise.all(legal.map(entryMap));
   const developersEntries = await Promise.all(developers.map(entryMap));
+  const sponsorEntries = await Promise.all(sponsors.map(entryMap));
+  const contactEntries = await Promise.all(contact.map(entryMap));
 
   const buildPath = (paths: string[], slug: string) => {
     const fullPath = [...paths, slug].join("/");
@@ -147,7 +155,8 @@ ${partnersIndexEntries.map(buildUrlEntry).join("\n")}
 ${helpIndexEntries.map(buildUrlEntry).join("\n")}
 ${developersEntries.map(buildUrlEntry).join("\n")}
 ${ambassadorEntries.map(buildUrlEntry).join("\n")}
-
+${sponsorEntries.map(buildUrlEntry).join("\n")}
+${contactEntries.map(buildUrlEntry).join("\n")}
 
   </urlset>  `.trim();
 

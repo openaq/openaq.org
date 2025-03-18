@@ -4,6 +4,7 @@ import Bubbles from "@components/Bubbles.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
 import SocialBanner from "@components/SocialBanner.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { frontmatter } from "@content/contact/contact.md";
 ---
 
 <style lang="scss">
@@ -29,17 +30,19 @@ import BaseLayout from "@layouts/BaseLayout.astro";
     <Bubbles />
     <div class="contact-content-container">
       <div>
-        <h2 class="type-header-2">Mailing address</h2>
+        <h2 class="type-header-2">{frontmatter.mailingAdressTitle}</h2>
         <p>
-          OpenAQ<br />
-          4301 50th Street NW<br />
-          Suite 300 PMB 1046<br />
-          Washington, DC 20016-4364
+          {frontmatter.mailingAdressFirstLine}<br />
+          {frontmatter.mailingAdressSecondLine}<br />
+          {frontmatter.mailingAdressThirdLine}<br />
+          {frontmatter.mailingAdressFourthLine}
         </p>
       </div>
       <div>
-        <h2 class="type-header-2">Email</h2>
-        <a class="type-link-1" href="mailto:info@openaq.org">info@openaq.org</a>
+        <h2 class="type-header-2">{frontmatter.emailTitle}</h2>
+        <a class="type-link-1" href="mailto:info@openaq.org"
+          >{frontmatter.emailContent}</a
+        >
       </div>
     </div>
   </div>
