@@ -1,5 +1,5 @@
 ---
-title: "Russ Biggs"
+name: "Russ Biggs"
 position: "Director of Technology"
 email: "russ@openaq.org"
 bluesky: "https://bsky.app/profile/russbiggs.com"

@@ -1,5 +1,5 @@
 ---
-title: "Nathan Pavlovic"
+name: "Nathan Pavlovic"
 position: "Member at large"
 email: "nathan@openaq.org"
 image: "@assets/images/nathan_pavlovic.png"

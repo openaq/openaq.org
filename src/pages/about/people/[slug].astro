@@ -123,11 +123,11 @@ const { Content } = await render(person);
         height={300}
         width={300}
         loading="eager"
-        alt=`${person.data.title} portrait`
+        alt=`${person.data.name} portrait`
       />
 
       <div class="person-description">
-        <h1 class="person-name gradient-title">{person.data.title}</h1>
+        <h1 class="person-name gradient-title">{person.data.name}</h1>
         <h2 class="person-title">{person.data.position}</h2>
         <SocialIcons {...socials(person)} />
         <div class="person-bio"><Content /></div>

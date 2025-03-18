@@ -71,7 +71,7 @@ const staff = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/people/staff" }),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
+      name: z.string(),
       position: z.string(),
       email: z.string().email(),
       image: image(),
@@ -90,7 +90,7 @@ const board = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/people/board" }),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
+      name: z.string(),
       position: z.string(),
       email: z.string().email(),
       image: image(),
@@ -109,7 +109,7 @@ const advisors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/people/advisors" }),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
+      name: z.string(),
       position: z.string(),
       country: z.string(),
       email: z.string().email().optional(),
@@ -129,7 +129,7 @@ const ambassadors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/people/ambassadors" }),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
+      name: z.string(),
       position: z.string(),
       country: z.string(),
       email: z.string().email().optional(),

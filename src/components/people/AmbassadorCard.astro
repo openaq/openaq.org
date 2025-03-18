@@ -1,7 +1,7 @@
 ---
 import SocialIcons from "./SocialIcons.astro";
 
-const { title, position, url, data, socials, portrait, country } = Astro.props;
+const { name, position, url, data, socials, portrait, country } = Astro.props;
 
 import { Image } from "astro:assets";
 
@@ -31,11 +31,11 @@ const summary = (bio: string, length = 300): string => {
       src={portrait}
       height={252}
       width={252}
-      alt={title}
+      alt={name}
     />
 
     <div class="team-card__description">
-      <h2 class="person-name">{title}</h2>
+      <h2 class="person-name">{name}</h2>
       <p class="person-bio">{country}</p>
       <p class="person-bio">{summary(data)}</p>
       <SocialIcons {...socials} />

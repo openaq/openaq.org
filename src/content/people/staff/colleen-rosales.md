@@ -1,5 +1,5 @@
 ---
-title: "Colleen Marciel F. Rosales"
+name: "Colleen Marciel F. Rosales"
 type: "about/people"
 honorific: "Dr."
 group: "team"

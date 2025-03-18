@@ -1,5 +1,5 @@
 ---
-title: "Sapana Bhujel"
+name: "Sapana Bhujel"
 country: "Kathmandu, Nepal"
 position: "Ambassador"
 image: "@assets/images/sapana.png"

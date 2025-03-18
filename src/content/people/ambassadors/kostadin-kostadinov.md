@@ -1,5 +1,5 @@
 ---
-title: "Kostadin Kostadinov"
+name: "Kostadin Kostadinov"
 honorific: "Dr."
 country: "Plovdiv, Bulgaria"
 position: "Ambassador"

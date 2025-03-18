@@ -1,5 +1,5 @@
 ---
-title: "Amrit Sharma"
+name: "Amrit Sharma"
 position: "Secretary"
 email: "amrit@openaq.org"
 image: "@assets/images/amrit_sharma.png"

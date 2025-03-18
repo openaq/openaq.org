@@ -1,5 +1,5 @@
 ---
-title: "Chris Hagerbaumer"
+name: "Chris Hagerbaumer"
 position: "Executive Director"
 group: "team"
 email: "chris@openaq.org"

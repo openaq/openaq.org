@@ -1,5 +1,5 @@
 ---
-title: "Matt Whitney"
+name: "Matt Whitney"
 position: "Member at large"
 email: "matt@openaq.org"
 image: "@assets/images/matt_whitney.png"
