@@ -8,7 +8,7 @@ export default defineConfig({
   },
   webServer: {
     command: "npm run preview",
-    url: "http://localhost:4321",
+    url: "http://openaq.org",
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
   },
