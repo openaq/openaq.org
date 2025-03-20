@@ -2,6 +2,7 @@
 import HelpItem from "@components/HelpItem.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
+import { frontmatter } from "@content/developers/helpIndex/help.md";
 
 const allFAQs = await getCollection("help");
 ---
@@ -51,7 +52,7 @@ const allFAQs = await getCollection("help");
 <PageLayout>
   <div class="help-content">
     <div class="help-content-container">
-      <h1 class="type-display-1 gradient-title">Help & FAQ</h1>
+      <h1 class="type-display-1 gradient-title">{frontmatter.title}</h1>
       <section class="help-items">
         {allFAQs.map((FAQ) => <HelpItem title={FAQ.data.title} FAQ={FAQ} />)}
       </section>

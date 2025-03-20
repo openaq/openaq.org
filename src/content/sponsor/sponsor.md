@@ -1,5 +1,5 @@
 ---
-name: "Sponsor us"
+title: "Sponsor us"
 ---
 
 _Help OpenAQ keep open air quality data flowing and available to all_
@@ -8,14 +8,15 @@ Sponsors play a critical role in sustaining the world’s largest open-source ai
 
 ## Sponsorship Levels
 
-| Sponsorship Level | Annual Sponsorship Amount in USD |
-| :---- | :---- |
-| Distinguished Devotee | starting at $1,000 |
-| Fabulous Fan | starting at $2,500 |
-| Big Believer | starting at $5,000 |
-| Prominent Proponent | starting at $10,000 |
-| Super Supporter | starting at $15,000 |
-| Chief Champion | starting at $20,000 |
+| Sponsorship Level     | Annual Sponsorship Amount in USD |
+| :-------------------- | :------------------------------- |
+| Distinguished Devotee | starting at $1,000               |
+| Fabulous Fan          | starting at $2,500               |
+| Big Believer          | starting at $5,000               |
+| Prominent Proponent   | starting at $10,000              |
+| Super Supporter       | starting at $15,000              |
+| Chief Champion        | starting at $20,000              |
+
 </table>
 
 ## Menu of Benefits
@@ -24,7 +25,6 @@ We work with you to customize your sponsorship benefits based on your marketing
 and business objectives. Each benefit requires a minimum level of support and is
 available within the span of one year. We are happy to discuss other potential
 benefits.
-
 
 |                              | Publicity                                                                                                                                                                                                        | Community Engagement                                                                                                                       | Direct Engagement                                                                                                                                                          |
 | :--------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -35,7 +35,6 @@ benefits.
 | $15,000 minimum sponsorship  | <ul><li>Publicity above</li> <li> Your organization’s name and logo included in OpenAQ’s _Open Air Quality Data: The Global Landscape report (published in even years)_ </li></ul>                               | <ul><li>Benefits above </li> <li>A virtual workshop for a community of your choice, with special recognition of your sponsorship</li></ul> | Benefits above                                                                                                                                                             |
 | $20,000 minimum sponsorship  | Publicity above                                                                                                                                                                                                  | Benefits above                                                                                                                             | <ul><li>Benefits above</li> <li> Opportunity to engage your employees and/or your favorite organization or academic institution in an air quality data hackathon</li></ul> |
 | $ amount mutually determined |                                                                                                                                                                                                                  |                                                                                                                                            | Direct technical assistance around the OpenAQ Platform                                                                                                                     |
-
 
 We look forward to discussing these opportunities with you.
 

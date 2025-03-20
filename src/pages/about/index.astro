@@ -1,11 +1,11 @@
 ---
 import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
-import { Content, frontmatter } from "@content/about.md";
+import { Content, frontmatter } from "@content/about/about.md";
 import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 ---
 
-<SingleArticleLayout frontmatter={frontmatter} name="About us">
+<SingleArticleLayout frontmatter={frontmatter} title={frontmatter.title}>
   <Content />
   <CommunityBanner slot="banner" />
   <ExplorerBanner slot="banner-low" />

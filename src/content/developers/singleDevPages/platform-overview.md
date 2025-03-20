@@ -1,5 +1,5 @@
 ---
-name: "Platform overview"
+title: "Platform overview"
 ---
 
 OpenAQ is the world’s largest open-source, open-access platform for ground-level ambient air quality data. To gather and harmonize the world's air quality data, OpenAQ searches and scrapes hundreds of data sources to extract and store data. OpenAQ gathers physical measurements, not aggregated values such as AQIs (Air Quality Indexes).

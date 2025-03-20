@@ -1,5 +1,5 @@
 ---
-name: "About Us"
+title: "About Us"
 ---
 
 OpenAQ is an environmental tech nonprofit. We aggregate and harmonize open air quality data from across the globe onto an open-source, open-access data platform so that anyone concerned about air quality has unfettered access to the data they need to analyze, communicate and advocate for clean air. By providing universal access to air quality data, OpenAQ empowers a global community of changemakers to solve air inequality–the unequal access to clean air.
@@ -45,7 +45,7 @@ This work wouldn't be possible without those who monitor air quality and share t
 
 As a mission-driven organization without a profit motive, OpenAQ advocates for transparent, publicly accessible air quality data and for more monitoring (especially where people are most vulnerable).
 
-OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [Click here](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) to view our 2022 report, _Open Air Quality Data: The Global Landscape_.
+OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [Click here](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) to view our 2022 report, _Open Air Quality Data: The Global Landscape_
 
 ---
 

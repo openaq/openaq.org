@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import StaffCard from "@components/people/StaffCard.astro";
 import type { CollectionEntry } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
@@ -8,6 +8,7 @@ import ExplorerBanner from "@components/ExplorerBanner.astro";
 import BoardCard from "@components/people/BoardCard.astro";
 import AdvisorCard from "@components/people/AdvisorCard.astro";
 import AmbassadorCard from "@components/people/AmbassadorCard.astro";
+import { frontmatter } from "@content/people/peopleIndex/people.md";
 const allStaff = await getCollection("staff");
 const allBoard = await getCollection("board");
 const allAdvisors = await getCollection("advisors");
@@ -59,9 +60,7 @@ const sortByName = (
 <PageLayout>
   <h1 class="gradient-title">Team</h1>
   <p>
-    The OpenAQ Team implements the day-to-day work of the organization, striving
-    to meet the needs of those who contribute to, use and benefit from the
-    OpenAQ Platform. Based in the U.S., we work remotely.
+    {frontmatter.staffIntro}
   </p>
   <section class="person-grid">
     {
@@ -81,10 +80,7 @@ const sortByName = (
   </section>
   <h1 class="gradient-title">Board</h1>
   <p>
-    The OpenAQ Governing Board stewards the organization, focusing on high-level
-    strategy, oversight and accountability. Members serve as ambassadors and
-    advocates for OpenAQ. The Executive Director serves as CEO of the Governing
-    Board.
+    {frontmatter.boardIntro}
   </p>
   <section class="person-grid">
     {
@@ -103,9 +99,7 @@ const sortByName = (
   </section>
   <h1 class="gradient-title">Advisors</h1>
   <p>
-    Members of the OpenAQ Advisory Board provide strategic advice and are
-    enthusiastic advocates for OpenAQ in their respective fields and
-    communities.
+    {frontmatter.advisorIntro}
   </p>
   <section class="person-grid">
     {
@@ -126,10 +120,10 @@ const sortByName = (
 
   <h1 class="gradient-title">Community Ambassadors</h1>
   <p>
-    Together with OpenAQ, Community Ambassadors commit to advocating for data
-    transparency and contribute to the collective action against air pollution.
-    Meet the 2024 cohort below, and learn more about the program <a href=""
-      >here</a
+    {frontmatter.ambassadorIntro}<a
+      href="/about/initiatives/community-ambassadors"
+    >
+      here</a
     >.
   </p>
   <section class="person-grid">

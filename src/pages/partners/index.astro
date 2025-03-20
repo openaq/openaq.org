@@ -6,6 +6,7 @@ import PartnerCard from "@components/partners/PartnerCard.astro";
 import PartnerInfoCard from "@components/partners/PartnerInfoCard.astro";
 import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
+import { frontmatter } from "@content/partners/partnersIndex/partners.md";
 
 const allPartners = await getCollection("partners");
 const allAirSensors = await getCollection("airsensors");
@@ -54,7 +55,7 @@ const sortByName = (
 </style>
 <PageLayout>
   <section class="air-sensors-section">
-    <h1 class="gradient-title">Air sensor partners</h1>
+    <h1 class="gradient-title">{frontmatter.airsensorsTitle}</h1>
     <div class="partners-grid">
       {
         allAirSensors
@@ -70,7 +71,7 @@ const sortByName = (
     </div>
   </section>
   <section class="corporate-sponsors-section">
-    <h1 class="gradient-title">Corporate sponsors</h1>
+    <h1 class="gradient-title">{frontmatter.corporateTitle}</h1>
     <div class="partners-grid">
       {
         allCorporates
@@ -86,7 +87,7 @@ const sortByName = (
     </div>
   </section>
 
-  <h1 class="gradient-title">Partners</h1>
+  <h1 class="gradient-title">{frontmatter.partnersTitle}</h1>
   <section class="partners-section">
     <div class="partners-info-grid">
       {
@@ -104,7 +105,7 @@ const sortByName = (
     </div>
   </section>
   <section class="funders-section">
-    <h1 class="gradient-title">Funders</h1>
+    <h1 class="gradient-title">{frontmatter.fundersTitle}</h1>
     <div class="partners-grid">
       {
         allFunders

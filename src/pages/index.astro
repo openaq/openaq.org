@@ -11,6 +11,7 @@ import nairobiImg from "@assets/images/nairobi.jpg";
 
 import dataPipeline from "@assets/svg/data-pipeline.svg";
 import CommunityBanner from "@components/CommunityBanner.astro";
+import { frontmatter } from "@content/index.md";
 ---
 
 <style lang="scss">
@@ -246,14 +247,13 @@ import CommunityBanner from "@components/CommunityBanner.astro";
   <section class="hero-section">
     <div class="hero-title">
       <h1 class="type-display-1 text-sky-120">
-        Fighting air inequality through <br /><span class="text-lavender-100"
-          >open data.</span
+        {frontmatter.heroTitle}
+        <br /><span class="text-lavender-100"
+          >{frontmatter.heroTitleLavender}</span
         >
       </h1>
       <h2 class="type-heading-3">
-        OpenAQ is a nonprofit organization providing universal access to air
-        quality data to empower a global community of changemakers to solve air
-        inequality—the unequal access to clean air.
+        {frontmatter.heroDescription}
       </h2>
       <a href="/about/" class="btn btn-primary learn-more-btn" role="button"
         >Learn More</a
@@ -271,11 +271,11 @@ import CommunityBanner from "@components/CommunityBanner.astro";
     <div class="bubble-sm"></div>
     <div class="technology-section-blurb">
       <div class="technology-section-blurb__content">
-        <h2 class="type-heading-1 text-white">One-stop data source</h2>
+        <h2 class="type-heading-1 text-white">
+          {frontmatter.technologyCardTitle}
+        </h2>
         <p class="type-body-2 text-white">
-          OpenAQ aggregates data from hundreds of sources worldwide, harmonizing
-          and sharing them on our centralized, trusted, open-source data
-          platform.
+          {frontmatter.technologlyCardDescription}
         </p>
         <a href="/developers/platform-overview/" class="icon-btn btn-primary"
           >Learn how OpenAQ works
@@ -301,10 +301,9 @@ import CommunityBanner from "@components/CommunityBanner.astro";
     </div>
     <div class="search-section-blurb">
       <div class="search-section-blurb__content">
-        <h2 class="type-heading-1 text-white">Search for local data</h2>
+        <h2 class="type-heading-1 text-white">{frontmatter.searchCardTitle}</h2>
         <p class="type-body-2 text-white">
-          Hundreds of people use OpenAQ every day. Our interactive map makes it
-          easy to explore and understand global air quality data.
+          {frontmatter.searchCardDescription}
         </p>
         <a
           href="https://explore.openaq.org"
@@ -321,11 +320,9 @@ import CommunityBanner from "@components/CommunityBanner.astro";
   <section class="aqi-hub-section">
     <div class="aqi-hub-section-blurb">
       <div class="aqi-hub-section-blurb__content">
-        <h2 class="type-heading-1 text-white">Air Quality Index Hub</h2>
+        <h2 class="type-heading-1 text-white">{frontmatter.aqiHubCardTitle}</h2>
         <p class="type-body-2 text-white">
-          Visit the OpenAQ AQI Hub to learn about the methodologies different
-          countries use to build their most important air quality communications
-          tool.
+          {frontmatter.aqiHubCardDescription}
         </p>
         <a
           href="https://aqihub.info"
@@ -350,11 +347,8 @@ import CommunityBanner from "@components/CommunityBanner.astro";
     </div>
     <div class="api-section-blurb">
       <div class="api-section-blurb__content">
-        <h2 class="type-heading-1 text-white">Direct API access</h2>
-        <p class="type-body-2 text-white">
-          Our open API allows applications to connect directly to OpenAQ data.
-          One air quality API provides access to hundred of sources.
-        </p>
+        <h2 class="type-heading-1 text-white">{frontmatter.apiCardTitle}</h2>
+        <p class="type-body-2 text-white">{frontmatter.apiCardDescription}</p>
         <a
           href="https://docs.openaq.org"
           class="learn-btn"

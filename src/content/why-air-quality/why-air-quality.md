@@ -1,5 +1,5 @@
 ---
-name: "Why air quality?"
+title: "Why air quality?"
 ---
 
 Air pollution is the 2nd leading risk factor for death and the leading environmental contributor to death worldwide, contributing to more than 8 million deaths in 2021 [^1]. Up to 99% of us are breathing polluted air [^2], cutting lives short by an average of 1.9 years across the globe [^3].

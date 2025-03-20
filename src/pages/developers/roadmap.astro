@@ -2,10 +2,13 @@
 import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 import SocialBanner from "@components/SocialBanner.astro";
 
-import { Content, frontmatter } from "@content/developers/roadmap.md";
+import {
+  Content,
+  frontmatter,
+} from "@content/developers/singleDevPages/roadmap.md";
 ---
 
-<SingleArticleLayout frontmatter={frontmatter} name={frontmatter.name}>
+<SingleArticleLayout frontmatter={frontmatter} title={frontmatter.title}>
   <Content />
   <SocialBanner slot="banner" />
 </SingleArticleLayout>

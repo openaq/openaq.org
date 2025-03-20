@@ -4,6 +4,7 @@ import Bubbles from "@components/Bubbles.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
 import CommunityBanner from "@components/CommunityBanner.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { frontmatter } from "@content/legal/legal.md";
 ---
 
 <style lang="scss">
@@ -122,9 +123,9 @@ import BaseLayout from "@layouts/BaseLayout.astro";
       </div>
       <div class="reporting-grid">
         <div class="reporting-item">
-          <h2 class="reporting-item__title">Financial</h2>
+          <h2 class="reporting-item__title">{frontmatter.financialTitle}</h2>
           <p class="reporting-item__description">
-            Financial documents including IRS Form 990 and Financial audits
+            {frontmatter.financialDescription}
           </p>
           <div class="download-section">
             <select
@@ -147,9 +148,9 @@ import BaseLayout from "@layouts/BaseLayout.astro";
           </div>
         </div>
         <div class="reporting-item">
-          <h2 class="reporting-item__title">Bylaws</h2>
+          <h2 class="reporting-item__title">{frontmatter.bylawsTitle}</h2>
           <p class="reporting-item__description">
-            The Bylaws that dictate the operation of OpenAQ as an organization
+            {frontmatter.bylawsDescription}
           </p>
           <div class="download-section">
             <div></div>
@@ -160,10 +161,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
           </div>
         </div>
         <div class="reporting-item">
-          <h2 class="reporting-item__title">Incorporation</h2>
+          <h2 class="reporting-item__title">
+            {frontmatter.incorporationTitle}
+          </h2>
           <p class="reporting-item__description">
-            Documents pertaining to the incorporation and non-profit status of
-            OpenAQ
+            {frontmatter.incorporationDescription}
           </p>
           <div class="download-section">
             <select
@@ -192,9 +194,9 @@ import BaseLayout from "@layouts/BaseLayout.astro";
         </div>
 
         <div class="reporting-item">
-          <h2 class="reporting-item__title">Policies</h2>
+          <h2 class="reporting-item__title">{frontmatter.policiesTitle}</h2>
           <p class="reporting-item__description">
-            Overarching organizational policies
+            {frontmatter.policiesDescription}
           </p>
           <div class="download-section">
             <select

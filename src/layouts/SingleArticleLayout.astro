@@ -4,7 +4,7 @@ import Breadcrumb from "@components/Breadcrumb.astro";
 import Bubbles from "@components/Bubbles.astro";
 import CopyLink from "@components/CopyLink.astro";
 
-const { frontmatter, name } = Astro.props;
+const { frontmatter, title } = Astro.props;
 
 const url = Astro.url;
 ---
@@ -99,7 +99,7 @@ const url = Astro.url;
   <Bubbles />
   <div class="single-article-content">
     <article class="single-article-content-container">
-      <h1 class="gradient-title">{name}</h1>
+      <h1 class="gradient-title">{title}</h1>
       <div class="single-article-body">
         <slot />
         <CopyLink url={url} />

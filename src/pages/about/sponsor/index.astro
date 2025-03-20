@@ -1,17 +1,8 @@
 ---
 import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
-import { getEntry } from "astro:content";
-import { render } from "astro:content";
 import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
-
-const sponsors = await getEntry("sponsors", "sponsor");
-
-if (!sponsors) {
-  throw new Error("Could not find sponsors");
-}
-
-const { Content } = await render(sponsors);
+import { frontmatter, Content } from "@content/sponsor/sponsor.md";
 ---
 
 <style lang="scss">
@@ -72,8 +63,8 @@ const { Content } = await render(sponsors);
     }
   }
 </style>
-<SingleArticleLayout frontmatter={sponsors?.data}>
-  <h1 class="gradient-title">Sponsor us</h1>
+<SingleArticleLayout frontmatter={frontmatter}>
+  <h1 class="gradient-title">{frontmatter.title}</h1>
 
   <section class="sponsor-grid">
     <Content />
