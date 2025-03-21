@@ -197,6 +197,7 @@ const peopleIndex = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/people/peopleIndex" }),
   schema: () =>
     z.object({
+      title: z.string(),
       staffIntro: z.string(),
       advisorIntro: z.string(),
       boardIntro: z.string(),
