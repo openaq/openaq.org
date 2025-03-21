@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 
 import removeMarkdown from 'remove-markdown';
 
-const { name, image, url, body } = Astro.props;
+const { title, image, url, body } = Astro.props;
 
 const summary = (content: string, length = 300): string => {
   const cleanText = removeMarkdown(content, {
@@ -73,12 +73,12 @@ const summary = (content: string, length = 300): string => {
         src={image}
         height={252}
         width={252}
-        alt={name}
+        alt={title}
       />
     </a>
   </div>
   <div class="initiative-description">
-    <h2 class="initiative-description__title">{name}</h2>
+    <h2 class="initiative-description__title">{title}</h2>
     <div class="initiative-description__body">
       <p>{summary(body)}<a href={url}>read more..</a></p>
     </div>

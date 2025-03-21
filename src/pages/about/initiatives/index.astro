@@ -11,7 +11,7 @@ const allInitiatives = await getCollection("initiatives");
 const sortByName = (
   a: CollectionEntry<"initiatives">,
   b: CollectionEntry<"initiatives">
-) => a.data.name.localeCompare(b.data.name);
+) => a.data.title.localeCompare(b.data.title);
 ---
 
 <style lang="scss">
@@ -35,7 +35,7 @@ const sortByName = (
         .sort(sortByName)
         .map((initiative) => (
           <InitiativeCard
-            name={initiative.data.name}
+            title={initiative.data.title}
             image={initiative.data.image}
             body={initiative.body}
             url={`/about/initiatives/${initiative.id}`}

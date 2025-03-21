@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.3.1",
+    "astro-og-canvas": "^0.7.0",
     "astro-purgecss": "^5.2.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.8.3",

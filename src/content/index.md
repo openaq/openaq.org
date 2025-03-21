@@ -1,4 +1,5 @@
 ---
+title: "OpenAQ Homepage"
 heroTitle: "Fighting air inequality through"
 heroTitleLavender: "open data."
 heroDescription: "OpenAQ is a nonprofit organization providing universal access to air quality data to empower a global community of changemakers to solve air inequality—the unequal access to clean air."

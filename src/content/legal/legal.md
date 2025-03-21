@@ -1,4 +1,5 @@
 ---
+title: "Legal"
 financialTitle: "Financial"
 financialDescription: "Financial documents including IRS Form 990 and Financial audits"
 bylawsTitle: "Bylaws"

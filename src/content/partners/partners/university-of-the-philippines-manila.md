@@ -1,5 +1,5 @@
 ---
-name: "University of the Philippines-Manila"
+title: "University of the Philippines-Manila"
 image: "@assets/images/up-seal.png"
 url: "https://cph.upm.edu.ph/"
 ---

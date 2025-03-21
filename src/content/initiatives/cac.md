@@ -1,5 +1,5 @@
 ---
-name: "Partnership Project: Clean Air Catalyst"
+title: "Partnership Project: Clean Air Catalyst"
 image: "@assets/images/cac_logo.png"
 ---
 

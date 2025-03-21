@@ -1,5 +1,5 @@
 ---
-name: "Green Decision Labs"
+title: "Green Decision Labs"
 image: "@assets/images/logo_vertical-removebg-preview.png"
 url: "https://gdlabs.org.np/"
 ---

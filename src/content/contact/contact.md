@@ -1,4 +1,5 @@
 ---
+title: "Contact"
 mailingAdressTitle: "Mailing address"
 mailingAdressFirstLine: "OpenAQ"
 mailingAdressSecondLine: "4301 50th Street NW"

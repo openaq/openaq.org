@@ -1,5 +1,5 @@
 ---
-name: "Project Phoenix"
+title: "Project Phoenix"
 image: "@assets/images/projectphoenix_transparent.png"
 url: "https://projectphoenix.study/"
 ---

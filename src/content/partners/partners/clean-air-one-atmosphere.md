@@ -1,5 +1,5 @@
 ---
-name: "Clean Air One Atmosphere"
+title: "Clean Air One Atmosphere"
 image: "@assets/images/caoa-logo-.jpg"
 url: "https://www.facebook.com/cleanaironea/"
 ---

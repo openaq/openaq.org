@@ -1,5 +1,5 @@
 ---
-name: "Publications"
+title: "Publications"
 image: "@assets/images/landscape-report-cover.png"
 ---
 

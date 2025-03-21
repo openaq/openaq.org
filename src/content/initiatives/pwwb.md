@@ -1,5 +1,5 @@
 ---
-name: "Partnership Project: Predicting What We Breathe"
+title: "Partnership Project: Predicting What We Breathe"
 image: "@assets/images/city_of_la_logo.png"
 ---
 
