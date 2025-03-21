@@ -1,7 +1,6 @@
 ---
 title: "Where can I find more data, tools and resources on air quality?"
 type: "developers/help"
-weight: 8
 ---
 
 <!--StartFragment-->

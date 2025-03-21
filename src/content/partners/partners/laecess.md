@@ -1,5 +1,5 @@
 ---
-name: "LAECESS"
+title: "LAECESS"
 image: "@assets/images/laecess_alpha.png"
 url: "https://laearlycareer.wixsite.com/latinamericaecess"
 ---

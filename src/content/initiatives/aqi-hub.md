@@ -1,5 +1,5 @@
 ---
-name: "AQI Hub"
+title: "AQI Hub"
 image: "@assets/images/aqi-hub.png"
 ---
 

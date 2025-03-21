@@ -1,5 +1,5 @@
 ---
-name: "Community Engagement"
+title: "Community Engagement"
 image: "@assets/images/map-hands.jpg"
 ---
 

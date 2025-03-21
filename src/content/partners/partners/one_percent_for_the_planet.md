@@ -1,5 +1,5 @@
 ---
-name: "One Percent for the Planet"
+title: "One Percent for the Planet"
 image: "@assets/images/one-percent-for-the-planet.png"
 url: "https://onepercentfortheplanet.org/"
 ---

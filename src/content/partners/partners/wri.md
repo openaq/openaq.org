@@ -1,5 +1,5 @@
 ---
-name: "World Resources Institute"
+title: "World Resources Institute"
 image: "@assets/images/wri_logo.png"
 url: "https://www.wri.org/"
 ---

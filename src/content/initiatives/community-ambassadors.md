@@ -1,5 +1,5 @@
 ---
-name: "Community Ambassador Program"
+title: "Community Ambassador Program"
 image: "@assets/images/team-map.png"
 ---
 

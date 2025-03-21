@@ -4,7 +4,10 @@ import { glob } from "astro/loaders";
 
 const contact = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/contact" }),
-  schema: () => z.object({}),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
 });
 
 const sponsors = defineCollection({
@@ -27,7 +30,7 @@ const funders = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/funders" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -37,7 +40,7 @@ const corporate = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/corporate" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -47,7 +50,7 @@ const airsensors = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/airsensors" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -57,7 +60,7 @@ const partners = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/partners/partners" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
       url: z.string().url(),
     }),
@@ -67,7 +70,7 @@ const initiatives = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/initiatives" }),
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       image: image(),
     }),
 });
@@ -208,6 +211,7 @@ const partnersIndex = defineCollection({
   }),
   schema: () =>
     z.object({
+      title: z.string(),
       airsensorsTitle: z.string(),
       fundersTitle: z.string(),
       corporateTitle: z.string(),
@@ -227,6 +231,7 @@ const legal = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/legal" }),
   schema: () =>
     z.object({
+      title: z.string(),
       financialTitle: z.string(),
       financialDescription: z.string(),
       bylawsTitle: z.string(),
@@ -242,6 +247,7 @@ const homepage = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/index.md" }),
   schema: () =>
     z.object({
+      title: z.string(),
       heroTitle: z.string(),
       heroTitleLavender: z.string(),
       heroDescription: z.string(),
