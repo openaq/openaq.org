@@ -164,7 +164,7 @@ const contactContent = contact.map((page) => {
   return {
     id: page.id,
     title: page.data.title,
-    description: "Contact information about OpenAQ",
+    description: "Contact information to OpenAQ",
   };
 });
 
@@ -204,13 +204,13 @@ export const { getStaticPaths, GET } = OGImageRoute({
       title: `OpenAQ`,
       description: page.description,
       bgGradient: [
-        [106, 92, 216],
-        [227, 224, 251],
+        [51, 163, 161],
+        [203, 232, 202],
       ],
       logo: {
         path: "./src/assets/logo.svg",
       },
-      border: { color: [106, 92, 216], width: 20 },
+      border: { color: [51, 163, 161], width: 40 },
       padding: 40,
     };
   },
