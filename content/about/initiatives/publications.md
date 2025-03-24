@@ -27,6 +27,36 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
+### *Regional Reports (From the 2024 Report)*
+
+*East Asia and Pacific:* 
+
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_EN.pdf)
+* [Bahasa Indonesia](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_ID.pdf)
+
+*Latin America and the Caribbean*
+
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_EN.pdf)
+* [Spanish](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_ES.pdf)
+* [Portuguese](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_PT.pdf)
+
+*Middle East and North Africa*
+
+* [English](documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_EN.pdf)
+* [Arabic](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_AR.pdf)
+* [French](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_FR.pdf)
+
+*South Asia*
+
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_EN.pdf)
+* [Hindi](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_HI.pdf)
+
+*Sub-Saharan Africa*
+
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_EN.pdf)
+* [Swahili](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_SW.pdf)
+* [French](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)[](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)[](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)
+
 ### *Previous Reports on the Global Landscape of Open Air Quality Data*
 
 *Open Air Quality Data: The Global Landscape 2022*\
