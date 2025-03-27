@@ -62,12 +62,12 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 ### *Previous Reports on the Global Landscape of Open Air Quality Data*
 
-*Open Air Quality Data: The Global Landscape 2022*\
-[Summary](https://bit.ly/3uOSZXu)\
-[Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)\
-[Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)\
-[Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)  
+*Open Air Quality Data: The Global Landscape 2022* 
+* [Summary](https://bit.ly/3uOSZXu) 
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)
+* [Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)
+* [Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)  
 
-*Open Air Quality Data: The Global State of Play 2020*\
-[Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)\
-[Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
+*Open Air Quality Data: The Global State of Play 2020*
+* [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
