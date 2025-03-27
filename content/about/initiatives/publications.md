@@ -27,6 +27,11 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 ### *Regional Reports (From the 2024 Report)*
 
+*Central Asia:* 
+
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_EN.pdf)
+* [Russian](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_RU.pdf)[](<>)
+
 *East Asia and Pacific:* 
 
 * [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_EN.pdf)
