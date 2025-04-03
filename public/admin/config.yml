@@ -1,0 +1,529 @@
+backend:
+  name: github
+  repo: openaq/openaq.org
+  branch: main
+  base_url: https://oauth.openaq.org
+publish_mode: editorial_workflow
+media_folder: "src/assets/images"
+public_folder: "src/assets/images"
+media_folder_relative: true
+public_folder_relative: true
+collections:
+  - name: "about"
+    label: "About us"
+    folder: "src/content/about"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "contact"
+    label: "Contact"
+    folder: "src/content/contact"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "sponsors"
+    label: "Sponsors"
+    folder: "src/content/sponsor"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "policies"
+    label: "Policies"
+    folder: "src/content/policies"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "funders"
+    label: "Funders"
+    folder: "src/content/partners/funders"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "URL", name: "url", widget: "string" }
+
+  - name: "corporate"
+    label: "Corporate Partners"
+    folder: "src/content/partners/corporate"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "URL", name: "url", widget: "string" }
+
+  - name: "airsensors"
+    label: "Air Sensors"
+    folder: "src/content/partners/airsensors"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "URL", name: "url", widget: "string" }
+
+  - name: "partners"
+    label: "Partners"
+    folder: "src/content/partners/partners"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "URL", name: "url", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "initiatives"
+    label: "Initiatives"
+    folder: "src/content/initiatives"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "staff"
+    label: "Staff"
+    folder: "src/content/people/staff"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Position", name: "position", widget: "string" }
+      - { label: "Email", name: "email", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
+      - {
+          label: "LinkedIn",
+          name: "linkedin",
+          widget: "string",
+          required: false,
+        }
+      - { label: "GitHub", name: "github", widget: "string", required: false }
+      - { label: "X", name: "x", widget: "string", required: false }
+      - {
+          label: "Mastodon",
+          name: "mastadon",
+          widget: "string",
+          required: false,
+        }
+      - { label: "ORCID", name: "orcid", widget: "string", required: false }
+      - {
+          label: "ResearchGate",
+          name: "researchGate",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Google Scholar",
+          name: "googleScholar",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "board"
+    label: "Board"
+    folder: "src/content/people/board"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Position", name: "position", widget: "string" }
+      - { label: "Email", name: "email", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
+      - {
+          label: "LinkedIn",
+          name: "linkedin",
+          widget: "string",
+          required: false,
+        }
+      - { label: "GitHub", name: "github", widget: "string", required: false }
+      - { label: "X", name: "x", widget: "string", required: false }
+      - {
+          label: "Mastodon",
+          name: "mastadon",
+          widget: "string",
+          required: false,
+        }
+      - { label: "ORCID", name: "orcid", widget: "string", required: false }
+      - {
+          label: "ResearchGate",
+          name: "researchGate",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Google Scholar",
+          name: "googleScholar",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "advisors"
+    label: "Advisors"
+    folder: "src/content/people/advisors"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Position", name: "position", widget: "string" }
+      - { label: "Country", name: "country", widget: "string" }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
+      - {
+          label: "LinkedIn",
+          name: "linkedin",
+          widget: "string",
+          required: false,
+        }
+      - { label: "GitHub", name: "github", widget: "string", required: false }
+      - { label: "X", name: "x", widget: "string", required: false }
+      - {
+          label: "Mastodon",
+          name: "mastadon",
+          widget: "string",
+          required: false,
+        }
+      - { label: "ORCID", name: "orcid", widget: "string", required: false }
+      - {
+          label: "ResearchGate",
+          name: "researchGate",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Google Scholar",
+          name: "googleScholar",
+          widget: "string",
+          required: false,
+        }
+
+  - name: "ambassadors"
+    label: "Ambassadors"
+    folder: "src/content/people/ambassadors"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Position", name: "position", widget: "string" }
+      - { label: "Country", name: "country", widget: "string" }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
+      - {
+          label: "LinkedIn",
+          name: "linkedin",
+          widget: "string",
+          required: false,
+        }
+      - { label: "GitHub", name: "github", widget: "string", required: false }
+      - { label: "X", name: "x", widget: "string", required: false }
+      - {
+          label: "Mastodon",
+          name: "mastadon",
+          widget: "string",
+          required: false,
+        }
+      - { label: "ORCID", name: "orcid", widget: "string", required: false }
+      - {
+          label: "ResearchGate",
+          name: "researchGate",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Google Scholar",
+          name: "googleScholar",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "usecases"
+    label: "Use Cases"
+    folder: "src/content/use-cases"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "URL", name: "url", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - {
+          label: "Categories",
+          name: "categories",
+          widget: "list",
+          required: false,
+        }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Featured", name: "featured", widget: "boolean" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "help"
+    label: "Help"
+    folder: "src/content/developers/help"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "peopleIndex"
+    label: "People Index"
+    folder: "src/content/people/index"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Staff intro", name: "staffIntro", widget: "text" }
+      - { label: "Board intro", name: "boardIntro", widget: "text" }
+      - { label: "Ambassador intro", name: "ambassadorIntro", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "developers"
+    label: "Developers"
+    folder: "src/content/developers/singleDevPages"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "legal"
+    label: "Legal"
+    folder: "src/content/legal"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Financial title", name: "financialTitle", widget: "string" }
+      - {
+          label: "Financial description",
+          name: "financialDescription",
+          widget: "string",
+        }
+      - { label: "Bylaws title", name: "bylawsTitle", widget: "string" }
+      - {
+          label: "Bylaws description",
+          name: "bylawsDescription",
+          widget: "string",
+        }
+      - {
+          label: "Incorporation title",
+          name: "incorporationTitle",
+          widget: "string",
+        }
+      - {
+          label: "Incorporation description",
+          name: "incorporationDescription",
+          widget: "string",
+        }
+      - { label: "Policies title", name: "policiesTitle", widget: "string" }
+      - {
+          label: "Policies description",
+          name: "policiesDescription",
+          widget: "string",
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "homepage"
+    label: "Homepage"
+    folder: "src/content/"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Hero title", name: "heroTitle", widget: "string" }
+      - {
+          label: "Hero title lavender",
+          name: "heroTitleLavender",
+          widget: "string",
+        }
+      - { label: "Hero description", name: "heroDescription", widget: "string" }
+      - {
+          label: "Technology card title",
+          name: "technologyCardTitle",
+          widget: "string",
+        }
+      - {
+          label: "Technology card description",
+          name: "technologyCardDescription",
+          widget: "string",
+        }
+      - {
+          label: "Search card title",
+          name: "searchCardTitle",
+          widget: "string",
+        }
+      - {
+          label: "Search card description",
+          name: "searchCardDescription",
+          widget: "string",
+        }
+      - {
+          label: "Aqi Hub card title",
+          name: "aqiHubCardTitle",
+          widget: "string",
+        }
+      - {
+          label: "Aqi Hub card description",
+          name: "aqiHubCardDescription",
+          widget: "string",
+        }
+      - { label: "Api card title", name: "apiCardTitle", widget: "string" }
+      - {
+          label: "Api card description",
+          name: "apiCardDescription",
+          widget: "string",
+        }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "initiativesIndex"
+    label: "Initiatives"
+    folder: "src/content/initiatives/initiativesindex"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+
+  - name: "usecaseIndex"
+    label: "Use Cases"
+    folder: "src/content/use-cases/use-casesIndex"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+
+  - name: "whyAirQuality"
+    label: "Why Air Quality"
+    folder: "src/content/why-air-quality"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "whyOpenData"
+    label: "Why Open Data"
+    folder: "src/content/why-open-data"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "helpIndex"
+    label: "Help Index"
+    folder: "src/content/developers/helpIndex"
+    format: "yaml-frontmatter"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+
+  - name: "partnersIndex"
+    label: "Partners Index"
+    folder: "src/content/partners/index"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - {
+          label: "Air sensors title",
+          name: "airSensorsTitle",
+          widget: "string",
+        }
+      - { label: "Funders title", name: "fundersTitle", widget: "text" }
+      - { label: "Corporate title", name: "corporateTitle", widget: "string" }
+      - { label: "Partners title", name: "partnersTitle", widget: "string" }
