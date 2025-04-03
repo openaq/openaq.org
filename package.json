@@ -18,6 +18,7 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.8.3",
     "dayjs": "^1.11.13",
+    "decap-cms-app": "^3.6.2",
     "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
     "purgecss": "^7.0.2",
