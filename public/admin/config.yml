@@ -513,7 +513,7 @@ collections:
     label: "Partners Index"
     folder: "src/content/partners/index"
     format: "yaml-frontmatter"
-    create: true
+    create: false
     slug: "{{slug}}"
     editor:
       preview: true
