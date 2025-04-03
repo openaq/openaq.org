@@ -456,7 +456,7 @@ collections:
     label: "Initiatives"
     folder: "src/content/initiatives/initiativesindex"
     format: "yaml-frontmatter"
-    create: true
+    create: false
     slug: "{{slug}}"
     editor:
       preview: true
@@ -467,7 +467,7 @@ collections:
     label: "Use Cases"
     folder: "src/content/use-cases/use-casesIndex"
     format: "yaml-frontmatter"
-    create: true
+    create: false
     slug: "{{slug}}"
     editor:
       preview: true
