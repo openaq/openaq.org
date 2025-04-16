@@ -48,6 +48,6 @@ const breadcrumbs = urlPathToObject(pathname);
 </style>
 
 <ol class="breadcrumb">
-    <a href="/"><HomeIcon size={24} fill="#34a3a1"/></a>
-    {Object.entries(breadcrumbs).map(([path, name]) => <ChevronRight size={24} fill="#7e8c9a"/> <a class={`type-body-3 ${path === Object.keys(breadcrumbs).pop() ? "text-sky-120" : ""}`} href={`/${path}`}>{name}</a> )}
+    <a href="/"><HomeIcon width={24} fill="#34a3a1"/></a>
+    {Object.entries(breadcrumbs).map(([path, name]) => <ChevronRight width={24} fill="#7e8c9a"/> <a class={`type-body-3 ${path === Object.keys(breadcrumbs).pop() ? "text-sky-120" : ""}`} href={`/${path}`}>{name}</a> )}
 </ol>

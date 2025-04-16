@@ -9,10 +9,6 @@ export default defineConfig({
   prefetch: true,
   output: "static",
 
-  experimental: {
-    svg: true,
-  },
-
   markdown: {
     remarkPlugins: [remarkModifiedTime],
   },
