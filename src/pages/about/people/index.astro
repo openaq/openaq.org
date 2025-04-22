@@ -117,32 +117,6 @@ const sortByName = (
         ))
     }
   </section>
-
-  <h1 class="gradient-title">Community Ambassadors</h1>
-  <p>
-    {frontmatter.ambassadorIntro}<a
-      href="/about/initiatives/community-ambassadors"
-    >
-      here</a
-    >.
-  </p>
-  <section class="person-grid">
-    {
-      allAmbassadors
-        .sort(sortByName)
-        .map((ambassador) => (
-          <AmbassadorCard
-            name={ambassador.data.name}
-            country={ambassador.data.country}
-            url={`/about/people/${ambassador.id}/`}
-            position={ambassador.data.position}
-            data={ambassador.body}
-            socials={socials(ambassador)}
-            portrait={ambassador.data.image}
-          />
-        ))
-    }
-  </section>
   <CommunityBanner slot="banner" />
   <ExplorerBanner slot="banner-low" />
 </PageLayout>

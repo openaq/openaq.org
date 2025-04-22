@@ -133,26 +133,6 @@ const advisors = defineCollection({
     }),
 });
 
-const ambassadors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/people/ambassadors" }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      position: z.string(),
-      country: z.string(),
-      email: z.string().email().optional(),
-      image: image(),
-      bluesky: z.string().url().optional(),
-      linkedin: z.string().url().optional(),
-      github: z.string().url().optional(),
-      x: z.string().url().optional(),
-      mastadon: z.string().url().optional(),
-      orcid: z.string().url().optional(),
-      researchGate: z.string().url().optional(),
-      googleScholar: z.string().url().optional(),
-    }),
-});
-
 const usecases = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/use-cases/" }),
   schema: ({ image }) =>
@@ -318,7 +298,6 @@ export const collections = {
   staff,
   board,
   advisors,
-  ambassadors,
   usecases,
   help,
   about,
