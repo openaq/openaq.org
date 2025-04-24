@@ -3,6 +3,7 @@ import HelpItem from "@components/HelpItem.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 import { frontmatter } from "@content/developers/helpIndex/help.md";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
 
 const allFAQs = await getCollection("help");
 ---
@@ -58,4 +59,5 @@ const allFAQs = await getCollection("help");
       </section>
     </div>
   </div>
+  <ExplorerBanner slot="banner-low" />
 </PageLayout>
