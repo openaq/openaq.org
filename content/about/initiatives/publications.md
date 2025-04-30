@@ -52,6 +52,8 @@ Since our last assessment in 2022, there has been a small increase in the number
 *South Asia*
 
 * [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_EN.pdf)
+* [Hindi]
+(https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_HI.pdf)
 * [Punjabi](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_PA.pdf)
 
 *Sub-Saharan Africa*
