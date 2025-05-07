@@ -9,8 +9,7 @@ interface PathDefinition {
 }
 
 function cleanName(name: string): string {
-    const parts = name.split('-'); 
-    return parts.join(' ')
+    return name.replace(/[-_]/g, ' '); 
 }
 
 function urlPathToObject(path: string): PathDefinition {
