@@ -1,8 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
 import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
-import CommunityBanner from "@components/CommunityBanner.astro";
-import ExplorerBanner from "@components/ExplorerBanner.astro";
 
 export async function getStaticPaths() {
   const usecases = await getCollection("usecases");
