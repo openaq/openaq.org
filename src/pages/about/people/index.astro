@@ -7,12 +7,10 @@ import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
 import BoardCard from "@components/people/BoardCard.astro";
 import AdvisorCard from "@components/people/AdvisorCard.astro";
-import AmbassadorCard from "@components/people/AmbassadorCard.astro";
 import { frontmatter } from "@content/people/peopleIndex/people.md";
 const allStaff = await getCollection("staff");
 const allBoard = await getCollection("board");
 const allAdvisors = await getCollection("advisors");
-const allAmbassadors = await getCollection("ambassadors");
 
 type CollectionName = "staff" | "board" | "advisors" | "ambassadors";
 

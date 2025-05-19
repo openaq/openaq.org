@@ -1,15 +1,13 @@
 ---
-// import SocialIcons from "./SocialIcons.astro";
-
 import { Image } from "astro:assets";
 
-import removeMarkdown from 'remove-markdown';
+import removeMarkdown from "remove-markdown";
 
 const { title, image, url, body } = Astro.props;
 
 const summary = (content: string, length = 300): string => {
   const cleanText = removeMarkdown(content, {
-    useImgAltText: false
+    useImgAltText: false,
   });
   if (cleanText.length <= length) return cleanText;
   return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
