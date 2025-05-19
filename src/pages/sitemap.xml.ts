@@ -1,69 +1,66 @@
-import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content";
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 
 export async function GET() {
   const siteUrl = import.meta.env.SITE;
 
-  const staff = await getCollection("staff");
-  const ambassadors = await getCollection("ambassadors");
-  const initiatives = await getCollection("initiatives");
-  const policies = await getCollection("policies");
-  const usecases = await getCollection("usecases");
-  const about = await getCollection("about");
-  const peopleIndex = await getCollection("peopleIndex");
-  const initiativesIndex = await getCollection("initiativesIndex");
-  const usecaseIndex = await getCollection("usecaseIndex");
-  const whyOpenData = await getCollection("whyOpenData");
-  const whyAirQuality = await getCollection("whyAirQuality");
-  const homepage = await getCollection("homepage");
-  const legal = await getCollection("legal");
-  const helpIndex = await getCollection("helpIndex");
-  const partnersindex = await getCollection("partnersIndex");
-  const developers = await getCollection("developers");
-  const sponsors = await getCollection("sponsors");
-  const contact = await getCollection("contact");
+  const staff = await getCollection('staff');
+  const initiatives = await getCollection('initiatives');
+  const policies = await getCollection('policies');
+  const useCases = await getCollection('useCases');
+  const about = await getCollection('about');
+  const peopleIndex = await getCollection('peopleIndex');
+  const initiativesIndex = await getCollection('initiativesIndex');
+  const usecaseIndex = await getCollection('usecaseIndex');
+  const whyOpenData = await getCollection('whyOpenData');
+  const whyAirQuality = await getCollection('whyAirQuality');
+  const homepage = await getCollection('homepage');
+  const legal = await getCollection('legal');
+  const helpIndex = await getCollection('helpIndex');
+  const partnersindex = await getCollection('partnersIndex');
+  const developers = await getCollection('developers');
+  const sponsors = await getCollection('sponsors');
+  const contact = await getCollection('contact');
 
   type CollectionName =
-    | "staff"
-    | "ambassadors"
-    | "initiatives"
-    | "policies"
-    | "usecases"
-    | "about"
-    | "peopleIndex"
-    | "partners"
-    | "initiativesIndex"
-    | "usecaseIndex"
-    | "whyOpenData"
-    | "whyAirQuality"
-    | "legal"
-    | "homepage"
-    | "helpIndex"
-    | "developers"
-    | "sponsors"
-    | "partnersIndex"
-    | "contact";
+    | 'staff'
+    | 'initiatives'
+    | 'policies'
+    | 'useCases'
+    | 'about'
+    | 'peopleIndex'
+    | 'partners'
+    | 'initiativesIndex'
+    | 'usecaseIndex'
+    | 'whyOpenData'
+    | 'whyAirQuality'
+    | 'legal'
+    | 'homepage'
+    | 'helpIndex'
+    | 'developers'
+    | 'sponsors'
+    | 'partnersIndex'
+    | 'contact';
 
   const routes = {
-    staff: ["about", "people"],
-    ambassadors: ["about", "people"],
-    initiatives: ["about", "initiatives"],
+    staff: ['about', 'people'],
+    initiatives: ['about', 'initiatives'],
     policies: [],
-    usecases: ["about", "use-cases"],
+    useCases: ['about', 'use-cases'],
     whyAirQuality: [],
     whyOpenData: [],
     about: [],
-    peopleIndex: ["about"],
-    partners: ["partners"],
-    usecaseIndex: ["about"],
-    initiativesIndex: ["about"],
+    peopleIndex: ['about'],
+    partners: ['partners'],
+    usecaseIndex: ['about'],
+    initiativesIndex: ['about'],
     homepage: [],
-    legal: ["about"],
-    helpIndex: ["developers"],
+    legal: ['about'],
+    helpIndex: ['developers'],
     partnersIndex: [],
-    developers: ["developers"],
-    sponsors: ["about"],
+    developers: ['developers'],
+    sponsors: ['about'],
     contact: [],
   };
 
@@ -83,12 +80,11 @@ export async function GET() {
   };
 
   const staffEntries = await Promise.all(staff.map(entryMap));
-  const ambassadorEntries = await Promise.all(ambassadors.map(entryMap));
   const aboutEntries = await Promise.all(about.map(entryMap));
   const initiativeEntries = await Promise.all(initiatives.map(entryMap));
   const policiesEntries = await Promise.all(policies.map(entryMap));
   const peopleIndexEntries = await Promise.all(peopleIndex.map(entryMap));
-  const usecaseEntries = await Promise.all(usecases.map(entryMap));
+  const usecaseEntries = await Promise.all(useCases.map(entryMap));
   const initiativeIndexEntries = await Promise.all(
     initiativesIndex.map(entryMap)
   );
@@ -104,7 +100,7 @@ export async function GET() {
   const contactEntries = await Promise.all(contact.map(entryMap));
 
   const buildPath = (paths: string[], slug: string) => {
-    const fullPath = [...paths, slug].join("/");
+    const fullPath = [...paths, slug].join('/');
 
     const url = new URL(fullPath, siteUrl);
     return url;
@@ -139,30 +135,29 @@ export async function GET() {
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url><loc>${siteUrl}</loc></url>
 
-${peopleIndexEntries.map(buildUrlEntry).join("\n")}
-${staffEntries.map(buildUrlEntry).join("\n")}
-${usecaseEntries.map(buildUrlEntry).join("\n")}
-${policiesEntries.map(buildUrlEntry).join("\n")}
-${usecaseIndexEntries.map(buildUrlEntry).join("\n")}
-${initiativeEntries.map(buildUrlEntry).join("\n")}
-${whyAirQualityEntries.map(buildUrlEntry).join("\n")}
-${whyOpenDataEntries.map(buildUrlEntry).join("\n")}
-${initiativeIndexEntries.map(buildUrlEntry).join("\n")}
-${aboutEntries.map(buildUrlEntry).join("\n")}
-${legalEntries.map(buildUrlEntry).join("\n")}
-${homepageEntries.map(buildUrlEntry).join("\n")}
-${partnersIndexEntries.map(buildUrlEntry).join("\n")}
-${helpIndexEntries.map(buildUrlEntry).join("\n")}
-${developersEntries.map(buildUrlEntry).join("\n")}
-${ambassadorEntries.map(buildUrlEntry).join("\n")}
-${sponsorEntries.map(buildUrlEntry).join("\n")}
-${contactEntries.map(buildUrlEntry).join("\n")}
+${peopleIndexEntries.map(buildUrlEntry).join('\n')}
+${staffEntries.map(buildUrlEntry).join('\n')}
+${usecaseEntries.map(buildUrlEntry).join('\n')}
+${policiesEntries.map(buildUrlEntry).join('\n')}
+${usecaseIndexEntries.map(buildUrlEntry).join('\n')}
+${initiativeEntries.map(buildUrlEntry).join('\n')}
+${whyAirQualityEntries.map(buildUrlEntry).join('\n')}
+${whyOpenDataEntries.map(buildUrlEntry).join('\n')}
+${initiativeIndexEntries.map(buildUrlEntry).join('\n')}
+${aboutEntries.map(buildUrlEntry).join('\n')}
+${legalEntries.map(buildUrlEntry).join('\n')}
+${homepageEntries.map(buildUrlEntry).join('\n')}
+${partnersIndexEntries.map(buildUrlEntry).join('\n')}
+${helpIndexEntries.map(buildUrlEntry).join('\n')}
+${developersEntries.map(buildUrlEntry).join('\n')}
+${sponsorEntries.map(buildUrlEntry).join('\n')}
+${contactEntries.map(buildUrlEntry).join('\n')}
 
   </urlset>  `.trim();
 
   return new Response(result, {
     headers: {
-      "Content-Type": "application/xml",
+      'Content-Type': 'application/xml',
     },
   });
 }
