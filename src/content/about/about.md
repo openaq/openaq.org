@@ -10,7 +10,7 @@ Anyone can explore the data via [OpenAQ Explorer](https://explore.openaq.org/), 
 
 OpenAQ was the first to aggregate disparate ground-level ambient air quality data on a centralized open-source platform, making it findable, accessible, interoperable and reusable. We started with real-time and historical data from reference-grade government monitors in 2015 and began ingesting data from air sensors starting in 2021. Our platform remains the largest **open-source** air quality data platform in the world. Read more about OpenAQ's start in our [origin story.](https://openaq.medium.com/the-openaq-origin-story-31e0ce904529)
 
-![](/uploads/data-ingestion.webp)
+![Data ingestion](src/assets/images/data-ingestion.webp)
 
 By providing foundational data infrastructure, we fill a basic data-access gap and make it possible for individuals and organizations to fully maximize the uses–and ultimate impact–of air quality data. We also connect users of this data across sectors and geographies to support an international learning environment.
 

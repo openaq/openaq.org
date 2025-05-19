@@ -81,7 +81,7 @@ const staff = defineCollection({
     z.object({
       name: z.string(),
       position: z.string(),
-      email: z.string().email(),
+      email: z.string().email().optional(),
       image: image(),
       bluesky: z.string().url().optional(),
       linkedin: z.string().url().optional(),
