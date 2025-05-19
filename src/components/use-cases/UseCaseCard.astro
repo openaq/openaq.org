@@ -3,7 +3,7 @@ import Chip from "@components/Chip.astro";
 import { Image } from "astro:assets";
 import removeMarkdown from "remove-markdown";
 
-const { url, name, image, body, tags } = Astro.props;
+const { url, title, image, body, tags } = Astro.props;
 
 const summary = (content: string, length = 300): string => {
   const cleanText = removeMarkdown(content, {
@@ -66,15 +66,14 @@ const summary = (content: string, length = 300): string => {
     <Image
       class="use-case-card__img"
       src={image}
-      height={252}
-      width={252}
+      width={300}
       alt=""
     />
   </a>
 
   <div class="use-case-card__body">
     <a href={url}>
-      <h2 class="use-case-description__title">{name}</h2>
+      <h2 class="use-case-description__title">{title}</h2>
       <div class="use-case-description">{summary(body)} read more...</div>
     </a>
   </div>

@@ -4,7 +4,7 @@ url: "https://openaq.org/use-cases/shootismoke/"
 tags: ["API", "Health"]
 categories: ["developer"]
 image: "@assets/images/sis.png"
-featured: true
+featured: false
 ---
 
 The Sh\*\*t I Smoke! [mobile app](https://shootismoke.app/) uses data from the OpenAQ platform to demonstrate the severity of air pollution by comparing it to cigarette smoking.

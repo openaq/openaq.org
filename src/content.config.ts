@@ -133,7 +133,7 @@ const advisors = defineCollection({
     }),
 });
 
-const usecases = defineCollection({
+const useCases = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/use-cases/" }),
   schema: ({ image }) =>
     z.object({
@@ -298,7 +298,7 @@ export const collections = {
   staff,
   board,
   advisors,
-  usecases,
+  useCases,
   help,
   about,
   peopleIndex,

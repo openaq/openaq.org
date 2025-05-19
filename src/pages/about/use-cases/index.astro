@@ -7,7 +7,7 @@ import ExplorerBanner from "@components/ExplorerBanner.astro";
 import UseCaseCard from "@components/use-cases/UseCaseCard.astro";
 import { frontmatter } from "@content/use-cases/use-casesIndex/use-cases.md";
 
-const allUseCases = await getCollection("usecases");
+const allUseCases = await getCollection("useCases");
 
 const sortByName = (
   a: CollectionEntry<"usecases">,

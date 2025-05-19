@@ -10,6 +10,10 @@ import nairobiImg from "@assets/images/nairobi.jpg";
 
 import dataPipeline from "@assets/svg/data-pipeline.svg";
 import { frontmatter } from "@content/index.md";
+import { getCollection } from "astro:content";
+import UseCaseCard from "@components/use-cases/UseCaseCard.astro";
+const featuredUseCases = await getCollection("useCases", ({ data }) => data.featured === true);
+
 ---
 
 <style lang="scss">
@@ -261,7 +265,9 @@ import { frontmatter } from "@content/index.md";
   </section>
 
   <section class="use-cases-section">
-    <div class="featured-use-cases"></div>
+    <div class="featured-use-cases">
+      {featuredUseCases.map(useCase => <UseCaseCard {...useCase.data} body={useCase.body} />)} 
+    </div>
   </section>
 
   <section class="technology-section">
