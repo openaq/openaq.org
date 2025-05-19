@@ -50,7 +50,7 @@ const allFAQs = await getCollection("help");
     }
   }
 </style>
-<PageLayout>
+<PageLayout pageTitle={frontmatter.title}>
   <div class="help-content">
     <div class="help-content-container">
       <h1 class="type-display-1 gradient-title">{frontmatter.title}</h1>
