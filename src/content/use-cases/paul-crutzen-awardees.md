@@ -3,7 +3,7 @@ title: "Paul Crutzen Publication Awardees"
 url: "https://openaq.org/use-cases/paul-crutzen-awardees/"
 tags: ["API", "Community"]
 image: "@assets/images/openaq-map.webp"
-featured: true
+featured: false
 ---
 
 Harmonized air quality measurements from the OpenAQ platform aided researchers who were awarded the 2021 Paul Crutzen Publication Award by the journal Atmospheric Chemistry and Physics.
