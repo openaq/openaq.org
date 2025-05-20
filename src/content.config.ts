@@ -181,7 +181,6 @@ const peopleIndex = defineCollection({
       staffIntro: z.string(),
       advisorIntro: z.string(),
       boardIntro: z.string(),
-      ambassadorIntro: z.string(),
     }),
 });
 

@@ -2,10 +2,9 @@ import { OGImageRoute } from "astro-og-canvas";
 import { getCollection } from "astro:content";
 
 const staff = await getCollection("staff");
-const ambassadors = await getCollection("ambassadors");
 const initiatives = await getCollection("initiatives");
 const policies = await getCollection("policies");
-const usecases = await getCollection("usecases");
+const useCases = await getCollection("useCases");
 const about = await getCollection("about");
 const peopleIndex = await getCollection("peopleIndex");
 const initiativesIndex = await getCollection("initiativesIndex");
@@ -53,14 +52,6 @@ const staffContent = staff.map((person) => {
   };
 });
 
-const ambassadorsContent = ambassadors.map((person) => {
-  return {
-    id: person.id,
-    title: person.data.name,
-    description: `${person.data.name} - ${person.data.position}`,
-  };
-});
-
 const usecaseIndexContent = usecaseIndex.map((index) => {
   return {
     id: index.id,
@@ -69,7 +60,7 @@ const usecaseIndexContent = usecaseIndex.map((index) => {
   };
 });
 
-const usecasesContent = usecases.map((usecase) => {
+const useCasesContent = useCases.map((usecase) => {
   return {
     id: usecase.id,
     title: usecase.data.title,
@@ -170,9 +161,8 @@ const contactContent = contact.map((page) => {
 
 const allCollections = [
   ...staffContent,
-  ...ambassadorsContent,
   ...initiativesContent,
-  ...usecasesContent,
+  ...useCasesContent,
   ...policiesContent,
   ...contactContent,
   ...whyOpenAirContent,

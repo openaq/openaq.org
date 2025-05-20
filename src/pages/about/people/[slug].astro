@@ -8,13 +8,12 @@ import SocialIcons from "@components/people/SocialIcons.astro";
 
 import { Image } from "astro:assets";
 
-type CollectionName = "staff" | "ambassadors";
+type CollectionName = "staff";
 
 export async function getStaticPaths() {
   const staff = await getCollection("staff");
-  const ambassadors = await getCollection("ambassadors");
 
-  return [...staff, ...ambassadors].map((person) => ({
+  return [...staff].map((person) => ({
     params: { slug: person.id },
     props: { person },
   }));
