@@ -2,8 +2,8 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": ".",
-    "strictNullChecks": true, // add if using `base` template
-    "allowJs": true, // required, and included with all Astro templates
+    "strictNullChecks": true,
+    "allowJs": true,
     "paths": {
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
