@@ -35,6 +35,7 @@ const sortByName = (
 ---
 
 <style lang="scss">
+  @use "openaq-design-system/scss/variables" as variables;
   .person-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -55,6 +56,12 @@ const sortByName = (
   }
   .working-section {
     padding-bottom: 100px;
+  }
+
+  .ambassadors-section {
+    a {
+      color: variables.$sky100;
+    }
   }
 </style>
 
@@ -118,6 +125,20 @@ const sortByName = (
         ))
     }
   </section>
+
+  <section class="ambassadors-section">
+    <h1 class="gradient-title">Community Ambassadors</h1>
+    <p>
+      Together with OpenAQ, Community Ambassadors commit to advocating for data
+      transparency and contribute to the collective action against air
+      pollution. Meet the Ambassadors <a
+        href="https://ambassadors.openaq.org"
+        target="_blank"
+        rel="noopener">here</a
+      > and learn more about the program.
+    </p>
+  </section>
+
   <section class="working-section">
     <h1 class="gradient-title">Working with OpenAQ</h1>
     <p>
