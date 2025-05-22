@@ -64,7 +64,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "URL", name: "url", widget: "string" }
+      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
   - name: "corporate"
     label: "Corporate Partners"
     folder: "src/content/partners/corporate"
@@ -76,7 +76,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "URL", name: "url", widget: "string" }
+      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
   - name: "airsensors"
     label: "Air Sensors"
     folder: "src/content/partners/airsensors"
@@ -100,7 +100,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "URL", name: "url", widget: "string" }
+      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "initiatives"
     label: "Initiatives"
@@ -136,7 +136,7 @@ collections:
           pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
       - { label: "GitHub", name: "github", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
-      - { label: "X", name: "x", widget: "string", required: false }
+      - { label: "X", name: "x", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - {
           label: "Mastodon",
           name: "mastadon",
@@ -218,9 +218,8 @@ collections:
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Position", name: "position", widget: "string" }
       - { label: "Country", name: "country", widget: "string" }
-      - { label: "Email", name: "email", widget: "string", required: false }
       - { label: "Image", name: "image", widget: "image" }
-    - name: "usecasesIndex"
+  - name: "usecasesIndex"
     label: "Usecases Index"
     folder: "src/content/developers/use-casesIndex"
     format: "yaml-frontmatter"
@@ -240,8 +239,8 @@ collections:
       preview: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "URL", name: "url", widget: "string" }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
+      - { label: "Tags", name: "tags", widget: "select", options: [ "API", "Health", "Media", "Community"], }
       - {
           label: "Categories",
           name: "categories",
@@ -343,7 +342,7 @@ collections:
           name: "heroTitleLavender",
           widget: "string",
         }
-      - { label: "Hero description", name: "heroDescription", widget: "string" }
+      - { label: "Hero description", name: "heroDescription", widget: "text" }
       - {
           label: "Technology card title",
           name: "technologyCardTitle",
@@ -352,7 +351,7 @@ collections:
       - {
           label: "Technology card description",
           name: "technologyCardDescription",
-          widget: "string",
+          widget: "text",
         }
       - {
           label: "Search card title",
@@ -362,7 +361,7 @@ collections:
       - {
           label: "Search card description",
           name: "searchCardDescription",
-          widget: "string",
+          widget: "text",
         }
       - {
           label: "AQI Hub card title",
@@ -372,13 +371,13 @@ collections:
       - {
           label: "AQI Hub card description",
           name: "aqiHubCardDescription",
-          widget: "string",
+          widget: "text",
         }
       - { label: "API card title", name: "apiCardTitle", widget: "string" }
       - {
           label: "API card description",
           name: "apiCardDescription",
-          widget: "string",
+          widget: "text",
         }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "initiativesIndex"
