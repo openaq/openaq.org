@@ -88,7 +88,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "URL", name: "url", widget: "string" }
+      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
   - name: "partners"
     label: "Partners"
     folder: "src/content/partners/partners"
@@ -127,33 +127,37 @@ collections:
       - { label: "Position", name: "position", widget: "string" }
       - { label: "Email", name: "email", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
+      - { label: "Bluesky", name: "bluesky", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - {
           label: "LinkedIn",
           name: "linkedin",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
-      - { label: "GitHub", name: "github", widget: "string", required: false }
+      - { label: "GitHub", name: "github", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - { label: "X", name: "x", widget: "string", required: false }
       - {
           label: "Mastodon",
           name: "mastadon",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
-      - { label: "ORCID", name: "orcid", widget: "string", required: false }
+      - { label: "ORCID", name: "orcid", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - {
           label: "ResearchGate",
           name: "researchGate",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
       - {
           label: "Google Scholar",
           name: "googleScholar",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "board"
@@ -169,33 +173,37 @@ collections:
       - { label: "Position", name: "position", widget: "string" }
       - { label: "Email", name: "email", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
+      - { label: "Bluesky", name: "bluesky", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - {
           label: "LinkedIn",
           name: "linkedin",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
-      - { label: "GitHub", name: "github", widget: "string", required: false }
-      - { label: "X", name: "x", widget: "string", required: false }
+      - { label: "GitHub", name: "github", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
+      - { label: "X", name: "x", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - {
           label: "Mastodon",
           name: "mastadon",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
-      - { label: "ORCID", name: "orcid", widget: "string", required: false }
+      - { label: "ORCID", name: "orcid", widget: "string", required: false, pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
       - {
           label: "ResearchGate",
           name: "researchGate",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
       - {
           label: "Google Scholar",
           name: "googleScholar",
           widget: "string",
           required: false,
+          pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"],
         }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "advisors"
@@ -212,77 +220,16 @@ collections:
       - { label: "Country", name: "country", widget: "string" }
       - { label: "Email", name: "email", widget: "string", required: false }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
-      - {
-          label: "LinkedIn",
-          name: "linkedin",
-          widget: "string",
-          required: false,
-        }
-      - { label: "GitHub", name: "github", widget: "string", required: false }
-      - { label: "X", name: "x", widget: "string", required: false }
-      - {
-          label: "Mastodon",
-          name: "mastadon",
-          widget: "string",
-          required: false,
-        }
-      - { label: "ORCID", name: "orcid", widget: "string", required: false }
-      - {
-          label: "ResearchGate",
-          name: "researchGate",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Google Scholar",
-          name: "googleScholar",
-          widget: "string",
-          required: false,
-        }
-  - name: "ambassadors"
-    label: "Ambassadors"
-    folder: "src/content/people/ambassadors"
+    - name: "usecasesIndex"
+    label: "Usecases Index"
+    folder: "src/content/developers/use-casesIndex"
     format: "yaml-frontmatter"
-    create: true
+    create: false
     slug: "{{slug}}"
     editor:
       preview: true
     fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Position", name: "position", widget: "string" }
-      - { label: "Country", name: "country", widget: "string" }
-      - { label: "Email", name: "email", widget: "string", required: false }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Bluesky", name: "bluesky", widget: "string", required: false }
-      - {
-          label: "LinkedIn",
-          name: "linkedin",
-          widget: "string",
-          required: false,
-        }
-      - { label: "GitHub", name: "github", widget: "string", required: false }
-      - { label: "X", name: "x", widget: "string", required: false }
-      - {
-          label: "Mastodon",
-          name: "mastadon",
-          widget: "string",
-          required: false,
-        }
-      - { label: "ORCID", name: "orcid", widget: "string", required: false }
-      - {
-          label: "ResearchGate",
-          name: "researchGate",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Google Scholar",
-          name: "googleScholar",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Title", name: "title", widget: "string" }
   - name: "usecases"
     label: "Use Cases"
     folder: "src/content/use-cases"
@@ -298,7 +245,8 @@ collections:
       - {
           label: "Categories",
           name: "categories",
-          widget: "list",
+          widget: "select",
+          options: "developer",
           required: false,
         }
       - { label: "Image", name: "image", widget: "image" }
@@ -327,7 +275,7 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Staff intro", name: "staffIntro", widget: "text" }
       - { label: "Board intro", name: "boardIntro", widget: "text" }
-      - { label: "Ambassador intro", name: "ambassadorIntro", widget: "text" }
+      - { label: "Advisor intro", name: "advisorIntro", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "developers"
     label: "Developers"
@@ -417,18 +365,18 @@ collections:
           widget: "string",
         }
       - {
-          label: "Aqi Hub card title",
+          label: "AQI Hub card title",
           name: "aqiHubCardTitle",
           widget: "string",
         }
       - {
-          label: "Aqi Hub card description",
+          label: "AQI Hub card description",
           name: "aqiHubCardDescription",
           widget: "string",
         }
-      - { label: "Api card title", name: "apiCardTitle", widget: "string" }
+      - { label: "API card title", name: "apiCardTitle", widget: "string" }
       - {
-          label: "Api card description",
+          label: "API card description",
           name: "apiCardDescription",
           widget: "string",
         }
@@ -436,15 +384,6 @@ collections:
   - name: "initiativesIndex"
     label: "Initiatives"
     folder: "src/content/initiatives/initiativesindex"
-    format: "yaml-frontmatter"
-    create: true
-    create: false
-    slug: "{{slug}}"
-    editor:
-      preview: true
-@@ -467,7 +467,7 @@ collections:
-    label: "Use Cases"
-    folder: "src/content/use-cases/use-casesIndex"
     format: "yaml-frontmatter"
     create: true
     create: false
@@ -500,6 +439,6 @@ collections:
           name: "airSensorsTitle",
           widget: "string",
         }
-      - { label: "Funders title", name: "fundersTitle", widget: "text" }
+      - { label: "Funders title", name: "fundersTitle", widget: "string" }
       - { label: "Corporate title", name: "corporateTitle", widget: "string" }
       - { label: "Partners title", name: "partnersTitle", widget: "string" }
