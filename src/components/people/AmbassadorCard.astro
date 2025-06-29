@@ -1,0 +1,44 @@
+---
+import SocialIcons from "./SocialIcons.astro";
+
+const { name, url, data, socials, portrait, country } = Astro.props;
+
+import { Image } from "astro:assets";
+
+const summary = (bio: string, length = 300): string => {
+  if (bio.length <= length) return bio;
+  return bio.substring(0, bio.lastIndexOf(" ", length)) + "...";
+};
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  @use "./person-card" as *;
+
+  @include person-card("team", variables.$sky100);
+
+  .team-card:hover {
+    @include mixins.box-shadow;
+  }
+</style>
+
+<article class="team-card">
+  <a href={url}>
+    <Image
+      class="person-image"
+      src={portrait}
+      height={252}
+      width={252}
+      alt={name}
+    />
+
+    <div class="team-card__description">
+      <h2 class="person-name">{name}</h2>
+      <p class="person-bio">{country}</p>
+      <p class="person-bio">{summary(data)}</p>
+      <SocialIcons {...socials} />
+    </div>
+  </a>
+</article>

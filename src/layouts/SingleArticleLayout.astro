@@ -1,0 +1,110 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Bubbles from "@components/Bubbles.astro";
+import CopyLink from "@components/CopyLink.astro";
+
+const { frontmatter, title } = Astro.props;
+
+const url = Astro.url;
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  .single-article-content {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 0 100px 0;
+
+    &-container {
+      width: 800px;
+      z-index: 2;
+      .single-article-body {
+        margin: 20px 0 60px 0;
+
+        :global(h1) {
+          color: variables.$sky120;
+          margin-bottom: 0;
+        }
+
+        :global(h2) {
+          @include mixins.heading3;
+          color: variables.$sky120;
+          margin: 20px 0;
+        }
+
+        :global(h3, h4) {
+          @include mixins.subtitle3;
+          color: variables.$sky120;
+          margin: 20px 0;
+        }
+
+        :global(a) {
+          @include mixins.link2;
+        }
+
+        :global(p) {
+          @include mixins.body2;
+          margin: 20px 0 0 0;
+        }
+
+        :global(ul) {
+          @include mixins.body2;
+          margin: 20px 0 0 15px;
+        }
+
+        :global(hr) {
+          margin: 40px 0;
+          border: 0;
+          border-bottom: 1px dashed variables.$smoke30;
+        }
+
+        :global(img) {
+          width: 100%;
+          height: auto;
+          border-radius: 22px;
+          margin: 20px 0 0 0;
+        }
+
+        :global(iframe) {
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+        }
+      }
+    }
+
+    @media (max-width: 1000px) {
+      & {
+        &-container {
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  .explore-more-btn {
+    width: fit-content;
+    margin: 40px 0 0 0;
+  }
+</style>
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <Breadcrumb />
+
+  <Bubbles />
+  <div class="single-article-content">
+    <article class="single-article-content-container">
+      <h1 class="gradient-title">{title}</h1>
+      <div class="single-article-body">
+        <slot />
+        <CopyLink url={url} />
+      </div>
+    </article>
+  </div>
+  <slot name="banner" slot="banner" />
+  <slot name="banner-low" slot="banner-low" />
+</BaseLayout>

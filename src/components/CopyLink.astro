@@ -1,0 +1,101 @@
+---
+import XLogo from "@assets/svg/x_logo.svg";
+import FacebookLogo from "@assets/svg/facebook.svg";
+import LinkedInLogo from "@assets/svg/linkedin.svg";
+import CopyIcon from "@assets/svg/copy.svg";
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  .social-links {
+    margin: 50px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .btn-secondary {
+      background-color: #e6f8f8;
+      border: 1px solid #b0e8e6;
+      color: #33a3a1;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 22px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      font-family:
+        Space Grotesk,
+        sans-serif;
+
+      &:hover {
+        background: #b0e8e6;
+      }
+    }
+
+    .social-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      width: 40px;
+      height: 40px;
+      border: 1px solid variables.$smoke30;
+      border-radius: 100%;
+    }
+  }
+</style>
+
+<div class="social-links">
+  <button class="icon-btn btn-secondary js-copy-button"
+    ><span class="js-copy-button__text">Copy link</span>
+    <CopyIcon width="22" height="22" fill="#33a3a1" />
+  </button>
+  <a
+    class="social-circle"
+    href={"https://www.facebook.com/openaq/"}
+    target="_blank"
+    rel="noreferrer noopener"
+  >
+    <FacebookLogo width="20" height="20" />
+  </a>
+  <a
+    class="social-circle"
+    href={"https://x.com/openaq"}
+    target="_blank"
+    rel="noreferrer noopener"
+  >
+    <XLogo width="20" height="20" />
+  </a>
+  <a
+    class="social-circle"
+    href={"https://www.linkedin.com/company/openaq"}
+    target="_blank"
+    rel="noreferrer noopener"
+  >
+    <LinkedInLogo width="20" height="20" />
+  </a>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.querySelector(".js-copy-button");
+    const buttonText = document.querySelector(
+      ".js-copy-button__text"
+    ) as HTMLSpanElement;
+
+    button?.addEventListener("click", () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        if (buttonText) {
+          buttonText.innerText = "Copied!";
+          setTimeout(() => {
+            if (buttonText) buttonText.innerText = "Copy link";
+          }, 1000);
+        }
+      });
+    });
+  });
+</script>

@@ -1,5 +1,0 @@
-Contact: mailto:dev@openaq.org
-Expires: 2025-07-31T11:59:59Z
-Preferred-Languages: en
-Canonical: https://openaq.org/.well-known/security.txt
-Policy: https://openaq.org/security/

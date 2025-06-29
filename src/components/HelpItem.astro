@@ -1,0 +1,122 @@
+---
+import { render } from "astro:content";
+const { title, FAQ } = Astro.props;
+
+const { Content } = await render(FAQ);
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+  @use "openaq-design-system/scss/utilities/index.scss" as utilities;
+  @use "../styles/mixins.scss" as local-mixins;
+  @use "sass:color";
+
+  .tab {
+    width: 90%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid variables.$smoke10;
+
+    input {
+      border: 0;
+      clip: rect(1px, 1px, 1px, 1px);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    &:hover {
+      border: 1px solid variables.$ocean100;
+      border-radius: 12px;
+    }
+
+    &-label {
+      @include mixins.subtitle2;
+      display: flex;
+      justify-content: space-between;
+      padding: 22px 20px;
+      cursor: pointer;
+      svg {
+        fill: rgb(0, 0, 0);
+      }
+    }
+
+    &-content {
+      height: 0;
+      padding: 0 1em;
+      background: white;
+      transition: all 0.35s;
+
+      h1 {
+        @include mixins.heading1(variables.$sky120);
+        margin: 0 0 10px 0;
+      }
+
+      h2 {
+        @include mixins.heading2(variables.$sky120);
+        margin: 0 0 10px 0;
+      }
+
+      h3 {
+        @include mixins.heading3(variables.$sky120);
+        margin: 0 0 10px 0;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+      }
+    }
+    &-close {
+      display: flex;
+      justify-content: flex-end;
+      padding: 1em;
+      font-size: 0.75em;
+      background: variables.$sky120;
+      cursor: pointer;
+      &:hover {
+        background: color.adjust(variables.$sky120, $lightness: 10%);
+      }
+    }
+  }
+
+  input:checked {
+    + .tab-label {
+      border-radius: 12px 12px 0 0;
+      background: variables.$sky120;
+      color: white;
+      svg {
+        fill: rgb(255, 255, 255);
+        transform: rotate(180deg);
+      }
+    }
+    ~ .tab-content {
+      height: auto;
+      padding: 1em;
+    }
+  }
+</style>
+
+<div class="tab">
+  <input type="checkbox" id={title} />
+  <label class="tab-label" for={title}>
+    {title}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
+    </svg>
+  </label>
+
+  <div class="tab-content">
+    <Content />
+  </div>
+</div>

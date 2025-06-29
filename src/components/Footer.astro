@@ -1,0 +1,344 @@
+---
+import LogoWhite from "@assets/logo_white.svg";
+
+import FacebookLogo from "@assets/svg/facebook.svg";
+import MediumLogo from "@assets/svg/medium.svg";
+import XLogo from "@assets/svg/x_logo.svg";
+import SlackLogo from "@assets/svg/slack.svg";
+import LinkedinLogo from "@assets/svg/linkedin.svg";
+import YoutubeLogo from "@assets/svg/youtube.svg";
+import GithubLogo from "@assets/svg/github.svg";
+import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables" as variables;
+  @use "openaq-design-system/scss/mixins/typography" as *;
+  @use "openaq-design-system/scss/buttons";
+  @use "openaq-design-system/scss/inputs";
+  @use "openaq-design-system/scss/utilities";
+
+  .footer {
+    background-color: variables.$lavender180;
+    align-items: center;
+    color: white;
+
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 24px 80px;
+
+      .nav-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+
+        .footer-nav {
+          display: flex;
+          flex-direction: row;
+          gap: 24px;
+
+          a {
+            @include navigation2(#fff);
+          }
+        }
+      }
+
+      .contact-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 0;
+
+        .social-links {
+          margin: 12px 0;
+          display: flex;
+          gap: 12px;
+
+          .social-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            width: 40px;
+            height: 40px;
+            border: 1px solid variables.$smoke30;
+            border-radius: 100%;
+
+            img {
+              width: 18px;
+              height: auto;
+            }
+          }
+        }
+
+        .subscribe-form {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 10px;
+
+          input {
+            width: 180px;
+          }
+        }
+      }
+    }
+
+    .sub-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      border-top: 1px solid variables.$sky120;
+      padding: 24px 80px;
+
+      &-nav {
+        display: flex;
+        gap: 20px;
+
+        a {
+          @include body4(#fff);
+        }
+      }
+
+      @media (max-width: 800px) {
+        & {
+          flex-direction: column;
+          padding: 0 80px;
+          justify-content: center;
+          align-items: center;
+
+          .copyright {
+            order: 1;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1180px) {
+      & {
+        &__content {
+          .nav-section {
+            justify-content: space-between;
+          }
+
+          .contact-section {
+            justify-content: space-between;
+
+            .subscribe-form {
+              display: flex;
+              flex-direction: column;
+              align-items: left;
+
+              input {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      & {
+        box-sizing: border-box;
+
+        &__content {
+          padding: 40px 24px 0 24px;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          gap: 40px;
+
+          .nav-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .footer-nav {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+          }
+
+          .contact-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            order: 1;
+
+            .subscribe-form {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+
+              input {
+                width: 300px;
+              }
+            }
+
+            .social-links {
+              margin-bottom: 24px;
+              justify-content: center;
+              flex-wrap: wrap;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<footer class="footer">
+  <div class="footer__content">
+    <section class="nav-section">
+      <LogoWhite width="72" height="40" aria-label="OpenAQ logo" />
+      <nav class="footer-nav">
+        <a class="footer-home" href="/">Home</a>
+        <a class="footer-explore" href="https://explore.openaq.org">Explore</a>
+        <a class="footer-api" href="https://docs.openaq.org/docs">API</a>
+        <a class="footer-about" href="/about">About</a>
+        <a class="footer-contact" href="/contact">Contact</a>
+        <a class="footer-help" href="/developers/help">Help</a>
+      </nav>
+    </section>
+    <section class="contact-section">
+      <span class="type-subtitle-3 text-white"
+        >Stay up to date with our quarterly newsletter</span
+      >
+      <form
+        action="//openaq.us10.list-manage.com/subscribe/post?u=ca93b2911fff40db15f6e7203&id=e65a8618a1"
+        method="post"
+        id="mc-embedded-subscribe-form"
+        class="subscribe-form"
+        name="mc-embedded-subscribe-form"
+        target="_blank"
+        novalidate
+      >
+        <input
+          type="email"
+          name="EMAIL"
+          id="mce-EMAIL"
+          placeholder="Enter your email"
+          class="text-input"
+          required
+        />
+
+        <!-- First Name Field -->
+        <input
+          type="text"
+          name="FNAME"
+          id="mce-FNAME"
+          placeholder="First Name"
+          class="text-input"
+        />
+
+        <!-- Last Name Field -->
+        <input
+          type="text"
+          name="LNAME"
+          id="mce-LNAME"
+          placeholder="Last Name"
+          class="text-input"
+        />
+
+        <button class="btn btn-primary js-footer-subscribe" type="submit">
+          Subscribe
+        </button>
+
+        <div style="position: absolute; left: -5000px" aria-hidden="true">
+          <input
+            type="text"
+            name="b_ca93b2911fff40db15f6e7203_e65a8618a1"
+            tabindex="-1"
+          />
+        </div>
+      </form>
+
+      <div class="social-links">
+        <a
+          href="https://x.com/openaq"
+          class="social-circle x-nav js-footer-x-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <XLogo width={18} />
+        </a>
+        <a
+          href="https://bsky.app/profile/openaq.org"
+          class="social-circle bsky-nav js-footer-bsky-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <BlueskyLogo width={18} />
+        </a>
+        <a
+          href="https://join.slack.com/t/openaq/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw"
+          class="social-circle slack-nav js-footer-slack-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <SlackLogo width={18} />
+        </a>
+        <a
+          href="https://github.com/openaq"
+          class="social-circle github-nav js-footer-github-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <GithubLogo width={18} />
+        </a>
+        <a
+          href="https://www.linkedin.com/company/openaq"
+          class="social-circle linkedIn-nav js-footer-linkedIn-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <LinkedinLogo width={18} />
+        </a>
+        <a
+          href="https://openaq.medium.com/"
+          class="social-circle medium-nav js-footer-medium-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <MediumLogo width={18} />
+        </a>
+        <a
+          href="https://www.youtube.com/@openaq4768"
+          class="social-circle youtube-nav js-footer-youtube-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <YoutubeLogo width={18} />
+        </a>
+        <a
+          href="https://www.facebook.com/openaq/"
+          class="social-circle fb-nav js-footer-fb-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <FacebookLogo width={18} />
+        </a>
+      </div>
+    </section>
+  </div>
+  <div class="sub-footer">
+    <span class="copyright text-white type-body-4"
+      >&#169; OpenAQ. All rights reserved.</span
+    >
+    <nav class="sub-footer-nav">
+      <a href="/terms/">Website Terms</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/dmca/">DMCA</a>
+      <a href="/cookies/">Cookies</a>
+    </nav>
+  </div>
+</footer>

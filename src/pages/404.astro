@@ -1,0 +1,27 @@
+---
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Bubbles from '@components/Bubbles.astro';
+---
+
+<style lang="scss">
+
+@use 'openaq-design-system/scss/bubbles';
+
+
+.page-404 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+
+}
+
+</style>
+<BaseLayout>
+<section class="page-404">
+    <Bubbles />
+    <h1 class="type-heading-1">Uh oh! we can't find the page you've requested</h1>
+</section>
+</BaseLayout>

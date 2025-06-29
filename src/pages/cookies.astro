@@ -1,0 +1,21 @@
+---
+import { getEntry, render } from 'astro:content';
+
+import CommunityBanner from '@components/CommunityBanner.astro';
+import ExplorerBanner from '@components/ExplorerBanner.astro';
+import GitModifiedLayout from "@layouts/GitModifiedLayout.astro";
+
+const cookies = await getEntry('policies', 'cookies');
+if (!cookies) {
+  throw new Error('Could not find cookies');
+}
+const { Content, remarkPluginFrontmatter } = await render(cookies);
+
+---
+
+
+<GitModifiedLayout pageTitle={"Cookie policy"}, frontmatter={ remarkPluginFrontmatter }>
+    <Content />
+    <CommunityBanner slot="banner" />
+    <ExplorerBanner slot="banner-low" />
+</GitModifiedLayout>

@@ -1,0 +1,367 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import HeroImage from "@components/HeroImage.astro";
+
+import { Image } from "astro:assets";
+
+import aqiHubImg from "@assets/images/aqi-hub.png";
+import codeSnippet from "@assets/images/r-code-snippet.png";
+import nairobiImg from "@assets/images/nairobi.jpg";
+
+import dataPipeline from "@assets/svg/data-pipeline.svg";
+import { frontmatter } from "@content/index.md";
+import { getCollection } from "astro:content";
+import UseCaseCard from "@components/use-cases/UseCaseCard.astro";
+const featuredUseCases = await getCollection("useCases", ({ data }) => data.featured === true);
+
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables" as variables;
+
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+  @use "openaq-design-system/scss/utilities/types.scss";
+  @use "openaq-design-system/scss/utilities/colors.scss";
+  @use "openaq-design-system/scss/inputs";
+
+  @use "openaq-design-system/scss/buttons";
+
+  @mixin landing-section {
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: 800px) {
+      & {
+        flex-direction: column;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .hero-section {
+    @include landing-section();
+    & {
+      justify-content: space-around;
+      display: flex;
+    }
+    .hero-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+      margin: 60px 0 0 0;
+      width: 400px;
+
+      .learn-more-btn {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      & {
+        .hero-title {
+          margin: 60px 40px 0 40px;
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .use-cases-section {
+    @include landing-section();
+    & {
+      gap: 20px;
+      justify-content: center;
+      padding: 50px 0;
+    }
+    .featured-use-cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 40px;
+      width: 940px;
+    }
+
+    @media (max-width: 1000px) {
+      & {
+        .featured-use-cases {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: 40px;
+          row-gap: 40px;
+          width: 800px;
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      justify-content: center;
+      align-items: center;
+      & {
+        .featured-use-cases {
+          display: grid;
+
+          grid-template-columns: repeat(1, 1fr);
+          column-gap: 40px;
+          row-gap: 40px;
+          width: 300px;
+        }
+      }
+    }
+  }
+
+  @mixin panel($color) {
+    @include landing-section();
+    & {
+      position: relative;
+      height: 500px;
+      color: white;
+    }
+    &-blurb {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 0;
+      background-color: $color;
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 280px;
+
+        .icon-btn {
+          width: fit-content;
+        }
+      }
+    }
+
+    &__img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex: 2;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      & {
+        height: auto;
+      }
+
+      &-blurb {
+        &__content {
+          width: 350px;
+        }
+      }
+    }
+  }
+
+  .technology-section {
+    @include panel(variables.$sky120);
+
+    .bubble-sm {
+      position: absolute;
+      top: 138px;
+      left: 46px;
+    }
+
+    .bubble-lg {
+      position: absolute;
+      top: -111px;
+      left: -132px;
+    }
+
+    @media (max-width: 800px) {
+      .bubble-sm {
+        top: -20px;
+        left: 19px;
+      }
+
+      .bubble-lg {
+        z-index: -1;
+        top: -40px;
+        left: -132px;
+      }
+    }
+  }
+
+  .search-section {
+    @include panel(variables.$lavender120);
+
+    .explore-input-link {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+
+      .search-input {
+        @include mixins.box-shadow;
+        width: 100%;
+        line-height: 22px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      &__img {
+        order: 1;
+      }
+    }
+  }
+
+  .learn-btn {
+    @extend .icon-btn;
+    @extend .btn-primary;
+  }
+
+  .api-section {
+    @include panel(variables.$sky120);
+
+    @media (max-width: 800px) {
+      &__img {
+        order: 1;
+      }
+    }
+  }
+
+  .aqi-hub-section {
+    @include panel(variables.$smoke120);
+
+    @media (max-width: 800px) {
+      &__img {
+        order: 1;
+      }
+    }
+  }
+</style>
+
+<BaseLayout>
+  <section class="hero-section">
+    <div class="hero-title">
+      <h1 class="type-display-1 text-sky-120">
+        {frontmatter.heroTitle}
+        <br /><span class="text-lavender-100"
+          >{frontmatter.heroTitleLavender}</span
+        >
+      </h1>
+      <h2 class="type-heading-3">
+        {frontmatter.heroDescription}
+      </h2>
+      <a href="/about/" class="btn btn-primary learn-more-btn" role="button"
+        >Learn More</a
+      >
+    </div>
+    <HeroImage />
+  </section>
+
+  <section class="use-cases-section">
+    <div class="featured-use-cases">
+      {featuredUseCases.map(useCase => <UseCaseCard {...useCase.data} body={useCase.body} />)} 
+    </div>
+  </section>
+
+  <section class="technology-section">
+    <div class="bubble-lg"></div>
+    <div class="bubble-sm"></div>
+    <div class="technology-section-blurb">
+      <div class="technology-section-blurb__content">
+        <h2 class="type-heading-1 text-white">
+          {frontmatter.technologyCardTitle}
+        </h2>
+        <p class="type-body-2 text-white">
+          {frontmatter.technologlyCardDescription}
+        </p>
+        <a href="/developers/platform-overview/" class="icon-btn btn-primary"
+          >Learn how OpenAQ works
+          <span class="arrow-forward-icon--white"></span>
+        </a>
+      </div>
+    </div>
+    <div class="technology-section__img">
+      <Image src={dataPipeline} alt={"OpenAQ data pipeline diagram"} />
+    </div>
+  </section>
+
+  <section class="search-section">
+    <div class="search-section__img">
+      <a href="https://explore.openaq.org" class="explore-input-link">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search for air quality data"
+        />
+      </a>
+      <Image src={nairobiImg} alt={"Map of Nairobi, Kenya"} />
+    </div>
+    <div class="search-section-blurb">
+      <div class="search-section-blurb__content">
+        <h2 class="type-heading-1 text-white">{frontmatter.searchCardTitle}</h2>
+        <p class="type-body-2 text-white">
+          {frontmatter.searchCardDescription}
+        </p>
+        <a
+          href="https://explore.openaq.org"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="icon-btn btn-primary"
+          >Explore the data
+          <span class="arrow-forward-icon--white"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="aqi-hub-section">
+    <div class="aqi-hub-section-blurb">
+      <div class="aqi-hub-section-blurb__content">
+        <h2 class="type-heading-1 text-white">{frontmatter.aqiHubCardTitle}</h2>
+        <p class="type-body-2 text-white">
+          {frontmatter.aqiHubCardDescription}
+        </p>
+        <a
+          href="https://aqihub.info"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="icon-btn btn-primary"
+          >Visit the AQI Hub
+          <span class="arrow-forward-icon--white"></span>
+        </a>
+      </div>
+    </div>
+    <div class="aqi-hub-section__img">
+      <div>
+        <Image src={aqiHubImg} alt={"AQI Hub logo"} />
+      </div>
+    </div>
+  </section>
+
+  <section class="api-section">
+    <div class="api-section__img">
+      <Image src={codeSnippet} alt="code snippet of openaq R package" />
+    </div>
+    <div class="api-section-blurb">
+      <div class="api-section-blurb__content">
+        <h2 class="type-heading-1 text-white">{frontmatter.apiCardTitle}</h2>
+        <p class="type-body-2 text-white">{frontmatter.apiCardDescription}</p>
+        <a
+          href="https://docs.openaq.org"
+          class="learn-btn"
+          target="_blank"
+          rel="noreferrer noopener"
+          >Learn about OpenAQ API
+          <span class="arrow-forward-icon--white"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

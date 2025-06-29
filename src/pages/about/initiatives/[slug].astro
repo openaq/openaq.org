@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from "astro:content";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+
+export async function getStaticPaths() {
+  const initiatives = await getCollection("initiatives");
+  return initiatives.map((initiative) => ({
+    params: { slug: initiative.id },
+    props: { initiative },
+  }));
+}
+
+const { initiative } = Astro.props;
+const { Content } = await render(initiative);
+---
+
+
+<SingleArticleLayout frontmatter={initiative.data} title={initiative.data.title}>
+  <Content /> 
+</SingleArticleLayout>

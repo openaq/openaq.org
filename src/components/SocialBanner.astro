@@ -1,0 +1,127 @@
+---
+import Bubbles from "./Bubbles.astro";
+
+const { github, slack, x } = Astro.props;
+
+import XLogo from "@assets/svg/x_logo.svg";
+import GitHubLogo from "@assets/svg/github.svg";
+import SlackLogo from "@assets/svg/slack.svg";
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/utilities";
+  @use "openaq-design-system/scss/buttons";
+  @use "../styles/mixins.scss" as local-mixins;
+
+  .social-banner {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 430px;
+    width: 100%;
+    overflow: hidden;
+    background-color: variables.$lavender120;
+    @include local-mixins.bubbles(160, "left");
+
+    &-content {
+      max-width: 850px;
+      display: flex;
+      gap: 80px;
+
+      .social-section {
+        display: flex;
+        gap: 26px;
+        flex: 1;
+
+        &-description {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 36px;
+
+          .btn {
+            width: fit-content;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      & {
+        height: auto;
+        padding: 40px 32px;
+
+        &-content {
+          display: flex;
+          flex-direction: column;
+          gap: 80px;
+        }
+      }
+    }
+  }
+</style>
+
+<section class="social-banner">
+  <Bubbles />
+  <div class="social-banner-content">
+    <div class="social-section">
+      <div>
+        <a href={github}>
+          <GitHubLogo height={35} width={35} />
+        </a>
+      </div>
+      <div class="social-section-description">
+        <span class="type-subtitle-1 text-white"
+          >Follow and contribute to our work on GitHub.</span
+        >
+        <a
+          href="https://github.com/openaq"
+          class="btn btn-secondary social-banner-gh"
+          target="_blank"
+          rel="noreferrer noopener">Follow</a
+        >
+      </div>
+    </div>
+    <div class="social-section">
+      <div>
+        <a href={slack}>
+          <SlackLogo height={35} width={35} />
+        </a>
+      </div>
+
+      <div class="social-section-description">
+        <span class="type-subtitle-1 text-white"
+          >Participate in the OpenAQ clean air community on slack</span
+        >
+        <a
+          href="https://join.slack.com/t/openaq/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw"
+          class="btn btn-secondary social-banner-slack"
+          target="_blank"
+          rel="noreferrer noopener">Join</a
+        >
+      </div>
+    </div>
+    <div class="social-section">
+      <div>
+        <a href={x}>
+          <XLogo height={35} width={35} />
+        </a>
+      </div>
+
+      <div class="social-section-description">
+        <span class="type-subtitle-1 text-white"
+          >Stay up to date with OpenAQ news on X</span
+        >
+        <a
+          href="https://x.com/openaq"
+          class="btn btn-secondary social-banner-x"
+          target="_blank"
+          rel="noreferrer noopener">Follow</a
+        >
+      </div>
+    </div>
+  </div>
+</section>

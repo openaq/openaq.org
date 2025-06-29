@@ -1,0 +1,89 @@
+---
+import Chip from "@components/Chip.astro";
+import { Image } from "astro:assets";
+import removeMarkdown from "remove-markdown";
+
+const { url, title, image, body, tags } = Astro.props;
+
+const summary = (content: string, length = 300): string => {
+  const cleanText = removeMarkdown(content, {
+    useImgAltText: false,
+  });
+  if (cleanText.length <= length) return cleanText;
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
+};
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+  @use "openaq-design-system/scss/utilities/index.scss" as utilities;
+
+  .use-case-card {
+    background: #ffffff;
+    border: 1px solid variables.$smoke10;
+    border-radius: 22px;
+    overflow: hidden;
+    width: 290px;
+
+    &:hover {
+      @include mixins.box-shadow;
+    }
+
+    a:nth-child(1) {
+      flex: 1;
+    }
+
+    &__img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    &__body {
+      flex: 2;
+      padding: 0 20px;
+
+      .use-case-description {
+        @include mixins.body2;
+        padding: 10px 0;
+        color: variables.$smoke100;
+      }
+      .use-case-description__title {
+        @include mixins.heading2;
+      }
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 20px;
+    }
+  }
+</style>
+<article class="use-case-card">
+  <a href={url}>
+    <Image
+      class="use-case-card__img"
+      src={image}
+      width={300}
+      alt=""
+    />
+  </a>
+
+  <div class="use-case-card__body">
+    <a href={url}>
+      <h2 class="use-case-description__title">{title}</h2>
+      <div class="use-case-description">{summary(body)} read more...</div>
+    </a>
+  </div>
+  {
+    tags && (
+      <div class="tags">
+        {tags.map((tag: string) => (
+          <Chip tag={tag} url={url} />
+        ))}
+      </div>
+    )
+  }
+</article>

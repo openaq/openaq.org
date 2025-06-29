@@ -1,0 +1,125 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import PartnerCard from "@components/partners/PartnerCard.astro";
+import PartnerInfoCard from "@components/partners/PartnerInfoCard.astro";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import { frontmatter } from "@content/partners/partnersIndex/partners.md";
+
+const allPartners = await getCollection("partners");
+const allAirSensors = await getCollection("airsensors");
+const allCorporates = await getCollection("corporate");
+const allFunders = await getCollection("funders");
+type CollectionName = "partners" | "airsensors" | "corporate" | "funders";
+
+const sortByName = (
+  a: CollectionEntry<CollectionName>,
+  b: CollectionEntry<CollectionName>
+) => a.data.title.localeCompare(b.data.title);
+---
+
+<style lang="scss">
+  .partners-grid {
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 36px;
+    row-gap: 40px;
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  .partners-info-grid {
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 36px;
+    row-gap: 40px;
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  .funders-section,
+  .air-sensors-section,
+  .corporate-sponsors-section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+</style>
+<PageLayout pageTitle="Partners">
+  <section class="air-sensors-section">
+    <h1 class="gradient-title">{frontmatter.airsensorsTitle}</h1>
+    <div class="partners-grid">
+      {
+        allAirSensors
+          .sort(sortByName)
+          .map((partner) => (
+            <PartnerCard
+              title={partner.data.title}
+              image={partner.data.image}
+              url={partner.data.url}
+            />
+          ))
+      }
+    </div>
+  </section>
+  <section class="corporate-sponsors-section">
+    <h1 class="gradient-title">{frontmatter.corporateTitle}</h1>
+    <div class="partners-grid">
+      {
+        allCorporates
+          .sort(sortByName)
+          .map((partner) => (
+            <PartnerCard
+              title={partner.data.title}
+              image={partner.data.image}
+              url={partner.data.url}
+            />
+          ))
+      }
+    </div>
+  </section>
+
+  <h1 class="gradient-title">{frontmatter.partnersTitle}</h1>
+  <section class="partners-section">
+    <div class="partners-info-grid">
+      {
+        allPartners
+          .sort(sortByName)
+          .map((partner) => (
+            <PartnerInfoCard
+              title={partner.data.title}
+              image={partner.data.image}
+              url={partner.data.url}
+              body={partner.body}
+            />
+          ))
+      }
+    </div>
+  </section>
+  <section class="funders-section">
+    <h1 class="gradient-title">{frontmatter.fundersTitle}</h1>
+    <div class="partners-grid">
+      {
+        allFunders
+          .sort(sortByName)
+          .map((partner) => (
+            <PartnerCard
+              title={partner.data.title}
+              image={partner.data.image}
+              url={partner.data.url}
+            />
+          ))
+      }
+    </div>
+  </section>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</PageLayout>

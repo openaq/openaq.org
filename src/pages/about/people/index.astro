@@ -1,0 +1,131 @@
+---
+import { getCollection } from "astro:content";
+import StaffCard from "@components/people/StaffCard.astro";
+import type { CollectionEntry } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import BoardCard from "@components/people/BoardCard.astro";
+import AdvisorCard from "@components/people/AdvisorCard.astro";
+import { frontmatter } from "@content/people/peopleIndex/people.md";
+const allStaff = await getCollection("staff");
+const allBoard = await getCollection("board");
+const allAdvisors = await getCollection("advisors");
+
+type CollectionName = "staff" | "board" | "advisors";
+
+const socials = (entry: CollectionEntry<CollectionName>) => {
+  return {
+    email: entry.data.email,
+    x: entry.data.x,
+    mastadon: entry.data.mastadon,
+    linkedin: entry.data.linkedin,
+    github: entry.data.github,
+    orcid: entry.data.orcid,
+    researchGate: entry.data.researchGate,
+    googleScholar: entry.data.googleScholar,
+    bluesky: entry.data.bluesky,
+  };
+};
+
+const sortByName = (
+  a: CollectionEntry<CollectionName>,
+  b: CollectionEntry<CollectionName>
+) => a.data.name.localeCompare(b.data.name);
+---
+
+<style lang="scss">
+  .person-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 22px;
+    row-gap: 22px;
+    margin: 20px 0;
+    overflow: hidden;
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(2, 1fr);
+      width: 530px;
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(1, 1fr);
+      width: 250px;
+    }
+  }
+  .working-section {
+    padding-bottom: 100px;
+  }
+</style>
+
+<PageLayout pageTitle="People">
+  <h1 class="gradient-title">Team</h1>
+  <p>
+    {frontmatter.staffIntro}
+  </p>
+  <section class="person-grid">
+    {
+      allStaff
+        .sort(sortByName)
+        .map((staff) => (
+          <StaffCard
+            name={staff.data.name}
+            url={`/about/people/${staff.id}/`}
+            position={staff.data.position}
+            data={staff.body}
+            socials={socials(staff)}
+            portrait={staff.data.image}
+          />
+        ))
+    }
+  </section>
+  <h1 class="gradient-title">Board</h1>
+  <p>
+    {frontmatter.boardIntro}
+  </p>
+  <section class="person-grid">
+    {
+      allBoard
+        .sort(sortByName)
+        .map((board) => (
+          <BoardCard
+            name={board.data.name}
+            position={board.data.position}
+            data={board.body}
+            socials={socials(board)}
+            portrait={board.data.image}
+          />
+        ))
+    }
+  </section>
+  <h1 class="gradient-title">Advisors</h1>
+  <p>
+    {frontmatter.advisorIntro}
+  </p>
+  <section class="person-grid">
+    {
+      allAdvisors
+        .sort(sortByName)
+        .map((advisor) => (
+          <AdvisorCard
+            name={advisor.data.name}
+            position={advisor.data.position}
+            country={advisor.data.country}
+            data={advisor.body}
+            socials={socials(advisor)}
+            portrait={advisor.data.image}
+          />
+        ))
+    }
+  </section>
+  <section class="working-section">
+    <h1 class="gradient-title">Working with OpenAQ</h1>
+    <p>
+      OpenAQ is a small, but mighty, team of thought-partners that takes pride
+      in our work and values lightheartedness and camaraderie. Follow us on
+      Medium to learn of job opportunities.
+    </p>
+  </section>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</PageLayout>

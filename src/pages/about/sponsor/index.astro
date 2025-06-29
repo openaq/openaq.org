@@ -1,0 +1,73 @@
+---
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
+import { frontmatter, Content } from "@content/sponsor/sponsor.md";
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables" as variables;
+
+  .sponsor-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 800px;
+    z-index: 2;
+    margin: 0 auto;
+    justify-content: center;
+
+    :global(table) {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      display: block;
+      :global(thead) {
+        background-color: variables.$smoke10;
+        height: 50px;
+        color: variables.$sky100;
+
+        :global(tr) {
+          th {
+            margin: 0 auto;
+          }
+        }
+      }
+      :global(table),
+      :global(th),
+      :global(td) {
+        padding: 12px;
+        border: 2px solid variables.$smoke30;
+        word-break: break-word;
+
+        :global(ul) {
+          :global(li) {
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+      }
+
+      @media (max-width: 800px) {
+        max-width: 100%;
+      }
+      @media (max-width: 600px) {
+        row-gap: 20px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      max-width: 100vw;
+      width: 100%;
+    }
+  }
+</style>
+<SingleArticleLayout frontmatter={frontmatter}>
+  <h1 class="gradient-title">{frontmatter.title}</h1>
+
+  <section class="sponsor-grid">
+    <Content />
+  </section>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</SingleArticleLayout>

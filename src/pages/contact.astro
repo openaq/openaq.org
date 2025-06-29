@@ -1,0 +1,51 @@
+---
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Bubbles from "@components/Bubbles.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import SocialBanner from "@components/SocialBanner.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { frontmatter } from "@content/contact/contact.md";
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  .contact-content {
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    &-container {
+      width: 800px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+</style>
+<BaseLayout>
+  <Breadcrumb />
+  <div class="contact-content">
+    <Bubbles />
+    <div class="contact-content-container">
+      <div>
+        <h2 class="type-header-2">{frontmatter.mailingAdressTitle}</h2>
+        <p>
+          {frontmatter.mailingAdressFirstLine}<br />
+          {frontmatter.mailingAdressSecondLine}<br />
+          {frontmatter.mailingAdressThirdLine}<br />
+          {frontmatter.mailingAdressFourthLine}
+        </p>
+      </div>
+      <div>
+        <h2 class="type-header-2">{frontmatter.emailTitle}</h2>
+        <a class="type-link-1" href="mailto:info@openaq.org"
+          >{frontmatter.emailContent}</a
+        >
+      </div>
+    </div>
+  </div>
+  <SocialBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</BaseLayout>

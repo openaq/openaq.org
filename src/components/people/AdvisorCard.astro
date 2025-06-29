@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+
+const { name, position, portrait, data, country } = Astro.props;
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  @use "./person-card" as *;
+
+  @include person-card("team", variables.$ocean120);
+</style>
+
+<article class="team-card">
+  <Image
+    class="person-image"
+    src={portrait}
+    height={252}
+    width={252}
+    alt={name}
+  />
+  <div class="team-card__description">
+    <h2 class="person-name">{name}</h2>
+    <h3 class="person-title">{position}</h3>
+    <p class="person-bio">{country}</p>
+  </div>
+</article>

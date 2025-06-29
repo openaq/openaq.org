@@ -1,0 +1,265 @@
+---
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Bubbles from "@components/Bubbles.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { frontmatter } from "@content/legal/legal.md";
+---
+
+<style lang="scss">
+  @use "openaq-design-system/scss/buttons";
+  @use "openaq-design-system/scss/variables";
+  @use "openaq-design-system/scss/inputs";
+  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+
+  .reporting-content {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 0 100px 0;
+
+    &-container {
+      width: 800px;
+
+      .policies-section {
+        .policies-title {
+          @include mixins.heading1;
+          color: variables.$sky120;
+        }
+
+        ul {
+          @include mixins.body1;
+          margin: 20px 0 0 15px;
+        }
+      }
+
+      .reporting-grid {
+        margin: 60px 0 0 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 60px;
+        row-gap: 80px;
+
+        .reporting-item {
+          &__title {
+            margin: 20px 0;
+            @include mixins.heading1;
+            color: variables.$sky120;
+          }
+
+          &__description {
+            @include mixins.body2;
+            margin: 20px 0;
+          }
+
+          .download-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            column-gap: 20px;
+          }
+        }
+      }
+
+      .ceritifications-grid {
+        margin: 80px 0 20px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        a {
+          img {
+            height: 135px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      & {
+        &-container {
+          width: 90%;
+
+          .reporting-grid {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<BaseLayout pageTitle="Legal">
+  <Breadcrumb />
+  <div class="reporting-content">
+    <Bubbles />
+    <div class="reporting-content-container">
+      <h1 class="type-display-1 gradient-title">Legal and Policy Documents</h1>
+
+      <div class="ceritifications-grid">
+        <a
+          href="https://www.guidestar.org/profile/shared/49986605-4410-4ce1-b0cd-ab4bb5955075"
+          target="_blank"
+          ><img
+            src="https://widgets.guidestar.org/TransparencySeal/9732592"
+          /></a
+        >
+        <a href="https://www.charitynavigator.org/ein/475324172" target="_blank"
+          ><img src="/src/assets/images/four_star_rating_badge.webp" /></a
+        >
+      </div>
+      <div class="policies-section">
+        <h2 class="policies-title">Terms of use and other policies</h2>
+        <ul>
+          <li><a href="https://openaq.org/terms/">Website terms of use</a></li>
+          <li>
+            <a href="https://docs.openaq.org/about/terms"
+              >Platform terms of use</a
+            >
+          </li>
+          <li><a href="https://openaq.org/privacy/">Privacy policy</a></li>
+          <li><a href="https://openaq.org/security/">Security policy</a></li>
+          <li><a href="https://openaq.org/cookies/">Cookie policy</a></li>
+          <li><a href="https://openaq.org/dmca/">DMCA</a></li>
+        </ul>
+      </div>
+      <div class="reporting-grid">
+        <div class="reporting-item">
+          <h2 class="reporting-item__title">{frontmatter.financialTitle}</h2>
+          <p class="reporting-item__description">
+            {frontmatter.financialDescription}
+          </p>
+          <div class="download-section">
+            <select
+              name="financial-downloads"
+              id="financial-downloads"
+              class="select js-financial-select"
+            >
+              <option
+                value="/forms/OpenAQ+Inc+Form+990+FY+2024+Public.pdf"
+                selected>IRS Form 990 2024</option
+              >
+              <option value="/forms/OpenAQ+Inc+2024+Review+by+Auditors.pdf"
+                >Audited Financials FY 2023 & 2024</option
+              >
+            </select><button
+              class="download-financial btn btn-secondary js-download-financial-btn"
+              >Download</button
+            >
+          </div>
+        </div>
+        <div class="reporting-item">
+          <h2 class="reporting-item__title">{frontmatter.bylawsTitle}</h2>
+          <p class="reporting-item__description">
+            {frontmatter.bylawsDescription}
+          </p>
+          <div class="download-section">
+            <div></div>
+            <a
+              href="https://documents.openaq.org/policy/OpenAQ+Bylaws+2022.pdf"
+              class="download-audit btn btn-secondary">Download</a
+            >
+          </div>
+        </div>
+        <div class="reporting-item">
+          <h2 class="reporting-item__title">
+            {frontmatter.incorporationTitle}
+          </h2>
+          <p class="reporting-item__description">
+            {frontmatter.incorporationDescription}
+          </p>
+          <div class="download-section">
+            <select
+              name="incorporation-download-select"
+              id="incorporation-download-select"
+              class="select js-incorporation-select"
+            >
+              <option
+                value="/forms/OpenAQ_Certificate_of_Incorporation%202015_09_09.pdf"
+                selected>Certificate of Incorporation</option
+              >
+              <option
+                value="/forms/OpenAQ_Articles_of_Incorporation%202018_01_01.pdf"
+                selected>Articles of Incorporation</option
+              >
+              <option
+                value="/forms/OpenAQ%2BIRS%2BDetermination%2BLetter%2B2018-09-21.pdf"
+                >IRS Determination Letter of 501(c)(3) Status</option
+              >
+            </select>
+            <button
+              class="download-incorporation btn btn-secondary js-download-incorporation-btn"
+              >Download</button
+            >
+          </div>
+        </div>
+
+        <div class="reporting-item">
+          <h2 class="reporting-item__title">{frontmatter.policiesTitle}</h2>
+          <p class="reporting-item__description">
+            {frontmatter.policiesDescription}
+          </p>
+          <div class="download-section">
+            <select
+              name="policy-download-select"
+              id="policy-download-select"
+              class="select js-policy-select"
+            >
+              <option
+                value="/policy/OpenAQ+Child+Safeguard+and+Protection+Policy.pdf"
+                selected>Child Safeguard and Protection</option
+              >
+              <option value="/policy/OpenAQ+Code+of+Conduct.pdf"
+                >Code of Conduct
+              </option>
+              <option value="/policy/OpenAQ+COI+Policy.pdf"
+                >Conflict of Interest
+              </option>
+              <option value="/policy/OpenAQ+Anti-Modern+Slavery+Policy.pdf"
+                >Anti-Modern Slavery
+              </option>
+              <option
+                value="/policy/OpenAQ+Anti-Fraud+&+Anti-Corruption+Policy.pdf"
+                >Anti-Fraud & Anti-Corruption
+              </option>
+              <option value="/policy/OpenAQ+Sanctions+Compliance+Policy.pdf"
+                >Sanctions Compliance Policy
+              </option>
+            </select>
+            <button
+              class="download-policy btn btn-secondary js-download-policy-btn"
+              >Download</button
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</BaseLayout>
+
+<script>
+  (() => {
+    const baseUrl = "https://documents.openaq.org";
+    const financialDownloadBtn = document.querySelector(
+      ".js-download-financial-btn"
+    );
+    const financialSelect = document.querySelector(".js-financial-select");
+    financialDownloadBtn?.addEventListener("click", () => {
+      location.href = `${baseUrl}${financialSelect?.value}`;
+    });
+    const incorporationDownloadBtn = document.querySelector(
+      ".js-download-incorporation-btn"
+    );
+    const incorporationSelect = document.querySelector(
+      ".js-incorporation-select"
+    );
+    incorporationDownloadBtn?.addEventListener("click", () => {
+      location.href = `${baseUrl}${incorporationSelect?.value}`;
+    });
+    const policyDownloadBtn = document.querySelector(".js-download-policy-btn");
+    const policySelect = document.querySelector(".js-policy-select");
+    policyDownloadBtn?.addEventListener("click", () => {
+      location.href = `${baseUrl}${policySelect?.value}`;
+    });
+  })();
+</script>

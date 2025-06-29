@@ -1,0 +1,52 @@
+---
+import HomeIcon from '@assets/svg/home_icon.svg'
+import ChevronRight from '@assets/svg/chevron_right.svg'
+
+const pathname = new URL(Astro.request.url).pathname;
+
+interface PathDefinition {
+    [key: string]: string;
+}
+
+function cleanName(name: string): string {
+    return name.replace(/[-_]/g, ' '); 
+}
+
+function urlPathToObject(path: string): PathDefinition {
+  path = path.endsWith('/') ? path.slice(0, -1) : path;
+
+  path = path.startsWith('/') ? path.slice(1) : path;
+  const segments = path.split('/');
+  const result: PathDefinition = {};
+
+  let currentPath = '';
+  for (const segment of segments) {
+    currentPath += (currentPath ? '/' : '') + segment;
+    result[currentPath] = cleanName(segment); 
+  }
+
+  return result;
+}
+const breadcrumbs = urlPathToObject(pathname);
+
+---
+
+<style lang="scss">
+    @use 'openaq-design-system/scss/utilities/types.scss';
+    @use "openaq-design-system/scss/utilities";
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        
+        a {
+            text-transform: capitalize;
+        }
+    }
+
+</style>
+
+<ol class="breadcrumb">
+    <a href="/"><HomeIcon width={24} fill="#34a3a1"/></a>
+    {Object.entries(breadcrumbs).map(([path, name]) => <ChevronRight width={24} fill="#7e8c9a"/> <a class={`type-body-3 ${path === Object.keys(breadcrumbs).pop() ? "text-sky-120" : ""}`} href={`/${path}`}>{name}</a> )}
+</ol>

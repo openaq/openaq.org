@@ -1,0 +1,63 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import UseCaseCard from "@components/use-cases/UseCaseCard.astro";
+import { frontmatter } from "@content/use-cases/use-casesIndex/use-cases.md";
+
+const allUseCases = await getCollection("useCases");
+
+const sortByName = (
+  a: CollectionEntry<"usecases">,
+  b: CollectionEntry<"usecases">
+) => a.data.title.localeCompare(b.data.title);
+---
+
+<style lang="scss">
+  .use-cases-content-container {
+    width: 800px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .use-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 20px;
+    justify-content: center;
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>
+<PageLayout pageTitle={frontmatter.title}>
+  <div class="use-cases-content-container">
+    <h1 class="gradient-title">{frontmatter.title}</h1>
+
+    <section class="use-cases-grid">
+      {
+        allUseCases
+          .sort(sortByName)
+          .map((usecase) => (
+            <UseCaseCard
+              name={usecase.data.title}
+              image={usecase.data.image}
+              body={usecase.body}
+              url={`/about/use-cases/${usecase.id}`}
+              categories={usecase.data.categories}
+              tags={usecase.data.tags}
+            />
+          ))
+      }
+    </section>
+  </div>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</PageLayout>

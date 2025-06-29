@@ -1,0 +1,48 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+import InitiativeCard from "@components/initiatives/InitiativeCard.astro";
+import type { CollectionEntry } from "astro:content";
+import CommunityBanner from "@components/CommunityBanner.astro";
+import ExplorerBanner from "@components/ExplorerBanner.astro";
+import { frontmatter } from "@content/initiatives/initiativesIndex/initiatives.md";
+const allInitiatives = await getCollection("initiatives");
+
+const sortByName = (
+  a: CollectionEntry<"initiatives">,
+  b: CollectionEntry<"initiatives">
+) => a.data.title.localeCompare(b.data.title);
+---
+
+<style lang="scss">
+  .initiative-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 40px;
+    width: 800px;
+    z-index: 2;
+    @media (max-width: 800px) {
+      max-width: 100vw;
+    }
+  }
+</style>
+<PageLayout pageTitle={frontmatter.title}>
+  <h1 class="gradient-title">{frontmatter.title}</h1>
+
+  <section class="initiative-grid">
+    {
+      allInitiatives
+        .sort(sortByName)
+        .map((initiative) => (
+          <InitiativeCard
+            title={initiative.data.title}
+            image={initiative.data.image}
+            body={initiative.body}
+            url={`/about/initiatives/${initiative.id}`}
+          />
+        ))
+    }
+  </section>
+  <CommunityBanner slot="banner" />
+  <ExplorerBanner slot="banner-low" />
+</PageLayout>

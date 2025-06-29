@@ -1,18 +1,40 @@
 {
-  "name": "openaq.org",
-  "private": "true",
-  "version": "1.0.0",
-  "repository": "https://github.com/openaq/openaq.org.git",
-  "author": "OpenAQ <dev@openaq.org>",
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test-build": "astro build --site http://localhost:4321",
+    "test": "playwright test"
+  },
   "dependencies": {
-    "openaq-design-system": "github:openaq/openaq-design-system#v-4.0.0",
-    "playwright": "^1.30.0"
+    "@astrojs/sitemap": "^3.3.0",
+    "astro": "^5.7.1",
+    "astro-og-canvas": "^0.7.0",
+    "astro-purgecss": "^5.2.0",
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.8.3",
+    "dayjs": "^1.11.13",
+    "lightningcss": "^1.28.2",
+    "openaq-design-system": "github:openaq/openaq-design-system",
+    "purgecss": "^7.0.2",
+    "remove-markdown": "^0.6.0",
+    "sass": "^1.83.0",
+    "vite-plugin-solid-svg": "^0.8.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0",
-    "autoprefixer": "^10.4.13",
-    "cssnano": "^5.1.14",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0"
+    "@playwright/test": "^1.51.0",
+    "@types/axios": "^0.9.36",
+    "@types/node": "^22.13.10",
+    "@types/xml2js": "^0.4.14",
+    "cssnano": "^7.0.6",
+    "postcss": "^8.4.49",
+    "stylelint": "^16.12.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-config-standard-scss": "^14.0.0"
   }
 }

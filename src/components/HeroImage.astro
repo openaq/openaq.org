@@ -1,0 +1,193 @@
+---
+import { Image } from 'astro:assets';
+import Hero from '@assets/images/hero.webp'
+---
+
+
+<style lang="scss">
+@use 'openaq-design-system/scss/variables' as variables;
+@use 'openaq-design-system/scss/mixins/index' as mixins;
+@use 'openaq-design-system/scss/bubbles';
+
+
+.hero-image {
+  position: relative;
+  width: 700px;
+  height: 700px;
+
+  .detail-card {
+    @include mixins.box-shadow;
+    top: 50px;
+    left: 320px;
+    position: absolute;
+    border-radius: 16px;
+    width: 280px;
+    height: 570px;
+    background-color: white;
+    border: 6px solid variables.$ocean10;
+    overflow: hidden;
+
+    &__header {
+      background-color: variables.$sky120;
+      padding: 10px 20px;
+    }
+
+    &__title {
+        @include mixins.heading3(#fff);
+    }
+
+    &-section {
+      padding: 14px 18px;
+      border-bottom: 1px dashed variables.$smoke30;
+
+      .latest-readings-title {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 5px 0 12px 0;
+      }
+
+      .latest-readings-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 12px;
+      }
+    }
+    &-section-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      row-gap: 12px;
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+  }
+
+  .active-marker {
+    @include mixins.box-shadow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 145px;
+    top: 220px;
+    width: 38px;
+    height: 38px;
+    border-radius: 100%;
+    background-color: variables.$lavender80;
+    border: 6px solid variables.$ocean60;
+
+    span {
+      @include mixins.body5;
+      color: white;
+    }
+  }
+
+  .bubble-lg {
+    position: absolute;
+    bottom: 30px;
+    left: -20px;
+  }
+
+  .bubble-sm {
+    position: absolute;
+    top: 65px;
+    left: 43px;
+  }
+
+  .bubble-md {
+    position: absolute;
+    top: 65px;
+    right: -70px;
+  }
+
+  @media (max-width: 800px) {
+    & {
+      width: 700px;
+      height: 1000px;
+
+      .active-marker {
+        top: 250px;
+        left: 165px;
+      }
+      &__img {
+        height: 800px;
+      }
+
+      .detail-card {
+        left: calc(50% - 280px);
+        top: 320px;
+      }
+    }
+  }
+}
+
+
+
+</style>
+
+<div class="hero-image">
+    <div class="bubble-lg"></div>
+    <div class="bubble-md"></div>
+    <div class="bubble-sm"></div>
+    <Image src={Hero}  class="hero-image__img" alt="hero image" />
+    <div class="active-marker">
+        <span>58</span>
+    </div>
+    <div class="detail-card">
+        <header class="detail-card__header">
+            <h3 class="detail-card__title">McMillan Reservoir</h3>
+        </header>
+        <section class="detail-card-section">
+            <div>
+                <span class="type-body-2">Washington DC, </span><span class="type-body-3">US</span>
+            </div>
+        </section>
+        <section class="detail-card-section detail-card-section-grid">
+            <span class="type-subtitle-3">Type</span>
+            <span class="type-body-1">Monitor</span>
+            <span class="type-subtitle-3">Measures</span>
+            <span class="type-body-1">PM2.5 (µg/m³), PM10 (µg/m³), SO₂ (ppb)  , O₃ (ppb), CO (ppb), BC (µg/m³), NO₂ (ppb)</span>
+        </section>
+        <section class="detail-card-section detail-card-section-grid">
+            <span class="type-subtitle-3">Provider:</span>
+            <span class="type-body-1">US EPA AirNow
+            </span>
+            <span class="type-subtitle-3">Reporting:
+            </span>
+            <span class="type-body-1">Updated 3 hours ago</span>
+            <span></span>
+            <span class="type-body-4">Since 26/04/2016
+            </span>
+        </section>
+        <section class="detail-card-section">
+            <div class="latest-readings-title">
+                <span class="type-subtitle-3">Latest readings</span> <span class="type-body-2 text-smoke-100">13:22 (local time)</span>
+            </div>
+            <div class="latest-readings-grid">
+                <span class="type-subtitle-3">PM2.5</span><div><span class="type-body-3 text-lavender-100">7</span><span class="type-body-1"> µg/m³</span></div><div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 21.2 5.3"><path fill="none" stroke="#7867eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="m1 1 1 1 1 1 1-1 1-1 2 1h1l1 2 1-2 2 1 1-1 1 1 2 1h2l1-1h1"/></svg>
+                </div>
+                <span class="type-subtitle-3">PM10</span><div><span class="type-body-3 text-lavender-100">24</span><span class="type-body-1"> µg/m³</span></div><div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 21.2 5.3"><path fill="none" stroke="#7867eb" stroke-linecap="round" stroke-linejoin="round" stroke-width=".8" d="M1 2h3l1-1 2 1h1l1 1 1-1 2 1h2l2 1 1-1 1 1 1-1 1-1"/></svg>                </div>
+                <span class="type-subtitle-3">BC</span><div><span class="type-body-3 text-lavender-100">0.25</span><span class="type-body-1"> µg/m³</span></div><div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 21.2 5.3"><path fill="none" stroke="#7867eb" stroke-linecap="round" stroke-linejoin="round" stroke-width=".8" d="M1 2h3l1 1 2-1h1l1 1 1-1h5l2 1h3"/></svg>
+                </div>
+                <span class="type-subtitle-3">O₃</span><div><span class="type-body-3 text-lavender-100">22</span><span class="type-body-1"> ppb</span></div><div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 21.2 5.3"><path fill="none" stroke="#7867eb" stroke-linecap="round" stroke-linejoin="round" stroke-width=".8" d="m1 1 1 1 1 1 1-1 1-1 2 1h1l1 2 1-2 2 1 1-1 1 1 2 1h2l1-1h1"/></svg>
+                </div>
+                <span class="type-subtitle-3">NO₂</span><div><span class="type-body-3 text-lavender-100">11</span><span class="type-body-1"> ppb</span></div><div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 21.2 5.3"><path fill="none" stroke="#7867eb" stroke-linecap="round" stroke-linejoin="round" stroke-width=".8" d="M1 2h3l1 1 2-1h1l1 1 1-1h5l2 1h3"/></svg>
+                </div>
+                <span class="type-subtitle-3">SO₂</span><div><span class="type-body-3 text-lavender-100">1.00</span><span class="type-body-1"> ppb</span></div><div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 21.2 5.3"><path fill="none" stroke="#7867eb" stroke-linecap="round" stroke-linejoin="round" stroke-width=".8" d="M1 2h3l1-1 2 1h1l1 1 1-1 2 1h2l2 1 1-1 1 1 1-1 1-1"/></svg>
+                </div>
+                <span class="type-subtitle-3">CO</span><div><span class="type-body-3 text-lavender-100">300</span><span class="type-body-1"> ppb</span></div><div></div>
+            </div>
+        </section>
+    </div>
+</div>

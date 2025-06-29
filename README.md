@@ -1,33 +1,34 @@
-# OpenAQ.org website
+# OpenAQ.org
+
+OpenAQ.org is a web application for presenting information about the OpenAQ organization.
 
 ## Development
 
-The website is built using [Hugo](https://gohugo.io) for content management and static site generation. Netlify Decap is used for a headless CMS.
+OpenAQ.org is built with [Astro](https://astro.build/), optimized for building fast, content-driven websites..
 
+### Linting and style
 
-For styles SCSS is used with the [openaq-design-system](https://github.com/openaq/openaq-design-system) SCSS library. Dart Sass is required to compile SCSS and must be installed and available in PATH for Hugo to access.
+[Stylelint](https://stylelint.io/) is used for linting SCSS.
+[PurgeCSS](https://purgecss.com/) is used to removed unused CSS.
 
-To use dart-sass with Hugo, install [dart-sass-embedded](https://github.com/sass/dart-sass-embedded) as follows:
+### Local development
 
-1. Download the binary to match your platform from the releases page: https://github.com/sass/dart-sass-embedded/releases
+The application requires Node 20 for building and development.
 
-2. Place the downloaded binary in the desired directory on your system. e.g. ~/bin/sass_embedded
+Install dependencies with:
 
-3. Add the path to the binary to your system's PATH:
+```sh
+npm install
+```
 
-    .zshrc
-    ```
-    export PATH="${HOME}/bin/sass_embedded:${PATH}"
-    ```
+To run a local development version run:
 
-Dart Sass will now be discoverable by Hugo.
+```sh
+npm run dev
+```
 
+To generate a static production build, run:
 
-
-## Content Guidance
-
-### Team photos
-
-Team portraits should be uploaded as a squaure image of least at 400px by 400px png. The portrait should include the subjects head and full shoulders down to mid-chest level. After resizing, use [remove.bg](https://remove.bg) to remove the background to create a transparent background around the subject.
-
-
+```sh
+npm run build
+```

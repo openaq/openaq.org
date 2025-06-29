@@ -1,0 +1,60 @@
+---
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+const { pageTitle } = Astro.props;
+
+import "../styles/main.scss";
+import CommunityBanner from "@components/CommunityBanner.astro";
+---
+
+<style lang="scss">
+  .main {
+    position: relative;
+    overflow: hidden;
+
+    .content {
+      width: 800px;
+      margin: 0 auto;
+
+      z-index: 2;
+    }
+  }
+</style>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
+    <link rel="sitemap" href="/sitemap.xml" /> 
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    {import.meta.env.PROD && (
+      <>
+        <script
+          is:inline
+          defer
+          data-domain="openaq.org"
+          crossorigin="anonymous"
+          src="https://plausible.io/js/script.outbound-links.js"></script>
+        <script is:inline>
+          window.plausible =
+            window.plausible ||
+            function () {
+              (window.plausible.q = window.plausible.q || []).push(arguments);
+            };
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <Header />
+    <main class="main">
+      <slot />
+    </main>
+    <slot name="banner" />
+    <slot name="banner-low" />
+
+    <Footer />
+  </body>
+</html>
