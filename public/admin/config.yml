@@ -384,7 +384,6 @@ collections:
     label: "Initiatives"
     folder: "src/content/initiatives/initiativesindex"
     format: "yaml-frontmatter"
-    create: true
     create: false
     slug: "{{slug}}"
     editor:
