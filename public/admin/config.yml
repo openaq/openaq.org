@@ -245,7 +245,7 @@ collections:
           label: "Categories",
           name: "categories",
           widget: "select",
-          options: "developer",
+          options: ["developer"],
           required: false,
         }
       - { label: "Image", name: "image", widget: "image" }
