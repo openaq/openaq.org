@@ -1,9 +1,8 @@
 ---
 import Bubbles from "./Bubbles.astro";
 
-const { github, slack, x } = Astro.props;
 
-import XLogo from "@assets/svg/x_logo.svg";
+import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
 import GitHubLogo from "@assets/svg/github.svg";
 import SlackLogo from "@assets/svg/slack.svg";
 ---
@@ -69,7 +68,7 @@ import SlackLogo from "@assets/svg/slack.svg";
   <div class="social-banner-content">
     <div class="social-section">
       <div>
-        <a href={github}>
+        <a href="https://github.com/openaq">
           <GitHubLogo height={35} width={35} />
         </a>
       </div>
@@ -87,7 +86,7 @@ import SlackLogo from "@assets/svg/slack.svg";
     </div>
     <div class="social-section">
       <div>
-        <a href={slack}>
+        <a href="https://join.slack.com/t/openaq/shared_invite/zt-yzqlgsva-v6McumTjy2BZnegIK9XCVw">
           <SlackLogo height={35} width={35} />
         </a>
       </div>
@@ -106,17 +105,17 @@ import SlackLogo from "@assets/svg/slack.svg";
     </div>
     <div class="social-section">
       <div>
-        <a href={x}>
-          <XLogo height={35} width={35} />
+        <a href="https://bsky.app/profile/openaq.org">
+          <BlueskyLogo height={35} width={35} />
         </a>
       </div>
 
       <div class="social-section-description">
         <span class="type-subtitle-1 text-white"
-          >Stay up to date with OpenAQ news on X</span
+          >Stay up to date with OpenAQ news on Bluesky</span
         >
         <a
-          href="https://x.com/openaq"
+          href="https://bsky.app/profile/openaq.org"
           class="btn btn-secondary social-banner-x"
           target="_blank"
           rel="noreferrer noopener">Follow</a
