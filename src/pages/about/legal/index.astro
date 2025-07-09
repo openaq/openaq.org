@@ -5,6 +5,9 @@ import ExplorerBanner from "@components/ExplorerBanner.astro";
 import CommunityBanner from "@components/CommunityBanner.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { frontmatter } from "@content/legal/legal.md";
+import { Image } from "astro:assets";
+import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png';
+
 ---
 
 <style lang="scss">
@@ -102,8 +105,9 @@ import { frontmatter } from "@content/legal/legal.md";
             src="https://widgets.guidestar.org/TransparencySeal/9732592"
           /></a
         >
-        <a href="https://www.charitynavigator.org/ein/475324172" target="_blank"
-          ><img src="/src/assets/images/four_star_rating_badge.webp" /></a
+        <a href="https://www.charitynavigator.org/ein/475324172" target="_blank">
+          <Image src={fourStarRatingBadgeImage} alt="Charity Navigator four star rating badge" width="135" height="135"  />
+          </a
         >
       </div>
       <div class="policies-section">
