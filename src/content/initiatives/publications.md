@@ -42,7 +42,7 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 *Middle East and North Africa*
 
-* [English](https://openaq.org/about/initiatives/publications/documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_EN.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_EN.pdf)
 * [Arabic](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_AR.pdf)
 * [French](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_FR.pdf)
 
@@ -62,7 +62,7 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 *Open Air Quality Data: The Global Landscape 2022*
 
-* [Summary](https://bit.ly/3uOSZXu)
+* [Summary](https://openaq.medium.com/three-quarters-of-national-governments-fail-to-provide-fully-transparent-data-on-air-pollution-e9158a85d511)
 * [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)
 * [Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)
 * [Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)
