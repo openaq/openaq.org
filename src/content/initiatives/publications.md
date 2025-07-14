@@ -28,39 +28,38 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 *Central Asia:*
 
-* [English](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_EN.pdf)
-* [Russian](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_RU.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_EN.pdf)
+* [Russian](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_RU.pdf)
 
-  [](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/publications/)
 
 *East Asia and Pacific:*
 
-* [English](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_EN.pdf)
-* [Bahasa Indonesia](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_ID.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_EN.pdf)
+* [Bahasa Indonesia](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_ID.pdf)
 
 *Latin America and the Caribbean*
 
-* [English](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_EN.pdf)
-* [Spanish](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_ES.pdf)
-* [Portuguese](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_PT.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_EN.pdf)
+* [Spanish](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_ES.pdf)
+* [Portuguese](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_PT.pdf)
 
 *Middle East and North Africa*
 
-* [English](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/publications/documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_EN.pdf)
-* [Arabic](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_AR.pdf)
-* [French](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_FR.pdf)
+* [English](https://openaq.org/about/initiatives/publications/documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_EN.pdf)
+* [Arabic](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_AR.pdf)
+* [French](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_FR.pdf)
 
 *South Asia*
 
-* [English](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_EN.pdf)
-* [Hindi](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_HI.pdf)
-* [Punjabi](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_PA.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_EN.pdf)
+* [Hindi](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_HI.pdf)
+* [Punjabi](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_PA.pdf)
 
 *Sub-Saharan Africa*
 
-* [English](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_EN.pdf)
-* [Swahili](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_SW.pdf)
-* [French](https://web.archive.org/web/20250625061734/https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_EN.pdf)
+* [Swahili](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_SW.pdf)
+* [French](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)
 
 ### *Previous Reports on the Global Landscape of Open Air Quality Data*
 
