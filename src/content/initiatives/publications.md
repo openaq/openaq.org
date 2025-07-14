@@ -74,9 +74,9 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 ## *More Initiatives*
 
-* [AQI Hub](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/aqi-hub/)
-* [OpenAQ Data Platform: Providing Air Quality Data](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/openaq-data-platform/)
-* [Community Engagement](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/community-engagement/)
-* [Partnership Project: Predicting What We Breathe](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/pwwb/)
-* [Community Ambassador Program](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/community-ambassadors/)
-* [Partnership Project: Clean Air Catalyst](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/cac/)
+* [AQI Hub](https://openaq.org/about/initiatives/aqi-hub/)
+* [OpenAQ Data Platform: Providing Air Quality Data](https://openaq.org/about/initiatives/openaq-data-platform/)
+* [Community Engagement](https://openaq.org/about/initiatives/community-engagement/)
+* [Partnership Project: Predicting What We Breathe](https://openaq.org/about/initiatives/pwwb/)
+* [Community Ambassador Program](https://openaq.org/about/initiatives/community-ambassadors/)
+* [Partnership Project: Clean Air Catalyst](https://openaq.org/about/initiatives/cac/)
