@@ -18,11 +18,9 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 *Open Air Quality Data: The Global Landscape 2024*
 
-[Infographic](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)[](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
-
-[Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
-
-[Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
+* [Infographic](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)[](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
+* [Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
 ### *Regional reports (From the 2024 Report)*
 
@@ -30,7 +28,6 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 * [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_EN.pdf)
 * [Russian](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_RU.pdf)
-
 
 *East Asia and Pacific:*
 
@@ -63,33 +60,23 @@ Since our last assessment in 2022, there has been a small increase in the number
 
 ### *Previous Reports on the Global Landscape of Open Air Quality Data*
 
-*Open Air Quality Data: The Global Landscape 2022*\
-[Summary](https://bit.ly/3uOSZXu)\
-[Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)\
-[Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)\
-[Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)
+*Open Air Quality Data: The Global Landscape 2022*
 
-*Open Air Quality Data: The Global State of Play 2020*\
-[Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)\
-[Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
+* [Summary](https://bit.ly/3uOSZXu)
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)
+* [Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)
+* [Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)
 
-[](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
+*Open Air Quality Data: The Global State of Play 2020*
+
+* [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
 
 ## *More Initiatives*
 
-*   [AQI Hub](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/aqi-hub/)
-
-
-*   [OpenAQ Data Platform: Providing Air Quality Data](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/openaq-data-platform/)
-
-
-*   [Community Engagement](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/community-engagement/)
-
-
-*   [Partnership Project: Predicting What We Breathe](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/pwwb/)
-
-
-*   [Community Ambassador Program](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/community-ambassadors/)
-
-
-*   [Partnership Project: Clean Air Catalyst](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/cac/)
+* [AQI Hub](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/aqi-hub/)
+* [OpenAQ Data Platform: Providing Air Quality Data](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/openaq-data-platform/)
+* [Community Engagement](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/community-engagement/)
+* [Partnership Project: Predicting What We Breathe](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/pwwb/)
+* [Community Ambassador Program](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/community-ambassadors/)
+* [Partnership Project: Clean Air Catalyst](https://web.archive.org/web/20250625061734/https://openaq.org/about/initiatives/cac/)
