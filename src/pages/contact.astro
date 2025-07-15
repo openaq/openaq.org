@@ -4,7 +4,7 @@ import Bubbles from "@components/Bubbles.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
 import SocialBanner from "@components/SocialBanner.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { frontmatter } from "@content/contact/contact.md";
+import { frontmatter, Content } from "@content/contact/contact.md";
 ---
 
 <style lang="scss">
@@ -15,12 +15,19 @@ import { frontmatter } from "@content/contact/contact.md";
     display: flex;
     position: relative;
     justify-content: center;
+          min-height: 100vh;
+
 
     &-container {
       width: 800px;
-      min-height: 100vh;
-      display: flex;
-      justify-content: space-around;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      div:nth-child(1) {
+        grid-column: span 2;
+      }
+
     }
   }
 </style>
@@ -29,6 +36,9 @@ import { frontmatter } from "@content/contact/contact.md";
   <div class="contact-content">
     <Bubbles />
     <div class="contact-content-container">
+      <div>
+        <Content />
+      </div>
       <div>
         <h2 class="type-header-2">{frontmatter.mailingAdressTitle}</h2>
         <p>

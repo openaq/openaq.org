@@ -8,3 +8,7 @@ mailingAdressFourthLine: "Washington, DC 20016-4364"
 emailTitle: "Email"
 emailContent: "info@openaq.org"
 ---
+
+
+As a small team are unable to provide personalized platform support over email. For platform
+support and questions we please join the OpenAQ Slack at [https://link.openaq.org/joinslack](https://link.openaq.org/joinslack).
