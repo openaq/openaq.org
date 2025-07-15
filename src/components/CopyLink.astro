@@ -1,8 +1,10 @@
 ---
-import XLogo from "@assets/svg/x_logo.svg";
+import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
 import FacebookLogo from "@assets/svg/facebook.svg";
 import LinkedInLogo from "@assets/svg/linkedin.svg";
 import CopyIcon from "@assets/svg/copy.svg";
+const currentPath = Astro.url.pathname;
+const pageUrl = new URL(currentPath, Astro.site)
 ---
 
 <style lang="scss">
@@ -54,9 +56,10 @@ import CopyIcon from "@assets/svg/copy.svg";
     ><span class="js-copy-button__text">Copy link</span>
     <CopyIcon width="22" height="22" fill="#33a3a1" />
   </button>
+  <span>Share</span>
   <a
     class="social-circle"
-    href={"https://www.facebook.com/openaq/"}
+    href=`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
     target="_blank"
     rel="noreferrer noopener"
   >
@@ -64,15 +67,15 @@ import CopyIcon from "@assets/svg/copy.svg";
   </a>
   <a
     class="social-circle"
-    href={"https://x.com/openaq"}
+    href=`https://bsky.app/intent/compose?text=${pageUrl}`
     target="_blank"
     rel="noreferrer noopener"
   >
-    <XLogo width="20" height="20" />
+    <BlueskyLogo width="20" height="20" />
   </a>
   <a
     class="social-circle"
-    href={"https://www.linkedin.com/company/openaq"}
+    href=`https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`
     target="_blank"
     rel="noreferrer noopener"
   >
