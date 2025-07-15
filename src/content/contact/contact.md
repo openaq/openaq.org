@@ -10,5 +10,4 @@ emailContent: "info@openaq.org"
 ---
 
 
-As a small team are unable to provide personalized platform support over email. For platform
-support and questions we please join the OpenAQ Slack at [https://link.openaq.org/joinslack](https://link.openaq.org/joinslack).
+As a small team, we are unable to provide personalized platform support over email. For platform support and questions, please join the OpenAQ Slack at [https://link.openaq.org/joinslack](https://link.openaq.org/joinslack).
