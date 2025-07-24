@@ -147,7 +147,7 @@ const useCases = defineCollection({
 });
 
 const help = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/developers/help" }),
+  loader: glob({ pattern: ["*.md"], base: "src/content/platform/help" }),
   schema: () =>
     z.object({
       title: z.string(),
@@ -162,10 +162,10 @@ const about = defineCollection({
     }),
 });
 
-const developers = defineCollection({
+const platform = defineCollection({
   loader: glob({
     pattern: ["*.md"],
-    base: "src/content/developers/singleDevPages",
+    base: "src/content/platform",
   }),
   schema: () =>
     z.object({
@@ -301,7 +301,7 @@ export const collections = {
   help,
   about,
   peopleIndex,
-  developers,
+  platform,
   legal,
   homepage,
   initiativesIndex,
