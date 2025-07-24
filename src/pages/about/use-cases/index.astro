@@ -10,8 +10,8 @@ import { frontmatter } from "@content/use-cases/use-casesIndex/use-cases.md";
 const allUseCases = await getCollection("useCases");
 
 const sortByName = (
-  a: CollectionEntry<"usecases">,
-  b: CollectionEntry<"usecases">
+  a: CollectionEntry<"useCases">,
+  b: CollectionEntry<"useCases">
 ) => a.data.title.localeCompare(b.data.title);
 ---
 

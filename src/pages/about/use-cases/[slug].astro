@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
 
 export async function getStaticPaths() {
-  const usecases = await getCollection("usecases");
+  const usecases = await getCollection("useCases");
   return usecases.map((usecase) => ({
     params: { slug: usecase.id },
     props: { usecase },
