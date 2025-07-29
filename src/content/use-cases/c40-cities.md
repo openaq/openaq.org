@@ -1,11 +1,16 @@
 ---
-title: "C40 Cities"
-url: "https://openaq.org/use-cases/c40-cities/"
-tags: ["Community"]
-categories: ["developer"]
+title: C40 Cities
+url: https://openaq.org/use-cases/c40-cities/
+tags:
+  - Community
+categories:
+  - developer
 image: "@assets/images/pdi_medell_n_160927_0188.jpg"
 featured: true
 ---
+
+
+OpenAQ provides air quality data, specifically PM2.5 measurements, to C40 Cities. This helps them assess the impact of implemented actions, track progress in reducing air pollution, and verify the number of air quality monitors reported by cities.
 
 ## The Problem
 
