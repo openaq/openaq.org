@@ -8,51 +8,55 @@ We actively build relationships with people and organizations concerned about ai
 
 We hold webinars on a variety of topics and workshops to help people in various sectors find the most impactful ways they can fight air inequality in their local community, for example:
 
-
-
-**OpenAQ Explorer Training Sessions**
+## **OpenAQ Explorer Training Sessions**
 
 **Africa**
 
 * [Kinshasa Air Quality (KINAQ), Democratic Republic of Congo](https://youtu.be/dPhMEm7B9jo)
-* [Sustenta Honduras](https://youtu.be/XsoPuv55QLU)
-* Air Sensors International Conference, Thailand
-* International Global Atmospheric Conference (IGAC), Malaysia
 * [Environmental Innovation Center, Kenya](https://youtu.be/gvojpTr_eeY)
 * [Addis Ababa University, Ethiopia](https://youtu.be/N917FHY9LRw)
 * [Kgotso Development Trust, Zimbabwe](https://youtu.be/CAk40VlzBj0)
-* [University of Dhaka, Bangladesh](https://youtu.be/GBw7vGohSJI)
+* [Air Quality Data Analytics and Machine Learning (ASAQ), Senegal (online)](https://youtu.be/lQYBgi5WGpw)
 * [African Engineering and Technology Network (AFRETEC), Lagos, Nigeria](https://www.youtube.com/watch?v=FPWpmkrbCRI)
+
+**Latin America**
+
+* [Sustenta Honduras](https://youtu.be/XsoPuv55QLU)
 * [Universidad Peruana de Ciencias Aplicadas (UPC)](https://youtu.be/8zRoWhloMA4?feature=shared)
-* [Clean Air Catalyst Training for Jakarta and Indore Teams](<>)
-* [](https://youtu.be/lQYBgi5WGpw)Air Quality Data Analytics and Machine Learning (ASAQ), Senegal (online[)](https://youtu.be/lQYBgi5WGpw)
-* [General Training for the OpenAQ Explorer](<>)[](https://youtu.be/GBw7vGohSJI)[](https://youtu.be/CAk40VlzBj0)[](https://youtu.be/N917FHY9LRw)[](https://youtu.be/gvojpTr_eeY)
 
-Various for
+**Asia**
 
-[World Health Organization Forum: Air Quality Monitoring Networks and Low-Cost Sensors](https://youtu.be/nIQVeVlE2qU?feature=shared&t=2688)
+* Air Sensors International Conference, Thailand
+* International Global Atmospheric Conference (IGAC), Malaysia
+* [University of Dhaka, Bangladesh](https://youtu.be/GBw7vGohSJI)
+* [Clean Air Catalyst Training for Jakarta and Indore Teams](https://openaq.org/admin/)
 
-[AirGradient Air Quality Forum](https://www.youtube.com/watch?v=UV00VTA8CkM)
+**Global**
 
-[Perry Weather](https://perryweather.com/resources/understanding-air-quality-webinar/)[](<>)
-
-[National Center for Atmospheric Research - Atmospheric Chemistry Observations and Modeling (NCAR ACOM) Seminar Series](https://www.youtube.com/watch?v=t0Scl9kE_1g)
-
-[Citizens' Climate Lobby Health Action Team](https://www.youtube.com/watch?v=Li3YQkDK3bg)
-
-[csv,conf,v7 conference](https://www.youtube.com/watch?v=nUBiiNEkXuE)
+* [General Training for the OpenAQ Explorer](https://openaq.org/admin/)
 
 
 
-**NASA Health and Air Quality Action Team (HAQAST):** 
+## **NASA Health and Air Quality Action Team (HAQAST)**
 
 * [Multiple Pollutant Sources and Other Environmental Exposures](https://www.youtube.com/watch?v=B4u0jQa5to8&t=1537s)
-* [Virtual Flash Talk: OpenAQ Resources](https://haqast.org/haqast-showcase-2025/#virtualflashtalks)[](https://www.youtube.com/watch?v=B4u0jQa5to8&t=1537s)
+* [Virtual Flash Talk: OpenAQ Resources](https://haqast.org/haqast-showcase-2025/#virtualflashtalks)
 
 
 
-**Earth Science Information Partners (ESIP):**
+## **Earth Science Information Partners (ESIP)**
 
 * [Air Quality Information: Innovations and Impacts (January 2024)](https://www.youtube.com/watch?v=nsandPI9vBA)
 * [Air Quality Session (July 2024)](https://youtu.be/uVzC2vmBtYE?feature=shared&t=2236)
 * [Using Open Data to Fight Air Inequality (January 2023)](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
+
+
+
+## **Various forums**
+
+* [World Health Organization Forum: Air Quality Monitoring Networks and Low-Cost Sensors](https://youtu.be/nIQVeVlE2qU?feature=shared&t=2688)
+* [AirGradient Air Quality Forum](https://www.youtube.com/watch?v=UV00VTA8CkM)
+* [Perry Weather](https://perryweather.com/resources/understanding-air-quality-webinar/)[](<>)
+* [National Center for Atmospheric Research - Atmospheric Chemistry Observations and Modeling (NCAR ACOM) Seminar Series](https://www.youtube.com/watch?v=t0Scl9kE_1g)
+* [Citizens' Climate Lobby Health Action Team](https://www.youtube.com/watch?v=Li3YQkDK3bg)
+* [csv,conf,v7 conference](https://www.youtube.com/watch?v=nUBiiNEkXuE)[](https://www.youtube.com/watch?v=nUBiiNEkXuE)[](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
