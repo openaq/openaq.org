@@ -29,28 +29,22 @@ We hold webinars on a variety of topics and workshops to help people in various 
 * Air Sensors International Conference, Thailand
 * International Global Atmospheric Conference (IGAC), Malaysia
 * [University of Dhaka, Bangladesh](https://youtu.be/GBw7vGohSJI)
-* [Clean Air Catalyst Training for Jakarta and Indore Teams](https://openaq.org/admin/)
+* [Clean Air Catalyst Training for Jakarta and Indore Teams](https://youtu.be/NMIDJAcFMsU)
 
 **Global**
 
-* [General Training for the OpenAQ Explorer](https://openaq.org/admin/)
-
-
+* [General Training for the OpenAQ Explorer](https://youtu.be/bDMWCOwZUk8)
 
 ## **NASA Health and Air Quality Action Team (HAQAST)**
 
 * [Multiple Pollutant Sources and Other Environmental Exposures](https://www.youtube.com/watch?v=B4u0jQa5to8&t=1537s)
 * [Virtual Flash Talk: OpenAQ Resources](https://haqast.org/haqast-showcase-2025/#virtualflashtalks)
 
-
-
 ## **Earth Science Information Partners (ESIP)**
 
 * [Air Quality Information: Innovations and Impacts (January 2024)](https://www.youtube.com/watch?v=nsandPI9vBA)
 * [Air Quality Session (July 2024)](https://youtu.be/uVzC2vmBtYE?feature=shared&t=2236)
 * [Using Open Data to Fight Air Inequality (January 2023)](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
-
-
 
 ## **Various forums**
 
