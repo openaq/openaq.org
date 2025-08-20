@@ -1,0 +1,133 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import Bubbles from '@components/Bubbles.astro';
+
+const { frontmatter, title } = Astro.props;
+
+const url = Astro.url;
+---
+
+<style lang="scss">
+  @use 'openaq-design-system/scss/variables';
+  @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
+
+  .brand-guidelines-content {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 0 100px 0;
+
+    &-container {
+      width: 800px;
+      z-index: 2;
+      .brand-guidelines-body {
+        margin: 20px 0 60px 0;
+
+        :global(h1) {
+          color: variables.$sky120;
+          margin-bottom: 0;
+        }
+
+        :global(table.examples-table) {
+          margin: 20px auto;
+          :global(tbody) {
+            vertical-align: top;
+          }
+        }
+
+        :global(h2) {
+          @include mixins.heading2;
+          color: variables.$sky120;
+          margin: 20px 0;
+        }
+
+        :global(h3, h4) {
+          @include mixins.heading3;
+          color: variables.$sky120;
+          margin: 20px 0;
+        }
+
+        :global(a) {
+          @include mixins.link2;
+        }
+
+        :global(p) {
+          @include mixins.body2;
+          margin: 20px 0 0 0;
+        }
+
+        :global(ul.correct-list) {
+          list-style: none;
+          @include mixins.body2;
+          margin: 20px 0 0 15px;
+        }
+
+        :global(ul.incorrect-list) {
+          list-style: none;
+          @include mixins.body2;
+          margin: 20px 0 0 15px;
+        }
+
+        :global(div.imgs-container) {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        :global(div.img-container) {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+
+          :global(img) {
+            background: conic-gradient(
+                #d0d0d0 90deg,
+                #efefef 90deg 180deg,
+                #d0d0d0 180deg 270deg,
+                #efefef 270deg,
+            );
+            background-repeat: repeat;
+            background-size: 40px 40px;
+            background-position: top left;
+            max-width: 90%;
+          }
+        }
+
+
+        :global(ul) {
+          @include mixins.body2;
+          margin: 20px 0 0 15px;
+        }
+
+        :global(hr) {
+          margin: 40px 0;
+          border: 0;
+          border-bottom: 1px dashed variables.$smoke30;
+        }
+      }
+    }
+
+    @media (max-width: 1000px) {
+      & {
+        &-container {
+          width: 80%;
+        }
+      }
+    }
+  }
+</style>
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <Breadcrumb />
+
+  <Bubbles />
+  <div class="brand-guidelines-content">
+    <article class="brand-guidelines-content-container">
+      <h1 class="gradient-title">{title}</h1>
+      <div class="brand-guidelines-body">
+        <slot />
+      </div>
+    </article>
+  </div>
+</BaseLayout>

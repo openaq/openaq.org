@@ -1,0 +1,10 @@
+---
+import { frontmatter, Content } from '@content/brand/guidelines.md';
+import BrandGuidelinesLayout from '@layouts/BrandGuidelinesLayout.astro';
+---
+
+
+<BrandGuidelinesLayout frontmatter={frontmatter} title={frontmatter.title}>
+    <Content />
+</BrandGuidelinesLayout>
+>
