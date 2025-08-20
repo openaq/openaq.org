@@ -1,7 +1,7 @@
 ---
 title: Student Learning
 url: https://openaq.org/about/use-cases/student-learning/
-tags: Community
+tags: ['Community']
 image: src/assets/images/student-learning.png
 featured: true
 ---
