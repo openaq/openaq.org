@@ -4,7 +4,7 @@ url: https://openaq.org/about/use-cases/student-learning/
 tags: 
     - Community
 image: src/assets/images/student-learning.png
-featured: true
+featured: false
 ---
 For many university students, accessing and working with data from OpenAQ serves as a real-world, hands-on learning experience that increases their data fluency and deepens their understanding of the air pollution crisis.
 
