@@ -1,7 +1,9 @@
 ---
 title: "Bloomberg DataDash"
 url: "https://openaq.org/use-cases/bloomberg-datadash/"
-tags: ["API", "Media"]
+tags: 
+    - API
+    - Media
 categories: ["developer"]
 image: "@assets/images/scoreboard.webp"
 featured: true

@@ -1,7 +1,8 @@
 ---
 title: Data for Communities
 url: https://openaq.org/about/use-cases/data-fpr-communities/
-tags: Community
+tags:
+    - Community
 image: src/assets/images/caoa.png
 featured: true
 ---

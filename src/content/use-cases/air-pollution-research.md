@@ -1,7 +1,8 @@
 ---
 title: Air Pollution Research
 url: https://openaq.org/about/use-cases/air-pollution-research/
-tags: API
+tags: 
+    - API
 image: src/assets/images/air-pollution-research.png
 featured: true
 ---

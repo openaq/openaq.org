@@ -1,7 +1,9 @@
 ---
 title: "Sh**t I Smoke!"
 url: "https://openaq.org/use-cases/shootismoke/"
-tags: ["API", "Health"]
+tags: 
+    - API
+    - Health
 categories: ["developer"]
 image: "@assets/images/sis.png"
 featured: false

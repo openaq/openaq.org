@@ -1,7 +1,8 @@
 ---
 title: Validating Satellite Data
 url: https://openaq.org/about/use-cases/validating-satellite-data/
-tags: API
+tags: 
+    - API
 image: src/assets/images/validating-satellite-data.png
 featured: true
 ---

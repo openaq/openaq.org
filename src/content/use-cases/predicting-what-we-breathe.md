@@ -1,7 +1,9 @@
 ---
 title: "Predicting What We Breathe"
 url: "https://openaq.org/use-cases/predicting-what-we-breathe/"
-tags: ["Health", "Community"]
+tags: 
+    - Health 
+    - Community
 categories: ["developer"]
 image: "@assets/images/pwwb-aq-la-city-website.png"
 featured: true

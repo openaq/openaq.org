@@ -1,7 +1,9 @@
 ---
 title: "AQAI"
 url: "https://openaq.org/use-cases/aqai/"
-tags: ["API", "Health"]
+tags: 
+    - API 
+    - Health
 categories: ["developer"]
 image: "@assets/images/aqai.png"
 featured: false

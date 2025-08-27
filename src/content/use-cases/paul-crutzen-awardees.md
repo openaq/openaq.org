@@ -1,7 +1,9 @@
 ---
 title: "Paul Crutzen Publication Awardees"
 url: "https://openaq.org/use-cases/paul-crutzen-awardees/"
-tags: ["API", "Community"]
+tags: 
+    - API
+    - Community
 image: "@assets/images/openaq-map.webp"
 featured: false
 ---
