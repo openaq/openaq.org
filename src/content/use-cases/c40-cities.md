@@ -6,7 +6,7 @@ tags:
 categories:
   - developer
 image: "@assets/images/pdi_medell_n_160927_0188.jpg"
-featured: true
+featured: false
 ---
 
 

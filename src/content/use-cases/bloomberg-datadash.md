@@ -6,7 +6,7 @@ tags:
     - Media
 categories: ["developer"]
 image: "@assets/images/scoreboard.webp"
-featured: true
+featured: false
 ---
 
 The Bloomberg Green scoreboard shows which cities have the unhealthiest air, using data from the OpenAQ platform.

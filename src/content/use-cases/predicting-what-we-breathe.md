@@ -6,7 +6,7 @@ tags:
     - Community
 categories: ["developer"]
 image: "@assets/images/pwwb-aq-la-city-website.png"
-featured: true
+featured: false
 ---
 
 Data from the OpenAQ platform informed the development of (and continue to feed) a highly accurate air pollution prediction model for Los Angeles County and beyond. The Predicting What We Breathe (PWWB) model provides hourly air quality predictions for six pollutants–PM2.5, ozone, CO, CO2, NO, and NO2–at a spatial resolution of 1 km2.
