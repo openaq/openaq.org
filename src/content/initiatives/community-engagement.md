@@ -6,9 +6,15 @@ Because data has value only if it is used, OpenAQ introduces potential new users
 
 We actively build relationships with people and organizations concerned about air quality, public health and climate change. Key stakeholders include community-based and other civil society organizations; governments and intergovernmental organizations; journalists and other communicators; educators; app developers and technology companies.
 
-We hold webinars on a variety of topics and workshops to help people in various sectors find the most impactful ways they can fight air inequality in their local community, for example:
+We hold webinars on a variety of topics and workshops to help people in various sectors find the most impactful ways they can fight air inequality in their local community.
+
+Examples of trainings and other recorded sessions in recent years include:
 
 ## **OpenAQ Explorer Training Sessions**
+
+**Global**
+
+* [General Training for the OpenAQ Explorer](<>)
 
 **Africa**
 
@@ -16,24 +22,20 @@ We hold webinars on a variety of topics and workshops to help people in various 
 * [Environmental Innovation Center, Kenya](https://youtu.be/gvojpTr_eeY)
 * [Addis Ababa University, Ethiopia](https://youtu.be/N917FHY9LRw)
 * [Kgotso Development Trust, Zimbabwe](https://youtu.be/CAk40VlzBj0)
-* [Air Quality Data Analytics and Machine Learning (ASAQ), Senegal (online)](https://youtu.be/lQYBgi5WGpw)
-* [African Engineering and Technology Network (AFRETEC), Lagos, Nigeria](https://www.youtube.com/watch?v=FPWpmkrbCRI)
+* [Air Quality Data Analytics and Machine Learning (ASAQ), Senegal](https://youtu.be/lQYBgi5WGpw)
+* [African Engineering and Technology Network (AFRETEC), Nigeria](https://www.youtube.com/watch?v=FPWpmkrbCRI)
 
 **Latin America**
 
-* [Sustenta Honduras](https://youtu.be/XsoPuv55QLU)
-* [Universidad Peruana de Ciencias Aplicadas (UPC)](https://youtu.be/8zRoWhloMA4?feature=shared)
+* [Sustenta Honduras, Honduras](https://youtu.be/XsoPuv55QLU)
+* [Universidad Peruana de Ciencias Aplicadas (UPC), Peru](https://youtu.be/8zRoWhloMA4?feature=shared)
 
 **Asia**
 
-* Air Sensors International Conference, Thailand
-* International Global Atmospheric Conference (IGAC), Malaysia
 * [University of Dhaka, Bangladesh](https://youtu.be/GBw7vGohSJI)
-* [Clean Air Catalyst Training for Jakarta and Indore Teams](https://youtu.be/NMIDJAcFMsU)
+* [Clean Air Catalyst Training for Jakarta and Indore Teams, Indonesia and India](https://youtu.be/NMIDJAcFMsU)
 
-**Global**
-
-* [General Training for the OpenAQ Explorer](https://youtu.be/bDMWCOwZUk8)
+[](https://youtu.be/bDMWCOwZUk8)
 
 ## **NASA Health and Air Quality Action Team (HAQAST)**
 
@@ -42,9 +44,9 @@ We hold webinars on a variety of topics and workshops to help people in various 
 
 ## **Earth Science Information Partners (ESIP)**
 
-* [Air Quality Information: Innovations and Impacts (January 2024)](https://www.youtube.com/watch?v=nsandPI9vBA)
-* [Air Quality Session (July 2024)](https://youtu.be/uVzC2vmBtYE?feature=shared&t=2236)
-* [Using Open Data to Fight Air Inequality (January 2023)](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
+* [Air Quality Information: Innovations and Impacts](https://www.youtube.com/watch?v=nsandPI9vBA)
+* [Air Quality Session](https://youtu.be/uVzC2vmBtYE?feature=shared&t=2236)
+* [Using Open Data to Fight Air Inequality](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
 
 ## **Various forums**
 
