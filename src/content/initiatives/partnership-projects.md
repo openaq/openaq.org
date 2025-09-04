@@ -2,19 +2,24 @@
 title: Partnership Projects
 image: src/assets/images/edi-2-istock-1311300990-purchased-.jpg
 ---
-**CLEAN AIR COMPASS**
+# **CLEAN AIR COMPASS**
 
 OpenAQ is co-leading a collaborative, community-informed initiative to develop a customizable open-source data management system (DMS) for air quality measurement data. This easy-to-use DMS will be available as open-source code for any entity to tailor to their needs, helping to solve for the fact that current air quality monitoring efforts must either rely on proprietary systems or build their DMS from scratch. To ensure the DMS meets the needs of a wide range of organizations monitoring air quality, a community of practice representing different geographies and data expertise (COMPASS) is securing stakeholder feedback from around the world. Learn more at [Clean Air COMPASS](https://cleanaircompass.org/).
 
 
 
-**CLEAN AIR CATALYST** 
+# **CLEAN AIR CATALYST** 
 
 The [Clean Air Catalyst](https://www.cleanaircatalyst.org/) is a global partnership to accelerate clean air solutions by building understanding of pollution sources, designing locally tailored solutions, and creating strategic coalitions to enact long-lasting change. Three pilots led by local teams in Indore (India), Jakarta (Indonesia) and Nairobi (Kenya) are winding down in 2025, but air quality monitoring will continue, along with aggregation of the data by OpenAQ. Over the course of the partnership, OpenAQ enhanced the capacity of the pilot cities to use the data effectively and helped organize workshops on source awareness and data collection in Indore and Jakarta. 
 
 
 
-**PREDICTING WHAT WE BREATHE**
+# **EPIC AIR QUALITY FUND**
+
+This ambitious project aims to expand access to air quality data to 1 billion people by 2030. Run by the Energy Policy Institute at the University of Chicago (EPIC), the [EPIC Air Quality Fund](<>) is supporting local organizations in installing monitors in communities that could benefit the most – communities located in countries where pollution levels are very high, there is little to no monitoring and little to no data sharing, and opportunities exist to effect national-level policy changes and pollution reductions. OpenAQ is aggregating data from the awardees’ projects, making it findable to a global audience so as to maximize the impact of the data. We are also amplifying the projects and building tools to help gauge impact.
+
+
+# **PREDICTING WHAT WE BREATHE**
 
 OpenAQ has partnered with the City of Los Angeles and California State University Los Angeles  on two NASA-funded projects and is now supporting a third NASA-funded project. OpenAQ assists the team with data aggregation and normalization as well as workshop development and execution.
 
