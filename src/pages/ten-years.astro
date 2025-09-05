@@ -1,0 +1,621 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Bubbles from '@components/Bubbles.astro';
+import Image from 'astro/components/Image.astro';
+
+import OpenAQCountriesPng from '@assets/images/openaq-countries.png';
+import LMICountriesPng from '@assets/images/lmic_map.png';
+import Candid from '@assets/images/candid.png';
+import CharityNavigator from '@assets/images/charity-navigator.png';
+import LocationsMap from '@assets/images/locations_map.png';
+
+import BreakingNewsIcon from '@assets/svg/breaking_news.svg';
+import LabIcon from '@assets/svg/lab.svg';
+---
+
+<style lang="scss">
+  @use 'openaq-design-system/scss/bubbles';
+  @use 'openaq-design-system/scss/variables';
+
+  * {
+    box-sizing: border-box;
+  }
+
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .ten-years {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-container {
+      margin: 40px 0;
+      width: 1000px;
+    }
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 8px 1fr;
+    column-gap: 20px;
+    padding: 40px 40px;
+    margin: 40px 0;
+    position: relative;
+    max-width: 1000px;
+    background: linear-gradient(
+      0deg,
+      #eef7ff 0%,
+      #b3d9ff 29%,
+      #eef7ff 50%,
+      #b3d9ff 70%,
+      #eef7ff 100%
+    );
+    border-radius: 42px;
+    box-shadow: inset 0px 0px 20px 20px #ffffff;
+  }
+  .event {
+    background-color: white;
+    text-wrap: pretty;
+    border-radius: 22px;
+    padding: 20px 40px;
+    margin: 20px 20px;
+    position: relative;
+    border: 4px solid variables.$sky10;
+
+    &:nth-child(even) {
+      justify-self: end;
+      align-self: center;
+      &:before {
+        content: ' ';
+        display: block;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 0;
+        left: -30px;
+        position: absolute;
+        z-index: 1;
+        border: medium solid white;
+        border-width: 10px 30px 10px 0;
+        border-color: transparent white transparent transparent;
+      }
+    }
+
+    &:nth-child(odd) {
+      justify-self: start;
+      align-self: center;
+      &:before {
+        content: ' ';
+        display: block;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 0;
+        position: absolute;
+        z-index: 1;
+        right: -30px;
+        border: medium solid white;
+        border-width: 10px 0 10px 30px;
+        border-color: transparent transparent transparent white;
+      }
+    }
+  }
+
+  .timeline-point {
+    background-color: white;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: -8px;
+      top: calc(50% - 12.5px);
+      width: 25px;
+      height: 25px;
+      background-color: variables.$lavender20;
+      border: 4px solid variables.$lavender100;
+      border-radius: 50%;
+      z-index: 1;
+    }
+  }
+
+  .event-date {
+    color: variables.$smoke120;
+    font-size: 24px;
+    font-weight: bold;
+
+    &:nth-child(even) {
+      justify-self: end;
+      align-self: center;
+    }
+
+    &:nth-child(odd) {
+      justify-self: start;
+      align-self: center;
+    }
+  }
+
+  .testimonials-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 40px;
+  }
+
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: white;
+    border-radius: 22px;
+    border: 8px solid variables.$ocean10;
+    padding: 40px 20px;
+    &:nth-child(4n-3),
+    &:nth-child(4n) {
+      grid-column: span 3;
+    }
+
+    &:nth-child(4n-2),
+    &:nth-child(4n-1) {
+      grid-column: span 1;
+    }
+
+    &__content {
+      font-size: 18px;
+    }
+
+    &__signature {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  .by-the-numbers {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .number-highlight {
+    color: variables.$sky120;
+    font-weight: bold;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: black 1px solid;
+    border-radius: 22px;
+    padding: 20px;
+    width: 66%;
+    margin: 20px 0;
+
+    &__body {
+      font-size: 18px;
+      flex: 1;
+    }
+
+    &__graphic {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+    }
+
+    &:nth-child(odd) {
+      align-self: start;
+    }
+
+    &:nth-child(even) {
+      align-self: end;
+    }
+  }
+</style>
+<BaseLayout>
+  <div class="ten-years">
+    <Bubbles />
+    <div class="ten-years-container">
+      <h1 class="gradient-title">Celebrating 10 years of OpenAQ</h1>
+      <section>
+        <p>
+          OpenAQ was the first to aggregate disparate ground-level ambient air
+          quality data on a centralized open-source platform, making the data
+          findable, accessible, interoperable, and reusable. We started
+          aggregating real-time and historical data from reference-grade
+          government monitors in 2015 and began aggregating data from air
+          sensors in 2021. Data on OpenAQ <a href="https://openaq.org/about/use-cases/">are used</a> to inform science and enable
+          research; to raise awareness and understanding; to spur, form,
+          analyze, assess and enforce solutions; to predict and forecast; to
+          educate; and more! <span class="bold">The OpenAQ platform remains the largest
+          open-source, open-access air quality data platform in the world</span> with over 2 billion data points from 20,700 locations in 134 countries as of September 2025! 
+        </p>
+        <p>
+          September 9, 2025 marks OpenAQ’s tenth anniversary. As we celebrate
+          this momentous milestone, we thank everyone who has and is helping us
+          achieve our vision of a world where everyone breathes healthy air,
+          enabled by universal access to data. As we look back and as we look
+          forward, we recognize YOU as the driving force behind our work.
+        </p>
+      </section>
+      <section>
+        <h1 class="type-heading-1">Organizational Milestones</h1>
+        <div class="timeline-container">
+          <div class="timeline">
+            <div class="event">
+              <div class="event__content">
+                Christa Hasenkopf and Joe Flasher <a
+                  href="https://openaq.medium.com/the-openaq-origin-story-31e0ce904529"
+                  >founded OpenAQ</a
+                > and began aggregating reference monitor data. By November, OpenAQ
+                had aggregated its 1 millionth datapoint. Our <a
+                  href="https://openaq.medium.com/the-ub-openaq-workshop-results-5e9a9829660c"
+                  >first workshop–held in Ulaanbaaatar, Mongolia</a
+                >–generated ideas for how air quality data could be used for
+                education, public notifications, and scientist/journalist
+                exchanges.
+              </div>
+            </div>
+            <div class="timeline-point"></div>
+            <div class="event-date">2015</div>
+            <div class="event-date">2016</div>
+            <div class="timeline-point"></div>
+
+            <div class="event">
+              <div class="event__content">
+                Finding and adding data to the platform was an entirely
+                volunteer effort during OpenAQ’s first couple of years. In
+                addition, community members built API wrappers and other tools
+                to help users with data ingestion, analysis and visualization.
+                OpenAQ’s second <a
+                  href="https://openaq.medium.com/delhi-openaq-workshop-info-materials-and-results-2bd74b88bee6#.e15az0o0m"
+                  >workshop in Delhi, India</a
+                > demonstrated how convening professionals across sectors sparks
+                creative, impactful uses of data to address air inequality. We organized
+                our first hackathon in Washington, DC and began building relationships
+                with data practitioners via conferences and presentations. An Echoing
+                Green Fellowship supported scaling, and we worked with companies
+                like Development Seed to expand OpenAQ’s underlying technical infrastructure
+                to meet new data demands.
+              </div>
+            </div>
+            <div class="event">
+              <div class="event__content">
+                The US Environmental Protection Agency and European
+                Environmental Agency improved their data-sharing systems after
+                users of OpenAQ noticed discrepancies. Participants in OpenAQ’s <a
+                  href="https://docs.google.com/document/d/1FG3rCb-ZGP1cP8ercyvfTCglXutSWglfWwWLj9W5QeY/edit?usp=sharing"
+                  >Sarajevo, Bosnia workshop</a
+                > presented a <a
+                  href="https://openaq.medium.com/openaq-community-members-influencing-policy-in-bosnia-317d509d46f"
+                  >Community Statement</a
+                > to the Bosnian Parliament and launched an air quality research
+                project to pinpoint policy-relevant air pollution sources. OpenAQ
+                was among seven finalists for the US National Institute of Health
+                and Wellcome Trust’s <a
+                  href="https://adigaskell.org/2017/05/26/open-science-prize-winner-announced/"
+                  >Open Science Prize</a
+                > and six finalists for the <a
+                  href="https://openaq.medium.com/openaq-community-honored-at-buckminster-fuller-challenge-celebration-8e2455068751"
+                  >Buckminster Fuller Challenge</a
+                >.
+              </div>
+            </div>
+            <div class="timeline-point"></div>
+            <div class="event-date">2017</div>
+            <div class="event-date">2018</div>
+            <div class="timeline-point"></div>
+            <div class="event">
+              <div class="event__content">
+                OpenAQ became a U.S. 501(c)(3) nonprofit organization, guided by
+                a volunteer Board of Directors. Participants in OpenAQ’s <a
+                  href="https://openaq.medium.com/accra-openaq-workshop-info-materials-results-press-and-data-use-cases-bf0efd0f72be"
+                  >Accra, Ghana workshop</a
+                > developed and delivered to decision-makers a community statement
+                on air quality. OpenAQ’s <a
+                  href="https://openaq.medium.com/nairobi-openaq-workshop-info-materials-results-press-and-data-use-cases-b14c2cc97ad8"
+                  >Nairobi, Kenya workshop</a
+                > resulted in a <a
+                  href="%20https://www.scielo.org.za/scielo.php?script=sci_arttext&pid=S2410-972X2018000200012&lng=en&nrm=iso&tlng=en"
+                  >call for action</a
+                > in Africa’s premiere clean air journal. OpenAQ began partnering
+                on data-related projects with major organizations such as Environmental
+                Defense Fund, Vital Strategies, and World Resources Institute.
+              </div>
+            </div>
+            <div class="event">
+              <div class="event__content">
+                Participants in the OpenAQ <a
+                  href="https://drive.google.com/file/d/1JXRW1kmEJJib1sR4zR3E4RMxAj7SIkJZ/view?usp=sharing"
+                  >Pristina, Kosovo workshop</a
+                > developed a Challenge Statement to drive post-workshop action.
+                OpenAQ launched an <a
+                  href="https://openaq.medium.com/announcing-the-inaugural-openaq-advisory-board-d4e8ebf4d83a"
+                  >Advisory Board</a
+                >. OpenAQ was chosen for the <a
+                  href="https://www.ffwd.org/accelerator"
+                  >Fast Forward Accelerator</a
+                >
+                program, won a <a
+                  href="https://www.nytimes.com/2019/12/30/technology/the-2019-good-tech-awards.html"
+                  >New York Times Good Tech Award</a
+                >, and was among top five finalists for the
+                <a
+                  href="https://www.ioes.ucla.edu/pritzker-genius/previous-candidates/"
+                  >Pritzker Emerging Environmental Genius Award</a
+                >.
+              </div>
+            </div>
+            <div class="timeline-point"></div>
+            <div class="event-date">2019</div>
+            <div class="event-date">2020</div>
+            <div class="timeline-point"></div>
+            <div class="event">
+              <div class="event__content">
+                OpenAQ released its first global assessment of whether and how
+                national governments are producing and sharing air quality data
+                with the public. (See <a
+                  href="https://openaq.org/about/initiatives/publications/"
+                  >Publications</a
+                >
+                for these biennial assessments.) Given the pandemic, OpenAQ shifted
+                to virtual outreach and engagement.
+              </div>
+            </div>
+            <div class="event">
+              <div class="event__content">
+                Through partnerships, OpenAQ added our first air sensor data to
+                the platform. We piloted our unique air quality training program
+                for emerging air quality leaders in low- and middle-income
+                countries, the <a
+                  href="https://ambassadors.openaq.org/cohorts/2021"
+                  >OpenAQ Clean Air Community Ambassadors program</a
+                >, launching it as an annual program in 2023. We began
+                participating in new multiyear partnership projects, including
+                the <a href="https://www.cleanaircatalyst.org/"
+                  >Clean Air Catalyst</a
+                > and <a href="https://airquality.lacity.gov/"
+                  >Predicting What We Breathe</a
+                >.
+              </div>
+            </div>
+            <div class="timeline-point"></div>
+            <div class="event-date">2021</div>
+            <div class="event-date">2022</div>
+            <div class="timeline-point"></div>
+            <div class="event">
+              <div class="event__content">
+                Major (and ongoing) improvements to the platform increased its
+                stability, reliability and resilience, along with continual
+                improvements to documentation to ensure users know how to work
+                efficiently with data on OpenAQ. We joined <a
+                  href="https://www.esipfed.org/"
+                  >Earth Science Information Partners (ESIP)</a
+                >, serving in multiple collaboration areas since then, and
+                endorsed the <a href="https://opendatacharter.org/"
+                  >Open Data Charter</a
+                >.
+              </div>
+            </div>
+            <div class="event">
+              <div class="event__content">
+                OpenAQ released <a href="https://explore.openaq.org"
+                  >OpenAQ Explorer</a
+                > and an in-house <a href="https://python.openaq.org/"
+                  >Python SDK</a
+                >. With added capacity, we increased community engagement
+                significantly and have held steady since then, including hosting <a
+                  href="https://openaq.org/about/initiatives/community-engagement/"
+                  >trainings and webinars</a
+                >; speaking at forums and moderating panels; and participating
+                in, organizing and presenting at conferences. As one example of
+                how OpenAQ supports policy, we informed a <a
+                  href="https://www.gao.gov/assets/d24106393.pdf"
+                  >US Government Accountability Office technology assessment of
+                  low-cost sensors</a
+                >.
+              </div>
+            </div>
+            <div class="timeline-point"></div>
+            <div class="event-date">2023</div>
+            <div class="event-date">2024</div>
+            <div class="timeline-point"></div>
+            <div class="event">
+              <div class="event__content">
+                OpenAQ launched the <a href="https://aqihub.info/">AQI Hub</a>,
+                a first-of-its-kind website that demystifies the opaque nature
+                of Air Quality Indexes across the world. The addition of a <a
+                  href="https://openaq.medium.com/do-you-want-to-track-specific-locations-on-openaq-weve-got-the-tool-for-you-498c55ebbf75"
+                  >lists tool</a
+                > to OpenAQ Explorer enables users to track specific locations. OpenAQ
+                began participating in the UN <a
+                  href="https://www.ccacoalition.org/"
+                  >Climate and Clean Air Coalition</a
+                >, contributing to their <a href="https://aqmx.org/"
+                  >Air Quality Management Exchange Platform</a
+                >. We won a <a
+                  href="https://www.globaltechaward.com/techbytes/detail/winners-spotlight-openaq"
+                  >Global Tech Award</a
+                > in the NonProfitTech category.
+              </div>
+            </div>
+            <div class="event">
+              <div class="event__content">
+                <a href="https://openaq.org/partners/">Eight companies</a> now facilitate
+                data sharing with OpenAQ, and we are aggregating data from the first
+                projects funded by the <a
+                  href="https://aqfund.epic.uchicago.edu/"
+                  >EPIC Air Quality Fund</a
+                >. We launched <a href="https://docs.openaq.org/about/about"
+                  >v3.0 of the OpenAQ API</a
+                >
+                and an <a href="https://openaq.github.io/openaq-r/">R client</a
+                >. OpenAQ began co-leading <a
+                  href="https://cleanaircompass.org/">Clean Air COMPASS</a
+                >, a project to develop an open-source air quality data
+                management system. We became a UNICEF Children’s Environmental
+                Health Collaborative <a
+                  href="https://ceh.unicef.org/about/partners/openaq">partner</a
+                >.
+              </div>
+            </div>
+            <div class="timeline-point"></div>
+            <div class="event-date">2025</div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h1 class="type-heading-1">Platform Growth</h1>
+        <p>
+          The OpenAQ platform is continuously growing, with over 2 billion data
+          points from 20,700 locations in 134 countries as of September 2025!
+        </p>
+        <div class="by-the-numbers">
+          <div class="card">
+            <div class="card__body">
+              <span class="number-highlight">20,700</span> total locations from which
+              data is aggregated
+            </div>
+                        <div class="card__graphic">
+              <Image
+                src={LocationsMap}
+                width={400}
+                alt="Map of the world showing all locations on OpenAQ filled in purple."
+              />
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__body">
+              <span class="number-highlight">14</span> average new scientific and
+              media uses each month
+            </div>
+            <div class="card__graphic">
+              <BreakingNewsIcon fill="#33a3a1" width={192} height={192} />
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__body">
+              <span class="number-highlight">134</span>
+              Countries from which OpenAQ is aggregating data
+            </div>
+            <div class="card__graphic">
+              <Image
+                src={OpenAQCountriesPng}
+                width={400}
+                alt="Map of the world showing all the countries covered by data on OpenAQ filled in purple."
+              />
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__body">
+              <span class="number-highlight">553</span> scientific and technical
+              publications and proceedings citing use of OpenAQ since our inception
+            </div>
+            <div class="card__graphic">
+              <LabIcon fill="#1e64ab" width={192} height={192} />
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__body">
+              <span class="number-highlight">2,043</span> locations in low- and middle-income
+              countries
+            </div>
+            <div class="card__graphic">
+              <Image
+                src={LMICountriesPng}
+                width={400}
+                alt="Map of the world showing all theLMIC countries covered by data on OpenAQ filled in purple."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h1 class="type-heading-1">Looking forward</h1>
+        <p>
+          OpenAQ is committed to making air quality data universally accessible
+          and to strategically increasing the amount and types of air quality
+          data that go into the platform.
+        </p>
+        <p>
+          See our technical roadmap <a
+            href="https://openaq.org/developers/roadmap/">here</a
+          > and be on the lookout for the release of our new 3-year strategic direction
+          later this year.
+        </p>
+      </section>
+      <section>
+        <h1 class="type-heading-1">Support us</h1>
+        <p>
+          By providing universal access to air quality data, OpenAQ empowers a
+          global community of changemakers to solve air inequality. Having you
+          as a partner in this mission will allow us to sustain and expand the
+          platform, provide tools and training to facilitate successful use, and
+          increase data fluency among emerging air quality leaders in some of
+          the most polluted regions on the planet. With your support, OpenAQ can
+          continue to provide essential infrastructure for one of the most
+          critical challenges of our time.
+
+          <ul>
+            <li>
+              Make a donation <a
+                href="https://secure.givelively.org/donate/openaq-inc/">here</a
+              >.
+            </li>
+            <li>
+              Learn about sponsorship opportunities <a
+                href="https://openaq.org/about/sponsor/">here</a
+              >.
+            </li>
+          </ul>
+
+          OpenAQ has earned the highest ratings for transparency,
+          cost-effectiveness and overall organizational health.
+
+        </p>
+
+        <div style="display: flex; gap: 40px; margin: 40px 0;">
+          <Image src={CharityNavigator} width={128} alt="Charity Navigator logo"/>
+          <Image src={Candid} width={128} alt="Candid logo"/> 
+        </div>
+      </section>
+      <section>
+        <h1 class="type-heading-1">Thank You for 10 Amazing Years! 🎉🎉</h1>
+        <div>
+          <p>
+            <b>Thank you</b> to everyone who uses data on OpenAQ. Your efforts are
+            solving air inequality.
+          </p>
+          <p>
+            <b>Thank you</b> to every institution and individual who shares their
+            air quality data with the world via OpenAQ. Your commitment to open data
+            enables folks across all sectors to be part of the solution through data-driven
+            analyses, communications and mitigation strategies.
+          </p>
+          <p>
+            <b>Thank you</b> to our founders, everyone who has served on our governing
+            board and advisory board, our interns and volunteers, and individuals
+            who have made financial contributions to OpenAQ.
+          </p>
+          <p>
+            <b>Thank you</b> to the foundations, corporations and institutions that
+            have provided financial or in-kind support, including Actions@EBMF, AirGradient,
+            ATMO, AWS, Bloomberg Philanthropies, Burr Forman LLP, Change Happens
+            Foundation, Clarity, Clean Air Fund, ClimateWorks, Deloitte Health Equity
+            Initiative, Development Seed, Earth Journalism Network, Echoing Green,
+            Environmental Defense Fund, Energy Policy Institute at the University
+            of Chicago, Ernst & Young, Fast Forward, Forschungszentrum Jülich, Geocode
+            Earth, George Mason University, GitHub, Godley Family Foundation, HPE
+            Foundation Accelerating Impact Campaign, Keen IO, Millennium Challenge
+            Corporation, NASA, Nesta, Okta, Open Science Prize, PagerDuty, Paul Hastings
+            LLP, Radiant Earth, Ropes & Gray LLP, Splunk/Cisco, Twilio, Up Here Media,
+            USAID, US Paycheck Protection Program, Vital Strategies, World Bank Group
+            and World Resources Institute.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
