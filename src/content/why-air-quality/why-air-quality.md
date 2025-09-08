@@ -1,7 +1,6 @@
 ---
-title: "Why air quality?"
+title: Why air quality?
 ---
-
 Air pollution is the 2nd leading risk factor for death and the leading environmental contributor to death worldwide, contributing to more than 8 million deaths in 2021 [^1]. Up to 99% of us are breathing polluted air [^2], cutting lives short by an average of 1.9 years across the globe [^3].
 
 Air pollution impacts our health in many ways, starting when we’re in the womb. Air pollution impacts practically every organ in the body and is associated with acute and chronic cardiovasculatory and respiratory illnesses, as well as increased incidence of lung cancer, diabetes, and poor birth outcomes. [^4]
@@ -14,13 +13,13 @@ Marginalized communities are also unfairly burdened. Not only is the air they br
 
 Addressing air pollution has many benefits above and beyond better health.
 
-- **A more stable climate**: Several pollutants both harm health directly and warm the planet. And because fossil fuels are not only the major source of greenhouse gases, but also a primary source of air pollution, reducing fossil fuel consumption is a win-win proposition.
-- **Improved food security**: Cleaner air improves crop yields.
-- **Healthier ecosystems, plants, and animals**: Air pollutants contaminate not only air, but also water and soil. Reducing air pollution therefore supports ecosystems broadly, allowing them to perform services that support all living beings.
-- **Greater social equity**: Reducing air pollution has even greater positive impacts for people who are disadvantaged socioeconomically and/or are disproportionately exposed.
-- **Stronger economies**: Cleaner air results in a healthier, longer-lived workforce.
-- **Clearer views**: Smog reduces visibility.
-- **Preservation of culturally significant buildings and monuments**: Certain air pollutants form acid rain that not only harms living beings, but also degrades certain building materials.
+* **A more stable climate**: Several pollutants both harm health directly and warm the planet. And because fossil fuels are not only the major source of greenhouse gases, but also a primary source of air pollution, reducing fossil fuel consumption is a win-win proposition.
+* **Improved food security**: Cleaner air improves crop yields.
+* **Healthier ecosystems, plants, and animals**: Air pollutants contaminate not only air, but also water and soil. Reducing air pollution therefore supports ecosystems broadly, allowing them to perform services that support all living beings.
+* **Greater social equity**: Reducing air pollution has even greater positive impacts for people who are disadvantaged socioeconomically and/or are disproportionately exposed.
+* **Stronger economies**: Cleaner air results in a healthier, longer-lived workforce.
+* **Clearer views**: Smog reduces visibility.
+* **Preservation of culturally significant buildings and monuments**: Certain air pollutants form acid rain that not only harms living beings, but also degrades certain building materials.
 
 ## Air Quality Data
 
@@ -39,6 +38,10 @@ Anyone can use the OpenAQ platform for free to find out what air quality data mo
 Likewise, anyone can use the data platform or the [OpenAQ Explorer Tool](https://explore.openaq.org/) for analysis, from basic interpretations to in-depth analyses using the API.
 
 For organizations deploying air quality monitors, OpenAQ can ingest and share the data from these projects on the OpenAQ platform to ensure data is broadly accessible.
+
+## Learn More
+
+Check out the UN's [24 Frequently Asked Questions about air pollution](https://www.cleanairblueskies.org/did-you-know/frequently-asked-questions-air-pollution).
 
 **References**
 
