@@ -212,6 +212,47 @@ import LabIcon from '@assets/svg/lab.svg';
       align-self: end;
     }
   }
+
+
+  @media (max-width: 1000px) {
+      .ten-years {
+              margin: 0 15px;
+
+    &-container {
+      margin: 40px 0;
+      width: 100%;
+    }
+  }
+
+  .timeline-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .timeline {
+    width: 95%;
+    padding: 40px 10px;
+        box-shadow: inset 0px 0px 2px 10px #ffffff;
+
+  }
+
+    .event {
+    padding: 20px 5px;
+    margin: 20px 5px;
+    }
+
+      .card {
+    width: 90%;
+
+        &:nth-child(odd) {
+      align-self: center;
+    }
+
+    &:nth-child(even) {
+      align-self: center;
+    }
+      }
+  }
 </style>
 <BaseLayout>
   <div class="ten-years">
