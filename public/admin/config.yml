@@ -120,6 +120,7 @@ collections:
     format: "yaml-frontmatter"
     create: true
     slug: "{{slug}}"
+    identifier_field: name
     editor:
       preview: true
     fields:
