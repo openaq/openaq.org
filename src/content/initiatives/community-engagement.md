@@ -48,6 +48,11 @@ Examples of trainings and other recorded sessions in recent years include:
 * [Air Quality Session](https://youtu.be/uVzC2vmBtYE?feature=shared&t=2236)
 * [Using Open Data to Fight Air Inequality](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
 
+## **csv,conf**
+
+* [csv,conf,v7 conference](https://www.youtube.com/watch?v=nUBiiNEkXuE)
+* [csv,conf,v9 conference](https://www.youtube.com/watch?v=-A2MZkXLcmg)[](https://www.youtube.com/watch?v=nUBiiNEkXuE)[](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
+
 ## **Various forums**
 
 * [World Health Organization Forum: Air Quality Monitoring Networks and Low-Cost Sensors](https://youtu.be/nIQVeVlE2qU?feature=shared&t=2688)
@@ -55,4 +60,3 @@ Examples of trainings and other recorded sessions in recent years include:
 * [Perry Weather](https://perryweather.com/resources/understanding-air-quality-webinar/)[](<>)
 * [National Center for Atmospheric Research - Atmospheric Chemistry Observations and Modeling (NCAR ACOM) Seminar Series](https://www.youtube.com/watch?v=t0Scl9kE_1g)
 * [Citizens' Climate Lobby Health Action Team](https://www.youtube.com/watch?v=Li3YQkDK3bg)
-* [csv,conf,v7 conference](https://www.youtube.com/watch?v=nUBiiNEkXuE)[](https://www.youtube.com/watch?v=nUBiiNEkXuE)[](https://www.youtube.com/watch?v=Eh1itk7vSgM&list=PL8X9E6I5_i8gA_VHWtcLa8qXknTyO_o7v&index=20)
