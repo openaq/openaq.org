@@ -47,7 +47,7 @@ const sortByName = (
           .sort(sortByName)
           .map((usecase) => (
             <UseCaseCard
-              name={usecase.data.title}
+              title={usecase.data.title}
               image={usecase.data.image}
               body={usecase.body}
               url={`/about/use-cases/${usecase.id}`}

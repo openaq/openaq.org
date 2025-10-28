@@ -68,13 +68,16 @@ const summary = (content: string, length = 300): string => {
       src={image}
       width={300}
       alt=""
+      aria-labelledby="use-case-description-title"
     />
   </a>
 
   <div class="use-case-card__body">
     <a href={url}>
-      <h2 class="use-case-description__title">{title}</h2>
-      <div class="use-case-description">{summary(body)} read more...</div>
+      <h2 class="use-case-description__title" id="use-case-description-title">{title}</h2>
+      <div class="use-case-description">{summary(body)} 
+        <span class="type-link-1">read more...</span>
+      </div>
     </a>
   </div>
   {
