@@ -130,6 +130,23 @@ import Logo from "@assets/logo.svg";
     }
   }
 
+  .dropdown {
+    a:focus-visible ~ .submenu {
+      background-color: white;
+      visibility: visible;
+      opacity: 1;
+      z-index: 1000;
+      display: block;
+      border: 1px solid #eaecf0;
+      border-radius: 12px;
+
+      &__item > a {
+        visibility: visible;
+        display: block;
+      }
+    }
+  }
+
   @media (max-width: 1000px) {
     $header-height: 60px;
 
