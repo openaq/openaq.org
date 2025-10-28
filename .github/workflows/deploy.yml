@@ -24,8 +24,6 @@ jobs:
 
     - name: Build static site
       run: npm run build
-      env:
-        SITE: https://openaq.org
     
     - uses: jakejarvis/s3-sync-action@master
       with:

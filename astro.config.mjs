@@ -12,8 +12,6 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkModifiedTime],
   },
-
-  site: "http://localhost:4321",
-
+  site: "https://openaq.org",
   integrations: [purgecss()],
 });
