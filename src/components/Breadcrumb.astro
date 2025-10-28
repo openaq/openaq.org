@@ -38,7 +38,9 @@ const breadcrumbs = urlPathToObject(pathname);
     .breadcrumb {
         display: flex;
         align-items: center;
-        
+        margin: 1em 0;
+        padding-inline-start: 40px;
+
         a {
             text-transform: capitalize;
         }
@@ -46,7 +48,7 @@ const breadcrumbs = urlPathToObject(pathname);
 
 </style>
 
-<ol class="breadcrumb">
-    <a href="/"><HomeIcon width={24} fill="#34a3a1"/></a>
-    {Object.entries(breadcrumbs).map(([path, name]) => <ChevronRight width={24} fill="#7e8c9a"/> <a class={`type-body-3 ${path === Object.keys(breadcrumbs).pop() ? "text-sky-120" : ""}`} href={`/${path}`}>{name}</a> )}
-</ol>
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/"><HomeIcon width={24} fill="#34a3a1" role="img" aria-label="Home" /></a>
+    {Object.entries(breadcrumbs).map(([path, name]) => <ChevronRight width={24} fill="#7e8c9a" aria-hidden="true" /> <a class={`type-body-3 ${path === Object.keys(breadcrumbs).pop() ? "text-sky-120" : ""}`} href={`/${path}`}>{name}</a> )}
+</nav>
