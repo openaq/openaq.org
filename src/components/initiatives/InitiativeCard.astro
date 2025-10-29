@@ -10,7 +10,7 @@ const summary = (content: string, length = 300): string => {
     useImgAltText: false,
   });
   if (cleanText.length <= length) return cleanText;
-  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + "...";
 };
 ---
 
@@ -59,6 +59,10 @@ const summary = (content: string, length = 300): string => {
           color: variables.$smoke120;
         }
       }
+      
+      .initiative-description__body > p {
+        padding-bottom: 10px;
+      }
 
       .initiative-tags {
         padding: 10px 20px;
@@ -85,8 +89,8 @@ const summary = (content: string, length = 300): string => {
     <div class="initiative-description__body">
       <p>
         {summary(body)}
-        <a href={url}>read more..</a>
       </p>
+      <a href={url}>Read more about {title}</a>
     </div>
   </div>
 </article>
