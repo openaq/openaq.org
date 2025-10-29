@@ -59,7 +59,7 @@ const summary = (content: string, length = 300): string => {
           color: variables.$smoke120;
         }
       }
-      
+
       .initiative-description__body > p {
         padding-bottom: 10px;
       }
@@ -71,10 +71,20 @@ const summary = (content: string, length = 300): string => {
       }
     }
   }
+  
+  .initiative-card {
+    position: relative;
+  }
+
+  .initiative-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
 </style>
-<article class="initiative-card">
+<li class="initiative-card">
   <div class="initiative-card-img">
-    <a href={url}>
+    <div>
       <Image
         class="initiative-card-image"
         src={image}
@@ -82,10 +92,12 @@ const summary = (content: string, length = 300): string => {
         width={252}
         alt={title}
       />
-    </a>
+    </div>
   </div>
   <div class="initiative-description">
-    <h2 class="initiative-description__title">{title}</h2>
+    <a href={url} class="initiative-link">
+      <h2 class="initiative-description__title">{title}</h2>
+    </a>
     <div class="initiative-description__body">
       <p>
         {summary(body)}
@@ -93,4 +105,4 @@ const summary = (content: string, length = 300): string => {
       <a href={url}>Read more about {title}</a>
     </div>
   </div>
-</article>
+</li>
