@@ -265,9 +265,9 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
   </section>
 
   <section class="use-cases-section">
-    <div class="featured-use-cases">
+    <ul class="featured-use-cases">
       {featuredUseCases.map(useCase => <UseCaseCard {...useCase.data} body={useCase.body} />)} 
-    </div>
+    </ul>
   </section>
 
   <section class="technology-section">
