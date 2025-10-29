@@ -81,6 +81,12 @@ const summary = (content: string, length = 300): string => {
     position: absolute;
     inset: 0;
   }
+
+  .initiative-link:hover::after {
+	overflow: hidden;
+	border-radius: 22px;
+	@include mixins.box-shadow;
+  }
 </style>
 <li class="initiative-card">
   <div class="initiative-card-img">
