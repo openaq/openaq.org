@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import removeMarkdown from "remove-markdown";
+import ChevronRight from '@assets/svg/chevron_right.svg'
 
 const { title, image, url, body } = Astro.props;
 
@@ -54,14 +55,12 @@ const summary = (content: string, length = 300): string => {
           color: variables.$smoke120;
         }
         
-        a {
-          @include mixins.link1;
+        span {
           color: variables.$smoke120;
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
         }
-      }
-
-      .initiative-description__body > p {
-        padding-bottom: 10px;
       }
 
       .initiative-tags {
@@ -108,7 +107,10 @@ const summary = (content: string, length = 300): string => {
       <p>
         {summary(body)}
       </p>
-      <a href={url}>Read more about {title}</a>
+      <span class="type-link-1">
+        Read more about {title}
+        <ChevronRight width={24} fill="#5a6672" aria-hidden="true" />
+      </span>
     </div>
   </div>
 </li>
