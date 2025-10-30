@@ -83,6 +83,14 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           input {
             width: 180px;
           }
+
+          label > span {
+            @include body4(#fff);
+          }
+
+          button {
+            margin-top: 16px;
+          }
         }
       }
     }
@@ -182,6 +190,11 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
               input {
                 width: 300px;
               }
+
+              label {
+                display: flex;
+                flex-direction: column;
+              }
             }
 
             .social-links {
@@ -222,32 +235,41 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
         target="_blank"
         novalidate
       >
-        <input
-          type="email"
-          name="EMAIL"
-          id="mce-EMAIL"
-          placeholder="Enter your email"
-          class="text-input"
-          required
-        />
+        <label for="mce-EMAIL">
+          <span>Email</span>
+          <input
+            type="email"
+            name="EMAIL"
+            id="mce-EMAIL"
+            placeholder="Enter your email"
+            class="text-input"
+            required
+          />
+        </label>
 
         <!-- First Name Field -->
-        <input
-          type="text"
-          name="FNAME"
-          id="mce-FNAME"
-          placeholder="First Name"
-          class="text-input"
-        />
+        <label for="mce-FNAME">
+          <span>First Name</span>
+          <input
+            type="text"
+            name="FNAME"
+            id="mce-FNAME"
+            placeholder="First Name"
+            class="text-input"
+          />
+        </label>
 
         <!-- Last Name Field -->
-        <input
-          type="text"
-          name="LNAME"
-          id="mce-LNAME"
-          placeholder="Last Name"
-          class="text-input"
-        />
+        <label for="mce-LNAME">
+          <span>Last name</span>
+          <input
+            type="text"
+            name="LNAME"
+            id="mce-LNAME"
+            placeholder="Last Name"
+            class="text-input"
+          />
+        </label>
 
         <button class="btn btn-primary js-footer-subscribe" type="submit">
           Subscribe
