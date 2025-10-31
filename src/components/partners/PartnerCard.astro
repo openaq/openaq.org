@@ -16,6 +16,7 @@ import { Image } from "astro:assets";
     border: 1px solid variables.$smoke10;
     border-radius: 22px;
     padding: 20px 0;
+    position: relative;
 
     &__img {
       display: flex;
@@ -29,12 +30,18 @@ import { Image } from "astro:assets";
         height: auto;
       }
     }
+
+    .partner-card-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
   }
 </style>
-<article class="partner-card">
+<li class="partner-card">
   <div class="partner-card__img">
-    <a href={url} target="_blank" rel="noopener noreferrer">
+    <a href={url} target="_blank" rel="noopener noreferrer" class="partner-card-link">
       <Image src={image} alt={title} />
     </a>
   </div>
-</article>
+</li>
