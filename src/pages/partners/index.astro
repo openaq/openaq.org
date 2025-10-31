@@ -53,6 +53,15 @@ const sortByName = (
     justify-content: center;
   }
 
+  .funders-section,
+  .air-sensors-section,
+  .corporate-sponsors-section,
+  .partners-section {
+    h2 {
+      align-self: start;
+    }
+  }
+
   .partners-grid,
   .partners-info-grid {
     margin-block-start: 40px;
@@ -63,7 +72,7 @@ const sortByName = (
 </style>
 <PageLayout pageTitle="Partners">
   <section class="air-sensors-section">
-    <h1 class="gradient-title">{frontmatter.airsensorsTitle}</h1>
+    <h2 class="gradient-title">{frontmatter.airsensorsTitle}</h2>
     <ul class="partners-grid">
       {
         allAirSensors
@@ -79,7 +88,7 @@ const sortByName = (
     </ul>
   </section>
   <section class="corporate-sponsors-section">
-    <h1 class="gradient-title">{frontmatter.corporateTitle}</h1>
+    <h2 class="gradient-title">{frontmatter.corporateTitle}</h2>
     <ul class="partners-grid">
       {
         allCorporates
@@ -96,7 +105,7 @@ const sortByName = (
   </section>
 
   <section class="partners-section">
-    <h1 class="gradient-title">{frontmatter.partnersTitle}</h1>
+    <h2 class="gradient-title">{frontmatter.partnersTitle}</h2>
     <ul class="partners-info-grid">
       {
         allPartners
@@ -113,7 +122,7 @@ const sortByName = (
     </ul>
   </section>
   <section class="funders-section">
-    <h1 class="gradient-title">{frontmatter.fundersTitle}</h1>
+    <h2 class="gradient-title">{frontmatter.fundersTitle}</h2>
     <ul class="partners-grid">
       {
         allFunders
