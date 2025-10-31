@@ -101,14 +101,15 @@ import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png'
         <a
           href="https://www.guidestar.org/profile/shared/49986605-4410-4ce1-b0cd-ab4bb5955075"
           target="_blank"
-          ><img
-            src="https://widgets.guidestar.org/TransparencySeal/9732592"
-          /></a
         >
+          <img
+            src="https://widgets.guidestar.org/TransparencySeal/9732592"
+            alt="Candid Platinum Transparency 2025"
+          />
+        </a>
         <a href="https://www.charitynavigator.org/ein/475324172" target="_blank">
           <Image src={fourStarRatingBadgeImage} alt="Charity Navigator four star rating badge" width="135" height="135"  />
-          </a
-        >
+        </a>
       </div>
       <div class="policies-section">
         <h2 class="policies-title">Terms of use and other policies</h2>
@@ -128,9 +129,11 @@ import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png'
       <div class="reporting-grid">
         <div class="reporting-item">
           <h2 class="reporting-item__title">{frontmatter.financialTitle}</h2>
-          <p class="reporting-item__description">
+          <label for="financial-downloads">
+            <p class="reporting-item__description">
             {frontmatter.financialDescription}
-          </p>
+            </p>
+          </label>
           <div class="download-section">
             <select
               name="financial-downloads"
@@ -167,9 +170,11 @@ import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png'
           <h2 class="reporting-item__title">
             {frontmatter.incorporationTitle}
           </h2>
-          <p class="reporting-item__description">
-            {frontmatter.incorporationDescription}
-          </p>
+          <label for="incorporation-download-select">
+            <p class="reporting-item__description">
+              {frontmatter.incorporationDescription}
+            </p>
+          </label>
           <div class="download-section">
             <select
               name="incorporation-download-select"
@@ -198,9 +203,11 @@ import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png'
 
         <div class="reporting-item">
           <h2 class="reporting-item__title">{frontmatter.policiesTitle}</h2>
-          <p class="reporting-item__description">
-            {frontmatter.policiesDescription}
-          </p>
+          <label for="policy-download-select">
+            <p class="reporting-item__description">
+              {frontmatter.policiesDescription}
+            </p>
+          </label>
           <div class="download-section">
             <select
               name="policy-download-select"
