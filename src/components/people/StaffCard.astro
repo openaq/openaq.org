@@ -19,13 +19,22 @@ const summary = (bio: string, length = 300): string => {
 
   @include person-card("team", variables.$sky100);
 
+  .team-card {
+    position: relative;
+  }
   .team-card:hover {
     @include mixins.box-shadow;
   }
+  .card-link::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+    z-index: 1;
+	}
 </style>
 
-<article class="team-card">
-  <a href={url}>
+<li class="team-card">
+  <a href={url} class="card-link">
     <Image
       class="person-image"
       src={portrait}
@@ -33,12 +42,11 @@ const summary = (bio: string, length = 300): string => {
       width={252}
       alt={name}
     />
-
-    <div class="team-card__description">
-      <h2 class="person-name">{name}</h2>
-      <h3 class="person-title">{position}</h3>
-      <p class="person-bio">{summary(data)}</p>
-      <SocialIcons {...socials} />
-    </div>
   </a>
-</article>
+  <div class="team-card__description">
+    <h2 class="person-name">{name}</h2>
+    <h3 class="person-title">{position}</h3>
+    <p class="person-bio">{summary(data)}</p>
+    <SocialIcons {...socials} />
+  </div>
+</li>

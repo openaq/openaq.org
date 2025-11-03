@@ -13,7 +13,7 @@ const { name, position, portrait, data, country } = Astro.props;
   @include person-card("team", variables.$ocean120);
 </style>
 
-<article class="team-card">
+<li class="team-card">
   <Image
     class="person-image"
     src={portrait}
@@ -26,4 +26,4 @@ const { name, position, portrait, data, country } = Astro.props;
     <h3 class="person-title">{position}</h3>
     <p class="person-bio">{country}</p>
   </div>
-</article>
+</li>

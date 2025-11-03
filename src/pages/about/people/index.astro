@@ -59,6 +59,12 @@ const sortByName = (
   .working-section {
     padding-bottom: 100px;
   }
+  ul {
+		margin-block-start: 0;
+		margin-block-end: 0;
+		padding-inline-start: 0;
+		list-style-type: none;
+	}
 </style>
 
 <PageLayout pageTitle="People">
@@ -66,7 +72,7 @@ const sortByName = (
   <p>
     {frontmatter.staffIntro}
   </p>
-  <section class="person-grid">
+  <ul class="person-grid">
     {
       allStaff
         .sort(sortByName)
@@ -81,12 +87,12 @@ const sortByName = (
           />
         ))
     }
-  </section>
+  </ul>
   <h2 class="gradient-title">Board</h2>
   <p>
     {frontmatter.boardIntro}
   </p>
-  <section class="person-grid">
+  <ul class="person-grid">
     {
       allBoard
         .sort(sortByName)
@@ -100,12 +106,12 @@ const sortByName = (
           />
         ))
     }
-  </section>
+  </ul>
   <h2 class="gradient-title">Advisors</h2>
   <p>
     {frontmatter.advisorIntro}
   </p>
-  <section class="person-grid">
+  <ul class="person-grid">
     {
       allAdvisors
         .sort(sortByName)
@@ -120,7 +126,7 @@ const sortByName = (
           />
         ))
     }
-  </section>
+  </ul>
   <section class="working-section">
     <h2 class="gradient-title">Working with OpenAQ</h2>
     <p>
