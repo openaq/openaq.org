@@ -17,7 +17,7 @@ By providing foundational data infrastructure, we fill a basic data-access gap a
 
 - - -
 
-# Uses and Users
+## Uses and Users
 
 Our data platform is used for such applications as:
 
@@ -42,7 +42,7 @@ We serve a wide range of users from the public, private and NGO sectors:
 
 This work wouldn't be possible without those who monitor air quality and share their data openly on our platform. Thank you, data producers!
 
-# Advocacy for Air Quality Monitoring and Data Transparency
+## Advocacy for Air Quality Monitoring and Data Transparency
 
 As a mission-driven organization without a profit motive, OpenAQ advocates for transparent, publicly accessible air quality data and for more monitoring (especially where people are most vulnerable).
 
@@ -50,19 +50,19 @@ OpenAQ publishes the only global assessment of whether and how national governme
 
 - - -
 
-# Vision, Mission and Values
+## Vision, Mission and Values
 
 See our [2022-2025 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ+Strategic+Direction-Abbreviated.pdf), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
 
-## Vision
+### Vision
 
 OpenAQ envisions a world where everyone breathes healthy air, enabled by universal access to data.
 
-## Mission
+### Mission
 
 By providing universal access to air quality data, we empower a global community of changemakers to solve air inequality.
 
-## Values
+### Values
 
 #### Community & Collaboration
 
