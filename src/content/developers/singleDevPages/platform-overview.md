@@ -8,7 +8,7 @@ OpenAQ is the world’s largest open-source, open-access platform for ground-lev
 
 ## Open Source
 
-OpenAQ is proudly open-source and built on open-source technology. View OpenAQ's open-source code on G[itHub](https://github.com/openaq).
+OpenAQ is proudly open-source and built on open-source technology. View OpenAQ's open-source code on [GitHub](https://github.com/openaq).
 
 ## Accessing Data
 
