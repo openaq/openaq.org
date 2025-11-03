@@ -30,6 +30,15 @@ const { Content } = await render(FAQ);
       width: 1px;
     }
 
+    input:focus {
+      ~ .tab-label {
+        border-radius: 12px;
+        outline: 1px auto;
+        outline: -webkit-focus-ring-color;
+        outline: -webkit-focus-ring-color auto 5px;
+      }
+    }
+
     &:hover {
       border: 1px solid variables.$ocean100;
       border-radius: 12px;
@@ -110,6 +119,8 @@ const { Content } = await render(FAQ);
       height="24"
       viewBox="0 0 24 24"
       width="24"
+      role="img"
+      aria-label="Toggle answer"
     >
       <path d="M0 0h24v24H0z" fill="none"></path>
       <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
