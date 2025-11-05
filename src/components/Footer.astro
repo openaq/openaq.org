@@ -83,6 +83,14 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           input {
             width: 180px;
           }
+
+          label > span {
+            @include body4(#fff);
+          }
+
+          button {
+            margin-top: 16px;
+          }
         }
       }
     }
@@ -182,6 +190,11 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
               input {
                 width: 300px;
               }
+
+              label {
+                display: flex;
+                flex-direction: column;
+              }
             }
 
             .social-links {
@@ -200,7 +213,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
   <div class="footer__content">
     <section class="nav-section">
       <LogoWhite width="72" height="40" aria-label="OpenAQ logo" />
-      <nav class="footer-nav">
+      <nav class="footer-nav" aria-label="Primary footer">
         <a class="footer-home" href="/">Home</a>
         <a class="footer-explore" href="https://explore.openaq.org">Explore</a>
         <a class="footer-api" href="https://docs.openaq.org/docs">API</a>
@@ -222,32 +235,41 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
         target="_blank"
         novalidate
       >
-        <input
-          type="email"
-          name="EMAIL"
-          id="mce-EMAIL"
-          placeholder="Enter your email"
-          class="text-input"
-          required
-        />
+        <label for="mce-EMAIL">
+          <span>Email</span>
+          <input
+            type="email"
+            name="EMAIL"
+            id="mce-EMAIL"
+            placeholder="Enter your email"
+            class="text-input"
+            required
+          />
+        </label>
 
         <!-- First Name Field -->
-        <input
-          type="text"
-          name="FNAME"
-          id="mce-FNAME"
-          placeholder="First Name"
-          class="text-input"
-        />
+        <label for="mce-FNAME">
+          <span>First Name</span>
+          <input
+            type="text"
+            name="FNAME"
+            id="mce-FNAME"
+            placeholder="First Name"
+            class="text-input"
+          />
+        </label>
 
         <!-- Last Name Field -->
-        <input
-          type="text"
-          name="LNAME"
-          id="mce-LNAME"
-          placeholder="Last Name"
-          class="text-input"
-        />
+        <label for="mce-LNAME">
+          <span>Last name</span>
+          <input
+            type="text"
+            name="LNAME"
+            id="mce-LNAME"
+            placeholder="Last Name"
+            class="text-input"
+          />
+        </label>
 
         <button class="btn btn-primary js-footer-subscribe" type="submit">
           Subscribe
@@ -269,7 +291,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           target="_blank"
           rel="noreferrer noopener"
         >
-          <BlueskyLogo width={18} />
+          <BlueskyLogo width={18} role="img" aria-label="OpenAQ on Bluesky" />
         </a>
         <a
           href="https://join.slack.com/t/openaq/shared_invite/zt-3bv5rrhnp-rgrQbf6CavRSihhTW_swmA"
@@ -277,7 +299,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           target="_blank"
           rel="noreferrer noopener"
         >
-          <SlackLogo width={18} />
+          <SlackLogo width={18} role="img" aria-label="OpenAQ on Slack" />
         </a>
         <a
           href="https://github.com/openaq"
@@ -285,7 +307,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           target="_blank"
           rel="noreferrer noopener"
         >
-          <GithubLogo width={18} />
+          <GithubLogo width={18} role="img" aria-label="OpenAQ on GitHub" />
         </a>
         <a
           href="https://www.linkedin.com/company/openaq"
@@ -293,7 +315,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           target="_blank"
           rel="noreferrer noopener"
         >
-          <LinkedinLogo width={18} />
+          <LinkedinLogo width={18} role="img" aria-label="OpenAQ on LinkedIn" />
         </a>
         <a
           href="https://openaq.medium.com/"
@@ -301,7 +323,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           target="_blank"
           rel="noreferrer noopener"
         >
-          <MediumLogo width={18} />
+          <MediumLogo width={18} role="img" aria-label="OpenAQ blog" />
         </a>
         <a
           href="https://www.youtube.com/@openaq4768"
@@ -309,7 +331,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           target="_blank"
           rel="noreferrer noopener"
         >
-          <YoutubeLogo width={18} />
+          <YoutubeLogo width={18} role="img" aria-label="OpenAQ on YouTube" />
         </a>
         <a
           href="https://www.facebook.com/openaq/"
@@ -317,7 +339,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
           target="_blank"
           rel="noreferrer noopener"
         >
-          <FacebookLogo width={18} />
+          <FacebookLogo width={18} role="img" aria-label="OpenAQ on Facebook" />
         </a>
       </div>
     </section>
@@ -326,7 +348,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
     <span class="copyright text-white type-body-4"
       >&#169; OpenAQ. All rights reserved.</span
     >
-    <nav class="sub-footer-nav">
+    <nav class="sub-footer-nav" aria-label="Secondary footer">
       <a href="/terms/">Website Terms</a>
       <a href="/privacy/">Privacy Policy</a>
       <a href="/dmca/">DMCA</a>
