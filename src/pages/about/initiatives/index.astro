@@ -25,11 +25,18 @@ const sortByName = (
       max-width: 100vw;
     }
   }
+
+  ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
 </style>
 <PageLayout pageTitle={frontmatter.title}>
   <h1 class="gradient-title">{frontmatter.title}</h1>
 
-  <section class="initiative-grid">
+  <ul class="initiative-grid">
     {
       allInitiatives
         .sort(sortByName)
@@ -42,7 +49,7 @@ const sortByName = (
           />
         ))
     }
-  </section>
+  </ul>
   <CommunityBanner slot="banner" />
   <ExplorerBanner slot="banner-low" />
 </PageLayout>

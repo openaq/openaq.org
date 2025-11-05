@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import removeMarkdown from "remove-markdown";
+import ChevronRight from '@assets/svg/chevron_right.svg'
 
 const { title, image, url, body } = Astro.props;
 
@@ -10,7 +11,7 @@ const summary = (content: string, length = 300): string => {
     useImgAltText: false,
   });
   if (cleanText.length <= length) return cleanText;
-  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + "...";
 };
 ---
 
@@ -49,9 +50,16 @@ const summary = (content: string, length = 300): string => {
       }
 
       .initiative-description__body {
-        * {
+        p {
           @include mixins.body1;
-          color: variables.$smoke100;
+          color: variables.$smoke120;
+        }
+        
+        span {
+          color: variables.$smoke120;
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
         }
       }
 
@@ -62,10 +70,26 @@ const summary = (content: string, length = 300): string => {
       }
     }
   }
+  
+  .initiative-card {
+    position: relative;
+  }
+
+  .initiative-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .initiative-link:hover::after {
+	overflow: hidden;
+	border-radius: 22px;
+	@include mixins.box-shadow;
+  }
 </style>
-<article class="initiative-card">
+<li class="initiative-card">
   <div class="initiative-card-img">
-    <a href={url}>
+    <div>
       <Image
         class="initiative-card-image"
         src={image}
@@ -73,12 +97,20 @@ const summary = (content: string, length = 300): string => {
         width={252}
         alt={title}
       />
-    </a>
-  </div>
-  <div class="initiative-description">
-    <h2 class="initiative-description__title">{title}</h2>
-    <div class="initiative-description__body">
-      <p>{summary(body)}<a href={url}>read more..</a></p>
     </div>
   </div>
-</article>
+  <div class="initiative-description">
+    <a href={url} class="initiative-link">
+      <h2 class="initiative-description__title">{title}</h2>
+    </a>
+    <div class="initiative-description__body">
+      <p>
+        {summary(body)}
+      </p>
+      <span class="type-link-1">
+        Read more about {title}
+        <ChevronRight width={24} fill="#5a6672" aria-hidden="true" />
+      </span>
+    </div>
+  </div>
+</li>
