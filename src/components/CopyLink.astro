@@ -54,7 +54,7 @@ const pageUrl = new URL(currentPath, Astro.site)
 <div class="social-links">
   <button class="icon-btn btn-secondary js-copy-button"
     ><span class="js-copy-button__text">Copy link</span>
-    <CopyIcon width="22" height="22" fill="#33a3a1" />
+    <CopyIcon width="22" height="22" fill="#33a3a1" aria-hidden="true" />
   </button>
   <span>Share</span>
   <a
@@ -63,7 +63,12 @@ const pageUrl = new URL(currentPath, Astro.site)
     target="_blank"
     rel="noreferrer noopener"
   >
-    <FacebookLogo width="20" height="20" />
+    <FacebookLogo 
+      width="20" 
+      height="20" 
+      role="img" 
+      aria-label="Share on Facebook" 
+    />
   </a>
   <a
     class="social-circle"
@@ -71,7 +76,12 @@ const pageUrl = new URL(currentPath, Astro.site)
     target="_blank"
     rel="noreferrer noopener"
   >
-    <BlueskyLogo width="20" height="20" />
+    <BlueskyLogo 
+      width="20" 
+      height="20" 
+      role="img" 
+      aria-label="Share on Bluesky" 
+    />
   </a>
   <a
     class="social-circle"
@@ -79,7 +89,12 @@ const pageUrl = new URL(currentPath, Astro.site)
     target="_blank"
     rel="noreferrer noopener"
   >
-    <LinkedInLogo width="20" height="20" />
+    <LinkedInLogo 
+      width="20" 
+      height="20" 
+      role="img" 
+      aria-label="Share on LinkedIn" 
+    />
   </a>
 </div>
 
