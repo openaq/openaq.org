@@ -67,57 +67,85 @@ import SlackLogo from "@assets/svg/slack.svg";
   <div class="social-banner-content">
     <div class="social-section">
       <div>
-        <a href="https://github.com/openaq">
-          <GitHubLogo height={35} width={35} />
+        <a 
+          href="https://github.com/openaq"
+          aria-labelledby="social-link-github"
+        >
+          <GitHubLogo height={35} width={35} aria-hidden="true" />
         </a>
       </div>
       <div class="social-section-description">
-        <span class="type-subtitle-1 text-white"
-          >Follow and contribute to our work on GitHub.</span
+        <span 
+          class="type-subtitle-1 text-white"
+          id="social-link-github"
         >
+          Follow and contribute to our work on GitHub.
+        </span>
         <a
           href="https://github.com/openaq"
           class="btn btn-secondary social-banner-gh"
           target="_blank"
-          rel="noreferrer noopener">Follow</a
+          rel="noreferrer noopener"
+          aria-labelledby="social-link-github"
         >
+          Follow
+        </a>
       </div>
     </div>
     <div class="social-section">
       <div>
-        <a href='https://link.openaq.org/joinslack.'>
-          <SlackLogo height={35} width={35} />
+        <a 
+          href="https://link.openaq.org/joinslack"
+          aria-labelledby="social-link-slack"
+        >
+          <SlackLogo height={35} width={35} aria-hidden="true" />
         </a>
       </div>
 
       <div class="social-section-description">
-        <span class="type-subtitle-1 text-white"
-          >Participate in the OpenAQ clean air community on slack</span
+        <span 
+          class="type-subtitle-1 text-white"
+          id="social-link-slack"
         >
+          Participate in the OpenAQ clean air community on Slack
+        </span>
         <a
           href="https://join.slack.com/t/openaq/shared_invite/zt-3bv5rrhnp-rgrQbf6CavRSihhTW_swmA"
           class="btn btn-secondary social-banner-slack"
           target="_blank"
-          rel="noreferrer noopener">Join</a
+          rel="noreferrer noopener"
+          aria-labelledby="social-link-slack"
         >
+          Join
+        </a>
       </div>
     </div>
     <div class="social-section">
       <div>
-        <a href="https://bsky.app/profile/openaq.org">
-          <BlueskyLogo height={35} width={35} />
+        <a 
+          href="https://bsky.app/profile/openaq.org"
+          aria-labelledby="social-link-bluesky"
+        >
+          <BlueskyLogo height={35} width={35} aria-hidden="true" />
         </a>
       </div>
 
       <div class="social-section-description">
-        <span class="type-subtitle-1 text-white"
-          >Stay up to date with OpenAQ news on Bluesky</span>
+        <span 
+          class="type-subtitle-1 text-white"
+          id="social-link-bluesky"
+        >
+          Stay up to date with OpenAQ news on Bluesky
+        </span>
         <a
           href="https://bsky.app/profile/openaq.org"
           class="btn btn-secondary social-banner-bluesky"
           target="_blank"
-          rel="noreferrer noopener">Follow</a
+          rel="noreferrer noopener"
+          aria-labelledby="social-link-bluesky"
         >
+          Follow
+        </a>
       </div>
     </div>
   </div>

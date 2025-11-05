@@ -51,11 +51,16 @@ const image = images[Math.floor(Math.random() * images.length)];
 
 <section class="explore-banner">
   <Image class="explore-banner__img" src={image.image} alt={image.name} />
-  <a href="https://explore.openaq.org" class="explore-banner__input-link">
+  <a 
+    href="https://explore.openaq.org" 
+    class="explore-banner__input-link"
+    aria-label="Search for air quality data"
+  >
     <input
       type="text"
       class="search-input"
       placeholder="Search for air quality data"
+      aria-hidden="true"
     />
   </a>
 </section>
