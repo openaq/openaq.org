@@ -3,7 +3,7 @@ title: Data for Communities
 url: https://openaq.org/about/use-cases/data-fpr-communities/
 tags:
     - Community
-image: src/assets/images/caoa.png
+image: "@assets/images/caoa.png"
 featured: true
 ---
 

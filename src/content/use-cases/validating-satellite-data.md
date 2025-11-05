@@ -3,7 +3,7 @@ title: Validating Satellite Data
 url: https://openaq.org/about/use-cases/validating-satellite-data/
 tags: 
     - API
-image: src/assets/images/validating-satellite-data.png
+image: "@assets/images/validating-satellite-data.png"
 featured: true
 ---
 Satellites orbiting Earth are able to fill air quality data gaps in regions with little or no ground-level monitoring by applying mathematical models to the atmospheric data that they collect. However, satellite-based observations have limitations and challenges. Ground measurements are needed to calibrate and improve the accuracy of satellite predictions and forecasts. Because OpenAQ provides open access to global ground-level air quality data, we play a critical role in improving satellite estimates of air quality.

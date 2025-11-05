@@ -3,7 +3,7 @@ honorific: Dr.
 name: Colleen Rosales
 position: Strategic Partnerships Director
 email: colleen@openaq.org
-image: src/assets/images/colleen-headshot-alpha.png
+image: "@assets/images/colleen-headshot-alpha.png"
 linkedin: https://www.linkedin.com/in/colleen-rosales-phd/
 github: https://github.com/colleenrosales
 orcid: https://orcid.org/0000-0002-8925-8352

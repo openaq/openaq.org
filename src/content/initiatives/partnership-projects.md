@@ -1,6 +1,6 @@
 ---
 title: Partnership Projects
-image: src/assets/images/edi-2-istock-1311300990-purchased-.jpg
+image: "@assets/images/edi-2-istock-1311300990-purchased-.jpg"
 ---
 # **CLEAN AIR COMPASS**
 

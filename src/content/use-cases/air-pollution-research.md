@@ -3,7 +3,7 @@ title: Air Pollution Research
 url: https://openaq.org/about/use-cases/air-pollution-research/
 tags: 
     - API
-image: src/assets/images/air-pollution-research.png
+image: "@assets/images/air-pollution-research.png"
 featured: true
 ---
 Access to key open data sets (emission sources, air pollution levels, meteorological/atmospheric conditions, etc.) are fundamental to air pollution research. OpenAQ serves as one of these important data sets, used by many scientific researchers to, for example, evaluate and verify air pollution models. 
