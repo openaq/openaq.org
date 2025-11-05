@@ -13,7 +13,7 @@ type: "developers/help"
 - AQMx Resource Exchange Library, a Climate & Clean Air Coalition resource for air quality managers, which links to many air quality databases: https://aqmx.org/
 - Open Sustainable Technology’s list of open-source tools in the area of climate change, energy, biodiversity and natural resources. Air quality-specific sources: <https://opensustain.tech/#air-quality>
 - Environmental Defense Fund's CLEAR Collaborative Air Quality Data Directory: https://www.clearcollab.org/data-directory/
-- List of satellite data for environmental justice from NASA HAQAST: https://haqast.org/ej/ [](https://www.epa.gov/air-sensor-toolbox)
+- List of satellite data for environmental justice from NASA HAQAST: https://haqast.org/ej/ 
 - Open-source daily fine particulate matter (PM2.5) datasets for India
 
   - 10 km resolution, from 2005 to 2023 \[non-peer-reviewed]: https://doi.org/10.5281/zenodo.10807119
@@ -28,9 +28,9 @@ type: "developers/help"
 **Resources for Developing an Air Sensor Project**
 
 - U.S. Environmental Protection Agency's Air Sensor Toolbox: <https://www.epa.gov/air-sensor-toolbox>
-- [](https://www.epa.gov/air-sensor-toolbox)U.S. Environmental Protection Agency: [Enhanced Air Sensor Guidebook](https://www.epa.gov/air-sensor-toolbox/how-use-air-sensors-air-sensor-guidebook)
+- U.S. Environmental Protection Agency: [Enhanced Air Sensor Guidebook](https://www.epa.gov/air-sensor-toolbox/how-use-air-sensors-air-sensor-guidebook)
 - Environmental Defense Fund: [Making the invisible visible: A guide for mapping hyperlocal air pollution to drive clean air action](https://www.edf.org/sites/default/files/content/making-the-invisible-visible.pdf)
-- South Coast AQMD/Sonoma Technology: [Community in Action: A Comprehensive Guidebook on Air Quality Sensors](<http://www.aqmd.gov/docs/default-source/aq-spec/star-grant/community-in-action-guidebook-on-air-quality-sensors-(appendices-only).pdf>)[](https://www.c40knowledgehub.org/s/article/Making-the-invisible-visible-A-guide-for-mapping-hyperlocal-air-pollution-to-drive-clean-air-action?language=en_US)
+- South Coast AQMD/Sonoma Technology: [Community in Action: A Comprehensive Guidebook on Air Quality Sensors](<http://www.aqmd.gov/docs/default-source/aq-spec/star-grant/community-in-action-guidebook-on-air-quality-sensors-(appendices-only).pdf>)
 - A﻿ir Sensor Performance Metrics: <https://www.epa.gov/air-sensor-toolbox/evaluation-emerging-air-sensor-performance>
 - UNEP and WMO report on integrating air sensors to enhance air quality applications: https://wmo.int/publication-series/integrating-low-cost-sensor-systems-and-networks-enhance-air-quality-applications
 - U.S. Government Accountability Office's Air Quality Sensors: Policy Options to Help Address Implementation Challenges: https://www.gao.gov/products/gao-24-106393

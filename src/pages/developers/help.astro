@@ -31,6 +31,10 @@ const allFAQs = await getCollection("help");
       gap: 20px;
       align-items: center;
       padding: 20px 0;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding-inline-start: 0;
+      list-style-type: none;
     }
 
     @media (max-width: 1000px) {
@@ -54,9 +58,9 @@ const allFAQs = await getCollection("help");
   <div class="help-content">
     <div class="help-content-container">
       <h1 class="type-display-1 gradient-title">{frontmatter.title}</h1>
-      <section class="help-items">
+      <ul class="help-items">
         {allFAQs.map((FAQ) => <HelpItem title={FAQ.data.title} FAQ={FAQ} />)}
-      </section>
+      </ul>
     </div>
   </div>
   <ExplorerBanner slot="banner-low" />

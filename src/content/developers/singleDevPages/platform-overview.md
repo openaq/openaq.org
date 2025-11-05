@@ -6,13 +6,13 @@ OpenAQ is the world’s largest open-source, open-access platform for ground-lev
 
 ![openaq platform diagram](@assets/images/platform_diagram.webp)
 
-# Open Source
+## Open Source
 
-OpenAQ is proudly open-source and built on open-source technology. View OpenAQ's open-source code on G[itHub](https://github.com/openaq).
+OpenAQ is proudly open-source and built on open-source technology. View OpenAQ's open-source code on [GitHub](https://github.com/openaq).
 
-# Accessing Data
+## Accessing Data
 
-## API
+### API
 
 For programmatic users, the best way to access data on the OpenAQ platform is through the OpenAQ REST API. The API allows programmatic and queryable access to the OpenAQ database.
 
@@ -20,7 +20,7 @@ For programmatic users, the best way to access data on the OpenAQ platform is th
 
 To learn how to use the OpenAQ API to query data and to create a user account visit [docs.openaq.org](https://docs.openaq.org).
 
-## OpenAQ Explorer
+### OpenAQ Explorer
 
 OpenAQ Explorer is an interactive web application that makes exploring the OpenAQ database easy.
 
