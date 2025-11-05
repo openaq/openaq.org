@@ -130,6 +130,23 @@ import Logo from "@assets/logo.svg";
     }
   }
 
+  .dropdown {
+    a:focus-visible ~ .submenu {
+      background-color: white;
+      visibility: visible;
+      opacity: 1;
+      z-index: 1000;
+      display: block;
+      border: 1px solid #eaecf0;
+      border-radius: 12px;
+
+      &__item > a {
+        visibility: visible;
+        display: block;
+      }
+    }
+  }
+
   @media (max-width: 1000px) {
     $header-height: 60px;
 
@@ -139,9 +156,19 @@ import Logo from "@assets/logo.svg";
     }
 
     .menu-button-container {
-      input {
-        display: none;
-      }
+      z-index: 1;
+    }
+
+    #menu-toggle {
+      display: inline-block;
+      position: absolute;
+      opacity: 0;
+    }
+
+    #menu-toggle:focus ~ .menu-button-container {
+      outline: 1px auto;
+      outline: -webkit-focus-ring-color;
+      outline: -webkit-focus-ring-color auto 5px;
     }
 
     .spacer {
@@ -297,9 +324,12 @@ import Logo from "@assets/logo.svg";
       <Logo width="72" height="40" aria-label="OpenAQ logo" />
     </a>
     <div class="spacer"></div>
-    <nav class="nav">
-      <input id="menu-toggle" type="checkbox" />
-      <label class="menu-button-container" for="menu-toggle">
+    <nav class="nav" aria-label="primary">
+      <input id="menu-toggle" type="checkbox" aria-label="Toggle menu"/>
+      <label 
+        class="menu-button-container" 
+        for="menu-toggle"
+      >
         <div class="menu-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -307,6 +337,8 @@ import Logo from "@assets/logo.svg";
             viewBox="0 -960 960 960"
             width="24px"
             fill="#000000"
+            role="img"
+            aria-label="menu"
             ><path
               d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
             ></path></svg
