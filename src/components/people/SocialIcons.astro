@@ -27,13 +27,19 @@ import MailLogo from "@assets/svg/mail.svg";
 <style lang="scss">
   .person-social {
     display: flex;
-    gap: 18px;
+    gap: 6px;
     align-items: center;
     align-content: flex-start;
+    position: relative;
+    z-index: 10;
 
     a {
       display: flex;
-      align-items: centerś;
+      align-items: center;
+      padding: 12px 8px;
+    }
+    a:first-child {
+      padding: 12px 8px 12px 0;
     }
   }
 </style>
@@ -42,7 +48,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     email ? (
       <a href={emailHref}>
-        <MailLogo height={12} width={15} />
+        <MailLogo height={12} width={15} role="img" aria-label="Email" />
       </a>
     ) : (
       ""
@@ -52,7 +58,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     linkedin ? (
       <a href={linkedin} target="_blank" rel="noreferrer noopener">
-        <LinkedinLogo width={15} />
+        <LinkedinLogo width={15} role="img" aria-label="LinkedIn" />
       </a>
     ) : (
       ""
@@ -62,7 +68,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     github ? (
       <a href={github} target="_blank" rel="noreferrer noopener">
-        <GithubLogo width={15} />
+        <GithubLogo width={15} role="img" aria-label="GitHub" />
       </a>
     ) : (
       ""
@@ -71,7 +77,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     x ? (
       <a href={x} target="_blank" rel="noreferrer noopener">
-        <XLogo width={15} />
+        <XLogo width={15} role="img" aria-label="X" />
       </a>
     ) : (
       ""
@@ -81,7 +87,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     bluesky ? (
       <a href={bluesky} target="_blank" rel="noreferrer noopener">
-        <BlueskyLogo width={15} />
+        <BlueskyLogo width={15} role="img" aria-label="Bluesky" />
       </a>
     ) : (
       ""
@@ -90,7 +96,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     mastadon ? (
       <a href={mastadon} target="_blank" rel="noreferrer noopener">
-        <MastadonLogo width={15} />
+        <MastadonLogo width={15} role="img" aria-label="Mastadon" />
       </a>
     ) : (
       ""
@@ -100,7 +106,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     googleScholar ? (
       <a href={googleScholar} target="_blank" rel="noreferrer noopener">
-        <GoogleScholarLogo width={15} />
+        <GoogleScholarLogo width={15} role="img" aria-label="Google Scholar" />
       </a>
     ) : (
       ""
@@ -109,7 +115,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     orcid ? (
       <a href={orcid} target="_blank" rel="noreferrer noopener">
-        <OrcidLogo width={15} />
+        <OrcidLogo width={15} role="img" aria-label="Orcid" />
       </a>
     ) : (
       ""
@@ -118,7 +124,7 @@ import MailLogo from "@assets/svg/mail.svg";
   {
     researchGate ? (
       <a href={researchGate} target="_blank" rel="noreferrer noopener">
-        <ResearchGateLogo width={15} />
+        <ResearchGateLogo width={15} role="img" aria-label="ResearchGate" />
       </a>
     ) : (
       ""

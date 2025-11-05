@@ -15,7 +15,7 @@ const { name, position, data, socials, portrait } = Astro.props;
   @include person-card("team", variables.$lavender120);
 </style>
 
-<article class="team-card">
+<li class="team-card">
   <Image
     class="person-image"
     src={portrait}
@@ -25,9 +25,9 @@ const { name, position, data, socials, portrait } = Astro.props;
   />
 
   <div class="team-card__description">
-    <h2 class="person-name">{name}</h2>
-    <h3 class="person-title">{position}</h3>
+    <h3 class="person-name">{name}</h3>
+    <h4 class="person-title">{position}</h4>
     <p class="person-bio">{data}</p>
     <SocialIcons {...socials} />
   </div>
-</article>
+</li>
