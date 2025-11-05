@@ -4,7 +4,7 @@ import HealthIcon from "@assets/svg/health.svg";
 import DiversityIcon from "@assets/svg/diversity.svg";
 import NewspaperIcon from "@assets/svg/newspaper.svg";
 
-const { tag } = Astro.props;
+const { tag, url } = Astro.props;
 
 let IconComponent;
 let iconClass = "";
@@ -111,10 +111,10 @@ switch (tag) {
 </style>
 
 <div class="chip-wrapper">
-  <a href="" class={`chip-base-data ${iconClass}`}>
+  <a href={url} class={`chip-base-data ${iconClass}`}>
     <span>{tag}</span>
     <span class="iconClass chip-icon">
-      {IconComponent && <IconComponent />}
+      {IconComponent && <IconComponent aria-hidden="true" />}
     </span>
   </a>
 </div>

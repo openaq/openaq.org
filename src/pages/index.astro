@@ -78,6 +78,11 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
       padding: 50px 0;
     }
     .featured-use-cases {
+      padding-inline-start: 0;
+      list-style-type: none;
+      margin-block-start: 0;
+      margin-block-end: 0;
+
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       column-gap: 40px;
@@ -265,9 +270,9 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
   </section>
 
   <section class="use-cases-section">
-    <div class="featured-use-cases">
+    <ul class="featured-use-cases">
       {featuredUseCases.map(useCase => <UseCaseCard {...useCase.data} body={useCase.body} />)} 
-    </div>
+    </ul>
   </section>
 
   <section class="technology-section">

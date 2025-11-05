@@ -2,6 +2,7 @@
 import Chip from "@components/Chip.astro";
 import { Image } from "astro:assets";
 import removeMarkdown from "remove-markdown";
+import ChevronRight from '@assets/svg/chevron_right.svg'
 
 const { url, title, image, body, tags } = Astro.props;
 
@@ -10,7 +11,7 @@ const summary = (content: string, length = 300): string => {
     useImgAltText: false,
   });
   if (cleanText.length <= length) return cleanText;
-  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + " ";
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + "...";
 };
 ---
 
@@ -45,9 +46,18 @@ const summary = (content: string, length = 300): string => {
       padding: 0 20px;
 
       .use-case-description {
-        @include mixins.body2;
-        padding: 10px 0;
-        color: variables.$smoke100;
+        p {
+          @include mixins.body2;
+          padding: 10px 0;
+          color: variables.$smoke120;
+        }
+
+        span {
+          color: variables.$smoke120;
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+        }
       }
       .use-case-description__title {
         @include mixins.heading2;
@@ -60,22 +70,41 @@ const summary = (content: string, length = 300): string => {
       padding: 20px;
     }
   }
+
+  .use-case-card {
+    position: relative;
+  }
+
+  .use-case-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
 </style>
-<article class="use-case-card">
-  <a href={url}>
+<li class="use-case-card">
+  <div>
     <Image
       class="use-case-card__img"
       src={image}
       width={300}
       alt=""
+      aria-labelledby="use-case-description-title"
     />
-  </a>
+  </div>
 
   <div class="use-case-card__body">
-    <a href={url}>
-      <h2 class="use-case-description__title">{title}</h2>
-      <div class="use-case-description">{summary(body)} read more...</div>
+    <a href={url} class="use-case-link">
+      <h2 class="use-case-description__title" id="use-case-description-title">{title}</h2>
     </a>
+      <div class="use-case-description">
+        <p>
+          {summary(body)}
+        </p>
+        <span class="type-link-1">
+          Read more about {title}
+          <ChevronRight width={24} fill="#5a6672" aria-hidden="true" />
+        </span>
+      </div>
   </div>
   {
     tags && (
@@ -86,4 +115,4 @@ const summary = (content: string, length = 300): string => {
       </div>
     )
   }
-</article>
+</li>

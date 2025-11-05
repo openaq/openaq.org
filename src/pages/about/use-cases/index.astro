@@ -36,18 +36,25 @@ const sortByName = (
       grid-template-columns: repeat(1, 1fr);
     }
   }
+
+  ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
 </style>
 <PageLayout pageTitle={frontmatter.title}>
   <div class="use-cases-content-container">
     <h1 class="gradient-title">{frontmatter.title}</h1>
 
-    <section class="use-cases-grid">
+    <ul class="use-cases-grid">
       {
         allUseCases
           .sort(sortByName)
           .map((usecase) => (
             <UseCaseCard
-              name={usecase.data.title}
+              title={usecase.data.title}
               image={usecase.data.image}
               body={usecase.body}
               url={`/about/use-cases/${usecase.id}`}
@@ -56,7 +63,7 @@ const sortByName = (
             />
           ))
       }
-    </section>
+    </ul>
   </div>
   <CommunityBanner slot="banner" />
   <ExplorerBanner slot="banner-low" />
