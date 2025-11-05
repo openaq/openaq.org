@@ -52,11 +52,28 @@ const sortByName = (
     flex-direction: column;
     justify-content: center;
   }
+
+  .funders-section,
+  .air-sensors-section,
+  .corporate-sponsors-section,
+  .partners-section {
+    h2 {
+      align-self: start;
+    }
+  }
+
+  .partners-grid,
+  .partners-info-grid {
+    margin-block-start: 40px;
+    margin-block-end: 40px;
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
 </style>
 <PageLayout pageTitle="Partners">
   <section class="air-sensors-section">
-    <h1 class="gradient-title">{frontmatter.airsensorsTitle}</h1>
-    <div class="partners-grid">
+    <h2 class="gradient-title">{frontmatter.airsensorsTitle}</h2>
+    <ul class="partners-grid">
       {
         allAirSensors
           .sort(sortByName)
@@ -68,11 +85,11 @@ const sortByName = (
             />
           ))
       }
-    </div>
+    </ul>
   </section>
   <section class="corporate-sponsors-section">
-    <h1 class="gradient-title">{frontmatter.corporateTitle}</h1>
-    <div class="partners-grid">
+    <h2 class="gradient-title">{frontmatter.corporateTitle}</h2>
+    <ul class="partners-grid">
       {
         allCorporates
           .sort(sortByName)
@@ -84,12 +101,12 @@ const sortByName = (
             />
           ))
       }
-    </div>
+    </ul>
   </section>
 
-  <h1 class="gradient-title">{frontmatter.partnersTitle}</h1>
   <section class="partners-section">
-    <div class="partners-info-grid">
+    <h2 class="gradient-title">{frontmatter.partnersTitle}</h2>
+    <ul class="partners-info-grid">
       {
         allPartners
           .sort(sortByName)
@@ -102,11 +119,11 @@ const sortByName = (
             />
           ))
       }
-    </div>
+    </ul>
   </section>
   <section class="funders-section">
-    <h1 class="gradient-title">{frontmatter.fundersTitle}</h1>
-    <div class="partners-grid">
+    <h2 class="gradient-title">{frontmatter.fundersTitle}</h2>
+    <ul class="partners-grid">
       {
         allFunders
           .sort(sortByName)
@@ -118,7 +135,7 @@ const sortByName = (
             />
           ))
       }
-    </div>
+    </ul>
   </section>
   <CommunityBanner slot="banner" />
   <ExplorerBanner slot="banner-low" />

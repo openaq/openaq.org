@@ -16,6 +16,7 @@ const { title, url, image, body } = Astro.props;
     border: 1px solid variables.$smoke10;
     border-radius: 22px;
     padding: 10px 0;
+    position: relative;
 
     &__img {
       display: flex;
@@ -39,14 +40,27 @@ const { title, url, image, body } = Astro.props;
       align-items: center;
       justify-content: center;
     }
+
+    .partner-card-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
   }
 </style>
 
-<a href={url} target="_blank" rel="noopener noreferrer">
-  <article class="partner-info-card">
-    <div class="partner-info-card__img">
+<li
+  aria-label={title}
+>
+  <div class="partner-info-card">
+    <a 
+      href={url} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="partner-card-link partner-info-card__img"
+    >
       <Image src={image} alt={title} />
-    </div>
+    </a>
     <p class="partner-info-card__body">{body}</p>
-  </article>
-</a>
+  </div>
+</li>
