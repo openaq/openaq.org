@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from "astro:content";
+import SingleArticleLayout from "@layouts/SingleArticleLayout.astro";
+
+export async function getStaticPaths() {
+  const careers = await getCollection("careers");
+  return careers.map((career) => ({
+    params: { slug: career.id },
+    props: { career },
+  }));
+}
+
+const { career } = Astro.props;
+const { Content } = await render(career);
+---
+
+
+<SingleArticleLayout frontmatter={career.data} title={career.data.title}>
+  <Content /> 
+</SingleArticleLayout>

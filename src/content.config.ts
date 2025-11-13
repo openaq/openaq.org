@@ -173,6 +173,17 @@ const developers = defineCollection({
     }),
 });
 
+const careers = defineCollection({
+  loader: glob({
+    pattern: ["*.md"],
+    base: "src/content/careers",
+  }),
+  schema: () =>
+    z.object({
+      title: z.string(),
+    }),
+});
+
 const peopleIndex = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/people/peopleIndex" }),
   schema: () =>
@@ -311,4 +322,5 @@ export const collections = {
   helpIndex,
   partnersIndex,
   contact,
+  careers,
 };
