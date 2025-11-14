@@ -15,6 +15,7 @@ Examples of trainings and other recorded sessions in recent years include:
 **Global**
 
 * [General Training for the OpenAQ Explorer](<>)
+* [ECR IGAC iCACGP (early career researchers in the global atmospheric community)](https://www.ecr-igac-icacgp.org/2025/11/05/workshop-11-leveraging-openaq-for-air-quality-research-and-applications/)
 
 **Africa**
 
