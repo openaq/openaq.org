@@ -13,6 +13,11 @@ const summary = (content: string, length = 300): string => {
   if (cleanText.length <= length) return cleanText;
   return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + "...";
 };
+
+const titleId = (title: string) => {
+  const removeSpaces = title.replace(/\s+/g, '-').toLowerCase(); 
+  return removeSpaces;
+};
 ---
 
 <style lang="scss">
@@ -88,13 +93,13 @@ const summary = (content: string, length = 300): string => {
       src={image}
       width={300}
       alt=""
-      aria-labelledby="use-case-description-title"
+      aria-labelledby=`use-case-${titleId(title)}`
     />
   </div>
 
   <div class="use-case-card__body">
     <a href={url} class="use-case-link">
-      <h2 class="use-case-description__title" id="use-case-description-title">{title}</h2>
+      <h2 class="use-case-description__title" id=`use-case-${titleId(title)}`>{title}</h2>
     </a>
       <div class="use-case-description">
         <p>
