@@ -235,7 +235,7 @@ const legal = defineCollection({
 });
 
 const homepage = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/index.md" }),
+  loader: glob({ pattern: ["index.md"], base: "src/content/" }),
   schema: () =>
     z.object({
       title: z.string(),
