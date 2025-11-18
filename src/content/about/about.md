@@ -52,7 +52,11 @@ OpenAQ publishes the only global assessment of whether and how national governme
 
 ## Vision, Mission and Values
 
-See our [2022-2025 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ+Strategic+Direction-Abbreviated.pdf), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
+See our [2026-2028 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ_Strategic_Direction_2026_2028.pdf), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
+
+## Past Strategic Direction Documents
+
+* [2022-2025 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ+Strategic+Direction-Abbreviated.pdf)
 
 ### Vision
 
