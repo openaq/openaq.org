@@ -14,4 +14,7 @@ export default defineConfig({
   },
   site: "https://openaq.org",
   integrations: [purgecss()],
+  experimental: {
+    svgo: true,
+  },
 });
