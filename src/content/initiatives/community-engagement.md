@@ -42,6 +42,7 @@ Examples of trainings and other recorded sessions in recent years include:
 
 * [Multiple Pollutant Sources and Other Environmental Exposures](https://www.youtube.com/watch?v=B4u0jQa5to8&t=1537s)
 * [Virtual Flash Talk: OpenAQ Resources](https://haqast.org/haqast-showcase-2025/#virtualflashtalks)
+* [Global Air Quality Monitoring and Forecasting](https://haqast.org/haqast-st-louis/#session5A)[](https://haqast.org/haqast-showcase-2025/#virtualflashtalks)
 
 ## **Earth Science Information Partners (ESIP)**
 
