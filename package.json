@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",
-    "astro": "^5.15.2",
+    "astro": "^5.16.4",
     "astro-og-canvas": "^0.7.0",
     "astro-purgecss": "^5.2.0",
     "autoprefixer": "^10.4.20",
