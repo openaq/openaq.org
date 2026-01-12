@@ -56,8 +56,18 @@ const airsensors = defineCollection({
     }),
 });
 
-const partners = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/partners/partners" }),
+const organizationalPartners = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/partners/organizational" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      url: z.string().url(),
+    }),
+});
+
+const networkPartners = defineCollection({
+  loader: glob({ pattern: ["*.md"], base: "src/content/partners/network" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -206,7 +216,8 @@ const partnersIndex = defineCollection({
       airsensorsTitle: z.string(),
       fundersTitle: z.string(),
       corporateTitle: z.string(),
-      partnersTitle: z.string(),
+      networkPartnersTitle: z.string(),
+      organizationalPartnersTitle: z.string(),
     }),
 });
 
@@ -302,7 +313,8 @@ export const collections = {
   policies,
   funders,
   airsensors,
-  partners,
+  organizationalPartners,
+  networkPartners,
   corporate,
   initiatives,
   staff,

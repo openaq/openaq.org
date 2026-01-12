@@ -8,11 +8,12 @@ import CommunityBanner from "@components/CommunityBanner.astro";
 import ExplorerBanner from "@components/ExplorerBanner.astro";
 import { frontmatter } from "@content/partners/partnersIndex/partners.md";
 
-const allPartners = await getCollection("partners");
+const organizationalPartners = await getCollection("organizationalPartners");
+const networkPartners = await getCollection("networkPartners");
 const allAirSensors = await getCollection("airsensors");
 const allCorporates = await getCollection("corporate");
 const allFunders = await getCollection("funders");
-type CollectionName = "partners" | "airsensors" | "corporate" | "funders";
+type CollectionName = "organizationalPartners" | "networkPartners" | "airsensors" | "corporate" | "funders";
 
 const sortByName = (
   a: CollectionEntry<CollectionName>,
@@ -105,10 +106,27 @@ const sortByName = (
   </section>
 
   <section class="partners-section">
-    <h2 class="gradient-title">{frontmatter.partnersTitle}</h2>
+    <h2 class="gradient-title">{frontmatter.networkPartnersTitle}</h2>
     <ul class="partners-info-grid">
       {
-        allPartners
+        networkPartners
+          .sort(sortByName)
+          .map((partner) => (
+            <PartnerInfoCard
+              title={partner.data.title}
+              image={partner.data.image}
+              url={partner.data.url}
+              body={partner.body}
+            />
+          ))
+      }
+    </ul>
+  </section>
+    <section class="partners-section">
+    <h2 class="gradient-title">{frontmatter.organizationalPartnersTitle}</h2>
+    <ul class="partners-info-grid">
+      {
+        organizationalPartners
           .sort(sortByName)
           .map((partner) => (
             <PartnerInfoCard
