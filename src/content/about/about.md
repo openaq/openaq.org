@@ -3,17 +3,17 @@ title: About Us
 ---
 OpenAQ is an environmental tech nonprofit. We aggregate and harmonize open air quality data from across the globe onto an open-source, open-access data platform so that anyone concerned about air quality has unfettered access to the data they need to analyze, communicate and advocate for clean air. By providing universal access to air quality data, OpenAQ empowers a global community of changemakers to solve air inequality–the unequal access to clean air.
 
-Anyone can explore the data via [OpenAQ Explorer](https://explore.openaq.org/), an interactive web application. For programmatic access via the API or to create custom lists on OpenAQ Explorer, [user registration](https://explore.openaq.org/login) is required. See also our [AQI Hub](https://aqihub.info/), a first-of-its-kind website to navigate air quality indexes across the world.
+Anyone can explore the data via [OpenAQ Explorer](https://explore.openaq.org/), an interactive web application. For programmatic access via the API or to create custom lists on OpenAQ Explorer, [user registration](https://explore.openaq.org/login) is required. See also our [AQI Hub](https://aqihub.info/), a unique website to navigate air quality indexes across the world.
 
 <iframe src="https://www.youtube-nocookie.com/embed/FntU6TXpb2g" referrerpolicy="strict-origin-when-cross-origin" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="YouTube Video"></iframe>
 
 OpenAQ was the first to aggregate disparate ground-level ambient air quality data on a centralized open-source platform, making it findable, accessible, interoperable and reusable. We started with real-time and historical data from reference-grade government monitors in 2015 and began ingesting data from air sensors starting in 2021. Our platform remains the largest **open-source** air quality data platform in the world. 
 
-Read OpenAQ's [origin story](https://openaq.medium.com/the-openaq-origin-story-31e0ce904529) and peruse our achievements since 2015 at [Celebrating 10 years of OpenAQ](https://openaq.org/ten-years/).  
+Read OpenAQ's [origin story](https://openaq.medium.com/the-openaq-origin-story-31e0ce904529) and peruse our major achievements at [Celebrating 10 years of OpenAQ](https://openaq.org/ten-years/).  
 
 ![Data ingestion](src/assets/images/data-ingestion.webp)
 
-By providing foundational data infrastructure, we fill a basic data-access gap and make it possible for individuals and organizations to fully maximize the uses–and ultimate impact–of air quality data. We also connect users of this data across sectors and geographies to support an international learning environment.
+By providing foundational data infrastructure, OpenAQ fills a basic data-access gap and make it possible for individuals and organizations to fully maximize the uses–and ultimate impact–of air quality data. We also connect users of this data across sectors and geographies to support an international learning environment.
 
 - - -
 
@@ -46,17 +46,15 @@ This work wouldn't be possible without those who monitor air quality and share t
 
 As a mission-driven organization without a profit motive, OpenAQ advocates for transparent, publicly accessible air quality data and for more monitoring (especially where people are most vulnerable).
 
-OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [Click here](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) to view our 2022 report, *Open Air Quality Data: The Global Landscape*
+OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public: [](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf) [Click here](https://openaq.org/about/initiatives/publications/) for our *Open Air Quality Data: The Global Landscape* reports, including regional 1-pagers.
 
 - - -
 
-## Vision, Mission and Values
+## Strategic Plan
 
-See our [2026-2028 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ_Strategic_Direction_2026_2028.pdf), which emphasizes data coverage and collaborative efforts in low- and middle-income countries and environmental justice communities.
+Our [2026-2028 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ_Strategic_Direction_2026_2028.pdf) emphasizes expanding data coverage (especially in low- and middle-income countries); equipping users with tools and training to access, understand, and effectively use data on OpenAQ; and collaborative projects around data management, data visualization, and in-field research and community action.[](<>)
 
-## Past Strategic Direction Documents
-
-* [2022-2025 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ+Strategic+Direction-Abbreviated.pdf)
+## Vision, Mission and Values[](https://documents.openaq.org/strategy/OpenAQ+Strategic+Direction-Abbreviated.pdf)
 
 ### Vision
 
@@ -83,7 +81,7 @@ At OpenAQ, we recognize that marginalized communities across the globe face wors
 
 To realize our mission, OpenAQ must be diverse and inclusive. Our focus on diversity includes racial and geographic diversity, as well as diversity in knowledge, perspectives, expertise and lived experiences in communities that are highly polluted and/or lack air quality data. OpenAQ commits to reflect the communities that we collaborate with, bringing people with diverse backgrounds and identities to our team, governing board and advisory board.
 
-#### Service & Sustainabilty
+#### Service & Sustainability
 
 OpenAQ was founded in service to those who are harmed by air pollution. As an environmental tech nonprofit, we are dedicated to the public good, not private or financial gain. We think strategically and holistically about how we can have the most impact; maintain a positive, hopeful outlook; and run our data platform and organization sustainably so that we can exist as long as we are needed.
 
