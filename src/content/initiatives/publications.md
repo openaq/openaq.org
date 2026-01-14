@@ -10,7 +10,7 @@ Our most recent biennial assessment (2024) found that:
 * In the most populated countries without a national government air quality monitoring program, air pollution is one of the top 7 risk factors for death and disability.
 * Barely over one-quarter of countries provide full and easy public access to maximally useful air quality data, impeding clean air progress.
 
-Since our last assessment in 2022, there has been a small increase in the number of countries that have begun to monitor or that are publishing data in a more transparent manner. Because many countries are constrained by lack of resources, the report calls upon funders to support less-resourced governments that are keen to monitor air quality and share data.
+Since the previous assessment in 2022, there was a small increase in the number of countries that have begun to monitor or that are publishing data in a more transparent manner. Because many countries are constrained by lack of resources, the report calls upon funders to support less-resourced governments that are keen to monitor air quality and share data.
 
 ![](@assets/images/landscape-report-cover.png)
 
@@ -22,7 +22,7 @@ Since our last assessment in 2022, there has been a small increase in the number
 * [Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 * [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
-### *Regional reports (From the 2024 Report)*
+### *Regional Reports (based on the 2024 assessment)*
 
 *Central Asia:*
 
