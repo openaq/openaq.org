@@ -1,6 +1,8 @@
 ---
-title: "Job Opportunity: Software Developer"
+title: "Job Opportunity: Software Developer (CLOSED)" 
 ---
+
+## NO LONGER ACCEPTING APPLICATIONS
 
 ## About OpenAQ
 
