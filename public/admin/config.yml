@@ -77,6 +77,30 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
       - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
+  - name: "network"
+    label: "Network Partners"
+    folder: "src/content/partners/network"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
+  - name: "organizational"
+    label: "Organizational Partners"
+    folder: "src/content/partners/organizational"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
   - name: "airsensors"
     label: "Air Sensors"
     folder: "src/content/partners/airsensors"
@@ -89,7 +113,6 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
       - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
-  - name: "partners"
     label: "Partners"
     folder: "src/content/partners/partners"
     format: "yaml-frontmatter"
