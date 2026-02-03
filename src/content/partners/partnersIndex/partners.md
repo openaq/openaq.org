@@ -4,5 +4,5 @@ airsensorsTitle: "Air Sensor Partners"
 fundersTitle: "Funders"
 corporateTitle: "Corporate Sponsors"
 networkPartnersTitle: "Network Partners"
-organizationalPartnersTitle: "Organziational Partners"
+organizationalPartnersTitle: "Organizational Partners"
 ---
