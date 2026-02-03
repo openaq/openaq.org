@@ -5,7 +5,7 @@ backend:
   base_url: https://oauth.openaq.org
 publish_mode: editorial_workflow
 media_folder: "src/assets/images"
-public_folder: "src/assets/images"
+public_folder: "@assets/images"
 media_folder_relative: true
 public_folder_relative: true
 collections:
