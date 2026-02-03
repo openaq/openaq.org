@@ -1,42 +1,50 @@
 ---
-title: "2025 Tech Roadmap"
+title: "2026 Tech Roadmap"
 ---
 
-The OpenAQ governing board and team developed core strategic objectives to guide the organization as shown in our [OpenAQ 2022-2025 strategic direction](https://documents.openaq.org/strategy/OpenAQ+Strategic+Direction-Abbreviated.pdf)
+As described in [OpenAQ’s 2026-2028 Strategic Direction](https://documents.openaq.org/strategy/OpenAQ_Strategic_Direction_2026_2028.pdf), two core objectives drive the
+technical direction of the OpenAQ platform:
 
-Three core objectives drive the technical direction of the OpenAQ platform:
+1. Enhance and maintain the data platform  
 
-1. Make air quality data universally accessible and equip stakeholders with tools to use it
+2. Expand and preserve data coverage  
 
-2. Maintain and strategically increase the amount and types of data on our platform
+## Roadmap for 2026
 
-3. Spur greater use of air quality data by introducing potential users to the platform and how it can be used
+### 1. Overhaul data ingestion
 
-## Roadmap for 2025
+- We will develop a new consolidated data ingestion process from the ground up,
+with a focus on observability and transparency into the health of the data
+ingestion pipeline. The existing process is in need of some new approaches to
+help us better react to upstream issues and better communicate these issues to
+OpenAQ users. Since the introduction of air sensors, also known as low-cost
+sensors, in 2021, our pipeline diverged into two separate processes, one
+prioritizing air sensor APIs and the other handling the legacy fetch process.
+Our new process will consolidate data ingestion into a single pipeline, taking
+lessons from both methods to create a cohesive approach.
 
-### 1 Tools
+### 2. Provide richer context for measurements
 
-- Release an official R package for the OpenAQ API.
+- Members of the OpenAQ community often request help in understanding data
+quality. To assist users with how to use and evaluate measurements on the
+platform, we will expand the metadata (the data that provides context for
+each measurement) to include more information on instrumentation, quality
+assurance/quality control (via flags), provenance (who produces and owns the
+data), and data licensing (how the data can be applied).
 
-- Release new features for common use-cases into OpenAQ Python SDK.
+### 3. Strategically increase data coverage
 
-- Release new features for common use-cases into OpenAQ CLI.
+- OpenAQ will continue to aggregate data from locations across the globe, but
+will focus new data ingestion in the areas of the world where people are most
+impacted by pollution and where there is little to no access to data, such as
+low- and middle-income countries. Through existing and new partnerships we will
+leverage new sources of air quality data that believe in maximizing the value of
+their data by making it fully publicly accessible. We will develop new tools for
+researchers and smaller projects to upload their data to OpenAQ so that we can
+share diverse, rich and novel datasets from strategic monitoring locations
+around the world.
 
-### 2 Data coverage
-
-- Develop and release an upload tool to more easily allow contributions from small projects.
-
-- Acquire new and regain lost government-produced data, prioritizing:
-
-  - India
-  - Brazil
-  - South Africa
-  - Türkiye
-
-- Fill in historical gaps across geographies, where possible.
-
-### 3 Outreach and Documentation
-
-- Improve documentation sites (API documentations site, Python documentation, R documentation and CLI documentation) with more examples of how to use the platform for common use cases.
-
-This roadmap was largely informed by the OpenAQ community through outreach and the results of our [Community Survey](https://openaq.medium.com/the-2024-openaq-community-survey-results-71d0d8f42ff7). To keep up with OpenAQ news sign up for our [quarterly newsletter](https://link.openaq.org/newsletter) and make your voice heard by participating in upcoming community surveys.
+Outreach to the OpenAQ community and the results of our [Community Survey](https://openaq.medium.com/the-2024-openaq-community-survey-results-71d0d8f42ff7) helped inform this
+roadmap and our core strategies. To keep up with OpenAQ news, sign up for our
+[quarterly newsletter](https://link.openaq.org/newsletter) and make your voice
+heard by participating in upcoming community surveys.
