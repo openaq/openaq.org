@@ -89,6 +89,8 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
       - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
+      - { label: "Body", name: "body", widget: "markdown" }
+
   - name: "organizational"
     label: "Organizational Partners"
     folder: "src/content/partners/organizational"
@@ -101,6 +103,8 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
       - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
+      - { label: "Body", name: "body", widget: "markdown" }
+
   - name: "airsensors"
     label: "Air Sensors"
     folder: "src/content/partners/airsensors"
