@@ -113,18 +113,7 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
       - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
-    label: "Partners"
-    folder: "src/content/partners/partners"
-    format: "yaml-frontmatter"
-    create: true
-    slug: "{{slug}}"
-    editor:
-      preview: true
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "URL", name: "url", widget: "string", pattern: ['https\:\/\/[a-z]*\.[a-z]{2,3}', "Must be valid URL"], }
-      - { label: "Body", name: "body", widget: "markdown" }
+
   - name: "initiatives"
     label: "Initiatives"
     folder: "src/content/initiatives"
