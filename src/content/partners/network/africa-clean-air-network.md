@@ -1,6 +1,6 @@
 ---
 title: Africa Clean Air Network
-image: "@assets/images/africa-clean-air-network-1-.png"
+image: "@assets/images/africa-clean-air-network_primary-logo_rgblarge.png"
 url: https://cleanairafrica.org
 ---
 
