@@ -6,7 +6,7 @@ The [OpenAQ Clean Air Community Ambassador Program](https://ambassadors.openaq.o
 
 The program includes a comprehensive curriculum on ambient air pollution, air quality monitoring, data transparency, data access, data analysis, participatory research and community engagement.
 
-![2025 OpenAQ Community Ambassador Cohort](src/assets/images/2025-team-map-2.png "2025 OpenAQ Community Ambassadors")
+![2025 OpenAQ Community Ambassador Cohort](@assets/images/2026-openaq-community-ambassadors-map.png "2025 OpenAQ Community Ambassadors")
 
 Through the interactive training, the Community Ambassadors become inspired and empowered to accelerate air pollution mitigation in communities throughout their region. As they engage with local governments, companies and community organizations, they are able to underscore the need for open data, holding air quality data producers accountable to data transparency, a critical component of successful collective action to reduce air and climate pollution.
 
