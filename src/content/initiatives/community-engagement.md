@@ -25,6 +25,7 @@ Examples of trainings and other recorded sessions in recent years include:
 * [Kgotso Development Trust, Zimbabwe](https://youtu.be/CAk40VlzBj0)
 * [Air Quality Data Analytics and Machine Learning (ASAQ), Senegal](https://youtu.be/lQYBgi5WGpw)
 * [African Engineering and Technology Network (AFRETEC), Nigeria](https://www.youtube.com/watch?v=FPWpmkrbCRI)
+* [EPA Ghana](https://youtu.be/pVorTi7u7Hk)
 
 **Latin America**
 
