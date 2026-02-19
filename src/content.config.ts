@@ -156,13 +156,7 @@ const useCases = defineCollection({
     }),
 });
 
-const help = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/developers/help" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
-});
+
 
 const about = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/about" }),
@@ -172,10 +166,10 @@ const about = defineCollection({
     }),
 });
 
-const developers = defineCollection({
+const platform = defineCollection({
   loader: glob({
     pattern: ["*.md"],
-    base: "src/content/developers/singleDevPages",
+    base: "src/content/platform",
   }),
   schema: () =>
     z.object({
@@ -221,13 +215,6 @@ const partnersIndex = defineCollection({
     }),
 });
 
-const helpIndex = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/developers/helpIndex" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
-});
 
 const legal = defineCollection({
   loader: glob({ pattern: ["*.md"], base: "src/content/legal" }),
@@ -321,17 +308,15 @@ export const collections = {
   board,
   advisors,
   useCases,
-  help,
   about,
   peopleIndex,
-  developers,
+  platform,
   legal,
   homepage,
   initiativesIndex,
   usecaseIndex,
   whyAirQuality,
   whyOpenData,
-  helpIndex,
   partnersIndex,
   contact,
   careers,

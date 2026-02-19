@@ -1,14 +1,15 @@
 ---
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.split("/")[1];
-import Logo from "@assets/logo.svg";
+const currentPath = pathname.split('/')[1];
+import Logo from '@assets/logo.svg';
+import ExternalLink from '@assets/svg/external_link.svg';
 ---
 
 <style lang="scss">
-  @use "openaq-design-system/scss/variables" as variables;
-  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
-  @use "openaq-design-system/scss/header";
-  @use "openaq-design-system/scss/buttons";
+  @use 'openaq-design-system/scss/variables' as variables;
+  @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
+  @use 'openaq-design-system/scss/header';
+  @use 'openaq-design-system/scss/buttons';
 
   .header {
     padding: 0 40px;
@@ -47,6 +48,9 @@ import Logo from "@assets/logo.svg";
 
     &__item {
       @include mixins.navigation1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       padding: 8px 0;
       margin: 0 12px;
 
@@ -325,11 +329,8 @@ import Logo from "@assets/logo.svg";
     </a>
     <div class="spacer"></div>
     <nav class="nav" aria-label="primary">
-      <input id="menu-toggle" type="checkbox" aria-label="Toggle menu"/>
-      <label 
-        class="menu-button-container" 
-        for="menu-toggle"
-      >
+      <input id="menu-toggle" type="checkbox" aria-label="Toggle menu" />
+      <label class="menu-button-container" for="menu-toggle">
         <div class="menu-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -375,31 +376,24 @@ import Logo from "@assets/logo.svg";
         </li>
         <li class="dropdown">
           <a
-            href="/developers/platform-overview/"
+            href="/platform/"
             aria-haspopup="true"
             class=`nav__item ${currentPath === "developers" ? "nav__item--active" : ""}`
-            >Developers</a
+            >Platform</a
           >
           <ul class="submenu" aria-label="submenu">
             <li class="submenu__item">
-              <a class="nav__item api-overview-nav" href="/developers/roadmap/"
+              <a class="nav__item api-overview-nav" href="/platform/roadmap/"
                 >Roadmap</a
               >
             </li>
             <li class="submenu__item">
               <a
-                class="nav__item api-overview-nav"
-                href="/developers/platform-overview/">Platform Overview</a
-              >
-            </li>
-            <li class="submenu__item">
-              <a
                 class="nav__item documentation-nav js-header-docs-link"
-                href="https://docs.openaq.org">Developer Documentation</a
+                href="https://docs.openaq.org"
+                >Platform Documentation
+                <ExternalLink width={18} height={18} /></a
               >
-            </li>
-            <li class="submenu__item">
-              <a class="nav__item help-nav" href="/developers/help/">Help</a>
             </li>
           </ul>
         </li>
