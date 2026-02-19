@@ -236,16 +236,6 @@ collections:
       - { label: "Position", name: "position", widget: "string" }
       - { label: "Country", name: "country", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-  - name: "usecasesIndex"
-    label: "Usecases Index"
-    folder: "src/content/developers/use-casesIndex"
-    format: "yaml-frontmatter"
-    create: false
-    slug: "{{slug}}"
-    editor:
-      preview: true
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
   - name: "usecases"
     label: "Use Cases"
     folder: "src/content/use-cases"
@@ -268,17 +258,6 @@ collections:
       - { label: "Image", name: "image", widget: "image" }
       - { label: "Featured", name: "featured", widget: "boolean" }
       - { label: "Body", name: "body", widget: "markdown" }
-  - name: "help"
-    label: "Help"
-    folder: "src/content/developers/help"
-    format: "yaml-frontmatter"
-    create: true
-    slug: "{{slug}}"
-    editor:
-      preview: true
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
   - name: "peopleIndex"
     label: "People Index"
     folder: "src/content/people/index"
@@ -293,9 +272,20 @@ collections:
       - { label: "Board intro", name: "boardIntro", widget: "text" }
       - { label: "Advisor intro", name: "advisorIntro", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
-  - name: "developers"
-    label: "Developers"
-    folder: "src/content/developers/singleDevPages"
+  - name: "roadmap"
+    label: "Roadmap"
+    folder: "src/content/platform/roadmap"
+    format: "yaml-frontmatter"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "platform"
+    label: "Platform"
+    folder: "src/content/platform/index"
     format: "yaml-frontmatter"
     create: true
     slug: "{{slug}}"
@@ -429,16 +419,6 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
-  - name: "helpIndex"
-    label: "Help Index"
-    folder: "src/content/developers/helpIndex"
-    format: "yaml-frontmatter"
-    create: false
-    slug: "{{slug}}"
-    editor:
-      preview: true
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
   - name: "partnersIndex"
     label: "Partners Index"
     folder: "src/content/partners/index"
