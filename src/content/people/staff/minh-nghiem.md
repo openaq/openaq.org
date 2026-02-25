@@ -1,7 +1,7 @@
 ---
 name: Minh Nghiem
 position: Applied Data Fellow
-email: minh@openaq.org
+email: minh <at> openaq.org
 image: "@assets/images/minh.png"
 linkedin: https://www.linkedin.com/in/minhhnghiem/
 ---
