@@ -1,11 +1,11 @@
 ---
-name: "Russ Biggs"
-position: "Director of Technology"
-email: "russ@openaq.org"
-bluesky: "https://bsky.app/profile/russbiggs.com"
-linkedin: "https://www.linkedin.com/in/russell-biggs-02238019"
-github: "https://github.com/russbiggs"
+name: Russ Biggs
+position: Director of Technology
+email: russ <at> openaq.org
 image: "@assets/images/russ-biggs.png"
+bluesky: https://bsky.app/profile/russbiggs.com
+linkedin: https://www.linkedin.com/in/russell-biggs-02238019
+github: https://github.com/russbiggs
 ---
 
 Russ Biggs joined OpenAQ October 2021. He leads the development and strategic
