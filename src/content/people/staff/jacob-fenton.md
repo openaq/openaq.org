@@ -1,7 +1,7 @@
 ---
 name: Jacob Fenton
 position: Software Developer
-email: jacob@openaq.org
+email: jacob <at> openaq.org
 image: "@assets/images/jacob_headshot.png"
 ---
 Jacob Fenton joined OpenAQ in February 2026 where he works on building and maintaining scalable, data-intensive visuals and user tooling. 
