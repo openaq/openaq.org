@@ -1,11 +1,12 @@
 ---
-name : 'Chris Hagerbaumer'
-position : 'Executive Director'
-group : 'team'
-email : 'chris@openaq.org'
-linkedin : 'https://www.linkedin.com/in/chrishagerbaumer/'
-image : '@assets/images/chris_hagerbaumer.png'
-quote : '"What happens to any of us, anywhere in the world, had better be the business of all of us." -Mamie Till'
+name: Chris Hagerbaumer
+position: Executive Director
+group: team
+email: chris <at> openaq.org
+image: "@assets/images/chris_hagerbaumer.png"
+linkedin: https://www.linkedin.com/in/chrishagerbaumer/
+quote: '"What happens to any of us, anywhere in the world, had better be the
+  business of all of us." -Mamie Till'
 ---
 
 Chris Hagerbaumer joined OpenAQ March 2022. She provides strategic leadership, runs operations, manages OpenAQ’s mighty team, and cultivates collaborative relationships in pursuit of a core human right: the right to breathe clean air. 
