@@ -2,7 +2,7 @@
 name: Chris Hagerbaumer
 position: Executive Director
 group: team
-email: chris <at> openaq.org
+email: chris@openaq.org
 image: "@assets/images/chris_hagerbaumer.png"
 linkedin: https://www.linkedin.com/in/chrishagerbaumer/
 quote: '"What happens to any of us, anywhere in the world, had better be the

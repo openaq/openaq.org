@@ -1,7 +1,7 @@
 ---
 name: Russ Biggs
 position: Director of Technology
-email: russ <at> openaq.org
+email: russ@openaq.org
 image: "@assets/images/russ-biggs.png"
 bluesky: https://bsky.app/profile/russbiggs.com
 linkedin: https://www.linkedin.com/in/russell-biggs-02238019

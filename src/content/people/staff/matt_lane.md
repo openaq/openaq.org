@@ -1,7 +1,7 @@
 ---
 name: Matt Lane
 position: Marketing Communications Volunteer
-email: dev <at> openaq.org
+email: dev@openaq.org
 image: "@assets/images/matt_lane.png"
 ---
 
