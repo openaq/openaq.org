@@ -39,6 +39,7 @@ Examples of trainings and other recorded sessions in recent years include:
 
 * [University of Dhaka, Bangladesh](https://youtu.be/GBw7vGohSJI)
 * [Clean Air Catalyst Training for Jakarta and Indore Teams, Indonesia and India](https://youtu.be/NMIDJAcFMsU)
+* Lebanon AWAIR (University of Balamand and Health & Environmenta Response Agency (HERA)
 
 [](https://youtu.be/bDMWCOwZUk8)
 
