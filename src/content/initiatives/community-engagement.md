@@ -14,7 +14,8 @@ Examples of trainings and other recorded sessions in recent years include:
 
 **Global**
 
-* [General Training for the OpenAQ Explorer](<>)
+* [General Training for the OpenAQ Explorer Custom Lists](https://youtu.be/cSHYQtlODQs)
+* [Open Day Day 2026](https://youtu.be/dF9_hl4h0ok)
 * [ECR IGAC iCACGP (early career researchers in the global atmospheric community)](https://www.ecr-igac-icacgp.org/2025/11/05/workshop-11-leveraging-openaq-for-air-quality-research-and-applications/)
 
 **Africa**
@@ -25,12 +26,14 @@ Examples of trainings and other recorded sessions in recent years include:
 * [Kgotso Development Trust, Zimbabwe](https://youtu.be/CAk40VlzBj0)
 * [Air Quality Data Analytics and Machine Learning (ASAQ), Senegal](https://youtu.be/lQYBgi5WGpw)
 * [African Engineering and Technology Network (AFRETEC), Nigeria](https://www.youtube.com/watch?v=FPWpmkrbCRI)
-* [EPA Ghana](https://youtu.be/pVorTi7u7Hk)
+* [EPA Ghana: OpenAQ Explorer and AQI Hub](https://youtu.be/pVorTi7u7Hk)
+* [EPA Ghana: Python SDK training](https://youtu.be/d22D8QCQxs8)
+* [Dennis Osadebay University, Nigeria](https://youtu.be/Qp2IZttO_is)
 
 **Latin America**
 
 * [Sustenta Honduras, Honduras](https://youtu.be/XsoPuv55QLU)
-* [Universidad Peruana de Ciencias Aplicadas (UPC), Peru](https://youtu.be/8zRoWhloMA4?feature=shared)
+* [Universidad Peruana de Ciencias Aplicadas (UPC), Peru](https://youtu.be/8zRoWhloMA4)
 
 **Asia**
 
