@@ -2,7 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import HeroImage from "@components/HeroImage.astro";
 
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 
 import aqiHubImg from "@assets/images/aqi-hub.png";
 import codeSnippet from "@assets/images/r-code-snippet.png";
@@ -345,14 +345,14 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
     </div>
     <div class="aqi-hub-section__img">
       <div>
-        <Image src={aqiHubImg} alt={"AQI Hub logo"} />
+        <Picture src={aqiHubImg} formats={['avif', 'webp']} alt={"AQI Hub logo"} />
       </div>
     </div>
   </section>
 
   <section class="api-section">
     <div class="api-section__img">
-      <Image src={codeSnippet} alt="code snippet of openaq R package" />
+      <Picture src={codeSnippet} formats={['avif', 'webp']} alt="code snippet of openaq R package" />
     </div>
     <div class="api-section-blurb">
       <div class="api-section-blurb__content">
