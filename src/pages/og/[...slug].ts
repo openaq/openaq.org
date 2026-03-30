@@ -13,9 +13,8 @@ const whyOpenData = await getCollection("whyOpenData");
 const whyAirQuality = await getCollection("whyAirQuality");
 const homepage = await getCollection("homepage");
 const legal = await getCollection("legal");
-const helpIndex = await getCollection("helpIndex");
 const partnersindex = await getCollection("partnersIndex");
-const developers = await getCollection("developers");
+const platform = await getCollection("platform");
 const sponsors = await getCollection("sponsors");
 const contact = await getCollection("contact");
 
@@ -92,11 +91,11 @@ const partnersIndexContent = partnersindex.map((page) => {
   };
 });
 
-const developersContent = developers.map((page) => {
+const platformContent = platform.map((page) => {
   return {
     id: page.id,
     title: page.data.title,
-    description: "Read more about OpenAQ's resources for developers",
+    description: "Read more about the OpenAQ platform",
   };
 });
 
@@ -121,15 +120,6 @@ const legalContent = legal.map((page) => {
     id: page.id,
     title: page.data.title,
     description: "Read and download Legal and Policy documents of OpenAQ",
-  };
-});
-
-const helpIndexContent = helpIndex.map((page) => {
-  return {
-    id: page.id,
-    title: page.data.title,
-    description:
-      "Here you can get answer to the most common questions about OpenAQ",
   };
 });
 
@@ -167,10 +157,9 @@ const allCollections = [
   ...contactContent,
   ...whyOpenAirContent,
   ...whyOpenDataContent,
-  ...helpIndexContent,
   ...legalContent,
   ...sponsorContent,
-  ...developersContent,
+  ...platformContent,
   ...initiativesIndexContent,
   ...homepageContent,
   ...aboutContent,
@@ -186,7 +175,7 @@ const pages = Object.fromEntries(
   ])
 );
 
-export const { getStaticPaths, GET } = OGImageRoute({
+export const { getStaticPaths, GET } = await OGImageRoute({
   pages,
   param: "slug",
   getImageOptions: (_path, page: (typeof pages)[number]) => {

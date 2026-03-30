@@ -8,7 +8,6 @@ import purgecss from "astro-purgecss";
 export default defineConfig({
   prefetch: true,
   output: "static",
-
   markdown: {
     remarkPlugins: [remarkModifiedTime],
   },
