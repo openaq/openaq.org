@@ -2,6 +2,14 @@
 title: Publications
 image: "@assets/images/landscape-report-cover.png"
 ---
+## Before You Buy: A Guide to Choosing Air Sensors that Allow Fully Open Data Sharing 
+
+Before You Buy is a guide for organizations that are launching or expanding air quality monitoring networks and want sovereignty over the data they generate. It covers two key considerations: data ownership and data licensing. And, for those who wish to share data with OpenAQ, the guide outlines the steps to follow both before and after equipment procurement. See [https://link.openaq.org/beforeyoubuy.](https://link.openaq.org/beforeyoubuy)
+
+
+
+## Open Air Quality Data: The Global Landscape
+
 OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public. By identifying gaps in monitoring and data sharing, this assessment points to strategic locations for launching new air quality monitoring and data-sharing efforts. Furthermore, by outlining the value of open data and best practices for data sharing, this assessment helps governments and other data providers move toward greater data transparency.
 
 Our most recent biennial assessment (2024) found that:
