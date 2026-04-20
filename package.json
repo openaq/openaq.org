@@ -16,7 +16,7 @@
     "astro-og-canvas": "^0.10.1",
     "astro-purgecss": "^6.0.1",
     "autoprefixer": "^10.4.20",
-    "axios": "^1.8.3",
+    "axios": "^1.13.5",
     "dayjs": "^1.11.13",
     "lightningcss": "^1.28.2",
     "openaq-design-system": "github:openaq/openaq-design-system",
