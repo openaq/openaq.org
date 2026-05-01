@@ -18,6 +18,12 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
   @use "openaq-design-system/scss/inputs";
   @use "openaq-design-system/scss/utilities";
 
+
+  .mc-field {
+    position: absolute; 
+    left: -5000px;
+  }
+
   .footer {
     background-color: variables.$lavender180;
     align-items: center;
@@ -273,8 +279,7 @@ import BlueskyLogo from "@assets/svg/bluesky_logo.svg";
         <button class="btn btn-primary js-footer-subscribe" type="submit">
           Subscribe
         </button>
-
-        <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <div class="mc-field" aria-hidden="true">
           <input
             type="text"
             name="b_ca93b2911fff40db15f6e7203_e65a8618a1"
