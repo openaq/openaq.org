@@ -12,7 +12,7 @@ export default defineConfig({
         "default-src 'none'",
         "font-src 'self'",
         "connect-src 'self' https://plausible.io https://medium.openaq.org https://api.github.com https://www.githubstatus.com blob:",
-        "img-src 'self' https://widgets.guidestar.org/ data: blob: https://avatars.githubusercontent.com",
+        "img-src 'self' https://widgets.guidestar.org/ data: blob: https://avatars.githubusercontent.com https://i.ytimg.com",
         'frame-src https://www.youtube.com/ https://www.youtube-nocookie.com/',
       ],
       scriptDirective: {
