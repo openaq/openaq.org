@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+
+const {logo} = Astro.props
+---
+    <style>
+
+        .asset {
+            padding-top: 16px;
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: contain; 
+                display: block;
+            }
+        }
+
+        .png {
+            background-image: conic-gradient(#eee 25%, #fff 0 50%, #eee 0 75%, #fff 0);
+            background-size: 20px 20px;
+        }
+
+    </style>
+
+    <div class="asset">
+        <Image src={logo} class=`${logo.format === 'png' ? 'png' : ''}` alt=`OpenAQ Logo in ${logo.format}`/>
+        <div>{logo.format.toUpperCase()} format {logo.width}px x {logo.height}px <a href={logo.src} download>Download</a></div>
+    </div>

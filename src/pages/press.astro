@@ -1,0 +1,38 @@
+---
+import SocialBanner from "@components/SocialBanner.astro";
+
+import logoJpg from '../../public/assets/logo/openaq_logo.jpg';
+import logoPng from '../../public/assets/logo/openaq_logo.png';
+import logoBlackpng from '../../public/assets/logo/openaq_logo_neutral.png';
+import logoWhitepng from '../../public/assets/logo/openaq-logo_white.png';
+
+import PageLayout from "@layouts/PageLayout.astro";
+import Asset from "@components/Asset.astro";
+---
+
+<style>
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding-bottom: 10px;
+    
+}
+
+</style>
+
+<PageLayout pageTitle="press kit">
+    <h2 class="type-heading-1">Logo</h2>
+    <div><p>Please follow these guidelines when using our logo. Always keep the logo proportional and never stretch, squish, or distort it. Do not alter the colors, add effects such as shadows or outlines, or place the logo on busy backgrounds. Maintain clear space around the logo and avoid scaling it so small that details become unclear. When in doubt, use the provided file as-is.</p></div>
+    <h3 class="type-heading-2">Color logo</h3>
+   <div class="content">
+    <Asset logo={logoJpg}/>
+    <Asset logo={logoPng}/>
+   </div>
+   <h3 class="type-heading-2">Monochromatic logo</h3>
+   <div class="content">
+        <Asset logo={logoBlackpng}/>
+        <Asset logo={logoWhitepng}/>
+   </div>
+  <SocialBanner slot="banner" />
+</PageLayout>
