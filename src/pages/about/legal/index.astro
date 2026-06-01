@@ -1,20 +1,19 @@
 ---
-import Breadcrumb from "@components/Breadcrumb.astro";
-import Bubbles from "@components/Bubbles.astro";
-import ExplorerBanner from "@components/ExplorerBanner.astro";
-import CommunityBanner from "@components/CommunityBanner.astro";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { frontmatter } from "@content/legal/legal.md";
-import { Image } from "astro:assets";
+import Breadcrumb from '@components/Breadcrumb.astro';
+import Bubbles from '@components/Bubbles.astro';
+import ExplorerBanner from '@components/ExplorerBanner.astro';
+import CommunityBanner from '@components/CommunityBanner.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { frontmatter } from '@content/legal/legal.md';
+import { Image } from 'astro:assets';
 import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png';
-
 ---
 
 <style lang="scss">
-  @use "openaq-design-system/scss/buttons";
-  @use "openaq-design-system/scss/variables";
-  @use "openaq-design-system/scss/inputs";
-  @use "openaq-design-system/scss/mixins/index.scss" as mixins;
+  @use 'openaq-design-system/scss/buttons';
+  @use 'openaq-design-system/scss/variables';
+  @use 'openaq-design-system/scss/inputs';
+  @use 'openaq-design-system/scss/mixins/index.scss' as mixins;
 
   .reporting-content {
     display: flex;
@@ -99,16 +98,25 @@ import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png'
 
       <div class="ceritifications-grid">
         <a
-          href="https://www.guidestar.org/profile/shared/49986605-4410-4ce1-b0cd-ab4bb5955075"
+          aria-label="OpenAQ Inc"
+          href="https://app.candid.org/profile/9732592/openaq-inc-47-5324172/?pkId=f0bc12b8-e774-4894-bcdf-64387343f212"
           target="_blank"
         >
           <img
-            src="https://widgets.guidestar.org/TransparencySeal/9732592"
-            alt="Candid Platinum Transparency 2025"
+            alt=""
+            src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/9732592/svg"
           />
         </a>
-        <a href="https://www.charitynavigator.org/ein/475324172" target="_blank">
-          <Image src={fourStarRatingBadgeImage} alt="Charity Navigator four star rating badge" width="135" height="135"  />
+        <a
+          href="https://www.charitynavigator.org/ein/475324172"
+          target="_blank"
+        >
+          <Image
+            src={fourStarRatingBadgeImage}
+            alt="Charity Navigator four star rating badge"
+            width="135"
+            height="135"
+          />
         </a>
       </div>
       <div class="policies-section">
@@ -131,7 +139,7 @@ import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png'
           <h2 class="reporting-item__title">{frontmatter.financialTitle}</h2>
           <label for="financial-downloads">
             <p class="reporting-item__description">
-            {frontmatter.financialDescription}
+              {frontmatter.financialDescription}
             </p>
           </label>
           <div class="download-section">
@@ -250,26 +258,26 @@ import fourStarRatingBadgeImage from '@assets/images/four_star_rating_badge.png'
 
 <script>
   (() => {
-    const baseUrl = "https://documents.openaq.org";
+    const baseUrl = 'https://documents.openaq.org';
     const financialDownloadBtn = document.querySelector(
-      ".js-download-financial-btn"
+      '.js-download-financial-btn',
     );
-    const financialSelect = document.querySelector(".js-financial-select");
-    financialDownloadBtn?.addEventListener("click", () => {
+    const financialSelect = document.querySelector('.js-financial-select');
+    financialDownloadBtn?.addEventListener('click', () => {
       location.href = `${baseUrl}${financialSelect?.value}`;
     });
     const incorporationDownloadBtn = document.querySelector(
-      ".js-download-incorporation-btn"
+      '.js-download-incorporation-btn',
     );
     const incorporationSelect = document.querySelector(
-      ".js-incorporation-select"
+      '.js-incorporation-select',
     );
-    incorporationDownloadBtn?.addEventListener("click", () => {
+    incorporationDownloadBtn?.addEventListener('click', () => {
       location.href = `${baseUrl}${incorporationSelect?.value}`;
     });
-    const policyDownloadBtn = document.querySelector(".js-download-policy-btn");
-    const policySelect = document.querySelector(".js-policy-select");
-    policyDownloadBtn?.addEventListener("click", () => {
+    const policyDownloadBtn = document.querySelector('.js-download-policy-btn');
+    const policySelect = document.querySelector('.js-policy-select');
+    policyDownloadBtn?.addEventListener('click', () => {
       location.href = `${baseUrl}${policySelect?.value}`;
     });
   })();
