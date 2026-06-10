@@ -11,6 +11,7 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.1",
     "astro-og-canvas": "^0.10.1",
@@ -23,6 +24,7 @@
     "purgecss": "^8.0.0",
     "remove-markdown": "^0.6.0",
     "sass": "^1.83.0",
+    "typescript": "^5.9.3",
     "vite-plugin-solid-svg": "^0.8.1",
     "xml2js": "^0.6.2"
   },
