@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { parseStringPromise } from 'xml2js';
 import { test, expect } from '@playwright/test';
 
@@ -12,19 +11,16 @@ interface SitemapUrl {
 }
 
 async function getSitemapUrls(): Promise<string[]> {
-  const response = await axios.get<string>(sitemapUrl);
-  const data = await parseStringPromise(response.data);
+  const response = await fetch(sitemapUrl);
+  const text = await response.text();
+  const data = await parseStringPromise(text);
 
   const urls: SitemapUrl[] = data.urlset.url;
   return urls.map((urlObj) => urlObj.loc[0]);
 }
 
 async function checkUrl(url: string): Promise<number> {
-  const response = await axios.get(url, {
-    validateStatus: (status) => {
-      return status >= 200 && status < 500;
-    },
-  });
+  const response = await fetch(url);
   return response.status;
 }
 
