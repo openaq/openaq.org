@@ -18,9 +18,7 @@ export default defineConfig({
       scriptDirective: {
         resources: [
           "'self'",
-          'https://plausible.io',
-          'https://identity.netlify.com/v1/netlify-identity-widget.js',
-          'https://unpkg.com/decap-cms@%5E3.0.0/dist/decap-cms.js',
+          'https://plausible.io'
         ],
       },
       styleDirective: {
