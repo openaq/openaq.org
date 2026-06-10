@@ -1,7 +1,3 @@
----
-Astro.csp?.insertScriptResource("'unsafe-eval'");
----
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,9 +7,6 @@ Astro.csp?.insertScriptResource("'unsafe-eval'");
     <title>Content Manager</title>
   </head>
   <body>
-    <script>
-      import CMS from 'decap-cms-app';
-      CMS.init();
-    </script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
 </html>
