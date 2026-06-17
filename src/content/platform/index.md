@@ -31,6 +31,6 @@ To learn how to use the OpenAQ API to query data and to create a user account vi
 
 OpenAQ Explorer is an interactive web application that makes exploring the OpenAQ database easy.
 
-![openaq explorer](@assets/images/explorer_screenshot.webp)
+![openaq explorer](@assets/images/explorer_screenshot.png)
 
 Visit the OpenAQ Explorer at <https://explore.openaq.org>.
