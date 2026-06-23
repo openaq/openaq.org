@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import { remarkModifiedTime } from './remark-modified-time.mjs';
 
 import purgecss from 'astro-purgecss';
@@ -28,8 +29,10 @@ export default defineConfig({
   },
   prefetch: true,
   output: 'static',
-  markdown: {
-    remarkPlugins: [remarkModifiedTime],
+    markdown: {
+    processor: unified({
+      remarkPlugins: [remarkModifiedTime],
+    }),
   },
   site: 'https://openaq.org',
   integrations: [purgecss()],

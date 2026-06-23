@@ -12,20 +12,26 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v6
       with:
-        node-version: '23'
+        version: 11 
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version-file: '.nvmrc' 
+        cache: 'pnpm'
 
     - name: Install dependencies
-      run: npm install
+      run: pnpm install --frozen-lockfile
 
-    - name: Build static site
-      run: npm run build
+    - name: Build site
+      run: pnpm run build
     
     - uses: jakejarvis/s3-sync-action@master
       with:
