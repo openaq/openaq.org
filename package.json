@@ -25,6 +25,7 @@
     "purgecss": "^8.0.0",
     "remove-markdown": "^0.6.0",
     "sass": "^1.83.0",
+    "sharp": "^0.35.2",
     "typescript": "^5.9.3",
     "vite-plugin-solid-svg": "^0.8.1",
     "xml2js": "^0.6.2"
