@@ -12,17 +12,17 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v7
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
       with:
         fetch-depth: 0
 
     - name: Setup pnpm
-      uses: pnpm/action-setup@v6
+      uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
       with:
         version: 11.7.0
 
     - name: Setup Node.js
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
       with:
         node-version-file: '.nvmrc' 
         cache: 'pnpm'
@@ -33,7 +33,7 @@ jobs:
     - name: Build site
       run: pnpm run build
     
-    - uses: jakejarvis/s3-sync-action@master
+    - uses: jakejarvis/s3-sync-action@be0c4ab89158cac4278689ebedd8407dd5f35a83
       with:
         args: --follow-symlinks --delete
       env:
@@ -44,7 +44,7 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_REGION }}
 
     - name: invalidate
-      uses: chetan/invalidate-cloudfront-action@master
+      uses: chetan/invalidate-cloudfront-action@6adb1f613f4102ad81cd08a7ba83b8abe490cb8d
       env:
         DISTRIBUTION: ${{ secrets.AWS_CF_DISTRIBUTION_ID }}
         PATHS: '/*'
