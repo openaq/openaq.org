@@ -1,7 +1,9 @@
 {
-  "name": "",
+  "name": "openaq.org",
+  "private": true,
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@11.7.0",
   "scripts": {
     "dev": "astro dev --site http://localhost:4321",
     "build": "astro build",
