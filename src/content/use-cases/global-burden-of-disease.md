@@ -13,7 +13,8 @@ OpenAQ is proud to be a data source for the Global Burden of Disease (GBD) repor
 
 Health practitioners and policymakers need accurate information on health trends to improve health systems and combat health disparities. This crucial data is provided by the GBD  study, which is the largest study on worldwide trends in global health.
 
-The GBD is led by the Institute of Health Metrics and Evaluation (IHME), housed at the University of Washington School of Medicine, and involves a large collaborative network of researchers with expertise in various fields. The systematic review identifies 369 diseases and injuries, 87 risk factors in 204 countries, and showcases the impact of events such as the COVID-19 pandemic on health outcomes. Risk factors discussed in the report include environmental and occupational risks, behavioral risks, and metabolic risks.
+The GBD is led by the Institute of Health Metrics and Evaluation (IHME), housed at the University of Washington School of Medicine, and involves a large collaborative network of researchers with expertise in various fields. The systematic review identifies 463
+health outcomes and risk factors in 204 countries, and showcases the impact of events such as the COVID-19 pandemic on health outcomes. Risk factors discussed in the report include environmental and occupational risks, behavioral risks, and metabolic risks.
 
 One environmental risk factor considered in the GBD is air pollution, including ambient and household particulate matter (PM) pollution, as well as ambient ozone pollution. OpenAQ has served as a key data source for information on PM2.5, PM10 and NO2. In 2021 and 2023, OpenAQ contributed annual average concentrations for select reference grade stations worldwide.
 
