@@ -2,7 +2,21 @@
 title: Publications
 image: "@assets/images/landscape-report-cover.png"
 ---
-## Before You Buy: A Guide to Choosing Air Sensors that Allow Fully Open Data Sharing 
+## Air Quality "Data-to-Action" Resource Directory
+
+This dynamic directory includes: 
+
+* Web-based resources related to installing and managing air quality monitoring networks and turning data into action
+*  A roster of organizations that provide technical support along the “data-to-action” spectrum 
+* A roster of equipment manufacturers that provide technical assistance to their customers/users 
+
+Technical supporters submit their information to be listed, and anyone is welcome to suggest additional resources. 
+
+View [the directory](https://docs.google.com/spreadsheets/d/1oFXv15Dq_Ll1HFEbOU6ppSaVAnW_dTuPY_Niu19_Ih0/edit?usp=sharing).
+
+
+
+## Before You Buy: A Guide to Choosing Air Sensors that Allow Fully Open Data Sharing
 
 Before You Buy is a guide for organizations that are launching or expanding air quality monitoring networks and want sovereignty over the data they generate. It covers two key considerations: data ownership and data licensing. And, for those who wish to share data with OpenAQ, the guide outlines the steps to follow both before and after equipment procurement. See [https://link.openaq.org/beforeyoubuy.](https://link.openaq.org/beforeyoubuy)
 
@@ -26,7 +40,7 @@ Since the previous assessment in 2022, there was a small increase in the number 
 
 *Open Air Quality Data: The Global Landscape 2024*
 
-* [Infographic](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)[](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
+* [Infographic](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 * [Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 * [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
