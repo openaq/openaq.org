@@ -1,17 +1,46 @@
 ---
-import { Code } from 'astro:components';
+import { codeToHtml } from 'shiki';
 
 interface Props {
   title?: string;
   code: string;
+  lang?: string;
 }
 
-const { title, code } = Astro.props;
+const { title, code, lang = 'r' } = Astro.props;
+
+const styleToClass = {
+  name: 'style-to-class',
+  pre(node: any) {
+    delete node.properties.style;
+  },
+  span(node: any) {
+    const style = node.properties?.style;
+    if (typeof style !== 'string') return;
+    delete node.properties.style;
+
+    const color = style.match(/color:\s*(#[0-9a-f]{6})/i)?.[1];
+    const classes = [];
+    if (color) classes.push('t' + color.slice(1).toLowerCase());
+    if (/italic/.test(style)) classes.push('i');
+    if (classes.length) {
+      node.properties.class = [node.properties.class, ...classes]
+        .filter(Boolean)
+        .join(' ');
+    }
+  },
+};
+
+const html = await codeToHtml(code.trim(), {
+  lang,
+  theme: 'catppuccin-mocha',
+  transformers: [styleToClass],
+});
 ---
 
 <figure class="win">
   {title && <figcaption class="bar">{title}</figcaption>}
-  <Code code={code.trim()} lang="r" theme="catppuccin-mocha" />
+  <Fragment set:html={html} />
 </figure>
 
 <style>
@@ -46,14 +75,26 @@ const { title, code } = Astro.props;
     box-shadow: 24px 0 #5c5c5c, 48px 0 #5c5c5c;
   }
 
-  .win :global(pre.astro-code) {
+  .win :global(pre.shiki) {
     margin: 0 !important;
     border: 0 !important;
     border-radius: 0 !important;
     padding: 1rem 1.375rem 1.75rem !important;
+    background: #1e1e2e !important;
     overflow-x: auto;
     font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace !important;
     font-size: 1.0625rem;
     line-height: 1.6;
+    color: #cdd6f4 !important;
   }
+
+  .win :global(pre.shiki .tcdd6f4) { color: #cdd6f4 !important; } /* text */
+  .win :global(pre.shiki .tcba6f7) { color: #cba6f7 !important; } /* keyword */
+  .win :global(pre.shiki .ta6e3a1) { color: #a6e3a1 !important; } /* string */
+  .win :global(pre.shiki .t94e2d5) { color: #94e2d5 !important; } /* operator */
+  .win :global(pre.shiki .t89b4fa) { color: #89b4fa !important; } /* function */
+  .win :global(pre.shiki .teba0ac) { color: #eba0ac !important; } /* parameter */
+  .win :global(pre.shiki .tfab387) { color: #fab387 !important; } /* number */
+  .win :global(pre.shiki .t6c7086) { color: #6c7086 !important; } /* comment */
+  .win :global(pre.shiki .i) { font-style: italic; }
 </style>
