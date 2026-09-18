@@ -14,7 +14,8 @@ const { title, code } = Astro.props;
   <Code
     code={code.trim()}
     lang="r"
-    theme="catppuccin-mocha"
+    themes={{ light: 'catppuccin-mocha', dark: 'catppuccin-mocha' }}
+    defaultColor={false}
   />
 </figure>
 
@@ -62,4 +63,14 @@ const { title, code } = Astro.props;
     line-height: 1.6;
   }
 
+  .win :global(pre.astro-code),
+  .win :global(pre.astro-code span) {
+    color: var(--shiki-light, #cdd6f4) !important;
+  }
+
+  .win :global(pre.astro-code),
+  .win :global(pre.astro-code code),
+  .win :global(pre.astro-code span) {
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace !important;
+  }
 </style>
