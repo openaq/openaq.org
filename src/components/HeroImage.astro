@@ -134,7 +134,13 @@ import Hero from '@assets/images/hero.webp'
   <div class="bubble-lg"></div>
   <div class="bubble-md"></div>
   <div class="bubble-sm"></div>
-  <Image src={Hero}  class="hero-image__img" alt="hero image" />
+  <Image src={Hero}
+    class="hero-image__img"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+    alt="hero image"
+  />
   <div class="active-marker">
     <span>58</span>
   </div>
