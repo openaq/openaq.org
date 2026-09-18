@@ -11,12 +11,7 @@ const { title, code } = Astro.props;
 
 <figure class="win">
   {title && <figcaption class="bar">{title}</figcaption>}
-  <Code
-    code={code.trim()}
-    lang="r"
-    themes={{ light: 'catppuccin-mocha', dark: 'catppuccin-mocha' }}
-    defaultColor={false}
-  />
+  <Code code={code.trim()} lang="r" theme="catppuccin-mocha" />
 </figure>
 
 <style>
@@ -26,7 +21,6 @@ const { title, code } = Astro.props;
     border: 1px solid var(--code-border, #555);
     border-radius: 14px;
     overflow: hidden;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
   }
 
   .bar {
@@ -56,21 +50,10 @@ const { title, code } = Astro.props;
     margin: 0 !important;
     border: 0 !important;
     border-radius: 0 !important;
-    background-color: #1e1e2e !important;
     padding: 1rem 1.375rem 1.75rem !important;
     overflow-x: auto;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace !important;
     font-size: 1.0625rem;
     line-height: 1.6;
-  }
-
-  .win :global(pre.astro-code),
-  .win :global(pre.astro-code span) {
-    color: var(--shiki-light, #cdd6f4) !important;
-  }
-
-  .win :global(pre.astro-code),
-  .win :global(pre.astro-code code),
-  .win :global(pre.astro-code span) {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace !important;
   }
 </style>
