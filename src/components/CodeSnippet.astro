@@ -14,8 +14,7 @@ const { title, code } = Astro.props;
   <Code
     code={code.trim()}
     lang="r"
-    themes={{ light: 'github-light', dark: 'catppuccin-mocha' }}
-    defaultColor={false}
+    theme="catppuccin-mocha"
   />
 </figure>
 
@@ -34,7 +33,7 @@ const { title, code } = Astro.props;
     display: grid;
     place-items: center;
     height: 44px;
-    background: var(--code-bg, #3d3d3d);
+    background: var(--code-bg, #313244);
     font: 400 0.9375rem system-ui, sans-serif;
     color: #b8b8b8;
   }
@@ -61,21 +60,4 @@ const { title, code } = Astro.props;
     line-height: 1.6;
   }
 
-  .win :global(pre.astro-code) {
-    background-color: var(--shiki-light-bg, #fff);
-  }
-  .win :global(pre.astro-code),
-  .win :global(pre.astro-code span) {
-    color: var(--shiki-light, #24292e);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .win :global(pre.astro-code) {
-      background-color: var(--shiki-dark-bg, #1e1e2e);
-    }
-    .win :global(pre.astro-code),
-    .win :global(pre.astro-code span) {
-      color: var(--shiki-dark, #cdd6f4);
-    }
-  }
 </style>
