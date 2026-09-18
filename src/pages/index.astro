@@ -5,7 +5,8 @@ import HeroImage from "@components/HeroImage.astro";
 import { Image, Picture } from "astro:assets";
 
 import aqiHubImg from "@assets/images/aqi-hub.png";
-import codeSnippet from "@assets/images/r-code-snippet.png";
+import code from '@content/code/r-snippet.R?raw';
+import CodeSnippet from '@components/CodeSnippet.astro';
 import nairobiImg from "@assets/images/nairobi.jpg";
 
 import dataPipeline from "@assets/svg/data-pipeline.svg";
@@ -352,7 +353,7 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
 
   <section class="api-section">
     <div class="api-section__img">
-      <Picture src={codeSnippet} formats={['avif', 'webp']} alt="code snippet of openaq R package" />
+    <CodeSnippet title="openaq.R" code={code}/>
     </div>
     <div class="api-section-blurb">
       <div class="api-section-blurb__content">

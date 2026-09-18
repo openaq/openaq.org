@@ -1,0 +1,72 @@
+---
+import { Code } from 'astro:components';
+
+interface Props {
+  title?: string;
+  code: string;
+}
+
+const { title, code } = Astro.props;
+---
+
+<figure class="win">
+  {title && <figcaption class="bar">{title}</figcaption>}
+  <Code
+    code={code.trim()}
+    lang="r"
+    themes={{ light: 'github-light', dark: 'catppuccin-mocha' }}
+    defaultColor="light"
+  />
+</figure>
+
+<style>
+  .win {
+    max-width: 68rem;
+    margin: 1.5rem auto;
+    border: 1px solid var(--code-border, #555);
+    border-radius: 14px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  .bar {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 44px;
+    background: var(--code-bg, #3d3d3d);
+    font: 400 0.9375rem system-ui, sans-serif;
+    color: #b8b8b8;
+  }
+
+  .bar::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #5c5c5c;
+    box-shadow: 24px 0 #5c5c5c, 48px 0 #5c5c5c;
+  }
+
+  .win :global(pre.astro-code) {
+    margin: 0;
+    padding: 1rem 1.375rem 1.75rem;
+    overflow-x: auto;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .win :global(pre.astro-code) {
+      background-color: var(--shiki-dark-bg) !important;
+    }
+    .win :global(pre.astro-code),
+    .win :global(pre.astro-code span) {
+      color: var(--shiki-dark) !important;
+    }
+  }
+</style>
