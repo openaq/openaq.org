@@ -69,3 +69,7 @@ a {
     z-index: 2;
   }
 }
+
+@layer base {
+  .api-section { color: #fff; }
+}
