@@ -1,17 +1,17 @@
 ---
-title: "Sh**t I Smoke!"
-url: "https://openaq.org/use-cases/shootismoke/"
-tags: 
-    - API
-    - Health
-categories: ["developer"]
+title: Sh**t I Smoke!
+url: https://openaq.org/use-cases/shootismoke/
+tags:
+  - API
+  - Health
+categories:
+  - developer
 image: "@assets/images/sis.png"
 featured: false
 ---
-
 The Sh\*\*t I Smoke! [mobile app](https://shootismoke.app/) uses data from the OpenAQ platform to demonstrate the severity of air pollution by comparing it to cigarette smoking.
 
-Sh\*\*t I Smoke! was developed by Amaury Martiny and Marcelo Coelho.
+Sh\*\*t I Smoke! was developed by Amaury and Marcelo Coelho.
 
 ## The Problem
 
@@ -29,6 +29,6 @@ The Sh\*\*t! I Smoke app relies on real-time air pollution data accessed from th
 
 ## For More Information
 
-- Read the long-version blog: [App Raises Awareness by Translating Air Pollution Into Cigarettes Smoked](https://medium.com/@openaq/app-raises-awareness-by-translating-air-pollution-into-cigarettes-smoked-d08cfc66c3c)
-- Find out how many cigarettes you are unwillingly smoking at [Sh\*\*t! I Smoke](https://shootismoke.app/).
-- Read one of the articles written when the app was first released: [Bloomberg: How Much Are You ‘Smoking’ by Breathing Urban Air?](https://www.bloomberg.com/news/articles/2018-04-25/the-app-that-translates-air-pollution-into-cigarettes)
+* Read the long-version blog: [App Raises Awareness by Translating Air Pollution Into Cigarettes Smoked](https://medium.com/@openaq/app-raises-awareness-by-translating-air-pollution-into-cigarettes-smoked-d08cfc66c3c)
+* Find out how many cigarettes you are unwillingly smoking at [Sh\*\*t! I Smoke](https://shootismoke.app/).
+* Read one of the articles written when the app was first released: [Bloomberg: How Much Are You ‘Smoking’ by Breathing Urban Air?](https://www.bloomberg.com/news/articles/2018-04-25/the-app-that-translates-air-pollution-into-cigarettes)
