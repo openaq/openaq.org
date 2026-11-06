@@ -1,12 +1,14 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-const { frontmatter } = Astro.props;
+
+import { schemas, type SchemaKey } from '../data/schema';
+
+const { frontmatter, jsonLd } = Astro.props;
+const schemaKey = frontmatter?.schema as SchemaKey | undefined;
+const pageSchema = jsonLd ?? (schemaKey ? schemas[schemaKey] : undefined);
+
 ---
 
-
-
-</style>
-
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout pageTitle={frontmatter.title} jsonLd={pageSchema}>
   <slot />
 </BaseLayout>

@@ -130,7 +130,12 @@ import Hero from '@assets/images/hero.webp'
 
 </style>
 
-<div class="hero-image">
+<div
+  class="hero-image"
+  role="img"
+  aria-label="Map of air quality monitoring stations with a sample reading card showing PM2.5, NO₂ and ozone levels"
+  data-nosnippet
+>
   <div class="bubble-lg"></div>
   <div class="bubble-md"></div>
   <div class="bubble-sm"></div>
@@ -139,14 +144,14 @@ import Hero from '@assets/images/hero.webp'
     loading="eager"
     decoding="async"
     fetchpriority="high"
-    alt="hero image"
+    alt=""
   />
   <div class="active-marker">
     <span>58</span>
   </div>
   <div class="detail-card">
     <header class="detail-card__header">
-      <h2 class="detail-card__title">McMillan Reservoir</h2>
+      <span class="detail-card__title">McMillan Reservoir</span>
     </header>
     <section class="detail-card-section">
       <div>

@@ -4,6 +4,7 @@ import HeroImage from "@components/HeroImage.astro";
 
 import { Image, Picture } from "astro:assets";
 
+
 import aqiHubImg from "@assets/images/aqi-hub.png";
 import code from '@content/code/r-snippet.R?raw';
 import CodeSnippet from '@components/CodeSnippet.astro';
@@ -15,6 +16,7 @@ import { getCollection } from "astro:content";
 import UseCaseCard from "@components/use-cases/UseCaseCard.astro";
 const featuredUseCases = await getCollection("useCases", ({ data }) => data.featured === true);
 
+import { schemas } from '../data/schema';
 ---
 
 <style lang="scss">
@@ -72,12 +74,17 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
   }
 
   .use-cases-section {
-    @include landing-section();
-    & {
-      gap: 20px;
-      justify-content: center;
-      padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px 0;
+
+    .use-cases-heading {
+      width: 940px;
+      margin: 0;
     }
+
     .featured-use-cases {
       padding-inline-start: 0;
       list-style-type: none;
@@ -91,6 +98,10 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
     }
 
     @media (max-width: 1000px) {
+
+        .use-cases-heading {
+      width: 800px;
+    }
       & {
         .featured-use-cases {
           display: grid;
@@ -103,6 +114,10 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
     }
 
     @media (max-width: 800px) {
+    .use-cases-heading {
+      width: 300px;
+    }
+    
       justify-content: center;
       align-items: center;
       & {
@@ -251,7 +266,11 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
   }
 </style>
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout
+  pageTitle={frontmatter.title}
+  description={frontmatter.description}
+  jsonLd={schemas.home}
+>
   <section class="hero-section">
     <div class="hero-title">
       <h1 class="type-display-1 text-sky-120">
@@ -260,17 +279,18 @@ const featuredUseCases = await getCollection("useCases", ({ data }) => data.feat
           >{frontmatter.heroTitleLavender}</span
         >
       </h1>
-      <h2 class="type-heading-3">
+      <p class="type-heading-3">
         {frontmatter.heroDescription}
-      </h2>
-      <a href="/about/" class="btn btn-primary learn-more-btn" role="button"
+      </p>
+      <a href="/about/" class="btn btn-primary learn-more-btn"
         >Learn More</a
       >
     </div>
     <HeroImage />
   </section>
 
-  <section class="use-cases-section">
+  <section class="use-cases-section" aria-labelledby="use-cases-heading">
+    <h2 id="use-cases-heading" class="type-heading-1 text-sky-120">How people use air quality data from OpenAQ</h2>
     <ul class="featured-use-cases">
       {featuredUseCases.map(useCase => <UseCaseCard {...useCase.data} body={useCase.body} />)} 
     </ul>
