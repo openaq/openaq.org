@@ -6,11 +6,11 @@ import { Image, Picture } from "astro:assets";
 
 
 import aqiHubImg from "@assets/images/aqi-hub.png";
+import publicationsImg from "@assets/images/landscape_reports.png"
 import code from '@content/code/r-snippet.R?raw';
 import CodeSnippet from '@components/CodeSnippet.astro';
 import nairobiImg from "@assets/images/nairobi.jpg";
 
-import dataPipeline from "@assets/svg/data-pipeline.svg";
 import { frontmatter } from "@content/index.md";
 import { getCollection } from "astro:content";
 import UseCaseCard from "@components/use-cases/UseCaseCard.astro";
@@ -187,20 +187,20 @@ import { schemas } from '../data/schema';
     }
   }
 
-  .technology-section {
+  .publications-section {
     @include panel(variables.$sky120);
-
-    .bubble-sm {
-      position: absolute;
-      top: 138px;
-      left: 46px;
+  @media (max-width: 800px) {
+    &__img {
+      order: 1;
     }
+  }
 
-    .bubble-lg {
-      position: absolute;
-      top: -111px;
-      left: -132px;
-    }
+  }
+
+  .search-section {
+    @include panel(variables.$lavender120);
+
+
 
     @media (max-width: 800px) {
       .bubble-sm {
@@ -214,10 +214,6 @@ import { schemas } from '../data/schema';
         left: -132px;
       }
     }
-  }
-
-  .search-section {
-    @include panel(variables.$lavender120);
 
     .explore-input-link {
       position: absolute;
@@ -296,39 +292,7 @@ import { schemas } from '../data/schema';
     </ul>
   </section>
 
-  <section class="technology-section">
-    <div class="bubble-lg"></div>
-    <div class="bubble-sm"></div>
-    <div class="technology-section-blurb">
-      <div class="technology-section-blurb__content">
-        <h2 class="type-heading-1 text-white">
-          {frontmatter.technologyCardTitle}
-        </h2>
-        <p class="type-body-2 text-white">
-          {frontmatter.technologlyCardDescription}
-        </p>
-        <a href="/platform/platform-overview/" class="icon-btn btn-primary"
-          >Learn how OpenAQ works
-          <span class="arrow-forward-icon--white"></span>
-        </a>
-      </div>
-    </div>
-    <div class="technology-section__img">
-      <Image src={dataPipeline} alt={"OpenAQ data pipeline diagram"} />
-    </div>
-  </section>
-
   <section class="search-section">
-    <div class="search-section__img">
-      <a href="https://explore.openaq.org" class="explore-input-link">
-        <input
-          type="text"
-          class="search-input"
-          placeholder="Search for air quality data"
-        />
-      </a>
-      <Image src={nairobiImg} alt={"Map of Nairobi, Kenya"} />
-    </div>
     <div class="search-section-blurb">
       <div class="search-section-blurb__content">
         <h2 class="type-heading-1 text-white">{frontmatter.searchCardTitle}</h2>
@@ -341,6 +305,40 @@ import { schemas } from '../data/schema';
           rel="noreferrer noopener"
           class="icon-btn btn-primary"
           >Explore the data
+          <span class="arrow-forward-icon--white"></span>
+        </a>
+      </div>
+    </div>
+    <div class="search-section__img">
+      <a href="https://explore.openaq.org" class="explore-input-link">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search for air quality data"
+        />
+      </a>
+      <Image src={nairobiImg} alt={"Map of Nairobi, Kenya"} />
+    </div>
+  </section>
+    <section class="publications-section">
+    <div class="publications-section__img">
+      <div>
+        <Picture src={publicationsImg} formats={['avif', 'webp']} alt={"OpenAQ global landscape report covers"} />
+      </div>
+    </div>
+
+    <div class="publications-section-blurb">
+      <div class="publications-section-blurb__content">
+        <h2 class="type-heading-1 text-white">{frontmatter.publicationsCardTitle}</h2>
+        <p class="type-body-2 text-white">
+          {frontmatter.publicationsCardDescription}
+        </p>
+        <a
+          href="https://openaq.org/about/initiatives/publications/"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="icon-btn btn-primary"
+          >Read more
           <span class="arrow-forward-icon--white"></span>
         </a>
       </div>

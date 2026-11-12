@@ -1,324 +1,323 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-import { glob } from "astro/loaders";
-
 const contact = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/contact" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/contact" }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const sponsors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/sponsor" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/sponsor" }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const policies = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/policies" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/policies" }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const funders = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/partners/funders" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      url: z.url(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/partners/funders" }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			image: image(),
+			url: z.url(),
+		}),
 });
 
 const corporate = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/partners/corporate" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      url: z.url(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/partners/corporate" }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			image: image(),
+			url: z.url(),
+		}),
 });
 
 const airsensors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/partners/airsensors" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      url: z.url(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/partners/airsensors" }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			image: image(),
+			url: z.url(),
+		}),
 });
 
 const organizationalPartners = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/partners/organizational" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      url: z.url(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/partners/organizational",
+	}),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			image: image(),
+			url: z.url(),
+		}),
 });
 
 const networkPartners = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/partners/network" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      url: z.url(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/partners/network" }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			image: image(),
+			url: z.url(),
+		}),
 });
 
 const initiatives = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/initiatives" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/initiatives" }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			image: image(),
+		}),
 });
 
 const staff = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/people/staff" }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      position: z.string(),
-      email: z.email().optional(),
-      image: image(),
-      bluesky: z.url().optional(),
-      linkedin: z.url().optional(),
-      github: z.url().optional(),
-      x: z.url().optional(),
-      mastadon: z.url().optional(),
-      orcid: z.url().optional(),
-      researchGate: z.url().optional(),
-      googleScholar: z.url().optional(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/people/staff" }),
+	schema: ({ image }) =>
+		z.object({
+			name: z.string(),
+			position: z.string(),
+			email: z.email().optional(),
+			image: image(),
+			bluesky: z.url().optional(),
+			linkedin: z.url().optional(),
+			github: z.url().optional(),
+			x: z.url().optional(),
+			mastadon: z.url().optional(),
+			orcid: z.url().optional(),
+			researchGate: z.url().optional(),
+			googleScholar: z.url().optional(),
+		}),
 });
 
 const board = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/people/board" }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      position: z.string(),
-      email: z.email().optional(),
-      image: image(),
-      bluesky: z.url().optional(),
-      linkedin: z.url().optional(),
-      github: z.url().optional(),
-      x: z.url().optional(),
-      mastadon: z.url().optional(),
-      orcid: z.url().optional(),
-      researchGate: z.url().optional(),
-      googleScholar: z.url().optional(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/people/board" }),
+	schema: ({ image }) =>
+		z.object({
+			name: z.string(),
+			position: z.string(),
+			email: z.email().optional(),
+			image: image(),
+			bluesky: z.url().optional(),
+			linkedin: z.url().optional(),
+			github: z.url().optional(),
+			x: z.url().optional(),
+			mastadon: z.url().optional(),
+			orcid: z.url().optional(),
+			researchGate: z.url().optional(),
+			googleScholar: z.url().optional(),
+		}),
 });
 
 const advisors = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/people/advisors" }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      position: z.string(),
-      country: z.string(),
-      email: z.email().optional(),
-      image: image(),
-      bluesky: z.url().optional(),
-      linkedin: z.url().optional(),
-      github: z.url().optional(),
-      x: z.url().optional(),
-      mastadon: z.url().optional(),
-      orcid: z.url().optional(),
-      researchGate: z.url().optional(),
-      googleScholar: z.url().optional(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/people/advisors" }),
+	schema: ({ image }) =>
+		z.object({
+			name: z.string(),
+			position: z.string(),
+			country: z.string(),
+			email: z.email().optional(),
+			image: image(),
+			bluesky: z.url().optional(),
+			linkedin: z.url().optional(),
+			github: z.url().optional(),
+			x: z.url().optional(),
+			mastadon: z.url().optional(),
+			orcid: z.url().optional(),
+			researchGate: z.url().optional(),
+			googleScholar: z.url().optional(),
+		}),
 });
 
 const useCases = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/use-cases/" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      url: z.string(),
-      tags: z.array(z.string()),
-      categories: z.array(z.string()).optional(),
-      image: image(),
-      featured: z.boolean(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/use-cases/" }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			url: z.string(),
+			tags: z.array(z.string()),
+			categories: z.array(z.string()).optional(),
+			image: image(),
+			featured: z.boolean(),
+		}),
 });
 
-
-
 const about = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/about" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/about" }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const platform = defineCollection({
-  loader: glob({
-    pattern: ["*.md"],
-    base: "src/content/platform",
-  }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/platform",
+	}),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const careers = defineCollection({
-  loader: glob({
-    pattern: ["*.md"],
-    base: "src/content/careers",
-  }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/careers",
+	}),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const peopleIndex = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/people/peopleIndex" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-      staffIntro: z.string(),
-      advisorIntro: z.string(),
-      boardIntro: z.string(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/people/peopleIndex" }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			staffIntro: z.string(),
+			advisorIntro: z.string(),
+			boardIntro: z.string(),
+		}),
 });
 
 const partnersIndex = defineCollection({
-  loader: glob({
-    pattern: ["*.md"],
-    base: "src/content/partners/partnersIndex",
-  }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-      airsensorsTitle: z.string(),
-      fundersTitle: z.string(),
-      corporateTitle: z.string(),
-      networkPartnersTitle: z.string(),
-      organizationalPartnersTitle: z.string(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/partners/partnersIndex",
+	}),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			airsensorsTitle: z.string(),
+			fundersTitle: z.string(),
+			corporateTitle: z.string(),
+			networkPartnersTitle: z.string(),
+			organizationalPartnersTitle: z.string(),
+		}),
 });
 
-
 const legal = defineCollection({
-  loader: glob({ pattern: ["*.md"], base: "src/content/legal" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-      financialTitle: z.string(),
-      financialDescription: z.string(),
-      bylawsTitle: z.string(),
-      bylawsDescription: z.string(),
-      incorporationTitle: z.string(),
-      incorporationDescription: z.string(),
-      policiesTitle: z.string(),
-      policiesDescription: z.string(),
-    }),
+	loader: glob({ pattern: ["*.md"], base: "src/content/legal" }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			financialTitle: z.string(),
+			financialDescription: z.string(),
+			bylawsTitle: z.string(),
+			bylawsDescription: z.string(),
+			incorporationTitle: z.string(),
+			incorporationDescription: z.string(),
+			policiesTitle: z.string(),
+			policiesDescription: z.string(),
+		}),
 });
 
 const homepage = defineCollection({
-  loader: glob({ pattern: ["index.md"], base: "src/content/" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-      heroTitle: z.string(),
-      heroTitleLavender: z.string(),
-      heroDescription: z.string(),
-      technologyCardTitle: z.string(),
-      technologlyCardDescription: z.string(),
-      searchCardTitle: z.string(),
-      searchCardDescription: z.string(),
-      aqiHubCardTitle: z.string(),
-      aqiHubCardDescription: z.string(),
-      apiCardTitle: z.string(),
-      apiCardDescription: z.string(),
-    }),
+	loader: glob({ pattern: ["index.md"], base: "src/content/" }),
+	schema: () =>
+		z.object({
+			title: z.string(),
+			heroTitle: z.string(),
+			heroTitleLavender: z.string(),
+			heroDescription: z.string(),
+			publicationsCardTitle: z.string(),
+			publicationsCardDescription: z.string(),
+			searchCardTitle: z.string(),
+			searchCardDescription: z.string(),
+			aqiHubCardTitle: z.string(),
+			aqiHubCardDescription: z.string(),
+			apiCardTitle: z.string(),
+			apiCardDescription: z.string(),
+		}),
 });
 
 const initiativesIndex = defineCollection({
-  loader: glob({
-    pattern: ["*.md"],
-    base: "src/content/initiatives/initiativesIndex/",
-  }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/initiatives/initiativesIndex/",
+	}),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const usecaseIndex = defineCollection({
-  loader: glob({
-    pattern: ["*.md"],
-    base: "src/content/use-cases/use-casesIndex/",
-  }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/use-cases/use-casesIndex/",
+	}),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const whyOpenData = defineCollection({
-  loader: glob({
-    pattern: ["*.md"],
-    base: "src/content/why-open-data/",
-  }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/why-open-data/",
+	}),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 const whyAirQuality = defineCollection({
-  loader: glob({
-    pattern: ["*.md"],
-    base: "src/content/why-air-quality/",
-  }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-    }),
+	loader: glob({
+		pattern: ["*.md"],
+		base: "src/content/why-air-quality/",
+	}),
+	schema: () =>
+		z.object({
+			title: z.string(),
+		}),
 });
 
 export const collections = {
-  sponsors,
-  policies,
-  funders,
-  airsensors,
-  organizationalPartners,
-  networkPartners,
-  corporate,
-  initiatives,
-  staff,
-  board,
-  advisors,
-  useCases,
-  about,
-  peopleIndex,
-  platform,
-  legal,
-  homepage,
-  initiativesIndex,
-  usecaseIndex,
-  whyAirQuality,
-  whyOpenData,
-  partnersIndex,
-  contact,
-  careers,
+	sponsors,
+	policies,
+	funders,
+	airsensors,
+	organizationalPartners,
+	networkPartners,
+	corporate,
+	initiatives,
+	staff,
+	board,
+	advisors,
+	useCases,
+	about,
+	peopleIndex,
+	platform,
+	legal,
+	homepage,
+	initiativesIndex,
+	usecaseIndex,
+	whyAirQuality,
+	whyOpenData,
+	partnersIndex,
+	contact,
+	careers,
 };
