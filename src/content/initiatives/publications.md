@@ -1,6 +1,6 @@
 ---
 title: Publications
-image: "@assets/images/landscape-report-cover.png"
+image: "@assets/images/landscape_reports.png"
 ---
 
 ## Air Quality "Data-to-Action" Resource Directory
@@ -25,7 +25,7 @@ OpenAQ publishes the only global assessment of whether and how national governme
 
 Our most recent biennial assessment (2026) found that:
 
-* 33.% of countries, representing a cumulative population of nearly one billion people, are not currently monitoring air quality. Most of these countries are low-income or lower-income countries.  
+* 33% of countries, representing a cumulative population of nearly one billion people, are not currently monitoring air quality. Most of these countries are low-income or lower-income countries.  
 * In the most populated countries without a national government air quality monitoring program, air pollution is one of the top 8 risk factors for death and disability.  
 * One-third of countries provide full and easy public access to air quality data, which maximizes support for clean air solutions.
 
@@ -47,6 +47,18 @@ Since the previous assessment in 2024, there was a small increase (3%) in the nu
 * [Infographic](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)  
 * [Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)  
 * [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
+
+*Open Air Quality Data: The Global Landscape 2022*
+
+* [Summary](https://openaq.medium.com/three-quarters-of-national-governments-fail-to-provide-fully-transparent-data-on-air-pollution-e9158a85d511)  
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)  
+* [Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)  
+* [Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)
+
+*Open Air Quality Data: The Global State of Play 2020*
+
+* [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)  
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
 
 ### *Regional Reports (based on the 2024 assessment)*
 
@@ -84,17 +96,6 @@ Since the previous assessment in 2024, there was a small increase (3%) in the nu
 * [Kiswahili](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_SW.pdf)  
 * [Français](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)
 
-*Open Air Quality Data: The Global Landscape 2022*
-
-* [Summary](https://openaq.medium.com/three-quarters-of-national-governments-fail-to-provide-fully-transparent-data-on-air-pollution-e9158a85d511)  
-* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)  
-* [Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)  
-* [Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)
-
-*Open Air Quality Data: The Global State of Play 2020*
-
-* [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)  
-* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
 
 ## *More Initiatives*
 
