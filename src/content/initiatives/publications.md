@@ -25,7 +25,7 @@ OpenAQ publishes the only global assessment of whether and how national governme
 
 Our most recent biennial assessment (2026) found that:
 
-* 33.% of countries, representing a cumulative population of nearly one billion people, are not currently monitoring air quality. Most of these countries are low-income or lower-income countries.  
+* 33% of countries, representing a cumulative population of nearly one billion people, are not currently monitoring air quality. Most of these countries are low-income or lower-income countries.  
 * In the most populated countries without a national government air quality monitoring program, air pollution is one of the top 8 risk factors for death and disability.  
 * One-third of countries provide full and easy public access to air quality data, which maximizes support for clean air solutions.
 
