@@ -2,103 +2,106 @@
 title: Publications
 image: "@assets/images/landscape-report-cover.png"
 ---
+
 ## Air Quality "Data-to-Action" Resource Directory
 
-This dynamic directory includes: 
+This dynamic directory includes:
 
-* Web-based resources related to installing and managing air quality monitoring networks and turning data into action
-*  A roster of organizations that provide technical support along the “data-to-action” spectrum 
-* A roster of equipment manufacturers that provide technical assistance to their customers/users 
+* Web-based resources related to installing and managing air quality monitoring networks and turning data into action  
+* A roster of organizations that provide technical support along the “data-to-action” spectrum  
+* A roster of equipment manufacturers that provide technical assistance to their customers/users
 
-Technical supporters submit their information to be listed, and anyone is welcome to suggest additional resources. 
+Technical supporters submit their information to be listed, and anyone is welcome to suggest additional resources.
 
 View [the directory](https://docs.google.com/spreadsheets/d/1oFXv15Dq_Ll1HFEbOU6ppSaVAnW_dTuPY_Niu19_Ih0/edit?usp=sharing).
 
-
-
 ## Before You Buy: A Guide to Choosing Air Sensors that Allow Fully Open Data Sharing
 
-Before You Buy is a guide for organizations that are launching or expanding air quality monitoring networks and want sovereignty over the data they generate. It covers two key considerations: data ownership and data licensing. And, for those who wish to share data with OpenAQ, the guide outlines the steps to follow both before and after equipment procurement. See [https://link.openaq.org/beforeyoubuy.](https://link.openaq.org/beforeyoubuy)
-
-
+Before You Buy is a guide for organizations that are launching or expanding air quality monitoring networks and want sovereignty over the data they generate. It covers two key considerations: data ownership and data licensing. And, for those who wish to share data with OpenAQ, the guide outlines the steps to follow both before and after equipment procurement. See [https\://link.openaq.org/beforeyoubuy.](https://link.openaq.org/beforeyoubuy)
 
 ## Open Air Quality Data: The Global Landscape
 
 OpenAQ publishes the only global assessment of whether and how national governments are producing and sharing air quality data with the public. By identifying gaps in monitoring and data sharing, this assessment points to strategic locations for launching new air quality monitoring and data-sharing efforts. Furthermore, by outlining the value of open data and best practices for data sharing, this assessment helps governments and other data providers move toward greater data transparency.
 
-Our most recent biennial assessment (2024) found that:
+Our most recent biennial assessment (2026) found that:
 
-* 36% of countries, representing a cumulative population of nearly one billion people, are not currently monitoring air quality. Most of these countries are low-income or lower-income countries.
-* In the most populated countries without a national government air quality monitoring program, air pollution is one of the top 7 risk factors for death and disability.
-* Barely over one-quarter of countries provide full and easy public access to maximally useful air quality data, impeding clean air progress.
+* 33.% of countries, representing a cumulative population of nearly one billion people, are not currently monitoring air quality. Most of these countries are low-income or lower-income countries.  
+* In the most populated countries without a national government air quality monitoring program, air pollution is one of the top 8 risk factors for death and disability.  
+* One-third of countries provide full and easy public access to air quality data, which maximizes support for clean air solutions.
 
-Since the previous assessment in 2022, there was a small increase in the number of countries that have begun to monitor or that are publishing data in a more transparent manner. Because many countries are constrained by lack of resources, the report calls upon funders to support less-resourced governments that are keen to monitor air quality and share data.
+Since the previous assessment in 2024, there was a small increase (3%) in the number of countries that have begun to monitor or that are publishing data in a more transparent manner. Because many countries are constrained by lack of resources, the report calls upon funders to support less-resourced governments that are keen to monitor air quality and share data.
 
-![](@assets/images/landscape-report-cover.png)
+![](@assets/images/landscape-report-cover.jpg)
 
 ### *Current Report on the Global Landscape of Open Air Quality Data*
 
+*Open Air Quality Data: The Global Landscape 2026*
+
+* [Summary](http://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2026.pdf)  
+* [Full Report](http://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2026.pdf)
+
+### *Previous Reports on the Global Landscape of Open Air Quality Data*
+
 *Open Air Quality Data: The Global Landscape 2024*
 
-* [Infographic](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
-* [Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
+* [Infographic](https://documents.openaq.org/reports/Infographic-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)  
+* [Summary](https://documents.openaq.org/reports/Executive+Summary-Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)  
 * [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data-The+Global+Landscape+2024.pdf)
 
 ### *Regional Reports (based on the 2024 assessment)*
 
 *Central Asia:*
 
-* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_EN.pdf)
-* [Russian](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_RU.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_EN.pdf)  
+* [Pусский](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Central+Asia_RU.pdf)
 
 *East Asia and Pacific:*
 
-* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_EN.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_EN.pdf)  
 * [Bahasa Indonesia](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+East+Asia+and+Pacific_ID.pdf)
 
 *Latin America and the Caribbean*
 
-* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_EN.pdf)
-* [Spanish](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_ES.pdf)
-* [Portuguese](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_PT.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_EN.pdf)  
+* [Español](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_ES.pdf)  
+* [Português](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+LatAm_PT.pdf)
 
 *Middle East and North Africa*
 
-* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_EN.pdf)
-* [Arabic](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_AR.pdf)
-* [French](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_FR.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_EN.pdf)  
+* [اَلْعَرَبِيَّةُ](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_AR.pdf)  
+* [Français](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+MENA_FR.pdf)
 
 *South Asia*
 
-* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_EN.pdf)
-* [Hindi](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_HI.pdf)
-* [Punjabi](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_PA.pdf)
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_EN.pdf)  
+* [हिन्दी](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_HI.pdf)  
+* [ਪੰਜਾਬੀ/پنجابی](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+South+Asia_PA.pdf)
 
 *Sub-Saharan Africa*
 
-* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_EN.pdf)
-* [Swahili](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_SW.pdf)
-* [French](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)
-
-### *Previous Reports on the Global Landscape of Open Air Quality Data*
+* [English](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_EN.pdf)  
+* [Kiswahili](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_SW.pdf)  
+* [Français](https://documents.openaq.org/reports/OpenAQ+Data+Landscape+2024+Sub-Saharan+Africa_FR.pdf)
 
 *Open Air Quality Data: The Global Landscape 2022*
 
-* [Summary](https://openaq.medium.com/three-quarters-of-national-governments-fail-to-provide-fully-transparent-data-on-air-pollution-e9158a85d511)
-* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)
-* [Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)
+* [Summary](https://openaq.medium.com/three-quarters-of-national-governments-fail-to-provide-fully-transparent-data-on-air-pollution-e9158a85d511)  
+* [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf)  
+* [Full report (Spanish)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+SPA.pdf)  
 * [Full report (Portuguese)](https://documents.openaq.org/reports/Open+Air+Quality+Data+x+The+Global+Landscape+PT.pdf)
 
 *Open Air Quality Data: The Global State of Play 2020*
 
-* [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)
+* [Webinar](https://www.youtube.com/watch?v=sHg2TafhxsI&t=59s)  
 * [Full report](https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf)
 
 ## *More Initiatives*
 
-* [AQI Hub](https://openaq.org/about/initiatives/aqi-hub/)
-* [OpenAQ Data Platform: Providing Air Quality Data](https://openaq.org/about/initiatives/openaq-data-platform/)
-* [Community Engagement](https://openaq.org/about/initiatives/community-engagement/)
-* [Partnership Project: Predicting What We Breathe](https://openaq.org/about/initiatives/pwwb/)
-* [Community Ambassador Program](https://openaq.org/about/initiatives/community-ambassadors/)
+* [AQI Hub](https://openaq.org/about/initiatives/aqi-hub/)  
+* [OpenAQ Data Platform: Providing Air Quality Data](https://openaq.org/about/initiatives/openaq-data-platform/)  
+* [Community Engagement](https://openaq.org/about/initiatives/community-engagement/)  
+* [Partnership Project: Predicting What We Breathe](https://openaq.org/about/initiatives/pwwb/)  
+* [Community Ambassador Program](https://openaq.org/about/initiatives/community-ambassadors/)  
 * [Partnership Project: Clean Air Catalyst](https://openaq.org/about/initiatives/cac/)
+
