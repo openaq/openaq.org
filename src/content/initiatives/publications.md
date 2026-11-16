@@ -1,6 +1,6 @@
 ---
 title: Publications
-image: "@assets/images/landscape_reports.png"
+image: "@assets/images/landscape-report-cover.jpg"
 ---
 
 ## Air Quality "Data-to-Action" Resource Directory
